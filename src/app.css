@@ -1,0 +1,89 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Integrate Custom Fonts */
+@font-face {
+	font-family: 'Lato';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src:
+      url('./fonts/Lato-Regular.woff2') format('woff2'),
+      url('./fonts/Lato-Regular.woff') format('woff'),
+      url('./fonts/Lato-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Lato';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src:
+      url('./fonts/Lato-Bold.woff2') format('woff2'),
+      url('./fonts/Lato-Bold.woff') format('woff'),
+      url('./fonts/Lato-Bold.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Lato';
+	font-style: normal;
+	font-weight: 300;
+	font-display: swap;
+	src:
+      url('./fonts/Lato-Light.woff2') format('woff2'),
+      url('./fonts/Lato-Light.woff') format('woff'),
+      url('./fonts/Lato-Light.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'PTSerif';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: 
+      url('./fonts/PTSerif-Regular.woff2') format('woff2'),
+      url('./fonts/PTSerif-Regular.woff') format('woff'),
+      url('./fonts/PTSerif-Regular.ttf') format('truetype');
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* BASICS */
+* {
+  @apply m-0 p-0 break-words;
+}
+
+*:focus {
+	@apply outline-none;
+}
+
+html,
+body {
+	@apply font-Lato w-full h-full relative;
+}
+
+/* TYPOGRAPHY */
+p {
+  @apply text-base;
+
+  &.p2 {
+    @apply text-xl;
+  }
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-PTSerif text-neutral-800;
+}
+h1 {
+	@apply text-4xl;
+}
+h2 {
+	@apply text-2xl;
+}
+h3 {
+	@apply text-xl;
+}
+h4, h5, h6 {
+	@apply  text-lg;
+}
