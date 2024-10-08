@@ -2,4 +2,7 @@
 	import '../app.css';
 </script>
 
-<slot></slot>
+<div class="wrapper">
+  <slot></slot>
+</div>
+

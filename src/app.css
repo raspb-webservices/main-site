@@ -64,26 +64,61 @@ body {
 
 /* TYPOGRAPHY */
 p {
-  @apply text-base;
-
+  @apply text-base pb-6;
   &.p2 {
     @apply text-xl;
   }
+  &.no-padding {
+    @apply p-0;
+  }
 }
-
 
 h1, h2, h3, h4, h5, h6 {
   @apply font-PTSerif text-neutral-800;
+  > a {
+    @apply no-underline;
+  }
+  &.no-padding {
+    @apply p-0;
+  }
 }
 h1 {
-	@apply text-4xl;
+	@apply text-4xl pb-8;
 }
 h2 {
-	@apply text-2xl;
+	@apply text-2xl pb-8;
 }
 h3 {
-	@apply text-xl;
+	@apply text-xl pb-6;
 }
 h4, h5, h6 {
-	@apply  text-lg;
+	@apply  text-lg pb-4;
+}
+
+a, button.text-link-button {
+	@apply text-primary cursor-pointer m-0 p-0 min-h-0 duration-300 underline;
+	font-size: inherit;
+	line-height: inherit;
+	height: inherit;
+}
+
+a:hover,
+button.text-link-button:hover {
+	@apply no-underline;
+}
+
+/* LAYOUT */
+.wrapper {
+  @apply w-full h-full m-8;
+  .container {
+    @apply !max-w-none lg:!max-w-screen-2xl px-4 m-auto;
+  }
+}
+
+/* HELPER */
+.spacer {
+	height: 1rem;
+}
+.bigSpacer {
+	height: 2.5rem;
 }

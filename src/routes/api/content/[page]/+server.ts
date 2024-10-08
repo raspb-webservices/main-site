@@ -5,26 +5,11 @@ export const GET = async (req) => {
   const page = req.params.page;
   try {
     const query = gql`
-      query getSnippets($page: String!) {
-        contentSnippets(where: { pageToPlace: $page }, stage: PUBLISHED) {
-          createdAt
-          name
+      query getContentsByPage($page: String!) {
+        contents(where: { page:$page }, stage:PUBLISHED) {
           headline
-          subheadline
-          content
-          contentSecondParagraph
-          contentThirdParagraph
-          contentFourthParagraph
-          contentFifthParagraph
-          specialContent
-          specialContentOpt
-          pageToPlace
-          position
-          active
-          images {
-            url
-            fileName
-          }
+          text
+          page
         }
       }
     `;

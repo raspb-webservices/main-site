@@ -4,17 +4,11 @@ import { gql } from 'graphql-request';
 export const GET = async () => {
   try {
     const query = gql`
-      query getSnippets {
-        contentSnippets(stage: PUBLISHED) {
-          name
+      query getContents {
+        contents(stage:PUBLISHED) {
           headline
-          content
-          pageToPlace
-          position
-          images {
-            url
-            fileName
-          }
+          text
+          page
         }
       }
     `;
