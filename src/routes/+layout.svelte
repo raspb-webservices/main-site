@@ -1,8 +1,12 @@
 <script>
+  import HEADER from "$lib/components/header.svelte";
+  import FOOTER from "$lib/components/footer.svelte";
 	import '../app.css';
 </script>
 
 <div class="wrapper">
-  <slot></slot>
+  <HEADER />
+  <slot />
+  <FOOTER />
 </div>
 

@@ -11,11 +11,17 @@
     --pale-blue: #449DD1;
     --light-blue: #0d99e6;
     --turquoise: #5fcdc0;
+    --teal: #007388;
     --green: #42b863;
     --orange: #F09819;
     --yellow: #F4D03F;
     --violet: #731963;
     --red: #c93136;
+    --neutral: #3D4451;
+    --info: #3ABFF8;
+    --success: #6BB900;
+    --warning: #FBBD23;
+    --error: #F87272;
   }
 }
 
@@ -30,7 +36,10 @@
   @apply m-0 p-0 break-words box-border;
 }
 
-*:focus {
+*:focus,
+*:focus-visible,
+*:focus-within,
+*:active {
 	@apply outline-none;
 }
 
@@ -38,9 +47,13 @@ html,
 body {
 	@apply font-Lato text-darkGrey w-full h-full relative;
   min-height: 100vh;
+  scroll-behavior: smooth;
   -moz-text-size-adjust: none;
   -webkit-text-size-adjust: none;
+  -ms-text-size-adjust: none;
   text-size-adjust: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* TYPOGRAPHY */
@@ -52,12 +65,15 @@ p {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  @apply font-PTSerif text-neutral-800 text-balance;
+  @apply font-PTSerif font-bold text-primary text-balance;
   > a {
     @apply no-underline;
   }
   &.no-padding {
     @apply p-0;
+  }
+  &.on-dark {
+    @apply text-white;
   }
 }
 h1 {
@@ -74,19 +90,20 @@ h4, h5, h6 {
 }
 
 a, .text-link-button {
-	@apply text-secondary cursor-pointer m-0 p-0 duration-300 underline;
+	@apply text-primary cursor-pointer m-0 p-0 duration-300 underline;
 	font-size: inherit;
 	line-height: inherit;
 	height: inherit;
 
-  &.white-link {
+  &.white-link, &.on-dark {
     @apply text-white;
   }
-}
-
-a:hover,
-.text-link-button:hover {
-	@apply no-underline;
+  &:hover {
+    @apply no-underline;
+  }
+  &.active {
+    @apply no-underline text-secondary;
+  }
 }
 
 img,
@@ -112,6 +129,9 @@ textarea:not([rows]) {
   @apply w-full h-full;
   .container {
     @apply !max-w-none lg:!max-w-screen-xl px-4 m-auto;
+    .inner-container {
+      @apply p-6;
+    }
   }
 }
 

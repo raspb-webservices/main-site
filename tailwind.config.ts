@@ -2,16 +2,19 @@ import type { Config } from 'tailwindcss';
 
 export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
-
+  mode: 'jit',
 	theme: {
     colors: {
-      white: '#FFFFFF',
-      black: '#000000',
-      successGreen: '#6BB900',
-      darkGrey: '#454545',
-      mediumGrey: '#8e8d8d',
-      lightGrey: '#fafafa',
-      error: '#B22222',
+      white: 'var(--white)',
+      black: 'var(--black)',
+      red: 'var(--custom-red)',
+      teal: 'var(--teal)',
+      lightBlue: 'var(--light-blue)',
+      green: 'var(--green)',
+      darkGrey: 'var(--dark-grey)',
+      mediumGrey: 'var(--medium-grey)',
+      lightGrey: 'var(--light-grey)',
+      error: 'var(--red)',
     },
     extend: {
       fontFamily: {
@@ -24,9 +27,8 @@ export default {
     themes: [
       {
         mytheme: {
-          primary: '#F19405',
-          secondary: '#000000',
-          accent: '#37CDBE',
+          primary: '#0b3c49',
+          secondary: '#731963',
           neutral: '#3D4451',
           info: '#3ABFF8',
           success: '#6BB900',
@@ -36,7 +38,7 @@ export default {
       }
     ]
   },
-
+  variants: {},
 	// eslint-disable-next-line @typescript-eslint/no-require-imports
 	plugins: [require('@tailwindcss/typography'), require('daisyui')]
 } as Config;
