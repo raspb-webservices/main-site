@@ -8,6 +8,9 @@ export default {
       white: '#FFFFFF',
       black: '#000000',
       successGreen: '#6BB900',
+      darkGrey: '#454545',
+      mediumGrey: '#8e8d8d',
+      lightGrey: '#fafafa',
       error: '#B22222',
     },
     extend: {

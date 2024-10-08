@@ -1,47 +1,22 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import url('./fonts/font-collection.css');;
 
-/* Integrate Custom Fonts */
-@font-face {
-	font-family: 'Lato';
-	font-style: normal;
-	font-weight: 400;
-	font-display: swap;
-	src:
-      url('./fonts/Lato-Regular.woff2') format('woff2'),
-      url('./fonts/Lato-Regular.woff') format('woff'),
-      url('./fonts/Lato-Regular.ttf') format('truetype');
-}
-@font-face {
-	font-family: 'Lato';
-	font-style: normal;
-	font-weight: 700;
-	font-display: swap;
-	src:
-      url('./fonts/Lato-Bold.woff2') format('woff2'),
-      url('./fonts/Lato-Bold.woff') format('woff'),
-      url('./fonts/Lato-Bold.ttf') format('truetype');
-}
-@font-face {
-	font-family: 'Lato';
-	font-style: normal;
-	font-weight: 300;
-	font-display: swap;
-	src:
-      url('./fonts/Lato-Light.woff2') format('woff2'),
-      url('./fonts/Lato-Light.woff') format('woff'),
-      url('./fonts/Lato-Light.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'PTSerif';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: 
-      url('./fonts/PTSerif-Regular.woff2') format('woff2'),
-      url('./fonts/PTSerif-Regular.woff') format('woff'),
-      url('./fonts/PTSerif-Regular.ttf') format('truetype');
+@layer base {
+  :root {
+    --white: #fefefe;
+    --black: #010101;
+    --dark-grey: #444444;
+    --medium-grey: #8e8d8d;
+    --light-grey: #fafafa;
+    --dark-blue: #0b3c49;
+    --pale-blue: #449DD1;
+    --light-blue: #0d99e6;
+    --turquoise: #5fcdc0;
+    --green: #42b863;
+    --orange: #F09819;
+    --yellow: #F4D03F;
+    --violet: #731963;
+    --red: #c93136;
+  }
 }
 
 @tailwind base;
@@ -49,8 +24,10 @@
 @tailwind utilities;
 
 /* BASICS */
-* {
-  @apply m-0 p-0 break-words;
+*,
+*::before,
+*::after {
+  @apply m-0 p-0 break-words box-border;
 }
 
 *:focus {
@@ -59,22 +36,23 @@
 
 html,
 body {
-	@apply font-Lato w-full h-full relative;
+	@apply font-Lato text-darkGrey w-full h-full relative;
+  min-height: 100vh;
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
 }
 
 /* TYPOGRAPHY */
 p {
-  @apply text-base pb-6;
-  &.p2 {
-    @apply text-xl;
-  }
+  @apply text-lg leading-snug pb-5;
   &.no-padding {
-    @apply p-0;
+    @apply pb-0;
   }
 }
 
 h1, h2, h3, h4, h5, h6 {
-  @apply font-PTSerif text-neutral-800;
+  @apply font-PTSerif text-neutral-800 text-balance;
   > a {
     @apply no-underline;
   }
@@ -83,42 +61,77 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 h1 {
-	@apply text-4xl pb-8;
+	@apply text-4xl pb-5;
 }
 h2 {
-	@apply text-2xl pb-8;
+	@apply text-2xl pb-5;
 }
 h3 {
-	@apply text-xl pb-6;
+	@apply text-xl pb-4;
 }
 h4, h5, h6 {
-	@apply  text-lg pb-4;
+	@apply  text-lg pb-3;
 }
 
-a, button.text-link-button {
-	@apply text-primary cursor-pointer m-0 p-0 min-h-0 duration-300 underline;
+a, .text-link-button {
+	@apply text-secondary cursor-pointer m-0 p-0 duration-300 underline;
 	font-size: inherit;
 	line-height: inherit;
 	height: inherit;
+
+  &.white-link {
+    @apply text-white;
+  }
 }
 
 a:hover,
-button.text-link-button:hover {
+.text-link-button:hover {
 	@apply no-underline;
+}
+
+img,
+picture {
+  @apply max-w-full block;
+}
+
+input, button,
+textarea, select {
+  font: inherit;
+}
+
+textarea:not([rows]) {
+  @apply min-h-40;
+}
+
+:target {
+  scroll-margin-block: 5ex;
 }
 
 /* LAYOUT */
 .wrapper {
-  @apply w-full h-full m-8;
+  @apply w-full h-full;
   .container {
-    @apply !max-w-none lg:!max-w-screen-2xl px-4 m-auto;
+    @apply !max-w-none lg:!max-w-screen-xl px-4 m-auto;
   }
 }
 
 /* HELPER */
-.spacer {
-	height: 1rem;
-}
-.bigSpacer {
-	height: 2.5rem;
+.tiny-spacer { @apply m-0 p-0 w-full h-2 }
+.medium-spacer { @apply m-0 p-0 w-full h-4 }
+.spacer { @apply m-0 p-0 w-full h-8 }
+.big-spacer { @apply m-0 p-0 w-full h-12 }
+.massive-spacer { @apply m-0 p-0 w-full h-20 }
+.just-a-line { @apply w-full h-px p-0 m-0 bg-mediumGrey}
+
+/* Special Button Style */
+.btn-basic {
+  @apply block font-bold text-white text-lg leading-none rounded-md py-4 px-12 border-0 m-2 transition-all duration-500;
+  //background-image: linear-gradient(to right, #4CB8C4 0%, #3CD3AD  51%, #4CB8C4  100%);
+  background: linear-gradient(to right, var(--light-blue) 0%, var(--turquoise) 51%, var(--light-blue) 100%);
+  background-size: 200% auto;            
+  box-shadow: 0 0 .5rem var(--medium-grey);
+
+  &:hover {
+    @apply cursor-pointer shadow-none bg-right;
+  }
 }
