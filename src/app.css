@@ -155,3 +155,16 @@ textarea:not([rows]) {
     @apply cursor-pointer shadow-none bg-right;
   }
 }
+
+.sc-carousel-button {
+  --sc-dot-size: 12px;
+  --sc-active-dot-size: 12px;
+
+  &.sc-carousel-arrow__circle {
+    @apply !w-10 !h-10;
+  }
+
+}
+.sc-carousel-arrow__arrow {
+  --sc-arrow-size: 4px;
+}
