@@ -9,6 +9,7 @@ export const GET = async (req) => {
         contents(where: { page:$page }, stage:PUBLISHED) {
           headline
           text
+          subheadline
           page
         }
       }

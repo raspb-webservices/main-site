@@ -24,7 +24,7 @@
 
 <style lang="postcss">
   header {
-    @apply w-full py-10;
+    @apply w-full;
     .inner-container {
       @apply flex items-center justify-between;
 

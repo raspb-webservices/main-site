@@ -146,7 +146,6 @@ textarea:not([rows]) {
 /* Special Button Style */
 .btn-basic {
   @apply block font-bold text-white text-lg leading-none rounded-md py-4 px-12 border-0 m-2 transition-all duration-500;
-  //background-image: linear-gradient(to right, #4CB8C4 0%, #3CD3AD  51%, #4CB8C4  100%);
   background: linear-gradient(to right, var(--light-blue) 0%, var(--turquoise) 51%, var(--light-blue) 100%);
   background-size: 200% auto;            
   box-shadow: 0 0 .5rem var(--medium-grey);
@@ -156,15 +155,14 @@ textarea:not([rows]) {
   }
 }
 
-.sc-carousel-button {
-  --sc-dot-size: 12px;
-  --sc-active-dot-size: 12px;
-
-  &.sc-carousel-arrow__circle {
-    @apply !w-10 !h-10;
-  }
-
+/* Special Animations */
+.fade-in {
+  @apply opacity-0;
+  animation: fadeIn ease 1s;
+  animation-fill-mode: forwards;
 }
-.sc-carousel-arrow__arrow {
-  --sc-arrow-size: 4px;
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }

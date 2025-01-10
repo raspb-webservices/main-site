@@ -1,14 +1,10 @@
 <script lang="ts">
-  import Carousel from 'svelte-carousel'
-  import { browser } from '$app/environment';
-  import { goto } from '$app/navigation';
+  import SLIDER from "$lib/components/slider.svelte";
+  import markdownit from "markdown-it";
 
   export let data: any;
-  let carousel: any;
 
-  const handleNextClick = () => {
-    carousel.goToNext()
-  }
+  const md = markdownit()
 </script>
 
 <svelte:head>
@@ -22,22 +18,17 @@
 <section class="home-content-wrapper">
   <div class="container">
     <div class="inner-container">
-      
-  {#if browser}
-  <Carousel class="bg-teal h-80"
-    bind:this={carousel}
-  >
-    <div class="bg-teal h-80"></div>
-    <div class="bg-white h-80">2</div>
-    <div class="bg-white h-80">2</div>
-    <div>3</div>
-  </Carousel>
-{/if}
+      <div class="pb-8">
+        <SLIDER></SLIDER>
+      </div>
+
       <h1>Welcome to SvelteKit</h1>
       <p class="p2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque veritatis doloribus ratione magni labore voluptatum totam a exercitationem quis incidunt accusamus cum reprehenderit tenetur velit, sint commodi ab saepe ipsam?</p>
       <div class="bigSpacer"></div>
       {#each data.contents as snippet}
         <h2>{snippet.headline}</h2>
+        <h4>{snippet.subheadline}</h4>
+        <div>{@html md.render(snippet.text)}</div>
         <div class="spacer"></div>
       {/each}
     </div>

@@ -7,6 +7,7 @@ export const GET = async () => {
       query getContents {
         contents(stage:PUBLISHED) {
           headline
+          subheadline
           text
           page
         }
