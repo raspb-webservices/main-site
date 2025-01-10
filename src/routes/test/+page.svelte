@@ -1,10 +1,14 @@
 <script lang="ts">
+  import TEASER from '$lib/components/teaser.svelte';
   import { goto } from '$app/navigation';
 </script>
 
-<section class="impressum-content-wrapper">
-  <h1>Impressum</h1>
-  <div class="px-20 pt-10">
+<TEASER customImageURL={'https://picsum.photos/id/46/1920/1080'} headline={'Hier kommt eine tolle Headline'} subheadline={'Und eine super SubHeadline'}
+></TEASER>
+
+<section class="test-content-wrapper fade-in">
+  <h1>Test</h1>
+  <div class="pt-10 lg:px-20">
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio hic voluptatem neque consequuntur porro, accusantium sit, doloribus perferendis, reiciendis
       autem labore. Minus explicabo aperiam ratione sapiente voluptate aliquam cum est.
@@ -22,11 +26,11 @@
       }}>Zurück zur Startseite</button
     >
   </div>
-  <div class="big-spacer"></div>
+  <div class="spacer"></div>
 </section>
 
 <style lang="postcss">
-  section.impressum-content-wrapper {
+  section.test-content-wrapper {
     @apply m-auto h-full w-full max-w-screen-xl px-4 py-12;
   }
 </style>

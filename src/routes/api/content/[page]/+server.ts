@@ -6,7 +6,7 @@ export const GET = async (req) => {
   try {
     const query = gql`
       query getContentsByPage($page: String!) {
-        contents(where: { page:$page }, stage:PUBLISHED) {
+        contents(where: { page: $page }, stage: PUBLISHED) {
           headline
           text
           subheadline

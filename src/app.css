@@ -1,4 +1,4 @@
-@import url('./fonts/font-collection.css');;
+@import url('./fonts/font-collection.css');
 
 @layer base {
   :root {
@@ -8,20 +8,20 @@
     --medium-grey: #8e8d8d;
     --light-grey: #fafafa;
     --dark-blue: #0b3c49;
-    --pale-blue: #449DD1;
+    --pale-blue: #449dd1;
     --light-blue: #0d99e6;
     --turquoise: #5fcdc0;
     --teal: #007388;
     --green: #42b863;
-    --orange: #F09819;
-    --yellow: #F4D03F;
+    --orange: #f09819;
+    --yellow: #f4d03f;
     --violet: #731963;
     --red: #c93136;
-    --neutral: #3D4451;
-    --info: #3ABFF8;
-    --success: #6BB900;
-    --warning: #FBBD23;
-    --error: #F87272;
+    --neutral: #3d4451;
+    --info: #3abff8;
+    --success: #6bb900;
+    --warning: #fbbd23;
+    --error: #f87272;
   }
 }
 
@@ -33,39 +33,44 @@
 *,
 *::before,
 *::after {
-  @apply m-0 p-0 break-words box-border;
+  @apply m-0 box-border break-words p-0;
 }
 
 *:focus,
 *:focus-visible,
 *:focus-within,
 *:active {
-	@apply outline-none;
+  @apply outline-none;
 }
 
 html,
 body {
-	@apply font-Lato text-darkGrey w-full h-full relative;
+  @apply relative m-0 h-full w-full p-0 font-Lato text-darkGrey;
   min-height: 100vh;
   scroll-behavior: smooth;
-  -moz-text-size-adjust: none;
-  -webkit-text-size-adjust: none;
-  -ms-text-size-adjust: none;
-  text-size-adjust: none;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* TYPOGRAPHY */
 p {
-  @apply text-lg leading-snug pb-5;
+  @apply pb-5 text-lg leading-snug;
   &.no-padding {
     @apply pb-0;
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
-  @apply font-PTSerif font-bold text-primary text-balance;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply text-balance font-PTSerif font-bold text-primary;
   > a {
     @apply no-underline;
   }
@@ -77,42 +82,48 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 h1 {
-	@apply text-4xl pb-5;
+  @apply pb-5 text-4xl;
 }
 h2 {
-	@apply text-2xl pb-5;
+  @apply pb-5 text-2xl;
 }
 h3 {
-	@apply text-xl pb-4;
+  @apply pb-4 text-xl;
 }
-h4, h5, h6 {
-	@apply  text-lg pb-3;
+h4,
+h5,
+h6 {
+  @apply pb-3 text-lg;
 }
 
-a, .text-link-button {
-	@apply text-primary cursor-pointer m-0 p-0 duration-300 underline;
-	font-size: inherit;
-	line-height: inherit;
-	height: inherit;
+a,
+.text-link-button {
+  @apply m-0 cursor-pointer p-0 text-primary underline duration-300;
+  font-size: inherit;
+  line-height: inherit;
+  height: inherit;
 
-  &.white-link, &.on-dark {
+  &.white-link,
+  &.on-dark {
     @apply text-white;
   }
   &:hover {
     @apply no-underline;
   }
   &.active {
-    @apply no-underline text-secondary;
+    @apply text-secondary no-underline;
   }
 }
 
 img,
 picture {
-  @apply max-w-full block;
+  @apply block max-w-full;
 }
 
-input, button,
-textarea, select {
+input,
+button,
+textarea,
+select {
   font: inherit;
 }
 
@@ -126,32 +137,49 @@ textarea:not([rows]) {
 
 /* LAYOUT */
 .wrapper {
-  @apply w-full h-full;
-  .container {
-    @apply !max-w-none lg:!max-w-screen-xl px-4 m-auto;
-    .inner-container {
-      @apply p-6;
-    }
+  @apply w-full;
+
+  .content-container {
+    @apply min-h-[calc(100vh-192px)] md:min-h-[calc(100vh-176px)];
+  }
+
+  .inner-box {
+    @apply m-auto h-full w-full max-w-screen-xl px-4;
+  }
+  .inner-box-full-width {
+    @apply m-auto h-full w-full px-4;
   }
 }
 
 /* HELPER */
-.tiny-spacer { @apply m-0 p-0 w-full h-2 }
-.medium-spacer { @apply m-0 p-0 w-full h-4 }
-.spacer { @apply m-0 p-0 w-full h-8 }
-.big-spacer { @apply m-0 p-0 w-full h-12 }
-.massive-spacer { @apply m-0 p-0 w-full h-20 }
-.just-a-line { @apply w-full h-px p-0 m-0 bg-mediumGrey}
+.tiny-spacer {
+  @apply m-0 h-2 w-full p-0;
+}
+.medium-spacer {
+  @apply m-0 h-4 w-full p-0;
+}
+.spacer {
+  @apply m-0 h-8 w-full p-0;
+}
+.big-spacer {
+  @apply m-0 h-12 w-full p-0;
+}
+.massive-spacer {
+  @apply m-0 h-20 w-full p-0;
+}
+.just-a-line {
+  @apply m-0 h-px w-full bg-mediumGrey p-0;
+}
 
 /* Special Button Style */
 .btn-basic {
-  @apply block font-bold text-white text-lg leading-none rounded-md py-4 px-12 border-0 m-2 transition-all duration-500;
+  @apply m-2 block rounded-md border-0 px-12 py-4 text-lg font-bold leading-none text-white transition-all duration-500;
   background: linear-gradient(to right, var(--light-blue) 0%, var(--turquoise) 51%, var(--light-blue) 100%);
-  background-size: 200% auto;            
-  box-shadow: 0 0 .5rem var(--medium-grey);
+  background-size: 200% auto;
+  box-shadow: 0 0 0.5rem var(--medium-grey);
 
   &:hover {
-    @apply cursor-pointer shadow-none bg-right;
+    @apply cursor-pointer bg-right shadow-none;
   }
 }
 
@@ -163,6 +191,10 @@ textarea:not([rows]) {
 }
 
 @keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

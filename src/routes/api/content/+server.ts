@@ -5,7 +5,7 @@ export const GET = async () => {
   try {
     const query = gql`
       query getContents {
-        contents(stage:PUBLISHED) {
+        contents(stage: PUBLISHED) {
           headline
           subheadline
           text
