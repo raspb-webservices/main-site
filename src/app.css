@@ -58,7 +58,7 @@ body {
 
 /* TYPOGRAPHY */
 p {
-  @apply pb-5 text-lg leading-snug;
+  @apply pb-5 text-lg leading-normal;
   &.no-padding {
     @apply pb-0;
   }
