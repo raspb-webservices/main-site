@@ -74,26 +74,26 @@ h6 {
   > a {
     @apply no-underline;
   }
-  &.no-padding {
-    @apply p-0;
+  &.add-padding {
+    @apply pb-5;
   }
   &.on-dark {
     @apply text-white;
   }
 }
 h1 {
-  @apply pb-5 text-4xl;
+  @apply text-4xl;
 }
 h2 {
-  @apply pb-5 text-2xl;
+  @apply text-2xl;
 }
 h3 {
-  @apply pb-4 text-xl;
+  @apply text-xl;
 }
 h4,
 h5,
 h6 {
-  @apply pb-3 text-lg;
+  @apply text-lg;
 }
 
 a,
@@ -196,5 +196,30 @@ textarea:not([rows]) {
   }
   100% {
     opacity: 1;
+  }
+}
+
+/*--------------- CUSTOM CLASSES ---------------*/
+.item-row {
+  .item {
+    &.active {
+      @apply bg-primary text-white;
+      h3,
+      p {
+        @apply text-white;
+      }
+      .item-content {
+        @apply w-full;
+        .sub-item {
+          &.active {
+            @apply bg-secondary text-white;
+            h3,
+            p {
+              @apply text-white;
+            }
+          }
+        }
+      }
+    }
   }
 }

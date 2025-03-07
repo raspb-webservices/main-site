@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Splide, SplideSlide, SplideTrack } from '@splidejs/svelte-splide';
   import '@splidejs/svelte-splide/css';
-  import { generateSlides } from '$lib/generateSlides';
+  import { generateSlides } from '$lib/helper/generateSlides';
 
   const slides = generateSlides(12);
   const options = {

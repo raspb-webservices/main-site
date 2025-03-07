@@ -1,4 +1,4 @@
-import { client } from '$lib/graphql-client';
+import { client } from '$lib/helper/graphql-client';
 import { gql } from 'graphql-request';
 
 export const GET = async () => {

@@ -24,6 +24,13 @@
         }}>Aktuelles</button
       >
       <button
+      class="text-link-button"
+      class:active={$page.url.pathname === '/get-started'}
+      on:click={() => {
+        goto('/get-started');
+      }}>Get started</button
+    >
+      <button
         class="text-link-button"
         class:active={$page.url.pathname === '/test'}
         on:click={() => {
@@ -57,6 +64,13 @@
             goto('/aktuelles');
           }}>Aktuelles</button
         >
+        <button
+        class="text-link-button"
+        class:active={$page.url.pathname === '/get-started'}
+        on:click={() => {
+          goto('/get-started');
+        }}>Get started</button
+      >
         <button
           class="text-link-button"
           class:active={$page.url.pathname === '/test'}
