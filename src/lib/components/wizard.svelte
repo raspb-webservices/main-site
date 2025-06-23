@@ -230,6 +230,7 @@
 </section>
 
 <style lang="postcss">
+    @reference '../../app.css';
   section {
     @apply h-full w-full rounded-xl bg-lightGrey p-6;
 

@@ -20,7 +20,7 @@
   <div class="pb-8">
     <SLIDER></SLIDER>
   </div>
-  <div class="bigSpacer"></div>
+  <div class="big-spacer"></div>
   {#each data.contents as snippet}
     <h2>{snippet.headline}</h2>
     <h4>{snippet.subheadline}</h4>
@@ -32,7 +32,8 @@
 </section>
 
 <style lang="postcss">
+  @reference '../app.css';
   section.home-content-wrapper {
-    @apply m-auto h-full w-full max-w-screen-xl px-4 py-12;
+    @apply m-auto h-full w-full max-w-7xl px-4 py-12;
   }
 </style>

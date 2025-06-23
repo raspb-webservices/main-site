@@ -18,11 +18,12 @@
 </div>
 
 <style lang="postcss">
+    @reference '../../app.css';
   div.teaser-wrapper {
     @apply w-full bg-darkGrey;
 
     div.teaser-inner {
-      @apply relative m-auto flex aspect-32/9 w-full max-w-screen-4xl flex-col items-start justify-end bg-cover bg-center bg-no-repeat p-8;
+      @apply relative m-auto flex aspect-32/9 w-full max-w-wqhd flex-col items-start justify-end bg-cover bg-center bg-no-repeat p-8;
       background-image: var(--teaserImage);
 
       &:after {

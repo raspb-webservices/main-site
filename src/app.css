@@ -1,51 +1,68 @@
 @import url('./fonts/font-collection.css');
-
-@layer base {
-  :root {
-    --white: #fefefe;
-    --black: #010101;
-    --dark-grey: #444444;
-    --medium-grey: #8e8d8d;
-    --light-grey: #fafafa;
-    --dark-blue: #0b3c49;
-    --pale-blue: #449dd1;
-    --light-blue: #0d99e6;
-    --turquoise: #5fcdc0;
-    --teal: #007388;
-    --green: #42b863;
-    --orange: #f09819;
-    --yellow: #f4d03f;
-    --violet: #731963;
-    --red: #c93136;
-    --neutral: #3d4451;
-    --info: #3abff8;
-    --success: #6bb900;
-    --warning: #fbbd23;
-    --error: #f87272;
-  }
+@import 'tailwindcss';
+@plugin "daisyui" {
+  themes: fantasy;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+:root {
+  --white: #fefefe;
+  --black: #010101;
+  --dark-grey: #444444;
+  --medium-grey: #8e8d8d;
+  --light-grey: #fafafa;
+  --dark-blue: #0b3c49;
+  --pale-blue: #449dd1;
+  --light-blue: #0d99e6;
+  --turquoise: #5fcdc0;
+  --teal: #007388;
+  --green: #42b863;
+  --orange: #f09819;
+  --yellow: #f4d03f;
+  --violet: #731963;
+  --red: #c93136;
+  --neutral: #3d4451;
+  --info: #3abff8;
+  --success: #6bb900;
+  --warning: #fbbd23;
+  --error: #f87272;
+}
+
+@theme {
+  --font-lato: 'Lato', sans-serif;
+  --font-pt-serif: 'PTSerif', serif;
+  --aspect-21/9: 21 / 9;
+  --aspect-32/9: 32 / 9;
+  --spacing-fhd: 120rem;
+  --spacing-wqhd: 160rem;
+  --color-white: var(--white);
+  --color-black: var(--black);
+  --color-red: var(--custom-red);
+  --color-teal: var(--teal);
+  --color-lightBlue: var(--light-blue);
+  --color-green: var(--green);
+  --color-darkGrey: var(--dark-grey);
+  --color-mediumGrey: var(--medium-grey);
+  --color-lightGrey: var(--light-grey);
+  --color-error: var(--red);
+}
 
 /* BASICS */
-*,
-*::before,
-*::after {
-  @apply m-0 box-border break-words p-0;
-}
-
 *:focus,
 *:focus-visible,
 *:focus-within,
 *:active {
-  @apply outline-none;
+  outline: none;
+}
+
+*,
+*::before,
+*::after {
+  @apply m-0 box-border p-0 break-words;
 }
 
 html,
 body {
-  @apply relative m-0 h-full w-full p-0 font-Lato text-darkGrey;
+  @apply font-lato text-darkGrey relative m-0 h-full w-full p-0;
   min-height: 100vh;
   scroll-behavior: smooth;
   -moz-text-size-adjust: 100%;
@@ -70,7 +87,7 @@ h3,
 h4,
 h5,
 h6 {
-  @apply text-balance font-PTSerif font-bold text-primary;
+  @apply font-pt-serif text-primary font-bold text-balance;
   > a {
     @apply no-underline;
   }
@@ -98,7 +115,7 @@ h6 {
 
 a,
 .text-link-button {
-  @apply m-0 cursor-pointer p-0 text-primary underline duration-300;
+  @apply text-primary m-0 cursor-pointer p-0 underline duration-300;
   font-size: inherit;
   line-height: inherit;
   height: inherit;
@@ -144,7 +161,7 @@ textarea:not([rows]) {
   }
 
   .inner-box {
-    @apply m-auto h-full w-full max-w-screen-xl px-4;
+    @apply m-auto h-full w-full max-w-7xl px-4;
   }
   .inner-box-full-width {
     @apply m-auto h-full w-full px-4;
@@ -168,12 +185,12 @@ textarea:not([rows]) {
   @apply m-0 h-20 w-full p-0;
 }
 .just-a-line {
-  @apply m-0 h-px w-full bg-mediumGrey p-0;
+  @apply bg-mediumGrey m-0 h-px w-full p-0;
 }
 
 /* Special Button Style */
 .btn-basic {
-  @apply m-2 block rounded-md border-0 px-12 py-4 text-lg font-bold leading-none text-white transition-all duration-500;
+  @apply m-2 block rounded-md border-0 px-12 py-4 text-lg leading-none font-bold text-white transition-all duration-500;
   background: linear-gradient(to right, var(--light-blue) 0%, var(--turquoise) 51%, var(--light-blue) 100%);
   background-size: 200% auto;
   box-shadow: 0 0 0.5rem var(--medium-grey);
@@ -220,6 +237,33 @@ textarea:not([rows]) {
           }
         }
       }
+    }
+  }
+}
+
+.swiper-pagination {
+  @apply flex w-full items-center justify-center gap-2;
+  .swiper-pagination-bullet {
+    @apply h-5 w-5 rounded-full bg-gray-800;
+    &.swiper-pagination-bullet-active {
+      @apply bg-blue-400;
+    }
+  }
+}
+
+swiper-container {
+  @apply overflow-hidden rounded-3xl;
+}
+
+.swiper-controls {
+  @apply mt-3 flex items-center justify-between;
+  .swiper-button-prev,
+  .swiper-button-next {
+    @apply h-10 w-10 cursor-pointer rounded-xl bg-amber-100 p-2 hover:bg-amber-300;
+
+    &:disabled,
+    &[disabled] {
+      @apply cursor-default opacity-30 hover:bg-amber-100;
     }
   }
 }

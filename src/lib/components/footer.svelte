@@ -30,6 +30,7 @@
 </footer>
 
 <style lang="postcss">
+  @reference '../../app.css';
   footer {
     @apply h-24 w-full bg-primary py-2 md:h-20;
 

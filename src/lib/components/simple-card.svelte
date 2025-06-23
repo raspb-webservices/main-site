@@ -20,6 +20,7 @@
 </div>
 
 <style lang="postcss">
+    @reference '../../app.css';
   div.simple-card {
     @apply cursor-pointer overflow-hidden rounded-md shadow-md;
 

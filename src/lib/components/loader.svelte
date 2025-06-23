@@ -3,6 +3,7 @@
 </div>
 
 <style lang="postcss">
+    @reference '../../app.css';
   .loader-wrapper {
     @apply flex h-auto w-full items-center justify-center;
     .loader {

@@ -84,6 +84,7 @@
 </header>
 
 <style lang="postcss">
+  @reference '../../app.css';
   header {
     @apply h-24 w-full py-10;
     > div.inner-box {

@@ -6,6 +6,7 @@
 </div>
 
 <style lang="postcss">
+    @reference '../../app.css';
   .info-box {
     @apply flex h-auto w-full items-center justify-center bg-lightBlue rounded-xl p-4 px-8 text-white;
     .text, .text p {
