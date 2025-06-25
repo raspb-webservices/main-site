@@ -5,7 +5,10 @@ import fs from 'fs';
 const config = {
   preprocess: vitePreprocess(),
   kit: {
-    adapter: adapter()
+    adapter: adapter(),
+    alias: {
+      $store: './src/stores'
+    }
   },
   vite: {
     optimizeDeps: {

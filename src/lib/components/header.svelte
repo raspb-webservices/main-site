@@ -1,49 +1,71 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { page } from '$app/stores';
-
-  let mobileNavOpen = false;
+  import { page } from '$app/state';
+  let mobileNavOpen = $state(false);
 </script>
 
 <header>
   <div class="inner-box">
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <!-- svelte-ignore a11y-no-static-element-interactions -->
-    <div
+    <button
+      aria-label="raspb Logo"
       class="logo"
-      on:click={() => {
+      onclick={() => {
         goto('/');
       }}
-    ></div>
+    ></button>
+
     <nav class="navigation">
       <button
-        class="text-link-button"
-        class:active={$page.url.pathname === '/aktuelles'}
-        on:click={() => {
-          goto('/aktuelles');
-        }}>Aktuelles</button
+        class="nav-item"
+        class:active={page.url.pathname === '/services'}
+        onclick={() => {
+          goto('/services');
+        }}>Services</button
+      >
+
+      <button
+        class="nav-item"
+        class:active={page.url.pathname === '/einblicke'}
+        onclick={() => {
+          goto('/einblicke');
+        }}>Einblicke</button
       >
       <button
-      class="text-link-button"
-      class:active={$page.url.pathname === '/get-started'}
-      on:click={() => {
-        goto('/get-started');
-      }}>Get started</button
-    >
+        class="nav-item"
+        class:active={page.url.pathname === '/ueber-uns'}
+        onclick={() => {
+          goto('/ueber-uns');
+        }}>Über uns</button
+      >
       <button
-        class="text-link-button"
-        class:active={$page.url.pathname === '/test'}
-        on:click={() => {
-          goto('/test');
-        }}>Test</button
+        class="nav-item"
+        class:active={page.url.pathname === '/faq'}
+        onclick={() => {
+          goto('/faq');
+        }}>FAQ</button
+      >
+      <button
+        class="nav-item"
+        class:active={page.url.pathname === '/kontakt'}
+        onclick={() => {
+          goto('/kontakt');
+        }}>Kontakt</button
       >
     </nav>
 
+    <div class="cta-area">
+      <button
+        class="btn-basic"
+        onclick={() => {
+          goto('/get-started');
+        }}><span class="hidden lg:block">Projekt konfigurieren</span><span class="lg:hidden">Starten</span></button
+      >
+    </div>
     <nav class="mobile-navigvation">
       <div class="burger-nav-button">
         <button
           aria-label="Burger Navigation - Open Mobile Navigation"
-          on:click={() => {
+          onclick={() => {
             mobileNavOpen = !mobileNavOpen;
           }}
         ></button>
@@ -52,29 +74,29 @@
         <div class="close-area">
           <button
             aria-label="Mobile Navigation - Close Mobile Navigation"
-            on:click={() => {
+            onclick={() => {
               mobileNavOpen = !mobileNavOpen;
             }}
           ></button>
         </div>
         <button
           class="text-link-button"
-          class:active={$page.url.pathname === '/aktuelles'}
-          on:click={() => {
+          class:active={page.url.pathname === '/aktuelles'}
+          onclick={() => {
             goto('/aktuelles');
           }}>Aktuelles</button
         >
         <button
-        class="text-link-button"
-        class:active={$page.url.pathname === '/get-started'}
-        on:click={() => {
-          goto('/get-started');
-        }}>Get started</button
-      >
+          class="text-link-button"
+          class:active={page.url.pathname === '/get-started'}
+          onclick={() => {
+            goto('/get-started');
+          }}>Get started</button
+        >
         <button
           class="text-link-button"
-          class:active={$page.url.pathname === '/test'}
-          on:click={() => {
+          class:active={page.url.pathname === '/test'}
+          onclick={() => {
             goto('/test');
           }}>Test</button
         >
@@ -86,31 +108,60 @@
 <style lang="postcss">
   @reference '../../app.css';
   header {
-    @apply h-24 w-full py-10;
+    @apply h-24 w-full py-10 shadow-lg;
+
     > div.inner-box {
       @apply flex items-center justify-between;
 
       .logo {
         @apply aspect-video h-24 cursor-pointer bg-cover bg-center bg-no-repeat;
-        background-image: url(/images/logo.png);
+        background-image: url(/images/logo.jpg);
       }
 
       nav.navigation {
-        @apply ml-auto hidden md:flex;
+        @apply navOne:flex hidden w-fit items-center justify-center;
         > button {
-          @apply ml-8 py-1 text-lg font-semibold;
+          @apply text-textBase/80 relative ml-6 px-2 text-lg font-bold;
+
+          &::before,
+          &::after {
+            @apply from-pink to-purple absolute -bottom-1 left-0 block h-0.5 w-full origin-right scale-x-0 bg-gradient-to-r transition-transform duration-500;
+            content: '';
+          }
+          &::before {
+            @apply -top-1 origin-left;
+          }
+          &:hover {
+            @apply cursor-pointer text-black;
+            &::before,
+            &::after {
+              @apply scale-x-100;
+            }
+          }
           &:first-child {
             @apply ml-0;
+          }
+          &.active {
+            @apply text-black;
+            &::after {
+              @apply bg-gradient-to-r from-gray-500  via-textBase/80 to-gray-500 scale-x-100;
+            }
+            &:hover {
+              @apply cursor-default;
+              &::before {
+                @apply scale-x-0;
+              }
+            }
           }
         }
       }
       nav.mobile-navigvation {
-        @apply flex md:hidden;
+        @apply navOne:hidden flex;
 
         .burger-nav-button {
           @apply cursor-pointer;
           button {
-            @apply h-8 w-8 bg-primary bg-contain bg-center bg-no-repeat transition-all duration-300;
+            @apply bg-primary h-8 w-8 bg-contain bg-center bg-no-repeat transition-all duration-300;
             mask-image: url(/icons/burger-menu.svg);
 
             &:hover {
@@ -120,7 +171,7 @@
         }
 
         .mobile-navigation-panel {
-          @apply fixed left-0 top-0 z-50 flex h-full w-full flex-col items-center justify-start bg-secondary;
+          @apply bg-secondary fixed top-0 left-0 z-50 flex h-full w-full flex-col items-center justify-start;
           &.closed {
             @apply hidden;
           }
@@ -150,6 +201,10 @@
             }
           }
         }
+      }
+
+      .cta-area {
+        @apply navOne:flex hidden items-center justify-center;
       }
     }
   }

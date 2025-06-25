@@ -8,5 +8,3 @@
     CookieConsent.run(config);
   });
 </script>
-
-<!-- <button on:click={CookieConsent.showPreferences}>Open consent preferences</button> -->

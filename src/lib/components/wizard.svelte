@@ -1,8 +1,6 @@
 <script lang="ts">
   const currentYear = new Date().getFullYear();
-  import { goto } from '$app/navigation';
   import { onMount } from 'svelte';
-  import Infobox from './infobox.svelte';
 
   let current = $state('');
 
@@ -79,6 +77,10 @@
 
 <section>
   <div class="inner-box">
+    <div class="flex w-full justify-center items-center">
+      <span class="loading loading-spinner text-primary" style="--size-selector: 1rem"></span>
+    </div>
+    
     <h2>Was möchten Sie realisieren? {current}</h2>
     <div class="medium-spacer"></div>
     <div class="item-row">
@@ -122,13 +124,19 @@
             <p>beliebig viele Nutzer</p>
             <p>Preis auf Anfrage</p>
           </div>
-          
+
           <div class="floating-sub-item">
             <div class="tiny-spacer"></div>
-            <Infobox
-              >Für komplexe Rollen und Berechtigungs Anforderungen sind U.U. externer Partner heranziehen, was die Projektzeiten verlängert und die Kosten
-              steigert.</Infobox
-            >
+            <div role="alert" class="alert alert-info">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span
+                >Für komplexe Rollen und Berechtigungs Anforderungen sind U.U. externer Partner heranziehen, was die Projektzeiten verlängert und die Kosten
+                steigert.</span
+              >
+            </div>
+
             <div class="spacer"></div>
             <p>Was brauchen Sie wirklich?</p>
           </div>
@@ -182,7 +190,6 @@
         </div>
       </div>
 
-
       <div class="item" id="webkampagne" bind:this={parentItemCustomApp}>
         <div class="item-header">
           <h3>Ihre Custom App</h3>
@@ -192,7 +199,10 @@
             <h3>Webanwendung PWA</h3>
             <p>Ihre eigene kleine Webanwendung / PWA</p>
             <p>Es soll nicht das Schweizer Taschenmesser sein, sonder Ihre App macht eine Sache, aber diese richtig gut!</p>
-            <p>Gekoppelt mit einer Content Strategie, könnte es eine kleine App für die Mitarbeiter sein. Sie loggen sich ein und bekommen kuratierte Inhalte präsentiert.</p>
+            <p>
+              Gekoppelt mit einer Content Strategie, könnte es eine kleine App für die Mitarbeiter sein. Sie loggen sich ein und bekommen kuratierte Inhalte
+              präsentiert.
+            </p>
             <p>Oder eine App, um ihre Inhalte auf ihrer Webseite bei uns editieren zu können. Oder oder oder... Sie entscheiden!</p>
             <p>10.000 €</p>
           </div>
@@ -219,7 +229,9 @@
           </div>
           <div class="sub-item" id="pwa" bind:this={websiteExtensionSubItem}>
             <h3>Extensions für bestehende Webseiten</h3>
-            <p>Haben Sie bereits eine Webseite oder Anwendung von uns entwicklen lassen? Brauchen Sie nun eine neue Funktion oder eine grundlegende Änderung?</p>
+            <p>
+              Haben Sie bereits eine Webseite oder Anwendung von uns entwicklen lassen? Brauchen Sie nun eine neue Funktion oder eine grundlegende Änderung?
+            </p>
             <p>Dank unseres Ansatzes ist das schnell und einfach möglich.</p>
             <p>Preis auf Anfrage</p>
           </div>
@@ -230,15 +242,15 @@
 </section>
 
 <style lang="postcss">
-    @reference '../../app.css';
+  @reference '../../app.css';
   section {
-    @apply h-full w-full rounded-xl bg-lightGrey p-6;
+    @apply bg-lightGrey h-full w-full rounded-xl p-6;
 
     .item-row {
       @apply flex flex-wrap justify-center;
 
       .item {
-        @apply mb-4 flex flex-grow basis-full flex-wrap overflow-hidden rounded-xl border-2 border-primary text-left;
+        @apply border-primary mb-4 flex flex-grow basis-full flex-wrap overflow-hidden rounded-xl border-2 text-left;
 
         .item-header {
           @apply w-full cursor-pointer p-4;
@@ -253,13 +265,13 @@
         .item-content {
           @apply w-full;
           .sub-item {
-            @apply m-4 flex-grow basis-full rounded-xl border-2 border-secondary p-4 text-left bg-white;
+            @apply border-secondary m-4 flex-grow basis-full rounded-xl border-2 bg-white p-4 text-left;
             h3,
-              p {
-                @apply text-darkGrey;
-              }
+            p {
+              @apply text-darkGrey;
+            }
             &:hover {
-              @apply cursor-pointer bg-mediumGrey text-black;
+              @apply bg-mediumGrey cursor-pointer text-black;
             }
           }
 

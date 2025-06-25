@@ -59,7 +59,7 @@
   @reference '../../app.css';
 
   .swiper-image {
-    @apply block h-[400px] w-full bg-amber-100 bg-cover bg-center bg-no-repeat;
+    @apply block h-[450px] w-full bg-primary/5 bg-cover bg-center bg-no-repeat;
     background-image: var(--image-url);
   }
 </style>

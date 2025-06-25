@@ -21,7 +21,7 @@
     <div class="spacer"></div>
     <button
       class="btn-basic"
-      on:click={() => {
+      onclick={() => {
         goto('/');
       }}>Zurück zur Startseite</button
     >

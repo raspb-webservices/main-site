@@ -11,7 +11,7 @@
     <div class="flex w-full justify-center">
       <button
         class="btn-basic"
-        on:click={() => {
+        onclick={() => {
           goto('/');
         }}>Zurück zur Startseite</button
       >

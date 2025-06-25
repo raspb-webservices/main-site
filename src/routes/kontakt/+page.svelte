@@ -98,7 +98,7 @@
             @apply mt-1 block w-full border border-mediumGrey bg-white p-3 text-sm text-darkGrey focus:border-secondary focus:ring-secondary;
           }
           input.is-checkbox {
-            @apply mt-0 h-6 w-6 p-0 focus:ring-1 focus:ring-teal;
+            @apply mt-0 h-6 w-6 p-0 focus:ring-1 focus:ring-primary;
           }
 
           .additional-information {
