@@ -28,7 +28,7 @@
       }
     }
     &.center-teaser {
-      @apply from-primary/10 to-secondary/20 bg-gradient-to-br py-36;
+      @apply from-secondary/30 via-primary/10 to-secondary/20 bg-gradient-to-br py-36;
     }
   }
 </style>

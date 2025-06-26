@@ -76,7 +76,7 @@
       </div>
       <div class="spacer"></div>
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
-        <div class="card bg-base-100 card-md w-full shadow-sm">
+        <div class="card from-lightGrey/70 via-lightGrey/90 to-lightGrey/45 bg-gradient-to-br card-md w-full shadow-sm">
           <div class="card-body">
             <h2 class="card-title no-padding">Webseiten</h2>
             <p class="no-padding pt-3">
@@ -111,7 +111,7 @@
           </div>
         </div>
 
-        <div class="card bg-base-100 card-md w-full shadow-sm">
+        <div class="card rom-lightGrey/70 via-lightGrey/90 to-lightGrey/45 bg-gradient-to-br card-md w-full shadow-sm">
           <div class="card-body">
             <h2 class="card-title no-padding">Custom CMS</h2>
             <p class="no-padding pt-3">
@@ -146,7 +146,7 @@
           </div>
         </div>
 
-        <div class="card bg-base-100 card-md w-full shadow-sm">
+        <div class="card rom-lightGrey/70 via-lightGrey/90 to-lightGrey/45 bg-gradient-to-br card-md w-full shadow-sm">
           <div class="card-body">
             <h2 class="card-title no-padding">Applications (Apps)</h2>
             <p class="no-padding pt-3">
@@ -181,7 +181,7 @@
           </div>
         </div>
 
-        <div class="card bg-base-100 card-md w-full shadow-sm">
+        <div class="card rom-lightGrey/70 via-lightGrey/90 to-lightGrey/45 bg-gradient-to-br card-md w-full shadow-sm">
           <div class="card-body">
             <h2 class="card-title no-padding">Individualentwicklung</h2>
             <p class="no-padding pt-3">
