@@ -89,19 +89,19 @@
                 Responsives Design - perfekte Darstellung auf jedem Gerät
               </li>
               <li class="text-neutral my-1 flex items-center text-lg">
-                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 rounded-full bg-gradient-to-r"></div>
+                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 min-w-2.5 rounded-full bg-gradient-to-r"></div>
                 State of the art - Nutzung modernster Webtechnologien
               </li>
               <li class="text-neutral my-1 flex items-center text-lg">
-                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 rounded-full bg-gradient-to-r"></div>
+                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 min-w-2.5 rounded-full bg-gradient-to-r"></div>
                 Performant, sicher, benutzerfreundlich
               </li>
               <li class="text-neutral my-1 flex items-center text-lg">
-                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 rounded-full bg-gradient-to-r"></div>
+                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 min-w-2.5 rounded-full bg-gradient-to-r"></div>
                 Individuell und flexibel erweierbar
               </li>
               <li class="text-neutral my-1 flex items-center text-lg">
-                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 rounded-full bg-gradient-to-r"></div>
+                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 min-w-2.5 rounded-full bg-gradient-to-r"></div>
                 Ihre Webseite, Ihr Code - kein geschlossenes System
               </li>
             </ul>
@@ -124,19 +124,19 @@
                 Volle Kontrolle über Ihre Inhalte
               </li>
               <li class="text-neutral my-1 flex items-center text-lg">
-                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 rounded-full bg-gradient-to-r"></div>
+                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 min-w-2.5 rounded-full bg-gradient-to-r"></div>
                 Sicher, schnell und einfach
               </li>
               <li class="text-neutral my-1 flex items-center text-lg">
-                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 rounded-full bg-gradient-to-r"></div>
+                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 min-w-2.5 rounded-full bg-gradient-to-r"></div>
                 Wartungsarm und beliebig erweiterbar
               </li>
               <li class="text-neutral my-1 flex items-center text-lg">
-                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 rounded-full bg-gradient-to-r"></div>
+                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 min-w-2.5 rounded-full bg-gradient-to-r"></div>
                 Bestehende Webseiten nachträglich "editierbar" machen
               </li>
               <li class="text-neutral my-1 flex items-center text-lg">
-                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 rounded-full bg-gradient-to-r"></div>
+                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 min-w-2.5 rounded-full bg-gradient-to-r"></div>
                 Headless: erfasste Inhalte auch an anderer Stelle nutzen
               </li>
             </ul>
@@ -155,19 +155,19 @@
             </p>
             <ul class="mt-2 mb-3">
               <li class="text-neutral my-1 flex items-center text-lg">
-                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 rounded-full bg-gradient-to-r"></div>
+                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 min-w-2.5 rounded-full bg-gradient-to-r"></div>
                 Ihre Webseite als App - oder Start auf weißer Leinwand
               </li>
               <li class="text-neutral my-1 flex items-center text-lg">
-                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 rounded-full bg-gradient-to-r"></div>
+                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 min-w-2.5 rounded-full bg-gradient-to-r"></div>
                 PWA - (Progressive Web Application) powered
               </li>
               <li class="text-neutral my-1 flex items-center text-lg">
-                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 rounded-full bg-gradient-to-r"></div>
+                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 min-w-2.5 rounded-full bg-gradient-to-r"></div>
                 Service Worker: Offline-Fähigkeiten
               </li>
               <li class="text-neutral my-1 flex items-center text-lg">
-                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 rounded-full bg-gradient-to-r"></div>
+                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 min-w-2.5 rounded-full bg-gradient-to-r"></div>
                 Service Worker: Push Benachrichtigungen
               </li>
               <li class="text-neutral my-1 flex items-center text-lg">
@@ -222,20 +222,6 @@
         Qualität: Höchste Standards in Design und Programmierung (Bewehrte und geprüfte Qualität: Verwendung moderner Webtechnologien, Frameworks,
         eigenentwicklete Module, usw. (welche? auflisten) geprüft von Experten, von Menschen)
       </p>
-    </div>
-  </Section>
-
-  <Section>
-    <div class="flex flex-col items-center justify-center">
-      <div class="massive-spacer"></div>
-      <div class="intro m-auto max-w-5xl text-center">
-        <h1>Unsere <span class="inner-text-special">Zielgruppe</span></h1>
-        <p class="teaser">
-          Wir verstehen die individuellen Bedürfnisse verschiedener Organisationen und Personen. Unsere Lösungen sind speziell auf Ihre Anforderungen
-          zugeschnitten.
-        </p>
-      </div>
-      <div class="spacer"></div>
     </div>
   </Section>
 
@@ -304,10 +290,10 @@
     }
 
     .image-container {
-      @apply relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-2xl;
+      @apply relative aspect-[5/3] w-full overflow-hidden rounded-2xl shadow-2xl;
       .solution-image {
         @apply h-full w-full bg-cover bg-center bg-no-repeat;
-        background-image: url('./images/visualisation-1.jpg');
+        background-image: url('/images/visualization-2.png');
       }
     }
   }

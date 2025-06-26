@@ -195,13 +195,13 @@ h6 {
   }
 }
 h1 {
-  @apply pb-8 text-6xl;
+  @apply pb-8 text-4xl md:text-6xl;
   &.massive {
-    @apply pb-10 text-8xl;
+    @apply pb-10 text-6xl md:text-8xl;
   }
 }
 h2 {
-  @apply pb-7 text-4xl;
+  @apply pb-7 text-3xl md:text-4xl;
 }
 h3 {
   @apply pb-6 text-xl;
