@@ -17,8 +17,8 @@
 
     <Section>
     <div class="animate-fade-in-up flex w-full flex-col items-center justify-center text-center max-w-4xl m-auto">
-      <h1>Wir stzen <span class="inner-text-special">moderne Webtechnologien</span> ein</h1>
-      <h3>skalierbar - sicher - nach bewährter raspb Philosophie - super günstig</h3>
+      <h1>Wir setzen <span class="inner-text-special">moderne Webtechnologien</span> ein</h1>
+      <h3>Wir haben unseren eigenen Technologie-Stack entwickelt, der auf dem Jamstack basiert und alles einfacher, schneller und effizienter macht, ohne dabei Einschränkungen in Kauf nehmen zu müssen.</h3>
     </div>
   </Section>
 </div>

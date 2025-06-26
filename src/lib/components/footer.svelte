@@ -38,19 +38,19 @@
 <style lang="postcss">
   @reference '../../app.css';
   footer {
-    @apply bg-textBase h-12 w-full;
+    @apply bg-textBase h-20 md:h-12 w-full;
 
     > div.inner-box {
-      @apply flex h-full w-full items-center justify-between;
+      @apply flex flex-col md:flex-row h-full w-full items-center md:justify-between;
 
       h4 {
-        @apply p-0 font-medium whitespace-nowrap text-white;
+        @apply pt-2 pb-1 md:p-0 font-medium whitespace-nowrap text-white;
       }
 
       nav.footer-navigation {
-        @apply py-2 md:ml-auto;
+        @apply md:py-2 md:ml-auto;
         > button {
-          @apply relative ml-6 px-1 font-medium text-white opacity-75;
+          @apply relative ml-2.5 mr-2.5 md:mr-0 md:ml-6 px-1 font-medium text-white opacity-75;
           &::after {
             @apply absolute -bottom-1 left-0 block h-0.5 w-full origin-left scale-x-0 bg-white transition-transform duration-500;
             content: '';

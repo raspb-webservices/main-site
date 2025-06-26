@@ -1,7 +1,7 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
-  let mobileNavOpen = $state(false);
+  let mobileNavOpen;
 </script>
 
 <header>
@@ -63,7 +63,7 @@
 
     <nav class="mobile-navigvation">
       <div class="drawer drawer-end">
-        <input id="mobile-navigation" type="checkbox" class="drawer-toggle" />
+        <input id="mobile-navigation" type="checkbox" class="drawer-toggle" bind:checked={mobileNavOpen} />
         <div class="drawer-content">
           <label for="mobile-navigation" class="drawer-button text-text-base-content hover:text-primary block h-11 cursor-pointer rounded-full p-1">
             <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 512 512">
@@ -71,10 +71,8 @@
             </svg>
           </label>
         </div>
-
         <div class="drawer-side">
           <label for="mobile-navigation" aria-label="close sidebar" class="drawer-overlay"></label>
-
           <div class="flex min-h-full w-80 flex-col bg-white">
             <div class="bg-secondary/30 w-full grow">
               <div class="flex w-full items-center justify-end px-4 pt-6 pb-4">
@@ -225,51 +223,6 @@
             }
             &:hover {
               @apply text-primary bg-white/30;
-            }
-          }
-        }
-
-        .burger-nav-button {
-          @apply cursor-pointer;
-          button {
-            @apply bg-primary h-8 w-8 bg-contain bg-center bg-no-repeat transition-all duration-300;
-            mask-image: url(/icons/burger-menu.svg);
-
-            &:hover {
-              @apply bg-secondary;
-            }
-          }
-        }
-
-        .mobile-navigation-panel {
-          @apply bg-secondary fixed top-0 left-0 z-50 flex h-full w-full flex-col items-center justify-start;
-          &.closed {
-            @apply hidden;
-          }
-
-          .close-area {
-            @apply flex w-full items-center justify-end p-4 pb-1;
-            button {
-              @apply h-12 w-12 cursor-pointer bg-white bg-contain bg-center bg-no-repeat transition-all duration-300;
-              mask-image: url(/icons/closing-x.svg);
-
-              &:hover {
-                @apply bg-lightGrey;
-              }
-            }
-          }
-
-          > button.nav-item {
-            @apply mx-auto max-h-[125px] w-10/12 cursor-pointer border-b-2 border-white py-4 text-2xl font-semibold text-white no-underline;
-
-            &.active {
-              @apply underline;
-            }
-            &:hover {
-              @apply bg-primary;
-            }
-            &:last-child {
-              @apply border-b-0;
             }
           }
         }
