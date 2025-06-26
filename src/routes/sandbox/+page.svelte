@@ -1,6 +1,7 @@
 <script lang="ts">
   import TEASER from '$lib/components/teaser.svelte';
   import { goto } from '$app/navigation';
+  import Slider from '$lib/components/slider.svelte';
 </script>
 
 <TEASER customImageURL={'https://picsum.photos/id/46/1920/1080'} headline={'Hier kommt eine tolle Headline'} subheadline={'Und eine super SubHeadline'}
@@ -18,7 +19,11 @@
       autem labore. Minus explicabo aperiam ratione sapiente voluptate aliquam cum est.
     </p>
 
-    <div class="spacer"></div>
+    <div class="big-spacer"></div>
+
+    <Slider></Slider>
+<div class="big-spacer"></div>
+
     <button
       class="btn-basic"
       onclick={() => {

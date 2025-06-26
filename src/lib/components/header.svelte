@@ -22,7 +22,6 @@
           goto('/services');
         }}>Services</button
       >
-
       <button
         class="nav-item"
         class:active={page.url.pathname === '/einblicke'}
@@ -61,44 +60,72 @@
         }}><span class="hidden lg:block">Projekt konfigurieren</span><span class="lg:hidden">Starten</span></button
       >
     </div>
+
     <nav class="mobile-navigvation">
       <div class="burger-nav-button">
         <button
-          aria-label="Burger Navigation - Open Mobile Navigation"
+          aria-label="Open Mobile Navigation"
           onclick={() => {
-            mobileNavOpen = !mobileNavOpen;
+            mobileNavOpen = true;
           }}
         ></button>
       </div>
       <div class="mobile-navigation-panel" class:closed={!mobileNavOpen}>
         <div class="close-area">
           <button
-            aria-label="Mobile Navigation - Close Mobile Navigation"
+            aria-label="Close Mobile Navigation"
             onclick={() => {
-              mobileNavOpen = !mobileNavOpen;
+              mobileNavOpen = false;
             }}
           ></button>
         </div>
+
         <button
-          class="text-link-button"
-          class:active={page.url.pathname === '/aktuelles'}
+          class="btn-basic mb-4 w-10/12"
           onclick={() => {
-            goto('/aktuelles');
-          }}>Aktuelles</button
-        >
-        <button
-          class="text-link-button"
-          class:active={page.url.pathname === '/get-started'}
-          onclick={() => {
+            mobileNavOpen = false;
             goto('/get-started');
-          }}>Get started</button
+          }}>Projekt konfigurieren</button
         >
         <button
-          class="text-link-button"
-          class:active={page.url.pathname === '/test'}
+          class="nav-item"
+          class:active={page.url.pathname === '/services'}
           onclick={() => {
-            goto('/test');
-          }}>Test</button
+            mobileNavOpen = false;
+            goto('/services');
+          }}>Services</button
+        >
+        <button
+          class="nav-item"
+          class:active={page.url.pathname === '/einblicke'}
+          onclick={() => {
+            mobileNavOpen = false;
+            goto('/einblicke');
+          }}>Einblicke</button
+        >
+        <button
+          class="nav-item"
+          class:active={page.url.pathname === '/ueber-uns'}
+          onclick={() => {
+            mobileNavOpen = false;
+            goto('/ueber-uns');
+          }}>Über uns</button
+        >
+        <button
+          class="nav-item"
+          class:active={page.url.pathname === '/faq'}
+          onclick={() => {
+            mobileNavOpen = false;
+            goto('/faq');
+          }}>FAQ</button
+        >
+        <button
+          class="nav-item"
+          class:active={page.url.pathname === '/kontakt'}
+          onclick={() => {
+            mobileNavOpen = false;
+            goto('/kontakt');
+          }}>Kontakt</button
         >
       </div>
     </nav>
@@ -144,7 +171,7 @@
           &.active {
             @apply text-black;
             &::after {
-              @apply bg-gradient-to-r from-gray-500  via-textBase/80 to-gray-500 scale-x-100;
+              @apply via-textBase/80 scale-x-100 bg-gradient-to-r from-gray-500 to-gray-500;
             }
             &:hover {
               @apply cursor-default;
@@ -177,9 +204,9 @@
           }
 
           .close-area {
-            @apply flex w-full items-center justify-end p-4;
+            @apply flex w-full items-center justify-end p-4 pb-1;
             button {
-              @apply h-12 w-12 bg-white bg-contain bg-center bg-no-repeat transition-all duration-300;
+              @apply h-12 w-12 bg-white bg-contain bg-center bg-no-repeat transition-all duration-300 cursor-pointer;
               mask-image: url(/icons/closing-x.svg);
 
               &:hover {
@@ -188,8 +215,8 @@
             }
           }
 
-          > button {
-            @apply mx-auto max-h-[125px] w-10/12 border-b-2 border-white py-4 text-2xl font-semibold text-white no-underline;
+          > button.nav-item {
+            @apply mx-auto max-h-[125px] w-10/12 border-b-2 border-white py-4 text-2xl font-semibold text-white no-underline cursor-pointer;
             &.active {
               @apply underline;
             }

@@ -7,12 +7,16 @@
   const params = {
     slidesPerView: 1,
     spaceBetween: 10,
+    keyboard: {
+      enabled: true
+    },
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev'
     },
     pagination: {
-      el: '.swiper-pagination'
+      el: '.swiper-pagination',
+      clickable: true,
     },
     on: {
       init() {}
@@ -59,7 +63,7 @@
   @reference '../../app.css';
 
   .swiper-image {
-    @apply block h-[450px] w-full bg-primary/5 bg-cover bg-center bg-no-repeat;
+    @apply bg-primary/5 block h-[450px] w-full bg-cover bg-center bg-no-repeat;
     background-image: var(--image-url);
   }
 </style>

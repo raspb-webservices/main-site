@@ -85,7 +85,7 @@
             </p>
             <ul class="mt-2 mb-3">
               <li class="text-neutral my-1 flex items-center text-lg">
-                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 rounded-full bg-gradient-to-r"></div>
+                <div class="from-wine to-pink mr-3 h-2.5 w-2.5 min-w-2.5 rounded-full bg-gradient-to-r"></div>
                 Responsives Design - perfekte Darstellung auf jedem Gerät
               </li>
               <li class="text-neutral my-1 flex items-center text-lg">
@@ -273,6 +273,13 @@
 
 <style lang="postcss">
   @reference '../app.css';
+
+  .card {
+    @apply transition-transform duration-300 cursor-default;
+    &:hover {
+      @apply translate-y-1.5;
+    }
+  }
 
   .home-content-wrapper {
     .direct-section {
