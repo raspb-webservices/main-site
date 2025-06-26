@@ -62,71 +62,87 @@
     </div>
 
     <nav class="mobile-navigvation">
-      <div class="burger-nav-button">
-        <button
-          aria-label="Open Mobile Navigation"
-          onclick={() => {
-            mobileNavOpen = true;
-          }}
-        ></button>
-      </div>
-      <div class="mobile-navigation-panel" class:closed={!mobileNavOpen}>
-        <div class="close-area">
-          <button
-            aria-label="Close Mobile Navigation"
-            onclick={() => {
-              mobileNavOpen = false;
-            }}
-          ></button>
+      <div class="drawer drawer-end">
+        <input id="mobile-navigation" type="checkbox" class="drawer-toggle" />
+        <div class="drawer-content">
+          <label for="mobile-navigation" class="drawer-button text-text-base-content hover:text-primary block h-11 cursor-pointer rounded-full p-1">
+            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 512 512">
+              <path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" />
+            </svg>
+          </label>
         </div>
 
-        <button
-          class="btn-basic mb-4 w-10/12"
-          onclick={() => {
-            mobileNavOpen = false;
-            goto('/get-started');
-          }}>Projekt konfigurieren</button
-        >
-        <button
-          class="nav-item"
-          class:active={page.url.pathname === '/services'}
-          onclick={() => {
-            mobileNavOpen = false;
-            goto('/services');
-          }}>Services</button
-        >
-        <button
-          class="nav-item"
-          class:active={page.url.pathname === '/einblicke'}
-          onclick={() => {
-            mobileNavOpen = false;
-            goto('/einblicke');
-          }}>Einblicke</button
-        >
-        <button
-          class="nav-item"
-          class:active={page.url.pathname === '/ueber-uns'}
-          onclick={() => {
-            mobileNavOpen = false;
-            goto('/ueber-uns');
-          }}>Über uns</button
-        >
-        <button
-          class="nav-item"
-          class:active={page.url.pathname === '/faq'}
-          onclick={() => {
-            mobileNavOpen = false;
-            goto('/faq');
-          }}>FAQ</button
-        >
-        <button
-          class="nav-item"
-          class:active={page.url.pathname === '/kontakt'}
-          onclick={() => {
-            mobileNavOpen = false;
-            goto('/kontakt');
-          }}>Kontakt</button
-        >
+        <div class="drawer-side">
+          <label for="mobile-navigation" aria-label="close sidebar" class="drawer-overlay"></label>
+
+          <div class="flex min-h-full w-80 flex-col bg-white">
+            <div class="bg-secondary/30 w-full grow">
+              <div class="flex w-full items-center justify-end px-4 pt-6 pb-4">
+                <label
+                  for="mobile-navigation"
+                  aria-label="close sidebar"
+                  class="text-base-content hover:text-primary block h-11 cursor-pointer rounded-full p-1"
+                >
+                  <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 512 512">
+                    <polygon
+                      points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49"
+                    />
+                  </svg>
+                </label>
+              </div>
+
+              <div class="navigation-area">
+                <button
+                  class="btn-basic mx-0 mt-1.5 mb-4 w-full"
+                  onclick={() => {
+                    mobileNavOpen = false;
+                    goto('/get-started');
+                  }}>Projekt konfigurieren</button
+                >
+                <button
+                  class="nav-item"
+                  class:active={page.url.pathname === '/services'}
+                  onclick={() => {
+                    mobileNavOpen = false;
+                    goto('/services');
+                  }}>Services</button
+                >
+                <button
+                  class="nav-item"
+                  class:active={page.url.pathname === '/einblicke'}
+                  onclick={() => {
+                    mobileNavOpen = false;
+                    goto('/einblicke');
+                  }}>Einblicke</button
+                >
+                <button
+                  class="nav-item"
+                  class:active={page.url.pathname === '/ueber-uns'}
+                  onclick={() => {
+                    mobileNavOpen = false;
+                    goto('/ueber-uns');
+                  }}>Über uns</button
+                >
+                <button
+                  class="nav-item"
+                  class:active={page.url.pathname === '/faq'}
+                  onclick={() => {
+                    mobileNavOpen = false;
+                    goto('/faq');
+                  }}>FAQ</button
+                >
+                <button
+                  class="nav-item"
+                  class:active={page.url.pathname === '/kontakt'}
+                  onclick={() => {
+                    mobileNavOpen = false;
+                    goto('/kontakt');
+                  }}>Kontakt</button
+                >
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </nav>
   </div>
@@ -185,6 +201,34 @@
       nav.mobile-navigvation {
         @apply navOne:hidden flex;
 
+        .navigation-area {
+          @apply flex flex-wrap p-4 pt-0;
+          .nav-item {
+            @apply text-base-content relative flex w-full cursor-pointer items-center justify-center p-3 pb-4 text-2xl transition-all duration-300;
+
+            &::after {
+              @apply from-pink to-purple absolute bottom-0 left-0 block h-0.5 w-full origin-left bg-gradient-to-r;
+              content: '';
+            }
+
+            &:last-child {
+              &::after {
+                @apply hidden;
+              }
+            }
+
+            &.active {
+              @apply font-bold text-black;
+              &:hover {
+                @apply bg-transparent text-black cursor-default;
+              }
+            }
+            &:hover {
+              @apply text-primary bg-white/30;
+            }
+          }
+        }
+
         .burger-nav-button {
           @apply cursor-pointer;
           button {
@@ -206,7 +250,7 @@
           .close-area {
             @apply flex w-full items-center justify-end p-4 pb-1;
             button {
-              @apply h-12 w-12 bg-white bg-contain bg-center bg-no-repeat transition-all duration-300 cursor-pointer;
+              @apply h-12 w-12 cursor-pointer bg-white bg-contain bg-center bg-no-repeat transition-all duration-300;
               mask-image: url(/icons/closing-x.svg);
 
               &:hover {
@@ -216,7 +260,8 @@
           }
 
           > button.nav-item {
-            @apply mx-auto max-h-[125px] w-10/12 border-b-2 border-white py-4 text-2xl font-semibold text-white no-underline cursor-pointer;
+            @apply mx-auto max-h-[125px] w-10/12 cursor-pointer border-b-2 border-white py-4 text-2xl font-semibold text-white no-underline;
+
             &.active {
               @apply underline;
             }

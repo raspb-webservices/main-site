@@ -12,7 +12,14 @@
 <div class="content-area">
   <Section>
     <h1>Einblicke</h1>
-    <p class="teaser no-padding">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil, dolor soluta. Suscipit nemo ipsam nostrum sunt debitis. Voluptatum quam, quis dolore aspernatur, ab sed fugit neque laudantium, officiis quia quaerat?</p>
+    <p class="teaser no-padding">Vertrauen und Transparenz sind wichtig für eine gute Kundenbeziehhung. Hier möchten wir Einblicke in unserer Arbeit und einen typischen Projektablauf geben, damit glasklar ist, womit sie rechnen können.</p>
+  </Section>
+
+    <Section>
+    <div class="animate-fade-in-up flex w-full flex-col items-center justify-center text-center max-w-4xl m-auto">
+      <h1>Wir stzen <span class="inner-text-special">moderne Webtechnologien</span> ein</h1>
+      <h3>skalierbar - sicher - nach bewährter raspb Philosophie - super günstig</h3>
+    </div>
   </Section>
 </div>
 
