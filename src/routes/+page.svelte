@@ -111,7 +111,7 @@
           </div>
         </div>
 
-        <div class="card rom-lightGrey/70 via-lightGrey/90 to-lightGrey/45 bg-gradient-to-br card-md w-full shadow-sm">
+        <div class="card from-lightGrey/70 via-lightGrey/90 to-lightGrey/45 bg-gradient-to-br card-md w-full shadow-sm">
           <div class="card-body">
             <h2 class="card-title no-padding">Custom CMS</h2>
             <p class="no-padding pt-3">
@@ -146,7 +146,7 @@
           </div>
         </div>
 
-        <div class="card rom-lightGrey/70 via-lightGrey/90 to-lightGrey/45 bg-gradient-to-br card-md w-full shadow-sm">
+        <div class="card from-lightGrey/70 via-lightGrey/90 to-lightGrey/45 bg-gradient-to-br card-md w-full shadow-sm">
           <div class="card-body">
             <h2 class="card-title no-padding">Applications (Apps)</h2>
             <p class="no-padding pt-3">
@@ -181,7 +181,7 @@
           </div>
         </div>
 
-        <div class="card rom-lightGrey/70 via-lightGrey/90 to-lightGrey/45 bg-gradient-to-br card-md w-full shadow-sm">
+        <div class="card from-lightGrey/70 via-lightGrey/90 to-lightGrey/45 bg-gradient-to-br card-md w-full shadow-sm">
           <div class="card-body">
             <h2 class="card-title no-padding">Individualentwicklung</h2>
             <p class="no-padding pt-3">
