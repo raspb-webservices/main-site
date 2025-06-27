@@ -147,7 +147,7 @@
 
 html,
 body {
-  @apply relative m-0 h-full w-full p-0;
+  @apply relative m-0 p-0 h-full w-full;
   min-height: 100vh;
   scroll-behavior: smooth;
   -moz-text-size-adjust: 100%;
@@ -178,7 +178,7 @@ h3,
 h4,
 h5,
 h6 {
-  @apply font-circular font-bold text-balance;
+  @apply font-circular font-bold text-balance leading-[1.1];
 
   > a {
     @apply no-underline;
@@ -187,8 +187,7 @@ h6 {
     @apply font-light;
   }
   > span.inner-text-special {
-    background: linear-gradient(135deg, var(--purple) 0%, var(--pink) 50%, var(--violet) 100%) padding-box text;
-    -webkit-text-fill-color: transparent;
+    @apply inline-block bg-linear-135 from-purple via-pink to-violet bg-clip-text text-transparent;
   }
   &.no-padding {
     @apply pb-0;
@@ -256,7 +255,7 @@ textarea:not([rows]) {
   @apply w-full;
 
   .content-container {
-    @apply min-h-[calc(100vh-144px)];
+    @apply min-h-[calc(100vh-176px)] md:min-h-[calc(100vh-144px)];
   }
 
   .inner-box {
@@ -289,10 +288,7 @@ textarea:not([rows]) {
 
 /* Special Button Style */
 .btn-basic {
-  @apply block rounded-md border-0 px-12 py-4 text-lg leading-none font-bold text-white transition-all duration-500;
-  background: linear-gradient(to right, var(--purple) 0%, var(--pink) 51%, var(--violet) 100%);
-  background-size: 200% auto;
-  box-shadow: 0 0 0.5rem var(--medium-grey);
+  @apply block rounded-md border-0 px-12 py-4 text-lg leading-none font-bold text-white transition-all duration-500 bg-linear-to-r from-purple via-pink to-violet bg-size-[200%_auto] shadow-md;
 
   &.block-button {
     @apply h-[50px] px-4 py-0;

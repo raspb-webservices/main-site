@@ -285,17 +285,12 @@
     .direct-section {
       @apply m-auto mb-10 w-full max-w-7xl p-4;
     }
-
     .benefits {
       @apply flex flex-wrap gap-2;
       .item {
         @apply text-mediumGrey bg-lightGrey w-fit rounded-lg p-2;
       }
     }
-    .cta-area {
-      @apply mt-8;
-    }
-
     .image-container {
       @apply relative aspect-[5/3] w-full overflow-hidden rounded-2xl shadow-2xl;
       .solution-image {
