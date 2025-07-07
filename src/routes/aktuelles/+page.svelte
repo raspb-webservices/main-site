@@ -11,7 +11,7 @@
 
 <div class="content-area">
   <Section>
-    <h1>Aktuelles</h1>
+    <h1>Aktuelles - 2</h1>
     <p class="teaser no-padding">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil, dolor soluta. Suscipit nemo ipsam nostrum sunt debitis. Voluptatum quam, quis dolore aspernatur, ab sed fugit neque laudantium, officiis quia quaerat?</p>
   </Section>
 </div>
