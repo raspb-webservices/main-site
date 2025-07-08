@@ -7,7 +7,7 @@ const config = {
   kit: {
     adapter: adapter(),
     alias: {
-      $store: './src/stores'
+      $store: './src/store'
     }
   },
   vite: {
