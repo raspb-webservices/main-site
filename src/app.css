@@ -133,8 +133,7 @@
   --color-pink: oklch(0.6559 0.2118 354.31);
   --color-violet: oklch(0.6668 0.2591 322.15);
   --animate-fade-in-up: fadeInUp 0.5s ease-out;
-  --animate-fade-in-from-side: fadeInFromSide 0.5s ease-out;
-  
+  --animate-fade-in-from-side: fadeInFromSide 0.5s ease-out;  
 }
 
 /* BASICS */

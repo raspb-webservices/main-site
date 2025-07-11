@@ -1,7 +1,23 @@
 <script lang="ts">
+  import { user, isAuthenticated, popupOpen } from '$store/sharedStates.svelte';
+  import auth from '../../authService';
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
+
   let mobileNavOpen;
+
+  async function login() {
+    const auth0Client = await auth.createClient();
+    await auth.loginWithPopup(auth0Client);
+    const claims = await auth.getIdTokenClaims(auth0Client);
+    console.log("claims", claims);
+  }
+
+  async function logout() {
+    const auth0Client = await auth.createClient();
+    await auth.logout(auth0Client);
+    console.log('USER: ', user.get());
+  }
 </script>
 
 <header>
@@ -53,6 +69,23 @@
     </nav>
 
     <div class="cta-area">
+      <p>{isAuthenticated.get()}</p>
+
+      {#if isAuthenticated.get() !== true}
+      <button
+        class="btn btn-ghost"
+        onclick={() => {
+          login();
+        }}>Login</button
+      >  
+      {:else}
+      <button
+        class="btn btn-ghost"
+        onclick={() => {
+          logout();
+        }}>Logout</button
+      >      
+      {/if}
       <button
         class="btn-basic"
         onclick={() => {

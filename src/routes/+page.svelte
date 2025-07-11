@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { user, isAuthenticated, popupOpen } from '$store/sharedStates.svelte';
   import SLIDER from '$lib/components/slider.svelte';
   import Hero from '$lib/components/hero.svelte';
   import markdownit from 'markdown-it';
@@ -24,7 +25,7 @@
   <title>raspb Webservices</title>
   <meta name="description" content="Hier kann eine Beschreibung stehen..." />
 </svelte:head>
-
+<div>{JSON.stringify(user)}</div>
 <div class="home-content-wrapper">
   <Section type={'centerTeaser'}>
     <div class="animate-fade-in-up flex w-full flex-col items-center justify-center text-center">

@@ -1,19 +1,30 @@
 import { createAuth0Client } from '@auth0/auth0-spa-js';
 import { user, isAuthenticated, popupOpen } from '$store/sharedStates.svelte';
-import config from './auth_config';
+import authConfig from './auth_config';
 
 async function createClient() {
   return await createAuth0Client({
-    domain: config.domain,
-    clientId: config.clientId
+    domain: authConfig.domain,
+    clientId: authConfig.clientId
   });
 }
 
-async function loginWithPopup(client, options) {
+async function loginWithPopup(client, options?) {
+  console.log("loginWithPopup called")
   popupOpen.set(true);
+
+  console.log(" popupOpen ",  popupOpen.get())
+
   try {
-    await client.loginWithPopup(options);
-    user.set(await client.getUser());
+    const login = await client.loginWithPopup(options);
+
+    console.log(" login ",  login)
+
+    const currentUser = await client.getUser();
+
+    console.log(" currentUser ",  currentUser)
+
+    user.set(currentUser);
     isAuthenticated.set(true);
   } catch (e) {
     console.error(e);
@@ -24,7 +35,7 @@ async function loginWithPopup(client, options) {
 
 function logout(client) {
   return client.logout({
-    clientId: config.clientId,
+    clientId: authConfig.clientId,
     logoutParams: {
       returnTo: 'http://localhost:5173/'
     }
