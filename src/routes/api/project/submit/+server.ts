@@ -78,19 +78,20 @@ export const POST: RequestHandler = async ({ request }) => {
       subType: wizardData.subType || null,
       description: wizardData.description || null,
       customFeatures: wizardData.customFeatures || null,
-      pages: wizardData.pages.length > 0 ? wizardData.pages : null,
-      formFields: wizardData.formFields.length > 0 ? wizardData.formFields : null,
+      pages: wizardData.pages.length > 0 ? JSON.stringify(wizardData.pages) : null,
+      formFields: wizardData.formFields.length > 0 ? JSON.stringify(wizardData.formFields) : null,
       targetAudience: wizardData.targetAudience || null,
       goals: wizardData.goals || null,
       timeline: wizardData.timeline || null,
       budget: wizardData.budget || null,
-      colors: wizardData.colors,
+      colors: JSON.stringify(wizardData.colors),
       font: wizardData.font || null,
       customFont: wizardData.customFont || null,
-      uploadedFiles: wizardData.uploadedFiles.length > 0 ? wizardData.uploadedFiles : null,
+      uploadedFiles: wizardData.uploadedFiles.length > 0 ? JSON.stringify(wizardData.uploadedFiles) : null,
       estimatedPrice: wizardData.estimatedPrice || null,
       timestamp: wizardData.timestamp
     };
+    console.log("variables", variables)
 
     // GraphQL Request an Hygraph senden
     const response = await client.request(mutation, variables) as { createProject: ProjectResponse };
