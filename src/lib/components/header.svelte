@@ -69,8 +69,6 @@
     </nav>
 
     <div class="cta-area">
-      <p>{isAuthenticated.get()}</p>
-
       {#if isAuthenticated.get() !== true}
       <button
         class="btn btn-ghost"
