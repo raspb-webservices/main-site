@@ -4,7 +4,10 @@
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
 
-  let mobileNavOpen;
+  let mobileNavOpen = $state(false);
+
+  // Erstelle eine reaktive Variable, die sich automatisch aktualisiert
+  let isAuth = $derived(isAuthenticated.get());
 
   async function login() {
     const auth0Client = await auth.createClient();
@@ -69,20 +72,20 @@
     </nav>
 
     <div class="cta-area">
-      {#if isAuthenticated.get() !== true}
+      {#if !isAuth}
       <button
         class="btn btn-ghost"
         onclick={() => {
           login();
         }}>Login</button
-      >  
+      >
       {:else}
       <button
         class="btn btn-ghost"
         onclick={() => {
           logout();
         }}>Logout</button
-      >      
+      >
       {/if}
       <button
         class="btn-basic"

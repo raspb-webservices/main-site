@@ -6,8 +6,9 @@
   import Section from '$lib/components/section.svelte';
   import { goto } from '$app/navigation';
 
-  export let data: any;
+  const { data } = $props();
 
+  let curretnUser = $derived(user.get());
   const md = markdownit();
 
   function renderMarkdown(content: string) {
@@ -25,7 +26,9 @@
   <title>raspb Webservices</title>
   <meta name="description" content="Hier kann eine Beschreibung stehen..." />
 </svelte:head>
-<div>{JSON.stringify(user)}</div>
+
+<p>{JSON.stringify(curretnUser)}</p>
+
 <div class="home-content-wrapper">
   <Section type={'centerTeaser'}>
     <div class="animate-fade-in-up flex w-full flex-col items-center justify-center text-center">

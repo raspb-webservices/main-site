@@ -600,14 +600,14 @@
 </div>
 
 <style lang="postcss">
-  @reference '../app.css';
+  @reference '../../app.css';
 
   .services-content-wrapper {
     .service-section {
       @apply flex flex-col items-center justify-center;
 
       .service-header {
-        @apply intro m-auto mb-12 max-w-5xl text-center;
+        @apply m-auto mb-12 max-w-5xl text-center;
       }
     }
 
@@ -626,7 +626,7 @@
         @apply mb-4 flex items-center justify-between;
 
         h3 {
-          @apply card-title no-padding text-xl;
+          @apply card-title text-xl;
         }
 
         .service-icon {

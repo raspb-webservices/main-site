@@ -9,7 +9,7 @@ async function createClient() {
   });
 }
 
-async function loginWithPopup(client, options?) {
+async function loginWithPopup(client: any, options?: any) {
   console.log("loginWithPopup called")
   popupOpen.set(true);
 
@@ -25,7 +25,7 @@ async function loginWithPopup(client, options?) {
     console.log(" currentUser ",  currentUser)
 
     user.set(currentUser);
-    isAuthenticated.set(true);
+    isAuthenticated.set(true); // Verwende .set() Methode
   } catch (e) {
     console.error(e);
   } finally {
@@ -33,7 +33,9 @@ async function loginWithPopup(client, options?) {
   }
 }
 
-function logout(client) {
+function logout(client: any) {
+  isAuthenticated.set(false); // Verwende .set() Methode
+  user.set({ name: '', nickname: '', user_id: '', email: '' }); // Setze User zurück
   return client.logout({
     clientId: authConfig.clientId,
     logoutParams: {
@@ -42,15 +44,32 @@ function logout(client) {
   });
 }
 
-async function getIdTokenClaims(client) {
+async function getIdTokenClaims(client: any) {
   return await client.getIdTokenClaims();
+}
+
+async function checkAuthState(client: any) {
+  try {
+    const isAuth = await client.isAuthenticated();
+    if (isAuth) {
+      const currentUser = await client.getUser();
+      user.set(currentUser);
+      isAuthenticated.set(true); // Verwende .set() Methode
+    } else {
+      isAuthenticated.set(false); // Verwende .set() Methode
+    }
+  } catch (e) {
+    console.error('Error checking auth state:', e);
+    isAuthenticated.set(false); // Verwende .set() Methode
+  }
 }
 
 const auth = {
   createClient,
   loginWithPopup,
   logout,
-  getIdTokenClaims
+  getIdTokenClaims,
+  checkAuthState
 };
 
 export default auth;

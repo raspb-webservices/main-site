@@ -1,11 +1,12 @@
+import { env } from '$env/dynamic/public';
 interface AuthConfig {
   domain: string;
   clientId: string;
 }
 
 const authConfig: AuthConfig = {
-  domain: import.meta.env.VITE_AUTH0_DOMAIN || '',
-  clientId: import.meta.env.VITE_AUTH0_CLIENT_ID || ''
+  domain: env.PUBLIC_AUTH0_DOMAIN || '',
+  clientId: env.PUBLIC_AUTH0_CLIENT_ID || ''
 };
 
 // Validierung hinzufügen

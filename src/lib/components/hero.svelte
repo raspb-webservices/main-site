@@ -45,6 +45,7 @@
 </div>
 
 <style lang="postcss">
+  @reference '../../app.css';
   .hero-container {
     @apply relative min-h-[60vh] w-full overflow-hidden;
   }
