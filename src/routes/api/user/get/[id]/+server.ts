@@ -1,0 +1,21 @@
+import { client } from '$lib/helper/graphql-client';
+import { gql } from 'graphql-request';
+
+export const GET = async (req) => {
+  const id = req.params.id;
+  try {
+    const query = gql`
+      query getUserById($id: ID!) {
+        raspUsers(where: { id: $id }, stage: PUBLISHED) {
+          id
+        }
+      }
+    `;
+
+    const variables = { id };
+    const response = await client.request(query, variables);
+    return new Response(JSON.stringify(response));
+  } catch (error) {
+    return new Response(JSON.stringify(error));
+  }
+};

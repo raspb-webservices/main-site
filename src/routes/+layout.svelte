@@ -15,9 +15,6 @@
     const auth0Client = await auth.createClient();
     await auth.loginWithPopup(auth0Client);
     const claims = await auth.getIdTokenClaims(auth0Client);
-
-    console.log('USER: ', user.get());
-    console.log('claims: ', claims);
   }
 
   async function logout() {
@@ -26,13 +23,6 @@
     console.log('USER: ', user.get());
   }
 </script>
-
-<p>{isAuthenticated.get()}</p>
-<p>{popupOpen.get()}</p>
-<p>{JSON.stringify(user.get())}</p>
-
-<button class="btn" onclick={login}>Login</button>
-<button class="btn" onclick={logout}>Logout</button>
 
 <div class="wrapper">
   <HEADER />

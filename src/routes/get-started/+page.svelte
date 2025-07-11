@@ -1,31 +1,135 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import Wizard from '$lib/components/wizard.svelte';
+  import Wizard from '$lib/components/wizard/wizard.svelte';
 </script>
 
-<section class="impressum-content-wrapper">
-  <h1>Get started</h1>
-  <div class="px-20 pt-10">
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio hic voluptatem neque consequuntur porro, accusantium sit, doloribus perferendis, reiciendis
-      autem labore. Minus explicabo aperiam ratione sapiente voluptate aliquam cum est.
-    </p>
-    <div class="spacer"></div>
-    <Wizard />
-    <div class="spacer"></div>
-    <button
-      class="btn-basic"
-      onclick={() => {
-        goto('/');
-      }}>Zurück zur Startseite</button
-    >
+<section class="get-started-content-wrapper">
+  <div class="hero-section">
+    <h1>Projekt <span class="inner-text-special">konfigurieren</span></h1>
+    
+    <div class="teaser-content">
+      <p class="lead-text">
+        In nur wenigen Minuten zu Ihrem maßgeschneiderten Angebot – unser intelligenter Konfigurator führt Sie Schritt für Schritt durch alle wichtigen Entscheidungen.
+      </p>
+      
+      <div class="benefits-grid">
+        <div class="benefit-item">
+          <div class="benefit-icon">⚡</div>
+          <div class="benefit-text">
+            <h3>Schnell & Effizient</h3>
+            <p>Keine langen Gespräche – definieren Sie Ihr Projekt in 5-10 Minuten</p>
+          </div>
+        </div>
+        
+        <div class="benefit-item">
+          <div class="benefit-icon">💰</div>
+          <div class="benefit-text">
+            <h3>Transparente Preise</h3>
+            <p>Erhalten Sie sofort eine realistische Kostenschätzung für Ihr Vorhaben</p>
+          </div>
+        </div>
+        
+        <div class="benefit-item">
+          <div class="benefit-icon">🎯</div>
+          <div class="benefit-text">
+            <h3>Präzise Planung</h3>
+            <p>Alle Details werden erfasst – für ein perfekt auf Sie zugeschnittenes Ergebnis</p>
+          </div>
+        </div>
+        
+        <div class="benefit-item">
+          <div class="benefit-icon">📋</div>
+          <div class="benefit-text">
+            <h3>Komplette Dokumentation</h3>
+            <p>Am Ende erhalten Sie eine detaillierte Projektbeschreibung zum Download</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="cta-text">
+        <p class="no-padding">
+          <strong>So funktioniert's:</strong> Wählen Sie Ihren Projekttyp, beschreiben Sie Ihre Anforderungen, 
+          definieren Sie gewünschte Features und Design – fertig! Sie erhalten sofort eine Kostenschätzung 
+          und können Ihre Konfiguration als PDF herunterladen.
+        </p>
+      </div>
+    </div>
   </div>
-  <div class="big-spacer"></div>
+  
+  <div class="wizard-section">
+    <Wizard />
+  </div>
 </section>
 
 <style lang="postcss">
-    @reference '../../app.css';
-  section.impressum-content-wrapper {
+  @reference '../../app.css';
+  
+  section.get-started-content-wrapper {
     @apply m-auto h-full w-full max-w-7xl px-4 py-12;
+  }
+  
+  .hero-section {
+    @apply text-center mb-16;
+    
+    h1 {
+      @apply mb-8;
+    }
+  }
+  
+  .teaser-content {
+    @apply max-w-4xl mx-auto;
+  }
+  
+  .lead-text {
+    @apply text-xl text-center mb-12 text-base-content/80;
+    line-height: 1.6;
+  }
+  
+  .benefits-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-8 mb-12;
+  }
+  
+  .benefit-item {
+    @apply flex items-start gap-4 p-6 bg-base-100 rounded-xl shadow-sm border border-base-200;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      @apply shadow-md translate-y-[-2px];
+    }
+  }
+  
+  .benefit-icon {
+    @apply text-3xl flex-shrink-0;
+  }
+  
+  .benefit-text {
+    h3 {
+      @apply text-lg font-semibold mb-2 text-base-content;
+    }
+    
+    p {
+      @apply text-sm text-base-content/70 leading-relaxed;
+    }
+  }
+  
+  .cta-text {
+    @apply bg-primary/5 border border-primary/20 rounded-xl p-6 text-center;
+    
+    p {
+      @apply text-base text-base-content/80 leading-relaxed;
+      margin: 0;
+    }
+    
+    strong {
+      @apply text-primary font-semibold;
+    }
+  }
+  
+  .wizard-section {
+    @apply mb-16;
+  }
+  
+  .back-section {
+    @apply text-center;
   }
 </style>

@@ -288,8 +288,11 @@ textarea:not([rows]) {
 
 /* Special Button Style */
 .btn-basic {
-  @apply block rounded-md border-0 px-12 py-4 text-lg leading-none font-bold text-white transition-all duration-500 bg-linear-to-r from-purple via-pink to-violet bg-size-[200%_auto] shadow-md;
+  @apply flex text-nowrap justify-center items-center rounded-md border-0 px-12 py-4 text-lg leading-none font-bold text-white transition-all duration-500 bg-linear-to-r from-purple via-pink to-violet bg-size-[200%_auto] shadow-md;
 
+  svg {
+    @apply mx-1
+  }
   &.block-button {
     @apply h-[50px] px-4 py-0;
   }

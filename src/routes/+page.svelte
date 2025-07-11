@@ -1,5 +1,6 @@
 <script lang="ts">
   import SLIDER from '$lib/components/slider.svelte';
+  import Hero from '$lib/components/hero.svelte';
   import markdownit from 'markdown-it';
   import Section from '$lib/components/section.svelte';
   import { goto } from '$app/navigation';
@@ -10,6 +11,12 @@
 
   function renderMarkdown(content: string) {
     return md.render(content);
+  }
+
+  // Hero button action for testing
+  function handleHeroButton() {
+    console.log('Hero button clicked!');
+    goto('/einblicke');
   }
 </script>
 
@@ -259,6 +266,19 @@
       </div>
       <div class="spacer"></div>
     </div>
+  </Section>
+
+  <Section>
+    <Hero
+      headline="Innovative <span class='inner-text-special'>Web Solutions</span>"
+      subheadline="Transform your digital presence with cutting-edge technology and expert craftsmanship. Our team delivers scalable, secure solutions tailored to your unique business needs."
+      variant="split"
+      image="/images/visualization-2.png"
+      imageAlt="Web development visualization"
+      showButton={true}
+      buttonText="Start Your Project"
+      buttonAction={handleHeroButton}
+    />
   </Section>
 
   <section class="direct-section hidden">
