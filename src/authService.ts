@@ -39,7 +39,7 @@ function logout(client: any) {
   return client.logout({
     clientId: authConfig.clientId,
     logoutParams: {
-      returnTo: 'http://localhost:5173/'
+      returnTo: authConfig.callbackUrl
     }
   });
 }
