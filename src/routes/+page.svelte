@@ -27,8 +27,6 @@
   <meta name="description" content="Hier kann eine Beschreibung stehen..." />
 </svelte:head>
 
-<p>{JSON.stringify(curretnUser)}</p>
-
 <div class="home-content-wrapper">
   <Section type={'centerTeaser'}>
     <div class="animate-fade-in-up flex w-full flex-col items-center justify-center text-center">

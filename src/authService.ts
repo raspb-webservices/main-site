@@ -1,5 +1,5 @@
 import { createAuth0Client } from '@auth0/auth0-spa-js';
-import { user, isAuthenticated, popupOpen } from '$store/sharedStates.svelte';
+import { user, isAuthenticated, popupOpen, userroles } from '$store/sharedStates.svelte';
 import authConfig from './auth_config';
 
 async function createClient() {
@@ -9,20 +9,40 @@ async function createClient() {
   });
 }
 
+async function getRoles(userid: string): Promise<string[]> {
+  const userRolesResponse = await fetch('/api/user/role/get/' + userid);
+  if (userRolesResponse.ok) {
+    const userRoleObjects = await userRolesResponse.json();
+
+    const userRoles = [];
+    if (userRoleObjects && userRoleObjects.length) {
+      userRoleObjects.forEach((element: any) => {
+        userRoles.push(element.name);
+      });
+    }
+    return userRoles;
+  }
+  throw new Error('Could not fetch user roles from /api/userRoles/user[sub]!');
+}
+
 async function loginWithPopup(client: any, options?: any) {
-  console.log("loginWithPopup called")
+  console.log('loginWithPopup called');
   popupOpen.set(true);
 
-  console.log(" popupOpen ",  popupOpen.get())
+  console.log(' popupOpen ', popupOpen.get());
 
   try {
     const login = await client.loginWithPopup(options);
 
-    console.log(" login ",  login)
+    console.log(' login ', login);
 
     const currentUser = await client.getUser();
+    const currentUserRole = await getRoles(currentUser.sub);
 
-    console.log(" currentUser ",  currentUser)
+    console.log(' currentUser ', currentUser);
+    console.log(' currentUserRole ', currentUserRole);
+
+    userroles.set(currentUserRole);
 
     user.set(currentUser);
     isAuthenticated.set(true); // Verwende .set() Methode
@@ -66,6 +86,7 @@ async function checkAuthState(client: any) {
 
 const auth = {
   createClient,
+  getRoles,
   loginWithPopup,
   logout,
   getIdTokenClaims,

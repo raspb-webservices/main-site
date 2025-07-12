@@ -26,6 +26,20 @@ export function createUser() {
   };
 }
 
+// Store für User-Roles
+export const userroles = createUserroles();
+export function createUserroles() {
+  let value = $state(['basic']);
+  return {
+    get() {
+      return value;
+    },
+    set(userroles: string[]) {
+      value = userroles;
+    }
+  };
+}
+
 // Store für Popup-Status
 export const popupOpen = createPopupOpen();
 export function createPopupOpen() {

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { user, isAuthenticated, popupOpen } from '$store/sharedStates.svelte';
+  import { user, isAuthenticated, popupOpen, userroles } from '$store/sharedStates.svelte';
   import auth from '../../authService';
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
@@ -8,21 +8,23 @@
 
   // Erstelle eine reaktive Variable, die sich automatisch aktualisiert
   let isAuth = $derived(isAuthenticated.get());
+  let currentUser = $derived(user.get());
+  let currentUserRoles = $derived(userroles.get());
 
   async function login() {
     const auth0Client = await auth.createClient();
     await auth.loginWithPopup(auth0Client);
-    const claims = await auth.getIdTokenClaims(auth0Client);
-    console.log("claims", claims);
   }
 
   async function logout() {
     const auth0Client = await auth.createClient();
     await auth.logout(auth0Client);
-    console.log('USER: ', user.get());
   }
 </script>
 
+  {#if isAuth}
+    <p class="text-center no-padding">Hallo {currentUser.name}  - Rollen: {JSON.stringify(currentUserRoles)}</p>
+  {/if}
 <header>
   <div class="inner-box">
     <button
