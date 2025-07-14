@@ -8,9 +8,14 @@ export const GET = async (req) => {
       query getContentsByPage($page: String!) {
         contents(where: { page: $page }, stage: PUBLISHED) {
           headline
-          text
           subheadline
+          text
+          images {
+            url
+            fileName
+          }
           page
+          section
         }
       }
     `;

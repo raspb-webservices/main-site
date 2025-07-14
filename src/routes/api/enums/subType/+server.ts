@@ -4,14 +4,16 @@ import { gql } from 'graphql-request';
 export const GET = async () => {
   try {
     const query = gql`
-      query getUsers {
-        raspUsers(stage: PUBLISHED) {
-          id
+      query getSubType {
+        __type(name: "SubType") {
+          enumValues {
+            name
+          }
         }
       }
     `;
-    const response = await client.request(query);
-    return new Response(JSON.stringify(response));
+    const { __type } = await client.request(query) as any;
+    return new Response(JSON.stringify(__type.enumValues));
   } catch (error) {
     return new Response(JSON.stringify(error));
   }

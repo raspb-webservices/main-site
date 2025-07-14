@@ -4,17 +4,25 @@ import { gql } from 'graphql-request';
 export const GET = async () => {
   try {
     const query = gql`
-      query getContents {
-        contents(stage: PUBLISHED) {
-          headline
-          subheadline
-          text
-          images {
-            url
-            fileName
+      query getCustomers {
+        customers(stage: PUBLISHED) {
+          id
+          address
+          auth0Id
+          city
+          company
+          country
+          createdAt
+          email
+          familyName
+          givenName
+          phone
+          postCode
+          salutation
+          projects {
+            id
+            name
           }
-          page
-          section
         }
       }
     `;

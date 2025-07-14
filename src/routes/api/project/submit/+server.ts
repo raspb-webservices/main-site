@@ -1,71 +1,91 @@
 import { client } from '$lib/helper/graphql-client';
 import { gql } from 'graphql-request';
 import type { RequestHandler } from './$types';
-import type { WizardConfig, ProjectResponse } from '../../../../interfaces/project.interface';
+import type { Project, ProjectResponse } from '$interfaces/project.interface';
 
 export const POST: RequestHandler = async ({ request }) => {
   try {
-    const wizardData: WizardConfig = await request.json();
-    
-    // GraphQL Mutation für das Erstellen eines neuen Projekts in Hygraph
+    const projectData: Project = await request.json();
+
     const mutation = gql`
       mutation CreateProject(
-        $uuid: Int!
-        $projectType: ProjectTypes!
-        $subType: String
+        $name: String
         $description: String
-        $customFeatures: String
-        $pages: Json
-        $formFields: Json
-        $targetAudience: String
+        $projectType: ProjectType
+        $subType: SubType
+        $projectDetails: String
+        $desiredDomain: String
+        $domainStatus: String
         $goals: String
-        $timeline: String
+        $targetAudience: String
         $budget: String
-        $colors: Json
-        $font: String
-        $customFont: String
-        $uploadedFiles: Json
+        $timeline: String
+        $features: [Features!]
+        $customFeature: String
+        $primaryColour: String
+        $secondaryColour: String
+        $accentColour: String
+        $desiredFont: String
         $estimatedPrice: Float
-        $timestamp: DateTime
+        $formFields: Json!
+        $pages: Json!
+        $fileIDs: [AssetWhereUniqueInput!]
+        $ownerID: ID
       ) {
         createProject(
           data: {
-            uuid: $uuid
+            name: $name
+            description: $description
             projectType: $projectType
             subType: $subType
-            description: $description
-            customFeatures: $customFeatures
-            pages: $pages
-            formFields: $formFields
-            targetAudience: $targetAudience
+            projectDetails: $projectDetails
+            desiredDomain: $desiredDomain
+            domainStatus: $domainStatus
             goals: $goals
-            timeline: $timeline
+            targetAudience: $targetAudience
             budget: $budget
-            colors: $colors
-            font: $font
-            customFont: $customFont
-            uploadedFiles: $uploadedFiles
+            timeline: $timeline
+            features: $features
+            customFeature: $customFeature
+            primaryColour: $primaryColour
+            secondaryColour: $secondaryColour
+            accentColour: $accentColour
+            desiredFont: $desiredFont
             estimatedPrice: $estimatedPrice
-            timestamp: $timestamp
+            formFields: $formFields
+            pages: $pages
+            relatedFiles: { connect: $fileIDs }
+            owner: { connect: { id: $ownerID } }
           }
         ) {
           id
+          name
+          description
           projectType
           subType
-          description
-          customFeatures
-          pages
-          formFields
-          targetAudience
+          projectDetails
+          desiredDomain
+          domainStatus
           goals
-          timeline
+          targetAudience
           budget
-          colors
-          font
-          customFont
-          uploadedFiles
+          timeline
+          features
+          customFeature
+          primaryColour
+          secondaryColour
+          accentColour
+          desiredFont
           estimatedPrice
-          timestamp
+          formFields
+          pages
+          relatedFiles {
+            fileName
+          }
+          owner {
+            familyName
+            givenName
+          }
           createdAt
         }
       }
@@ -73,49 +93,56 @@ export const POST: RequestHandler = async ({ request }) => {
 
     // Variablen für die Mutation vorbereiten
     const variables = {
-      uuid:  Math.floor(Math.random() * (10000000000 - 1 + 1)) + 1,
-      projectType: wizardData.projectType,
-      subType: wizardData.subType || null,
-      description: wizardData.description || null,
-      customFeatures: wizardData.customFeatures || null,
-      pages: wizardData.pages.length > 0 ? JSON.stringify(wizardData.pages) : null,
-      formFields: wizardData.formFields.length > 0 ? JSON.stringify(wizardData.formFields) : null,
-      targetAudience: wizardData.targetAudience || null,
-      goals: wizardData.goals || null,
-      timeline: wizardData.timeline || null,
-      budget: wizardData.budget || null,
-      colors: JSON.stringify(wizardData.colors),
-      font: wizardData.font || null,
-      customFont: wizardData.customFont || null,
-      uploadedFiles: wizardData.uploadedFiles.length > 0 ? JSON.stringify(wizardData.uploadedFiles) : null,
-      estimatedPrice: wizardData.estimatedPrice || null,
-      timestamp: wizardData.timestamp
-    };
-    console.log("variables", variables)
+      name: projectData.name || 'untitled',
+      description: projectData.description || null,
+      projectType: projectData.projectType || null,
+      subType: projectData.subType || null,
+      projectDetails: projectData.projectDetails || null,
+      desiredDomain: projectData.desiredDomain || null,
+      domainStatus: projectData.domainStatus || null,
+      goals: projectData.goals || null,
+      targetAudience: projectData.targetAudience || null,
+      budget: projectData.budget || null,
+      timeline: projectData.timeline || null,
+      features: projectData.features?.length ? projectData.features : null,
+      customFeature: projectData.customFeature || null,
+      primaryColour: projectData.primaryColour || null,
+      secondaryColour: projectData.secondaryColour || null,
+      accentColour: projectData.accentColour || null,
+      desiredFont: projectData.desiredFont || null,
+      estimatedPrice: projectData.estimatedPrice || null,
+      formFields: projectData.formFields ? JSON.stringify(projectData.formFields) : null,
+      pages: projectData.pages ? JSON.stringify(projectData.pages) : null,
+      fileIDs: projectData.relatedFiles?.length ? projectData.relatedFiles : null,
+      owner: projectData.owner ? projectData.owner.id : null
+    }
+    console.log('variables', variables);
 
     // GraphQL Request an Hygraph senden
-    const response = await client.request(mutation, variables) as { createProject: ProjectResponse };
-    
-    return new Response(JSON.stringify({
-      success: true,
-      data: response.createProject
-    }), {
-      status: 201,
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
+    const response = (await client.request(mutation, variables)) as { createProject: ProjectResponse };
 
+    return new Response(
+      JSON.stringify({
+        success: true,
+        data: response.createProject
+      }),
+      {
+        status: 201,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    );
   } catch (error) {
     console.error('Error creating project:', error);
-    
+
     // Spezifische Fehlerbehandlung für GraphQL-Fehler
     let errorMessage = 'Unknown error occurred';
     let statusCode = 500;
-    
+
     if (error instanceof Error) {
       errorMessage = error.message;
-      
+
       // Prüfe auf spezifische GraphQL-Fehler
       if (error.message.includes('authorization') || error.message.includes('Unauthorized')) {
         statusCode = 401;
@@ -125,15 +152,18 @@ export const POST: RequestHandler = async ({ request }) => {
         errorMessage = 'Validation error: ' + error.message;
       }
     }
-    
-    return new Response(JSON.stringify({
-      success: false,
-      error: errorMessage
-    }), {
-      status: statusCode,
-      headers: {
-        'Content-Type': 'application/json'
+
+    return new Response(
+      JSON.stringify({
+        success: false,
+        error: errorMessage
+      }),
+      {
+        status: statusCode,
+        headers: {
+          'Content-Type': 'application/json'
+        }
       }
-    });
+    );
   }
 };

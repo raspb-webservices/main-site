@@ -9,7 +9,7 @@ const config = {
     alias: {
       $store: './src/store',
       $helper: './src/lib/helper',
-
+      $interfaces: './src/interfaces'
     }
   },
   vite: {

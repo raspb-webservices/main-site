@@ -11,14 +11,15 @@ export interface SubType {
   id: string;
   title: string;
   description: string;
-  lowestPrice: number;
-  highestPrice: number;
+  parentId: string;
+  price: number;
 }
 
 export interface Feature {
-  id: string;
+  name: string;
   title: string;
-  price: number;
+  description?: string;
+  category?: string;
 }
 
 export interface FormFieldType {
@@ -26,108 +27,162 @@ export interface FormFieldType {
   title: string;
 }
 
+
 export const projectTypes: ProjectType[] = [
   {
     id: 'website',
     title: 'Website',
-    description: 'Klassische Unternehmenswebsite oder Webvisitenkarte',
+    description: 'Klassische Unternehmenswebsite oder einfache Webvisitenkarte',
     icon: '🌐',
-    lowestPrice: 800,
-    highestPrice: 3500
+    lowestPrice: 399,
+    highestPrice: 5000
   },
   {
     id: 'cms',
     title: 'Content Management System',
     description: 'Website mit eigenständiger Inhaltsverwaltung',
     icon: '📝',
-    lowestPrice: 2500,
-    highestPrice: 8000
+    lowestPrice: 1999,
+    highestPrice: 10000
   },
   {
-    id: 'webapp',
+    id: 'webApplication',
     title: 'Web Application',
     description: 'Interaktive Webanwendung oder PWA',
     icon: '💻',
-    lowestPrice: 6000,
-    highestPrice: 25000
+    lowestPrice: 5999,
+    highestPrice: 15000
   },
-  {
-    id: 'mobile',
-    title: 'Mobile Application',
-    description: 'Native oder hybride Mobile App',
-    icon: '📱',
-    lowestPrice: 12000,
+    {
+    id: 'artificialIntelligence',
+    title: 'Ihr KI Use-Case',
+    description: 'Infrastruktur, Automation, Engineering',
+    icon: '🤖',
+    lowestPrice: 10000,
     highestPrice: 50000
   },
   {
-    id: 'individual',
+    id: 'freestyle',
     title: 'Individuelle Entwicklung',
     description: 'Maßgeschneiderte Lösung nach Ihren Anforderungen',
     icon: '🛠️',
-    lowestPrice: 3000,
-    highestPrice: 100000
+    lowestPrice: 5000,
+    highestPrice: 50000
   }
 ];
 
-export const subTypes: Record<string, SubType[]> = {
-  website: [
-    { id: 'business-card', title: 'Webvisitenkarte', description: 'Einfacher Onepager mit Kontaktdaten', lowestPrice: 800, highestPrice: 1500 },
-    { id: 'corporate', title: 'Unternehmenswebsite', description: 'Mehrere Seiten mit umfassenden Informationen', lowestPrice: 2000, highestPrice: 5000 },
-    { id: 'onepager', title: 'Onepager', description: 'Alles auf einer Seite, modern und übersichtlich', lowestPrice: 1200, highestPrice: 2500 },
-    { id: 'landing', title: 'Landing Page', description: 'Kampagnenseite mit klarem Call-to-Action', lowestPrice: 1500, highestPrice: 3000 }
-  ],
-  cms: [
-    { id: 'simple', title: 'Einfaches CMS', description: 'Grundlegende Inhaltsbearbeitung', lowestPrice: 2500, highestPrice: 4000 },
-    { id: 'advanced', title: 'Erweiterte CMS', description: 'Komplexe Inhaltsverwaltung mit Nutzerverwaltung', lowestPrice: 5000, highestPrice: 12000 },
-    { id: 'blog', title: 'Blog-System', description: 'Speziell für Blogs und News optimiert', lowestPrice: 3000, highestPrice: 6000 },
-    { id: 'headless', title: 'Headless CMS', description: 'API-basiertes CMS für flexible Nutzung', lowestPrice: 4000, highestPrice: 8000 }
-  ],
-  webapp: [
-    { id: 'pwa', title: 'Progressive Web App', description: 'App-ähnliche Webanwendung', lowestPrice: 6000, highestPrice: 15000 },
-    { id: 'dashboard', title: 'Dashboard/Admin Panel', description: 'Verwaltungsoberfläche für Daten', lowestPrice: 8000, highestPrice: 20000 },
-    { id: 'ecommerce', title: 'E-Commerce Platform', description: 'Online-Shop mit Zahlungsabwicklung', lowestPrice: 12000, highestPrice: 35000 }
-  ],
-  mobile: [
-    { id: 'hybrid', title: 'Hybrid App', description: 'Eine App für iOS und Android', lowestPrice: 12000, highestPrice: 25000 },
-    { id: 'native', title: 'Native App', description: 'Separate Apps für iOS und Android', lowestPrice: 20000, highestPrice: 45000 }
-  ],
-  individual: [
-    { id: 'api-integration', title: 'API Integration', description: 'Anbindung externer Systeme', lowestPrice: 3000, highestPrice: 8000 },
-    { id: 'automation', title: 'Workflow Automation', description: 'Automatisierung von Geschäftsprozessen', lowestPrice: 8000, highestPrice: 25000 },
-    { id: 'custom-tool', title: 'Custom Tool', description: 'Spezielles Werkzeug für Ihre Anforderungen', lowestPrice: 5000, highestPrice: 50000 }
-  ]
-};
-
-export const availableFeatures: Feature[] = [
-  { id: 'contact-form', title: 'Kontaktformular', price: 300 },
-  { id: 'gallery', title: 'Bildergalerie', price: 500 },
-  { id: 'maps', title: 'Karten Integration', price: 200 },
-  { id: 'social-media', title: 'Social Media Integration', price: 300 },
-  { id: 'newsletter', title: 'Newsletter Anmeldung', price: 400 },
-  { id: 'search', title: 'Suchfunktion', price: 800 },
-  { id: 'multilingual', title: 'Mehrsprachigkeit', price: 1500 },
-  { id: 'booking', title: 'Terminbuchung', price: 1200 },
-  { id: 'payment', title: 'Zahlungsabwicklung', price: 2000 },
-  { id: 'user-accounts', title: 'Benutzerkonten', price: 1800 },
-  { id: 'analytics', title: 'Analytics Integration', price: 300 },
-  { id: 'seo', title: 'SEO Optimierung', price: 600 }
+export const subTypes: SubType[] = [
+  { id: 'onepager', title: 'Webvisitenkarte', description: 'Einfacher Onepager mit Kontaktdaten und grundlegenden Informationen', parentId: 'website', price: 399 },
+  { id: 'onepagerPlus', title: 'Kampagnen Seite', description: 'Zielgerichtete Landing Page für Marketing-Kampagnen mit Call-to-Action', parentId: 'website', price: 699 },
+  { id: 'corporateWebsite', title: 'Unternehmenswebseite', description: 'Professionelle Firmenwebsite mit mehreren Seiten und Unternehmensinformationen', parentId: 'website', price: 999 },
+  { id: 'corporateWebsitePremium', title: 'Unternehmenswebseite Premium', description: 'Umfassende Unternehmenswebsite mit erweiterten Funktionen und individuellem Design', parentId: 'website', price: 1999 },
+  { id: 'cmsSimple', title: 'Einfaches CMS', description: 'Grundlegendes Content Management System für einfache Inhaltspflege', parentId: 'cms', price: 1999 },
+  { id: 'cmsPremium', title: 'Premium CMS', description: 'Erweiterte Content-Management-Lösung mit benutzerdefinierten Feldern und Workflows', parentId: 'cms', price: 4999 },
+  { id: 'blogSystem', title: 'Blog System', description: 'Vollständiges Blog-System mit Kategorien, Tags und Kommentarfunktion', parentId: 'cms', price: 3999 },
+  { id: 'headlessCms', title: 'Headless CMS', description: 'API-basiertes Content Management System für flexible Frontend-Lösungen', parentId: 'cms', price: 5999 },
+  { id: 'pwa', title: 'Progressive Web App', description: 'App-ähnliche Webanwendung mit Offline-Funktionalität und Push-Benachrichtigungen', parentId: 'webApplication', price: 5999 },
+  { id: 'customApp', title: 'Individuelle Anwendung', description: 'Maßgeschneiderte Webanwendung nach spezifischen Anforderungen', parentId: 'webApplication', price: 5999 },
+  { id: 'eCommerce', title: 'E-Commerce Shop', description: 'Online-Shop mit Produktkatalog, Warenkorb und Zahlungsabwicklung', parentId: 'webApplication', price: 5999 },
+  { id: 'apiIntegration', title: 'API Integration', description: 'Integration externer Dienste und APIs in bestehende Systeme', parentId: 'webApplication', price: 5999 },
+  { id: 'customTool', title: 'Individuelles Tool', description: 'Spezialisierte Web-Tools für spezifische Geschäftsprozesse', parentId: 'webApplication', price: 5999 },
 ];
 
+export const availableFeatures: Feature[] = [
+  // Kommunikation & Kontakt
+  { name: 'kontaktformular', title: 'Kontaktformular', description: 'Ein individuelles Kontaktformular, welches alle Anfragen erfasst.', category: 'Kommunikation' },
+  { name: 'newsletterRegistrierung', title: 'Newsletter Registrierung', description: 'Newsletter-Anmeldung mit E-Mail-Validierung und Double-Opt-In', category: 'Kommunikation' },
+  { name: 'chatbot', title: 'Chatbot', description: 'KI-gestützter Chatbot für Kundenservice und Beratung', category: 'Kommunikation' },
+  { name: 'terminbuchung', title: 'Terminbuchung', description: 'Online-Terminbuchungssystem mit Kalenderintegration', category: 'Kommunikation' },
+  
+  // Content & Medien
+  { name: 'bildergalerie', title: 'Bildergalerie', description: 'Responsive Bildergalerie mit Lightbox-Funktionalität und Kategorisierung', category: 'Content' },
+  { name: 'videoEmbedding', title: 'Video Embedding', description: 'Responsive Video-Einbindung mit Player-Kontrollen', category: 'Content' },
+  { name: 'portfolioGrid', title: 'Portfolio Grid', description: 'Responsive Portfolio-Raster zur Präsentation von Arbeiten', category: 'Content' },
+  { name: 'kalender', title: 'Kalender', description: 'Interaktiver Kalender mit Event-Management und Terminanzeige', category: 'Content' },
+  { name: 'dateiupload', title: 'Datei Upload', description: 'Sichere Datei-Upload-Funktionalität mit Validierung und Vorschau', category: 'Content' },
+  
+  // Navigation & UI
+  { name: 'megaMenu', title: 'Mega Menu', description: 'Erweiterte Navigation mit mehrstufigen Dropdown-Menüs', category: 'Navigation' },
+  { name: 'customTeaser', title: 'Custom Teaser', description: 'Individuelle Teaser-Komponenten für Inhalte und Produkte', category: 'Navigation' },
+  { name: 'customCarousel', title: 'Custom Carousel', description: 'Maßgeschneiderte Karussell-Komponente für Bilder und Inhalte', category: 'Navigation' },
+  { name: 'akkordeon', title: 'Akkordeon', description: 'Zusammenklappbare Inhaltsabschnitte für FAQ und strukturierte Inhalte', category: 'Navigation' },
+  { name: 'tabs', title: 'Tabs', description: 'Tab-Navigation zur übersichtlichen Darstellung von Inhalten', category: 'Navigation' },
+  { name: 'themeSwitcher', title: 'Theme Switcher', description: 'Dark/Light Mode Toggle und individuelle Theme-Auswahl', category: 'Navigation' },
+  
+  // Funktionalität & Tools
+  { name: 'suchfunktion', title: 'Suchfunktion', description: 'Intelligente Suchfunktion für Website-Inhalte mit Filteroptionen', category: 'Funktionalität' },
+  { name: 'customFilter', title: 'Custom Filter', description: 'Erweiterte Filterfunktionen für Produktkataloge und Inhalte', category: 'Funktionalität' },
+  { name: 'multiStepDialog', title: 'Multi-Step Dialog', description: 'Mehrstufige Formulare und Dialoge für komplexe Eingaben', category: 'Funktionalität' },
+  { name: 'konfigurator', title: 'Konfigurator', description: 'Interaktiver Produkt- oder Service-Konfigurator', category: 'Funktionalität' },
+  { name: 'assistent', title: 'Assistent', description: 'Digitaler Assistent zur Benutzerführung und Hilfestellung', category: 'Funktionalität' },
+  { name: 'bewertungsmechanismus', title: 'Bewertungsmechanismus', description: 'Bewertungs- und Review-System für Produkte oder Services', category: 'Funktionalität' },
+  
+  // E-Commerce & Zahlungen
+  { name: 'zahlungsbawicklung', title: 'Zahlungsabwicklung', description: 'Sichere Online-Zahlungsabwicklung mit verschiedenen Payment-Providern', category: 'E-Commerce' },
+  
+  // Benutzer & Sicherheit
+  { name: 'benutzerkonten', title: 'Benutzerkonten', description: 'User-Management mit Registrierung, Login und Profilverwaltung', category: 'Benutzer' },
+  { name: 'altersverifikation', title: 'Altersverifikation', description: 'Altersverifikationssystem für altersbeschränkte Inhalte', category: 'Benutzer' },
+  { name: 'cookieConsent', title: 'Cookie Consent', description: 'DSGVO-konforme Cookie-Einverständniserklärung und -verwaltung', category: 'Benutzer' },
+  { name: 'barrierefreiheitTools', title: 'Barrierefreiheit Tools', description: 'Accessibility-Features für bessere Nutzbarkeit und WCAG-Konformität', category: 'Benutzer' },
+  
+  // Integration & Services
+  { name: 'mapsIntegration', title: 'Maps Integration', description: 'Google Maps, Mapbox oder OpenStreetMap Integration mit Standortmarkierungen', category: 'Integration' },
+  { name: 'socialMediaIntegration', title: 'Social Media Integration', description: 'Einbindung von Social Media Feeds und Sharing-Buttons', category: 'Integration' },
+  { name: 'analyticsIntegration', title: 'Analytics Integration', description: 'Google Analytics, Matomo oder andere Tracking-Tools Integration', category: 'Integration' },
+  
+  // Marketing & SEO
+  { name: 'seo', title: 'SEO Optimierung', description: 'Suchmaschinenoptimierung mit Meta-Tags, Schema Markup und Performance', category: 'Marketing' },
+  { name: 'marketingTools', title: 'Marketing Tools', description: 'A/B-Testing, Conversion-Tracking und Marketing-Automation', category: 'Marketing' },
+  
+  // Lokalisierung
+  { name: 'mehrsprachigkeit', title: 'Mehrsprachigkeit', description: 'Multi-Language Support mit automatischer Spracherkennung', category: 'Lokalisierung' },
+];
+
+// Feature category colors for badges
+export const featureCategoryColors: Record<string, string> = {
+  'Kommunikation': 'badge-primary',
+  'Content': 'badge-secondary', 
+  'Navigation': 'badge-accent',
+  'Funktionalität': 'badge-info',
+  'E-Commerce': 'badge-success',
+  'Benutzer': 'badge-warning',
+  'Integration': 'badge-error',
+  'Marketing': 'badge-neutral',
+  'Lokalisierung': 'badge-ghost'
+};
+
 export const googleFonts: string[] = [
-  'Circular',
-  'Lato',
-  'PT Serif',
-  'Inter',
-  'Roboto',
-  'Open Sans',
-  'Montserrat',
-  'Source Sans Pro',
-  'Raleway',
-  'PT Sans',
-  'Lora',
-  'Merriweather',
-  'Playfair Display',
-  'Oswald'
+  "Roboto",
+  "Open Sans",
+  "Lato",
+  "Montserrat",
+  "Oswald",
+  "Raleway",
+  "Poppins",
+  "Source Sans Pro",
+  "Slabo 27px",
+  "Merriweather",
+  "Noto Sans",
+  "PT Sans",
+  "Playfair Display",
+  "Ubuntu",
+  "Roboto Condensed",
+  "Mukta",
+  "Nunito",
+  "Rubik",
+  "Quicksand",
+  "Work Sans",
+  "Josefin Sans",
+  "Fjalla One",
+  "Libre Baskerville",
+  "Anton",
+  "Bebas Neue",
+  "Dancing Script",
+  "Encode Sans",
+  "Arimo",
+  "Titillium Web",
+  "Inconsolata"
 ];
 
 export const formFieldTypes: FormFieldType[] = [

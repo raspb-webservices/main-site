@@ -5,9 +5,25 @@ export const GET = async (req) => {
   const id = req.params.id;
   try {
     const query = gql`
-      query getUserById($id: ID!) {
-        raspUsers(where: { id: $id }, stage: PUBLISHED) {
+      query getCustomerById($id: ID!) {
+        customer(where: { id: $id }, stage: PUBLISHED) {
           id
+          address
+          auth0Id
+          city
+          company
+          country
+          createdAt
+          email
+          familyName
+          givenName
+          phone
+          postCode
+          salutation
+          projects {
+            id
+            name
+          }
         }
       }
     `;

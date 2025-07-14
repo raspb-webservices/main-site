@@ -1,85 +1,67 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import type { WizardConfig } from '../../../interfaces/wizard.interface';
-  import {
-    projectTypes,
-    subTypes,
-    availableFeatures,
-    googleFonts,
-    formFieldTypes,
-    type ProjectType,
-    type SubType,
-    type Feature,
-    type FormFieldType
-  } from './wizard-config';
-
-  // Local interface for internal state (with File objects)
-  interface ProjectConfig extends Omit<WizardConfig, 'uploadedFiles' | 'timestamp'> {
-    uploadedFiles: File[];
-  }
+  import type { WizardConfig, Project } from '$interfaces/project.interface';
+  import { projectTypes, subTypes, availableFeatures, googleFonts, formFieldTypes, featureCategoryColors } from './wizard-config';
 
   // State
   let currentStep = $state(1);
   let showResetModal = $state(false);
-  let config: ProjectConfig = $state({
+
+  let config: WizardConfig = $state({
     step: 1,
+    name: '',
+    description: '',
     projectType: '',
     subType: '',
-    description: '',
-    features: [],
-    customFeatures: '',
-    pages: [],
-    formFields: [],
-    targetAudience: '',
+    projectDetails: '',
+    desiredDomain: '',
+    domainStatus: '',
     goals: '',
-    timeline: '',
+    targetAudience: '',
     budget: '',
-    colors: {
-      primary: '#731963',
-      secondary: '#449dd1',
-      accent: '#f09819'
-    },
-    font: 'Circular',
+    timeline: '',
+    features: [],
+    customFeature: '',
+    primaryColour: '#c1121f',
+    secondaryColour: '#003049',
+    accentColour: '#fdf0d5',
+    desiredFont: '',
     customFont: '',
-    uploadedFiles: [],
     estimatedPrice: 0,
-    lowestPrice: 0,
-    highestPrice: 0
+    formFields: [],
+    pages: [],
+    relatedFiles: [],
+    uploadedFiles: [],
+    owner: {
+      id: ''
+    }
   });
+
+  // Additional wizard-specific properties
+  let uploadedFiles: File[] = $state([]);
+  let customFeatures = $state('');
 
   // Dynamic step configuration based on project type
   const stepConfig = $derived(getStepConfig(config.projectType));
-
   function getStepConfig(projectType: string) {
     const baseSteps = [
       { id: 1, title: 'Projekttyp', required: true },
-      { id: 2, title: 'Details', required: true }
+      { id: 2, title: 'Details', required: true },
+      { id: 3, title: 'Beschreibung', required: false }
     ];
 
     if (projectType === 'website' || projectType === 'cms') {
       return [
         ...baseSteps,
-        { id: 3, title: 'Beschreibung', required: false },
         { id: 4, title: 'Features', required: false },
         { id: 5, title: 'Inhalte', required: false },
         { id: 6, title: 'Design', required: false },
         { id: 7, title: 'Zusammenfassung', required: false }
       ];
-    } else if (projectType === 'individual') {
-      return [
-        ...baseSteps,
-        { id: 3, title: 'Beschreibung', required: false },
-        { id: 4, title: 'Materialien', required: false },
-        { id: 5, title: 'Zusammenfassung', required: false }
-      ];
+    } else if (projectType === 'freestyle') {
+      return [...baseSteps, { id: 4, title: 'Materialien', required: false }, { id: 5, title: 'Zusammenfassung', required: false }];
     } else {
-      // webapp, mobile
-      return [
-        ...baseSteps,
-        { id: 3, title: 'Beschreibung', required: false },
-        { id: 4, title: 'Design', required: false },
-        { id: 5, title: 'Zusammenfassung', required: false }
-      ];
+      return [...baseSteps, { id: 4, title: 'Design', required: false }, { id: 5, title: 'Zusammenfassung', required: false }];
     }
   }
 
@@ -89,14 +71,11 @@
   function selectProjectType(type: string) {
     config.projectType = type;
     config.subType = '';
-    // Reset step to 1 but don't auto-advance
     currentStep = 1;
-    calculatePrice();
   }
 
   function selectSubType(subType: string) {
     config.subType = subType;
-    calculatePrice();
   }
 
   function addPage() {
@@ -146,104 +125,75 @@
     currentStep = 1;
     config = {
       step: 1,
+      name: '',
+      description: '',
       projectType: '',
       subType: '',
-      description: '',
-      features: [],
-      customFeatures: '',
-      pages: [],
-      formFields: [],
-      targetAudience: '',
+      projectDetails: '',
+      desiredDomain: '',
+      domainStatus: '',
       goals: '',
-      timeline: '',
+      targetAudience: '',
       budget: '',
-      colors: {
-        primary: '#731963',
-        secondary: '#449dd1',
-        accent: '#f09819'
-      },
-      font: 'Circular',
+      timeline: '',
+      features: [],
+      customFeature: '',
+      primaryColour: '#003049',
+      secondaryColour: '#c1121f',
+      accentColour: '#fdf0d5',
+      desiredFont: '',
       customFont: '',
-      uploadedFiles: [],
       estimatedPrice: 0,
-      lowestPrice: 0,
-      highestPrice: 0
+      formFields: [],
+      pages: [],
+      relatedFiles: [],
+      uploadedFiles: [],
+      owner: {
+        id: ''
+      }
     };
+    uploadedFiles = [];
+    customFeatures = '';
     closeResetModal();
   }
 
   function calculatePrice() {
-    let lowestPrice = 0;
-    let highestPrice = 0;
+    let basePrice = 0;
 
-    // Base price range for project type
+    // Base price from project type
     const projectType = projectTypes.find((p) => p.id === config.projectType);
     if (projectType) {
-      lowestPrice += projectType.lowestPrice;
-      highestPrice += projectType.highestPrice;
+      basePrice = (projectType.lowestPrice + projectType.highestPrice) / 2;
     }
 
-    // Subtype price range (replaces base price range)
-    const subTypeData = subTypes[config.projectType as keyof typeof subTypes]?.find((s) => s.id === config.subType);
+    // Subtype price (replaces base price)
+    const subTypeData = subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType);
     if (subTypeData) {
-      // Replace base price with more specific subtype price
-      lowestPrice = subTypeData.lowestPrice;
-      highestPrice = subTypeData.highestPrice;
+      basePrice = subTypeData.price;
     }
 
-    // Features price (added to both lowest and highest)
-    let featuresPrice = 0;
-    config.features.forEach((featureId) => {
-      const feature = availableFeatures.find((f) => f.id === featureId);
-      if (feature) featuresPrice += feature.price;
-    });
+    // Additional complexity factors
+    const complexityFactor = 1 + (config.description.length / 1000) * 0.2 + (config.features.length / 10) * 0.3;
 
-    lowestPrice += featuresPrice;
-    highestPrice += featuresPrice;
-
-    // Additional pages (if more than 5)
-    if (config.pages.length > 5) {
-      const additionalPagesCost = (config.pages.length - 5) * 200;
-      lowestPrice += additionalPagesCost;
-      highestPrice += additionalPagesCost;
-    }
-
-    // Complex form fields
-    if (config.formFields.length > 5) {
-      const additionalFieldsCost = (config.formFields.length - 5) * 100;
-      lowestPrice += additionalFieldsCost;
-      highestPrice += additionalFieldsCost;
-    }
-
-    // Complexity multiplier based on description length and features
-    const complexityFactorLow = 1 + (config.description.length / 2000) * 0.1 + (config.features.length / 15) * 0.1;
-    const complexityFactorHigh = 1 + (config.description.length / 1000) * 0.3 + (config.features.length / 10) * 0.4;
-
-    lowestPrice *= complexityFactorLow;
-    highestPrice *= complexityFactorHigh;
-
-    // Store both prices in config
-    config.estimatedPrice = Math.round((lowestPrice + highestPrice) / 2); // Average for backward compatibility
-    config.lowestPrice = Math.round(lowestPrice);
-    config.highestPrice = Math.round(highestPrice);
+    config.estimatedPrice = Math.round(basePrice * complexityFactor);
   }
 
   function handleFileUpload(event: Event) {
     const target = event.target as HTMLInputElement;
     if (target.files) {
-      config.uploadedFiles = [...config.uploadedFiles, ...Array.from(target.files)];
+      uploadedFiles = [...uploadedFiles, ...Array.from(target.files)];
     }
   }
 
   function removeFile(index: number) {
-    config.uploadedFiles = config.uploadedFiles.filter((_, i) => i !== index);
+    uploadedFiles = uploadedFiles.filter((_, i) => i !== index);
   }
 
   function generateJSON() {
     const result = {
       ...config,
       timestamp: new Date().toISOString(),
-      uploadedFiles: config.uploadedFiles.map((f) => ({ name: f.name, size: f.size, type: f.type }))
+      uploadedFiles: uploadedFiles.map((f) => ({ name: f.name, size: f.size, type: f.type }))
     };
 
     const blob = new Blob([JSON.stringify(result, null, 2)], { type: 'application/json' });
@@ -257,10 +207,32 @@
 
   // Neue Funktion zum Senden der Daten an die API
   async function submitToAPI() {
-    const wizardData = {
-      ...config,
-      timestamp: new Date().toISOString(),
-      uploadedFiles: config.uploadedFiles.map((f) => ({ name: f.name, size: f.size, type: f.type }))
+    // Prepare project data according to Project interface
+
+
+    console.log("CONFIG ", config)
+
+    const projectData: Project = {
+      name: config.name,
+      description: config.description,
+      projectType: config.projectType,
+      subType: config.subType,
+      projectDetails: config.projectDetails,
+      desiredDomain: config.desiredDomain,
+      domainStatus: config.domainStatus,
+      goals: config.goals,
+      targetAudience: config.targetAudience,
+      budget: config.budget,
+      timeline: config.timeline,
+      features: config.features,
+      customFeature: config.customFeature, 
+      primaryColour: config.primaryColour,
+      secondaryColour: config.secondaryColour,
+      accentColour: config.accentColour,
+      desiredFont: config.desiredFont,
+      estimatedPrice: config.estimatedPrice,
+      formFields: config.formFields,
+      pages: config.pages,
     };
 
     try {
@@ -269,7 +241,7 @@
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(wizardData)
+        body: JSON.stringify(projectData)
       });
 
       const result = await response.json();
@@ -277,6 +249,9 @@
       if (result.success) {
         alert('Projekt erfolgreich übermittelt! Wir werden uns bald bei Ihnen melden.');
         console.log('Projekt erstellt:', result.data);
+
+        // Redirect to thank you page
+        window.location.href = '/danke';
       } else {
         alert('Fehler beim Übermitteln: ' + result.error);
         console.error('API Fehler:', result.error);
@@ -376,7 +351,7 @@
       </div>
 
       <div class="subtypes-grid">
-        {#each subTypes[config.projectType as keyof typeof subTypes] || [] as subtype}
+        {#each subTypes.filter((st) => st.parentId === config.projectType) as subtype}
           <div
             class="card service-card cursor-pointer transition-all duration-300"
             class:card-selected={config.subType === subtype.id}
@@ -386,7 +361,7 @@
               <h3 class="card-title">{subtype.title}</h3>
               <p class="no-padding">{subtype.description}</p>
               <div class="card-actions justify-end">
-                <div class="badge badge-success">{subtype.lowestPrice.toLocaleString()}€ - {subtype.highestPrice.toLocaleString()}€</div>
+                <div class="badge badge-success">{subtype.price.toLocaleString()}€</div>
               </div>
             </div>
           </div>
@@ -400,6 +375,19 @@
       </div>
 
       <div class="content-section">
+        <div class="form-control mb-8 w-full">
+          <label class="label" for="projectName">
+            <span class="label-text text-lg font-semibold">Projektname:</span>
+          </label>
+          <input
+            type="text"
+            id="projectName"
+            class="input input-bordered input-lg w-full"
+            bind:value={config.name}
+            placeholder="Geben Sie Ihrem Projekt einen Namen..."
+          />
+        </div>
+
         <div class="form-control mb-8 w-full">
           <label class="label" for="description">
             <span class="label-text text-lg font-semibold">Projektbeschreibung:</span>
@@ -448,6 +436,32 @@
           </div>
 
           <div class="form-control w-full">
+            <label class="label" for="desiredDomain">
+              <span class="label-text font-semibold">Gewünschte Domain:</span>
+            </label>
+            <input
+              type="text"
+              id="desiredDomain"
+              class="input input-bordered w-full"
+              bind:value={config.desiredDomain}
+              placeholder="z.B. meine-firma.de, example.com..."
+            />
+          </div>
+
+          <div class="form-control w-full">
+            <label class="label" for="domainStatus">
+              <span class="label-text font-semibold">Domain-Status:</span>
+            </label>
+            <select id="domainStatus" class="select select-bordered w-full" bind:value={config.domainStatus}>
+              <option value="">Bitte wählen...</option>
+              <option value="owned">Domain bereits im Besitz</option>
+              <option value="needs-registration">Domain muss registriert werden</option>
+              <option value="needs-transfer">Domain muss übertragen werden</option>
+              <option value="undecided">Noch nicht entschieden</option>
+            </select>
+          </div>
+
+          <div class="form-control w-full">
             <label class="label" for="timeline">
               <span class="label-text font-semibold">Gewünschter Zeitrahmen:</span>
             </label>
@@ -485,14 +499,16 @@
 
       <div class="features-grid">
         {#each availableFeatures as feature}
-          <label class="card service-card cursor-pointer transition-all duration-300" class:card-selected={config.features.includes(feature.id)}>
+          <label class="card service-card cursor-pointer transition-all duration-300" class:card-selected={config.features.includes(feature.name)}>
             <div class="card-body">
-              <div class="card-actions justify-start">
-                <input type="checkbox" class="checkbox checkbox-primary" bind:group={config.features} value={feature.id} onchange={() => calculatePrice()} />
+              <div class="card-actions items-center justify-start">
+                <input type="checkbox" class="checkbox checkbox-primary" bind:group={config.features} value={feature.name} onchange={() => calculatePrice()} />
+                <h3 class="card-title no-padding">{feature.title}</h3>
               </div>
-              <h4 class="card-title text-lg">{feature.title}</h4>
+              <p class="no-padding">{feature.description}</p>
+
               <div class="card-actions justify-end">
-                <div class="badge badge-accent">+{feature.price}€</div>
+                <div class="badge {featureCategoryColors[feature.category || 'Funktionalität']}">{feature.category}</div>
               </div>
             </div>
           </label>
@@ -501,12 +517,12 @@
 
       <div class="form-control mt-8 w-full">
         <label class="label" for="customFeatures">
-          <span class="label-text text-lg font-semibold">Weitere gewünschte Features (Freitext):</span>
+          <span class="label-text text-lg font-semibold">Weitere gewünschte Features:</span>
         </label>
         <textarea
           id="customFeatures"
           class="textarea textarea-bordered textarea-lg w-full"
-          bind:value={config.customFeatures}
+          bind:value={customFeatures}
           placeholder="Beschreiben Sie weitere spezielle Anforderungen, die nicht in der Liste stehen..."
           rows="4"
         ></textarea>
@@ -574,7 +590,7 @@
       </div>
 
       <!-- Form Fields (only if contact form is selected) -->
-      {#if config.features.includes('contact-form')}
+      {#if config.features.includes('kontaktformular')}
         <div class="content-section">
           <h2>Formular-Felder</h2>
           <p>Da Sie ein Kontaktformular gewählt haben, definieren Sie hier die gewünschten Felder und deren Bezeichnungen.</p>
@@ -655,8 +671,8 @@
               <span class="label-text font-semibold">Primärfarbe:</span>
             </label>
             <div class="join w-full">
-              <input type="color" id="primaryColor" class="join-item h-12 w-16 border-0" bind:value={config.colors.primary} />
-              <input type="text" class="input input-bordered join-item flex-1" bind:value={config.colors.primary} />
+              <input type="color" id="primaryColor" class="join-item h-12 w-16 border-0" bind:value={config.primaryColour} />
+              <input type="text" class="input input-bordered join-item flex-1" bind:value={config.primaryColour} />
             </div>
           </div>
 
@@ -665,8 +681,8 @@
               <span class="label-text font-semibold">Sekundärfarbe:</span>
             </label>
             <div class="join w-full">
-              <input type="color" id="secondaryColor" class="join-item h-12 w-16 border-0" bind:value={config.colors.secondary} />
-              <input type="text" class="input input-bordered join-item flex-1" bind:value={config.colors.secondary} />
+              <input type="color" id="secondaryColor" class="join-item h-12 w-16 border-0" bind:value={config.secondaryColour} />
+              <input type="text" class="input input-bordered join-item flex-1" bind:value={config.secondaryColour} />
             </div>
           </div>
 
@@ -675,8 +691,8 @@
               <span class="label-text font-semibold">Akzentfarbe:</span>
             </label>
             <div class="join w-full">
-              <input type="color" id="accentColor" class="join-item h-12 w-16 border-0" bind:value={config.colors.accent} />
-              <input type="text" class="input input-bordered join-item flex-1" bind:value={config.colors.accent} />
+              <input type="color" id="accentColor" class="join-item h-12 w-16 border-0" bind:value={config.accentColour} />
+              <input type="text" class="input input-bordered join-item flex-1" bind:value={config.accentColour} />
             </div>
           </div>
         </div>
@@ -692,7 +708,7 @@
             <label class="label">
               <span class="label-text font-semibold">Google Fonts Auswahl:</span>
             </label>
-            <select class="select select-bordered select-lg w-full" bind:value={config.font}>
+            <select class="select select-bordered select-lg w-full" bind:value={config.desiredFont}>
               {#each googleFonts as font}
                 <option value={font}>{font}</option>
               {/each}
@@ -719,8 +735,8 @@
           </svg>
           <div>
             <div class="font-bold">Schriftart-Vorschau:</div>
-            <div style="font-family: {config.customFont || config.font}, sans-serif; font-size: 1.1em; margin-top: 0.5rem;">
-              Dies ist ein Beispieltext in der gewählten Schriftart "{config.customFont || config.font}". So wird Ihr Text später aussehen.
+            <div style="font-family: {config.customFont || config.desiredFont}, sans-serif; font-size: 1.1em; margin-top: 0.5rem;">
+              Dies ist ein Beispieltext in der gewählten Schriftart "{config.customFont || config.desiredFont}". So wird Ihr Text später aussehen.
             </div>
           </div>
         </div>
@@ -836,7 +852,7 @@
               <h3 class="card-title">Projekttyp</h3>
               <p class="no-padding">{projectTypes.find((p) => p.id === config.projectType)?.title}</p>
               <p class="text-base-content/70 no-padding text-sm">
-                {subTypes[config.projectType as keyof typeof subTypes]?.find((s) => s.id === config.subType)?.title}
+                {subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType)?.title}
               </p>
             </div>
           </div>
@@ -856,7 +872,7 @@
                 <h3 class="card-title">Gewählte Features</h3>
                 <div class="flex flex-wrap gap-2">
                   {#each config.features as featureId}
-                    <div class="badge badge-primary">{availableFeatures.find((f) => f.id === featureId)?.title}</div>
+                    <div class="badge badge-primary">{availableFeatures.find((f) => f.name === featureId)?.title}</div>
                   {/each}
                 </div>
               </div>
@@ -907,14 +923,14 @@
                   <div class="flex items-center gap-4">
                     <span class="font-semibold">Farben:</span>
                     <div class="flex gap-2">
-                      <div class="border-base-300 h-8 w-8 rounded border-2" style="background-color: {config.colors.primary}"></div>
-                      <div class="border-base-300 h-8 w-8 rounded border-2" style="background-color: {config.colors.secondary}"></div>
-                      <div class="border-base-300 h-8 w-8 rounded border-2" style="background-color: {config.colors.accent}"></div>
+                      <div class="border-base-300 h-8 w-8 rounded border-2" style="background-color: {config.primaryColour}"></div>
+                      <div class="border-base-300 h-8 w-8 rounded border-2" style="background-color: {config.secondaryColour}"></div>
+                      <div class="border-base-300 h-8 w-8 rounded border-2" style="background-color: {config.accentColour}"></div>
                     </div>
                   </div>
                   <div>
                     <span class="font-semibold">Schriftart:</span>
-                    <span style="font-family: {config.customFont || config.font}, sans-serif">{config.customFont || config.font}</span>
+                    <span style="font-family: {config.customFont || config.desiredFont}, sans-serif">{config.customFont || config.desiredFont}</span>
                   </div>
                 </div>
               </div>
@@ -925,7 +941,7 @@
         <div class="card bg-success text-success-content">
           <div class="card-body text-center">
             <h2 class="card-title justify-center text-3xl">Geschätzter Preis</h2>
-            <div class="text-5xl font-bold">{config.lowestPrice.toLocaleString()}€ - {config.highestPrice.toLocaleString()}€</div>
+            <div class="text-5xl font-bold">{config.estimatedPrice}€</div>
             <div class="text-sm opacity-80">Durchschnitt: {config.estimatedPrice.toLocaleString()}€</div>
             <p class="no-padding text-sm opacity-80">*Unverbindliche Schätzung. Der finale Preis wird nach einem persönlichen Gespräch festgelegt.</p>
 
@@ -942,20 +958,14 @@
               </div>
               {#if config.subType}
                 <div class="flex justify-between">
-                  <span>{subTypes[config.projectType as keyof typeof subTypes]?.find((s) => s.id === config.subType)?.title}:</span>
-                  <span
-                    >{subTypes[config.projectType as keyof typeof subTypes]?.find((s) => s.id === config.subType)?.lowestPrice.toLocaleString()}€ - {subTypes[
-                      config.projectType as keyof typeof subTypes
-                    ]
-                      ?.find((s) => s.id === config.subType)
-                      ?.highestPrice.toLocaleString()}€</span
-                  >
+                  <span>{subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType)?.title}:</span>
+                  <span>{subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType)?.price.toLocaleString()}€</span>
                 </div>
               {/if}
               {#if config.features.length > 0}
                 <div class="flex justify-between">
                   <span>Features ({config.features.length}):</span>
-                  <span>+{config.features.reduce((sum, fId) => sum + (availableFeatures.find((f) => f.id === fId)?.price || 0), 0)}€</span>
+                  <span>Inklusive</span>
                 </div>
               {/if}
             </div>
