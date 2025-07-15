@@ -116,7 +116,6 @@ export const POST: RequestHandler = async ({ request }) => {
       fileIDs: projectData.relatedFiles?.length ? projectData.relatedFiles : null,
       owner: projectData.owner ? projectData.owner.id : null
     }
-    console.log('variables', variables);
 
     // GraphQL Request an Hygraph senden
     const response = (await client.request(mutation, variables)) as { createProject: ProjectResponse };

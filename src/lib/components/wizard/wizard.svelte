@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import type { WizardConfig, Project } from '$interfaces/project.interface';
+  import { uploadAsset, publishAsset } from '$helper/uploadAsset';
   import { projectTypes, subTypes, availableFeatures, googleFonts, formFieldTypes, featureCategoryColors } from './wizard-config';
 
   // State
@@ -40,6 +41,8 @@
   // Additional wizard-specific properties
   let uploadedFiles: File[] = $state([]);
   let customFeatures = $state('');
+  let isUploading = $state(false);
+  let uploadProgress = $state('');
 
   // Dynamic step configuration based on project type
   const stepConfig = $derived(getStepConfig(config.projectType));
@@ -178,15 +181,56 @@
     config.estimatedPrice = Math.round(basePrice * complexityFactor);
   }
 
-  function handleFileUpload(event: Event) {
+  async function handleFileUpload(event: Event) {
     const target = event.target as HTMLInputElement;
-    if (target.files) {
-      uploadedFiles = [...uploadedFiles, ...Array.from(target.files)];
+    if (target.files && target.files.length > 0) {
+      // Neue Dateien zu den bestehenden hinzufügen
+      const newFiles = Array.from(target.files);
+      uploadedFiles = [...uploadedFiles, ...newFiles];
+      
+      // Input zurücksetzen, damit dieselbe Datei erneut ausgewählt werden kann
+      target.value = '';
     }
   }
 
   function removeFile(index: number) {
     uploadedFiles = uploadedFiles.filter((_, i) => i !== index);
+  }
+
+  async function uploadAllFiles() {
+    if (uploadedFiles.length === 0) return [];
+    
+    isUploading = true;
+    uploadProgress = 'Dateien werden hochgeladen...';
+    const uploadedAssetIds: string[] = [];
+    
+    try {
+      for (let i = 0; i < uploadedFiles.length; i++) {
+        const file = uploadedFiles[i];
+        uploadProgress = `Lade Datei ${i + 1} von ${uploadedFiles.length} hoch: ${file.name}`;
+        
+        const assetId = await uploadAsset(file);
+        if (assetId && assetId !== 'error') {
+          uploadedAssetIds.push(assetId);
+          
+          // Datei als erfolgreich hochgeladen markieren
+          uploadProgress = `Datei ${i + 1} von ${uploadedFiles.length} erfolgreich hochgeladen`;
+        } else {
+          console.error(`Fehler beim Hochladen der Datei: ${file.name}`);
+          uploadProgress = `Fehler beim Hochladen der Datei: ${file.name}`;
+        }
+      }
+      
+      uploadProgress = `Alle ${uploadedAssetIds.length} Dateien erfolgreich hochgeladen`;
+      return uploadedAssetIds;
+      
+    } catch (error) {
+      console.error('Fehler beim Hochladen der Dateien:', error);
+      uploadProgress = 'Fehler beim Hochladen der Dateien';
+      return [];
+    } finally {
+      isUploading = false;
+    }
   }
 
   function generateJSON() {
@@ -207,35 +251,48 @@
 
   // Neue Funktion zum Senden der Daten an die API
   async function submitToAPI() {
-    // Prepare project data according to Project interface
-
-
-    console.log("CONFIG ", config)
-
-    const projectData: Project = {
-      name: config.name,
-      description: config.description,
-      projectType: config.projectType,
-      subType: config.subType,
-      projectDetails: config.projectDetails,
-      desiredDomain: config.desiredDomain,
-      domainStatus: config.domainStatus,
-      goals: config.goals,
-      targetAudience: config.targetAudience,
-      budget: config.budget,
-      timeline: config.timeline,
-      features: config.features,
-      customFeature: config.customFeature, 
-      primaryColour: config.primaryColour,
-      secondaryColour: config.secondaryColour,
-      accentColour: config.accentColour,
-      desiredFont: config.desiredFont,
-      estimatedPrice: config.estimatedPrice,
-      formFields: config.formFields,
-      pages: config.pages,
-    };
-
     try {
+      // Erst alle Dateien hochladen
+      let uploadedAssetIds: string[] = [];
+      if (uploadedFiles.length > 0) {
+        uploadedAssetIds = await uploadAllFiles();
+        
+        // Wenn Upload fehlgeschlagen ist, Abbruch
+        if (uploadedAssetIds.length === 0 && uploadedFiles.length > 0) {
+          alert('Fehler beim Hochladen der Dateien. Bitte versuchen Sie es erneut.');
+          return;
+        }
+      }
+
+      // Prepare project data according to Project interface
+      console.log("CONFIG ", config);
+
+      const projectData: Project = {
+        name: config.name,
+        description: config.description,
+        projectType: config.projectType,
+        subType: config.subType,
+        projectDetails: config.projectDetails,
+        desiredDomain: config.desiredDomain,
+        domainStatus: config.domainStatus,
+        goals: config.goals,
+        targetAudience: config.targetAudience,
+        budget: config.budget,
+        timeline: config.timeline,
+        features: config.features,
+        customFeature: customFeatures || config.customFeature, 
+        primaryColour: config.primaryColour,
+        secondaryColour: config.secondaryColour,
+        accentColour: config.accentColour,
+        desiredFont: config.desiredFont,
+        estimatedPrice: config.estimatedPrice,
+        formFields: config.formFields,
+        pages: config.pages,
+        relatedFiles: uploadedAssetIds.map(id => ({ id }))
+      };
+
+      console.log("projectData  ", projectData);
+
       const response = await fetch('/api/project/submit', {
         method: 'POST',
         headers: {
@@ -761,11 +818,11 @@
           </div>
         </div>
 
-        {#if config.uploadedFiles.length > 0}
+        {#if uploadedFiles.length > 0}
           <div class="mt-6">
             <h3>Hochgeladene Dateien:</h3>
             <div class="space-y-2">
-              {#each config.uploadedFiles as file, i}
+              {#each uploadedFiles as file, i}
                 <div class="alert">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
                     <path
@@ -783,6 +840,21 @@
                   </button>
                 </div>
               {/each}
+            </div>
+          </div>
+        {/if}
+
+        {#if isUploading && uploadProgress}
+          <div class="mt-6">
+            <div class="alert alert-info">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <div>
+                <div class="font-bold">Upload läuft...</div>
+                <div class="text-sm">{uploadProgress}</div>
+              </div>
+              <span class="loading loading-spinner loading-md"></span>
             </div>
           </div>
         {/if}
@@ -812,11 +884,11 @@
           </div>
         </div>
 
-        {#if config.uploadedFiles.length > 0}
+        {#if uploadedFiles.length > 0}
           <div class="mt-6">
             <h3>Hochgeladene Dateien:</h3>
             <div class="space-y-2">
-              {#each config.uploadedFiles as file, i}
+              {#each uploadedFiles as file, i}
                 <div class="alert">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
                     <path
@@ -834,6 +906,21 @@
                   </button>
                 </div>
               {/each}
+            </div>
+          </div>
+        {/if}
+
+        {#if isUploading && uploadProgress}
+          <div class="mt-6">
+            <div class="alert alert-info">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <div>
+                <div class="font-bold">Upload läuft...</div>
+                <div class="text-sm">{uploadProgress}</div>
+              </div>
+              <span class="loading loading-spinner loading-md"></span>
             </div>
           </div>
         {/if}
