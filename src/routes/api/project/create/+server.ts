@@ -30,7 +30,6 @@ export const POST: RequestHandler = async ({ request }) => {
         $formFields: Json!
         $pages: Json!
         $fileIDs: [AssetWhereUniqueInput!]
-        $ownerID: ID
       ) {
         createProject(
           data: {
@@ -55,7 +54,6 @@ export const POST: RequestHandler = async ({ request }) => {
             formFields: $formFields
             pages: $pages
             relatedFiles: { connect: $fileIDs }
-            owner: { connect: { id: $ownerID } }
           }
         ) {
           id
@@ -113,9 +111,11 @@ export const POST: RequestHandler = async ({ request }) => {
       estimatedPrice: projectData.estimatedPrice || null,
       formFields: projectData.formFields ? JSON.stringify(projectData.formFields) : null,
       pages: projectData.pages ? JSON.stringify(projectData.pages) : null,
-      fileIDs: projectData.relatedFiles?.length ? projectData.relatedFiles : null,
-      owner: projectData.owner ? projectData.owner.id : null
+      fileIDs: projectData.relatedFiles?.length ? projectData.relatedFiles : null
     }
+
+    console.log("PROJECT VARIABLES ", variables )
+
 
     // GraphQL Request an Hygraph senden
     const response = (await client.request(mutation, variables)) as { createProject: ProjectResponse };

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import type { WizardConfig, Project } from '$interfaces/project.interface';
-  import { uploadAsset, publishAsset } from '$helper/uploadAsset';
+  import { uploadAsset, publishAsset, createAsset } from '$helper/uploadAsset';
   import { projectTypes, subTypes, availableFeatures, googleFonts, formFieldTypes, featureCategoryColors } from './wizard-config';
 
   // State
@@ -10,32 +10,97 @@
 
   let config: WizardConfig = $state({
     step: 1,
-    name: '',
-    description: '',
-    projectType: '',
-    subType: '',
+    name: 'Mustermann und Söhne - Unternehmenswebseite',
+    description: 'Lorem ipsum... Projektbeschreibung',
+    projectType: 'website',
+    subType: 'corporateWebsitePremium',
     projectDetails: '',
-    desiredDomain: '',
-    domainStatus: '',
-    goals: '',
-    targetAudience: '',
-    budget: '',
-    timeline: '',
-    features: ['cookieConsent'],
+    desiredDomain: 'www.mustermann.de',
+    domainStatus: 'needs-registration',
+    goals: 'Kundengewinnung, im Internet präsent sein',
+    targetAudience: 'Kleinunternehmner',
+    budget: '7k-10k',
+    timeline: '2-4-weeks',
+    features: [
+      'kontaktformular',
+      'terminbuchung',
+      'bildergalerie',
+      'kalender',
+      'customTeaser',
+      'tabs',
+      'benutzerkonten',
+      'altersverifikation',
+      'cookieConsent'
+    ],
     customFeature: '',
-    primaryColour: '#c1121f',
-    secondaryColour: '#003049',
-    accentColour: '#fdf0d5',
-    desiredFont: '',
+    primaryColour: '#8c1cb7',
+    secondaryColour: '#008ad5',
+    accentColour: '#f8c863',
+    desiredFont: 'Raleway',
     customFont: '',
-    estimatedPrice: 0,
-    formFields: [],
-    pages: [],
+    estimatedPrice: 2552,
+    formFields: [
+      {
+        type: 'text',
+        name: 'Vorname',
+        required: true
+      },
+      {
+        type: 'text',
+        name: 'Nachname',
+        required: false
+      }
+    ],
+    pages: [
+      {
+        name: 'Home',
+        content: 'Startseite mit Dummy Content',
+        characteristic: 'Diese seite muss knallen!'
+      },
+      {
+        name: 'Über uns',
+        content: 'die über uns seite',
+        characteristic: 'test test test'
+      }
+    ],
     relatedFiles: [],
-    uploadedFiles: [],
+    uploadedFiles: [
+      {
+        name: '03799_pinkskyofsydney_2560x1440.jpg',
+        size: 2749968,
+        type: 'image/jpeg'
+      }
+    ],
     owner: {
       id: ''
     }
+    // step: 1,
+    // name: '',
+    // description: '',
+    // projectType: '',
+    // subType: '',
+    // projectDetails: '',
+    // desiredDomain: '',
+    // domainStatus: '',
+    // goals: '',
+    // targetAudience: '',
+    // budget: '',
+    // timeline: '',
+    // features: ['cookieConsent'],
+    // customFeature: '',
+    // primaryColour: '#c1121f',
+    // secondaryColour: '#003049',
+    // accentColour: '#fdf0d5',
+    // desiredFont: '',
+    // customFont: '',
+    // estimatedPrice: 0,
+    // formFields: [],
+    // pages: [],
+    // relatedFiles: [],
+    // uploadedFiles: [],
+    // owner: {
+    //   id: ''
+    // }
   });
 
   // Additional wizard-specific properties
@@ -61,10 +126,13 @@
         { id: 6, title: 'Design', required: false },
         { id: 7, title: 'Ergebnis', required: false }
       ];
-    } else if (projectType === 'freestyle') {
+    } else if (projectType === 'webApplication') {
+      return [...baseSteps, { id: 4, title: 'Materialien', required: false }, { id: 5, title: 'Ergebnis', required: false }];
+    } else if (projectType === 'artificialIntelligence') {
       return [...baseSteps, { id: 4, title: 'Materialien', required: false }, { id: 5, title: 'Ergebnis', required: false }];
     } else {
-      return [...baseSteps, { id: 4, title: 'Design', required: false }, { id: 5, title: 'Ergebnis', required: false }];
+      // freestyle
+      return [...baseSteps, { id: 4, title: 'Ergebnis', required: false }];
     }
   }
 
@@ -82,7 +150,7 @@
   }
 
   function addPage() {
-    config.pages = [...config.pages, { name: '', content: '' }];
+    config.pages = [...config.pages, { name: '', content: '', characteristic: '' }];
   }
 
   function removePage(index: number) {
@@ -139,7 +207,7 @@
       targetAudience: '',
       budget: '',
       timeline: '',
-      features: [],
+      features: ['cookieConsent'],
       customFeature: '',
       primaryColour: '#003049',
       secondaryColour: '#c1121f',
@@ -205,15 +273,14 @@
     const uploadedAssetIds: string[] = [];
 
     try {
+      // Phase 1: Alle Dateien hochladen
       for (let i = 0; i < uploadedFiles.length; i++) {
         const file = uploadedFiles[i];
         uploadProgress = `Lade Datei ${i + 1} von ${uploadedFiles.length} hoch: ${file.name}`;
-
         const assetId = await uploadAsset(file);
+
         if (assetId && assetId !== 'error') {
           uploadedAssetIds.push(assetId);
-
-          // Datei als erfolgreich hochgeladen markieren
           uploadProgress = `Datei ${i + 1} von ${uploadedFiles.length} erfolgreich hochgeladen`;
         } else {
           console.error(`Fehler beim Hochladen der Datei: ${file.name}`);
@@ -221,7 +288,33 @@
         }
       }
 
-      uploadProgress = `Alle ${uploadedAssetIds.length} Dateien erfolgreich hochgeladen`;
+      // Kurze Wartezeit, damit Assets im Backend verfügbar sind
+      if (uploadedAssetIds.length > 0) {
+        uploadProgress = 'Bereite Veröffentlichung vor...';
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+
+        // Phase 2: Alle Assets veröffentlichen
+        const publishedAssetIds: string[] = [];
+        for (let i = 0; i < uploadedAssetIds.length; i++) {
+          const assetId = uploadedAssetIds[i];
+          const fileName = uploadedFiles[i]?.name || `Asset ${i + 1}`;
+
+          uploadProgress = `Veröffentliche Datei ${i + 1} von ${uploadedAssetIds.length}: ${fileName}`;
+          const publishResult = await publishAsset(assetId);
+          if (publishResult && publishResult !== 'error') {
+            publishedAssetIds.push(assetId);
+            uploadProgress = `Datei ${i + 1} von ${uploadedAssetIds.length} erfolgreich veröffentlicht`;
+          } else {
+            console.error(`Fehler beim Veröffentlichen der Datei: ${fileName}`);
+            uploadProgress = `Fehler beim Veröffentlichen der Datei: ${fileName}`;
+          }
+        }
+
+        uploadProgress = `Alle ${publishedAssetIds.length} Dateien erfolgreich hochgeladen und veröffentlicht`;
+        return publishedAssetIds;
+      }
+
+      uploadProgress = `${uploadedAssetIds.length} Dateien hochgeladen`;
       return uploadedAssetIds;
     } catch (error) {
       console.error('Fehler beim Hochladen der Dateien:', error);
@@ -292,7 +385,7 @@
 
       console.log('projectData  ', projectData);
 
-      const response = await fetch('/api/project/submit', {
+      const response = await fetch('/api/project/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -344,17 +437,17 @@
   <div class="progress-wrapper">
     <div class="relative flex w-full items-center justify-between">
       <!-- Background connecting line -->
-      <div class="bg-base-300 absolute top-6 right-0 left-0 h-0.5 mx-8"></div>
+      <div class="bg-base-300 absolute top-6 right-0 left-0 mx-8 h-0.5"></div>
       <!-- Progress connecting line -->
       <div
-        class="bg-primary absolute top-6 left-0 right-0 h-0.5 mx-8 transition-all duration-300"
-        style="width: {currentStep > 1 ? `calc(${((currentStep - 1) / (stepConfig.length - 1)) * 100}% - ${(currentStep - 1)}rem )` : '0%'}"
+        class="bg-primary absolute top-6 right-0 left-0 mx-8 h-0.5 transition-all duration-300"
+        style="width: {currentStep > 1 ? `calc(${((currentStep - 1) / (stepConfig.length - 1)) * 100}% - ${currentStep - 1}rem )` : '0%'}"
       ></div>
 
       {#each stepConfig as step, i}
         <button
           type="button"
-          class="relative z-10 flex cursor-pointer flex-col items-center border-none bg-transparent p-2 transition-all duration-200 hover:scale-105 min-w-24"
+          class="relative z-10 flex min-w-24 cursor-pointer flex-col items-center border-none bg-transparent p-2 transition-all duration-200"
           onclick={() => goToStep(i + 1)}
           onkeydown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
@@ -368,8 +461,7 @@
           <!-- Step Circle -->
           <div
             class="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 text-sm font-bold transition-all duration-200
-                   {i + 1 <= currentStep ? 'bg-primary text-primary-content border-primary' : 'bg-base-100 border-base-300'}
-                   hover:scale-110"
+                   {i + 1 <= currentStep ? 'bg-primary text-primary-content border-primary' : 'bg-base-100 border-base-300 hover:bg-base-300'}"
           >
             {i + 1}
           </div>
@@ -653,7 +745,7 @@
                   />
                 </div>
 
-                <div class="form-control w-full">
+                <div class="form-control mb-4 w-full">
                   <label class="label" for="pageContent{i}">
                     <span class="label-text font-semibold">Gewünschte Inhalte:</span>
                   </label>
@@ -662,6 +754,19 @@
                     class="textarea textarea-bordered w-full"
                     bind:value={config.pages[i].content}
                     placeholder="Beschreiben Sie, welche Inhalte auf dieser Seite stehen sollen: Texte, Bilder, Funktionen, etc."
+                    rows="3"
+                  ></textarea>
+                </div>
+
+                <div class="form-control w-full">
+                  <label class="label" for="pageCharacteristic{i}">
+                    <span class="label-text font-semibold">Besonderheiten der Seite:</span>
+                  </label>
+                  <textarea
+                    id="pageCharacteristic{i}"
+                    class="textarea textarea-bordered w-full"
+                    bind:value={config.pages[i].characteristic}
+                    placeholder="Welche Features sollen auf dieser Seite platziert werden? Sollen Inhaltsvorschläge erarbeitet werden oder sollen Inhalte exakt wie vorgegeben übernommen werden?"
                     rows="3"
                   ></textarea>
                 </div>
@@ -836,6 +941,8 @@
       <div class="content-section">
         <h2>Materialien hochladen</h2>
         <p>Laden Sie Styleguides, Logos, Bilder oder andere relevante Dateien hoch, die uns bei der Umsetzung helfen.</p>
+        <p>{uploadProgress}</p>
+        <button type="button" class="btn-basic" onclick={() => uploadAllFiles()} aria-label="Assets hochladen">UPLOAD</button>
 
         <div class="form-control w-full">
           <input
@@ -1214,11 +1321,14 @@
     @apply transition-all duration-300;
 
     &:hover {
-      @apply translate-y-1.5;
+      @apply bg-base-200;
     }
 
     &.card-selected {
       @apply ring-primary ring-2 ring-offset-2;
+      &:hover {
+        @apply cursor-default bg-transparent;
+      }
     }
 
     .service-card-header {
@@ -1263,5 +1373,10 @@
 
   .join {
     @apply w-full;
+  }
+
+  /* Enhanced button styles */
+  .btn-basic {
+    @apply btn btn-primary;
   }
 </style>

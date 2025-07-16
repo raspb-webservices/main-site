@@ -1,0 +1,25 @@
+import { client } from '$lib/helper/graphql-client';
+import { gql } from 'graphql-request';
+
+export const GET = async (req) => {
+  const id = req.params.id;
+
+  console.log("WANT TO PUBLISH ASSET ", id);
+  try {
+    const query = gql`
+      mutation publishAsset($id: ID) {
+        publishAsset(where: { id: $id }, to: PUBLISHED) {
+          id
+        }
+      }
+    `;
+    const variables = { id };
+    const response = await client.request(query, variables);
+
+    console.log("RESPONSE ",response)
+
+    return new Response(JSON.stringify(response));
+  } catch (error) {
+    return new Response(JSON.stringify(error));
+  }
+};

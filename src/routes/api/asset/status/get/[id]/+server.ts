@@ -3,12 +3,20 @@ import { gql } from 'graphql-request';
 
 export const GET = async (req) => {
   const id = req.params.id;
-
   try {
     const query = gql`
-      mutation publishAsset($id: ID) {
-        publishAsset(where: { id: $id }, to: PUBLISHED) {
+      query GetAssetStatus($id: ID!) {
+        published: asset(stage: PUBLISHED, where: { id: $id }) {
           id
+          fileName
+          url
+          updatedAt
+        }
+        draft: asset(stage: DRAFT, where: { id: $id }) {
+          id
+          fileName
+          url
+          updatedAt
         }
       }
     `;
