@@ -21,7 +21,7 @@
     targetAudience: '',
     budget: '',
     timeline: '',
-    features: [],
+    features: ['cookieConsent'],
     customFeature: '',
     primaryColour: '#c1121f',
     secondaryColour: '#003049',
@@ -59,12 +59,12 @@
         { id: 4, title: 'Features', required: false },
         { id: 5, title: 'Inhalte', required: false },
         { id: 6, title: 'Design', required: false },
-        { id: 7, title: 'Zusammenfassung', required: false }
+        { id: 7, title: 'Ergebnis', required: false }
       ];
     } else if (projectType === 'freestyle') {
-      return [...baseSteps, { id: 4, title: 'Materialien', required: false }, { id: 5, title: 'Zusammenfassung', required: false }];
+      return [...baseSteps, { id: 4, title: 'Materialien', required: false }, { id: 5, title: 'Ergebnis', required: false }];
     } else {
-      return [...baseSteps, { id: 4, title: 'Design', required: false }, { id: 5, title: 'Zusammenfassung', required: false }];
+      return [...baseSteps, { id: 4, title: 'Design', required: false }, { id: 5, title: 'Ergebnis', required: false }];
     }
   }
 
@@ -187,7 +187,7 @@
       // Neue Dateien zu den bestehenden hinzufügen
       const newFiles = Array.from(target.files);
       uploadedFiles = [...uploadedFiles, ...newFiles];
-      
+
       // Input zurücksetzen, damit dieselbe Datei erneut ausgewählt werden kann
       target.value = '';
     }
@@ -199,20 +199,20 @@
 
   async function uploadAllFiles() {
     if (uploadedFiles.length === 0) return [];
-    
+
     isUploading = true;
     uploadProgress = 'Dateien werden hochgeladen...';
     const uploadedAssetIds: string[] = [];
-    
+
     try {
       for (let i = 0; i < uploadedFiles.length; i++) {
         const file = uploadedFiles[i];
         uploadProgress = `Lade Datei ${i + 1} von ${uploadedFiles.length} hoch: ${file.name}`;
-        
+
         const assetId = await uploadAsset(file);
         if (assetId && assetId !== 'error') {
           uploadedAssetIds.push(assetId);
-          
+
           // Datei als erfolgreich hochgeladen markieren
           uploadProgress = `Datei ${i + 1} von ${uploadedFiles.length} erfolgreich hochgeladen`;
         } else {
@@ -220,10 +220,9 @@
           uploadProgress = `Fehler beim Hochladen der Datei: ${file.name}`;
         }
       }
-      
+
       uploadProgress = `Alle ${uploadedAssetIds.length} Dateien erfolgreich hochgeladen`;
       return uploadedAssetIds;
-      
     } catch (error) {
       console.error('Fehler beim Hochladen der Dateien:', error);
       uploadProgress = 'Fehler beim Hochladen der Dateien';
@@ -256,7 +255,7 @@
       let uploadedAssetIds: string[] = [];
       if (uploadedFiles.length > 0) {
         uploadedAssetIds = await uploadAllFiles();
-        
+
         // Wenn Upload fehlgeschlagen ist, Abbruch
         if (uploadedAssetIds.length === 0 && uploadedFiles.length > 0) {
           alert('Fehler beim Hochladen der Dateien. Bitte versuchen Sie es erneut.');
@@ -265,7 +264,7 @@
       }
 
       // Prepare project data according to Project interface
-      console.log("CONFIG ", config);
+      console.log('CONFIG ', config);
 
       const projectData: Project = {
         name: config.name,
@@ -280,7 +279,7 @@
         budget: config.budget,
         timeline: config.timeline,
         features: config.features,
-        customFeature: customFeatures || config.customFeature, 
+        customFeature: customFeatures || config.customFeature,
         primaryColour: config.primaryColour,
         secondaryColour: config.secondaryColour,
         accentColour: config.accentColour,
@@ -288,10 +287,10 @@
         estimatedPrice: config.estimatedPrice,
         formFields: config.formFields,
         pages: config.pages,
-        relatedFiles: uploadedAssetIds.map(id => ({ id }))
+        relatedFiles: uploadedAssetIds.map((id) => ({ id }))
       };
 
-      console.log("projectData  ", projectData);
+      console.log('projectData  ', projectData);
 
       const response = await fetch('/api/project/submit', {
         method: 'POST',
@@ -345,15 +344,27 @@
   <div class="progress-wrapper">
     <div class="relative flex w-full items-center justify-between">
       <!-- Background connecting line -->
-      <div class="bg-base-300 absolute top-4 left-4 h-0.5 -translate-y-1/2" style="right: 2rem;"></div>
+      <div class="bg-base-300 absolute top-6 right-0 left-0 h-0.5 mx-8"></div>
       <!-- Progress connecting line -->
       <div
-        class="bg-primary absolute top-4 left-4 h-0.5 -translate-y-1/2 transition-all duration-300"
-        style="width: {currentStep > 1 ? `calc(${((currentStep - 1) / (stepConfig.length - 1)) * 100}% - 2rem)` : '0%'}"
+        class="bg-primary absolute top-6 left-0 right-0 h-0.5 mx-8 transition-all duration-300"
+        style="width: {currentStep > 1 ? `calc(${((currentStep - 1) / (stepConfig.length - 1)) * 100}% - ${(currentStep - 1)}rem )` : '0%'}"
       ></div>
 
       {#each stepConfig as step, i}
-        <div class="relative z-10 flex cursor-pointer flex-col items-center" onclick={() => goToStep(i + 1)}>
+        <button
+          type="button"
+          class="relative z-10 flex cursor-pointer flex-col items-center border-none bg-transparent p-2 transition-all duration-200 hover:scale-105 min-w-24"
+          onclick={() => goToStep(i + 1)}
+          onkeydown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              goToStep(i + 1);
+            }
+          }}
+          aria-label="Go to step {i + 1}: {step.title}"
+          aria-current={i + 1 === currentStep ? 'step' : undefined}
+        >
           <!-- Step Circle -->
           <div
             class="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 text-sm font-bold transition-all duration-200
@@ -366,7 +377,7 @@
           <div class="mt-2 max-w-20 text-center text-xs font-medium">
             {step.title}
           </div>
-        </div>
+        </button>
       {/each}
     </div>
   </div>
@@ -385,7 +396,16 @@
           <div
             class="card service-card cursor-pointer transition-all duration-300"
             class:card-selected={config.projectType === type.id}
+            role="button"
+            tabindex="0"
             onclick={() => selectProjectType(type.id)}
+            onkeydown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                selectProjectType(type.id);
+              }
+            }}
+            aria-label="Select project type: {type.title}"
           >
             <div class="card-body">
               <div class="service-card-header">
@@ -412,13 +432,22 @@
           <div
             class="card service-card cursor-pointer transition-all duration-300"
             class:card-selected={config.subType === subtype.id}
+            role="button"
+            tabindex="0"
             onclick={() => selectSubType(subtype.id)}
+            onkeydown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                selectSubType(subtype.id);
+              }
+            }}
+            aria-label="Select subtype: {subtype.title}"
           >
             <div class="card-body">
               <h3 class="card-title">{subtype.title}</h3>
               <p class="no-padding">{subtype.description}</p>
               <div class="card-actions justify-end">
-                <div class="badge badge-success">{subtype.price.toLocaleString()}€</div>
+                <div class="badge badge-success">ab {subtype.price.toLocaleString()}€</div>
               </div>
             </div>
           </div>
@@ -525,9 +554,9 @@
             <select id="timeline" class="select select-bordered w-full" bind:value={config.timeline}>
               <option value="">Bitte wählen...</option>
               <option value="asap">So schnell wie möglich</option>
-              <option value="1-month">Innerhalb 1 Monat</option>
-              <option value="2-3-months">2-3 Monate</option>
-              <option value="3-6-months">3-6 Monate</option>
+              <option value="5-10-days">5 - 10 Tage </option>
+              <option value="2-4-weeks">2 - 4 Wochen</option>
+              <option value="2-6-months">2 - 6 Monate</option>
               <option value="flexible">Flexibel</option>
             </select>
           </div>
@@ -538,11 +567,12 @@
             </label>
             <select id="budget" class="select select-bordered w-full" bind:value={config.budget}>
               <option value="">Bitte wählen...</option>
-              <option value="under-2k">Unter 2.000€</option>
-              <option value="2k-5k">2.000€ - 5.000€</option>
-              <option value="5k-10k">5.000€ - 10.000€</option>
-              <option value="10k-20k">10.000€ - 20.000€</option>
-              <option value="over-20k">Über 20.000€</option>
+              <option value="under-500">Unter 500€</option>
+              <option value="1k-3k">1.000€ - 3.000€</option>
+              <option value="3k-7k">3.000€ - 7.000€</option>
+              <option value="7k-10k">7.000€ - 10.000€</option>
+              <option value="10k-15k">10.000€ - 15.000€</option>
+              <option value="over-20k">mehr als 15.000€</option>
             </select>
           </div>
         </div>
@@ -602,7 +632,7 @@
               <div class="card-body">
                 <div class="mb-4 flex items-center justify-between">
                   <h4 class="card-title text-lg">Seite {i + 1}</h4>
-                  <button type="button" class="btn btn-error btn-sm" onclick={() => removePage(i)}>
+                  <button type="button" class="btn btn-error btn-sm" onclick={() => removePage(i)} aria-label="Seite entfernen">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -611,11 +641,12 @@
                 </div>
 
                 <div class="form-control mb-4 w-full">
-                  <label class="label">
+                  <label class="label" for="pageName{i}">
                     <span class="label-text font-semibold">Seitenname:</span>
                   </label>
                   <input
                     type="text"
+                    id="pageName{i}"
                     class="input input-bordered w-full"
                     bind:value={config.pages[i].name}
                     placeholder="z.B. Startseite, Über uns, Kontakt, Leistungen..."
@@ -623,10 +654,11 @@
                 </div>
 
                 <div class="form-control w-full">
-                  <label class="label">
+                  <label class="label" for="pageContent{i}">
                     <span class="label-text font-semibold">Gewünschte Inhalte:</span>
                   </label>
                   <textarea
+                    id="pageContent{i}"
                     class="textarea textarea-bordered w-full"
                     bind:value={config.pages[i].content}
                     placeholder="Beschreiben Sie, welche Inhalte auf dieser Seite stehen sollen: Texte, Bilder, Funktionen, etc."
@@ -658,7 +690,7 @@
                 <div class="card-body">
                   <div class="mb-4 flex items-center justify-between">
                     <h4 class="card-title text-lg">Feld {i + 1}</h4>
-                    <button type="button" class="btn btn-error btn-sm" onclick={() => removeFormField(i)}>
+                    <button type="button" class="btn btn-error btn-sm" onclick={() => removeFormField(i)} aria-label="Formularfeld entfernen">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                       </svg>
@@ -668,10 +700,10 @@
 
                   <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div class="form-control w-full">
-                      <label class="label">
+                      <label class="label" for="fieldType{i}">
                         <span class="label-text font-semibold">Feldtyp:</span>
                       </label>
-                      <select class="select select-bordered w-full" bind:value={config.formFields[i].type}>
+                      <select id="fieldType{i}" class="select select-bordered w-full" bind:value={config.formFields[i].type}>
                         <option value="">Feldtyp wählen...</option>
                         {#each formFieldTypes as fieldType}
                           <option value={fieldType.id}>{fieldType.title}</option>
@@ -680,11 +712,12 @@
                     </div>
 
                     <div class="form-control w-full">
-                      <label class="label">
+                      <label class="label" for="fieldName{i}">
                         <span class="label-text font-semibold">Feldname/Beschriftung:</span>
                       </label>
                       <input
                         type="text"
+                        id="fieldName{i}"
                         class="input input-bordered w-full"
                         bind:value={config.formFields[i].name}
                         placeholder="z.B. Name, E-Mail, Nachricht, Telefon..."
@@ -762,10 +795,10 @@
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div class="form-control w-full">
-            <label class="label">
+            <label class="label" for="googleFonts">
               <span class="label-text font-semibold">Google Fonts Auswahl:</span>
             </label>
-            <select class="select select-bordered select-lg w-full" bind:value={config.desiredFont}>
+            <select id="googleFonts" class="select select-bordered select-lg w-full" bind:value={config.desiredFont}>
               {#each googleFonts as font}
                 <option value={font}>{font}</option>
               {/each}
@@ -833,7 +866,7 @@
                     ></path>
                   </svg>
                   <span>{file.name} ({Math.round(file.size / 1024)}KB)</span>
-                  <button type="button" class="btn btn-sm btn-error" onclick={() => removeFile(i)}>
+                  <button type="button" class="btn btn-sm btn-error" onclick={() => removeFile(i)} aria-label="Datei entfernen">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -899,7 +932,7 @@
                     ></path>
                   </svg>
                   <span>{file.name} ({Math.round(file.size / 1024)}KB)</span>
-                  <button type="button" class="btn btn-sm btn-error" onclick={() => removeFile(i)}>
+                  <button type="button" class="btn btn-sm btn-error" onclick={() => removeFile(i)} aria-label="Datei entfernen">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>

@@ -22,9 +22,9 @@
   }
 </script>
 
-  {#if isAuth}
-    <p class="text-center no-padding">Hallo {currentUser.name}  - Rollen: {JSON.stringify(currentUserRoles)}</p>
-  {/if}
+{#if isAuth}
+  <p class="no-padding text-center">Hallo {currentUser.name} - Rollen: {JSON.stringify(currentUserRoles)}</p>
+{/if}
 <header>
   <div class="inner-box">
     <button
@@ -75,19 +75,19 @@
 
     <div class="cta-area">
       {#if !isAuth}
-      <button
-        class="btn btn-ghost"
-        onclick={() => {
-          login();
-        }}>Login</button
-      >
+        <button
+          class="btn btn-ghost"
+          onclick={() => {
+            login();
+          }}>Login</button
+        >
       {:else}
-      <button
-        class="btn btn-ghost"
-        onclick={() => {
-          logout();
-        }}>Logout</button
-      >
+        <button
+          class="btn btn-ghost"
+          onclick={() => {
+            logout();
+          }}>Logout</button
+        >
       {/if}
       <button
         class="btn-basic"
@@ -173,6 +173,21 @@
                     goto('/kontakt');
                   }}>Kontakt</button
                 >
+                {#if !isAuth}
+                  <button
+                    class="nav-item"
+                    onclick={() => {
+                      login();
+                    }}>Login</button
+                  >
+                {:else}
+                  <button
+                    class="nav-item"
+                    onclick={() => {
+                      logout();
+                    }}>Logout</button
+                  >
+                {/if}
               </div>
             </div>
           </div>
@@ -254,7 +269,7 @@
             &.active {
               @apply font-bold text-black;
               &:hover {
-                @apply bg-transparent text-black cursor-default;
+                @apply cursor-default bg-transparent text-black;
               }
             }
             &:hover {
