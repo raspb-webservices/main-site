@@ -5,8 +5,8 @@ export const GET = async (req) => {
   const id = req.params.id;
   try {
     const query = gql`
-      mutation publishAsset($id: ID) {
-        publishAsset(where: { id: $id }, to: PUBLISHED) {
+      mutation publishProject($id: ID) {
+        publishProject(where: { id: $id }, to: PUBLISHED) {
           id
         }
       }

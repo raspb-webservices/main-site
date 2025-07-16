@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import type { WizardConfig, Project } from '$interfaces/project.interface';
-  import { uploadAsset, publishAsset, createAsset } from '$helper/uploadAsset';
+  import { uploadAsset, publishAsset, createAsset, uploadMultipleAssetsWithDelay, publishMultipleAssets } from '$helper/uploadAsset';
   import { projectTypes, subTypes, availableFeatures, googleFonts, formFieldTypes, featureCategoryColors } from './wizard-config';
 
   // State
@@ -10,97 +10,29 @@
 
   let config: WizardConfig = $state({
     step: 1,
-    name: 'Mustermann und Söhne - Unternehmenswebseite',
-    description: 'Lorem ipsum... Projektbeschreibung',
-    projectType: 'website',
-    subType: 'corporateWebsitePremium',
+    name: '',
+    description: '',
+    projectType: '',
+    subType: '',
     projectDetails: '',
-    desiredDomain: 'www.mustermann.de',
-    domainStatus: 'needs-registration',
-    goals: 'Kundengewinnung, im Internet präsent sein',
-    targetAudience: 'Kleinunternehmner',
-    budget: '7k-10k',
-    timeline: '2-4-weeks',
-    features: [
-      'kontaktformular',
-      'terminbuchung',
-      'bildergalerie',
-      'kalender',
-      'customTeaser',
-      'tabs',
-      'benutzerkonten',
-      'altersverifikation',
-      'cookieConsent'
-    ],
+    desiredDomain: '',
+    domainStatus: '',
+    goals: '',
+    targetAudience: '',
+    budget: '',
+    timeline: '',
+    features: ['cookieConsent'],
     customFeature: '',
-    primaryColour: '#8c1cb7',
-    secondaryColour: '#008ad5',
-    accentColour: '#f8c863',
-    desiredFont: 'Raleway',
+    primaryColour: '#c1121f',
+    secondaryColour: '#003049',
+    accentColour: '#fdf0d5',
+    desiredFont: '',
     customFont: '',
-    estimatedPrice: 2552,
-    formFields: [
-      {
-        type: 'text',
-        name: 'Vorname',
-        required: true
-      },
-      {
-        type: 'text',
-        name: 'Nachname',
-        required: false
-      }
-    ],
-    pages: [
-      {
-        name: 'Home',
-        content: 'Startseite mit Dummy Content',
-        characteristic: 'Diese seite muss knallen!'
-      },
-      {
-        name: 'Über uns',
-        content: 'die über uns seite',
-        characteristic: 'test test test'
-      }
-    ],
+    estimatedPrice: 0,
+    formFields: [],
+    pages: [],
     relatedFiles: [],
-    uploadedFiles: [
-      {
-        name: '03799_pinkskyofsydney_2560x1440.jpg',
-        size: 2749968,
-        type: 'image/jpeg'
-      }
-    ],
-    owner: {
-      id: ''
-    }
-    // step: 1,
-    // name: '',
-    // description: '',
-    // projectType: '',
-    // subType: '',
-    // projectDetails: '',
-    // desiredDomain: '',
-    // domainStatus: '',
-    // goals: '',
-    // targetAudience: '',
-    // budget: '',
-    // timeline: '',
-    // features: ['cookieConsent'],
-    // customFeature: '',
-    // primaryColour: '#c1121f',
-    // secondaryColour: '#003049',
-    // accentColour: '#fdf0d5',
-    // desiredFont: '',
-    // customFont: '',
-    // estimatedPrice: 0,
-    // formFields: [],
-    // pages: [],
-    // relatedFiles: [],
-    // uploadedFiles: [],
-    // owner: {
-    //   id: ''
-    // }
+    uploadedFiles: []
   });
 
   // Additional wizard-specific properties
@@ -109,8 +41,20 @@
   let isUploading = $state(false);
   let uploadProgress = $state('');
 
+  // Loading and error states
+  let isSubmitting = $state(false);
+  let showErrorModal = $state(false);
+  let errorDetails = $state<string[]>([]);
+  let showThankYou = $state(false);
+
+  // Asset upload states
+  let uploadedAssetIds: string[] = $state([]);
+  let isPreparingAssets = $state(false);
+  let assetPreparationProgress = $state('');
+
   // Dynamic step configuration based on project type
   const stepConfig = $derived(getStepConfig(config.projectType));
+
   function getStepConfig(projectType: string) {
     const baseSteps = [
       { id: 1, title: 'Projekttyp', required: true },
@@ -165,22 +109,47 @@
     config.formFields = config.formFields.filter((_, i) => i !== index);
   }
 
+  function scrollToTop() {
+    // Scroll to the top of the wizard container
+
+    setTimeout(() => {
+      const wizardContainer = document.querySelector('.wizard-container');
+
+      console.log('wizardContainer', wizardContainer);
+
+      if (wizardContainer) {
+        wizardContainer.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+      } else {
+        // Fallback: scroll to top of page
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }, 300);
+  }
+
   function goToStep(step: number) {
     if (step >= 1 && step <= maxSteps) {
       currentStep = step;
+      scrollToTop();
     }
   }
 
   function nextStep() {
     if (currentStep < maxSteps) {
       currentStep++;
-      calculatePrice();
+      scrollToTop();
+
+      // If entering the final step, prepare assets
+      if (currentStep === maxSteps) {
+        calculatePrice();
+        prepareAssetsForFinalStep();
+      }
     }
   }
 
   function prevStep() {
     if (currentStep > 1) {
       currentStep--;
+      scrollToTop();
     }
   }
 
@@ -265,56 +234,55 @@
     uploadedFiles = uploadedFiles.filter((_, i) => i !== index);
   }
 
+  // Function to prepare assets when entering final step
+  async function prepareAssetsForFinalStep() {
+    if (uploadedFiles.length === 0 || uploadedAssetIds.length > 0) return;
+
+    isPreparingAssets = true;
+    assetPreparationProgress = 'Bereite Assets vor...';
+
+    try {
+      const preparedAssetIds = await uploadMultipleAssetsWithDelay(
+        uploadedFiles,
+        3000, // 3 second delay between uploads to avoid rate limiting
+        (message, current, total, assetId) => {
+          assetPreparationProgress = `[${current}/${total}] ${message}`;
+        }
+      );
+
+      uploadedAssetIds = preparedAssetIds;
+
+      if (preparedAssetIds.length > 0) {
+        assetPreparationProgress = `${preparedAssetIds.length} von ${uploadedFiles.length} Assets bereit zum Veröffentlichen`;
+      } else {
+        assetPreparationProgress = 'Keine Assets konnten vorbereitet werden';
+      }
+    } catch (error) {
+      console.error('Fehler beim Vorbereiten der Assets:', error);
+      assetPreparationProgress = 'Fehler beim Vorbereiten der Assets';
+    } finally {
+      isPreparingAssets = false;
+    }
+  }
+
+  // Legacy function for manual upload (kept for compatibility)
   async function uploadAllFiles() {
     if (uploadedFiles.length === 0) return [];
 
     isUploading = true;
     uploadProgress = 'Dateien werden hochgeladen...';
-    const uploadedAssetIds: string[] = [];
 
     try {
-      // Phase 1: Alle Dateien hochladen
-      for (let i = 0; i < uploadedFiles.length; i++) {
-        const file = uploadedFiles[i];
-        uploadProgress = `Lade Datei ${i + 1} von ${uploadedFiles.length} hoch: ${file.name}`;
-        const assetId = await uploadAsset(file);
+      const uploadedAssetIds = await uploadMultipleAssetsWithDelay(uploadedFiles, 2000, (message, current, total) => {
+        uploadProgress = `[${current}/${total}] ${message}`;
+      });
 
-        if (assetId && assetId !== 'error') {
-          uploadedAssetIds.push(assetId);
-          uploadProgress = `Datei ${i + 1} von ${uploadedFiles.length} erfolgreich hochgeladen`;
-        } else {
-          console.error(`Fehler beim Hochladen der Datei: ${file.name}`);
-          uploadProgress = `Fehler beim Hochladen der Datei: ${file.name}`;
-        }
-      }
-
-      // Kurze Wartezeit, damit Assets im Backend verfügbar sind
       if (uploadedAssetIds.length > 0) {
-        uploadProgress = 'Bereite Veröffentlichung vor...';
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-
-        // Phase 2: Alle Assets veröffentlichen
-        const publishedAssetIds: string[] = [];
-        for (let i = 0; i < uploadedAssetIds.length; i++) {
-          const assetId = uploadedAssetIds[i];
-          const fileName = uploadedFiles[i]?.name || `Asset ${i + 1}`;
-
-          uploadProgress = `Veröffentliche Datei ${i + 1} von ${uploadedAssetIds.length}: ${fileName}`;
-          const publishResult = await publishAsset(assetId);
-          if (publishResult && publishResult !== 'error') {
-            publishedAssetIds.push(assetId);
-            uploadProgress = `Datei ${i + 1} von ${uploadedAssetIds.length} erfolgreich veröffentlicht`;
-          } else {
-            console.error(`Fehler beim Veröffentlichen der Datei: ${fileName}`);
-            uploadProgress = `Fehler beim Veröffentlichen der Datei: ${fileName}`;
-          }
-        }
-
-        uploadProgress = `Alle ${publishedAssetIds.length} Dateien erfolgreich hochgeladen und veröffentlicht`;
-        return publishedAssetIds;
+        uploadProgress = `Alle ${uploadedAssetIds.length} von ${uploadedFiles.length} Dateien erfolgreich verarbeitet`;
+      } else {
+        uploadProgress = 'Keine Dateien konnten erfolgreich hochgeladen werden';
       }
 
-      uploadProgress = `${uploadedAssetIds.length} Dateien hochgeladen`;
       return uploadedAssetIds;
     } catch (error) {
       console.error('Fehler beim Hochladen der Dateien:', error);
@@ -341,23 +309,41 @@
     URL.revokeObjectURL(url);
   }
 
+  function closeErrorModal() {
+    showErrorModal = false;
+    errorDetails = [];
+    // Redirect back to step 1 while preserving user input
+    currentStep = 1;
+  }
+
+  function showThankYouPage() {
+    showThankYou = true;
+  }
+
   // Neue Funktion zum Senden der Daten an die API
   async function submitToAPI() {
-    try {
-      // Erst alle Dateien hochladen
-      let uploadedAssetIds: string[] = [];
-      if (uploadedFiles.length > 0) {
-        uploadedAssetIds = await uploadAllFiles();
+    isSubmitting = true;
+    errorDetails = [];
 
-        // Wenn Upload fehlgeschlagen ist, Abbruch
-        if (uploadedAssetIds.length === 0 && uploadedFiles.length > 0) {
-          alert('Fehler beim Hochladen der Dateien. Bitte versuchen Sie es erneut.');
-          return;
+    try {
+      // Step 1: Prepare asset IDs (use pre-uploaded or fallback to upload now)
+      let finalAssetIds: string[] = [];
+      if (uploadedAssetIds.length > 0) {
+        console.log('Using pre-uploaded assets:', uploadedAssetIds);
+        finalAssetIds = uploadedAssetIds;
+      } else if (uploadedFiles.length > 0) {
+        // Fallback: If no pre-uploaded assets, upload them now
+        console.log('No pre-uploaded assets found, uploading now...');
+        finalAssetIds = await uploadAllFiles();
+
+        if (finalAssetIds.length === 0 && uploadedFiles.length > 0) {
+          errorDetails.push('Fehler beim Hochladen der Dateien');
+          throw new Error('File upload failed');
         }
       }
 
-      // Prepare project data according to Project interface
-      console.log('CONFIG ', config);
+      // Step 2: Create project
+      console.log('Creating project with assets:', finalAssetIds);
 
       const projectData: Project = {
         name: config.name,
@@ -380,10 +366,8 @@
         estimatedPrice: config.estimatedPrice,
         formFields: config.formFields,
         pages: config.pages,
-        relatedFiles: uploadedAssetIds.map((id) => ({ id }))
+        relatedFiles: finalAssetIds.map((id) => ({ id }))
       };
-
-      console.log('projectData  ', projectData);
 
       const response = await fetch('/api/project/create', {
         method: 'POST',
@@ -395,19 +379,66 @@
 
       const result = await response.json();
 
-      if (result.success) {
-        alert('Projekt erfolgreich übermittelt! Wir werden uns bald bei Ihnen melden.');
-        console.log('Projekt erstellt:', result.data);
+      if (result.success && result.data?.id) {
+        const projectId = result.data.id;
+        console.log('Projekt erstellt:', projectId);
 
-        // Redirect to thank you page
-        window.location.href = '/danke';
+        // Step 3: Publish the project FIRST
+        try {
+          const publishResponse = await fetch(`/api/project/publish/${projectId}`);
+          const publishResult = await publishResponse.json();
+
+          if (publishResponse.ok && publishResult) {
+            console.log('Projekt veröffentlicht:', publishResult);
+          } else {
+            console.warn('Project publishing failed, but project was created:', publishResult);
+            // Don't fail the entire process if publishing fails
+          }
+        } catch (publishError) {
+          console.warn('Project publishing error:', publishError);
+          // Don't fail the entire process if publishing fails
+        }
+
+        // Step 4: Now publish all assets AFTER project is published
+        if (finalAssetIds.length > 0) {
+          console.log('Publishing assets after project publication:', finalAssetIds);
+
+          const publishedAssetIds = await publishMultipleAssets(finalAssetIds, (message, current, total) => {
+            // Update loading steps to show asset publishing progress
+            console.log(`Asset publishing: ${message}`);
+          });
+
+          if (publishedAssetIds.length === 0 && finalAssetIds.length > 0) {
+            console.warn('Asset publishing failed, but project was created and published');
+            // Don't fail the entire process if asset publishing fails
+          } else {
+            console.log('Assets successfully published:', publishedAssetIds);
+          }
+        }
+
+        // Show thank you page
+        showThankYouPage();
       } else {
-        alert('Fehler beim Übermitteln: ' + result.error);
-        console.error('API Fehler:', result.error);
+        // Collect detailed error information
+        errorDetails.push(`API Fehler: ${result.error || 'Unbekannter Fehler'}`);
+        if (result.details) {
+          errorDetails.push(...result.details);
+        }
+        throw new Error('API request failed');
       }
     } catch (error) {
-      alert('Fehler beim Übermitteln des Projekts. Bitte versuchen Sie es später erneut.');
-      console.error('Netzwerk Fehler:', error);
+      console.error('Submission error:', error);
+
+      // Add network error if no other errors were collected
+      if (errorDetails.length === 0) {
+        errorDetails.push('Netzwerk Fehler: Verbindung zum Server fehlgeschlagen');
+        errorDetails.push('Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut');
+      }
+
+      // Show error modal
+      showErrorModal = true;
+    } finally {
+      isSubmitting = false;
     }
   }
 
@@ -419,7 +450,7 @@
 <div class="wizard-container">
   <!-- Header with Reset Button -->
   <div class="wizard-header">
-    <h1>Projekt <span class="inner-text-special">Konfigurator</span></h1>
+    <h1 id="projekt-konfigurator">Projekt <span class="inner-text-special">Konfigurator</span></h1>
     <button type="button" class="btn btn-outline btn-sm" onclick={openResetModal}>
       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path
@@ -903,7 +934,7 @@
             <label class="label" for="googleFonts">
               <span class="label-text font-semibold">Google Fonts Auswahl:</span>
             </label>
-            <select id="googleFonts" class="select select-bordered select-lg w-full" bind:value={config.desiredFont}>
+            <select id="googleFonts" class="select select-bordered w-full" bind:value={config.desiredFont}>
               {#each googleFonts as font}
                 <option value={font}>{font}</option>
               {/each}
@@ -940,9 +971,7 @@
       <!-- File Upload -->
       <div class="content-section">
         <h2>Materialien hochladen</h2>
-        <p>Laden Sie Styleguides, Logos, Bilder oder andere relevante Dateien hoch, die uns bei der Umsetzung helfen.</p>
-        <p>{uploadProgress}</p>
-        <button type="button" class="btn-basic" onclick={() => uploadAllFiles()} aria-label="Assets hochladen">UPLOAD</button>
+        <p>Laden Sie hier Styleguides, Mockups, Logos, Bilder oder andere relevante Dateien hoch, die uns bei der Umsetzung helfen.</p>
 
         <div class="form-control w-full">
           <input
@@ -954,7 +983,9 @@
             onchange={handleFileUpload}
           />
           <div class="label">
-            <span class="label-text-alt">Unterstützte Formate: PDF, DOC, JPG, PNG, GIF, SVG, AI, PSD</span>
+            <span class="label-text-alt"
+              >Unterstützte Formate: Allgemeine Dateien (PDF, .txt, ...), Office Dokumente (Word, Powerpoint, ...), Bildformate (.jpg, .png, ...)</span
+            >
           </div>
         </div>
 
@@ -1071,6 +1102,24 @@
         <h1><span class="inner-text-special">Zusammenfassung</span></h1>
         <p class="teaser">Überprüfen Sie Ihre Konfiguration. Sie können jederzeit zu vorherigen Schritten zurückkehren, um Änderungen vorzunehmen.</p>
       </div>
+
+      <!-- Asset Preparation Progress -->
+      {#if isPreparingAssets || assetPreparationProgress}
+        <div class="mb-8">
+          <div class="alert alert-info">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <div>
+              <div class="font-bold">Assets werden vorbereitet</div>
+              <div class="text-sm">{assetPreparationProgress}</div>
+            </div>
+            {#if isPreparingAssets}
+              <span class="loading loading-spinner loading-md"></span>
+            {/if}
+          </div>
+        </div>
+      {/if}
 
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
         <div class="space-y-6">
@@ -1256,6 +1305,139 @@
   </div>
 </div>
 
+<!-- Loading Overlay -->
+{#if isSubmitting}
+  <div class="loading-overlay">
+    <div class="loading-content">
+      <div class="loading-animation">
+        <div class="loading-spinner"></div>
+        <div class="loading-pulse"></div>
+      </div>
+      <h2 class="loading-title">Projekt wird übermittelt...</h2>
+      <p class="loading-text">Bitte warten Sie, während wir Ihr Projekt verarbeiten.</p>
+      <div class="loading-steps">
+        <div class="loading-step">
+          <span class="loading-step-icon">✓</span>
+          <span>Daten werden vorbereitet</span>
+        </div>
+        <div class="loading-step">
+          <span class="loading-step-icon">⏳</span>
+          <span>Projekt wird erstellt</span>
+        </div>
+        <div class="loading-step">
+          <span class="loading-step-icon">⏳</span>
+          <span>Bestätigung wird gesendet</span>
+        </div>
+      </div>
+    </div>
+  </div>
+{/if}
+
+<!-- Error Modal -->
+{#if showErrorModal}
+  <div class="modal modal-open">
+    <div class="modal-box max-w-2xl">
+      <h3 class="text-error text-lg font-bold">Fehler beim Übermitteln</h3>
+      <div class="py-4">
+        <p class="mb-4">Bei der Übermittlung Ihres Projekts sind folgende Fehler aufgetreten:</p>
+        <div class="bg-error/10 border-error/20 rounded-lg border p-4">
+          <ul class="space-y-2">
+            {#each errorDetails as error}
+              <li class="flex items-start gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="text-error mt-0.5 h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span class="text-sm">{error}</span>
+              </li>
+            {/each}
+          </ul>
+        </div>
+        <div class="bg-info/10 border-info/20 mt-4 rounded-lg border p-4">
+          <p class="text-sm">
+            <strong>Was passiert jetzt?</strong><br />
+            Nach dem Schließen dieses Dialogs werden Sie zu Schritt 1 zurückgeleitet. Ihre Eingaben bleiben dabei erhalten, sodass Sie das Problem beheben und erneut
+            versuchen können.
+          </p>
+        </div>
+      </div>
+      <div class="modal-action">
+        <button type="button" class="btn btn-primary" onclick={closeErrorModal}>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+          Zurück zu Schritt 1
+        </button>
+      </div>
+    </div>
+    <button class="modal-backdrop" aria-label="close modal" onclick={closeErrorModal}></button>
+  </div>
+{/if}
+
+<!-- Thank You Page -->
+{#if showThankYou}
+  <div class="thank-you-overlay">
+    <div class="thank-you-content">
+      <div class="thank-you-animation">
+        <div class="success-checkmark flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="text-success h-24 w-24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+      </div>
+      <h1 class="thank-you-title">Vielen Dank!</h1>
+      <p class="thank-you-subtitle">Ihr Projekt wurde erfolgreich übermittelt</p>
+      <div class="thank-you-details">
+        <div class="thank-you-card">
+          <h3>Was passiert als nächstes?</h3>
+          <ul class="thank-you-steps">
+            <li>
+              <span class="step-number">1</span>
+              <span>Wir prüfen Ihre Anfrage innerhalb von 24 Stunden</span>
+            </li>
+            <li>
+              <span class="step-number">2</span>
+              <span>Sie erhalten ein detailliertes Angebot per E-Mail</span>
+            </li>
+            <li>
+              <span class="step-number">3</span>
+              <span>Wir vereinbaren einen Termin für ein persönliches Gespräch</span>
+            </li>
+          </ul>
+        </div>
+        <div class="thank-you-info">
+          <p><strong>Projektname:</strong> {config.name}</p>
+          <p><strong>Geschätzter Preis:</strong> {config.estimatedPrice.toLocaleString()}€</p>
+          <p><strong>Projekttyp:</strong> {projectTypes.find((p) => p.id === config.projectType)?.title}</p>
+        </div>
+      </div>
+      <div class="thank-you-actions">
+        <a href="/" class="btn btn-primary btn-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+            />
+          </svg>
+          Zur Startseite
+        </a>
+        <a href="/kontakt" class="btn btn-outline btn-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+            />
+          </svg>
+          Kontakt aufnehmen
+        </a>
+      </div>
+    </div>
+  </div>
+{/if}
+
 <!-- Reset Modal -->
 {#if showResetModal}
   <div class="modal modal-open">
@@ -1378,5 +1560,166 @@
   /* Enhanced button styles */
   .btn-basic {
     @apply btn btn-primary;
+  }
+
+  /* Loading Overlay Styles */
+  .loading-overlay {
+    @apply fixed inset-0 z-50 flex items-center justify-center;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+  }
+
+  .loading-content {
+    @apply bg-base-100 mx-4 max-w-md rounded-2xl p-12 text-center shadow-2xl;
+  }
+
+  .loading-animation {
+    @apply relative mb-8;
+  }
+
+  .loading-spinner {
+    @apply border-primary/20 border-t-primary mx-auto h-16 w-16 rounded-full border-4;
+    animation: spin 1s linear infinite;
+  }
+
+  .loading-pulse {
+    @apply border-primary/40 absolute inset-0 mx-auto h-16 w-16 rounded-full border-4;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .loading-title {
+    @apply text-base-content mb-4 text-2xl font-bold;
+  }
+
+  .loading-text {
+    @apply text-base-content/70 mb-8;
+  }
+
+  .loading-steps {
+    @apply space-y-3 text-left;
+  }
+
+  .loading-step {
+    @apply flex items-center gap-3 text-sm;
+  }
+
+  .loading-step-icon {
+    @apply bg-primary/10 text-primary flex h-6 w-6 items-center justify-center rounded-full font-bold;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.3;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.1;
+    }
+  }
+
+  /* Thank You Page Styles */
+  .thank-you-overlay {
+    @apply fixed inset-0 z-50 flex items-center justify-center p-4;
+    background: linear-gradient(135deg, rgba(139, 69, 19, 0.1), rgba(34, 197, 94, 0.1));
+    backdrop-filter: blur(12px);
+  }
+
+  .thank-you-content {
+    @apply bg-base-100 w-full max-w-4xl rounded-3xl p-12 text-center shadow-2xl;
+  }
+
+  .thank-you-animation {
+    @apply mb-8;
+  }
+
+  .success-checkmark {
+    @apply mx-auto mb-6;
+    animation: checkmark-bounce 0.6s ease-in-out;
+  }
+
+  .thank-you-title {
+    @apply text-success mb-4 text-4xl font-bold;
+  }
+
+  .thank-you-subtitle {
+    @apply text-base-content/70 mb-12 text-xl;
+  }
+
+  .thank-you-details {
+    @apply mb-12 grid grid-cols-1 gap-8 lg:grid-cols-2;
+  }
+
+  .thank-you-card {
+    @apply bg-base-200 rounded-2xl p-8;
+  }
+
+  .thank-you-card h3 {
+    @apply text-base-content mb-6 text-xl font-bold;
+  }
+
+  .thank-you-steps {
+    @apply space-y-4;
+  }
+
+  .thank-you-steps li {
+    @apply flex items-start gap-4;
+  }
+
+  .step-number {
+    @apply bg-primary text-primary-content mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold;
+  }
+
+  .thank-you-info {
+    @apply bg-success/10 border-success/20 space-y-3 rounded-2xl border p-8;
+  }
+
+  .thank-you-info p {
+    @apply text-base-content;
+  }
+
+  .thank-you-actions {
+    @apply flex flex-col justify-center gap-4 sm:flex-row;
+  }
+
+  @keyframes checkmark-bounce {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  /* Responsive improvements */
+  @media (max-width: 768px) {
+    .loading-content {
+      @apply p-8;
+    }
+
+    .thank-you-content {
+      @apply p-8;
+    }
+
+    .thank-you-title {
+      @apply text-3xl;
+    }
+
+    .thank-you-subtitle {
+      @apply text-lg;
+    }
   }
 </style>
