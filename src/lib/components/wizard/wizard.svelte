@@ -3,6 +3,7 @@
   import type { WizardConfig, Project } from '$interfaces/project.interface';
   import { uploadAsset, publishAsset, createAsset, uploadMultipleAssetsWithDelay, publishMultipleAssets } from '$helper/uploadAsset';
   import { projectTypes, subTypes, availableFeatures, googleFonts, formFieldTypes, featureCategoryColors } from './wizard-config';
+  import { goto } from '$app/navigation';
 
   // State
   let currentStep = $state(1);
@@ -46,6 +47,8 @@
   let showErrorModal = $state(false);
   let errorDetails = $state<string[]>([]);
   let showThankYou = $state(false);
+  let errorModal: HTMLDialogElement;
+  let resetModal: HTMLDialogElement;
 
   // Asset upload states
   let uploadedAssetIds: string[] = $state([]);
@@ -153,13 +156,6 @@
     }
   }
 
-  function openResetModal() {
-    showResetModal = true;
-  }
-
-  function closeResetModal() {
-    showResetModal = false;
-  }
 
   function confirmReset() {
     currentStep = 1;
@@ -293,27 +289,369 @@
     }
   }
 
-  function generateJSON() {
-    const result = {
-      ...config,
-      timestamp: new Date().toISOString(),
-      uploadedFiles: uploadedFiles.map((f) => ({ name: f.name, size: f.size, type: f.type }))
-    };
-
-    const blob = new Blob([JSON.stringify(result, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'projekt-konfiguration.json';
-    a.click();
-    URL.revokeObjectURL(url);
+  async function generatePDF() {
+    try {
+      // Dynamic import to avoid SSR issues
+      const { jsPDF } = await import('jspdf');
+      
+      const doc = new jsPDF();
+      
+      // Raspb brand colors
+      const primaryColor = { r: 193, g: 18, b: 31 }; // #c1121f
+      const secondaryColor = { r: 0, g: 48, b: 73 }; // #003049
+      const accentColor = { r: 253, g: 240, b: 213 }; // #fdf0d5
+      
+      let yPosition = 20;
+      const pageWidth = doc.internal.pageSize.width;
+      const margin = 20;
+      const contentWidth = pageWidth - (margin * 2);
+      
+      // Helper function to add text with word wrapping
+      function addText(text: string, x: number, y: number, maxWidth: number, fontSize: number = 10) {
+        doc.setFontSize(fontSize);
+        const lines = doc.splitTextToSize(text, maxWidth);
+        doc.text(lines, x, y);
+        return y + (lines.length * fontSize * 0.4);
+      }
+      
+      // Helper function to add a new page if needed
+      function checkPageBreak(requiredSpace: number) {
+        if (yPosition + requiredSpace > doc.internal.pageSize.height - 20) {
+          doc.addPage();
+          yPosition = 20;
+        }
+      }
+      
+      // Header with logo area and title
+      doc.setFillColor(primaryColor.r, primaryColor.g, primaryColor.b);
+      doc.rect(0, 0, pageWidth, 40, 'F');
+      
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(24);
+      doc.setFont('helvetica', 'bold');
+      doc.text('RASPB', margin, 25);
+      
+      doc.setFontSize(16);
+      doc.setFont('helvetica', 'normal');
+      doc.text('Projekt Konfiguration', margin, 35);
+      
+      yPosition = 55;
+      doc.setTextColor(0, 0, 0);
+      
+      // Project Overview Section
+      doc.setFillColor(accentColor.r, accentColor.g, accentColor.b);
+      doc.rect(margin, yPosition - 5, contentWidth, 15, 'F');
+      
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(secondaryColor.r, secondaryColor.g, secondaryColor.b);
+      doc.text('PROJEKT ÜBERSICHT', margin + 5, yPosition + 5);
+      
+      yPosition += 20;
+      doc.setTextColor(0, 0, 0);
+      doc.setFont('helvetica', 'normal');
+      
+      // Project Name
+      if (config.name) {
+        doc.setFontSize(12);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Projektname:', margin, yPosition);
+        doc.setFont('helvetica', 'normal');
+        yPosition = addText(config.name, margin + 40, yPosition, contentWidth - 40, 12);
+        yPosition += 5;
+      }
+      
+      // Project Type
+      const projectType = projectTypes.find(p => p.id === config.projectType);
+      const subType = subTypes.find(s => s.id === config.subType && s.parentId === config.projectType);
+      
+      if (projectType) {
+        doc.setFont('helvetica', 'bold');
+        doc.text('Projekttyp:', margin, yPosition);
+        doc.setFont('helvetica', 'normal');
+        yPosition = addText(`${projectType.title}${subType ? ` - ${subType.title}` : ''}`, margin + 40, yPosition, contentWidth - 40, 12);
+        yPosition += 5;
+      }
+      
+      // Estimated Price
+      if (config.estimatedPrice > 0) {
+        doc.setFont('helvetica', 'bold');
+        doc.text('Geschätzter Preis:', margin, yPosition);
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(primaryColor.r, primaryColor.g, primaryColor.b);
+        doc.text(`${config.estimatedPrice.toLocaleString()}€`, margin + 50, yPosition);
+        doc.setTextColor(0, 0, 0);
+        yPosition += 10;
+      }
+      
+      // Project Description
+      if (config.description) {
+        checkPageBreak(30);
+        doc.setFillColor(accentColor.r, accentColor.g, accentColor.b);
+        doc.rect(margin, yPosition - 5, contentWidth, 15, 'F');
+        
+        doc.setFontSize(14);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(secondaryColor.r, secondaryColor.g, secondaryColor.b);
+        doc.text('PROJEKTBESCHREIBUNG', margin + 5, yPosition + 5);
+        
+        yPosition += 20;
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'normal');
+        yPosition = addText(config.description, margin, yPosition, contentWidth, 10);
+        yPosition += 10;
+      }
+      
+      // Project Details
+      checkPageBreak(50);
+      doc.setFillColor(accentColor.r, accentColor.g, accentColor.b);
+      doc.rect(margin, yPosition - 5, contentWidth, 15, 'F');
+      
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(secondaryColor.r, secondaryColor.g, secondaryColor.b);
+      doc.text('PROJEKT DETAILS', margin + 5, yPosition + 5);
+      
+      yPosition += 20;
+      doc.setTextColor(0, 0, 0);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(10);
+      
+      const details = [
+        { label: 'Zielgruppe', value: config.targetAudience },
+        { label: 'Hauptziele', value: config.goals },
+        { label: 'Gewünschte Domain', value: config.desiredDomain },
+        { label: 'Domain-Status', value: config.domainStatus },
+        { label: 'Zeitrahmen', value: config.timeline },
+        { label: 'Budget', value: config.budget }
+      ];
+      
+      details.forEach(detail => {
+        if (detail.value) {
+          doc.setFont('helvetica', 'bold');
+          doc.text(`${detail.label}:`, margin, yPosition);
+          doc.setFont('helvetica', 'normal');
+          yPosition = addText(detail.value, margin + 45, yPosition, contentWidth - 45, 10);
+          yPosition += 3;
+        }
+      });
+      
+      // Features (if any)
+      if (config.features.length > 0) {
+        checkPageBreak(30);
+        yPosition += 5;
+        
+        doc.setFillColor(accentColor.r, accentColor.g, accentColor.b);
+        doc.rect(margin, yPosition - 5, contentWidth, 15, 'F');
+        
+        doc.setFontSize(14);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(secondaryColor.r, secondaryColor.g, secondaryColor.b);
+        doc.text('GEWÄHLTE FEATURES', margin + 5, yPosition + 5);
+        
+        yPosition += 20;
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(10);
+        
+        config.features.forEach(featureId => {
+          const feature = availableFeatures.find(f => f.name === featureId);
+          if (feature) {
+            doc.text(`• ${feature.title}`, margin + 5, yPosition);
+            yPosition += 5;
+            if (feature.description) {
+              yPosition = addText(`  ${feature.description}`, margin + 10, yPosition, contentWidth - 15, 9);
+              yPosition += 2;
+            }
+          }
+        });
+        
+        if (customFeatures) {
+          yPosition += 3;
+          doc.setFont('helvetica', 'bold');
+          doc.text('Weitere Features:', margin, yPosition);
+          doc.setFont('helvetica', 'normal');
+          yPosition += 5;
+          yPosition = addText(customFeatures, margin + 5, yPosition, contentWidth - 10, 10);
+        }
+      }
+      
+      // Pages/Content (if any)
+      if (config.pages.length > 0) {
+        checkPageBreak(30);
+        yPosition += 5;
+        
+        doc.setFillColor(accentColor.r, accentColor.g, accentColor.b);
+        doc.rect(margin, yPosition - 5, contentWidth, 15, 'F');
+        
+        doc.setFontSize(14);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(secondaryColor.r, secondaryColor.g, secondaryColor.b);
+        doc.text('SEITEN/BEREICHE', margin + 5, yPosition + 5);
+        
+        yPosition += 20;
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(10);
+        
+        config.pages.forEach((page, index) => {
+          if (page.name.trim()) {
+            checkPageBreak(20);
+            doc.setFont('helvetica', 'bold');
+            doc.text(`${index + 1}. ${page.name}`, margin, yPosition);
+            yPosition += 5;
+            
+            if (page.content) {
+              doc.setFont('helvetica', 'normal');
+              doc.text('Inhalte:', margin + 5, yPosition);
+              yPosition += 4;
+              yPosition = addText(page.content, margin + 10, yPosition, contentWidth - 15, 9);
+              yPosition += 2;
+            }
+            
+            if (page.characteristic) {
+              doc.setFont('helvetica', 'normal');
+              doc.text('Besonderheiten:', margin + 5, yPosition);
+              yPosition += 4;
+              yPosition = addText(page.characteristic, margin + 10, yPosition, contentWidth - 15, 9);
+              yPosition += 5;
+            }
+          }
+        });
+      }
+      
+      // Form Fields (if any)
+      if (config.formFields.length > 0) {
+        checkPageBreak(30);
+        yPosition += 5;
+        
+        doc.setFillColor(accentColor.r, accentColor.g, accentColor.b);
+        doc.rect(margin, yPosition - 5, contentWidth, 15, 'F');
+        
+        doc.setFontSize(14);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(secondaryColor.r, secondaryColor.g, secondaryColor.b);
+        doc.text('FORMULAR-FELDER', margin + 5, yPosition + 5);
+        
+        yPosition += 20;
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(10);
+        
+        config.formFields.forEach((field, index) => {
+          if (field.name.trim()) {
+            const fieldType = formFieldTypes.find(f => f.id === field.type);
+            doc.text(`${index + 1}. ${field.name}`, margin, yPosition);
+            doc.text(`(${fieldType?.title || field.type})`, margin + 80, yPosition);
+            if (field.required) {
+              doc.setTextColor(primaryColor.r, primaryColor.g, primaryColor.b);
+              doc.text('*Pflicht', margin + 130, yPosition);
+              doc.setTextColor(0, 0, 0);
+            }
+            yPosition += 5;
+          }
+        });
+      }
+      
+      // Design (if not individual project)
+      if (config.projectType !== 'individual') {
+        checkPageBreak(40);
+        yPosition += 5;
+        
+        doc.setFillColor(accentColor.r, accentColor.g, accentColor.b);
+        doc.rect(margin, yPosition - 5, contentWidth, 15, 'F');
+        
+        doc.setFontSize(14);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(secondaryColor.r, secondaryColor.g, secondaryColor.b);
+        doc.text('DESIGN', margin + 5, yPosition + 5);
+        
+        yPosition += 20;
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(10);
+        
+        // Colors
+        doc.setFont('helvetica', 'bold');
+        doc.text('Farbschema:', margin, yPosition);
+        yPosition += 5;
+        
+        doc.setFont('helvetica', 'normal');
+        doc.text(`Primärfarbe: ${config.primaryColour}`, margin + 5, yPosition);
+        yPosition += 4;
+        doc.text(`Sekundärfarbe: ${config.secondaryColour}`, margin + 5, yPosition);
+        yPosition += 4;
+        doc.text(`Akzentfarbe: ${config.accentColour}`, margin + 5, yPosition);
+        yPosition += 8;
+        
+        // Font
+        doc.setFont('helvetica', 'bold');
+        doc.text('Schriftart:', margin, yPosition);
+        doc.setFont('helvetica', 'normal');
+        doc.text(config.customFont || config.desiredFont || 'Nicht angegeben', margin + 30, yPosition);
+        yPosition += 10;
+      }
+      
+      // Uploaded Files
+      if (uploadedFiles.length > 0) {
+        checkPageBreak(30);
+        yPosition += 5;
+        
+        doc.setFillColor(accentColor.r, accentColor.g, accentColor.b);
+        doc.rect(margin, yPosition - 5, contentWidth, 15, 'F');
+        
+        doc.setFontSize(14);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(secondaryColor.r, secondaryColor.g, secondaryColor.b);
+        doc.text('HOCHGELADENE DATEIEN', margin + 5, yPosition + 5);
+        
+        yPosition += 20;
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(10);
+        
+        uploadedFiles.forEach((file, index) => {
+          doc.text(`${index + 1}. ${file.name}`, margin, yPosition);
+          doc.text(`(${Math.round(file.size / 1024)}KB)`, margin + 120, yPosition);
+          yPosition += 5;
+        });
+      }
+      
+      // Footer
+      const totalPages = doc.internal.pages.length - 1;
+      for (let i = 1; i <= totalPages; i++) {
+        doc.setPage(i);
+        doc.setFontSize(8);
+        doc.setTextColor(128, 128, 128);
+        doc.text(`Erstellt am ${new Date().toLocaleDateString('de-DE')} | Seite ${i} von ${totalPages}`, margin, doc.internal.pageSize.height - 10);
+        doc.text('RASPB Webservices | www.raspb.de', pageWidth - margin - 60, doc.internal.pageSize.height - 10);
+      }
+      
+      // Save the PDF
+      const fileName = `${config.name || 'Projekt'}_Konfiguration_${new Date().toISOString().split('T')[0]}.pdf`;
+      doc.save(fileName);
+      
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('Fehler beim Erstellen des PDFs. Bitte versuchen Sie es erneut.');
+    }
   }
 
   function closeErrorModal() {
+    errorModal?.close();
     showErrorModal = false;
     errorDetails = [];
     // Redirect back to step 1 while preserving user input
     currentStep = 1;
+  }
+
+  function openResetModal() {
+    resetModal?.showModal();
+  }
+
+  function closeResetModal() {
+    resetModal?.close();
+    showResetModal = false;
   }
 
   function showThankYouPage() {
@@ -1278,7 +1616,7 @@
       </button>
     {:else}
       <div class="flex gap-4">
-        <button type="button" class="btn-basic" onclick={generateJSON}>
+        <button type="button" class="btn-basic" onclick={generatePDF}>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path
               stroke-linecap="round"
@@ -1334,44 +1672,54 @@
 {/if}
 
 <!-- Error Modal -->
-{#if showErrorModal}
-  <div class="modal modal-open">
-    <div class="modal-box max-w-2xl">
-      <h3 class="text-error text-lg font-bold">Fehler beim Übermitteln</h3>
-      <div class="py-4">
-        <p class="mb-4">Bei der Übermittlung Ihres Projekts sind folgende Fehler aufgetreten:</p>
-        <div class="bg-error/10 border-error/20 rounded-lg border p-4">
-          <ul class="space-y-2">
+<dialog bind:this={errorModal} class="modal">
+  <div class="modal-box max-w-2xl">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    
+    <h3 class="text-error text-lg font-bold mb-4">Fehler beim Übermitteln</h3>
+    
+    <div class="space-y-4">
+      <p>Bei der Übermittlung Ihres Projekts sind folgende Fehler aufgetreten:</p>
+      
+      <div class="alert alert-error">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <div>
+          <ul class="space-y-1">
             {#each errorDetails as error}
-              <li class="flex items-start gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="text-error mt-0.5 h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span class="text-sm">{error}</span>
-              </li>
+              <li class="text-sm">{error}</li>
             {/each}
           </ul>
         </div>
-        <div class="bg-info/10 border-info/20 mt-4 rounded-lg border p-4">
-          <p class="text-sm">
-            <strong>Was passiert jetzt?</strong><br />
-            Nach dem Schließen dieses Dialogs werden Sie zu Schritt 1 zurückgeleitet. Ihre Eingaben bleiben dabei erhalten, sodass Sie das Problem beheben und erneut
-            versuchen können.
-          </p>
+      </div>
+      
+      <div class="alert alert-info">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <div>
+          <div class="font-bold">Was passiert jetzt?</div>
+          <div class="text-sm">Nach dem Schließen dieses Dialogs werden Sie zu Schritt 1 zurückgeleitet. Ihre Eingaben bleiben dabei erhalten, sodass Sie das Problem beheben und erneut versuchen können.</div>
         </div>
       </div>
-      <div class="modal-action">
-        <button type="button" class="btn btn-primary" onclick={closeErrorModal}>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-          Zurück zu Schritt 1
-        </button>
-      </div>
     </div>
-    <button class="modal-backdrop" aria-label="close modal" onclick={closeErrorModal}></button>
+    
+    <div class="modal-action">
+      <button type="button" class="btn btn-primary" onclick={closeErrorModal}>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+        Zurück zu Schritt 1
+      </button>
+    </div>
   </div>
-{/if}
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>
 
 <!-- Thank You Page -->
 {#if showThankYou}
@@ -1411,7 +1759,7 @@
         </div>
       </div>
       <div class="thank-you-actions">
-        <a href="/" class="btn btn-primary btn-lg">
+        <button onclick={ () => {goto("/")}} class="btn btn-primary btn-lg">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path
               stroke-linecap="round"
@@ -1421,8 +1769,8 @@
             />
           </svg>
           Zur Startseite
-        </a>
-        <a href="/kontakt" class="btn btn-outline btn-lg">
+        </button>
+        <a href="/kontakt" class="btn btn-link btn-lg">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path
               stroke-linecap="round"
@@ -1439,19 +1787,24 @@
 {/if}
 
 <!-- Reset Modal -->
-{#if showResetModal}
-  <div class="modal modal-open">
-    <div class="modal-box">
-      <h3 class="text-lg font-bold">Von vorne beginnen?</h3>
-      <p class="py-4">Möchten Sie wirklich von vorne beginnen? Alle Ihre bisherigen Eingaben gehen dabei verloren.</p>
-      <div class="modal-action">
-        <button type="button" class="btn btn-outline" onclick={closeResetModal}>Abbrechen</button>
-        <button type="button" class="btn btn-error" onclick={confirmReset}>Ja, zurücksetzen</button>
-      </div>
+<dialog bind:this={resetModal} class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    
+    <h3 class="text-lg font-bold mb-4">Von vorne beginnen?</h3>
+    <p class="py-4">Möchten Sie wirklich von vorne beginnen? Alle Ihre bisherigen Eingaben gehen dabei verloren.</p>
+    
+    <div class="modal-action">
+      <button type="button" class="btn btn-outline" onclick={closeResetModal}>Abbrechen</button>
+      <button type="button" class="btn btn-error" onclick={confirmReset}>Ja, zurücksetzen</button>
     </div>
-    <button class="modal-backdrop" aria-label="close modal" onclick={closeResetModal}></button>
   </div>
-{/if}
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>
 
 <style lang="postcss">
   @reference '../../../app.css';
@@ -1555,11 +1908,6 @@
 
   .join {
     @apply w-full;
-  }
-
-  /* Enhanced button styles */
-  .btn-basic {
-    @apply btn btn-primary;
   }
 
   /* Loading Overlay Styles */

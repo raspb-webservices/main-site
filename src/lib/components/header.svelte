@@ -5,6 +5,7 @@
   import { page } from '$app/state';
 
   let mobileNavOpen = $state(false);
+  let logginIn = $state(false);
 
   // Erstelle eine reaktive Variable, die sich automatisch aktualisiert
   let isAuth = $derived(isAuthenticated.get());
@@ -12,18 +13,26 @@
   let currentUserRoles = $derived(userroles.get());
 
   async function login() {
+    logginIn = true;
     const auth0Client = await auth.createClient();
     await auth.loginWithPopup(auth0Client);
+
+    if(currentUserRoles.includes('admin')) {
+      goto("/dashboard")
+    }
+    logginIn = false;
   }
 
   async function logout() {
+    logginIn = true;
     const auth0Client = await auth.createClient();
     await auth.logout(auth0Client);
+    logginIn = false;
   }
 </script>
 
 {#if isAuth}
-  <p class="no-padding text-center">Hallo {currentUser.name} - Rollen: {JSON.stringify(currentUserRoles)}</p>
+  <p class="no-padding text-center">Hallo {currentUser['name']} - Rollen: {JSON.stringify(currentUserRoles)}</p>
 {/if}
 <header>
   <div class="inner-box">
@@ -79,14 +88,14 @@
           class="btn btn-ghost"
           onclick={() => {
             login();
-          }}>Login</button
+          }}>{#if logginIn}<span class="loading loading-ring loading-sm"></span>{:else}<span>Login</span>{/if}</button
         >
       {:else}
         <button
           class="btn btn-ghost"
           onclick={() => {
             logout();
-          }}>Logout</button
+          }}>{#if logginIn}<span class="loading loading-ring loading-sm"></span>{:else}<span>Logout</span>{/if}</button
         >
       {/if}
       <button

@@ -81,7 +81,7 @@
           <div class="category-card">
             <div class="category-icon">🌐</div>
             <h3>Webseiten</h3>
-            <p>Von One-Pagern bis Corporate Sites</p>
+            <p>Von One-Pagern bis Corporate Websites</p>
           </div>
           <div class="category-card">
             <div class="category-icon">📝</div>
@@ -91,17 +91,17 @@
           <div class="category-card">
             <div class="category-icon">📱</div>
             <h3>Applikationen</h3>
-            <p>Web Apps, PWAs und Mobile Apps</p>
+            <p>Business Apps, Webanwendungen, PWAs</p>
           </div>
           <div class="category-card">
             <div class="category-icon">⚙️</div>
-            <h3>Individualentwicklung</h3>
-            <p>Maßgeschneiderte Lösungen</p>
+            <h3>Freestyle</h3>
+            <p>Hochindividuelle Lösungen</p>
           </div>
           <div class="category-card">
             <div class="category-icon">🤖</div>
             <h3>KI-Services</h3>
-            <p>Beratung, Agenten & Automation</p>
+            <p>Beratung, Engineering, Automation & Infrastructure</p>
           </div>
         </div>
       </div>
@@ -115,7 +115,7 @@
         <h1>Webseiten <span class="inner-text-special">für jeden Anspruch</span></h1>
         <p class="teaser">
           Von eleganten One-Pagern bis hin zu umfassenden Corporate Websites - wir entwickeln Webseiten, die Ihre Zielgruppe begeistern und Ihre Geschäftsziele
-          unterstützen.
+          unterstützen. Und all das mit einem technischen Standard, der seines Gleichen sucht.
         </p>
       </div>
 
@@ -124,14 +124,14 @@
         <div class="service-card">
           <div class="service-card-content">
             <div class="service-card-header">
-              <h3>One-Page Websites</h3>
+              <h3>One-Pager Websites</h3>
               <div class="service-icon">🎯</div>
             </div>
-            <p>Kompakte, fokussierte Präsentation auf einer scrollbaren Seite. Perfekt für Startups und klare Botschaften.</p>
+            <p>Kompakte, fokussierte Präsentation auf einer scrollbaren Seite. Perfekt für für den schnellen Einstieg mit klarer Botschaft.</p>
             <div class="service-highlights">
-              <span class="highlight">Conversion-optimiert</span>
-              <span class="highlight">Schnelle Ladezeiten</span>
-              <span class="highlight">Mobile-first</span>
+              <span class="highlight">Webvisitenkarte</span>
+              <span class="highlight">Maintenance Seite</span>
+              <span class="highlight">Minmalistische Kampagnenseite</span>
             </div>
             <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-onepage')}>
               Mehr Details
@@ -577,35 +577,37 @@
 <!-- One-Page Websites Modal -->
 <dialog id="modal-onepage" class="modal">
   <div class="modal-box">
-    <h3 class="font-bold text-lg mb-4">One-Page Websites</h3>
+    <h3 class="font-bold text-lg mb-4">One-Pager Websites</h3>
     <div class="space-y-4">
-      <p><strong>Perfekt für:</strong> Startups, kleine Unternehmen, Produktpräsentationen, Portfolios</p>
-      
+      <p><strong>Perfekt für:</strong> den Einstieg, mit wenigen Inhalten, eine schnelle und vorübergehende Internetpäsenz oder eine einfache Kampagnenseite</p>
+      <p>Möchte man JETZT im Internet präsent sein, mit Anschrift, Telefonnummer und ggf. den Laden-Öffnungszeiten, ist aber noch in der Planung. Dann bietet sich eine Webvisitenkarte als simpler One-Pager an. So sind Sie mit Ihren Kontaktdaten wenigstens schone einmal auffindbar und haben ein Grundlage für komplexere Vorhaben.</p>
+      <p>Aber auch wenn Sie eine einzelnen Seite als Maintenance-Seite (wird angezeigt, wenn die Seite im Wartungsmodus ist) wünschen oder eine einzelne Vorschaltseite implementiert werden soll, ist der One-Pager on raspb ideal. Und das sochon ab 399 € (inkl. allem = Hosting, Gebühren, etc.)</p>
+      <p>Eine One-Pager-Seite, lässt sich auch komplexer aufziehen. Mit einem Formular am Ende oder ansprechenden Animationen. Der Phantasie sind kaum grenzen gesetzt. Nutzen Sie den One-Pager Ansatz um Ihre Online-Kampagne zu realisieren.</p>
+
       <div>
         <h4 class="font-semibold mb-2">Leistungen im Detail:</h4>
         <ul class="list-disc list-inside space-y-1">
           <li>Responsive Design für alle Geräte</li>
-          <li>Optimierte Ladezeiten unter 3 Sekunden</li>
+          <li>Optimierte Performance mit blitzschnellen Ladezeiten</li>
           <li>SEO-Grundoptimierung</li>
-          <li>Kontaktformular mit Spam-Schutz</li>
-          <li>Google Analytics Integration</li>
-          <li>SSL-Zertifikat inklusive</li>
+          <li>Flexibel erweiterbar. Bringen Sie ihre Wünsche ein.</li>
+          <li>Doamin und SSL-Zertifikat inklusive</li>
+          <li>Im Fair Use Bereich* entstehen keine weiteren Kosten (Hosting, Wartung, Betrieb)</li>
         </ul>
       </div>
-      
+      <div class="spacer"></div>
       <div>
         <h4 class="font-semibold mb-2">Technische Features:</h4>
         <ul class="list-disc list-inside space-y-1">
-          <li>Moderne CSS-Animationen</li>
+          <li>Auf Wunsch mit modernen CSS-Animationen</li>
           <li>Smooth Scrolling Navigation</li>
           <li>Lazy Loading für Bilder</li>
-          <li>Progressive Web App Features</li>
         </ul>
       </div>
       
       <div class="bg-base-200 p-4 rounded-lg">
-        <p class="text-sm"><strong>Projektdauer:</strong> 1-2 Wochen</p>
-        <p class="text-sm"><strong>Wartung:</strong> Optional verfügbar</p>
+        <p class="text-sm"><strong>Projektdauer:</strong> 1-5 Tage</p>
+        <p class="text-sm"><strong>Wartung:</strong> Für ein Jahr inklusive.</p>
       </div>
     </div>
     <div class="modal-action">

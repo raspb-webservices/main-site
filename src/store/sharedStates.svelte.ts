@@ -15,7 +15,7 @@ export function createIsAuthenticated() {
 // Store für User-Daten
 export const user = createUser();
 export function createUser() {
-  let value = $state({ name: '', nickname: '', user_id: '', email: '' });
+  let value = $state({});
   return {
     get() {
       return value;
@@ -29,7 +29,7 @@ export function createUser() {
 // Store für User-Roles
 export const userroles = createUserroles();
 export function createUserroles() {
-  let value = $state(['basic']);
+  let value = $state([]);
   return {
     get() {
       return value;
