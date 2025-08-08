@@ -28,6 +28,7 @@ export const GET = async (req) => {
           estimatedPrice
           formFields
           pages
+          setup
           relatedFiles {
             id
             url

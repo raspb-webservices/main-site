@@ -76,7 +76,7 @@
   <Section>
     <div class="service-overview-highlight">
       <div class="highlight-content">
-        <h2 class="text-center mb-8">Unsere <span class="inner-text-special">Service-Kategorien</span></h2>
+        <h2 class="mb-8 text-center">Unsere <span class="inner-text-special">Service-Kategorien</span></h2>
         <div class="service-categories-grid">
           <div class="category-card">
             <div class="category-icon">🌐</div>
@@ -133,9 +133,7 @@
               <span class="highlight">Maintenance Seite</span>
               <span class="highlight">Minmalistische Kampagnenseite</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-onepage')}>
-              Mehr Details
-            </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-onepage')}> Mehr Details </button>
           </div>
         </div>
 
@@ -152,9 +150,7 @@
               <span class="highlight">Analytics</span>
               <span class="highlight">Schnelle Umsetzung</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-landing')}>
-              Mehr Details
-            </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-landing')}> Mehr Details </button>
           </div>
         </div>
 
@@ -171,9 +167,7 @@
               <span class="highlight">Mehrseitig</span>
               <span class="highlight">Professionell</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-corporate')}>
-              Mehr Details
-            </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-corporate')}> Mehr Details </button>
           </div>
         </div>
       </div>
@@ -205,9 +199,7 @@
               <span class="highlight">Benutzerfreundlich</span>
               <span class="highlight">Sofortige Vorschau</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-simple-cms')}>
-              Mehr Details
-            </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-simple-cms')}> Mehr Details </button>
           </div>
         </div>
 
@@ -224,9 +216,7 @@
               <span class="highlight">Workflow-Management</span>
               <span class="highlight">Mehrsprachigkeit</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-complex-cms')}>
-              Mehr Details
-            </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-complex-cms')}> Mehr Details </button>
           </div>
         </div>
 
@@ -243,9 +233,7 @@
               <span class="highlight">Social Media</span>
               <span class="highlight">Newsletter</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-blog-cms')}>
-              Mehr Details
-            </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-blog-cms')}> Mehr Details </button>
           </div>
         </div>
 
@@ -262,9 +250,7 @@
               <span class="highlight">Multi-Channel</span>
               <span class="highlight">Zukunftssicher</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-headless-cms')}>
-              Mehr Details
-            </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-headless-cms')}> Mehr Details </button>
           </div>
         </div>
       </div>
@@ -296,9 +282,7 @@
               <span class="highlight">Keine Installation</span>
               <span class="highlight">Auto-Updates</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-web-apps')}>
-              Mehr Details
-            </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-web-apps')}> Mehr Details </button>
           </div>
         </div>
 
@@ -315,9 +299,7 @@
               <span class="highlight">Offline-fähig</span>
               <span class="highlight">Push-Notifications</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-pwa')}>
-              Mehr Details
-            </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-pwa')}> Mehr Details </button>
           </div>
         </div>
 
@@ -334,9 +316,7 @@
               <span class="highlight">Native Performance</span>
               <span class="highlight">Hardware-Zugriff</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-native-apps')}>
-              Mehr Details
-            </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-native-apps')}> Mehr Details </button>
           </div>
         </div>
 
@@ -353,9 +333,7 @@
               <span class="highlight">Real-time Features</span>
               <span class="highlight">Skalierbar</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-complex-apps')}>
-              Mehr Details
-            </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-complex-apps')}> Mehr Details </button>
           </div>
         </div>
       </div>
@@ -380,9 +358,7 @@
               <div class="service-icon">🧩</div>
             </div>
             <p>UI-Komponenten, Widgets, spezielle Formulare und Custom Plugins.</p>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-components')}>
-              Mehr Details
-            </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-components')}> Mehr Details </button>
           </div>
         </div>
 
@@ -393,9 +369,7 @@
               <div class="service-icon">🔧</div>
             </div>
             <p>Erweiterung bestehender Websites, API-Integrationen und Performance-Optimierungen.</p>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-extensions')}>
-              Mehr Details
-            </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-extensions')}> Mehr Details </button>
           </div>
         </div>
 
@@ -406,9 +380,7 @@
               <div class="service-icon">📊</div>
             </div>
             <p>Event-Registrierung, Daten-Dashboards, Reporting-Tools und Automatisierungs-Scripts.</p>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-special-apps')}>
-              Mehr Details
-            </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-special-apps')}> Mehr Details </button>
           </div>
         </div>
 
@@ -419,9 +391,7 @@
               <div class="service-icon">🎨</div>
             </div>
             <p>Interface-Design, User Experience Optimierung, Prototyping und Design-Systeme.</p>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-design')}>
-              Mehr Details
-            </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-design')}> Mehr Details </button>
           </div>
         </div>
       </div>
@@ -433,9 +403,7 @@
     <div class="service-section">
       <div class="service-header">
         <h1>KI-Services <span class="inner-text-special">& Automation</span></h1>
-        <p class="teaser">
-          Nutzen Sie die Kraft der Künstlichen Intelligenz für Ihr Unternehmen. Von der Beratung bis zur fertigen KI-Lösung.
-        </p>
+        <p class="teaser">Nutzen Sie die Kraft der Künstlichen Intelligenz für Ihr Unternehmen. Von der Beratung bis zur fertigen KI-Lösung.</p>
       </div>
 
       <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
@@ -452,9 +420,7 @@
               <span class="highlight">Prompt Engineering</span>
               <span class="highlight">ROI-Analyse</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-ki-beratung')}>
-              Mehr Details
-            </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-ki-beratung')}> Mehr Details </button>
           </div>
         </div>
 
@@ -471,9 +437,7 @@
               <span class="highlight">Content-Generierung</span>
               <span class="highlight">System-Integration</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-ki-agenten')}>
-              Mehr Details
-            </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-ki-agenten')}> Mehr Details </button>
           </div>
         </div>
 
@@ -490,9 +454,7 @@
               <span class="highlight">Automatisierung</span>
               <span class="highlight">Predictive Analytics</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-workflow')}>
-              Mehr Details
-            </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-workflow')}> Mehr Details </button>
           </div>
         </div>
 
@@ -509,9 +471,7 @@
               <span class="highlight">Pay-per-Use</span>
               <span class="highlight">24/7 Support</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-ai-infrastructure')}>
-              Mehr Details
-            </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-ai-infrastructure')}> Mehr Details </button>
           </div>
         </div>
       </div>
@@ -577,16 +537,26 @@
 <!-- One-Page Websites Modal -->
 <dialog id="modal-onepage" class="modal">
   <div class="modal-box">
-    <h3 class="font-bold text-lg mb-4">One-Pager Websites</h3>
+    <h3 class="mb-4 text-lg font-bold">One-Pager Websites</h3>
     <div class="space-y-4">
       <p><strong>Perfekt für:</strong> den Einstieg, mit wenigen Inhalten, eine schnelle und vorübergehende Internetpäsenz oder eine einfache Kampagnenseite</p>
-      <p>Möchte man JETZT im Internet präsent sein, mit Anschrift, Telefonnummer und ggf. den Laden-Öffnungszeiten, ist aber noch in der Planung. Dann bietet sich eine Webvisitenkarte als simpler One-Pager an. So sind Sie mit Ihren Kontaktdaten wenigstens schone einmal auffindbar und haben ein Grundlage für komplexere Vorhaben.</p>
-      <p>Aber auch wenn Sie eine einzelnen Seite als Maintenance-Seite (wird angezeigt, wenn die Seite im Wartungsmodus ist) wünschen oder eine einzelne Vorschaltseite implementiert werden soll, ist der One-Pager on raspb ideal. Und das sochon ab 399 € (inkl. allem = Hosting, Gebühren, etc.)</p>
-      <p>Eine One-Pager-Seite, lässt sich auch komplexer aufziehen. Mit einem Formular am Ende oder ansprechenden Animationen. Der Phantasie sind kaum grenzen gesetzt. Nutzen Sie den One-Pager Ansatz um Ihre Online-Kampagne zu realisieren.</p>
+      <p>
+        Möchte man JETZT im Internet präsent sein, mit Anschrift, Telefonnummer und ggf. den Laden-Öffnungszeiten, ist aber noch in der Planung. Dann bietet
+        sich eine Webvisitenkarte als simpler One-Pager an. So sind Sie mit Ihren Kontaktdaten wenigstens schone einmal auffindbar und haben ein Grundlage für
+        komplexere Vorhaben.
+      </p>
+      <p>
+        Aber auch wenn Sie eine einzelnen Seite als Maintenance-Seite (wird angezeigt, wenn die Seite im Wartungsmodus ist) wünschen oder eine einzelne
+        Vorschaltseite implementiert werden soll, ist der One-Pager on raspb ideal. Und das sochon ab 399 € (inkl. allem = Hosting, Gebühren, etc.)
+      </p>
+      <p>
+        Eine One-Pager-Seite, lässt sich auch komplexer aufziehen. Mit einem Formular am Ende oder ansprechenden Animationen. Der Phantasie sind kaum grenzen
+        gesetzt. Nutzen Sie den One-Pager Ansatz um Ihre Online-Kampagne zu realisieren.
+      </p>
 
       <div>
-        <h4 class="font-semibold mb-2">Leistungen im Detail:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Leistungen im Detail:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Responsive Design für alle Geräte</li>
           <li>Optimierte Performance mit blitzschnellen Ladezeiten</li>
           <li>SEO-Grundoptimierung</li>
@@ -597,15 +567,15 @@
       </div>
       <div class="spacer"></div>
       <div>
-        <h4 class="font-semibold mb-2">Technische Features:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Technische Features:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Auf Wunsch mit modernen CSS-Animationen</li>
           <li>Smooth Scrolling Navigation</li>
           <li>Lazy Loading für Bilder</li>
         </ul>
       </div>
-      
-      <div class="bg-base-200 p-4 rounded-lg">
+
+      <div class="bg-base-200 rounded-lg p-4">
         <p class="text-sm"><strong>Projektdauer:</strong> 1-5 Tage</p>
         <p class="text-sm"><strong>Wartung:</strong> Für ein Jahr inklusive.</p>
       </div>
@@ -621,13 +591,13 @@
 <!-- Landing Pages Modal -->
 <dialog id="modal-landing" class="modal">
   <div class="modal-box">
-    <h3 class="font-bold text-lg mb-4">Landing Pages</h3>
+    <h3 class="mb-4 text-lg font-bold">Landing Pages</h3>
     <div class="space-y-4">
       <p><strong>Perfekt für:</strong> Marketing-Kampagnen, Produktlaunches, Events, Lead-Generierung</p>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Conversion-Optimierung:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Conversion-Optimierung:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>A/B-Testing Setup für Headlines und CTAs</li>
           <li>Heatmap-Integration (Hotjar/Crazy Egg)</li>
           <li>Conversion-Tracking mit Google Analytics</li>
@@ -635,18 +605,18 @@
           <li>Social Proof Integration</li>
         </ul>
       </div>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Marketing-Integration:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Marketing-Integration:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Facebook Pixel Integration</li>
           <li>Google Ads Conversion-Tracking</li>
           <li>E-Mail-Marketing-Tool Anbindung</li>
           <li>CRM-Integration (HubSpot, Salesforce)</li>
         </ul>
       </div>
-      
-      <div class="bg-base-200 p-4 rounded-lg">
+
+      <div class="bg-base-200 rounded-lg p-4">
         <p class="text-sm"><strong>Projektdauer:</strong> 3-5 Tage</p>
         <p class="text-sm"><strong>Performance:</strong> Optimiert für maximale Conversion-Rate</p>
       </div>
@@ -662,13 +632,13 @@
 <!-- Corporate Websites Modal -->
 <dialog id="modal-corporate" class="modal">
   <div class="modal-box">
-    <h3 class="font-bold text-lg mb-4">Corporate Websites</h3>
+    <h3 class="mb-4 text-lg font-bold">Corporate Websites</h3>
     <div class="space-y-4">
       <p><strong>Perfekt für:</strong> Mittelständische Unternehmen, Agenturen, Beratungen, B2B-Firmen</p>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Umfangreiche Features:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Umfangreiche Features:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Mehrseitige Struktur (5-20 Seiten)</li>
           <li>Erweiterte SEO-Optimierung</li>
           <li>Professionelles Corporate Design</li>
@@ -678,10 +648,10 @@
           <li>News/Blog-Integration</li>
         </ul>
       </div>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Erweiterte Funktionen:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Erweiterte Funktionen:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Mehrsprachigkeit (DACH-Region)</li>
           <li>Erweiterte Analytics und Tracking</li>
           <li>Newsletter-Integration</li>
@@ -689,8 +659,8 @@
           <li>Downloadbereich für Dokumente</li>
         </ul>
       </div>
-      
-      <div class="bg-base-200 p-4 rounded-lg">
+
+      <div class="bg-base-200 rounded-lg p-4">
         <p class="text-sm"><strong>Projektdauer:</strong> 3-6 Wochen</p>
         <p class="text-sm"><strong>Wartung:</strong> Empfohlen für optimale Performance</p>
       </div>
@@ -706,13 +676,13 @@
 <!-- Simple CMS Modal -->
 <dialog id="modal-simple-cms" class="modal">
   <div class="modal-box">
-    <h3 class="font-bold text-lg mb-4">Einfache Inhaltsbearbeitung</h3>
+    <h3 class="mb-4 text-lg font-bold">Einfache Inhaltsbearbeitung</h3>
     <div class="space-y-4">
       <p><strong>Perfekt für:</strong> Kleine Unternehmen, Vereine, Praxen, Restaurants</p>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Benutzerfreundliche Features:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Benutzerfreundliche Features:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Inline-Editing direkt auf der Website</li>
           <li>WYSIWYG-Editor für Texte</li>
           <li>Einfacher Bildupload und -verwaltung</li>
@@ -721,18 +691,18 @@
           <li>Versionskontrolle</li>
         </ul>
       </div>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Technische Details:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Technische Details:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Keine technischen Kenntnisse erforderlich</li>
           <li>Sichere Benutzeranmeldung</li>
           <li>Mobile Bearbeitung möglich</li>
           <li>Automatische SEO-Optimierung</li>
         </ul>
       </div>
-      
-      <div class="bg-base-200 p-4 rounded-lg">
+
+      <div class="bg-base-200 rounded-lg p-4">
         <p class="text-sm"><strong>Setup-Zeit:</strong> 1-2 Tage</p>
         <p class="text-sm"><strong>Schulung:</strong> 30 Minuten Online-Training inklusive</p>
       </div>
@@ -748,13 +718,13 @@
 <!-- Complex CMS Modal -->
 <dialog id="modal-complex-cms" class="modal">
   <div class="modal-box">
-    <h3 class="font-bold text-lg mb-4">Komplexe CMS-Systeme</h3>
+    <h3 class="mb-4 text-lg font-bold">Komplexe CMS-Systeme</h3>
     <div class="space-y-4">
       <p><strong>Perfekt für:</strong> Große Unternehmen, Verlage, E-Commerce, Portale</p>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Enterprise Features:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Enterprise Features:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Benutzerdefinierte Content-Typen</li>
           <li>Workflow-Management mit Freigabeprozessen</li>
           <li>Mehrsprachigkeit und Lokalisierung</li>
@@ -763,18 +733,18 @@
           <li>Erweiterte Suchfunktionen</li>
         </ul>
       </div>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Skalierbarkeit:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Skalierbarkeit:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Hochperformante Datenbank-Architektur</li>
           <li>CDN-Integration für globale Verfügbarkeit</li>
           <li>Automatische Skalierung</li>
           <li>Umfangreiche Analytics und Reporting</li>
         </ul>
       </div>
-      
-      <div class="bg-base-200 p-4 rounded-lg">
+
+      <div class="bg-base-200 rounded-lg p-4">
         <p class="text-sm"><strong>Projektdauer:</strong> 6-12 Wochen</p>
         <p class="text-sm"><strong>Support:</strong> Dedicated Support-Team verfügbar</p>
       </div>
@@ -790,13 +760,13 @@
 <!-- Blog CMS Modal -->
 <dialog id="modal-blog-cms" class="modal">
   <div class="modal-box">
-    <h3 class="font-bold text-lg mb-4">Blog & Content-Plattformen</h3>
+    <h3 class="mb-4 text-lg font-bold">Blog & Content-Plattformen</h3>
     <div class="space-y-4">
       <p><strong>Perfekt für:</strong> Blogger, Journalisten, Content Creator, Magazine</p>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Content-optimierte Features:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Content-optimierte Features:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Optimiert für Content-Erstellung</li>
           <li>SEO-Tools und Meta-Tag-Management</li>
           <li>Social Media Integration und Auto-Posting</li>
@@ -805,18 +775,18 @@
           <li>Kategorien und Tag-System</li>
         </ul>
       </div>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Monetarisierung:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Monetarisierung:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Werbeplatz-Management</li>
           <li>Affiliate-Link-Integration</li>
           <li>Premium-Content-Bereiche</li>
           <li>E-Mail-Marketing-Tools</li>
         </ul>
       </div>
-      
-      <div class="bg-base-200 p-4 rounded-lg">
+
+      <div class="bg-base-200 rounded-lg p-4">
         <p class="text-sm"><strong>Projektdauer:</strong> 2-4 Wochen</p>
         <p class="text-sm"><strong>Content-Migration:</strong> Bestehende Inhalte übernehmen wir gerne</p>
       </div>
@@ -832,13 +802,13 @@
 <!-- Headless CMS Modal -->
 <dialog id="modal-headless-cms" class="modal">
   <div class="modal-box">
-    <h3 class="font-bold text-lg mb-4">Headless CMS</h3>
+    <h3 class="mb-4 text-lg font-bold">Headless CMS</h3>
     <div class="space-y-4">
       <p><strong>Perfekt für:</strong> Multi-Channel-Publishing, Apps + Web, Enterprise-Lösungen</p>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">API-First Ansatz:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">API-First Ansatz:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Content einmal erstellen, überall nutzen</li>
           <li>RESTful und GraphQL APIs</li>
           <li>Flexibilität bei der Darstellung</li>
@@ -847,18 +817,18 @@
           <li>Entwicklerfreundliche Dokumentation</li>
         </ul>
       </div>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Use Cases:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Use Cases:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Website + Mobile App mit gleichen Inhalten</li>
           <li>Mehrere Websites aus einer Quelle</li>
           <li>IoT-Geräte und Digital Signage</li>
           <li>E-Commerce mit verschiedenen Frontends</li>
         </ul>
       </div>
-      
-      <div class="bg-base-200 p-4 rounded-lg">
+
+      <div class="bg-base-200 rounded-lg p-4">
         <p class="text-sm"><strong>Projektdauer:</strong> 4-8 Wochen</p>
         <p class="text-sm"><strong>Technologie:</strong> Hygraph, Strapi oder Custom Solution</p>
       </div>
@@ -874,13 +844,13 @@
 <!-- Web Apps Modal -->
 <dialog id="modal-web-apps" class="modal">
   <div class="modal-box">
-    <h3 class="font-bold text-lg mb-4">Web Applications</h3>
+    <h3 class="mb-4 text-lg font-bold">Web Applications</h3>
     <div class="space-y-4">
       <p><strong>Perfekt für:</strong> Dashboards, Tools, Kalkulatoren, Verwaltungssysteme</p>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Technische Vorteile:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Technische Vorteile:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Plattformunabhängig (Windows, Mac, Linux)</li>
           <li>Keine Installation erforderlich</li>
           <li>Automatische Updates</li>
@@ -889,10 +859,10 @@
           <li>Sichere Datenübertragung</li>
         </ul>
       </div>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Beispiel-Anwendungen:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Beispiel-Anwendungen:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Business Dashboards mit Real-time Daten</li>
           <li>Projektmanagement-Tools</li>
           <li>Finanz-Kalkulatoren</li>
@@ -900,8 +870,8 @@
           <li>Zeiterfassungs-Tools</li>
         </ul>
       </div>
-      
-      <div class="bg-base-200 p-4 rounded-lg">
+
+      <div class="bg-base-200 rounded-lg p-4">
         <p class="text-sm"><strong>Projektdauer:</strong> 2-8 Wochen je nach Komplexität</p>
         <p class="text-sm"><strong>Technologie:</strong> SvelteKit, React oder Vue.js</p>
       </div>
@@ -917,13 +887,13 @@
 <!-- PWA Modal -->
 <dialog id="modal-pwa" class="modal">
   <div class="modal-box">
-    <h3 class="font-bold text-lg mb-4">Progressive Web Apps (PWA)</h3>
+    <h3 class="mb-4 text-lg font-bold">Progressive Web Apps (PWA)</h3>
     <div class="space-y-4">
       <p><strong>Perfekt für:</strong> App-ähnliche Erfahrungen ohne App Store</p>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">App-ähnliche Features:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">App-ähnliche Features:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Installierbar auf allen Geräten</li>
           <li>Funktioniert offline</li>
           <li>Push-Benachrichtigungen</li>
@@ -932,10 +902,10 @@
           <li>Vollbild-Modus ohne Browser-UI</li>
         </ul>
       </div>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Technische Features:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Technische Features:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Service Worker für Offline-Funktionalität</li>
           <li>App Manifest für Installation</li>
           <li>Intelligentes Caching</li>
@@ -943,8 +913,8 @@
           <li>Automatische Updates</li>
         </ul>
       </div>
-      
-      <div class="bg-base-200 p-4 rounded-lg">
+
+      <div class="bg-base-200 rounded-lg p-4">
         <p class="text-sm"><strong>Projektdauer:</strong> 3-6 Wochen</p>
         <p class="text-sm"><strong>Vorteil:</strong> Keine App Store Gebühren oder Genehmigungen</p>
       </div>
@@ -960,13 +930,13 @@
 <!-- Native Apps Modal -->
 <dialog id="modal-native-apps" class="modal">
   <div class="modal-box">
-    <h3 class="font-bold text-lg mb-4">Native Mobile Apps</h3>
+    <h3 class="mb-4 text-lg font-bold">Native Mobile Apps</h3>
     <div class="space-y-4">
       <p><strong>Perfekt für:</strong> Apps mit hohen Performance-Anforderungen</p>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Native Vorteile:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Native Vorteile:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>App Store und Google Play Distribution</li>
           <li>Native Performance und Geschwindigkeit</li>
           <li>Vollzugriff auf alle Gerätehardware</li>
@@ -975,18 +945,18 @@
           <li>Tiefe System-Integration</li>
         </ul>
       </div>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Entwicklungsansatz:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Entwicklungsansatz:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>React Native für iOS und Android</li>
           <li>Capacitor für Web-zu-App Konvertierung</li>
           <li>Shared Codebase für Effizienz</li>
           <li>Native Module bei Bedarf</li>
         </ul>
       </div>
-      
-      <div class="bg-base-200 p-4 rounded-lg">
+
+      <div class="bg-base-200 rounded-lg p-4">
         <p class="text-sm"><strong>Projektdauer:</strong> 8-16 Wochen</p>
         <p class="text-sm"><strong>App Store:</strong> Unterstützung bei Veröffentlichung inklusive</p>
       </div>
@@ -1002,13 +972,13 @@
 <!-- Complex Apps Modal -->
 <dialog id="modal-complex-apps" class="modal">
   <div class="modal-box">
-    <h3 class="font-bold text-lg mb-4">Komplexe Anwendungen</h3>
+    <h3 class="mb-4 text-lg font-bold">Komplexe Anwendungen</h3>
     <div class="space-y-4">
       <p><strong>Perfekt für:</strong> CRM-Systeme, E-Learning-Plattformen, Booking-Systeme</p>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Enterprise-Features:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Enterprise-Features:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Umfangreiche Datenbank-Integration</li>
           <li>API-Entwicklung und -Integration</li>
           <li>Benutzerauthentifizierung und -verwaltung</li>
@@ -1017,10 +987,10 @@
           <li>Umfangreiche Reporting-Funktionen</li>
         </ul>
       </div>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Beispiel-Systeme:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Beispiel-Systeme:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Customer Relationship Management (CRM)</li>
           <li>E-Learning und Kursplattformen</li>
           <li>Buchungs- und Reservierungssysteme</li>
@@ -1028,8 +998,8 @@
           <li>Inventory Management Systeme</li>
         </ul>
       </div>
-      
-      <div class="bg-base-200 p-4 rounded-lg">
+
+      <div class="bg-base-200 rounded-lg p-4">
         <p class="text-sm"><strong>Projektdauer:</strong> 12-24 Wochen</p>
         <p class="text-sm"><strong>Support:</strong> Langfristige Wartung und Weiterentwicklung</p>
       </div>
@@ -1045,13 +1015,13 @@
 <!-- Individual Development Modals -->
 <dialog id="modal-components" class="modal">
   <div class="modal-box">
-    <h3 class="font-bold text-lg mb-4">Einzelne Komponenten</h3>
+    <h3 class="mb-4 text-lg font-bold">Einzelne Komponenten</h3>
     <div class="space-y-4">
       <p><strong>Perfekt für:</strong> Spezielle UI-Elemente, Widgets, Custom Plugins</p>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Komponenten-Typen:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Komponenten-Typen:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Interaktive UI-Komponenten</li>
           <li>Spezielle Formulare und Eingabefelder</li>
           <li>Datenvisualisierung und Charts</li>
@@ -1059,8 +1029,8 @@
           <li>Wiederverwendbare Code-Module</li>
         </ul>
       </div>
-      
-      <div class="bg-base-200 p-4 rounded-lg">
+
+      <div class="bg-base-200 rounded-lg p-4">
         <p class="text-sm"><strong>Projektdauer:</strong> 1-3 Wochen</p>
         <p class="text-sm"><strong>Integration:</strong> Nahtlose Einbindung in bestehende Systeme</p>
       </div>
@@ -1075,13 +1045,13 @@
 
 <dialog id="modal-extensions" class="modal">
   <div class="modal-box">
-    <h3 class="font-bold text-lg mb-4">System-Erweiterungen</h3>
+    <h3 class="mb-4 text-lg font-bold">System-Erweiterungen</h3>
     <div class="space-y-4">
       <p><strong>Perfekt für:</strong> Bestehende Websites erweitern und optimieren</p>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Erweiterungs-Services:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Erweiterungs-Services:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Neue Features für bestehende Websites</li>
           <li>API-Integrationen (Payment, CRM, etc.)</li>
           <li>Performance-Optimierungen</li>
@@ -1089,8 +1059,8 @@
           <li>Security-Updates und Härtung</li>
         </ul>
       </div>
-      
-      <div class="bg-base-200 p-4 rounded-lg">
+
+      <div class="bg-base-200 rounded-lg p-4">
         <p class="text-sm"><strong>Projektdauer:</strong> 1-4 Wochen</p>
         <p class="text-sm"><strong>Kompatibilität:</strong> Arbeiten mit allen gängigen Technologien</p>
       </div>
@@ -1105,13 +1075,13 @@
 
 <dialog id="modal-special-apps" class="modal">
   <div class="modal-box">
-    <h3 class="font-bold text-lg mb-4">Spezial-Anwendungen</h3>
+    <h3 class="mb-4 text-lg font-bold">Spezial-Anwendungen</h3>
     <div class="space-y-4">
       <p><strong>Perfekt für:</strong> Einzigartige Geschäftsanforderungen</p>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Anwendungsbeispiele:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Anwendungsbeispiele:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Event-Registrierungssysteme</li>
           <li>Business Intelligence Dashboards</li>
           <li>Reporting und Analytics Tools</li>
@@ -1119,8 +1089,8 @@
           <li>Datenverarbeitungs-Pipelines</li>
         </ul>
       </div>
-      
-      <div class="bg-base-200 p-4 rounded-lg">
+
+      <div class="bg-base-200 rounded-lg p-4">
         <p class="text-sm"><strong>Projektdauer:</strong> 2-8 Wochen</p>
         <p class="text-sm"><strong>Ansatz:</strong> Agile Entwicklung mit regelmäßigen Reviews</p>
       </div>
@@ -1135,13 +1105,13 @@
 
 <dialog id="modal-design" class="modal">
   <div class="modal-box">
-    <h3 class="font-bold text-lg mb-4">UI/UX Design</h3>
+    <h3 class="mb-4 text-lg font-bold">UI/UX Design</h3>
     <div class="space-y-4">
       <p><strong>Perfekt für:</strong> Optimale Benutzererfahrung und modernes Design</p>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Design-Services:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Design-Services:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>User Interface Design</li>
           <li>User Experience Optimierung</li>
           <li>Interaktive Prototyping</li>
@@ -1149,8 +1119,8 @@
           <li>Usability Testing</li>
         </ul>
       </div>
-      
-      <div class="bg-base-200 p-4 rounded-lg">
+
+      <div class="bg-base-200 rounded-lg p-4">
         <p class="text-sm"><strong>Projektdauer:</strong> 2-6 Wochen</p>
         <p class="text-sm"><strong>Tools:</strong> Figma, Adobe Creative Suite</p>
       </div>
@@ -1166,13 +1136,13 @@
 <!-- KI Services Modals -->
 <dialog id="modal-ki-beratung" class="modal">
   <div class="modal-box">
-    <h3 class="font-bold text-lg mb-4">KI-Beratung & Support</h3>
+    <h3 class="mb-4 text-lg font-bold">KI-Beratung & Support</h3>
     <div class="space-y-4">
       <p><strong>Perfekt für:</strong> Unternehmen, die KI strategisch einsetzen möchten</p>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Beratungs-Services:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Beratungs-Services:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>KI-Strategieentwicklung für Ihr Unternehmen</li>
           <li>Prompt Engineering für optimale Ergebnisse</li>
           <li>Context Engineering für präzise KI-Antworten</li>
@@ -1181,8 +1151,8 @@
           <li>Change Management für KI-Einführung</li>
         </ul>
       </div>
-      
-      <div class="bg-base-200 p-4 rounded-lg">
+
+      <div class="bg-base-200 rounded-lg p-4">
         <p class="text-sm"><strong>Projektdauer:</strong> 2-4 Wochen</p>
         <p class="text-sm"><strong>Deliverable:</strong> Umfassende KI-Strategie und Roadmap</p>
       </div>
@@ -1197,13 +1167,13 @@
 
 <dialog id="modal-ki-agenten" class="modal">
   <div class="modal-box">
-    <h3 class="font-bold text-lg mb-4">KI-Agenten Entwicklung</h3>
+    <h3 class="mb-4 text-lg font-bold">KI-Agenten Entwicklung</h3>
     <div class="space-y-4">
       <p><strong>Perfekt für:</strong> Automatisierte Kundenbetreuung und Content-Generierung</p>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Agent-Typen:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Agent-Typen:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Custom Chatbots für Websites</li>
           <li>Automatisierte Kundenbetreuung</li>
           <li>Content-Generierung und -Optimierung</li>
@@ -1212,8 +1182,8 @@
           <li>Integration in bestehende CRM-Systeme</li>
         </ul>
       </div>
-      
-      <div class="bg-base-200 p-4 rounded-lg">
+
+      <div class="bg-base-200 rounded-lg p-4">
         <p class="text-sm"><strong>Projektdauer:</strong> 4-8 Wochen</p>
         <p class="text-sm"><strong>Training:</strong> Individuelle Schulung auf Ihre Daten</p>
       </div>
@@ -1228,13 +1198,13 @@
 
 <dialog id="modal-workflow" class="modal">
   <div class="modal-box">
-    <h3 class="font-bold text-lg mb-4">Workflow-Optimierung mit KI</h3>
+    <h3 class="mb-4 text-lg font-bold">Workflow-Optimierung mit KI</h3>
     <div class="space-y-4">
       <p><strong>Perfekt für:</strong> Effizienzsteigerung durch intelligente Automatisierung</p>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Optimierungs-Bereiche:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Optimierungs-Bereiche:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Prozessanalyse und Optimierungspotentiale</li>
           <li>Automatisierung wiederkehrender Aufgaben</li>
           <li>Intelligente Dokumentenverarbeitung</li>
@@ -1243,18 +1213,18 @@
           <li>Qualitätskontrolle durch KI</li>
         </ul>
       </div>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Messbare Vorteile:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Messbare Vorteile:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Zeit sparen (bis zu 70% Reduktion)</li>
           <li>Kosten reduzieren</li>
           <li>Fehler minimieren</li>
           <li>Effizienz steigern</li>
         </ul>
       </div>
-      
-      <div class="bg-base-200 p-4 rounded-lg">
+
+      <div class="bg-base-200 rounded-lg p-4">
         <p class="text-sm"><strong>Projektdauer:</strong> 6-12 Wochen</p>
         <p class="text-sm"><strong>ROI:</strong> Messbare Effizienzsteigerung bereits nach 4 Wochen</p>
       </div>
@@ -1269,13 +1239,13 @@
 
 <dialog id="modal-ai-infrastructure" class="modal">
   <div class="modal-box">
-    <h3 class="font-bold text-lg mb-4">AI as Infrastructure</h3>
+    <h3 class="mb-4 text-lg font-bold">AI as Infrastructure</h3>
     <div class="space-y-4">
       <p><strong>Perfekt für:</strong> Skalierbare KI-Lösungen ohne eigene Infrastruktur</p>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Service-Modelle:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Service-Modelle:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Skalierbare KI-Infrastruktur in der Cloud</li>
           <li>Pay-per-Use Modelle für Kosteneffizienz</li>
           <li>Managed KI-Services ohne Wartungsaufwand</li>
@@ -1284,18 +1254,18 @@
           <li>Compliance und Datenschutz inklusive</li>
         </ul>
       </div>
-      
+
       <div>
-        <h4 class="font-semibold mb-2">Abrechnungsmodelle:</h4>
-        <ul class="list-disc list-inside space-y-1">
+        <h4 class="mb-2 font-semibold">Abrechnungsmodelle:</h4>
+        <ul class="list-inside list-disc space-y-1">
           <li>Projekt-basierte Abrechnung</li>
           <li>Monatliche Miete für kontinuierliche Nutzung</li>
           <li>Usage-basierte Abrechnung nach Verbrauch</li>
           <li>Hybrid-Modelle für optimale Flexibilität</li>
         </ul>
       </div>
-      
-      <div class="bg-base-200 p-4 rounded-lg">
+
+      <div class="bg-base-200 rounded-lg p-4">
         <p class="text-sm"><strong>Setup-Zeit:</strong> 1-2 Wochen</p>
         <p class="text-sm"><strong>Skalierung:</strong> Automatisch je nach Bedarf</p>
       </div>
@@ -1313,32 +1283,32 @@
 
   .services-content-wrapper {
     .service-overview-highlight {
-      @apply bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10 py-16 my-12 rounded-3xl;
-      
+      @apply from-primary/10 via-secondary/5 to-accent/10 my-12 rounded-3xl bg-gradient-to-br py-16;
+
       .highlight-content {
-        @apply max-w-6xl mx-auto px-6;
-        
+        @apply mx-auto max-w-6xl px-6;
+
         h2 {
-          @apply text-4xl font-bold mb-12;
+          @apply mb-12 text-4xl font-bold;
         }
       }
-      
+
       .service-categories-grid {
-        @apply grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6;
-        
+        @apply grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-5;
+
         .category-card {
-          @apply bg-white/80 backdrop-blur-sm rounded-2xl p-6 text-center transition-all duration-300 hover:scale-105 hover:shadow-lg border border-white/20;
-          
+          @apply rounded-2xl border border-white/20 bg-white/80 p-6 text-center backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg;
+
           .category-icon {
-            @apply text-4xl mb-4;
+            @apply mb-4 text-4xl;
           }
-          
+
           h3 {
-            @apply text-lg font-semibold mb-2 text-darkGrey;
+            @apply text-darkGrey mb-2 text-lg font-semibold;
           }
-          
+
           p {
-            @apply text-sm text-neutral;
+            @apply text-neutral text-sm;
           }
         }
       }
@@ -1353,21 +1323,21 @@
     }
 
     .service-card {
-      @apply bg-gradient-to-br from-lightGrey/70 via-lightGrey/90 to-lightGrey/45 rounded-2xl shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border border-lightGrey/50;
+      @apply from-lightGrey/70 via-lightGrey/90 to-lightGrey/45 border-lightGrey/50 rounded-2xl border bg-gradient-to-br shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
 
       &.large {
         @apply min-h-[280px];
       }
 
       .service-card-content {
-        @apply p-6 h-full flex flex-col;
+        @apply flex h-full flex-col p-6;
       }
 
       .service-card-header {
         @apply mb-4 flex items-center justify-between;
 
         h3 {
-          @apply text-xl font-semibold text-darkGrey;
+          @apply text-darkGrey text-xl font-semibold;
         }
 
         .service-icon {
@@ -1380,16 +1350,16 @@
       }
 
       .service-highlights {
-        @apply flex flex-wrap gap-2 mb-4;
+        @apply mb-4 flex flex-wrap gap-2;
 
         .highlight {
-          @apply bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium;
+          @apply bg-primary/10 text-primary rounded-full px-3 py-1 text-sm font-medium;
         }
       }
     }
 
     .cta-section {
-      @apply flex flex-col items-center justify-center text-center bg-gradient-to-br from-primary/5 to-secondary/5 py-16 rounded-3xl;
+      @apply from-primary/5 to-secondary/5 flex flex-col items-center justify-center rounded-3xl bg-gradient-to-br py-16 text-center;
 
       .cta-content {
         @apply max-w-4xl px-6;

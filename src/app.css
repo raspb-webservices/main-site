@@ -133,7 +133,7 @@
   --color-pink: oklch(0.6559 0.2118 354.31);
   --color-violet: oklch(0.6668 0.2591 322.15);
   --animate-fade-in-up: fadeInUp 0.5s ease-out;
-  --animate-fade-in-from-side: fadeInFromSide 0.5s ease-out;  
+  --animate-fade-in-from-side: fadeInFromSide 0.5s ease-out;
 }
 
 /* BASICS */
@@ -146,7 +146,7 @@
 
 html,
 body {
-  @apply relative m-0 p-0 h-full w-full;
+  @apply relative m-0 h-full w-full p-0;
   min-height: 100vh;
   scroll-behavior: smooth;
   -moz-text-size-adjust: 100%;
@@ -177,7 +177,7 @@ h3,
 h4,
 h5,
 h6 {
-  @apply font-circular font-bold text-balance leading-[1.1];
+  @apply font-circular leading-[1.1] font-bold text-balance;
 
   > a {
     @apply no-underline;
@@ -186,7 +186,7 @@ h6 {
     @apply font-light;
   }
   > span.inner-text-special {
-    @apply inline-block bg-linear-135 from-purple via-pink to-violet bg-clip-text text-transparent;
+    @apply from-purple via-pink to-violet inline-block bg-linear-135 bg-clip-text text-transparent;
   }
   &.no-padding {
     @apply pb-0;
@@ -212,7 +212,8 @@ h6 {
 
 a,
 .text-link-button {
-  @apply text-primary m-0 cursor-pointer p-0 underline duration-300;
+  @apply m-0 cursor-pointer p-0 underline duration-300 opacity-70;
+  color: inherit;
   font-size: inherit;
   line-height: inherit;
   height: inherit;
@@ -287,10 +288,10 @@ textarea:not([rows]) {
 
 /* Special Button Style */
 .btn-basic {
-  @apply flex text-nowrap justify-center items-center rounded-md border-0 px-12 py-4 text-lg leading-none font-bold text-white transition-all duration-500 bg-linear-to-r from-purple via-pink to-violet bg-size-[200%_auto] shadow-md;
+  @apply from-purple via-pink to-violet flex items-center justify-center rounded-md border-0 bg-linear-to-r bg-size-[200%_auto] px-12 py-4 text-lg leading-none font-bold text-nowrap text-white shadow-md transition-all duration-500;
 
   svg {
-    @apply mx-1
+    @apply mx-1;
   }
   &.block-button {
     @apply h-[50px] px-4 py-0;
@@ -368,7 +369,6 @@ swiper-container {
     }
   }
 }
-
 
 @keyframes fadeInUp {
   0% {

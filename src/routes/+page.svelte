@@ -4,12 +4,14 @@
   import Hero from '$lib/components/hero.svelte';
   import markdownit from 'markdown-it';
   import Section from '$lib/components/section.svelte';
+  import RaspbPhilosophyModal from '$lib/components/raspb-philosophy-modal.svelte';
   import { goto } from '$app/navigation';
 
   const { data } = $props();
 
   let curretnUser = $derived(user.get());
   const md = markdownit();
+  let philosophyModal: RaspbPhilosophyModal;
 
   function renderMarkdown(content: string) {
     return md.render(content);
@@ -19,6 +21,10 @@
   function handleHeroButton() {
     console.log('Hero button clicked!');
     goto('/einblicke');
+  }
+
+  function openPhilosophyModal() {
+    philosophyModal?.openModal();
   }
 </script>
 
@@ -31,7 +37,7 @@
   <Section type={'centerTeaser'}>
     <div class="animate-fade-in-up flex w-full flex-col items-center justify-center text-center">
       <h1 class="massive">Digital Experience <span class="inner-text-special">nach Maß</span></h1>
-      <h3>skalierbar - sicher - nach bewährter raspb Philosophie - super günstig</h3>
+      <h3>skalierbar - sicher - nach bewährter <button class="text-link-button " onclick={openPhilosophyModal}>raspb Philosophie</button> - super günstig</h3>
       <button
         class="btn-basic"
         onclick={() => {
@@ -85,7 +91,7 @@
       </div>
       <div class="spacer"></div>
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
-        <div class="card from-lightGrey/70 via-lightGrey/90 to-lightGrey/45 bg-gradient-to-br card-md w-full shadow-sm">
+        <div class="card from-lightGrey/70 via-lightGrey/90 to-lightGrey/45 card-md w-full bg-gradient-to-br shadow-sm">
           <div class="card-body">
             <h2 class="card-title no-padding">Webseiten</h2>
             <p class="no-padding pt-3">
@@ -120,7 +126,7 @@
           </div>
         </div>
 
-        <div class="card from-lightGrey/70 via-lightGrey/90 to-lightGrey/45 bg-gradient-to-br card-md w-full shadow-sm">
+        <div class="card from-lightGrey/70 via-lightGrey/90 to-lightGrey/45 card-md w-full bg-gradient-to-br shadow-sm">
           <div class="card-body">
             <h2 class="card-title no-padding">Custom CMS</h2>
             <p class="no-padding pt-3">
@@ -155,7 +161,7 @@
           </div>
         </div>
 
-        <div class="card from-lightGrey/70 via-lightGrey/90 to-lightGrey/45 bg-gradient-to-br card-md w-full shadow-sm">
+        <div class="card from-lightGrey/70 via-lightGrey/90 to-lightGrey/45 card-md w-full bg-gradient-to-br shadow-sm">
           <div class="card-body">
             <h2 class="card-title no-padding">Applications (Apps)</h2>
             <p class="no-padding pt-3">
@@ -190,7 +196,7 @@
           </div>
         </div>
 
-        <div class="card from-lightGrey/70 via-lightGrey/90 to-lightGrey/45 bg-gradient-to-br card-md w-full shadow-sm">
+        <div class="card from-lightGrey/70 via-lightGrey/90 to-lightGrey/45 card-md w-full bg-gradient-to-br shadow-sm">
           <div class="card-body">
             <h2 class="card-title no-padding">Individualentwicklung</h2>
             <p class="no-padding pt-3">
@@ -214,7 +220,7 @@
       <div class="intro m-auto max-w-5xl text-center">
         <h1>Die perfekte <span class="inner-text-special">Balance</span></h1>
         <p class="teaser">
-          Wir verstehen, dass erfolgreiche Projekte das optimale Gleichgewicht zwischen Zeit, Kosten und Qualität erfordern. Unsere Philosophie "perfectly
+          Wir verstehen, dass erfolgreiche Projekte das optimale Gleichgewicht zwischen Zeit, Kosten und Qualität erfordern. <button class="text-link-button" onclick={openPhilosophyModal}>Unsere  Philosophie</button> "perfectly
           balanced" steht für diese harmonische Abstimmung aller Faktoren.
         </p>
       </div>
@@ -293,11 +299,13 @@
   </section>
 </div>
 
+<!-- Philosophy Modal -->
+<RaspbPhilosophyModal bind:this={philosophyModal} />
+
 <style lang="postcss">
   @reference '../app.css';
-
   .card {
-    @apply transition-transform duration-300 cursor-default;
+    @apply cursor-default transition-transform duration-300;
     &:hover {
       @apply translate-y-1.5;
     }

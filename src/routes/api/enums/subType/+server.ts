@@ -12,7 +12,7 @@ export const GET = async () => {
         }
       }
     `;
-    const { __type } = await client.request(query) as any;
+    const { __type } = (await client.request(query)) as any;
     return new Response(JSON.stringify(__type.enumValues));
   } catch (error) {
     return new Response(JSON.stringify(error));

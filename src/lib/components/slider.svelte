@@ -16,7 +16,7 @@
     },
     pagination: {
       el: '.swiper-pagination',
-      clickable: true,
+      clickable: true
     },
     on: {
       init() {}

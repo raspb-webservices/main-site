@@ -26,7 +26,7 @@
 </section>
 
 <style lang="postcss">
-    @reference '../../app.css';
+  @reference '../../app.css';
   section.impressum-content-wrapper {
     @apply m-auto h-full w-full max-w-7xl px-4 py-12;
   }

@@ -17,8 +17,8 @@
     const auth0Client = await auth.createClient();
     await auth.loginWithPopup(auth0Client);
 
-    if(currentUserRoles.includes('admin')) {
-      goto("/dashboard")
+    if (currentUserRoles.includes('admin')) {
+      goto('/dashboard');
     }
     logginIn = false;
   }
@@ -88,14 +88,16 @@
           class="btn btn-ghost"
           onclick={() => {
             login();
-          }}>{#if logginIn}<span class="loading loading-ring loading-sm"></span>{:else}<span>Login</span>{/if}</button
+          }}
+          >{#if logginIn}<span class="loading loading-ring loading-sm"></span>{:else}<span>Login</span>{/if}</button
         >
       {:else}
         <button
           class="btn btn-ghost"
           onclick={() => {
             logout();
-          }}>{#if logginIn}<span class="loading loading-ring loading-sm"></span>{:else}<span>Logout</span>{/if}</button
+          }}
+          >{#if logginIn}<span class="loading loading-ring loading-sm"></span>{:else}<span>Logout</span>{/if}</button
         >
       {/if}
       <button

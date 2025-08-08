@@ -62,7 +62,7 @@
 </section>
 
 <style lang="postcss">
-    @reference '../../app.css';
+  @reference '../../app.css';
   section.kontakt-content-wrapper {
     @apply m-auto h-full w-full max-w-7xl px-4 py-12;
     form {
@@ -83,7 +83,7 @@
             }
           }
           label {
-            @apply mb-1 block text-base text-darkGrey;
+            @apply text-darkGrey mb-1 block text-base;
 
             &[for='first-name'],
             &[for='last-name'],
@@ -95,14 +95,14 @@
           }
           input,
           textarea {
-            @apply mt-1 block w-full border border-mediumGrey bg-white p-3 text-sm text-darkGrey focus:border-secondary focus:ring-secondary;
+            @apply border-mediumGrey text-darkGrey focus:border-secondary focus:ring-secondary mt-1 block w-full border bg-white p-3 text-sm;
           }
           input.is-checkbox {
-            @apply mt-0 h-6 w-6 p-0 focus:ring-1 focus:ring-primary;
+            @apply focus:ring-primary mt-0 h-6 w-6 p-0 focus:ring-1;
           }
 
           .additional-information {
-            @apply text-sm text-mediumGrey;
+            @apply text-mediumGrey text-sm;
           }
         }
       }

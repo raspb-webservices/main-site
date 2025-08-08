@@ -1,7 +1,7 @@
 interface AuthConfig {
   domain: string;
   clientId: string;
-  callbackUrl?: string,
+  callbackUrl?: string;
 }
 
 const authConfig: AuthConfig = {

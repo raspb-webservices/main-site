@@ -1,9 +1,8 @@
 <script lang="ts">
-
-    import { page } from '$app/state';
+  import { page } from '$app/state';
   import { goto } from '$app/navigation';
 
-    const currentYear = new Date().getFullYear();
+  const currentYear = new Date().getFullYear();
 </script>
 
 <footer>
@@ -38,19 +37,19 @@
 <style lang="postcss">
   @reference '../../app.css';
   footer {
-    @apply bg-textBase h-20 md:h-12 w-full;
+    @apply bg-textBase h-20 w-full md:h-12;
 
     > div.inner-box {
-      @apply flex flex-col md:flex-row h-full w-full items-center md:justify-between;
+      @apply flex h-full w-full flex-col items-center md:flex-row md:justify-between;
 
       h4 {
-        @apply pt-2 pb-1 md:p-0 font-medium whitespace-nowrap text-white;
+        @apply pt-2 pb-1 font-medium whitespace-nowrap text-white md:p-0;
       }
 
       nav.footer-navigation {
-        @apply md:py-2 md:ml-auto;
+        @apply md:ml-auto md:py-2;
         > button {
-          @apply relative ml-2.5 mr-2.5 md:mr-0 md:ml-6 px-1 font-medium text-white opacity-75;
+          @apply relative mr-2.5 ml-2.5 px-1 font-medium text-white opacity-75 md:mr-0 md:ml-6;
           &::after {
             @apply absolute -bottom-1 left-0 block h-0.5 w-full origin-left scale-x-0 bg-white transition-transform duration-500;
             content: '';

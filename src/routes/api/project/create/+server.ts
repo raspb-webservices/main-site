@@ -29,6 +29,7 @@ export const POST: RequestHandler = async ({ request }) => {
         $estimatedPrice: Float
         $formFields: Json!
         $pages: Json!
+        $setup: Json
         $fileIDs: [AssetWhereUniqueInput!]
       ) {
         createProject(
@@ -53,6 +54,7 @@ export const POST: RequestHandler = async ({ request }) => {
             estimatedPrice: $estimatedPrice
             formFields: $formFields
             pages: $pages
+            setup: $setup
             relatedFiles: { connect: $fileIDs }
           }
         ) {
@@ -77,6 +79,7 @@ export const POST: RequestHandler = async ({ request }) => {
           estimatedPrice
           formFields
           pages
+          setup
           relatedFiles {
             fileName
           }
@@ -111,11 +114,11 @@ export const POST: RequestHandler = async ({ request }) => {
       estimatedPrice: projectData.estimatedPrice || null,
       formFields: projectData.formFields ? JSON.stringify(projectData.formFields) : null,
       pages: projectData.pages ? JSON.stringify(projectData.pages) : null,
+      setup: projectData.setup ? JSON.stringify(projectData.setup) : null,
       fileIDs: projectData.relatedFiles?.length ? projectData.relatedFiles : null
-    }
+    };
 
-    console.log("PROJECT VARIABLES ", variables )
-
+    console.log('PROJECT VARIABLES ', variables);
 
     // GraphQL Request an Hygraph senden
     const response = (await client.request(mutation, variables)) as { createProject: ProjectResponse };

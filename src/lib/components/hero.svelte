@@ -21,10 +21,7 @@
       {/if}
 
       {#if showButton && buttonText}
-        <button
-          class="btn-basic hero-button"
-          on:click={buttonAction}
-        >
+        <button class="btn-basic hero-button" on:click={buttonAction}>
           {buttonText}
         </button>
       {/if}
@@ -65,12 +62,12 @@
 
   .split .hero-content {
     @apply grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-14;
-    @apply py-16 px-4;
+    @apply px-4 py-16;
   }
 
   .centered .hero-content {
     @apply flex flex-col items-center justify-center px-4;
-    @apply max-w-4xl mx-auto;
+    @apply mx-auto max-w-4xl;
   }
 
   .hero-container:not(.split):not(.centered) .hero-content {
@@ -87,7 +84,7 @@
   }
 
   .hero-headline {
-    @apply pb-8 text-4xl font-bold leading-tight md:text-6xl;
+    @apply pb-8 text-4xl leading-tight font-bold md:text-6xl;
   }
 
   .centered .hero-headline {
@@ -99,7 +96,7 @@
   }
 
   .hero-subheadline {
-    @apply pb-6 text-xl font-light leading-relaxed;
+    @apply pb-6 text-xl leading-relaxed font-light;
   }
 
   .centered .hero-subheadline {
