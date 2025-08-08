@@ -43,6 +43,7 @@
   let customFeatures = $state('');
   let isUploading = $state(false);
   let uploadProgress = $state('');
+  let isGeneratingPDF = $state(false);
 
   // Customer data for contact form
   let customerData: Partial<Customer> = $state({
@@ -318,550 +319,46 @@
   }
 
   async function generatePDF() {
+    isGeneratingPDF = true;
     try {
-      // Dynamic import to avoid SSR issues
-      const { jsPDF } = await import('jspdf');
-
-      const doc = new jsPDF();
-
-      // RASPB brand colors - violett-rosa Verläufe
-      const brandPurple = { r: 139, g: 69, b: 19 }; // #8B4513 (Saddle Brown - als Basis für Violett)
-      const brandPink = { r: 219, g: 112, b: 147 }; // #DB7093 (Pale Violet Red)
-      const brandViolet = { r: 138, g: 43, b: 226 }; // #8A2BE2 (Blue Violet)
-      const brandRose = { r: 255, g: 182, b: 193 }; // #FFB6C1 (Light Pink)
-      const brandDeepPurple = { r: 75, g: 0, b: 130 }; // #4B0082 (Indigo)
-      const brandLavender = { r: 230, g: 230, b: 250 }; // #E6E6FA (Lavender)
-      const accentGold = { r: 255, g: 215, b: 0 }; // #FFD700 (Gold)
-
-      let yPosition = 20;
-      const pageWidth = doc.internal.pageSize.width;
-      const margin = 20;
-      const contentWidth = pageWidth - margin * 2;
-
-      // Helper function to create gradient effect with rectangles
-      function createGradientHeader(startColor: any, endColor: any, height: number) {
-        const steps = 20;
-        const stepHeight = height / steps;
-
-        for (let i = 0; i < steps; i++) {
-          const ratio = i / (steps - 1);
-          const r = Math.round(startColor.r + (endColor.r - startColor.r) * ratio);
-          const g = Math.round(startColor.g + (endColor.g - startColor.g) * ratio);
-          const b = Math.round(startColor.b + (endColor.b - startColor.b) * ratio);
-
-          doc.setFillColor(r, g, b);
-          doc.rect(0, i * stepHeight, pageWidth, stepHeight, 'F');
-        }
-      }
-
-      // Helper function to create section headers with gradient
-      function createSectionHeader(text: string, y: number) {
-        const headerHeight = 15;
-        const steps = 10;
-        const stepHeight = headerHeight / steps;
-
-        // Create gradient from violet to pink
-        for (let i = 0; i < steps; i++) {
-          const ratio = i / (steps - 1);
-          const r = Math.round(brandViolet.r + (brandPink.r - brandViolet.r) * ratio);
-          const g = Math.round(brandViolet.g + (brandPink.g - brandViolet.g) * ratio);
-          const b = Math.round(brandViolet.b + (brandPink.b - brandViolet.b) * ratio);
-
-          doc.setFillColor(r, g, b);
-          doc.rect(margin, y - 5 + i * stepHeight, contentWidth, stepHeight, 'F');
-        }
-
-        // Add text
-        doc.setFontSize(14);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(255, 255, 255);
-        doc.text(text, margin + 5, y + 5);
-      }
-
-      // Helper function to add text with word wrapping
-      function addText(text: string, x: number, y: number, maxWidth: number, fontSize: number = 10) {
-        doc.setFontSize(fontSize);
-        const lines = doc.splitTextToSize(text, maxWidth);
-        doc.text(lines, x, y);
-        return y + lines.length * fontSize * 0.4;
-      }
-
-      // Helper function to add a new page if needed
-      function checkPageBreak(requiredSpace: number) {
-        if (yPosition + requiredSpace > doc.internal.pageSize.height - 30) {
-          doc.addPage();
-          addPageHeader();
-          yPosition = 50;
-        }
-      }
-
-      // Helper function to add page header
-      function addPageHeader() {
-        // Mini gradient header for subsequent pages
-        createGradientHeader(brandDeepPurple, brandRose, 25);
-
-        doc.setTextColor(255, 255, 255);
-        doc.setFontSize(12);
-        doc.setFont('helvetica', 'bold');
-        doc.text('RASPB', margin, 15);
-        doc.setFontSize(10);
-        doc.setFont('helvetica', 'normal');
-        doc.text('Projekt Konfiguration', margin + 35, 15);
-      }
-
-      // Main header with dramatic gradient
-      createGradientHeader(brandDeepPurple, brandRose, 50);
-
-      // Add decorative elements
-      doc.setFillColor(accentGold.r, accentGold.g, accentGold.b);
-      doc.circle(pageWidth - 30, 25, 8, 'F');
-      doc.setFillColor(255, 255, 255);
-      doc.circle(pageWidth - 30, 25, 6, 'F');
-
-      // Main title
-      doc.setTextColor(255, 255, 255);
-      doc.setFontSize(28);
-      doc.setFont('helvetica', 'bold');
-      doc.text('RASPB', margin, 25);
-
-      doc.setFontSize(18);
-      doc.setFont('helvetica', 'normal');
-      doc.text('Projekt Konfiguration', margin, 40);
-
-      // Subtitle with date
-      doc.setFontSize(10);
-      doc.setTextColor(brandLavender.r, brandLavender.g, brandLavender.b);
-      doc.text(`Erstellt am ${new Date().toLocaleDateString('de-DE')}`, pageWidth - margin - 50, 40);
-
-      yPosition = 65;
-      doc.setTextColor(0, 0, 0);
-
-      // Project Overview Section
-      createSectionHeader('PROJEKT ÜBERSICHT', yPosition);
-      yPosition += 25;
-      doc.setFont('helvetica', 'normal');
-
-      // Project Name with special styling
-      if (config.name) {
-        doc.setFontSize(16);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(brandViolet.r, brandViolet.g, brandViolet.b);
-        doc.text('Projektname:', margin, yPosition);
-        doc.setFont('helvetica', 'normal');
-        doc.setTextColor(0, 0, 0);
-        yPosition = addText(config.name, margin + 50, yPosition, contentWidth - 50, 16);
-        yPosition += 8;
-      }
-
-      // Project Type
-      const projectType = projectTypes.find((p) => p.id === config.projectType);
-      const subType = subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType);
-
-      if (projectType) {
-        doc.setFontSize(12);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(brandViolet.r, brandViolet.g, brandViolet.b);
-        doc.text('Projekttyp:', margin, yPosition);
-        doc.setFont('helvetica', 'normal');
-        doc.setTextColor(0, 0, 0);
-        yPosition = addText(`${projectType.title}${subType ? ` - ${subType.title}` : ''}`, margin + 40, yPosition, contentWidth - 40, 12);
-        yPosition += 8;
-      }
-
-      // Estimated Price with special highlight
-      if (config.estimatedPrice > 0) {
-        // Price highlight box
-        doc.setFillColor(brandLavender.r, brandLavender.g, brandLavender.b);
-        doc.roundedRect(margin, yPosition - 3, contentWidth, 20, 3, 3, 'F');
-
-        doc.setFontSize(14);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(brandDeepPurple.r, brandDeepPurple.g, brandDeepPurple.b);
-        doc.text('Geschätzter Preis:', margin + 5, yPosition + 8);
-
-        doc.setFontSize(18);
-        doc.setTextColor(brandViolet.r, brandViolet.g, brandViolet.b);
-        doc.text(`${config.estimatedPrice.toLocaleString()}€`, margin + 70, yPosition + 8);
-
-        yPosition += 25;
-      }
-
-      // Project Description
-      if (config.description) {
-        checkPageBreak(40);
-        createSectionHeader('PROJEKTBESCHREIBUNG', yPosition);
-        yPosition += 25;
-
-        doc.setTextColor(0, 0, 0);
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(10);
-        yPosition = addText(config.description, margin, yPosition, contentWidth, 10);
-        yPosition += 15;
-      }
-
-      // Project Details
-      checkPageBreak(60);
-      createSectionHeader('PROJEKT DETAILS', yPosition);
-      yPosition += 25;
-
-      doc.setTextColor(0, 0, 0);
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(10);
-
-      const details = [
-        { label: 'Zielgruppe', value: config.targetAudience },
-        { label: 'Hauptziele', value: config.goals },
-        { label: 'Gewünschte Domain', value: config.desiredDomain },
-        { label: 'Domain-Status', value: config.domainStatus },
-        { label: 'Zeitrahmen', value: config.timeline },
-        { label: 'Budget', value: config.budget }
-      ];
-
-      details.forEach((detail) => {
-        if (detail.value) {
-          doc.setFont('helvetica', 'bold');
-          doc.setTextColor(brandViolet.r, brandViolet.g, brandViolet.b);
-          doc.text(`${detail.label}:`, margin, yPosition);
-          doc.setFont('helvetica', 'normal');
-          doc.setTextColor(0, 0, 0);
-          yPosition = addText(detail.value, margin + 45, yPosition, contentWidth - 45, 10);
-          yPosition += 5;
-        }
+      // Send project data to server-side PDF generation
+      const response = await fetch('/api/generate-pdf', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          config,
+          customerData,
+          uploadedFiles: uploadedFiles.map((file) => ({
+            name: file.name,
+            size: file.size,
+            type: file.type
+          })),
+          customFeatures,
+          filename: `${config.name || 'Projekt'}_Konfiguration_${new Date().toISOString().split('T')[0]}.pdf`
+        })
       });
 
-      // Features (if any)
-      if (config.features.length > 0) {
-        checkPageBreak(40);
-        yPosition += 10;
-
-        createSectionHeader('GEWÄHLTE FEATURES', yPosition);
-        yPosition += 25;
-
-        doc.setTextColor(0, 0, 0);
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(10);
-
-        config.features.forEach((featureId) => {
-          const feature = availableFeatures.find((f) => f.name === featureId);
-          if (feature) {
-            // Feature bullet with color
-            doc.setTextColor(brandPink.r, brandPink.g, brandPink.b);
-            doc.text('●', margin + 5, yPosition);
-            doc.setTextColor(0, 0, 0);
-            doc.text(feature.title, margin + 10, yPosition);
-            yPosition += 6;
-            if (feature.description) {
-              doc.setTextColor(100, 100, 100);
-              yPosition = addText(`  ${feature.description}`, margin + 15, yPosition, contentWidth - 20, 9);
-              doc.setTextColor(0, 0, 0);
-              yPosition += 3;
-            }
-          }
-        });
-
-        if (customFeatures) {
-          yPosition += 5;
-          doc.setFont('helvetica', 'bold');
-          doc.setTextColor(brandViolet.r, brandViolet.g, brandViolet.b);
-          doc.text('Weitere Features:', margin, yPosition);
-          doc.setFont('helvetica', 'normal');
-          doc.setTextColor(0, 0, 0);
-          yPosition += 6;
-          yPosition = addText(customFeatures, margin + 5, yPosition, contentWidth - 10, 10);
-        }
+      if (!response.ok) {
+        throw new Error('PDF generation failed');
       }
 
-      // Pages/Content (if any)
-      if (config.pages.length > 0) {
-        checkPageBreak(40);
-        yPosition += 10;
-
-        createSectionHeader('SEITEN/BEREICHE', yPosition);
-        yPosition += 25;
-
-        doc.setTextColor(0, 0, 0);
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(10);
-
-        config.pages.forEach((page, index) => {
-          if (page.name.trim()) {
-            checkPageBreak(25);
-
-            // Page number with colored background
-            doc.setFillColor(brandRose.r, brandRose.g, brandRose.b);
-            doc.circle(margin + 5, yPosition - 2, 3, 'F');
-            doc.setTextColor(255, 255, 255);
-            doc.setFontSize(8);
-            doc.text(`${index + 1}`, margin + 3, yPosition);
-
-            doc.setFontSize(10);
-            doc.setFont('helvetica', 'bold');
-            doc.setTextColor(brandViolet.r, brandViolet.g, brandViolet.b);
-            doc.text(page.name, margin + 12, yPosition);
-            yPosition += 6;
-
-            if (page.content) {
-              doc.setFont('helvetica', 'normal');
-              doc.setTextColor(0, 0, 0);
-              doc.text('Inhalte:', margin + 5, yPosition);
-              yPosition += 5;
-              yPosition = addText(page.content, margin + 10, yPosition, contentWidth - 15, 9);
-              yPosition += 3;
-            }
-
-            if (page.characteristic) {
-              doc.setFont('helvetica', 'normal');
-              doc.setTextColor(0, 0, 0);
-              doc.text('Besonderheiten:', margin + 5, yPosition);
-              yPosition += 5;
-              yPosition = addText(page.characteristic, margin + 10, yPosition, contentWidth - 15, 9);
-              yPosition += 8;
-            }
-          }
-        });
-      }
-
-      // Form Fields (if any)
-      if (config.formFields.length > 0) {
-        checkPageBreak(40);
-        yPosition += 10;
-
-        createSectionHeader('FORMULAR-FELDER', yPosition);
-        yPosition += 25;
-
-        doc.setTextColor(0, 0, 0);
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(10);
-
-        config.formFields.forEach((field, index) => {
-          if (field.name.trim()) {
-            const fieldType = formFieldTypes.find((f) => f.id === field.type);
-
-            // Field number with colored background
-            doc.setFillColor(brandRose.r, brandRose.g, brandRose.b);
-            doc.circle(margin + 5, yPosition - 2, 3, 'F');
-            doc.setTextColor(255, 255, 255);
-            doc.setFontSize(8);
-            doc.text(`${index + 1}`, margin + 3, yPosition);
-
-            doc.setFontSize(10);
-            doc.setTextColor(0, 0, 0);
-            doc.text(`${field.name}`, margin + 12, yPosition);
-            doc.text(`(${fieldType?.title || field.type})`, margin + 80, yPosition);
-
-            if (field.required) {
-              doc.setTextColor(brandViolet.r, brandViolet.g, brandViolet.b);
-              doc.text('*Pflicht', margin + 130, yPosition);
-              doc.setTextColor(0, 0, 0);
-            }
-            yPosition += 6;
-          }
-        });
-      }
-
-      // Design (if not individual project)
-      if (config.projectType !== 'individual') {
-        checkPageBreak(50);
-        yPosition += 10;
-
-        createSectionHeader('DESIGN', yPosition);
-        yPosition += 25;
-
-        doc.setTextColor(0, 0, 0);
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(10);
-
-        // Colors with visual representation
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(brandViolet.r, brandViolet.g, brandViolet.b);
-        doc.text('Farbschema:', margin, yPosition);
-        yPosition += 8;
-
-        doc.setFont('helvetica', 'normal');
-        doc.setTextColor(0, 0, 0);
-
-        // Primary Color
-        doc.text(`Primärfarbe: ${config.primaryColour}`, margin + 5, yPosition);
-        // Color swatch simulation
-        doc.setFillColor(
-          parseInt(config.primaryColour.slice(1, 3), 16),
-          parseInt(config.primaryColour.slice(3, 5), 16),
-          parseInt(config.primaryColour.slice(5, 7), 16)
-        );
-        doc.rect(margin + 70, yPosition - 3, 8, 5, 'F');
-        yPosition += 6;
-
-        // Secondary Color
-        doc.text(`Sekundärfarbe: ${config.secondaryColour}`, margin + 5, yPosition);
-        doc.setFillColor(
-          parseInt(config.secondaryColour.slice(1, 3), 16),
-          parseInt(config.secondaryColour.slice(3, 5), 16),
-          parseInt(config.secondaryColour.slice(5, 7), 16)
-        );
-        doc.rect(margin + 70, yPosition - 3, 8, 5, 'F');
-        yPosition += 6;
-
-        // Accent Color
-        doc.text(`Akzentfarbe: ${config.accentColour}`, margin + 5, yPosition);
-        doc.setFillColor(
-          parseInt(config.accentColour.slice(1, 3), 16),
-          parseInt(config.accentColour.slice(3, 5), 16),
-          parseInt(config.accentColour.slice(5, 7), 16)
-        );
-        doc.rect(margin + 70, yPosition - 3, 8, 5, 'F');
-        yPosition += 10;
-
-        // Font
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(brandViolet.r, brandViolet.g, brandViolet.b);
-        doc.text('Schriftart:', margin, yPosition);
-        doc.setFont('helvetica', 'normal');
-        doc.setTextColor(0, 0, 0);
-        doc.text(config.customFont || config.desiredFont || 'Nicht angegeben', margin + 30, yPosition);
-        yPosition += 15;
-      }
-
-      // Uploaded Files
-      if (uploadedFiles.length > 0) {
-        checkPageBreak(40);
-        yPosition += 10;
-
-        createSectionHeader('HOCHGELADENE DATEIEN', yPosition);
-        yPosition += 25;
-
-        doc.setTextColor(0, 0, 0);
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(10);
-
-        uploadedFiles.forEach((file, index) => {
-          // File icon
-          doc.setTextColor(brandPink.r, brandPink.g, brandPink.b);
-          doc.text('📄', margin, yPosition);
-          doc.setTextColor(0, 0, 0);
-          doc.text(`${index + 1}. ${file.name}`, margin + 8, yPosition);
-          doc.text(`(${Math.round(file.size / 1024)}KB)`, margin + 120, yPosition);
-          yPosition += 6;
-        });
-      }
-
-      // Contact Information
-      if (customerData.givenName || customerData.familyName || customerData.email) {
-        checkPageBreak(50);
-        yPosition += 10;
-
-        createSectionHeader('KONTAKTINFORMATIONEN', yPosition);
-        yPosition += 25;
-
-        doc.setTextColor(0, 0, 0);
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(10);
-
-        if (customerData.salutation) {
-          doc.setFont('helvetica', 'bold');
-          doc.setTextColor(brandViolet.r, brandViolet.g, brandViolet.b);
-          doc.text('Anrede:', margin, yPosition);
-          doc.setFont('helvetica', 'normal');
-          doc.setTextColor(0, 0, 0);
-          doc.text(customerData.salutation, margin + 25, yPosition);
-          yPosition += 6;
-        }
-
-        if (customerData.givenName || customerData.familyName) {
-          doc.setFont('helvetica', 'bold');
-          doc.setTextColor(brandViolet.r, brandViolet.g, brandViolet.b);
-          doc.text('Name:', margin, yPosition);
-          doc.setFont('helvetica', 'normal');
-          doc.setTextColor(0, 0, 0);
-          doc.text(`${customerData.givenName || ''} ${customerData.familyName || ''}`.trim(), margin + 25, yPosition);
-          yPosition += 6;
-        }
-
-        if (customerData.email) {
-          doc.setFont('helvetica', 'bold');
-          doc.setTextColor(brandViolet.r, brandViolet.g, brandViolet.b);
-          doc.text('E-Mail:', margin, yPosition);
-          doc.setFont('helvetica', 'normal');
-          doc.setTextColor(0, 0, 0);
-          doc.text(customerData.email, margin + 25, yPosition);
-          yPosition += 6;
-        }
-
-        if (customerData.phone) {
-          doc.setFont('helvetica', 'bold');
-          doc.setTextColor(brandViolet.r, brandViolet.g, brandViolet.b);
-          doc.text('Telefon:', margin, yPosition);
-          doc.setFont('helvetica', 'normal');
-          doc.setTextColor(0, 0, 0);
-          doc.text(customerData.phone, margin + 25, yPosition);
-          yPosition += 6;
-        }
-
-        if (customerData.company) {
-          doc.setFont('helvetica', 'bold');
-          doc.setTextColor(brandViolet.r, brandViolet.g, brandViolet.b);
-          doc.text('Unternehmen:', margin, yPosition);
-          doc.setFont('helvetica', 'normal');
-          doc.setTextColor(0, 0, 0);
-          doc.text(customerData.company, margin + 35, yPosition);
-          yPosition += 6;
-        }
-
-        if (customerData.address || customerData.postCode || customerData.city) {
-          doc.setFont('helvetica', 'bold');
-          doc.setTextColor(brandViolet.r, brandViolet.g, brandViolet.b);
-          doc.text('Adresse:', margin, yPosition);
-          doc.setFont('helvetica', 'normal');
-          doc.setTextColor(0, 0, 0);
-          yPosition += 6;
-
-          if (customerData.address) {
-            doc.text(customerData.address, margin + 5, yPosition);
-            yPosition += 5;
-          }
-          if (customerData.postCode || customerData.city) {
-            doc.text(`${customerData.postCode || ''} ${customerData.city || ''}`.trim(), margin + 5, yPosition);
-            yPosition += 5;
-          }
-          if (customerData.country) {
-            doc.text(customerData.country, margin + 5, yPosition);
-            yPosition += 5;
-          }
-        }
-      }
-
-      // Footer with branding
-      const totalPages = doc.internal.pages.length - 1;
-      for (let i = 1; i <= totalPages; i++) {
-        doc.setPage(i);
-
-        // Footer gradient
-        const footerY = doc.internal.pageSize.height - 20;
-        const footerSteps = 5;
-        const footerStepHeight = 10 / footerSteps;
-
-        for (let j = 0; j < footerSteps; j++) {
-          const ratio = j / (footerSteps - 1);
-          const r = Math.round(brandDeepPurple.r + (brandLavender.r - brandDeepPurple.r) * ratio);
-          const g = Math.round(brandDeepPurple.g + (brandLavender.g - brandDeepPurple.g) * ratio);
-          const b = Math.round(brandDeepPurple.b + (brandLavender.b - brandDeepPurple.b) * ratio);
-
-          doc.setFillColor(r, g, b);
-          doc.rect(0, footerY + j * footerStepHeight, pageWidth, footerStepHeight, 'F');
-        }
-
-        // Footer text
-        doc.setFontSize(8);
-        doc.setTextColor(255, 255, 255);
-        doc.text(`Erstellt am ${new Date().toLocaleDateString('de-DE')} | Seite ${i} von ${totalPages}`, margin, footerY + 8);
-        doc.text('RASPB Webservices | www.raspb.de', pageWidth - margin - 60, footerY + 8);
-      }
-
-      // Save the PDF
-      const fileName = `${config.name || 'Projekt'}_Konfiguration_${new Date().toISOString().split('T')[0]}.pdf`;
-      doc.save(fileName);
+      // Download the PDF
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${config.name || 'Projekt'}_Konfiguration_${new Date().toISOString().split('T')[0]}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
     } catch (error) {
       console.error('Error generating PDF:', error);
       alert('Fehler beim Erstellen des PDFs. Bitte versuchen Sie es erneut.');
+    } finally {
+      isGeneratingPDF = false;
     }
   }
 
@@ -1916,16 +1413,21 @@
       </button>
     {:else}
       <div class="flex gap-4">
-        <button type="button" class="btn-basic" onclick={generatePDF}>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-            />
-          </svg>
-          Konfiguration herunterladen
+        <button type="button" class="btn-basic" onclick={generatePDF} disabled={isGeneratingPDF}>
+          {#if isGeneratingPDF}
+            <span class="loading loading-spinner loading-sm"></span>
+            PDF wird erstellt...
+          {:else}
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              />
+            </svg>
+            Konfiguration herunterladen
+          {/if}
         </button>
         <button type="button" class="btn-basic" onclick={submitToAPI}>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

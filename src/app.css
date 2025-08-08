@@ -212,7 +212,7 @@ h6 {
 
 a,
 .text-link-button {
-  @apply m-0 cursor-pointer p-0 underline duration-300 opacity-70;
+  @apply m-0 cursor-pointer p-0 underline opacity-70 duration-300;
   color: inherit;
   font-size: inherit;
   line-height: inherit;

@@ -90,6 +90,9 @@
       Bei raspb Webservices verbinden wir menschliche Kreativität mit der Kraft künstlicher Intelligenz. Als modernes Webentwicklungs-Studio schaffen wir
       innovative digitale Lösungen, die Ihre Vision zum Leben erwecken.
     </p>
+    <p class="teaser no-padding animate-fade-in-up mx-auto max-w-4xl text-center text-lg">
+      Und wer genau ist raspb jetzt? - Eigentlich sind das nur ich un meine KI Crew 😉
+    </p>
   </Section>
 
   <!-- Markus Section -->
@@ -186,7 +189,7 @@
         <h2 class="mb-6 text-3xl font-bold">Unsere Philosophie</h2>
         <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div class="text-center">
-            <div class="mb-4 text-4xl">🚀</div>
+            <div class="mb-4 text-4xl">⚡</div>
             <h3 class="mb-2 text-xl font-semibold">Innovation</h3>
             <p class="opacity-80">Wir nutzen modernste Technologien und KI-Tools, um zukunftsweisende Lösungen zu entwickeln.</p>
           </div>

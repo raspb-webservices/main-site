@@ -53,6 +53,53 @@
     }
   }
 
+  // Helper function to publish project with retry mechanism and delay
+  async function publishProjectWithRetry(projectId: string, maxRetries: number = 3, delayMs: number = 2000) {
+    console.log(`Attempting to publish project ${projectId} with ${maxRetries} retries and ${delayMs}ms delay`);
+
+    // Wait before first attempt to ensure project is fully created
+    await new Promise((resolve) => setTimeout(resolve, delayMs));
+
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        console.log(`Publishing attempt ${attempt}/${maxRetries} for project ${projectId}`);
+
+        const publishResponse = await fetch(`/api/project/publish/${projectId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        const publishResult = await publishResponse.json();
+
+        if (publishResponse.ok && publishResult.success) {
+          console.log(`Projekt erfolgreich veröffentlicht (Versuch ${attempt}):`, publishResult);
+          return true;
+        } else {
+          console.warn(`Publishing attempt ${attempt} failed:`, publishResult);
+
+          // If this is not the last attempt, wait before retrying
+          if (attempt < maxRetries) {
+            console.log(`Waiting ${delayMs}ms before retry...`);
+            await new Promise((resolve) => setTimeout(resolve, delayMs));
+          }
+        }
+      } catch (publishError) {
+        console.warn(`Publishing attempt ${attempt} error:`, publishError);
+
+        // If this is not the last attempt, wait before retrying
+        if (attempt < maxRetries) {
+          console.log(`Waiting ${delayMs}ms before retry...`);
+          await new Promise((resolve) => setTimeout(resolve, delayMs));
+        }
+      }
+    }
+
+    console.error(`Failed to publish project ${projectId} after ${maxRetries} attempts`);
+    return false;
+  }
+
   // Main API submission function
   export async function submitToAPI(): Promise<{ success: boolean; projectId?: string }> {
     isSubmitting = true;
@@ -181,23 +228,8 @@
           // Don't fail the entire process if linking fails
         }
 
-        // Step 6: Publish the project
-        try {
-          const publishResponse = await fetch(`/api/project/publish/${projectId}`, {
-            method: 'POST'
-          });
-          const publishResult = await publishResponse.json();
-
-          if (publishResponse.ok && publishResult) {
-            console.log('Projekt veröffentlicht:', publishResult);
-          } else {
-            console.warn('Project publishing failed, but project was created:', publishResult);
-            // Don't fail the entire process if publishing fails
-          }
-        } catch (publishError) {
-          console.warn('Project publishing error:', publishError);
-          // Don't fail the entire process if publishing fails
-        }
+        // Step 6: Publish the project with retry mechanism and delay
+        await publishProjectWithRetry(projectId);
 
         // Step 7: Now publish all assets AFTER project is published
         if (finalAssetIds.length > 0) {

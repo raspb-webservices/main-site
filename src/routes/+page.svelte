@@ -37,7 +37,7 @@
   <Section type={'centerTeaser'}>
     <div class="animate-fade-in-up flex w-full flex-col items-center justify-center text-center">
       <h1 class="massive">Digital Experience <span class="inner-text-special">nach Maß</span></h1>
-      <h3>skalierbar - sicher - nach bewährter <button class="text-link-button " onclick={openPhilosophyModal}>raspb Philosophie</button> - super günstig</h3>
+      <h3>skalierbar - sicher - nach bewährter <button class="text-link-button" onclick={openPhilosophyModal}>raspb Philosophie</button> - super günstig</h3>
       <button
         class="btn-basic"
         onclick={() => {
@@ -220,8 +220,10 @@
       <div class="intro m-auto max-w-5xl text-center">
         <h1>Die perfekte <span class="inner-text-special">Balance</span></h1>
         <p class="teaser">
-          Wir verstehen, dass erfolgreiche Projekte das optimale Gleichgewicht zwischen Zeit, Kosten und Qualität erfordern. <button class="text-link-button" onclick={openPhilosophyModal}>Unsere  Philosophie</button> "perfectly
-          balanced" steht für diese harmonische Abstimmung aller Faktoren.
+          Wir verstehen, dass erfolgreiche Projekte das optimale Gleichgewicht zwischen Zeit, Kosten und Qualität erfordern. <button
+            class="text-link-button"
+            onclick={openPhilosophyModal}>Unsere Philosophie</button
+          > "perfectly balanced" steht für diese harmonische Abstimmung aller Faktoren.
         </p>
       </div>
       <div class="spacer"></div>
