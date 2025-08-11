@@ -278,18 +278,6 @@
     </div>
   </Section>
 
-  <Section>
-    <Hero
-      headline="Innovative <span class='inner-text-special'>Web Solutions</span>"
-      subheadline="Transform your digital presence with cutting-edge technology and expert craftsmanship. Our team delivers scalable, secure solutions tailored to your unique business needs."
-      variant="split"
-      image="/images/visualization-2.png"
-      imageAlt="Web development visualization"
-      showButton={true}
-      buttonText="Start Your Project"
-      buttonAction={handleHeroButton}
-    />
-  </Section>
 
   <section class="direct-section hidden">
     {#each data.contents as snippet}

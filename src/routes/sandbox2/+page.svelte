@@ -110,6 +110,8 @@
         })
       });
 
+      console.log("response", response);
+
       if (response.ok) {
         // PDF erfolgreich generiert - Download starten
         const blob = await response.blob();
