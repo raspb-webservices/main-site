@@ -85,7 +85,7 @@
     <div class="cta-area">
       {#if !isAuth}
         <button
-          class="btn btn-ghost"
+          class="nav-button-link"
           onclick={() => {
             login();
           }}
@@ -93,7 +93,7 @@
         >
       {:else}
         <button
-          class="btn btn-ghost"
+          class="nav-button-link"
           onclick={() => {
             logout();
           }}

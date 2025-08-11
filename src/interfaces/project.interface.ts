@@ -22,6 +22,7 @@ export interface Project {
   projectDetails?: string;
   desiredDomain?: string;
   domainStatus?: string;
+  projectStatus?: string;
   goals?: string;
   targetAudience?: string;
   budget?: string;
@@ -100,6 +101,16 @@ export enum subType {
   apiIntegration,
   customTool,
   onepagerPlus
+}
+
+export enum projectStatus {
+  created = 'created',
+  introduced = 'introduced',
+  prototype = 'prototype',
+  refinement = 'refinement',
+  ready = 'ready',
+  published = 'published',
+  paid = 'paid'
 }
 
 export enum features {

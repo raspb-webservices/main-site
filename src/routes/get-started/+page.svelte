@@ -1,6 +1,33 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { goto } from '$app/navigation';
   import Wizard from '$lib/components/wizard/wizard.svelte';
+
+  interface PageData {
+    projectType: string | null;
+    subType: string | null;
+  }
+
+  const { data }: { data: PageData } = $props();
+
+  function scrollToWizard(offset = 0) {
+    const target = document.getElementById('wizard');
+    if (!target) return;
+
+    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({
+      top: targetPosition,
+      behavior: 'smooth'
+    });
+  }
+
+  onMount(() => {
+    if (data.projectType || data.subType) {
+      setTimeout(() => {
+        scrollToWizard(30);
+      }, 300);
+    }
+  });
 </script>
 
 <section class="get-started-content-wrapper">
@@ -9,7 +36,7 @@
 
     <div class="teaser-content">
       <p class="lead-text">
-        In nur wenigen Minuten zu Ihrem maßgeschneiderten Angebot – unser intelligenter Konfigurator führt Sie Schritt für Schritt durch alle wichtigen
+        In nur wenigen Minuten zu Ihrem maßgeschneiderten Angebot - unser intelligenter Konfigurator führt Sie Schritt für Schritt durch alle wichtigen
         Entscheidungen.
       </p>
 
@@ -18,7 +45,7 @@
           <div class="benefit-icon">⚡</div>
           <div class="benefit-text">
             <h3>Schnell & Effizient</h3>
-            <p>Keine langen Gespräche – definieren Sie Ihr Projekt in 5-10 Minuten</p>
+            <p>Keine langen Gespräche - definieren Sie Ihr Projekt in 5-10 Minuten</p>
           </div>
         </div>
 
@@ -34,7 +61,7 @@
           <div class="benefit-icon">🎯</div>
           <div class="benefit-text">
             <h3>Präzise Planung</h3>
-            <p>Alle Details werden erfasst – für ein perfekt auf Sie zugeschnittenes Ergebnis</p>
+            <p>Alle Details werden erfasst - für ein perfekt auf Sie zugeschnittenes Ergebnis</p>
           </div>
         </div>
 
@@ -49,15 +76,15 @@
 
       <div class="cta-text">
         <p class="no-padding">
-          <strong>So funktioniert's:</strong> Wählen Sie Ihren Projekttyp, beschreiben Sie Ihre Anforderungen, definieren Sie gewünschte Features und Design – fertig!
+          <strong>So funktioniert's:</strong> Wählen Sie Ihren Projekttyp, beschreiben Sie Ihre Anforderungen, definieren Sie gewünschte Features und Design - fertig!
           Sie erhalten sofort eine Kostenschätzung und können Ihre Konfiguration als PDF herunterladen.
         </p>
       </div>
     </div>
   </div>
 
-  <div class="wizard-section">
-    <Wizard />
+  <div class="wizard-section" id="wizard">
+    <Wizard initialProjectType={data.projectType} initialSubType={data.subType} />
   </div>
 </section>
 

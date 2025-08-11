@@ -14,6 +14,7 @@ export const GET = async () => {
           projectDetails
           desiredDomain
           domainStatus
+          projectStatus
           goals
           targetAudience
           budget

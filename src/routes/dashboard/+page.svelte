@@ -5,6 +5,7 @@
   import { user, isAuthenticated, userroles } from '$store/sharedStates.svelte';
   import { onMount } from 'svelte';
   import type { Project } from '$interfaces/project.interface';
+  import { projectStatus } from '$interfaces/project.interface';
 
   // Reaktive Variablen für Authentifizierung und Rollen
   let isAuth = $derived(isAuthenticated.get());
@@ -121,6 +122,48 @@
 
   function formatBudget(budget: string) {
     return budget ? `${budget}€` : 'Nicht angegeben';
+  }
+
+  function getStatusBadgeClass(status: string) {
+    switch (status) {
+      case projectStatus.created:
+        return 'badge-neutral';
+      case projectStatus.introduced:
+        return 'badge-info';
+      case projectStatus.prototype:
+        return 'badge-warning';
+      case projectStatus.refinement:
+        return 'badge-secondary';
+      case projectStatus.ready:
+        return 'badge-accent';
+      case projectStatus.published:
+        return 'badge-success';
+      case projectStatus.paid:
+        return 'badge-primary';
+      default:
+        return 'badge-ghost';
+    }
+  }
+
+  function getStatusLabel(status: string) {
+    switch (status) {
+      case projectStatus.created:
+        return 'Erstellt';
+      case projectStatus.introduced:
+        return 'Vorgestellt';
+      case projectStatus.prototype:
+        return 'Prototyp';
+      case projectStatus.refinement:
+        return 'Verfeinerung';
+      case projectStatus.ready:
+        return 'Bereit';
+      case projectStatus.published:
+        return 'Veröffentlicht';
+      case projectStatus.paid:
+        return 'Bezahlt';
+      default:
+        return 'Unbekannt';
+    }
   }
 
   function redirectToHome() {
@@ -295,7 +338,14 @@
                 <div class="card-body">
                   <div class="mb-4 flex items-start justify-between">
                     <h2 class="card-title text-lg">{project.name}</h2>
-                    <div class="badge badge-primary badge-sm">{project.projectType || 'Unbekannt'}</div>
+                    <div class="flex flex-col gap-1">
+                      <div class="badge badge-primary badge-sm">{project.projectType || 'Unbekannt'}</div>
+                      {#if project.projectStatus}
+                        <div class="badge {getStatusBadgeClass(project.projectStatus)} badge-sm">
+                          {getStatusLabel(project.projectStatus)}
+                        </div>
+                      {/if}
+                    </div>
                   </div>
 
                   <p class="text-base-content/70 mb-4 line-clamp-3 text-sm">
@@ -393,6 +443,16 @@
               <div class="flex justify-between">
                 <span class="text-base-content/60">Untertyp:</span>
                 <span class="font-medium">{selectedProject.subType || 'Nicht angegeben'}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-base-content/60">Projektstatus:</span>
+                {#if selectedProject.projectStatus}
+                  <div class="badge {getStatusBadgeClass(selectedProject.projectStatus)} badge-sm">
+                    {getStatusLabel(selectedProject.projectStatus)}
+                  </div>
+                {:else}
+                  <span class="font-medium">Nicht angegeben</span>
+                {/if}
               </div>
               <div class="flex flex-col gap-1">
                 <span class="text-base-content/60">Beschreibung:</span>

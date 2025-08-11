@@ -218,6 +218,16 @@ a,
   line-height: inherit;
   height: inherit;
 
+  &.inverted-underline {
+    @apply no-underline;
+    &:hover {
+      @apply underline;
+    }
+    &.active {
+      @apply text-secondary underline;
+    }
+  }
+
   &.white-link,
   &.on-dark {
     @apply text-white;
@@ -299,6 +309,30 @@ textarea:not([rows]) {
 
   &:hover {
     @apply cursor-pointer bg-right shadow-none;
+  }
+}
+
+.nav-button-link {
+  @apply relative mr-2.5 ml-2.5 min-h-6 px-2 text-lg text-black opacity-75;
+  &::after {
+    @apply absolute -bottom-1 left-0 block h-0.5 w-full origin-left scale-x-0 bg-black transition-transform duration-500;
+    content: '';
+  }
+  &:hover {
+    @apply cursor-pointer opacity-100;
+    &::after {
+      @apply scale-x-100;
+    }
+  }
+
+  &.active {
+    @apply opacity-100;
+    &::after {
+      @apply scale-x-100;
+    }
+    &:hover {
+      @apply cursor-default;
+    }
   }
 }
 

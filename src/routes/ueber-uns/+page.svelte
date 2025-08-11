@@ -86,12 +86,12 @@
 <div class="content-area">
   <Section>
     <h1 class="animate-fade-in mb-8 text-center text-4xl font-bold">Über uns</h1>
-    <p class="teaser no-padding animate-fade-in-up mx-auto max-w-4xl text-center text-lg">
+    <p class="teaser animate-fade-in-up mx-auto max-w-4xl text-center text-lg">
       Bei raspb Webservices verbinden wir menschliche Kreativität mit der Kraft künstlicher Intelligenz. Als modernes Webentwicklungs-Studio schaffen wir
       innovative digitale Lösungen, die Ihre Vision zum Leben erwecken.
     </p>
     <p class="teaser no-padding animate-fade-in-up mx-auto max-w-4xl text-center text-lg">
-      Und wer genau ist raspb jetzt? - Eigentlich sind das nur ich un meine KI Crew 😉
+      Und wer genau ist raspb jetzt? - Eigentlich sind das nur ich und meine KI Crew 😉
     </p>
   </Section>
 

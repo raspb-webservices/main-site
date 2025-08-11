@@ -7,6 +7,14 @@
   import { goto } from '$app/navigation';
   import ContactForm from './contact-form.svelte';
 
+  // Props for initial values from URL parameters
+  interface Props {
+    initialProjectType?: string | null;
+    initialSubType?: string | null;
+  }
+
+  const { initialProjectType = null, initialSubType = null }: Props = $props();
+
   // State
   let currentStep = $state(1);
   let showResetModal = $state(false);
@@ -572,8 +580,36 @@
     }
   }
 
+  // Function to validate and set initial parameters
+  function initializeFromParams() {
+    let shouldAdvance = false;
+    
+    // Check if initialProjectType is valid
+    if (initialProjectType && projectTypes.some(pt => pt.id === initialProjectType)) {
+      config.projectType = initialProjectType;
+      shouldAdvance = true;
+      
+      // Check if initialSubType is valid for the selected project type
+      if (initialSubType && subTypes.some(st => st.id === initialSubType && st.parentId === initialProjectType)) {
+        config.subType = initialSubType;
+        // If both projectType and subType are valid, skip to step 3
+        currentStep = 3;
+        return;
+      } else {
+        // If only projectType is valid, go to step 2
+        currentStep = 2;
+        return;
+      }
+    }
+    
+    // If no valid parameters, stay on step 1
+    currentStep = 1;
+  }
+
   onMount(() => {
     calculatePrice();
+    // Initialize wizard with URL parameters if provided
+    initializeFromParams();
   });
 </script>
 
