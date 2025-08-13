@@ -1,7 +1,6 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { projectTypes, subTypes, availableFeatures, formFieldTypes } from '$lib/components/wizard/wizard-config';
-import Chromium from '@sparticuz/chromium';
 
 export const POST: RequestHandler = async ({ request }) => {
 
@@ -9,12 +8,17 @@ export const POST: RequestHandler = async ({ request }) => {
   try {
     const { config, customerData, uploadedFiles, customFeatures, filename } = await request.json();
     const htmlContent = generateHTMLContent(config, customerData, uploadedFiles, customFeatures);
+
     const isLocal = process.env.NETLIFY_LOCAL === 'true' || process.env.NETLIFY_DEV === 'true' || process.env.NODE_ENV === 'development';
     const myPuppeteer = isLocal ? (await import('puppeteer')).default : (await import('puppeteer-core')).default;
-    console.log("myPuppeteer ", myPuppeteer);
+    const myChrome = isLocal ? null : (await import('@sparticuz/chromium')).default;
 
-    const chromePath = await Chromium.executablePath();
-    
+
+    console.log("myPuppeteer ", myPuppeteer);
+    console.log("myChrome ", myChrome);
+
+    const chromePath = await myChrome.executablePath() ?? '/chrome/linux-139.0.7258.66/chrome-linux64/chrome';
+
     console.log("chromePath ", chromePath);
 
     let launchOptions;
