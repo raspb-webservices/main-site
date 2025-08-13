@@ -222,7 +222,8 @@
             <span class="example-tag">Event-Registrierung</span>
             <span class="example-tag">Daten-Dashboard</span>
             <span class="example-tag">API-Visualisierung</span>
-            <span class="example-tag">Custom Tools</span>
+            <span class="example-tag">Einzelne Module, Plugins, Komponenten</span>
+            <span class="example-tag">UI Bausteine </span>
           </div>
           <div class="service-card-actions push-right">
             <button class="btn btn-primary" onclick={() => goto('/get-started?projectType=freestyle')}>Jetzt anfragen</button>

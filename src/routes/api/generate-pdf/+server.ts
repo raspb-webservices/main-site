@@ -4,24 +4,49 @@ import puppeteer from 'puppeteer';
 import { projectTypes, subTypes, availableFeatures, formFieldTypes } from '$lib/components/wizard/wizard-config';
 
 export const POST: RequestHandler = async ({ request }) => {
+  console.log('🚀 PDF Generation API called');
+  console.log('📅 Timestamp:', new Date().toISOString());
+  console.log('🌍 Environment:', process.env.NODE_ENV);
+  console.log('💻 Platform:', process.platform);
+  console.log('🏗️ Architecture:', process.arch);
+  
   try {
-    const { config, customerData, uploadedFiles, customFeatures, filename } = await request.json();
+    console.log('📥 Parsing request body...');
+    const requestBody = await request.json();
+    const { config, customerData, uploadedFiles, customFeatures, filename } = requestBody;
+    
+    console.log('✅ Request body parsed successfully');
+    console.log('📋 Config keys:', Object.keys(config || {}));
+    console.log('👤 Customer data keys:', Object.keys(customerData || {}));
+    console.log('📁 Uploaded files count:', uploadedFiles?.length || 0);
+    console.log('🎯 Custom features length:', customFeatures?.length || 0);
+    console.log('📄 Filename:', filename);
 
-    // Generate HTML content
+    console.log('🏗️ Generating HTML content...');
     const htmlContent = generateHTMLContent(config, customerData, uploadedFiles, customFeatures);
+    console.log('✅ HTML content generated, length:', htmlContent.length);
 
-    // Launch Puppeteer
+    console.log('🚀 Launching Puppeteer browser...');
+    console.log('🔧 Puppeteer args: --no-sandbox, --disable-setuid-sandbox');
+    
     const browser = await puppeteer.launch({
       headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox']
+      args: [
+        '--no-sandbox', 
+        '--disable-setuid-sandbox'
+      ]
     });
+    console.log('✅ Browser launched successfully');
 
+    console.log('📄 Creating new page...');
     const page = await browser.newPage();
+    console.log('✅ Page created successfully');
 
-    // Set content and wait for fonts to load
+    console.log('🎨 Setting page content and waiting for network idle...');
     await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
+    console.log('✅ Page content set successfully');
 
-    // Generate PDF
+    console.log('📊 Generating PDF...');
     const pdfBuffer = await page.pdf({
       format: 'A4',
       printBackground: true,
@@ -32,10 +57,13 @@ export const POST: RequestHandler = async ({ request }) => {
         left: '10mm'
       }
     });
+    console.log('✅ PDF generated successfully, buffer size:', pdfBuffer.length);
 
+    console.log('🔒 Closing browser...');
     await browser.close();
+    console.log('✅ Browser closed successfully');
 
-    // Return PDF as response
+    console.log('📤 Returning PDF response...');
     return new Response(pdfBuffer as unknown as BodyInit, {
       headers: {
         'Content-Type': 'application/pdf',
@@ -43,8 +71,35 @@ export const POST: RequestHandler = async ({ request }) => {
       }
     });
   } catch (error) {
-    console.error('PDF generation error:', error);
-    return json({ error: 'PDF generation failed' }, { status: 500 });
+    console.error('❌ PDF generation error occurred:');
+    console.error('🔍 Error name:', error?.name);
+    console.error('💬 Error message:', error?.message);
+    console.error('📚 Error stack:', error?.stack);
+    console.error('🔧 Error details:', error);
+    
+    // Additional environment debugging
+    console.error('🌍 Environment details:');
+    console.error('  - NODE_ENV:', process.env.NODE_ENV);
+    console.error('  - Platform:', process.platform);
+    console.error('  - Architecture:', process.arch);
+    console.error('  - Node version:', process.version);
+    console.error('  - Memory usage:', process.memoryUsage());
+    
+    // Check if it's a Puppeteer-specific error
+    if (error?.message?.includes('puppeteer') || error?.message?.includes('browser') || error?.message?.includes('chrome')) {
+      console.error('🤖 This appears to be a Puppeteer/Browser related error');
+      console.error('💡 Possible causes:');
+      console.error('  - Missing Chrome/Chromium dependencies');
+      console.error('  - Insufficient memory');
+      console.error('  - Sandbox restrictions');
+      console.error('  - Network connectivity issues');
+    }
+    
+    return json({ 
+      error: 'PDF generation failed',
+      details: error?.message,
+      timestamp: new Date().toISOString()
+    }, { status: 500 });
   }
 };
 
