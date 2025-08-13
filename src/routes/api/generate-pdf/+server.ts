@@ -37,21 +37,49 @@ export const POST: RequestHandler = async ({ request }) => {
 
     console.log('📦 Loading Puppeteer modules...');
     const puppeteer = isLocal ? (await import('puppeteer')).default : (await import('puppeteer-core')).default;
-    const chromium = isLocal ? null : (await import('@sparticuz/chromium')).default;
     console.log('✅ Puppeteer modules loaded successfully');
 
     console.log('🚀 Launching Puppeteer browser...');
-    const launchOptions = isLocal
-      ? {
-          headless: true,
-          args: ['--no-sandbox', '--disable-setuid-sandbox']
+    let launchOptions;
+    
+    if (isLocal) {
+      launchOptions = {
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
+      };
+    } else {
+      // Find Chrome executable dynamically
+      const fs = await import('fs');
+      const path = await import('path');
+      const cacheDir = '/opt/buildhome/.cache/puppeteer/chrome';
+      
+      let chromePath = null;
+      try {
+        const chromeVersions = fs.readdirSync(cacheDir);
+        if (chromeVersions.length > 0) {
+          // Use the first (and likely only) Chrome version found
+          const chromeVersion = chromeVersions[0];
+          chromePath = path.join(cacheDir, chromeVersion, 'chrome-linux64', 'chrome');
+          console.log('🔍 Found Chrome at:', chromePath);
         }
-      : {
-          args: [...chromium.args, '--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu', '--single-process'],
-          defaultViewport: { width: 1280, height: 720 },
-          executablePath: await chromium.executablePath(),
-          headless: true
-        };
+      } catch (error) {
+        console.error('❌ Error finding Chrome:', error);
+      }
+      
+      launchOptions = {
+        args: [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage',
+          '--disable-gpu',
+          '--single-process',
+          '--disable-web-security',
+          '--disable-features=VizDisplayCompositor'
+        ],
+        executablePath: chromePath || '/usr/bin/google-chrome-stable',
+        headless: true
+      };
+    }
 
     console.log('🔧 Launch options:', launchOptions);
     browser = await puppeteer.launch(launchOptions);
