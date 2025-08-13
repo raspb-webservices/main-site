@@ -35,6 +35,7 @@
     "graphql": "^16.11.0",
     "graphql-request": "^7.2.0",
     "postcss": "^8.5.6",
+    "puppeteer": "^24.16.1",
     "prettier": "^3.6.0",
     "prettier-plugin-svelte": "^3.4.0",
     "prettier-plugin-tailwindcss": "^0.6.13",
@@ -49,12 +50,13 @@
   "dependencies": {
     "@auth0/auth0-spa-js": "^2.2.0",
     "@hygraph/management-sdk": "^1.4.0",
+    "@sparticuz/chromium": "^138.0.2",
     "@types/puppeteer": "^5.4.7",
     "dotenv": "^17.0.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^3.0.1",
     "markdown-it": "^14.1.0",
-    "puppeteer": "^24.16.0",
+    "puppeteer-core": "^24.16.1",
     "swiper": "^11.2.8",
     "vanilla-cookieconsent": "^3.1.0"
   }
