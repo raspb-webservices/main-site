@@ -28,7 +28,12 @@ export const POST: RequestHandler = async ({ request }) => {
 
     // Detect environment and configure Puppeteer accordingly
     const isLocal = process.env.NETLIFY_LOCAL === 'true' || process.env.NETLIFY_DEV === 'true' || process.env.NODE_ENV === 'development';
-    console.log('🔍 Environment detection:', { isLocal, NETLIFY_LOCAL: process.env.NETLIFY_LOCAL, NETLIFY_DEV: process.env.NETLIFY_DEV, NODE_ENV: process.env.NODE_ENV });
+    console.log('🔍 Environment detection:', {
+      isLocal,
+      NETLIFY_LOCAL: process.env.NETLIFY_LOCAL,
+      NETLIFY_DEV: process.env.NETLIFY_DEV,
+      NODE_ENV: process.env.NODE_ENV
+    });
 
     console.log('📦 Loading Puppeteer modules...');
     const puppeteer = isLocal ? (await import('puppeteer')).default : (await import('puppeteer-core')).default;
@@ -36,16 +41,18 @@ export const POST: RequestHandler = async ({ request }) => {
     console.log('✅ Puppeteer modules loaded successfully');
 
     console.log('🚀 Launching Puppeteer browser...');
-    const launchOptions = isLocal ? {
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox']
-    } : {
-      args: chromium.args,
-      defaultViewport: { width: 1280, height: 720 },
-      executablePath: await chromium.executablePath(),
-      headless: true
-    };
-    
+    const launchOptions = isLocal
+      ? {
+          headless: true,
+          args: ['--no-sandbox', '--disable-setuid-sandbox']
+        }
+      : {
+          args: [...chromium.args, '--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu', '--single-process'],
+          defaultViewport: { width: 1280, height: 720 },
+          executablePath: await chromium.executablePath(),
+          headless: true
+        };
+
     console.log('🔧 Launch options:', launchOptions);
     browser = await puppeteer.launch(launchOptions);
     console.log('✅ Browser launched successfully');
