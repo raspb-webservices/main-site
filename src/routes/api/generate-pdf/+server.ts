@@ -1,6 +1,5 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import puppeteer from 'puppeteer';
 import { projectTypes, subTypes, availableFeatures, formFieldTypes } from '$lib/components/wizard/wizard-config';
 
 export const POST: RequestHandler = async ({ request }) => {
@@ -10,6 +9,7 @@ export const POST: RequestHandler = async ({ request }) => {
   console.log('💻 Platform:', process.platform);
   console.log('🏗️ Architecture:', process.arch);
 
+  let browser;
   try {
     console.log('📥 Parsing request body...');
     const requestBody = await request.json();
@@ -26,13 +26,28 @@ export const POST: RequestHandler = async ({ request }) => {
     const htmlContent = generateHTMLContent(config, customerData, uploadedFiles, customFeatures);
     console.log('✅ HTML content generated, length:', htmlContent.length);
 
-    console.log('🚀 Launching Puppeteer browser...');
-    console.log('🔧 Puppeteer args: --no-sandbox, --disable-setuid-sandbox');
+    // Detect environment and configure Puppeteer accordingly
+    const isLocal = process.env.NETLIFY_LOCAL === 'true' || process.env.NETLIFY_DEV === 'true' || process.env.NODE_ENV === 'development';
+    console.log('🔍 Environment detection:', { isLocal, NETLIFY_LOCAL: process.env.NETLIFY_LOCAL, NETLIFY_DEV: process.env.NETLIFY_DEV, NODE_ENV: process.env.NODE_ENV });
 
-    const browser = await puppeteer.launch({
+    console.log('📦 Loading Puppeteer modules...');
+    const puppeteer = isLocal ? (await import('puppeteer')).default : (await import('puppeteer-core')).default;
+    const chromium = isLocal ? null : (await import('@sparticuz/chromium')).default;
+    console.log('✅ Puppeteer modules loaded successfully');
+
+    console.log('🚀 Launching Puppeteer browser...');
+    const launchOptions = isLocal ? {
       headless: true,
       args: ['--no-sandbox', '--disable-setuid-sandbox']
-    });
+    } : {
+      args: chromium.args,
+      defaultViewport: { width: 1280, height: 720 },
+      executablePath: await chromium.executablePath(),
+      headless: true
+    };
+    
+    console.log('🔧 Launch options:', launchOptions);
+    browser = await puppeteer.launch(launchOptions);
     console.log('✅ Browser launched successfully');
 
     console.log('📄 Creating new page...');
@@ -122,6 +137,10 @@ export const POST: RequestHandler = async ({ request }) => {
       },
       { status: 500 }
     );
+  } finally {
+    if (browser) {
+      await browser.close().catch(() => {});
+    }
   }
 };
 
