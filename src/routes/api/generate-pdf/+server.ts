@@ -15,7 +15,7 @@ export const POST: RequestHandler = async ({ request }) => {
     console.log('myPuppeteer ', myPuppeteer);
     console.log('myChrome ', myChrome);
 
-    const chromePath = (await myChrome.executablePath()) ?? '/chrome/linux-139.0.7258.66/chrome-linux64/chrome';
+    const chromePath = myChrome.executablePath ?? '/chrome/linux-139.0.7258.66/chrome-linux64/chrome';
 
     console.log('chromePath ', chromePath);
 
