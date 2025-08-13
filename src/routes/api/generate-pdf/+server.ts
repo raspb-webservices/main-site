@@ -3,7 +3,6 @@ import type { RequestHandler } from './$types';
 import { projectTypes, subTypes, availableFeatures, formFieldTypes } from '$lib/components/wizard/wizard-config';
 
 export const POST: RequestHandler = async ({ request }) => {
-
   let browser;
   try {
     const { config, customerData, uploadedFiles, customFeatures, filename } = await request.json();
@@ -13,13 +12,12 @@ export const POST: RequestHandler = async ({ request }) => {
     const myPuppeteer = isLocal ? (await import('puppeteer')).default : (await import('puppeteer-core')).default;
     const myChrome = isLocal ? null : (await import('@sparticuz/chromium')).default;
 
+    console.log('myPuppeteer ', myPuppeteer);
+    console.log('myChrome ', myChrome);
 
-    console.log("myPuppeteer ", myPuppeteer);
-    console.log("myChrome ", myChrome);
+    const chromePath = (await myChrome.executablePath()) ?? '/chrome/linux-139.0.7258.66/chrome-linux64/chrome';
 
-    const chromePath = await myChrome.executablePath() ?? '/chrome/linux-139.0.7258.66/chrome-linux64/chrome';
-
-    console.log("chromePath ", chromePath);
+    console.log('chromePath ', chromePath);
 
     let launchOptions;
     if (isLocal) {
@@ -69,7 +67,6 @@ export const POST: RequestHandler = async ({ request }) => {
       }
     });
   } catch (error) {
-
     const errorInfo = {
       name: error?.name,
       message: error?.message,
@@ -88,13 +85,13 @@ export const POST: RequestHandler = async ({ request }) => {
     const isPuppeteerError = error?.message?.includes('puppeteer') || error?.message?.includes('browser') || error?.message?.includes('chrome');
 
     return json(
-      { 
+      {
         error: 'PDF generation failed (api)',
         timestamp: new Date().toISOString(),
         errorInfo,
         environmentInfo,
-        isPuppeteerError,
-      }, 
+        isPuppeteerError
+      },
       { status: 500 }
     );
   } finally {

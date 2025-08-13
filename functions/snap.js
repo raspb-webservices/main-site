@@ -3,13 +3,22 @@ export const handler = async (event) => {
   const puppeteer = isLocal ? (await import('puppeteer')).default : (await import('puppeteer-core')).default;
   const chromium = isLocal ? null : (await import('@sparticuz/chromium')).default;
   const targetUrl = event.queryStringParameters?.url || 'https://example.com';
+  const chromePath = (await myChrome.executablePath()) ?? '/chrome/linux-139.0.7258.66/chrome-linux64/chrome';
 
   let browser;
   try {
     const launchOptions = isLocal ? { headless: true} : {
-      args: chromium.arguments,
-      executablePath: await chromium.executablePath(),
-      headless: true
+        args: [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage',
+          '--disable-gpu',
+          '--single-process',
+          '--disable-web-security',
+          '--disable-features=VizDisplayCompositor'
+        ],
+        executablePath: chromePath,
+        headless: true
     };
 
     console.log("launchOptions ", launchOptions);
