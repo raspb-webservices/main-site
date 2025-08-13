@@ -9,12 +9,12 @@ export const POST: RequestHandler = async ({ request }) => {
   console.log('🌍 Environment:', process.env.NODE_ENV);
   console.log('💻 Platform:', process.platform);
   console.log('🏗️ Architecture:', process.arch);
-  
+
   try {
     console.log('📥 Parsing request body...');
     const requestBody = await request.json();
     const { config, customerData, uploadedFiles, customFeatures, filename } = requestBody;
-    
+
     console.log('✅ Request body parsed successfully');
     console.log('📋 Config keys:', Object.keys(config || {}));
     console.log('👤 Customer data keys:', Object.keys(customerData || {}));
@@ -28,13 +28,10 @@ export const POST: RequestHandler = async ({ request }) => {
 
     console.log('🚀 Launching Puppeteer browser...');
     console.log('🔧 Puppeteer args: --no-sandbox, --disable-setuid-sandbox');
-    
+
     const browser = await puppeteer.launch({
       headless: true,
-      args: [
-        '--no-sandbox', 
-        '--disable-setuid-sandbox'
-      ]
+      args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
     console.log('✅ Browser launched successfully');
 
@@ -71,35 +68,60 @@ export const POST: RequestHandler = async ({ request }) => {
       }
     });
   } catch (error) {
+    const errorInfo = {
+      name: error?.name,
+      message: error?.message,
+      stack: error?.stack,
+      details: error
+    };
+
+    const environmentInfo = {
+      NODE_ENV: process.env.NODE_ENV,
+      platform: process.platform,
+      architecture: process.arch,
+      nodeVersion: process.version,
+      memoryUsage: process.memoryUsage()
+    };
+
+    const isPuppeteerError = error?.message?.includes('puppeteer') || error?.message?.includes('browser') || error?.message?.includes('chrome');
+
+    const possibleCauses = isPuppeteerError
+      ? ['Missing Chrome/Chromium dependencies', 'Insufficient memory', 'Sandbox restrictions', 'Network connectivity issues']
+      : [];
+
     console.error('❌ PDF generation error occurred:');
-    console.error('🔍 Error name:', error?.name);
-    console.error('💬 Error message:', error?.message);
-    console.error('📚 Error stack:', error?.stack);
-    console.error('🔧 Error details:', error);
-    
-    // Additional environment debugging
+    console.error('🔍 Error name:', errorInfo.name);
+    console.error('💬 Error message:', errorInfo.message);
+    console.error('📚 Error stack:', errorInfo.stack);
+    console.error('🔧 Error details:', errorInfo.details);
+
     console.error('🌍 Environment details:');
-    console.error('  - NODE_ENV:', process.env.NODE_ENV);
-    console.error('  - Platform:', process.platform);
-    console.error('  - Architecture:', process.arch);
-    console.error('  - Node version:', process.version);
-    console.error('  - Memory usage:', process.memoryUsage());
-    
-    // Check if it's a Puppeteer-specific error
-    if (error?.message?.includes('puppeteer') || error?.message?.includes('browser') || error?.message?.includes('chrome')) {
+    console.error('  - NODE_ENV:', environmentInfo.NODE_ENV);
+    console.error('  - Platform:', environmentInfo.platform);
+    console.error('  - Architecture:', environmentInfo.architecture);
+    console.error('  - Node version:', environmentInfo.nodeVersion);
+    console.error('  - Memory usage:', environmentInfo.memoryUsage);
+
+    if (isPuppeteerError) {
       console.error('🤖 This appears to be a Puppeteer/Browser related error');
-      console.error('💡 Possible causes:');
-      console.error('  - Missing Chrome/Chromium dependencies');
-      console.error('  - Insufficient memory');
-      console.error('  - Sandbox restrictions');
-      console.error('  - Network connectivity issues');
+      console.error('💡 Possible causes:', possibleCauses);
     }
-    
-    return json({ 
-      error: 'PDF generation failed',
-      details: error?.message,
-      timestamp: new Date().toISOString()
-    }, { status: 500 });
+
+    return json(
+      {
+        error: 'PDF generation failed (api)',
+        timestamp: new Date().toISOString(),
+        errorInfo,
+        environmentInfo,
+        isPuppeteerError,
+        possibleCauses,
+        debugInfo: {
+          message: 'Detailed error information for debugging',
+          serverLogs: 'Check server console for additional details'
+        }
+      },
+      { status: 500 }
+    );
   }
 };
 
