@@ -1,6 +1,8 @@
 <script lang="ts">
   import Section from '$lib/components/section.svelte';
   import { goto } from '$app/navigation';
+  import { _ } from 'svelte-i18n';
+  import { locale, locales } from 'svelte-i18n'
 
   // Modal control functions
   function openModal(modalId: string) {
@@ -19,18 +21,15 @@
 </script>
 
 <svelte:head>
-  <title>Services - raspb Webservices</title>
-  <meta
-    name="description"
-    content="Entdecken Sie unser umfassendes Service-Portfolio: Webseiten, CMS-Lösungen, Applikationen, Individualentwicklung und KI-Services für Ihr digitales Projekt."
-  />
+  <title>{$_('services.meta.title')}</title>
+  <meta name="description" content={$_('services.meta.description')} />
 </svelte:head>
 
 <div class="services-content-wrapper">
   <!-- Hero/Teaser Section -->
   <Section type={'centerTeaser'}>
     <div class="animate-fade-in-up flex w-full flex-col items-center justify-center text-center">
-      <h1 class="massive">Unsere <span class="inner-text-special">Services</span></h1>
+      <h1 class="massive">{$_('services.header.titleFirst')}  <span class="inner-text-special">{$_('services.header.titleHighlight')}</span></h1>
       <h3>Maßgeschneiderte digitale Lösungen für jeden Bedarf - von der einfachen Website bis zur komplexen KI-Integration</h3>
       <button
         class="btn-basic"

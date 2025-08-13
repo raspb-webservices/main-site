@@ -10,7 +10,9 @@
 
 <div class="wrapper">
   {#if $isLoading}
+  <div class="loading-wrapper">
     <div class="loading-spinner"></div>
+  </div>
   {:else}
     <HEADER />
     <div class="content-container">
@@ -23,9 +25,11 @@
 
 <style lang="postcss">
   @reference '../app.css';
-
-  .loading-spinner {
-    @apply border-primary/20 border-t-primary mx-auto h-16 w-16 rounded-full border-4;
-    animation: spin 1s linear infinite;
+  .loading-wrapper {
+    @apply w-full h-dvh flex justify-center items-center;
+    .loading-spinner {
+      @apply border-primary/20 border-t-primary mx-auto h-20 w-20 rounded-full border-6;
+      animation: spin 1s linear infinite;
+    }
   }
 </style>

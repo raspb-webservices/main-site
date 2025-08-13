@@ -2,65 +2,58 @@
   import { page } from '$app/state';
   import { goto } from '$app/navigation';
   import Section from '$lib/components/section.svelte';
+  import { _ } from 'svelte-i18n';
+  import { locale, locales } from 'svelte-i18n'
+
 </script>
 
 <svelte:head>
-  <title>raspb Webservices - Einblicke</title>
-  <meta name="description" content="Hier kann eine Beschreibung stehen..." />
+  <title>{$_('einblicke.meta.title')}</title>
+  <meta name="description" content={$_('einblicke.meta.description')} />
 </svelte:head>
 
 <div class="content-area">
   <Section>
-    <h1>Einblicke</h1>
+    <h1>{$_('einblicke.header.title')}</h1>
     <p class="teaser no-padding">
-      Vertrauen und Transparenz sind wichtig für eine gute Kundenbeziehhung. Hier möchten wir Einblicke in unserer Arbeit und einen typischen Projektablauf
-      geben, damit glasklar ist, womit sie rechnen können.
+      {$_('einblicke.header.teaser')}
     </p>
   </Section>
 
   <Section>
     <div class="animate-fade-in-up m-auto flex w-full max-w-4xl flex-col items-center justify-center text-center">
-      <h1>Wir setzen <span class="inner-text-special">moderne Webtechnologien</span> ein</h1>
+      <h1>{$_('einblicke.webtechnologien.titleFirst')} <span class="inner-text-special">{$_('einblicke.webtechnologien.titleHighlight')}</span>{#if $locale === 'de'}{$_('einblicke.webtechnologien.titleSecond')}{/if}</h1>
       <h3>
-        Wir haben unseren eigenen Technologie-Stack entwickelt, der auf dem Jamstack basiert und alles einfacher, schneller und effizienter macht, ohne dabei
-        Einschränkungen in Kauf nehmen zu müssen.
+        {$_('einblicke.webtechnologien.subtitle')}
       </h3>
 
       <div class="mt-8 space-y-6 text-left">
         <p>
-          <strong>JAMstack</strong> steht für JavaScript, APIs und Markup und repräsentiert eine moderne Architektur für Webentwicklung. Diese Technologie ermöglicht
-          es uns, extrem schnelle, sichere und skalierbare Websites zu erstellen, die eine außergewöhnliche Benutzererfahrung bieten.
+          {@html $_('einblicke.webtechnologien.absatz1')}
         </p>
 
         <p>
-          Der Kern des JAMstack-Ansatzes liegt in der <strong>Vorab-Generierung</strong> von Inhalten. Anstatt Seiten bei jeder Anfrage dynamisch zu erstellen, werden
-          alle Seiten bereits zur Build-Zeit generiert und über ein Content Delivery Network (CDN) ausgeliefert. Dies führt zu blitzschnellen Ladezeiten und einer
-          verbesserten Performance.
+          {@html $_('einblicke.webtechnologien.absatz2')}
         </p>
 
         <p>
-          Durch die <strong>Entkopplung von Frontend und Backend</strong> können wir flexibel die besten Tools für jeden Bereich einsetzen. Das Frontend wird als
-          statische Dateien ausgeliefert, während dynamische Funktionen über APIs realisiert werden. Diese Architektur bietet mehrere entscheidende Vorteile:
+          {@html $_('einblicke.webtechnologien.absatz3')}
         </p>
 
         <ul class="ml-4 list-inside list-disc space-y-2">
-          <li><strong>Sicherheit:</strong> Weniger Angriffsfläche durch statische Dateien</li>
-          <li><strong>Performance:</strong> Globale CDN-Verteilung für minimale Ladezeiten</li>
-          <li><strong>Skalierbarkeit:</strong> Automatische Skalierung ohne Serveradministration</li>
-          <li><strong>Entwicklerfreundlichkeit:</strong> Moderne Entwicklungstools und Workflows</li>
-          <li><strong>Kosteneffizienz:</strong> Reduzierte Hosting- und Wartungskosten</li>
+          <li>{@html $_('einblicke.webtechnologien.vorteile.sicherheit')}</li>
+          <li>{@html $_('einblicke.webtechnologien.vorteile.performance')}</li>
+          <li>{@html $_('einblicke.webtechnologien.vorteile.skalierbarkeit')}</li>
+          <li>{@html $_('einblicke.webtechnologien.vorteile.entwicklerfreundlichkeit')}</li>
+          <li>{@html $_('einblicke.webtechnologien.vorteile.kosteneffizienz')}</li>
         </ul>
 
         <p>
-          Unser JAMstack-Setup umfasst moderne Technologien wie <strong>Svelte/SvelteKit</strong> für das Frontend, <strong>TypeScript</strong> für typsichere
-          Entwicklung, <strong>Tailwind CSS</strong> für effizientes Styling und <strong>Netlify</strong> für Deployment und Hosting. Diese Kombination ermöglicht
-          es uns, robuste und wartbare Webanwendungen zu entwickeln, die sowohl für Entwickler als auch für Endnutzer optimiert sind.
+          {@html $_('einblicke.webtechnologien.absatz4')}
         </p>
 
         <p>
-          Die <strong>Headless CMS-Integration</strong> über GraphQL APIs ermöglicht es unseren Kunden, Inhalte einfach zu verwalten, während die technische Komplexität
-          im Hintergrund verborgen bleibt. So können Sie sich auf Ihr Geschäft konzentrieren, während wir für eine technisch einwandfreie und zukunftssichere Lösung
-          sorgen.
+          {@html $_('einblicke.webtechnologien.absatz5')}
         </p>
       </div>
     </div>

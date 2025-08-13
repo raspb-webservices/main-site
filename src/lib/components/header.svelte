@@ -3,7 +3,7 @@
   import auth from '../../authService';
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
-  import { locale, locales } from 'svelte-i18n'
+  import { locale, locales } from 'svelte-i18n';
 
   let mobileNavOpen = $state(false);
   let logginIn = $state(false);
@@ -12,6 +12,7 @@
   let isAuth = $derived(isAuthenticated.get());
   let currentUser = $derived(user.get());
   let currentUserRoles = $derived(userroles.get());
+  let currentTheme = $state('light');
 
   async function login() {
     logginIn = true;
@@ -29,6 +30,18 @@
     const auth0Client = await auth.createClient();
     await auth.logout(auth0Client);
     logginIn = false;
+  }
+
+  function toggleLocale() {
+    const newLocale = $locale === 'de' ? 'en' : 'de';
+    locale.set(newLocale);
+  }
+  function toggleTheme() {
+    if (currentTheme === 'light') {
+      currentTheme = 'dark';
+    } else {
+      currentTheme = 'light';
+    }
   }
 </script>
 
@@ -84,12 +97,6 @@
     </nav>
 
     <div class="cta-area">
-      
-<select bind:value={$locale}>
-  {#each $locales as locale}
-    <option value={locale}>{locale}</option>
-  {/each}
-</select>
       {#if !isAuth}
         <button
           class="nav-button-link"
@@ -113,6 +120,26 @@
           goto('/get-started');
         }}><span class="hidden lg:block">Projekt konfigurieren</span><span class="lg:hidden">Starten</span></button
       >
+      <div class="controls">
+        <button
+          class="locale-toggle-btn"
+          class:german={$locale === 'de'}
+          class:english={$locale === 'en'}
+          onclick={toggleLocale}
+          aria-label="Switch language"
+          title={$locale === 'de' ? 'Switch to English' : 'Auf Deutsch wechseln'}
+        >
+        </button>
+        <button
+          class="theme-toggle-btn"
+          class:light={currentTheme === 'light'}
+          class:dark={currentTheme === 'dark'}
+          onclick={toggleTheme}
+          aria-label="Switch theme"
+          title={currentTheme === 'light' ? 'dark mode' : 'light mode'}
+        >
+        </button>
+      </div>
     </div>
 
     <nav class="mobile-navigvation">
@@ -299,6 +326,38 @@
 
       .cta-area {
         @apply navOne:flex hidden items-center justify-center;
+
+        .controls {
+          @apply flex flex-row m-2 gap-2;
+          .locale-toggle-btn {
+            @apply flex h-8 w-8 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-white bg-cover bg-center bg-no-repeat p-0 transition-all duration-300 hover:shadow-lg;
+            &.german {
+              background-image: url('icons/flags/germany-flag.svg');
+            }
+            &.english {
+              background-image: url('icons/flags/uk-flag.svg');
+            }
+            &:hover {
+              @apply scale-105 transform;
+            }
+
+            &:active {
+              @apply scale-95 transform;
+            }
+          }
+          .theme-toggle-btn {
+            @apply flex h-8 w-8 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-white bg-cover bg-center bg-no-repeat p-0 transition-all duration-300  hover:shadow-lg;
+            &.light {
+              background-color: var(--decent-blue);
+              background-image: url('icons/sun-icon.svg');
+            }
+            &.dark {
+              background-color: var(--dark-grey);
+              background-image: url('icons/moon-icon.svg');
+            }
+          }
+        }
+
       }
     }
   }
