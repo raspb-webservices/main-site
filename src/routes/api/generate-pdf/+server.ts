@@ -1,97 +1,28 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { projectTypes, subTypes, availableFeatures, formFieldTypes } from '$lib/components/wizard/wizard-config';
+import Chromium from '@sparticuz/chromium';
 
 export const POST: RequestHandler = async ({ request }) => {
-  console.log('🚀 PDF Generation API called');
-  console.log('📅 Timestamp:', new Date().toISOString());
-  console.log('🌍 Environment:', process.env.NODE_ENV);
-  console.log('💻 Platform:', process.platform);
-  console.log('🏗️ Architecture:', process.arch);
 
   let browser;
   try {
-    console.log('📥 Parsing request body...');
-    const requestBody = await request.json();
-    const { config, customerData, uploadedFiles, customFeatures, filename } = requestBody;
-
-    console.log('✅ Request body parsed successfully');
-    console.log('📋 Config keys:', Object.keys(config || {}));
-    console.log('👤 Customer data keys:', Object.keys(customerData || {}));
-    console.log('📁 Uploaded files count:', uploadedFiles?.length || 0);
-    console.log('🎯 Custom features length:', customFeatures?.length || 0);
-    console.log('📄 Filename:', filename);
-
-    console.log('🏗️ Generating HTML content...');
+    const { config, customerData, uploadedFiles, customFeatures, filename } = await request.json();
     const htmlContent = generateHTMLContent(config, customerData, uploadedFiles, customFeatures);
-    console.log('✅ HTML content generated, length:', htmlContent.length);
-
-    // Detect environment and configure Puppeteer accordingly
     const isLocal = process.env.NETLIFY_LOCAL === 'true' || process.env.NETLIFY_DEV === 'true' || process.env.NODE_ENV === 'development';
-    console.log('🔍 Environment detection:', {
-      isLocal,
-      NETLIFY_LOCAL: process.env.NETLIFY_LOCAL,
-      NETLIFY_DEV: process.env.NETLIFY_DEV,
-      NODE_ENV: process.env.NODE_ENV
-    });
+    const myPuppeteer = isLocal ? (await import('puppeteer')).default : (await import('puppeteer-core')).default;
+    console.log("myPuppeteer ", myPuppeteer);
 
-    console.log('📦 Loading Puppeteer modules...');
-    const puppeteer = isLocal ? (await import('puppeteer')).default : (await import('puppeteer-core')).default;
-    console.log('✅ Puppeteer modules loaded successfully');
+    const chromePath = await Chromium.executablePath();
+    console.log("chromePath ", chromePath);
 
-    console.log('🚀 Launching Puppeteer browser...');
     let launchOptions;
-    
     if (isLocal) {
       launchOptions = {
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox']
       };
     } else {
-      // Use the Chrome path from Puppeteer installation
-      // Based on build log: chrome@139.0.7258.66 /opt/buildhome/.cache/puppeteer/chrome/linux-139.0.7258.66/chrome-linux64/chrome
-      const fs = await import('fs');
-      const path = await import('path');
-      
-      let chromePath = '/opt/buildhome/.cache/puppeteer/chrome/linux-139.0.7258.66/chrome-linux64/chrome';
-      
-      console.log('🔍 Checking Chrome at expected path:', chromePath);
-      
-      // Verify the path exists, if not try to find it dynamically
-      if (!fs.existsSync(chromePath)) {
-        console.log('❌ Chrome not found at expected path, searching dynamically...');
-        
-        try {
-          const cacheDir = '/opt/buildhome/.cache/puppeteer/chrome';
-          if (fs.existsSync(cacheDir)) {
-            const chromeVersions = fs.readdirSync(cacheDir);
-            console.log('📋 Found Chrome versions:', chromeVersions);
-            
-            if (chromeVersions.length > 0) {
-              const chromeVersion = chromeVersions[0];
-              chromePath = path.join(cacheDir, chromeVersion, 'chrome-linux64', 'chrome');
-              console.log('🎯 Trying dynamic path:', chromePath);
-              
-              if (fs.existsSync(chromePath)) {
-                console.log('✅ Found Chrome at dynamic path:', chromePath);
-              } else {
-                console.log('❌ Chrome not found at dynamic path either');
-                chromePath = null;
-              }
-            }
-          }
-        } catch (error) {
-          console.error('❌ Error finding Chrome dynamically:', error);
-          chromePath = null;
-        }
-      } else {
-        console.log('✅ Chrome found at expected path:', chromePath);
-      }
-      
-      if (!chromePath) {
-        throw new Error('Chrome executable not found. Please check Puppeteer installation.');
-      }
-      
       launchOptions = {
         args: [
           '--no-sandbox',
@@ -106,20 +37,13 @@ export const POST: RequestHandler = async ({ request }) => {
         headless: true
       };
     }
-
-    console.log(' Launch options:', launchOptions);
-    browser = await puppeteer.launch(launchOptions);
-    console.log('✅ Browser launched successfully');
-
-    console.log('📄 Creating new page...');
+    browser = await myPuppeteer.launch(launchOptions);
     const page = await browser.newPage();
-    console.log('✅ Page created successfully');
 
-    console.log('🎨 Setting page content and waiting for network idle...');
+    // Set content and wait for fonts to load
     await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
-    console.log('✅ Page content set successfully');
 
-    console.log('📊 Generating PDF...');
+    // Generate PDF
     const pdfBuffer = await page.pdf({
       format: 'A4',
       printBackground: true,
@@ -130,13 +54,9 @@ export const POST: RequestHandler = async ({ request }) => {
         left: '10mm'
       }
     });
-    console.log('✅ PDF generated successfully, buffer size:', pdfBuffer.length);
-
-    console.log('🔒 Closing browser...');
     await browser.close();
-    console.log('✅ Browser closed successfully');
 
-    console.log('📤 Returning PDF response...');
+    // Return PDF as response
     return new Response(pdfBuffer as unknown as BodyInit, {
       headers: {
         'Content-Type': 'application/pdf',
@@ -144,6 +64,7 @@ export const POST: RequestHandler = async ({ request }) => {
       }
     });
   } catch (error) {
+
     const errorInfo = {
       name: error?.name,
       message: error?.message,
@@ -161,41 +82,14 @@ export const POST: RequestHandler = async ({ request }) => {
 
     const isPuppeteerError = error?.message?.includes('puppeteer') || error?.message?.includes('browser') || error?.message?.includes('chrome');
 
-    const possibleCauses = isPuppeteerError
-      ? ['Missing Chrome/Chromium dependencies', 'Insufficient memory', 'Sandbox restrictions', 'Network connectivity issues']
-      : [];
-
-    console.error('❌ PDF generation error occurred:');
-    console.error('🔍 Error name:', errorInfo.name);
-    console.error('💬 Error message:', errorInfo.message);
-    console.error('📚 Error stack:', errorInfo.stack);
-    console.error('🔧 Error details:', errorInfo.details);
-
-    console.error('🌍 Environment details:');
-    console.error('  - NODE_ENV:', environmentInfo.NODE_ENV);
-    console.error('  - Platform:', environmentInfo.platform);
-    console.error('  - Architecture:', environmentInfo.architecture);
-    console.error('  - Node version:', environmentInfo.nodeVersion);
-    console.error('  - Memory usage:', environmentInfo.memoryUsage);
-
-    if (isPuppeteerError) {
-      console.error('🤖 This appears to be a Puppeteer/Browser related error');
-      console.error('💡 Possible causes:', possibleCauses);
-    }
-
     return json(
-      {
+      { 
         error: 'PDF generation failed (api)',
         timestamp: new Date().toISOString(),
         errorInfo,
         environmentInfo,
         isPuppeteerError,
-        possibleCauses,
-        debugInfo: {
-          message: 'Detailed error information for debugging',
-          serverLogs: 'Check server console for additional details'
-        }
-      },
+      }, 
       { status: 500 }
     );
   } finally {
