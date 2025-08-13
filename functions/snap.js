@@ -3,7 +3,7 @@ export const handler = async (event) => {
   const puppeteer = isLocal ? (await import('puppeteer')).default : (await import('puppeteer-core')).default;
   const chromium = isLocal ? null : (await import('@sparticuz/chromium')).default;
   const targetUrl = event.queryStringParameters?.url || 'https://example.com';
-  const chromePath = (await chromium.executablePath()) ?? '/chrome/linux-139.0.7258.66/chrome-linux64/chrome';
+  const chromePath = await chromium.executablePath ?? '/chrome/linux-139.0.7258.66/chrome-linux64/chrome';
 
   let browser;
   try {
