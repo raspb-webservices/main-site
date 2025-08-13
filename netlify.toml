@@ -9,3 +9,9 @@
 [functions.snap]
   timeout = 26 
   memory = 1024
+
+[context.production.environment]
+  PUPPETEER_CACHE_DIR = "/opt/buildhome/.cache/puppeteer"
+
+[context.deploy-preview.environment]
+  PUPPETEER_CACHE_DIR = "/opt/buildhome/.cache/puppeteer"
