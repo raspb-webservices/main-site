@@ -3,6 +3,7 @@
   import auth from '../../authService';
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
+  import { locale, locales } from 'svelte-i18n'
 
   let mobileNavOpen = $state(false);
   let logginIn = $state(false);
@@ -83,6 +84,12 @@
     </nav>
 
     <div class="cta-area">
+      
+<select bind:value={$locale}>
+  {#each $locales as locale}
+    <option value={locale}>{locale}</option>
+  {/each}
+</select>
       {#if !isAuth}
         <button
           class="nav-button-link"

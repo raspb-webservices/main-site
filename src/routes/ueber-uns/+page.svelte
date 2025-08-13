@@ -4,6 +4,7 @@
   import Section from '$lib/components/section.svelte';
   import RaspbPhilosophyModal from '$lib/components/raspb-philosophy-modal.svelte';
 
+
   let selectedMember: any = null;
   let philosophyModal: RaspbPhilosophyModal;
 

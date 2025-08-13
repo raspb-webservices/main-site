@@ -6,6 +6,7 @@
   import Section from '$lib/components/section.svelte';
   import RaspbPhilosophyModal from '$lib/components/raspb-philosophy-modal.svelte';
   import { goto } from '$app/navigation';
+  import { _ } from 'svelte-i18n'
 
   const { data } = $props();
 

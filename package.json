@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",
+    "@sparticuz/chromium": "^138.0.2",
     "@sveltejs/adapter-netlify": "^5.0.0",
     "@sveltejs/kit": "^2.16.0",
     "@sveltejs/vite-plugin-svelte": "^5.0.0",
@@ -24,7 +25,6 @@
     "@types/eslint": "^9.6.1",
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^24.0.3",
-    "@sparticuz/chromium": "^138.0.2",
     "auth0": "^4.27.0",
     "autoprefixer": "^10.4.21",
     "axios": "^1.10.0",
@@ -36,10 +36,10 @@
     "graphql": "^16.11.0",
     "graphql-request": "^7.2.0",
     "postcss": "^8.5.6",
-    "puppeteer": "^24.16.1",
     "prettier": "^3.6.0",
     "prettier-plugin-svelte": "^3.4.0",
     "prettier-plugin-tailwindcss": "^0.6.13",
+    "puppeteer": "^24.16.1",
     "svelte": "^5.34.7",
     "svelte-check": "^4.2.2",
     "tailwindcss": "^4.1.10",
@@ -58,6 +58,7 @@
     "jspdf": "^3.0.1",
     "markdown-it": "^14.1.0",
     "puppeteer-core": "^24.16.1",
+    "svelte-i18n": "^4.0.1",
     "swiper": "^11.2.8",
     "vanilla-cookieconsent": "^3.1.0"
   }
