@@ -13,6 +13,8 @@ export const handler = async (event) => {
       headless: chromium.headless
     };
 
+    console.log("launchOptions ", launchOptions);
+
     browser = await puppeteer.launch(launchOptions);
 
     const page = await browser.newPage();

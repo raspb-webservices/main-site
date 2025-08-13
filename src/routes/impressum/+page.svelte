@@ -123,10 +123,6 @@
     @apply mb-2;
   }
 
-  .impressum-content a {
-    @apply text-primary hover:text-primary-focus underline;
-  }
-
   .impressum-content strong {
     @apply font-semibold;
   }
