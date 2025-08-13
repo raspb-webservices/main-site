@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build"
+  command = "npx puppeteer browsers install chrome && npm run build"
   publish = "build"
 
 [functions]
@@ -9,9 +9,3 @@
 [functions.snap]
   timeout = 26 
   memory = 1024
-
-[context.production.environment]
-  PUPPETEER_CACHE_DIR = "/opt/buildhome/.cache/puppeteer"
-
-[context.deploy-preview.environment]
-  PUPPETEER_CACHE_DIR = "/opt/buildhome/.cache/puppeteer"
