@@ -48,22 +48,48 @@ export const POST: RequestHandler = async ({ request }) => {
         args: ['--no-sandbox', '--disable-setuid-sandbox']
       };
     } else {
-      // Find Chrome executable dynamically
+      // Use the Chrome path from Puppeteer installation
+      // Based on build log: chrome@139.0.7258.66 /opt/buildhome/.cache/puppeteer/chrome/linux-139.0.7258.66/chrome-linux64/chrome
       const fs = await import('fs');
       const path = await import('path');
-      const cacheDir = '/opt/buildhome/.cache/puppeteer/chrome';
       
-      let chromePath = null;
-      try {
-        const chromeVersions = fs.readdirSync(cacheDir);
-        if (chromeVersions.length > 0) {
-          // Use the first (and likely only) Chrome version found
-          const chromeVersion = chromeVersions[0];
-          chromePath = path.join(cacheDir, chromeVersion, 'chrome-linux64', 'chrome');
-          console.log('🔍 Found Chrome at:', chromePath);
+      let chromePath = '/opt/buildhome/.cache/puppeteer/chrome/linux-139.0.7258.66/chrome-linux64/chrome';
+      
+      console.log('🔍 Checking Chrome at expected path:', chromePath);
+      
+      // Verify the path exists, if not try to find it dynamically
+      if (!fs.existsSync(chromePath)) {
+        console.log('❌ Chrome not found at expected path, searching dynamically...');
+        
+        try {
+          const cacheDir = '/opt/buildhome/.cache/puppeteer/chrome';
+          if (fs.existsSync(cacheDir)) {
+            const chromeVersions = fs.readdirSync(cacheDir);
+            console.log('📋 Found Chrome versions:', chromeVersions);
+            
+            if (chromeVersions.length > 0) {
+              const chromeVersion = chromeVersions[0];
+              chromePath = path.join(cacheDir, chromeVersion, 'chrome-linux64', 'chrome');
+              console.log('🎯 Trying dynamic path:', chromePath);
+              
+              if (fs.existsSync(chromePath)) {
+                console.log('✅ Found Chrome at dynamic path:', chromePath);
+              } else {
+                console.log('❌ Chrome not found at dynamic path either');
+                chromePath = null;
+              }
+            }
+          }
+        } catch (error) {
+          console.error('❌ Error finding Chrome dynamically:', error);
+          chromePath = null;
         }
-      } catch (error) {
-        console.error('❌ Error finding Chrome:', error);
+      } else {
+        console.log('✅ Chrome found at expected path:', chromePath);
+      }
+      
+      if (!chromePath) {
+        throw new Error('Chrome executable not found. Please check Puppeteer installation.');
       }
       
       launchOptions = {
@@ -76,12 +102,12 @@ export const POST: RequestHandler = async ({ request }) => {
           '--disable-web-security',
           '--disable-features=VizDisplayCompositor'
         ],
-        executablePath: chromePath || '/usr/bin/google-chrome-stable',
+        executablePath: chromePath,
         headless: true
       };
     }
 
-    console.log('🔧 Launch options:', launchOptions);
+    console.log(' Launch options:', launchOptions);
     browser = await puppeteer.launch(launchOptions);
     console.log('✅ Browser launched successfully');
 
