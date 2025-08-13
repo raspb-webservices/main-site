@@ -14,6 +14,7 @@ export const POST: RequestHandler = async ({ request }) => {
     console.log("myPuppeteer ", myPuppeteer);
 
     const chromePath = await Chromium.executablePath();
+    
     console.log("chromePath ", chromePath);
 
     let launchOptions;

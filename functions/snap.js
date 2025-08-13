@@ -6,11 +6,10 @@ export const handler = async (event) => {
 
   let browser;
   try {
-    const launchOptions = isLocal ? { headless: 'new' } : {
-      args: chromium.args,
-      defaultViewport: chromium.defaultViewport,
+    const launchOptions = isLocal ? { headless: true} : {
+      args: chromium.arguments,
       executablePath: await chromium.executablePath(),
-      headless: chromium.headless
+      headless: true
     };
 
     console.log("launchOptions ", launchOptions);
@@ -19,7 +18,6 @@ export const handler = async (event) => {
 
     const page = await browser.newPage();
     await page.goto(targetUrl, { waitUntil: 'networkidle2', timeout: 30000 });
-
     const buffer = await page.screenshot({ type: 'png', fullPage: true });
 
     return {
