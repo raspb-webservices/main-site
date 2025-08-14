@@ -24,6 +24,7 @@ export interface Project {
   domainStatus?: string;
   projectStatus?: string;
   goals?: string;
+  inspiration?: string;
   targetAudience?: string;
   budget?: string;
   timeline?: string;
@@ -100,7 +101,11 @@ export enum subType {
   eCommerce,
   apiIntegration,
   customTool,
-  onepagerPlus
+  onepagerPlus,
+  aiConsulting,
+  aiWorkflows,
+  aiAgents,
+  aiIndividual
 }
 
 export enum projectStatus {

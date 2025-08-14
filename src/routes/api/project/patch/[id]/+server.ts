@@ -60,6 +60,10 @@ export const PATCH: RequestHandler = async ({ request }) => {
       updateFields.push('goals: $goals');
       variables.goals = projectData.goals;
     }
+    if (projectData.inspiration !== undefined) {
+      updateFields.push('inspiration: $inspiration');
+      variables.inspiration = projectData.inspiration;
+    }
     if (projectData.targetAudience !== undefined) {
       updateFields.push('targetAudience: $targetAudience');
       variables.targetAudience = projectData.targetAudience;
@@ -180,6 +184,7 @@ export const PATCH: RequestHandler = async ({ request }) => {
           desiredDomain
           domainStatus
           goals
+          inspiration
           targetAudience
           budget
           timeline

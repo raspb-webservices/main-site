@@ -16,6 +16,7 @@ export const GET = async (req) => {
           desiredDomain
           domainStatus
           goals
+          inspiration
           targetAudience
           budget
           timeline

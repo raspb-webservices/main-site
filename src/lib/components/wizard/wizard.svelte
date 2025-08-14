@@ -29,6 +29,7 @@
     desiredDomain: '',
     domainStatus: '',
     goals: '',
+    inspiration: '',
     targetAudience: '',
     budget: '',
     timeline: '',
@@ -170,6 +171,7 @@
       desiredDomain: '',
       domainStatus: '',
       goals: '',
+      inspiration: '',
       targetAudience: '',
       budget: '',
       timeline: '',
@@ -385,25 +387,7 @@
       createdCustomerId = customerResult.data.id;
       console.log('Customer erstellt/gefunden:', createdCustomerId);
 
-      // Step 2: Publish customer
-      try {
-        const publishCustomerResponse = await fetch(`/api/customer/publish/${createdCustomerId}`, {
-          method: 'POST'
-        });
-        const publishCustomerResult = await publishCustomerResponse.json();
-
-        if (publishCustomerResponse.ok && publishCustomerResult.success) {
-          console.log('Customer veröffentlicht:', publishCustomerResult);
-        } else {
-          console.warn('Customer publishing failed, but customer was created:', publishCustomerResult);
-          // Don't fail the entire process if customer publishing fails
-        }
-      } catch (publishCustomerError) {
-        console.warn('Customer publishing error:', publishCustomerError);
-        // Don't fail the entire process if customer publishing fails
-      }
-
-      // Step 3: Prepare asset IDs (use pre-uploaded or fallback to upload now)
+      // Step 2: Prepare asset IDs (use pre-uploaded or fallback to upload now)
       let finalAssetIds: string[] = [];
       if (uploadedAssetIds.length > 0) {
         console.log('Using pre-uploaded assets:', uploadedAssetIds);
@@ -419,7 +403,7 @@
         }
       }
 
-      // Step 4: Create project (without owner initially to avoid circular dependency)
+      // Step 3: Create project (without owner initially to avoid circular dependency)
       console.log('Creating project with assets:', finalAssetIds);
 
       const projectData: Project = {
@@ -431,6 +415,7 @@
         desiredDomain: config.desiredDomain,
         domainStatus: config.domainStatus,
         goals: config.goals,
+        inspiration: config.inspiration,
         targetAudience: config.targetAudience,
         budget: config.budget,
         timeline: config.timeline,
@@ -461,7 +446,7 @@
         const projectId = result.data.id;
         console.log('Projekt erstellt:', projectId);
 
-        // Step 5: Link customer to project
+        // Step 4: Link customer to project
         try {
           const linkResponse = await fetch(`/api/project/link-customer/${projectId}`, {
             method: 'POST',
@@ -483,43 +468,72 @@
           // Don't fail the entire process if linking fails
         }
 
-        // Step 6: Publish the project
+        // Step 5: Show thank you page immediately while publishing happens in background
+        showThankYouPage();
+        
+        // Step 6: Wait 2 seconds to ensure everything is properly saved before publishing
+        console.log('Waiting 3 seconds before publishing to ensure data consistency...');
+        await new Promise(resolve => setTimeout(resolve, 3000));
+
+        // Step 7: Publish customer
         try {
-          const publishResponse = await fetch(`/api/project/publish/${projectId}`, {
+          console.log('Publishing customer:', createdCustomerId);
+          const publishCustomerResponse = await fetch(`/api/customer/publish/${createdCustomerId}`, {
             method: 'POST'
           });
-          const publishResult = await publishResponse.json();
+          const publishCustomerResult = await publishCustomerResponse.json();
 
-          if (publishResponse.ok && publishResult) {
-            console.log('Projekt veröffentlicht:', publishResult);
+          if (publishCustomerResponse.ok && publishCustomerResult.success) {
+            console.log('Customer erfolgreich veröffentlicht:', publishCustomerResult);
           } else {
-            console.warn('Project publishing failed, but project was created:', publishResult);
+            console.warn('Customer publishing failed:', publishCustomerResult);
+            // Don't fail the entire process if customer publishing fails
+          }
+        } catch (publishCustomerError) {
+          console.warn('Customer publishing error:', publishCustomerError);
+          // Don't fail the entire process if customer publishing fails
+        }
+
+        // Step 8: Publish the project
+        try {
+          console.log('Publishing project:', projectId);
+          const publishProjectResponse = await fetch(`/api/project/publish/${projectId}`, {
+            method: 'POST'
+          });
+          const publishProjectResult = await publishProjectResponse.json();
+
+          if (publishProjectResponse.ok && publishProjectResult.success) {
+            console.log('Projekt erfolgreich veröffentlicht:', publishProjectResult);
+          } else {
+            console.warn('Project publishing failed:', publishProjectResult);
             // Don't fail the entire process if publishing fails
           }
-        } catch (publishError) {
-          console.warn('Project publishing error:', publishError);
+        } catch (publishProjectError) {
+          console.warn('Project publishing error:', publishProjectError);
           // Don't fail the entire process if publishing fails
         }
 
-        // Step 7: Now publish all assets AFTER project is published
+        // Step 9: Publish all assets that are part of the project
         if (finalAssetIds.length > 0) {
-          console.log('Publishing assets after project publication:', finalAssetIds);
+          console.log('Publishing all project assets:', finalAssetIds);
 
-          const publishedAssetIds = await publishMultipleAssets(finalAssetIds, (message, current, total) => {
-            // Update loading steps to show asset publishing progress
-            console.log(`Asset publishing: ${message}`);
-          });
+          try {
+            const publishedAssetIds = await publishMultipleAssets(finalAssetIds, (message, current, total) => {
+              console.log(`Asset publishing progress: ${message} (${current}/${total})`);
+            });
 
-          if (publishedAssetIds.length === 0 && finalAssetIds.length > 0) {
-            console.warn('Asset publishing failed, but project was created and published');
+            if (publishedAssetIds.length > 0) {
+              console.log('Assets erfolgreich veröffentlicht:', publishedAssetIds);
+            } else {
+              console.warn('No assets could be published, but project was created and published');
+            }
+          } catch (assetPublishError) {
+            console.warn('Asset publishing error:', assetPublishError);
             // Don't fail the entire process if asset publishing fails
-          } else {
-            console.log('Assets successfully published:', publishedAssetIds);
           }
         }
 
-        // Show thank you page
-        showThankYouPage();
+        console.log('Submission process completed successfully');
       } else {
         // Collect detailed error information
         errorDetails.push(`API Fehler: ${result.error || 'Unbekannter Fehler'}`);
@@ -771,6 +785,19 @@
               class="input input-bordered w-full"
               bind:value={config.goals}
               placeholder="z.B. Mehr Kunden gewinnen, Prozesse digitalisieren..."
+            />
+          </div>
+
+          <div class="form-control w-full">
+            <label class="label" for="inspiration">
+              <span class="label-text font-semibold">Gibt es Websieten, die als Inspiration dienen können?</span>
+            </label>
+            <input
+              type="text"
+              id="inspiration"
+              class="input input-bordered w-full"
+              bind:value={config.inspiration}
+              placeholder="z.B. www.atlassian.com, www.figma.com, ... "
             />
           </div>
 

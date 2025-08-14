@@ -17,6 +17,7 @@ export const POST: RequestHandler = async ({ request }) => {
         $desiredDomain: String
         $domainStatus: String
         $goals: String
+        $inspiration: String
         $targetAudience: String
         $budget: String
         $timeline: String
@@ -43,6 +44,7 @@ export const POST: RequestHandler = async ({ request }) => {
             desiredDomain: $desiredDomain
             domainStatus: $domainStatus
             goals: $goals
+            inspiration: $inspiration
             targetAudience: $targetAudience
             budget: $budget
             timeline: $timeline
@@ -69,6 +71,7 @@ export const POST: RequestHandler = async ({ request }) => {
           desiredDomain
           domainStatus
           goals
+          inspiration
           targetAudience
           budget
           timeline
@@ -105,6 +108,7 @@ export const POST: RequestHandler = async ({ request }) => {
       desiredDomain: projectData.desiredDomain || null,
       domainStatus: projectData.domainStatus || null,
       goals: projectData.goals || null,
+      inspiration: projectData.inspiration || null,
       targetAudience: projectData.targetAudience || null,
       budget: projectData.budget || null,
       timeline: projectData.timeline || null,
