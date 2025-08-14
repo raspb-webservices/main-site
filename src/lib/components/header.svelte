@@ -352,10 +352,10 @@
           .locale-toggle-btn {
             @apply flex h-8 w-8 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-white bg-cover bg-center bg-no-repeat p-0 transition-all duration-300 hover:shadow-lg;
             &.german {
-              background-image: url('icons/flags/germany-flag.svg');
+              background-image: url('/icons/flags/germany-flag.svg');
             }
             &.english {
-              background-image: url('icons/flags/uk-flag.svg');
+              background-image: url('/icons/flags/uk-flag.svg');
             }
             &:hover {
               @apply scale-105 transform;
@@ -369,11 +369,11 @@
             @apply flex h-8 w-8 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-white bg-cover bg-center bg-no-repeat p-0 transition-all duration-300  hover:shadow-lg;
             &.light {
               background-color: var(--decent-blue);
-              background-image: url('icons/sun-icon.svg');
+              background-image: url('/icons/sun-icon.svg');
             }
             &.dark {
               background-color: var(--dark-grey);
-              background-image: url('icons/moon-icon.svg');
+              background-image: url('/icons/moon-icon.svg');
             }
           }
         }
