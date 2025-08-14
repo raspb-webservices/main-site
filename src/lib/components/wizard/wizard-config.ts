@@ -55,7 +55,7 @@ export const projectTypes: ProjectType[] = [
   {
     id: 'artificialIntelligence',
     title: 'Ihr KI Use-Case',
-    description: 'Infrastruktur, Automation, Engineering',
+    description: 'KI-Lösungen für Beratung, Workflows, Agenten und individuelle Anwendungen',
     icon: '🤖',
     lowestPrice: 10000,
     highestPrice: 50000
@@ -63,7 +63,7 @@ export const projectTypes: ProjectType[] = [
   {
     id: 'freestyle',
     title: 'Individuelle Entwicklung',
-    description: 'Maßgeschneiderte Lösung nach Ihren Anforderungen',
+    description: 'Maßgeschneiderte Lösung nach Ihren spezifischen Anforderungen',
     icon: '🛠️',
     lowestPrice: 5000,
     highestPrice: 50000
@@ -130,13 +130,6 @@ export const subTypes: SubType[] = [
     price: 5999
   },
   {
-    id: 'eCommerce',
-    title: 'E-Commerce Shop',
-    description: 'Online-Shop mit Produktkatalog, Warenkorb und Zahlungsabwicklung',
-    parentId: 'webApplication',
-    price: 5999
-  },
-  {
     id: 'apiIntegration',
     title: 'API Integration',
     description: 'Integration externer Dienste und APIs in bestehende Systeme',
@@ -149,6 +142,35 @@ export const subTypes: SubType[] = [
     description: 'Spezialisierte Web-Tools für spezifische Geschäftsprozesse',
     parentId: 'webApplication',
     price: 5999
+  },
+  // AI Use Case Subtypes
+  {
+    id: 'aiConsulting',
+    title: 'KI-Beratung',
+    description: 'Strategische Beratung und Konzeptentwicklung für KI-Implementierungen',
+    parentId: 'artificialIntelligence',
+    price: 10000
+  },
+  {
+    id: 'aiWorkflows',
+    title: 'KI-Workflows',
+    description: 'Automatisierte Geschäftsprozesse und intelligente Workflow-Systeme',
+    parentId: 'artificialIntelligence',
+    price: 15000
+  },
+  {
+    id: 'aiAgents',
+    title: 'KI-Agenten',
+    description: 'Intelligente Agenten für Kundenservice, Support und Automatisierung',
+    parentId: 'artificialIntelligence',
+    price: 20000
+  },
+  {
+    id: 'aiIndividual',
+    title: 'Individuelle KI-Lösung',
+    description: 'Maßgeschneiderte KI-Anwendungen nach spezifischen Anforderungen',
+    parentId: 'artificialIntelligence',
+    price: 25000
   }
 ];
 
@@ -318,29 +340,56 @@ export interface WizardStep {
 // Dynamic step configuration function
 export function getStepConfig(projectType: string): WizardStep[] {
   const baseSteps: WizardStep[] = [
-    { id: 1, title: 'Projekttyp', required: true },
-    { id: 2, title: 'Details', required: true },
-    { id: 3, title: 'Beschreibung', required: false }
+    { id: 1, title: 'Projekttyp', required: true }
   ];
 
   if (projectType === 'website' || projectType === 'cms') {
     return [
       ...baseSteps,
+      { id: 2, title: 'Details', required: true },
+      { id: 3, title: 'Beschreibung', required: false },
       { id: 4, title: 'Features', required: false },
       { id: 5, title: 'Inhalte', required: false },
-      { id: 6, title: 'Design', required: false },
+      { id: 6, title: 'Materialien', required: false },
       { id: 7, title: 'Kontakt', required: true },
       { id: 8, title: 'Ergebnis', required: false }
     ];
-  } else if (projectType === 'webApplication' || projectType === 'artificialIntelligence') {
+  } else if (projectType === 'webApplication') {
     return [
       ...baseSteps,
+      { id: 2, title: 'Details', required: true },
+      { id: 3, title: 'Beschreibung', required: false },
+      { id: 4, title: 'Features', required: false },
+      { id: 5, title: 'Materialien', required: false },
+      { id: 6, title: 'Kontakt', required: true },
+      { id: 7, title: 'Ergebnis', required: false }
+    ];
+  } else if (projectType === 'artificialIntelligence') {
+    return [
+      ...baseSteps,
+      { id: 2, title: 'Details', required: true },
+      { id: 3, title: 'Beschreibung', required: false },
       { id: 4, title: 'Materialien', required: false },
       { id: 5, title: 'Kontakt', required: true },
       { id: 6, title: 'Ergebnis', required: false }
     ];
+  } else if (projectType === 'freestyle') {
+    return [
+      ...baseSteps,
+      { id: 2, title: 'Beschreibung', required: false },
+      { id: 3, title: 'Materialien', required: false },
+      { id: 4, title: 'Kontakt', required: true },
+      { id: 5, title: 'Ergebnis', required: false }
+    ];
   } else {
-    // freestyle
-    return [...baseSteps, { id: 4, title: 'Kontakt', required: true }, { id: 5, title: 'Ergebnis', required: false }];
+    // Default fallback
+    return [
+      ...baseSteps,
+      { id: 2, title: 'Details', required: true },
+      { id: 3, title: 'Beschreibung', required: false },
+      { id: 4, title: 'Materialien', required: false },
+      { id: 5, title: 'Kontakt', required: true },
+      { id: 6, title: 'Ergebnis', required: false }
+    ];
   }
 }

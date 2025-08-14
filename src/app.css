@@ -310,6 +310,12 @@ textarea:not([rows]) {
 .btn-basic {
   @apply from-purple via-pink to-violet flex items-center justify-center rounded-md border-0 bg-linear-to-r bg-size-[200%_auto] px-12 py-4 text-lg leading-none font-bold text-nowrap text-white shadow-md transition-all duration-500;
 
+  &:disabled, &[disabled] {
+    @apply cursor-not-allowed opacity-40;
+    &:hover {
+      @apply cursor-not-allowed bg-left;
+    }
+  }
   svg {
     @apply mx-1;
   }

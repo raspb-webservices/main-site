@@ -3,7 +3,7 @@
   import type { WizardConfig, Project } from '$interfaces/project.interface';
   import type { Customer } from '$interfaces/customer.interface';
   import { uploadAsset, publishAsset, createAsset, uploadMultipleAssetsWithDelay, publishMultipleAssets } from '$helper/uploadAsset';
-  import { projectTypes, subTypes, availableFeatures, googleFonts, formFieldTypes, featureCategoryColors } from './wizard-config';
+  import { projectTypes, subTypes, availableFeatures, googleFonts, formFieldTypes, featureCategoryColors, getStepConfig } from './wizard-config';
   import { goto } from '$app/navigation';
   import ContactForm from './contact-form.svelte';
 
@@ -84,42 +84,6 @@
 
   // Dynamic step configuration based on project type
   const stepConfig = $derived(getStepConfig(config.projectType));
-
-  function getStepConfig(projectType: string) {
-    const baseSteps = [
-      { id: 1, title: 'Projekttyp', required: true },
-      { id: 2, title: 'Details', required: true },
-      { id: 3, title: 'Beschreibung', required: false }
-    ];
-
-    if (projectType === 'website' || projectType === 'cms') {
-      return [
-        ...baseSteps,
-        { id: 4, title: 'Features', required: false },
-        { id: 5, title: 'Inhalte', required: false },
-        { id: 6, title: 'Design', required: false },
-        { id: 7, title: 'Kontakt', required: true },
-        { id: 8, title: 'Ergebnis', required: false }
-      ];
-    } else if (projectType === 'webApplication') {
-      return [
-        ...baseSteps,
-        { id: 4, title: 'Materialien', required: false },
-        { id: 5, title: 'Kontakt', required: true },
-        { id: 6, title: 'Ergebnis', required: false }
-      ];
-    } else if (projectType === 'artificialIntelligence') {
-      return [
-        ...baseSteps,
-        { id: 4, title: 'Materialien', required: false },
-        { id: 5, title: 'Kontakt', required: true },
-        { id: 6, title: 'Ergebnis', required: false }
-      ];
-    } else {
-      // freestyle
-      return [...baseSteps, { id: 4, title: 'Kontakt', required: true }, { id: 5, title: 'Ergebnis', required: false }];
-    }
-  }
 
   const maxSteps = $derived(stepConfig.length);
 
@@ -709,7 +673,7 @@
           </div>
         {/each}
       </div>
-    {:else if currentStep === 2}
+    {:else if currentStep === 2 && config.projectType !== 'freestyle'}
       <!-- Step 2: Subtype Selection -->
       <div class="step-header">
         <h1>Welche Art von <span class="inner-text-special">{projectTypes.find((p) => p.id === config.projectType)?.title}</span> benötigen Sie?</h1>
@@ -742,8 +706,8 @@
           </div>
         {/each}
       </div>
-    {:else if currentStep === 3}
-      <!-- Step 3: Project Description -->
+    {:else if (currentStep === 3 && config.projectType !== 'freestyle') || (currentStep === 2 && config.projectType === 'freestyle')}
+      <!-- Step 3: Project Description (or Step 2 for freestyle) -->
       <div class="step-header">
         <h1>Beschreiben Sie Ihr <span class="inner-text-special">Vorhaben</span></h1>
         <p class="teaser">Je detaillierter Sie Ihr Projekt beschreiben, desto genauer können wir Ihnen helfen und den Preis kalkulieren.</p>
@@ -771,9 +735,9 @@
             id="description"
             class="textarea textarea-bordered textarea-lg w-full"
             bind:value={config.description}
-            placeholder={config.projectType === 'webapp' || config.projectType === 'mobile'
-              ? 'Beschreiben Sie detailliert die gewünschten Funktionen und Features Ihrer App: Welche Hauptfunktionen soll sie haben? Wie sollen Benutzer damit interagieren? Welche Daten werden verarbeitet? Gibt es spezielle Anforderungen an Performance oder Sicherheit?'
-              : config.projectType === 'individual'
+            placeholder={config.projectType === 'webApplication' || config.projectType === 'artificialIntelligence'
+              ? 'Beschreiben Sie detailliert die gewünschten Funktionen und Features Ihrer Anwendung: Welche Hauptfunktionen soll sie haben? Wie sollen Benutzer damit interagieren? Welche Daten werden verarbeitet? Gibt es spezielle Anforderungen an Performance oder Sicherheit?'
+              : config.projectType === 'freestyle'
                 ? 'Beschreiben Sie Ihr individuelles Projekt im Detail: Welches Problem soll gelöst werden? Welche spezifischen Anforderungen haben Sie? Welche Systeme sollen integriert werden? Welche Funktionen sind besonders wichtig?'
                 : 'Beschreiben Sie Ihr Vorhaben im Detail: Was ist das Ziel? Welche Probleme soll es lösen? Welche Zielgruppe sprechen Sie an? Haben Sie bereits konkrete Vorstellungen zum Design oder Funktionen?'}
             rows="8"
@@ -866,7 +830,7 @@
           </div>
         </div>
       </div>
-    {:else if currentStep === 4 && (config.projectType === 'website' || config.projectType === 'cms')}
+    {:else if currentStep === 4 && (config.projectType === 'website' || config.projectType === 'cms' || config.projectType === 'webApplication')}
       <!-- Step 4: Features Selection (only for website/cms) -->
       <div class="step-header">
         <h1>Welche <span class="inner-text-special">Features</span> benötigen Sie?</h1>
@@ -903,7 +867,7 @@
           rows="4"
         ></textarea>
       </div>
-    {:else if currentStep === 5 && (config.projectType === 'website' || config.projectType === 'cms')}
+    {:else if currentStep === 5 && (config.projectType === 'website' || config.projectType === 'cms') }
       <!-- Step 5: Content Details (only for website/cms) -->
       <div class="step-header">
         <h1>Inhalte und <span class="inner-text-special">Struktur</span></h1>
@@ -1046,7 +1010,7 @@
           </button>
         </div>
       {/if}
-    {:else if (currentStep === 6 && (config.projectType === 'website' || config.projectType === 'cms')) || (currentStep === 4 && (config.projectType === 'webapp' || config.projectType === 'mobile'))}
+    {:else if (currentStep === 6 && (config.projectType === 'website' || config.projectType === 'cms')) || (currentStep === 5 && config.projectType === 'webApplication')}
       <!-- Design Step (not for individual development) -->
       <div class="step-header">
         <h1>Design und <span class="inner-text-special">Materialien</span></h1>
@@ -1196,7 +1160,7 @@
           </div>
         {/if}
       </div>
-    {:else if currentStep === 4 && config.projectType === 'individual'}
+    {:else if currentStep === 3 && config.projectType === 'freestyle' || currentStep === 4 && config.projectType === 'artificialIntelligence'}
       <!-- Materials Step for Individual Development -->
       <div class="step-header">
         <h1>Materialien und <span class="inner-text-special">Dokumente</span></h1>
@@ -1262,7 +1226,7 @@
           </div>
         {/if}
       </div>
-    {:else if (currentStep === 7 && (config.projectType === 'website' || config.projectType === 'cms')) || (currentStep === 5 && (config.projectType === 'webApplication' || config.projectType === 'artificialIntelligence')) || (currentStep === 4 && config.projectType === 'individual')}
+    {:else if (currentStep === 7 && (config.projectType === 'website' || config.projectType === 'cms')) || (currentStep === 6 && (config.projectType === 'webApplication') || (currentStep === 5 && config.projectType === 'artificialIntelligence') || (currentStep === 4 && config.projectType === 'freestyle'))}
       <!-- Contact Form Step -->
       <ContactForm bind:customerData bind:isValid={isContactFormValid} onUpdate={(data) => (customerData = data)} />
     {:else if currentStep === maxSteps}
@@ -1439,7 +1403,7 @@
         class="btn-basic"
         onclick={nextStep}
         disabled={(currentStep === 1 && !config.projectType) ||
-          (currentStep === 2 && !config.subType) ||
+          (currentStep === 2 && !config.subType && config.projectType !== 'freestyle') ||
           (stepConfig[currentStep - 1]?.title === 'Kontakt' && !isContactFormValid)}
       >
         Weiter
