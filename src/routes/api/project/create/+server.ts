@@ -1,7 +1,7 @@
 import { client } from '$lib/helper/graphql-client';
 import { gql } from 'graphql-request';
 import type { RequestHandler } from './$types';
-import type { Project, ProjectResponse } from '$interfaces/project.interface';
+import type { Project, ProjectResponse, projectStatus } from '$interfaces/project.interface';
 
 export const POST: RequestHandler = async ({ request }) => {
   try {
@@ -31,6 +31,7 @@ export const POST: RequestHandler = async ({ request }) => {
         $pages: Json!
         $setup: Json
         $fileIDs: [AssetWhereUniqueInput!]
+        $projectStatus: ProjectStatus
       ) {
         createProject(
           data: {
@@ -56,6 +57,7 @@ export const POST: RequestHandler = async ({ request }) => {
             pages: $pages
             setup: $setup
             relatedFiles: { connect: $fileIDs }
+            projectStatus: $projectStatus
           }
         ) {
           id
@@ -88,6 +90,7 @@ export const POST: RequestHandler = async ({ request }) => {
             givenName
           }
           createdAt
+          projectStatus
         }
       }
     `;
@@ -115,7 +118,8 @@ export const POST: RequestHandler = async ({ request }) => {
       formFields: projectData.formFields ? JSON.stringify(projectData.formFields) : null,
       pages: projectData.pages ? JSON.stringify(projectData.pages) : null,
       setup: projectData.setup ? JSON.stringify(projectData.setup) : null,
-      fileIDs: projectData.relatedFiles?.length ? projectData.relatedFiles : null
+      fileIDs: projectData.relatedFiles?.length ? projectData.relatedFiles : null,
+      projectStatus: "created"
     };
 
     console.log('PROJECT VARIABLES ', variables);

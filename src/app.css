@@ -4,6 +4,7 @@
 :root {
   --white: #fefefe;
   --black: #010101;
+  --very-dark-grey: #212121;
   --dark-grey: #444444;
   --medium-grey: #8e8d8d;
   --light-grey: #fafafa;
@@ -109,10 +110,11 @@
   --spacing-wqhd: 160rem;
   --color-white: var(--white);
   --color-black: var(--black);
-  --color-textBase: oklch(21% 0.006 285.885);
+  --color-base-content: oklch(21% 0.006 285.885);
   --color-lightGrey: var(--light-grey);
   --color-mediumGrey: var(--medium-grey);
   --color-darkGrey: var(--dark-grey);
+  --color-veryDarkGrey: var(--very-dark-grey);
   --color-darkBlue: var(--dark-blue);
   --color-paleBlue: var(--pale-blue);
   --color-lightBlue: var(--light-blue);
@@ -130,6 +132,7 @@
   --color-warning: var(--warning);
   --color-error: var(--error);
   --breakpoint-navOne: 55rem;
+  --breakpoint-halfXl: 72rem;
   --color-purple: oklch(0.6056 0.2189 292.72);
   --color-pink: oklch(0.6559 0.2118 354.31);
   --color-violet: oklch(0.6668 0.2591 322.15);
@@ -170,6 +173,9 @@ p {
       @apply pb-0;
     }
   }
+  &.stay-dark {
+    @apply text-veryDarkGrey;
+  }
 }
 
 h1,
@@ -191,6 +197,9 @@ h6 {
   }
   &.no-padding {
     @apply pb-0;
+  }
+    &.stay-dark {
+    @apply text-veryDarkGrey;
   }
 }
 h1 {
@@ -314,9 +323,9 @@ textarea:not([rows]) {
 }
 
 .nav-button-link {
-  @apply relative mr-2.5 ml-2.5 min-h-6 px-2 text-lg text-black opacity-75;
+  @apply relative mr-2.5 ml-2.5 min-h-6 px-2 text-lg text-base-content opacity-75;
   &::after {
-    @apply absolute -bottom-1 left-0 block h-0.5 w-full origin-left scale-x-0 bg-black transition-transform duration-500;
+    @apply absolute -bottom-1 left-0 block h-0.5 w-full origin-left scale-x-0 bg-base-content transition-transform duration-500;
     content: '';
   }
   &:hover {

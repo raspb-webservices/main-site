@@ -54,7 +54,7 @@
 <style lang="postcss">
   @reference '../../app.css';
   footer {
-    @apply bg-textBase h-20 w-full md:h-12;
+    @apply bg-base-content h-20 w-full md:h-12;
 
     > div.inner-box {
       @apply flex h-full w-full flex-col items-center md:flex-row md:justify-between;

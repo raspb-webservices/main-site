@@ -114,8 +114,8 @@
     <div class="flex flex-col items-center justify-center">
       <div class="massive-spacer"></div>
       <div class="intro m-auto max-w-5xl text-center">
-        <h1>Unsere <span class="inner-text-special">Services</span> im Überblick</h1>
-        <p class="teaser">
+        <h1 class="stay-dark">Unsere <span class="inner-text-special">Services</span> im Überblick</h1>
+        <p class="teaser stay-dark">
           Von der ersten Idee bis zur finalen Umsetzung - wir begleiten Sie mit modernster Technologie und jahrelanger Expertise zu Ihrem digitalen Erfolg.
         </p>
       </div>
@@ -289,8 +289,8 @@
     <div class="balance-section">
       <div class="massive-spacer"></div>
       <div class="intro m-auto max-w-5xl text-center">
-        <h1>Die perfekte <span class="inner-text-special">Balance</span></h1>
-        <p class="teaser">
+        <h1 class="stay-dark">Die perfekte <span class="inner-text-special">Balance</span></h1>
+        <p class="teaser stay-dark">
           Wir haben verstanden, dass erfolgreiche Projekte das optimale Gleichgewicht zwischen Zeit, Kosten und Qualität erfordern. <button
             class="text-link-button"
             onclick={openPhilosophyModal}>Unsere Philosophie</button
@@ -366,8 +366,8 @@
     <div class="features-section">
       <div class="massive-spacer"></div>
       <div class="intro m-auto max-w-5xl text-center">
-        <h1>Was uns <span class="inner-text-special">auszeichnet</span></h1>
-        <p class="teaser">Unsere Alleinstellungsmerkmale machen den Unterschied für Ihren Erfolg. Erfahren Sie, warum Kunden raspb wählen.</p>
+        <h1 class="stay-dark">Was uns <span class="inner-text-special">auszeichnet</span></h1>
+        <p class="teaser stay-dark">Unsere Alleinstellungsmerkmale machen den Unterschied für Ihren Erfolg. Erfahren Sie, warum Kunden raspb wählen.</p>
       </div>
       <div class="spacer"></div>
 
