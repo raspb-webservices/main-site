@@ -1095,12 +1095,13 @@
               {#each googleFonts as font}
                 <option value={font}>{font}</option>
               {/each}
+              <option value="Other Google Fonts"> &lt; Ich möchte eine andere Google Font nutzen  &gt; </option>
             </select>
           </div>
 
           <div class="form-control w-full">
             <label class="label" for="customFont">
-              <span class="label-text font-semibold">Oder eigene Schriftart:</span>
+              <span class="label-text font-semibold">Oder eigene Schriftart definieren:</span>
             </label>
             <input
               type="text"
@@ -1112,7 +1113,7 @@
           </div>
         </div>
 
-        {#if config.desiredFont}
+        {#if config.desiredFont && config.desiredFont !== "Other Google Fonts"}
           <div class="alert mt-4">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info h-6 w-6 shrink-0">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>

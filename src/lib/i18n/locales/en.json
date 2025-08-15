@@ -749,137 +749,324 @@
       },
       "blogCms": {
         "title": "Blog & Content Platforms",
-        "icon": "📝",
-        "description": "Specialized solutions for blogs, magazines and content-driven websites.",
-        "highlights": {
-          "h1": "SEO Tools",
-          "h2": "Social Media",
-          "h3": "Newsletter"
+        "perfectFor": "Perfect for:",
+        "perfectForDescription": "Bloggers, journalists, content creators, magazines",
+        "contentOptimizedFeaturesTitle": "Content-optimized Features:",
+        "contentOptimizedFeatures": {
+          "c1": "Optimized for content creation",
+          "c2": "SEO tools and meta tag management",
+          "c3": "Social media integration and auto-posting",
+          "c4": "Comment system with moderation",
+          "c5": "Newsletter integration (Mailchimp, ConvertKit)",
+          "c6": "Categories and tag system"
         },
-        "buttonText": "More Details"
+        "monetizationTitle": "Monetization:",
+        "monetization": {
+          "m1": "Advertising space management",
+          "m2": "Affiliate link integration",
+          "m3": "Premium content areas",
+          "m4": "Email marketing tools"
+        },
+        "projectDuration": "Project duration:",
+        "projectDurationValue": "2-4 weeks",
+        "contentMigration": "Content migration:",
+        "contentMigrationValue": "We're happy to take over existing content",
+        "closeButton": "Close"
       },
       "headlessCms": {
         "title": "Headless CMS",
-        "icon": "🔗",
-        "description": "Flexible content management with API-based delivery for multiple channels.",
-        "highlights": {
-          "h1": "API-first",
-          "h2": "Multi-Channel",
-          "h3": "Future-proof"
+        "perfectFor": "Perfect for:",
+        "perfectForDescription": "Multi-channel publishing, apps + web, enterprise solutions",
+        "apiFirstTitle": "API-First Approach:",
+        "apiFirst": {
+          "a1": "Create content once, use everywhere",
+          "a2": "RESTful and GraphQL APIs",
+          "a3": "Flexibility in presentation",
+          "a4": "Future-proof and scalable",
+          "a5": "Integration into existing systems",
+          "a6": "Developer-friendly documentation"
         },
-        "buttonText": "More Details"
+        "useCasesTitle": "Use Cases:",
+        "useCases": {
+          "u1": "Website + mobile app with the same content",
+          "u2": "Multiple websites from one source",
+          "u3": "IoT devices and digital signage",
+          "u4": "E-commerce with different frontends"
+        },
+        "projectDuration": "Project duration:",
+        "projectDurationValue": "4-8 weeks",
+        "technology": "Technology:",
+        "technologyValue": "Hygraph, Strapi or custom solution",
+        "closeButton": "Close"
       },
       "webApps": {
         "title": "Web Applications",
-        "icon": "💻",
-        "description": "Browser-based applications for specific tasks and workflows.",
-        "highlights": {
-          "h1": "Platform-independent",
-          "h2": "No Installation",
-          "h3": "Auto-Updates"
+        "perfectFor": "Perfect for:",
+        "perfectForDescription": "Dashboards, tools, calculators, management systems",
+        "technicalAdvantagesTitle": "Technical Advantages:",
+        "technicalAdvantages": {
+          "t1": "Platform-independent (Windows, Mac, Linux)",
+          "t2": "No installation required",
+          "t3": "Automatic updates",
+          "t4": "Responsive design for all screen sizes",
+          "t5": "Offline functionality possible",
+          "t6": "Secure data transmission"
         },
-        "buttonText": "More Details"
+        "exampleApplicationsTitle": "Example Applications:",
+        "exampleApplications": {
+          "e1": "Business dashboards with real-time data",
+          "e2": "Project management tools",
+          "e3": "Financial calculators",
+          "e4": "Inventory management systems",
+          "e5": "Time tracking tools"
+        },
+        "projectDuration": "Project duration:",
+        "projectDurationValue": "2-8 weeks depending on complexity",
+        "technology": "Technology:",
+        "technologyValue": "SvelteKit, React or Vue.js",
+        "closeButton": "Close"
       },
       "pwa": {
         "title": "Progressive Web Apps (PWA)",
-        "icon": "📱",
-        "description": "The best of web and app - installable, offline-capable and with native features.",
-        "highlights": {
-          "h1": "Installable",
-          "h2": "Offline-capable",
-          "h3": "Push Notifications"
+        "perfectFor": "Perfect for:",
+        "perfectForDescription": "App-like experiences without app store",
+        "appLikeFeaturesTitle": "App-like Features:",
+        "appLikeFeatures": {
+          "a1": "Installable on all devices",
+          "a2": "Works offline",
+          "a3": "Push notifications",
+          "a4": "Access to device hardware (camera, GPS)",
+          "a5": "App icon on the home screen",
+          "a6": "Full-screen mode without browser UI"
         },
-        "buttonText": "More Details"
+        "technicalFeaturesTitle": "Technical Features:",
+        "technicalFeatures": {
+          "t1": "Service worker for offline functionality",
+          "t2": "App manifest for installation",
+          "t3": "Intelligent caching",
+          "t4": "Background sync",
+          "t5": "Automatic updates"
+        },
+        "projectDuration": "Project duration:",
+        "projectDurationValue": "3-6 weeks",
+        "advantage": "Advantage:",
+        "advantageValue": "No app store fees or approvals",
+        "closeButton": "Close"
       },
       "nativeApps": {
         "title": "Native Mobile Apps",
-        "icon": "📲",
-        "description": "Full-fledged apps for iOS and Android App Stores with native performance.",
-        "highlights": {
-          "h1": "App Store",
-          "h2": "Native Performance",
-          "h3": "Hardware Access"
+        "perfectFor": "Perfect for:",
+        "perfectForDescription": "Apps with high performance requirements",
+        "nativeAdvantagesTitle": "Native Advantages:",
+        "nativeAdvantages": {
+          "n1": "App Store and Google Play distribution",
+          "n2": "Native performance and speed",
+          "n3": "Full access to all device hardware",
+          "n4": "Platform-specific UI elements",
+          "n5": "Advanced security features",
+          "n6": "Deep system integration"
         },
-        "buttonText": "More Details"
+        "developmentApproachTitle": "Development Approach:",
+        "developmentApproach": {
+          "d1": "React Native for iOS and Android",
+          "d2": "Capacitor for web-to-app conversion",
+          "d3": "Shared codebase for efficiency",
+          "d4": "Native modules when needed"
+        },
+        "projectDuration": "Project duration:",
+        "projectDurationValue": "8-16 weeks",
+        "appStore": "App Store:",
+        "appStoreValue": "Support with publication included",
+        "closeButton": "Close"
       },
       "complexApps": {
         "title": "Complex Applications",
-        "icon": "⚙️",
-        "description": "Extensive applications with advanced functions and integrations.",
-        "highlights": {
-          "h1": "Database Integration",
-          "h2": "Real-time Features",
-          "h3": "Scalable"
+        "perfectFor": "Perfect for:",
+        "perfectForDescription": "CRM systems, e-learning platforms, booking systems",
+        "enterpriseFeaturesTitle": "Enterprise Features:",
+        "enterpriseFeatures": {
+          "e1": "Extensive database integration",
+          "e2": "API development and integration",
+          "e3": "User authentication and management",
+          "e4": "Real-time features (chat, notifications)",
+          "e5": "Scalable microservice architecture",
+          "e6": "Extensive reporting functions"
         },
-        "buttonText": "More Details"
+        "exampleSystemsTitle": "Example Systems:",
+        "exampleSystems": {
+          "e1": "Customer Relationship Management (CRM)",
+          "e2": "E-learning and course platforms",
+          "e3": "Booking and reservation systems",
+          "e4": "Collaboration and project management tools",
+          "e5": "Inventory management systems"
+        },
+        "projectDuration": "Project duration:",
+        "projectDurationValue": "12-24 weeks",
+        "support": "Support:",
+        "supportValue": "Long-term maintenance and further development",
+        "closeButton": "Close"
       },
       "components": {
         "title": "Individual Components",
-        "icon": "🧩",
-        "description": "UI components, widgets, special forms and custom plugins.",
-        "buttonText": "More Details"
+        "perfectFor": "Perfect for:",
+        "perfectForDescription": "Special UI elements, widgets, custom plugins",
+        "componentTypesTitle": "Component Types:",
+        "componentTypes": {
+          "c1": "Interactive UI components",
+          "c2": "Special forms and input fields",
+          "c3": "Data visualization and charts",
+          "c4": "Custom widgets for websites",
+          "c5": "Reusable code modules"
+        },
+        "projectDuration": "Project duration:",
+        "projectDurationValue": "1-3 weeks",
+        "integration": "Integration:",
+        "integrationValue": "Seamless integration into existing systems",
+        "closeButton": "Close"
       },
       "extensions": {
         "title": "System Extensions",
-        "icon": "🔧",
-        "description": "Extension of existing websites, API integrations and performance optimizations.",
-        "buttonText": "More Details"
+        "perfectFor": "Perfect for:",
+        "perfectForDescription": "Extending and optimizing existing websites",
+        "extensionServicesTitle": "Extension Services:",
+        "extensionServices": {
+          "e1": "New features for existing websites",
+          "e2": "API integrations (payment, CRM, etc.)",
+          "e3": "Performance optimizations",
+          "e4": "Database migrations",
+          "e5": "Security updates and hardening"
+        },
+        "projectDuration": "Project duration:",
+        "projectDurationValue": "1-4 weeks",
+        "compatibility": "Compatibility:",
+        "compatibilityValue": "Works with all common technologies",
+        "closeButton": "Close"
       },
       "specialApps": {
         "title": "Special Applications",
-        "icon": "📊",
-        "description": "Event registration, data dashboards, reporting tools and automation scripts.",
-        "buttonText": "More Details"
+        "perfectFor": "Perfect for:",
+        "perfectForDescription": "Unique business requirements",
+        "applicationExamplesTitle": "Application Examples:",
+        "applicationExamples": {
+          "a1": "Event registration systems",
+          "a2": "Business intelligence dashboards",
+          "a3": "Reporting and analytics tools",
+          "a4": "Automation scripts",
+          "a5": "Data processing pipelines"
+        },
+        "projectDuration": "Project duration:",
+        "projectDurationValue": "2-8 weeks",
+        "approach": "Approach:",
+        "approachValue": "Agile development with regular reviews",
+        "closeButton": "Close"
       },
       "design": {
         "title": "UI/UX Design",
-        "icon": "🎨",
-        "description": "Interface design, user experience optimization, prototyping and design systems.",
-        "buttonText": "More Details"
+        "perfectFor": "Perfect for:",
+        "perfectForDescription": "Optimal user experience and modern design",
+        "designServicesTitle": "Design Services:",
+        "designServices": {
+          "d1": "User interface design",
+          "d2": "User experience optimization",
+          "d3": "Interactive prototyping",
+          "d4": "Design systems and style guides",
+          "d5": "Usability testing"
+        },
+        "projectDuration": "Project duration:",
+        "projectDurationValue": "2-6 weeks",
+        "tools": "Tools:",
+        "toolsValue": "Figma, Adobe Creative Suite",
+        "closeButton": "Close"
       },
       "kiConsulting": {
         "title": "AI Consulting & Support",
-        "icon": "🧠",
-        "description": "Comprehensive consulting and support for integrating AI into your business processes.",
-        "highlights": {
-          "h1": "Strategy Development",
-          "h2": "Prompt Engineering",
-          "h3": "ROI Analysis"
+        "perfectFor": "Perfect for:",
+        "perfectForDescription": "Companies that want to strategically use AI",
+        "consultingServicesTitle": "Consulting Services:",
+        "consultingServices": {
+          "c1": "AI strategy development for your company",
+          "c2": "Prompt engineering for optimal results",
+          "c3": "Context engineering for precise AI responses",
+          "c4": "Use case identification and evaluation",
+          "c5": "ROI analysis for AI projects",
+          "c6": "Change management for AI introduction"
         },
-        "buttonText": "More Details"
+        "projectDuration": "Project duration:",
+        "projectDurationValue": "2-4 weeks",
+        "deliverable": "Deliverable:",
+        "deliverableValue": "Comprehensive AI strategy and roadmap",
+        "closeButton": "Close"
       },
       "kiAgentDevelopment": {
         "title": "AI Agent Development",
-        "icon": "🤖",
-        "description": "Tailor-made AI agents for specific tasks and use cases.",
-        "highlights": {
-          "h1": "Custom Chatbots",
-          "h2": "Content Generation",
-          "h3": "System Integration"
+        "perfectFor": "Perfect for:",
+        "perfectForDescription": "Automated customer service and content generation",
+        "agentTypesTitle": "Agent Types:",
+        "agentTypes": {
+          "a1": "Custom chatbots for websites",
+          "a2": "Automated customer service",
+          "a3": "Content generation and optimization",
+          "a4": "Data analysis and reporting agents",
+          "a5": "Email automation with AI",
+          "a6": "Integration into existing CRM systems"
         },
-        "buttonText": "More Details"
+        "projectDuration": "Project duration:",
+        "projectDurationValue": "4-8 weeks",
+        "training": "Training:",
+        "trainingValue": "Individual training on your data",
+        "closeButton": "Close"
       },
       "workflowOptimization": {
         "title": "Workflow Optimization with AI",
-        "icon": "⚡",
-        "description": "Simplify, shorten and reduce costs of digital processes and workflows with AI.",
-        "highlights": {
-          "h1": "Process Analysis",
-          "h2": "Automation",
-          "h3": "Predictive Analytics"
+        "perfectFor": "Perfect for:",
+        "perfectForDescription": "Efficiency improvement through intelligent automation",
+        "optimizationAreasTitle": "Optimization Areas:",
+        "optimizationAreas": {
+          "o1": "Process analysis and optimization potentials",
+          "o2": "Automation of recurring tasks",
+          "o3": "Intelligent document processing",
+          "o4": "Predictive analytics for better decisions",
+          "o5": "Integration of AI into existing workflows",
+          "o6": "Quality control through AI"
         },
-        "buttonText": "More Details"
+        "measurableBenefitsTitle": "Measurable Benefits:",
+        "measurableBenefits": {
+          "m1": "Save time (up to 70% reduction)",
+          "m2": "Reduce costs",
+          "m3": "Minimize errors",
+          "m4": "Increase efficiency"
+        },
+        "projectDuration": "Project duration:",
+        "projectDurationValue": "6-12 weeks",
+        "roi": "ROI:",
+        "roiValue": "Measurable efficiency improvement already after 4 weeks",
+        "closeButton": "Close"
       },
       "aiInfrastructure": {
         "title": "AI as Infrastructure",
-        "icon": "🏗️",
-        "description": "AI infrastructure as a service - rent instead of buy for maximum flexibility.",
-        "highlights": {
-          "h1": "Scalable",
-          "h2": "Pay-per-Use",
-          "h3": "24/7 Support"
+        "perfectFor": "Perfect for:",
+        "perfectForDescription": "Scalable AI solutions without own infrastructure",
+        "serviceModelsTitle": "Service Models:",
+        "serviceModels": {
+          "s1": "Scalable AI infrastructure in the cloud",
+          "s2": "Pay-per-use models for cost efficiency",
+          "s3": "Managed AI services without maintenance effort",
+          "s4": "24/7 monitoring and technical support",
+          "s5": "Regular updates and improvements",
+          "s6": "Compliance and data protection included"
         },
-        "buttonText": "More Details"
+        "billingModelsTitle": "Billing Models:",
+        "billingModels": {
+          "b1": "Project-based billing",
+          "b2": "Monthly fee for continuous usage",
+          "b3": "Usage-based billing according to consumption",
+          "b4": "Hybrid models for optimal flexibility"
+        },
+        "setupTime": "Setup time:",
+        "setupTimeValue": "1-2 weeks",
+        "scaling": "Scaling:",
+        "scalingValue": "Automatically according to demand",
+        "closeButton": "Close"
       }
     }
   },
