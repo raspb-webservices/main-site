@@ -1649,8 +1649,6 @@
 
 <style lang="postcss">
   @reference '../../../app.css';
-  @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Open+Sans&family=Lato&family=Montserrat&family=Oswald&family=Raleway&family=Poppins&family=Source+Sans+Pro&family=Slabo+27px&family=Merriweather&family=Noto+Sans&family=PT+Sans&family=Playfair+Display&family=Ubuntu&family=Roboto+Condensed&family=Mukta&family=Nunito&family=Rubik&family=Quicksand&family=Work+Sans&family=Josefin+Sans&family=Fjalla+One&family=Libre+Baskerville&family=Anton&family=Bebas+Neue&family=Dancing+Script&family=Encode+Sans&family=Arimo&family=Titillium+Web&family=Inconsolata&display=swap');
-
   .wizard-container {
     @apply bg-lightGrey rounded-2xl shadow-lg;
     .inner-box {
