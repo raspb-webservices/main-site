@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from '$app/state';
   import { goto } from '$app/navigation';
+  import { _ } from 'svelte-i18n';
 
   const currentYear = new Date().getFullYear();
 
@@ -21,27 +22,27 @@
         class:active={page.url.pathname === '/impressum'}
         onclick={() => {
           goto('/impressum');
-        }}>Impressum</button
+        }}>{$_('footer.imprint')}</button
       >
       <button
         class="nav-item"
         class:active={page.url.pathname === '/datenschutz'}
         onclick={() => {
           goto('/datenschutz');
-        }}>Datenschutz</button
+        }}>{$_('footer.privacyPolicy')}</button
       >
       <button
         class="nav-item"
         class:active={page.url.pathname === '/kontakt'}
         onclick={() => {
           goto('/kontakt');
-        }}>Kontakt</button
+        }}>{$_('footer.contact')}</button
       >
       <button
         class="nav-item flex justify-center items-center"
         onclick={scrollToTop}
-        title="Nach oben scrollen"
-        aria-label="Nach oben scrollen"
+        title={$_('footer.scrollToTop')}
+        aria-label={$_('footer.scrollToTop')}
       >
         <svg class="chevron-up" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="18,15 12,9 6,15"></polyline>

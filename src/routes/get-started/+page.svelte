@@ -156,7 +156,4 @@
     @apply mb-16;
   }
 
-  .back-section {
-    @apply text-center;
-  }
 </style>

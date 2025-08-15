@@ -14,7 +14,7 @@
     if (element) {
       element.scrollIntoView({
         behavior: 'smooth',
-        block: 'center'
+        block: 'start'
       });
     }
   }
@@ -25,8 +25,8 @@
       title: 'Rapid',
       subtitle: 'Schnell & Effizient',
       description:
-        'Wir arbeiten mit modernsten Tools und agilen Methoden, um Ihre Projekte in Rekordzeit zu realisieren. Unsere KI-gestützten Workflows beschleunigen Entwicklungsprozesse ohne Qualitätsverlust.',
-      icon: '⚡',
+        'Wir arbeiten mit modernsten Tools und agilen Methoden, um Ihre Projekte in Rekordzeit zu realisieren. Unsere KI-gestützten Workflows beschleunigen Entwicklungsprozesse ohne Qualitätsverlust. Wir liefern Ergebnisse bereits nach Tagen, nicht Monaten! Ach ja, nicht nur die Projektzeiten sind super schnell, auch die Webseiten und Anwendungen, die daraus hervorgehen, bieten eine unübertroffene Performance.',
+      icon: '🚀',
       gradient: 'from-yellow-400 to-orange-500',
       bgColor: 'bg-yellow-50',
       textColor: 'text-yellow-800'
@@ -36,7 +36,7 @@
       title: 'Accurate',
       subtitle: 'Präzise & Zuverlässig',
       description:
-        'Jedes Detail wird sorgfältig durchdacht und perfektioniert. Unsere systematischen Tests und Qualitätskontrollen garantieren fehlerfreie Ergebnisse, die Ihre Erwartungen übertreffen.',
+        'Jedes Detail wird sorgfältig ausgewählt und perfektioniert. Alles, was überflüssig ist, wird weggelassen: Kein Bloat, kein Schnickschnack. Sie bekommen genau das, was sie wünschen und müssen nicht teure Software lizensieren, nur weil Sie ein einziges Feature brauchen. Genaue Anforderungsaufnahme, exakte Umsätzung - unsere Lösungen laufen akurat, wie ein schweizer Uhrwerk.',
       icon: '🎯',
       gradient: 'from-blue-400 to-indigo-500',
       bgColor: 'bg-blue-50',
@@ -45,31 +45,20 @@
     {
       letter: 'S',
       title: 'Services',
-      subtitle: 'Umfassende Lösungen',
+      subtitle: 'Umfassende Lösungen & Kundenorientiertheit',
       description:
-        'Von der ersten Idee bis zur finalen Umsetzung bieten wir alle Services aus einer Hand. Webentwicklung, Design, SEO, Hosting - alles perfekt aufeinander abgestimmt.',
+        'Von der ersten Idee bis zur finalen Umsetzung bieten wir alle Services aus einer Hand: Konzept, Design (UI/UX), Entwicklung (Frontend/Backend), Datenmodellierung, Content/SEO, Hosting und mehr - alles perfekt aufeinander abgestimmt. Neben dem umfangreichen Portfolio, steht Service bei uns auch noch für absolute Kundenorientierung. Ihre Zufriedenheit ist unser obersted Ziel.',
       icon: '🛠️',
       gradient: 'from-green-400 to-emerald-500',
       bgColor: 'bg-green-50',
       textColor: 'text-green-800'
     },
     {
-      letter: 'P',
-      title: 'Perfectly',
-      subtitle: 'Makellose Qualität',
-      description:
-        'Perfektion ist unser Standard. Wir geben uns nicht mit "gut genug" zufrieden, sondern streben nach Exzellenz in jedem Aspekt unserer Arbeit.',
-      icon: '💎',
-      gradient: 'from-purple-400 to-pink-500',
-      bgColor: 'bg-purple-50',
-      textColor: 'text-purple-800'
-    },
-    {
-      letter: 'B',
-      title: 'Balanced',
+      letter: 'PB',
+      title: 'Perfectly Balanced',
       subtitle: 'Ausgewogen & Harmonisch',
       description:
-        'Wir finden die perfekte Balance zwischen Innovation und Bewährtem, zwischen Geschwindigkeit und Qualität, zwischen Technik und Benutzerfreundlichkeit.',
+        'Ein Kunstwerk ist dann perfekt, wenn man nichts mehr hinzufügen muss und nichts mehr entfernen kann. Die akurate Umsetzung Ihrer Anforderungne bedingt sich auch durch die perfekte Balance, die wir in all unseren Projekten leben. Kosten, Zeit und Qualität halten wir stets im Einklang ohne Kompromisse. Dennoch lassen wir Platz für Innovationen. Ausbalanciert, nicht erzeungen.',
       icon: '⚖️',
       gradient: 'from-teal-400 to-cyan-500',
       bgColor: 'bg-teal-50',
@@ -80,16 +69,16 @@
 
 <!-- Modal -->
 <dialog bind:this={modal} class="modal">
-  <div class="modal-box max-h-[90vh] w-11/12 max-w-5xl overflow-y-auto">
+  <div class="modal-box max-h-[90vh] max-w-5xl overflow-y-auto lg:w-11/12">
     <!-- Header -->
     <div class="mb-8 text-center">
       <form method="dialog">
         <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2" on:click={closeModal}>✕</button>
       </form>
 
-      <div class="my-8">
-        <h2 class="no-padding">raspb Philosophie</h2>
-        <p class="text-base-content/70 mt-3 text-xl">Rapid - Accurate - Services - Perfectly - Balanced</p>
+      <div class="my-2 lg:my-8">
+        <h2 class="no-padding"><span class="inner-text-special">raspb</span> Philosophie</h2>
+        <p class="text-base-content/70 mt-3 text-xl">rapid - accurate - services - perfectly balanced</p>
       </div>
 
       <!-- RASPB Letters Display -->
@@ -98,13 +87,13 @@
           <div class="flex flex-col items-center">
             <button
               type="button"
-              class="mx-3 h-16 w-16 rounded-full bg-gradient-to-br {item.gradient} flex transform cursor-pointer items-center justify-center text-2xl font-bold text-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl"
+              class="mx-2 h-12 w-12 rounded-full bg-gradient-to-br md:mx-3 md:h-16 md:w-16 {item.gradient} flex transform cursor-pointer items-center justify-center text-2xl font-bold text-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl"
               on:click={() => scrollToSection(item.letter)}
               title="Zu {item.title} springen"
             >
               {item.letter}
             </button>
-            <div class="mt-2 text-xs font-semibold opacity-70">{item.title}</div>
+            <div class="mt-2 min-h-8 text-xs font-semibold opacity-70">{item.title}</div>
           </div>
         {/each}
       </div>
@@ -115,27 +104,31 @@
       {#each philosophyItems as item, index}
         <div
           id="philosophy-{item.letter.toLowerCase()}"
-          class="card {item.bgColor} border-base-300 animate-fade-in-up m-16 border shadow-lg transition-all duration-300 hover:shadow-xl"
+          class="card {item.bgColor} border-base-300 animate-fade-in-up border shadow-lg transition-all duration-300 hover:shadow-xl sm:m-4 lg:m-16"
           style="animation-delay: {index * 0.1}s"
         >
           <div class="card-body">
-            <div class="flex flex-col items-start gap-6 lg:flex-row">
+            <div class="flex flex-col items-end lg:items-center lg:flex-row">
               <!-- Icon and Letter -->
-              <div class="flex flex-shrink-0 flex-col items-center">
+              <div class="flex flex-shrink-0 flex-col items-center lg:mr-6">
                 <div
-                  class="h-20 w-20 rounded-full bg-gradient-to-br {item.gradient} mb-2 flex items-center justify-center text-3xl font-bold text-white shadow-lg"
+                  class="h-20 w-20 rounded-full bg-gradient-to-br {item.gradient} flex items-center justify-center text-3xl font-bold text-white shadow-lg"
                 >
                   {item.letter}
                 </div>
-                <div class="text-4xl">{item.icon}</div>
               </div>
 
               <!-- Content -->
               <div class="flex-1">
                 <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
                   <div>
-                    <h3 class="text-2xl font-bold {item.textColor} mb-1">{item.title}</h3>
-                    <p class="text-lg font-semibold opacity-80">{item.subtitle}</p>
+                    <div class="flex items-center mb-2">
+                      <div class="text-4xl">{item.icon}</div>
+                      <div class="text-wrapper flex flex-col justify-center ml-4">
+                      <h3 class="no-padding {item.textColor} mb-2">{item.title}</h3>
+                      <p class="text-lg font-semibold opacity-80 no-padding">{item.subtitle}</p>
+                      </div>
+                    </div>
                   </div>
                   <div class="hidden lg:block">
                     <div class="badge badge-lg {item.textColor} border-current bg-white/50">
@@ -158,32 +151,23 @@
       <div class="from-primary/10 to-secondary/10 rounded-2xl bg-gradient-to-r p-6">
         <h3 class="mb-3 text-xl font-bold">Unsere Mission</h3>
         <p class="text-base-content/80 mx-auto max-w-4xl leading-relaxed">
-          Bei raspb vereinen wir diese fünf Prinzipien zu einer einzigartigen Arbeitsphilosophie. Wir glauben daran, dass wahre Exzellenz nur durch die perfekte
-          Balance aller Aspekte erreicht wird. Jedes Projekt ist eine Gelegenheit, diese Philosophie zu leben und außergewöhnliche Ergebnisse zu schaffen.
+          Bei raspb vereinen wir diese vier Prinzipien zu einer einzigartigen Arbeitsphilosophie. Wir glauben daran, dass wahre Exzellenz nur durch das in
+          Einklang bringen aller Aspekte erreicht werden kann. Jedes Projekt ist eine Gelegenheit, diese Philosophie zu leben und außergewöhnliche Ergebnisse zu
+          schaffen.
         </p>
         <div class="mt-4 flex justify-center">
-          <div class="flex items-center gap-2 text-sm opacity-70">
-            <span>🚀</span>
-            <span>Rapid</span>
-            <span>•</span>
-            <span>🎯</span>
-            <span>Accurate</span>
-            <span>•</span>
-            <span>🛠️</span>
-            <span>Services</span>
-            <span>•</span>
-            <span>💎</span>
-            <span>Perfectly</span>
-            <span>•</span>
-            <span>⚖️</span>
-            <span>Balanced</span>
+          <div class="flex flex-wrap items-center justify-center gap-2 text-sm opacity-70">
+            <span class="mx-2">🚀 rapid</span>
+            <span class="mx-2">🎯 accurate</span>
+            <span class="mx-2">🛠️ services</span>
+            <span class="mx-2">⚖️ perfectly balanced</span>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Close Button -->
-    <div class="modal-action">
+    <div class="modal-action flex items-center justify-center">
       <button type="button" class="btn btn-primary btn-wide" on:click={closeModal}>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path
@@ -205,46 +189,7 @@
 </dialog>
 
 <style lang="postcss">
-  @keyframes fade-in-up {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-fade-in-up {
-    animation: fade-in-up 0.6s ease-out forwards;
-    opacity: 0;
-  }
-
-  /* Custom scrollbar for modal */
-  .modal-box {
-    scrollbar-width: thin;
-    scrollbar-color: #c1121f transparent;
-  }
-
-  .modal-box::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .modal-box::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .modal-box::-webkit-scrollbar-thumb {
-    background: #c1121f;
-    border-radius: 3px;
-  }
-
-  .modal-box::-webkit-scrollbar-thumb:hover {
-    background: #a10e1a;
-  }
-
-  /* Responsive adjustments */
+  @reference '../../app.css';
   @media (max-width: 768px) {
     .modal-box {
       max-height: 85vh;

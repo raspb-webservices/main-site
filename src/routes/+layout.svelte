@@ -3,6 +3,7 @@
   import FOOTER from '$lib/components/footer.svelte';
   import CookieConsentComponent from '$lib/components/cookieconsent.svelte';
   import { isLoading } from 'svelte-i18n';
+  import Loader from '$lib/components/loader.svelte';
   import '../app.css';
 
   let { children } = $props();
@@ -11,7 +12,7 @@
 <div class="wrapper">
   {#if $isLoading}
   <div class="loading-wrapper">
-    <div class="loading-spinner"></div>
+    <Loader size={'large'}></Loader>
   </div>
   {:else}
     <HEADER />
@@ -27,9 +28,5 @@
   @reference '../app.css';
   .loading-wrapper {
     @apply w-full h-dvh flex justify-center items-center;
-    .loading-spinner {
-      @apply border-primary/20 border-t-primary mx-auto h-20 w-20 rounded-full border-6;
-      animation: spin 1s linear infinite;
-    }
   }
 </style>

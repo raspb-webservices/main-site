@@ -21,21 +21,21 @@
 </script>
 
 <svelte:head>
-  <title>{$_('services.meta.title')}</title>
-  <meta name="description" content={$_('services.meta.description')} />
+  <title>{$_('servicesPage.meta.title')}</title>
+  <meta name="description" content={$_('servicesPage.meta.description')} />
 </svelte:head>
 
 <div class="services-content-wrapper">
   <!-- Hero/Teaser Section -->
   <Section type={'centerTeaser'}>
     <div class="animate-fade-in-up flex w-full flex-col items-center justify-center text-center">
-      <h1 class="massive">{$_('services.header.titleFirst')}  <span class="inner-text-special">{$_('services.header.titleHighlight')}</span></h1>
-      <h3>Maßgeschneiderte digitale Lösungen für jeden Bedarf - von der einfachen Website bis zur komplexen KI-Integration</h3>
+      <h1 class="massive">{$_('servicesPage.hero.titleFirst')}  <span class="inner-text-special">{$_('servicesPage.hero.titleHighlight')}</span></h1>
+      <h3>{$_('servicesPage.hero.subtitle')}</h3>
       <button
         class="btn-basic"
         onclick={() => {
           goto('/get-started');
-        }}>Projekt konfigurieren</button
+        }}>{$_('servicesPage.hero.buttonText')}</button
       >
     </div>
 
@@ -44,22 +44,20 @@
 
     <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-14">
       <div class="animate-fade-in-from-side mr-8">
-        <h2>Von der Idee zur <span class="inner-text-special">digitalen Realität</span></h2>
+        <h2>{$_('servicesPage.intro.titleFirst')} <span class="inner-text-special">{$_('servicesPage.intro.titleHighlight')}</span></h2>
         <p>
-          Unser umfassendes Service-Portfolio deckt alle Aspekte der digitalen Transformation ab. Ob Sie eine einfache Präsenz im Web benötigen oder komplexe,
-          KI-gestützte Anwendungen entwickeln möchten - wir haben die passende Lösung.
+          {$_('servicesPage.intro.paragraph1')}
         </p>
         <p>
-          Jeder Service wird nach der bewährten raspb-Philosophie umgesetzt: schnell, kostengünstig und in höchster Qualität. Dabei behalten Sie stets die volle
-          Kontrolle über Ihr digitales Eigentum.
+          {$_('servicesPage.intro.paragraph2')}
         </p>
         <div class="benefits">
-          <div class="item">Transparente Festpreise</div>
-          <div class="item">Keine Folgekosten</div>
-          <div class="item">Vollständige Code-Übergabe</div>
-          <div class="item">Moderne Technologien</div>
-          <div class="item">Persönlicher Ansprechpartner</div>
-          <div class="item">Agile Entwicklung</div>
+          <div class="item">{$_('servicesPage.intro.benefits.benefit1')}</div>
+          <div class="item">{$_('servicesPage.intro.benefits.benefit2')}</div>
+          <div class="item">{$_('servicesPage.intro.benefits.benefit3')}</div>
+          <div class="item">{$_('servicesPage.intro.benefits.benefit4')}</div>
+          <div class="item">{$_('servicesPage.intro.benefits.benefit5')}</div>
+          <div class="item">{$_('servicesPage.intro.benefits.benefit6')}</div>
         </div>
       </div>
       <div>
@@ -75,32 +73,32 @@
   <Section>
     <div class="service-overview-highlight">
       <div class="highlight-content">
-        <h2 class="mb-8 text-center">Unsere <span class="inner-text-special">Service-Kategorien</span></h2>
+        <h2 class="mb-8 text-center">{$_('servicesPage.categories.titleFirst')} <span class="inner-text-special">{$_('servicesPage.categories.titleHighlight')}</span></h2>
         <div class="service-categories-grid">
           <div class="category-card">
             <div class="category-icon">🌐</div>
-            <h3>Webseiten</h3>
-            <p>Von One-Pagern bis Corporate Websites</p>
+            <h3>{$_('servicesPage.categories.webseiten.title')}</h3>
+            <p>{$_('servicesPage.categories.webseiten.description')}</p>
           </div>
           <div class="category-card">
             <div class="category-icon">📝</div>
-            <h3>Content Management</h3>
-            <p>Einfache bis komplexe CMS-Lösungen</p>
+            <h3>{$_('servicesPage.categories.contentManagement.title')}</h3>
+            <p>{$_('servicesPage.categories.contentManagement.description')}</p>
           </div>
           <div class="category-card">
             <div class="category-icon">📱</div>
-            <h3>Applikationen</h3>
-            <p>Business Apps, Webanwendungen, PWAs</p>
+            <h3>{$_('servicesPage.categories.applications.title')}</h3>
+            <p>{$_('servicesPage.categories.applications.description')}</p>
           </div>
           <div class="category-card">
             <div class="category-icon">⚙️</div>
-            <h3>Freestyle</h3>
-            <p>Hochindividuelle Lösungen</p>
+            <h3>{$_('servicesPage.categories.freestyle.title')}</h3>
+            <p>{$_('servicesPage.categories.freestyle.description')}</p>
           </div>
           <div class="category-card">
             <div class="category-icon">🤖</div>
-            <h3>KI-Services</h3>
-            <p>Beratung, Engineering, Automation & Infrastructure</p>
+            <h3>{$_('servicesPage.categories.aiServices.title')}</h3>
+            <p>{$_('servicesPage.categories.aiServices.description')}</p>
           </div>
         </div>
       </div>
@@ -111,10 +109,9 @@
   <Section>
     <div class="service-section">
       <div class="service-header">
-        <h1>Webseiten <span class="inner-text-special">für jeden Anspruch</span></h1>
+        <h1>{$_('servicesPage.webseitenSection.titleFirst')} <span class="inner-text-special">{$_('servicesPage.webseitenSection.titleHighlight')}</span></h1>
         <p class="teaser">
-          Von eleganten One-Pagern bis hin zu umfassenden Corporate Websites - wir entwickeln Webseiten, die Ihre Zielgruppe begeistern und Ihre Geschäftsziele
-          unterstützen. Und all das mit einem technischen Standard, der seines Gleichen sucht.
+          {$_('servicesPage.webseitenSection.teaser')}
         </p>
       </div>
 
@@ -123,16 +120,16 @@
         <div class="service-card">
           <div class="service-card-content">
             <div class="service-card-header">
-              <h3>One-Pager Websites</h3>
-              <div class="service-icon">🎯</div>
+              <h3>{$_('servicesPage.webseitenSection.onePage.title')}</h3>
+              <div class="service-icon">{$_('servicesPage.webseitenSection.onePage.icon')}</div>
             </div>
-            <p>Kompakte, fokussierte Präsentation auf einer scrollbaren Seite. Perfekt für für den schnellen Einstieg mit klarer Botschaft.</p>
+            <p>{$_('servicesPage.webseitenSection.onePage.description')}</p>
             <div class="service-highlights">
-              <span class="highlight">Webvisitenkarte</span>
-              <span class="highlight">Maintenance Seite</span>
-              <span class="highlight">Minmalistische Kampagnenseite</span>
+              <span class="highlight">{$_('servicesPage.webseitenSection.onePage.highlights.h1')}</span>
+              <span class="highlight">{$_('servicesPage.webseitenSection.onePage.highlights.h2')}</span>
+              <span class="highlight">{$_('servicesPage.webseitenSection.onePage.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-onepage')}> Mehr Details </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-onepage')}> {$_('servicesPage.webseitenSection.onePage.buttonText')} </button>
           </div>
         </div>
 
@@ -140,16 +137,16 @@
         <div class="service-card">
           <div class="service-card-content">
             <div class="service-card-header">
-              <h3>Landing Pages</h3>
-              <div class="service-icon">🚀</div>
+              <h3>{$_('servicesPage.webseitenSection.landingPages.title')}</h3>
+              <div class="service-icon">{$_('servicesPage.webseitenSection.landingPages.icon')}</div>
             </div>
-            <p>Zielgerichtete Kampagnenseiten für Marketing-Aktionen, Produktlaunches oder Events mit maximaler Conversion.</p>
+            <p>{$_('servicesPage.webseitenSection.landingPages.description')}</p>
             <div class="service-highlights">
-              <span class="highlight">A/B-Testing</span>
-              <span class="highlight">Analytics</span>
-              <span class="highlight">Schnelle Umsetzung</span>
+              <span class="highlight">{$_('servicesPage.webseitenSection.landingPages.highlights.h1')}</span>
+              <span class="highlight">{$_('servicesPage.webseitenSection.landingPages.highlights.h2')}</span>
+              <span class="highlight">{$_('servicesPage.webseitenSection.landingPages.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-landing')}> Mehr Details </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-landing')}> {$_('servicesPage.webseitenSection.landingPages.buttonText')} </button>
           </div>
         </div>
 
@@ -157,16 +154,16 @@
         <div class="service-card">
           <div class="service-card-content">
             <div class="service-card-header">
-              <h3>Corporate Websites</h3>
-              <div class="service-icon">🏢</div>
+              <h3>{$_('servicesPage.webseitenSection.corporateWebsites.title')}</h3>
+              <div class="service-icon">{$_('servicesPage.webseitenSection.corporateWebsites.icon')}</div>
             </div>
-            <p>Professionelle Unternehmensauftritte mit mehreren Seiten, umfassenden Inhalten und erweiterten Funktionen.</p>
+            <p>{$_('servicesPage.webseitenSection.corporateWebsites.description')}</p>
             <div class="service-highlights">
-              <span class="highlight">SEO-optimiert</span>
-              <span class="highlight">Mehrseitig</span>
-              <span class="highlight">Professionell</span>
+              <span class="highlight">{$_('servicesPage.webseitenSection.corporateWebsites.highlights.h1')}</span>
+              <span class="highlight">{$_('servicesPage.webseitenSection.corporateWebsites.highlights.h2')}</span>
+              <span class="highlight">{$_('servicesPage.webseitenSection.corporateWebsites.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-corporate')}> Mehr Details </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-corporate')}> {$_('servicesPage.webseitenSection.corporateWebsites.buttonText')} </button>
           </div>
         </div>
       </div>
@@ -177,10 +174,9 @@
   <Section>
     <div class="service-section">
       <div class="service-header">
-        <h1>Content Management <span class="inner-text-special">nach Maß</span></h1>
+        <h1>{$_('servicesPage.cmsSection.titleFirst')} <span class="inner-text-special">{$_('servicesPage.cmsSection.titleHighlight')}</span></h1>
         <p class="teaser">
-          Behalten Sie die Kontrolle über Ihre Inhalte mit maßgeschneiderten CMS-Lösungen - von einfacher Seitenbearbeitung bis hin zu komplexen
-          Content-Strukturen.
+          {$_('servicesPage.cmsSection.teaser')}
         </p>
       </div>
 
@@ -189,16 +185,16 @@
         <div class="service-card large">
           <div class="service-card-content">
             <div class="service-card-header">
-              <h3>Einfache Inhaltsbearbeitung</h3>
-              <div class="service-icon">✏️</div>
+              <h3>{$_('servicesPage.cmsSection.simpleCms.title')}</h3>
+              <div class="service-icon">{$_('servicesPage.cmsSection.simpleCms.icon')}</div>
             </div>
-            <p>Machen Sie bestehende Seiten editierbar oder ermöglichen Sie die einfache Bearbeitung einzelner Inhalte.</p>
+            <p>{$_('servicesPage.cmsSection.simpleCms.description')}</p>
             <div class="service-highlights">
-              <span class="highlight">Inline-Editing</span>
-              <span class="highlight">Benutzerfreundlich</span>
-              <span class="highlight">Sofortige Vorschau</span>
+              <span class="highlight">{$_('servicesPage.cmsSection.simpleCms.highlights.h1')}</span>
+              <span class="highlight">{$_('servicesPage.cmsSection.simpleCms.highlights.h2')}</span>
+              <span class="highlight">{$_('servicesPage.cmsSection.simpleCms.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-simple-cms')}> Mehr Details </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-simple-cms')}> {$_('servicesPage.cmsSection.simpleCms.buttonText')} </button>
           </div>
         </div>
 
@@ -206,16 +202,16 @@
         <div class="service-card large">
           <div class="service-card-content">
             <div class="service-card-header">
-              <h3>Komplexe CMS-Systeme</h3>
-              <div class="service-icon">🏗️</div>
+              <h3>{$_('servicesPage.cmsSection.complexCms.title')}</h3>
+              <div class="service-icon">{$_('servicesPage.cmsSection.complexCms.icon')}</div>
             </div>
-            <p>Individuelle Content-Management-Systeme mit vielschichtigen Informationsobjekten und erweiterten Funktionen.</p>
+            <p>{$_('servicesPage.cmsSection.complexCms.description')}</p>
             <div class="service-highlights">
-              <span class="highlight">Custom Content-Typen</span>
-              <span class="highlight">Workflow-Management</span>
-              <span class="highlight">Mehrsprachigkeit</span>
+              <span class="highlight">{$_('servicesPage.cmsSection.complexCms.highlights.h1')}</span>
+              <span class="highlight">{$_('servicesPage.cmsSection.complexCms.highlights.h2')}</span>
+              <span class="highlight">{$_('servicesPage.cmsSection.complexCms.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-complex-cms')}> Mehr Details </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-complex-cms')}> {$_('servicesPage.cmsSection.complexCms.buttonText')} </button>
           </div>
         </div>
 
@@ -223,16 +219,16 @@
         <div class="service-card large">
           <div class="service-card-content">
             <div class="service-card-header">
-              <h3>Blog & Content-Plattformen</h3>
-              <div class="service-icon">📝</div>
+              <h3>{$_('servicesPage.cmsSection.blogCms.title')}</h3>
+              <div class="service-icon">{$_('servicesPage.cmsSection.blogCms.icon')}</div>
             </div>
-            <p>Spezialisierte Lösungen für Blogs, Magazine und content-getriebene Websites.</p>
+            <p>{$_('servicesPage.cmsSection.blogCms.description')}</p>
             <div class="service-highlights">
-              <span class="highlight">SEO-Tools</span>
-              <span class="highlight">Social Media</span>
-              <span class="highlight">Newsletter</span>
+              <span class="highlight">{$_('servicesPage.cmsSection.blogCms.highlights.h1')}</span>
+              <span class="highlight">{$_('servicesPage.cmsSection.blogCms.highlights.h2')}</span>
+              <span class="highlight">{$_('servicesPage.cmsSection.blogCms.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-blog-cms')}> Mehr Details </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-blog-cms')}> {$_('servicesPage.cmsSection.blogCms.buttonText')} </button>
           </div>
         </div>
 
@@ -240,16 +236,16 @@
         <div class="service-card large">
           <div class="service-card-content">
             <div class="service-card-header">
-              <h3>Headless CMS</h3>
-              <div class="service-icon">🔗</div>
+              <h3>{$_('servicesPage.cmsSection.headlessCms.title')}</h3>
+              <div class="service-icon">{$_('servicesPage.cmsSection.headlessCms.icon')}</div>
             </div>
-            <p>Flexible Content-Verwaltung mit API-basierter Auslieferung für multiple Kanäle.</p>
+            <p>{$_('servicesPage.cmsSection.headlessCms.description')}</p>
             <div class="service-highlights">
-              <span class="highlight">API-first</span>
-              <span class="highlight">Multi-Channel</span>
-              <span class="highlight">Zukunftssicher</span>
+              <span class="highlight">{$_('servicesPage.cmsSection.headlessCms.highlights.h1')}</span>
+              <span class="highlight">{$_('servicesPage.cmsSection.headlessCms.highlights.h2')}</span>
+              <span class="highlight">{$_('servicesPage.cmsSection.headlessCms.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-headless-cms')}> Mehr Details </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-headless-cms')}> {$_('servicesPage.cmsSection.headlessCms.buttonText')} </button>
           </div>
         </div>
       </div>
@@ -260,10 +256,9 @@
   <Section>
     <div class="service-section">
       <div class="service-header">
-        <h1>Applikationen <span class="inner-text-special">für Web & Mobile</span></h1>
+        <h1>{$_('servicesPage.applicationsSection.titleFirst')} <span class="inner-text-special">{$_('servicesPage.applicationsSection.titleHighlight')}</span></h1>
         <p class="teaser">
-          Von einfachen Browser-Anwendungen bis hin zu nativen Mobile Apps - wir setzen auf Progressive Web App Technologie für maximale Reichweite und
-          Performance.
+          {$_('servicesPage.applicationsSection.teaser')}
         </p>
       </div>
 
@@ -272,16 +267,16 @@
         <div class="service-card large">
           <div class="service-card-content">
             <div class="service-card-header">
-              <h3>Web Applications</h3>
-              <div class="service-icon">💻</div>
+              <h3>{$_('servicesPage.applicationsSection.webApps.title')}</h3>
+              <div class="service-icon">{$_('servicesPage.applicationsSection.webApps.icon')}</div>
             </div>
-            <p>Browser-basierte Anwendungen für spezifische Aufgaben und Workflows.</p>
+            <p>{$_('servicesPage.applicationsSection.webApps.description')}</p>
             <div class="service-highlights">
-              <span class="highlight">Plattformunabhängig</span>
-              <span class="highlight">Keine Installation</span>
-              <span class="highlight">Auto-Updates</span>
+              <span class="highlight">{$_('servicesPage.applicationsSection.webApps.highlights.h1')}</span>
+              <span class="highlight">{$_('servicesPage.applicationsSection.webApps.highlights.h2')}</span>
+              <span class="highlight">{$_('servicesPage.applicationsSection.webApps.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-web-apps')}> Mehr Details </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-web-apps')}> {$_('servicesPage.applicationsSection.webApps.buttonText')} </button>
           </div>
         </div>
 
@@ -289,16 +284,16 @@
         <div class="service-card large">
           <div class="service-card-content">
             <div class="service-card-header">
-              <h3>Progressive Web Apps (PWA)</h3>
-              <div class="service-icon">📱</div>
+              <h3>{$_('servicesPage.applicationsSection.pwa.title')}</h3>
+              <div class="service-icon">{$_('servicesPage.applicationsSection.pwa.icon')}</div>
             </div>
-            <p>Das Beste aus Web und App - installierbar, offline-fähig und mit nativen Features.</p>
+            <p>{$_('servicesPage.applicationsSection.pwa.description')}</p>
             <div class="service-highlights">
-              <span class="highlight">Installierbar</span>
-              <span class="highlight">Offline-fähig</span>
-              <span class="highlight">Push-Notifications</span>
+              <span class="highlight">{$_('servicesPage.applicationsSection.pwa.highlights.h1')}</span>
+              <span class="highlight">{$_('servicesPage.applicationsSection.pwa.highlights.h2')}</span>
+              <span class="highlight">{$_('servicesPage.applicationsSection.pwa.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-pwa')}> Mehr Details </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-pwa')}> {$_('servicesPage.applicationsSection.pwa.buttonText')} </button>
           </div>
         </div>
 
@@ -306,16 +301,16 @@
         <div class="service-card large">
           <div class="service-card-content">
             <div class="service-card-header">
-              <h3>Native Mobile Apps</h3>
-              <div class="service-icon">📲</div>
+              <h3>{$_('servicesPage.applicationsSection.nativeApps.title')}</h3>
+              <div class="service-icon">{$_('servicesPage.applicationsSection.nativeApps.icon')}</div>
             </div>
-            <p>Vollwertige Apps für iOS und Android App Stores mit nativer Performance.</p>
+            <p>{$_('servicesPage.applicationsSection.nativeApps.description')}</p>
             <div class="service-highlights">
-              <span class="highlight">App Store</span>
-              <span class="highlight">Native Performance</span>
-              <span class="highlight">Hardware-Zugriff</span>
+              <span class="highlight">{$_('servicesPage.applicationsSection.nativeApps.highlights.h1')}</span>
+              <span class="highlight">{$_('servicesPage.applicationsSection.nativeApps.highlights.h2')}</span>
+              <span class="highlight">{$_('servicesPage.applicationsSection.nativeApps.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-native-apps')}> Mehr Details </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-native-apps')}> {$_('servicesPage.applicationsSection.nativeApps.buttonText')} </button>
           </div>
         </div>
 
@@ -323,16 +318,16 @@
         <div class="service-card large">
           <div class="service-card-content">
             <div class="service-card-header">
-              <h3>Komplexe Anwendungen</h3>
-              <div class="service-icon">⚙️</div>
+              <h3>{$_('servicesPage.applicationsSection.complexApps.title')}</h3>
+              <div class="service-icon">{$_('servicesPage.applicationsSection.complexApps.icon')}</div>
             </div>
-            <p>Umfangreiche Anwendungen mit erweiterten Funktionen und Integrationen.</p>
+            <p>{$_('servicesPage.applicationsSection.complexApps.description')}</p>
             <div class="service-highlights">
-              <span class="highlight">Datenbank-Integration</span>
-              <span class="highlight">Real-time Features</span>
-              <span class="highlight">Skalierbar</span>
+              <span class="highlight">{$_('servicesPage.applicationsSection.complexApps.highlights.h1')}</span>
+              <span class="highlight">{$_('servicesPage.applicationsSection.complexApps.highlights.h2')}</span>
+              <span class="highlight">{$_('servicesPage.applicationsSection.complexApps.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-complex-apps')}> Mehr Details </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-complex-apps')}> {$_('servicesPage.applicationsSection.complexApps.buttonText')} </button>
           </div>
         </div>
       </div>
@@ -343,9 +338,9 @@
   <Section>
     <div class="service-section">
       <div class="service-header">
-        <h1>Individual<span class="inner-text-special">entwicklung</span></h1>
+        <h1>{$_('servicesPage.individualDevelopmentSection.titleFirst')}<span class="inner-text-special">{$_('servicesPage.individualDevelopmentSection.titleHighlight')}</span></h1>
         <p class="teaser">
-          Haben Sie spezielle Anforderungen, die nicht in die Standard-Kategorien passen? Wir entwickeln maßgeschneiderte Lösungen für jeden Use-Case.
+          {$_('servicesPage.individualDevelopmentSection.teaser')}
         </p>
       </div>
 
@@ -353,44 +348,44 @@
         <div class="service-card">
           <div class="service-card-content">
             <div class="service-card-header">
-              <h3>Einzelne Komponenten</h3>
-              <div class="service-icon">🧩</div>
+              <h3>{$_('servicesPage.individualDevelopmentSection.components.title')}</h3>
+              <div class="service-icon">{$_('servicesPage.individualDevelopmentSection.components.icon')}</div>
             </div>
-            <p>UI-Komponenten, Widgets, spezielle Formulare und Custom Plugins.</p>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-components')}> Mehr Details </button>
+            <p>{$_('servicesPage.individualDevelopmentSection.components.description')}</p>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-components')}> {$_('servicesPage.individualDevelopmentSection.components.buttonText')} </button>
           </div>
         </div>
 
         <div class="service-card">
           <div class="service-card-content">
             <div class="service-card-header">
-              <h3>System-Erweiterungen</h3>
-              <div class="service-icon">🔧</div>
+              <h3>{$_('servicesPage.individualDevelopmentSection.extensions.title')}</h3>
+              <div class="service-icon">{$_('servicesPage.individualDevelopmentSection.extensions.icon')}</div>
             </div>
-            <p>Erweiterung bestehender Websites, API-Integrationen und Performance-Optimierungen.</p>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-extensions')}> Mehr Details </button>
+            <p>{$_('servicesPage.individualDevelopmentSection.extensions.description')}</p>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-extensions')}> {$_('servicesPage.individualDevelopmentSection.extensions.buttonText')} </button>
           </div>
         </div>
 
         <div class="service-card">
           <div class="service-card-content">
             <div class="service-card-header">
-              <h3>Spezial-Anwendungen</h3>
-              <div class="service-icon">📊</div>
+              <h3>{$_('servicesPage.individualDevelopmentSection.specialApps.title')}</h3>
+              <div class="service-icon">{$_('servicesPage.individualDevelopmentSection.specialApps.icon')}</div>
             </div>
-            <p>Event-Registrierung, Daten-Dashboards, Reporting-Tools und Automatisierungs-Scripts.</p>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-special-apps')}> Mehr Details </button>
+            <p>{$_('servicesPage.individualDevelopmentSection.specialApps.description')}</p>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-special-apps')}> {$_('servicesPage.individualDevelopmentSection.specialApps.buttonText')} </button>
           </div>
         </div>
 
         <div class="service-card">
           <div class="service-card-content">
             <div class="service-card-header">
-              <h3>UI/UX Design</h3>
-              <div class="service-icon">🎨</div>
+              <h3>{$_('servicesPage.individualDevelopmentSection.design.title')}</h3>
+              <div class="service-icon">{$_('servicesPage.individualDevelopmentSection.design.icon')}</div>
             </div>
-            <p>Interface-Design, User Experience Optimierung, Prototyping und Design-Systeme.</p>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-design')}> Mehr Details </button>
+            <p>{$_('servicesPage.individualDevelopmentSection.design.description')}</p>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-design')}> {$_('servicesPage.individualDevelopmentSection.design.buttonText')} </button>
           </div>
         </div>
       </div>
@@ -401,8 +396,8 @@
   <Section>
     <div class="service-section">
       <div class="service-header">
-        <h1>KI-Services <span class="inner-text-special">& Automation</span></h1>
-        <p class="teaser">Nutzen Sie die Kraft der Künstlichen Intelligenz für Ihr Unternehmen. Von der Beratung bis zur fertigen KI-Lösung.</p>
+        <h1>{$_('servicesPage.kiServicesSection.titleFirst')} <span class="inner-text-special">{$_('servicesPage.kiServicesSection.titleHighlight')}</span></h1>
+        <p class="teaser">{$_('servicesPage.kiServicesSection.teaser')}</p>
       </div>
 
       <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
@@ -410,16 +405,16 @@
         <div class="service-card large">
           <div class="service-card-content">
             <div class="service-card-header">
-              <h3>KI-Beratung & Support</h3>
-              <div class="service-icon">🧠</div>
+              <h3>{$_('servicesPage.kiServicesSection.consulting.title')}</h3>
+              <div class="service-icon">{$_('servicesPage.kiServicesSection.consulting.icon')}</div>
             </div>
-            <p>Umfassende Beratung und Unterstützung bei der Integration von KI in Ihre Geschäftsprozesse.</p>
+            <p>{$_('servicesPage.kiServicesSection.consulting.description')}</p>
             <div class="service-highlights">
-              <span class="highlight">Strategieentwicklung</span>
-              <span class="highlight">Prompt Engineering</span>
-              <span class="highlight">ROI-Analyse</span>
+              <span class="highlight">{$_('servicesPage.kiServicesSection.consulting.highlights.h1')}</span>
+              <span class="highlight">{$_('servicesPage.kiServicesSection.consulting.highlights.h2')}</span>
+              <span class="highlight">{$_('servicesPage.kiServicesSection.consulting.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-ki-beratung')}> Mehr Details </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-ki-beratung')}> {$_('servicesPage.kiServicesSection.consulting.buttonText')} </button>
           </div>
         </div>
 
@@ -427,16 +422,16 @@
         <div class="service-card large">
           <div class="service-card-content">
             <div class="service-card-header">
-              <h3>KI-Agenten Entwicklung</h3>
-              <div class="service-icon">🤖</div>
+              <h3>{$_('servicesPage.kiServicesSection.agentDevelopment.title')}</h3>
+              <div class="service-icon">{$_('servicesPage.kiServicesSection.agentDevelopment.icon')}</div>
             </div>
-            <p>Maßgeschneiderte KI-Agenten für spezifische Aufgaben und Anwendungsfälle.</p>
+            <p>{$_('servicesPage.kiServicesSection.agentDevelopment.description')}</p>
             <div class="service-highlights">
-              <span class="highlight">Custom Chatbots</span>
-              <span class="highlight">Content-Generierung</span>
-              <span class="highlight">System-Integration</span>
+              <span class="highlight">{$_('servicesPage.kiServicesSection.agentDevelopment.highlights.h1')}</span>
+              <span class="highlight">{$_('servicesPage.kiServicesSection.agentDevelopment.highlights.h2')}</span>
+              <span class="highlight">{$_('servicesPage.kiServicesSection.agentDevelopment.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-ki-agenten')}> Mehr Details </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-ki-agenten')}> {$_('servicesPage.kiServicesSection.agentDevelopment.buttonText')} </button>
           </div>
         </div>
 
@@ -444,16 +439,16 @@
         <div class="service-card large">
           <div class="service-card-content">
             <div class="service-card-header">
-              <h3>Workflow-Optimierung</h3>
-              <div class="service-icon">⚡</div>
+              <h3>{$_('servicesPage.kiServicesSection.workflowOptimization.title')}</h3>
+              <div class="service-icon">{$_('servicesPage.kiServicesSection.workflowOptimization.icon')}</div>
             </div>
-            <p>Digitale Prozesse und Abläufe mit KI vereinfachen, verkürzen und vergünstigen.</p>
+            <p>{$_('servicesPage.kiServicesSection.workflowOptimization.description')}</p>
             <div class="service-highlights">
-              <span class="highlight">Prozessanalyse</span>
-              <span class="highlight">Automatisierung</span>
-              <span class="highlight">Predictive Analytics</span>
+              <span class="highlight">{$_('servicesPage.kiServicesSection.workflowOptimization.highlights.h1')}</span>
+              <span class="highlight">{$_('servicesPage.kiServicesSection.workflowOptimization.highlights.h2')}</span>
+              <span class="highlight">{$_('servicesPage.kiServicesSection.workflowOptimization.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-workflow')}> Mehr Details </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-workflow')}> {$_('servicesPage.kiServicesSection.workflowOptimization.buttonText')} </button>
           </div>
         </div>
 
@@ -461,16 +456,16 @@
         <div class="service-card large">
           <div class="service-card-content">
             <div class="service-card-header">
-              <h3>AI as Infrastructure</h3>
-              <div class="service-icon">🏗️</div>
+              <h3>{$_('servicesPage.kiServicesSection.aiAsInfrastructure.title')}</h3>
+              <div class="service-icon">{$_('servicesPage.kiServicesSection.aiAsInfrastructure.icon')}</div>
             </div>
-            <p>KI-Infrastruktur als Service - mieten statt kaufen für maximale Flexibilität.</p>
+            <p>{$_('servicesPage.kiServicesSection.aiAsInfrastructure.description')}</p>
             <div class="service-highlights">
-              <span class="highlight">Skalierbar</span>
-              <span class="highlight">Pay-per-Use</span>
-              <span class="highlight">24/7 Support</span>
+              <span class="highlight">{$_('servicesPage.kiServicesSection.aiAsInfrastructure.highlights.h1')}</span>
+              <span class="highlight">{$_('servicesPage.kiServicesSection.aiAsInfrastructure.highlights.h2')}</span>
+              <span class="highlight">{$_('servicesPage.kiServicesSection.aiAsInfrastructure.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-ai-infrastructure')}> Mehr Details </button>
+            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-ai-infrastructure')}> {$_('servicesPage.kiServicesSection.aiAsInfrastructure.buttonText')} </button>
           </div>
         </div>
       </div>
@@ -481,32 +476,31 @@
   <Section>
     <div class="cta-section">
       <div class="cta-content">
-        <h1>Bereit für Ihr <span class="inner-text-special">digitales Projekt</span>?</h1>
+        <h1>{$_('servicesPage.ctaSection.titleFirst')} <span class="inner-text-special">{$_('servicesPage.ctaSection.titleHighlight')}</span>?</h1>
         <p class="cta-text">
-          Sie haben die perfekte Lösung für Ihr Vorhaben gefunden? Unser intelligenter Konfigurator hilft Ihnen dabei, Ihr Projekt zu spezifizieren und erhalten
-          Sie sofort einen transparenten Festpreis.
+          {$_('servicesPage.ctaSection.teaser')}
         </p>
 
         <div class="cta-benefits">
           <div class="cta-benefit">
-            <div class="benefit-icon">⚡</div>
+            <div class="benefit-icon">{$_('servicesPage.ctaSection.benefits.benefit1.icon')}</div>
             <div>
-              <h4>Sofortiger Preis</h4>
-              <p>Erhalten Sie binnen Minuten einen verbindlichen Festpreis</p>
+              <h4>{$_('servicesPage.ctaSection.benefits.benefit1.title')}</h4>
+              <p>{$_('servicesPage.ctaSection.benefits.benefit1.description')}</p>
             </div>
           </div>
           <div class="cta-benefit">
-            <div class="benefit-icon">🎯</div>
+            <div class="benefit-icon">{$_('servicesPage.ctaSection.benefits.benefit2.icon')}</div>
             <div>
-              <h4>Maßgeschneidert</h4>
-              <p>Jede Lösung wird individuell auf Ihre Bedürfnisse zugeschnitten</p>
+              <h4>{$_('servicesPage.ctaSection.benefits.benefit2.title')}</h4>
+              <p>{$_('servicesPage.ctaSection.benefits.benefit2.description')}</p>
             </div>
           </div>
           <div class="cta-benefit">
-            <div class="benefit-icon">🤝</div>
+            <div class="benefit-icon">{$_('servicesPage.ctaSection.benefits.benefit3.icon')}</div>
             <div>
-              <h4>Persönlicher Kontakt</h4>
-              <p>Ein fester Ansprechpartner begleitet Sie durch das gesamte Projekt</p>
+              <h4>{$_('servicesPage.ctaSection.benefits.benefit3.title')}</h4>
+              <p>{$_('servicesPage.ctaSection.benefits.benefit3.description')}</p>
             </div>
           </div>
         </div>
@@ -518,13 +512,13 @@
               goto('/get-started');
             }}
           >
-            Projekt jetzt konfigurieren
+            {$_('servicesPage.ctaSection.button1')}
           </button>
-          <button class="btn btn-outline btn-lg px-8 py-4" onclick={() => goto('/faq')}> Häufige Fragen </button>
+          <button class="btn btn-outline btn-lg px-8 py-4" onclick={() => goto('/faq')}> {$_('servicesPage.ctaSection.button2')} </button>
         </div>
 
         <p class="cta-note">
-          💡 <strong>Tipp:</strong> Der Konfigurator dauert nur 3-5 Minuten und Sie erhalten sofort Ihren persönlichen Projektpreis. Unverbindlich und kostenlos.
+          {@html $_('servicesPage.ctaSection.note')}
         </p>
       </div>
     </div>
@@ -536,52 +530,48 @@
 <!-- One-Page Websites Modal -->
 <dialog id="modal-onepage" class="modal">
   <div class="modal-box">
-    <h3 class="mb-4 text-lg font-bold">One-Pager Websites</h3>
+    <h3 class="mb-4 text-lg font-bold">{$_('servicesPage.modals.onePage.title')}</h3>
     <div class="space-y-4">
-      <p><strong>Perfekt für:</strong> den Einstieg, mit wenigen Inhalten, eine schnelle und vorübergehende Internetpäsenz oder eine einfache Kampagnenseite</p>
+      <p><strong>{$_('servicesPage.modals.onePage.perfectFor')}</strong> {$_('servicesPage.modals.onePage.perfectForDescription')}</p>
       <p>
-        Möchte man JETZT im Internet präsent sein, mit Anschrift, Telefonnummer und ggf. den Laden-Öffnungszeiten, ist aber noch in der Planung. Dann bietet
-        sich eine Webvisitenkarte als simpler One-Pager an. So sind Sie mit Ihren Kontaktdaten wenigstens schone einmal auffindbar und haben ein Grundlage für
-        komplexere Vorhaben.
+        {$_('servicesPage.modals.onePage.paragraph1')}
       </p>
       <p>
-        Aber auch wenn Sie eine einzelnen Seite als Maintenance-Seite (wird angezeigt, wenn die Seite im Wartungsmodus ist) wünschen oder eine einzelne
-        Vorschaltseite implementiert werden soll, ist der One-Pager on raspb ideal. Und das sochon ab 399 € (inkl. allem = Hosting, Gebühren, etc.)
+        {$_('servicesPage.modals.onePage.paragraph2')}
       </p>
       <p>
-        Eine One-Pager-Seite, lässt sich auch komplexer aufziehen. Mit einem Formular am Ende oder ansprechenden Animationen. Der Phantasie sind kaum grenzen
-        gesetzt. Nutzen Sie den One-Pager Ansatz um Ihre Online-Kampagne zu realisieren.
+        {$_('servicesPage.modals.onePage.paragraph3')}
       </p>
 
       <div>
-        <h4 class="mb-2 font-semibold">Leistungen im Detail:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.onePage.servicesDetailTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Responsive Design für alle Geräte</li>
-          <li>Optimierte Performance mit blitzschnellen Ladezeiten</li>
-          <li>SEO-Grundoptimierung</li>
-          <li>Flexibel erweiterbar. Bringen Sie ihre Wünsche ein.</li>
-          <li>Doamin und SSL-Zertifikat inklusive</li>
-          <li>Im Fair Use Bereich* entstehen keine weiteren Kosten (Hosting, Wartung, Betrieb)</li>
+          <li>{$_('servicesPage.modals.onePage.servicesDetails.d1')}</li>
+          <li>{$_('servicesPage.modals.onePage.servicesDetails.d2')}</li>
+          <li>{$_('servicesPage.modals.onePage.servicesDetails.d3')}</li>
+          <li>{$_('servicesPage.modals.onePage.servicesDetails.d4')}</li>
+          <li>{$_('servicesPage.modals.onePage.servicesDetails.d5')}</li>
+          <li>{$_('servicesPage.modals.onePage.servicesDetails.d6')}</li>
         </ul>
       </div>
       <div class="spacer"></div>
       <div>
-        <h4 class="mb-2 font-semibold">Technische Features:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.onePage.technicalFeaturesTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Auf Wunsch mit modernen CSS-Animationen</li>
-          <li>Smooth Scrolling Navigation</li>
-          <li>Lazy Loading für Bilder</li>
+          <li>{$_('servicesPage.modals.onePage.technicalFeatures.t1')}</li>
+          <li>{$_('servicesPage.modals.onePage.technicalFeatures.t2')}</li>
+          <li>{$_('servicesPage.modals.onePage.technicalFeatures.t3')}</li>
         </ul>
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>Projektdauer:</strong> 1-5 Tage</p>
-        <p class="text-sm"><strong>Wartung:</strong> Für ein Jahr inklusive.</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.onePage.projectDuration')}</strong> {$_('servicesPage.modals.onePage.projectDurationValue')}</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.onePage.maintenance')}</strong> {$_('servicesPage.modals.onePage.maintenanceValue')}</p>
       </div>
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">Schließen</button>
+        <button class="btn">{$_('servicesPage.modals.onePage.closeButton')}</button>
       </form>
     </div>
   </div>
@@ -590,39 +580,39 @@
 <!-- Landing Pages Modal -->
 <dialog id="modal-landing" class="modal">
   <div class="modal-box">
-    <h3 class="mb-4 text-lg font-bold">Landing Pages</h3>
+    <h3 class="mb-4 text-lg font-bold">{$_('servicesPage.modals.landingPages.title')}</h3>
     <div class="space-y-4">
-      <p><strong>Perfekt für:</strong> Marketing-Kampagnen, Produktlaunches, Events, Lead-Generierung</p>
+      <p><strong>{$_('servicesPage.modals.landingPages.perfectFor')}</strong> {$_('servicesPage.modals.landingPages.perfectForDescription')}</p>
 
       <div>
-        <h4 class="mb-2 font-semibold">Conversion-Optimierung:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.landingPages.conversionOptimizationTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>A/B-Testing Setup für Headlines und CTAs</li>
-          <li>Heatmap-Integration (Hotjar/Crazy Egg)</li>
-          <li>Conversion-Tracking mit Google Analytics</li>
-          <li>Optimierte Formulare mit minimalen Feldern</li>
-          <li>Social Proof Integration</li>
+          <li>{$_('servicesPage.modals.landingPages.conversionOptimization.c1')}</li>
+          <li>{$_('servicesPage.modals.landingPages.conversionOptimization.c2')}</li>
+          <li>{$_('servicesPage.modals.landingPages.conversionOptimization.c3')}</li>
+          <li>{$_('servicesPage.modals.landingPages.conversionOptimization.c4')}</li>
+          <li>{$_('servicesPage.modals.landingPages.conversionOptimization.c5')}</li>
         </ul>
       </div>
 
       <div>
-        <h4 class="mb-2 font-semibold">Marketing-Integration:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.landingPages.marketingIntegrationTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Facebook Pixel Integration</li>
-          <li>Google Ads Conversion-Tracking</li>
-          <li>E-Mail-Marketing-Tool Anbindung</li>
-          <li>CRM-Integration (HubSpot, Salesforce)</li>
+          <li>{$_('servicesPage.modals.landingPages.marketingIntegration.m1')}</li>
+          <li>{$_('servicesPage.modals.landingPages.marketingIntegration.m2')}</li>
+          <li>{$_('servicesPage.modals.landingPages.marketingIntegration.m3')}</li>
+          <li>{$_('servicesPage.modals.landingPages.marketingIntegration.m4')}</li>
         </ul>
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>Projektdauer:</strong> 3-5 Tage</p>
-        <p class="text-sm"><strong>Performance:</strong> Optimiert für maximale Conversion-Rate</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.landingPages.projectDuration')}</strong> {$_('servicesPage.modals.landingPages.projectDurationValue')}</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.landingPages.performance')}</strong> {$_('servicesPage.modals.landingPages.performanceValue')}</p>
       </div>
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">Schließen</button>
+        <button class="btn">{$_('servicesPage.modals.landingPages.closeButton')}</button>
       </form>
     </div>
   </div>
@@ -631,42 +621,42 @@
 <!-- Corporate Websites Modal -->
 <dialog id="modal-corporate" class="modal">
   <div class="modal-box">
-    <h3 class="mb-4 text-lg font-bold">Corporate Websites</h3>
+    <h3 class="mb-4 text-lg font-bold">{$_('servicesPage.modals.corporateWebsites.title')}</h3>
     <div class="space-y-4">
-      <p><strong>Perfekt für:</strong> Mittelständische Unternehmen, Agenturen, Beratungen, B2B-Firmen</p>
+      <p><strong>{$_('servicesPage.modals.corporateWebsites.perfectFor')}</strong> {$_('servicesPage.modals.corporateWebsites.perfectForDescription')}</p>
 
       <div>
-        <h4 class="mb-2 font-semibold">Umfangreiche Features:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.corporateWebsites.extensiveFeaturesTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Mehrseitige Struktur (5-20 Seiten)</li>
-          <li>Erweiterte SEO-Optimierung</li>
-          <li>Professionelles Corporate Design</li>
-          <li>Kontaktformulare und Interaktionen</li>
-          <li>Team- und Über-uns-Seiten</li>
-          <li>Service-/Produktpräsentationen</li>
-          <li>News/Blog-Integration</li>
+          <li>{$_('servicesPage.modals.corporateWebsites.extensiveFeatures.e1')}</li>
+          <li>{$_('servicesPage.modals.corporateWebsites.extensiveFeatures.e2')}</li>
+          <li>{$_('servicesPage.modals.corporateWebsites.extensiveFeatures.e3')}</li>
+          <li>{$_('servicesPage.modals.corporateWebsites.extensiveFeatures.e4')}</li>
+          <li>{$_('servicesPage.modals.corporateWebsites.extensiveFeatures.e5')}</li>
+          <li>{$_('servicesPage.modals.corporateWebsites.extensiveFeatures.e6')}</li>
+          <li>{$_('servicesPage.modals.corporateWebsites.extensiveFeatures.e7')}</li>
         </ul>
       </div>
 
       <div>
-        <h4 class="mb-2 font-semibold">Erweiterte Funktionen:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.corporateWebsites.advancedFunctionsTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Mehrsprachigkeit (DACH-Region)</li>
-          <li>Erweiterte Analytics und Tracking</li>
-          <li>Newsletter-Integration</li>
-          <li>Social Media Anbindung</li>
-          <li>Downloadbereich für Dokumente</li>
+          <li>{$_('servicesPage.modals.corporateWebsites.advancedFunctions.a1')}</li>
+          <li>{$_('servicesPage.modals.corporateWebsites.advancedFunctions.a2')}</li>
+          <li>{$_('servicesPage.modals.corporateWebsites.advancedFunctions.a3')}</li>
+          <li>{$_('servicesPage.modals.corporateWebsites.advancedFunctions.a4')}</li>
+          <li>{$_('servicesPage.modals.corporateWebsites.advancedFunctions.a5')}</li>
         </ul>
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>Projektdauer:</strong> 3-6 Wochen</p>
-        <p class="text-sm"><strong>Wartung:</strong> Empfohlen für optimale Performance</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.corporateWebsites.projectDuration')}</strong> {$_('servicesPage.modals.corporateWebsites.projectDurationValue')}</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.corporateWebsites.maintenance')}</strong> {$_('servicesPage.modals.corporateWebsites.maintenanceValue')}</p>
       </div>
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">Schließen</button>
+        <button class="btn">{$_('servicesPage.modals.corporateWebsites.closeButton')}</button>
       </form>
     </div>
   </div>
@@ -675,40 +665,40 @@
 <!-- Simple CMS Modal -->
 <dialog id="modal-simple-cms" class="modal">
   <div class="modal-box">
-    <h3 class="mb-4 text-lg font-bold">Einfache Inhaltsbearbeitung</h3>
+    <h3 class="mb-4 text-lg font-bold">{$_('servicesPage.modals.simpleCms.title')}</h3>
     <div class="space-y-4">
-      <p><strong>Perfekt für:</strong> Kleine Unternehmen, Vereine, Praxen, Restaurants</p>
+      <p><strong>{$_('servicesPage.modals.simpleCms.perfectFor')}</strong> {$_('servicesPage.modals.simpleCms.perfectForDescription')}</p>
 
       <div>
-        <h4 class="mb-2 font-semibold">Benutzerfreundliche Features:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.simpleCms.userFriendlyFeaturesTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Inline-Editing direkt auf der Website</li>
-          <li>WYSIWYG-Editor für Texte</li>
-          <li>Einfacher Bildupload und -verwaltung</li>
-          <li>Sofortige Vorschau der Änderungen</li>
-          <li>Automatische Backups</li>
-          <li>Versionskontrolle</li>
+          <li>{$_('servicesPage.modals.simpleCms.userFriendlyFeatures.u1')}</li>
+          <li>{$_('servicesPage.modals.simpleCms.userFriendlyFeatures.u2')}</li>
+          <li>{$_('servicesPage.modals.simpleCms.userFriendlyFeatures.u3')}</li>
+          <li>{$_('servicesPage.modals.simpleCms.userFriendlyFeatures.u4')}</li>
+          <li>{$_('servicesPage.modals.simpleCms.userFriendlyFeatures.u5')}</li>
+          <li>{$_('servicesPage.modals.simpleCms.userFriendlyFeatures.u6')}</li>
         </ul>
       </div>
 
       <div>
-        <h4 class="mb-2 font-semibold">Technische Details:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.simpleCms.technicalDetailsTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Keine technischen Kenntnisse erforderlich</li>
-          <li>Sichere Benutzeranmeldung</li>
-          <li>Mobile Bearbeitung möglich</li>
-          <li>Automatische SEO-Optimierung</li>
+          <li>{$_('servicesPage.modals.simpleCms.technicalDetails.t1')}</li>
+          <li>{$_('servicesPage.modals.simpleCms.technicalDetails.t2')}</li>
+          <li>{$_('servicesPage.modals.simpleCms.technicalDetails.t3')}</li>
+          <li>{$_('servicesPage.modals.simpleCms.technicalDetails.t4')}</li>
         </ul>
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>Setup-Zeit:</strong> 1-2 Tage</p>
-        <p class="text-sm"><strong>Schulung:</strong> 30 Minuten Online-Training inklusive</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.simpleCms.setupTime')}</strong> {$_('servicesPage.modals.simpleCms.setupTimeValue')}</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.simpleCms.training')}</strong> {$_('servicesPage.modals.simpleCms.trainingValue')}</p>
       </div>
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">Schließen</button>
+        <button class="btn">{$_('servicesPage.modals.simpleCms.closeButton')}</button>
       </form>
     </div>
   </div>
@@ -717,40 +707,40 @@
 <!-- Complex CMS Modal -->
 <dialog id="modal-complex-cms" class="modal">
   <div class="modal-box">
-    <h3 class="mb-4 text-lg font-bold">Komplexe CMS-Systeme</h3>
+    <h3 class="mb-4 text-lg font-bold">{$_('servicesPage.modals.complexCms.title')}</h3>
     <div class="space-y-4">
-      <p><strong>Perfekt für:</strong> Große Unternehmen, Verlage, E-Commerce, Portale</p>
+      <p><strong>{$_('servicesPage.modals.complexCms.perfectFor')}</strong> {$_('servicesPage.modals.complexCms.perfectForDescription')}</p>
 
       <div>
-        <h4 class="mb-2 font-semibold">Enterprise Features:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.complexCms.enterpriseFeaturesTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Benutzerdefinierte Content-Typen</li>
-          <li>Workflow-Management mit Freigabeprozessen</li>
-          <li>Mehrsprachigkeit und Lokalisierung</li>
-          <li>Benutzerrollen und Rechteverwaltung</li>
-          <li>API-Integration für Drittsysteme</li>
-          <li>Erweiterte Suchfunktionen</li>
+          <li>{$_('servicesPage.modals.complexCms.enterpriseFeatures.e1')}</li>
+          <li>{$_('servicesPage.modals.complexCms.enterpriseFeatures.e2')}</li>
+          <li>{$_('servicesPage.modals.complexCms.enterpriseFeatures.e3')}</li>
+          <li>{$_('servicesPage.modals.complexCms.enterpriseFeatures.e4')}</li>
+          <li>{$_('servicesPage.modals.complexCms.enterpriseFeatures.e5')}</li>
+          <li>{$_('servicesPage.modals.complexCms.enterpriseFeatures.e6')}</li>
         </ul>
       </div>
 
       <div>
-        <h4 class="mb-2 font-semibold">Skalierbarkeit:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.complexCms.scalabilityTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Hochperformante Datenbank-Architektur</li>
-          <li>CDN-Integration für globale Verfügbarkeit</li>
-          <li>Automatische Skalierung</li>
-          <li>Umfangreiche Analytics und Reporting</li>
+          <li>{$_('servicesPage.modals.complexCms.scalability.s1')}</li>
+          <li>{$_('servicesPage.modals.complexCms.scalability.s2')}</li>
+          <li>{$_('servicesPage.modals.complexCms.scalability.s3')}</li>
+          <li>{$_('servicesPage.modals.complexCms.scalability.s4')}</li>
         </ul>
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>Projektdauer:</strong> 6-12 Wochen</p>
-        <p class="text-sm"><strong>Support:</strong> Dedicated Support-Team verfügbar</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.complexCms.projectDuration')}</strong> {$_('servicesPage.modals.complexCms.projectDurationValue')}</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.complexCms.support')}</strong> {$_('servicesPage.modals.complexCms.supportValue')}</p>
       </div>
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">Schließen</button>
+        <button class="btn">{$_('servicesPage.modals.complexCms.closeButton')}</button>
       </form>
     </div>
   </div>
@@ -759,40 +749,40 @@
 <!-- Blog CMS Modal -->
 <dialog id="modal-blog-cms" class="modal">
   <div class="modal-box">
-    <h3 class="mb-4 text-lg font-bold">Blog & Content-Plattformen</h3>
+    <h3 class="mb-4 text-lg font-bold">{$_('servicesPage.modals.blogCms.title')}</h3>
     <div class="space-y-4">
-      <p><strong>Perfekt für:</strong> Blogger, Journalisten, Content Creator, Magazine</p>
+      <p><strong>{$_('servicesPage.modals.blogCms.perfectFor')}</strong> {$_('servicesPage.modals.blogCms.perfectForDescription')}</p>
 
       <div>
-        <h4 class="mb-2 font-semibold">Content-optimierte Features:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.blogCms.contentOptimizedFeaturesTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Optimiert für Content-Erstellung</li>
-          <li>SEO-Tools und Meta-Tag-Management</li>
-          <li>Social Media Integration und Auto-Posting</li>
-          <li>Kommentar-System mit Moderation</li>
-          <li>Newsletter-Integration (Mailchimp, ConvertKit)</li>
-          <li>Kategorien und Tag-System</li>
+          <li>{$_('servicesPage.modals.blogCms.contentOptimizedFeatures.c1')}</li>
+          <li>{$_('servicesPage.modals.blogCms.contentOptimizedFeatures.c2')}</li>
+          <li>{$_('servicesPage.modals.blogCms.contentOptimizedFeatures.c3')}</li>
+          <li>{$_('servicesPage.modals.blogCms.contentOptimizedFeatures.c4')}</li>
+          <li>{$_('servicesPage.modals.blogCms.contentOptimizedFeatures.c5')}</li>
+          <li>{$_('servicesPage.modals.blogCms.contentOptimizedFeatures.c6')}</li>
         </ul>
       </div>
 
       <div>
-        <h4 class="mb-2 font-semibold">Monetarisierung:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.blogCms.monetizationTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Werbeplatz-Management</li>
-          <li>Affiliate-Link-Integration</li>
-          <li>Premium-Content-Bereiche</li>
-          <li>E-Mail-Marketing-Tools</li>
+          <li>{$_('servicesPage.modals.blogCms.monetization.m1')}</li>
+          <li>{$_('servicesPage.modals.blogCms.monetization.m2')}</li>
+          <li>{$_('servicesPage.modals.blogCms.monetization.m3')}</li>
+          <li>{$_('servicesPage.modals.blogCms.monetization.m4')}</li>
         </ul>
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>Projektdauer:</strong> 2-4 Wochen</p>
-        <p class="text-sm"><strong>Content-Migration:</strong> Bestehende Inhalte übernehmen wir gerne</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.blogCms.projectDuration')}</strong> {$_('servicesPage.modals.blogCms.projectDurationValue')}</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.blogCms.contentMigration')}</strong> {$_('servicesPage.modals.blogCms.contentMigrationValue')}</p>
       </div>
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">Schließen</button>
+        <button class="btn">{$_('servicesPage.modals.blogCms.closeButton')}</button>
       </form>
     </div>
   </div>
@@ -801,40 +791,40 @@
 <!-- Headless CMS Modal -->
 <dialog id="modal-headless-cms" class="modal">
   <div class="modal-box">
-    <h3 class="mb-4 text-lg font-bold">Headless CMS</h3>
+    <h3 class="mb-4 text-lg font-bold">{$_('servicesPage.modals.headlessCms.title')}</h3>
     <div class="space-y-4">
-      <p><strong>Perfekt für:</strong> Multi-Channel-Publishing, Apps + Web, Enterprise-Lösungen</p>
+      <p><strong>{$_('servicesPage.modals.headlessCms.perfectFor')}</strong> {$_('servicesPage.modals.headlessCms.perfectForDescription')}</p>
 
       <div>
-        <h4 class="mb-2 font-semibold">API-First Ansatz:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.headlessCms.apiFirstTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Content einmal erstellen, überall nutzen</li>
-          <li>RESTful und GraphQL APIs</li>
-          <li>Flexibilität bei der Darstellung</li>
-          <li>Zukunftssicher und skalierbar</li>
-          <li>Integration in bestehende Systeme</li>
-          <li>Entwicklerfreundliche Dokumentation</li>
+          <li>{$_('servicesPage.modals.headlessCms.apiFirst.a1')}</li>
+          <li>{$_('servicesPage.modals.headlessCms.apiFirst.a2')}</li>
+          <li>{$_('servicesPage.modals.headlessCms.apiFirst.a3')}</li>
+          <li>{$_('servicesPage.modals.headlessCms.apiFirst.a4')}</li>
+          <li>{$_('servicesPage.modals.headlessCms.apiFirst.a5')}</li>
+          <li>{$_('servicesPage.modals.headlessCms.apiFirst.a6')}</li>
         </ul>
       </div>
 
       <div>
-        <h4 class="mb-2 font-semibold">Use Cases:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.headlessCms.useCasesTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Website + Mobile App mit gleichen Inhalten</li>
-          <li>Mehrere Websites aus einer Quelle</li>
-          <li>IoT-Geräte und Digital Signage</li>
-          <li>E-Commerce mit verschiedenen Frontends</li>
+          <li>{$_('servicesPage.modals.headlessCms.useCases.u1')}</li>
+          <li>{$_('servicesPage.modals.headlessCms.useCases.u2')}</li>
+          <li>{$_('servicesPage.modals.headlessCms.useCases.u3')}</li>
+          <li>{$_('servicesPage.modals.headlessCms.useCases.u4')}</li>
         </ul>
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>Projektdauer:</strong> 4-8 Wochen</p>
-        <p class="text-sm"><strong>Technologie:</strong> Hygraph, Strapi oder Custom Solution</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.headlessCms.projectDuration')}</strong> {$_('servicesPage.modals.headlessCms.projectDurationValue')}</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.headlessCms.technology')}</strong> {$_('servicesPage.modals.headlessCms.technologyValue')}</p>
       </div>
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">Schließen</button>
+        <button class="btn">{$_('servicesPage.modals.headlessCms.closeButton')}</button>
       </form>
     </div>
   </div>
@@ -843,41 +833,41 @@
 <!-- Web Apps Modal -->
 <dialog id="modal-web-apps" class="modal">
   <div class="modal-box">
-    <h3 class="mb-4 text-lg font-bold">Web Applications</h3>
+    <h3 class="mb-4 text-lg font-bold">{$_('servicesPage.modals.webApps.title')}</h3>
     <div class="space-y-4">
-      <p><strong>Perfekt für:</strong> Dashboards, Tools, Kalkulatoren, Verwaltungssysteme</p>
+      <p><strong>{$_('servicesPage.modals.webApps.perfectFor')}</strong> {$_('servicesPage.modals.webApps.perfectForDescription')}</p>
 
       <div>
-        <h4 class="mb-2 font-semibold">Technische Vorteile:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.webApps.technicalAdvantagesTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Plattformunabhängig (Windows, Mac, Linux)</li>
-          <li>Keine Installation erforderlich</li>
-          <li>Automatische Updates</li>
-          <li>Responsive Design für alle Bildschirmgrößen</li>
-          <li>Offline-Funktionalität möglich</li>
-          <li>Sichere Datenübertragung</li>
+          <li>{$_('servicesPage.modals.webApps.technicalAdvantages.t1')}</li>
+          <li>{$_('servicesPage.modals.webApps.technicalAdvantages.t2')}</li>
+          <li>{$_('servicesPage.modals.webApps.technicalAdvantages.t3')}</li>
+          <li>{$_('servicesPage.modals.webApps.technicalAdvantages.t4')}</li>
+          <li>{$_('servicesPage.modals.webApps.technicalAdvantages.t5')}</li>
+          <li>{$_('servicesPage.modals.webApps.technicalAdvantages.t6')}</li>
         </ul>
       </div>
 
       <div>
-        <h4 class="mb-2 font-semibold">Beispiel-Anwendungen:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.webApps.exampleApplicationsTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Business Dashboards mit Real-time Daten</li>
-          <li>Projektmanagement-Tools</li>
-          <li>Finanz-Kalkulatoren</li>
-          <li>Inventar-Verwaltungssysteme</li>
-          <li>Zeiterfassungs-Tools</li>
+          <li>{$_('servicesPage.modals.webApps.exampleApplications.e1')}</li>
+          <li>{$_('servicesPage.modals.webApps.exampleApplications.e2')}</li>
+          <li>{$_('servicesPage.modals.webApps.exampleApplications.e3')}</li>
+          <li>{$_('servicesPage.modals.webApps.exampleApplications.e4')}</li>
+          <li>{$_('servicesPage.modals.webApps.exampleApplications.e5')}</li>
         </ul>
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>Projektdauer:</strong> 2-8 Wochen je nach Komplexität</p>
-        <p class="text-sm"><strong>Technologie:</strong> SvelteKit, React oder Vue.js</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.webApps.projectDuration')}</strong> {$_('servicesPage.modals.webApps.projectDurationValue')}</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.webApps.technology')}</strong> {$_('servicesPage.modals.webApps.technologyValue')}</p>
       </div>
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">Schließen</button>
+        <button class="btn">{$_('servicesPage.modals.webApps.closeButton')}</button>
       </form>
     </div>
   </div>
@@ -886,41 +876,41 @@
 <!-- PWA Modal -->
 <dialog id="modal-pwa" class="modal">
   <div class="modal-box">
-    <h3 class="mb-4 text-lg font-bold">Progressive Web Apps (PWA)</h3>
+    <h3 class="mb-4 text-lg font-bold">{$_('servicesPage.modals.pwa.title')}</h3>
     <div class="space-y-4">
-      <p><strong>Perfekt für:</strong> App-ähnliche Erfahrungen ohne App Store</p>
+      <p><strong>{$_('servicesPage.modals.pwa.perfectFor')}</strong> {$_('servicesPage.modals.pwa.perfectForDescription')}</p>
 
       <div>
-        <h4 class="mb-2 font-semibold">App-ähnliche Features:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.pwa.appLikeFeaturesTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Installierbar auf allen Geräten</li>
-          <li>Funktioniert offline</li>
-          <li>Push-Benachrichtigungen</li>
-          <li>Zugriff auf Gerätehardware (Kamera, GPS)</li>
-          <li>App-Icon auf dem Homescreen</li>
-          <li>Vollbild-Modus ohne Browser-UI</li>
+          <li>{$_('servicesPage.modals.pwa.appLikeFeatures.a1')}</li>
+          <li>{$_('servicesPage.modals.pwa.appLikeFeatures.a2')}</li>
+          <li>{$_('servicesPage.modals.pwa.appLikeFeatures.a3')}</li>
+          <li>{$_('servicesPage.modals.pwa.appLikeFeatures.a4')}</li>
+          <li>{$_('servicesPage.modals.pwa.appLikeFeatures.a5')}</li>
+          <li>{$_('servicesPage.modals.pwa.appLikeFeatures.a6')}</li>
         </ul>
       </div>
 
       <div>
-        <h4 class="mb-2 font-semibold">Technische Features:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.pwa.technicalFeaturesTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Service Worker für Offline-Funktionalität</li>
-          <li>App Manifest für Installation</li>
-          <li>Intelligentes Caching</li>
-          <li>Background Sync</li>
-          <li>Automatische Updates</li>
+          <li>{$_('servicesPage.modals.pwa.technicalFeatures.t1')}</li>
+          <li>{$_('servicesPage.modals.pwa.technicalFeatures.t2')}</li>
+          <li>{$_('servicesPage.modals.pwa.technicalFeatures.t3')}</li>
+          <li>{$_('servicesPage.modals.pwa.technicalFeatures.t4')}</li>
+          <li>{$_('servicesPage.modals.pwa.technicalFeatures.t5')}</li>
         </ul>
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>Projektdauer:</strong> 3-6 Wochen</p>
-        <p class="text-sm"><strong>Vorteil:</strong> Keine App Store Gebühren oder Genehmigungen</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.pwa.projectDuration')}</strong> {$_('servicesPage.modals.pwa.projectDurationValue')}</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.pwa.advantage')}</strong> {$_('servicesPage.modals.pwa.advantageValue')}</p>
       </div>
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">Schließen</button>
+        <button class="btn">{$_('servicesPage.modals.pwa.closeButton')}</button>
       </form>
     </div>
   </div>
@@ -929,40 +919,40 @@
 <!-- Native Apps Modal -->
 <dialog id="modal-native-apps" class="modal">
   <div class="modal-box">
-    <h3 class="mb-4 text-lg font-bold">Native Mobile Apps</h3>
+    <h3 class="mb-4 text-lg font-bold">{$_('servicesPage.modals.nativeApps.title')}</h3>
     <div class="space-y-4">
-      <p><strong>Perfekt für:</strong> Apps mit hohen Performance-Anforderungen</p>
+      <p><strong>{$_('servicesPage.modals.nativeApps.perfectFor')}</strong> {$_('servicesPage.modals.nativeApps.perfectForDescription')}</p>
 
       <div>
-        <h4 class="mb-2 font-semibold">Native Vorteile:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.nativeApps.nativeAdvantagesTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>App Store und Google Play Distribution</li>
-          <li>Native Performance und Geschwindigkeit</li>
-          <li>Vollzugriff auf alle Gerätehardware</li>
-          <li>Plattformspezifische UI-Elemente</li>
-          <li>Erweiterte Sicherheitsfeatures</li>
-          <li>Tiefe System-Integration</li>
+          <li>{$_('servicesPage.modals.nativeApps.nativeAdvantages.n1')}</li>
+          <li>{$_('servicesPage.modals.nativeApps.nativeAdvantages.n2')}</li>
+          <li>{$_('servicesPage.modals.nativeApps.nativeAdvantages.n3')}</li>
+          <li>{$_('servicesPage.modals.nativeApps.nativeAdvantages.n4')}</li>
+          <li>{$_('servicesPage.modals.nativeApps.nativeAdvantages.n5')}</li>
+          <li>{$_('servicesPage.modals.nativeApps.nativeAdvantages.n6')}</li>
         </ul>
       </div>
 
       <div>
-        <h4 class="mb-2 font-semibold">Entwicklungsansatz:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.nativeApps.developmentApproachTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>React Native für iOS und Android</li>
-          <li>Capacitor für Web-zu-App Konvertierung</li>
-          <li>Shared Codebase für Effizienz</li>
-          <li>Native Module bei Bedarf</li>
+          <li>{$_('servicesPage.modals.nativeApps.developmentApproach.d1')}</li>
+          <li>{$_('servicesPage.modals.nativeApps.developmentApproach.d2')}</li>
+          <li>{$_('servicesPage.modals.nativeApps.developmentApproach.d3')}</li>
+          <li>{$_('servicesPage.modals.nativeApps.developmentApproach.d4')}</li>
         </ul>
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>Projektdauer:</strong> 8-16 Wochen</p>
-        <p class="text-sm"><strong>App Store:</strong> Unterstützung bei Veröffentlichung inklusive</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.nativeApps.projectDuration')}</strong> {$_('servicesPage.modals.nativeApps.projectDurationValue')}</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.nativeApps.appStore')}</strong> {$_('servicesPage.modals.nativeApps.appStoreValue')}</p>
       </div>
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">Schließen</button>
+        <button class="btn">{$_('servicesPage.modals.nativeApps.closeButton')}</button>
       </form>
     </div>
   </div>
@@ -971,41 +961,41 @@
 <!-- Complex Apps Modal -->
 <dialog id="modal-complex-apps" class="modal">
   <div class="modal-box">
-    <h3 class="mb-4 text-lg font-bold">Komplexe Anwendungen</h3>
+    <h3 class="mb-4 text-lg font-bold">{$_('servicesPage.modals.complexApps.title')}</h3>
     <div class="space-y-4">
-      <p><strong>Perfekt für:</strong> CRM-Systeme, E-Learning-Plattformen, Booking-Systeme</p>
+      <p><strong>{$_('servicesPage.modals.complexApps.perfectFor')}</strong> {$_('servicesPage.modals.complexApps.perfectForDescription')}</p>
 
       <div>
-        <h4 class="mb-2 font-semibold">Enterprise-Features:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.complexApps.enterpriseFeaturesTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Umfangreiche Datenbank-Integration</li>
-          <li>API-Entwicklung und -Integration</li>
-          <li>Benutzerauthentifizierung und -verwaltung</li>
-          <li>Real-time Features (Chat, Notifications)</li>
-          <li>Skalierbare Microservice-Architektur</li>
-          <li>Umfangreiche Reporting-Funktionen</li>
+          <li>{$_('servicesPage.modals.complexApps.enterpriseFeatures.e1')}</li>
+          <li>{$_('servicesPage.modals.complexApps.enterpriseFeatures.e2')}</li>
+          <li>{$_('servicesPage.modals.complexApps.enterpriseFeatures.e3')}</li>
+          <li>{$_('servicesPage.modals.complexApps.enterpriseFeatures.e4')}</li>
+          <li>{$_('servicesPage.modals.complexApps.enterpriseFeatures.e5')}</li>
+          <li>{$_('servicesPage.modals.complexApps.enterpriseFeatures.e6')}</li>
         </ul>
       </div>
 
       <div>
-        <h4 class="mb-2 font-semibold">Beispiel-Systeme:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.complexApps.exampleSystemsTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Customer Relationship Management (CRM)</li>
-          <li>E-Learning und Kursplattformen</li>
-          <li>Buchungs- und Reservierungssysteme</li>
-          <li>Collaboration und Projektmanagement-Tools</li>
-          <li>Inventory Management Systeme</li>
+          <li>{$_('servicesPage.modals.complexApps.exampleSystems.e1')}</li>
+          <li>{$_('servicesPage.modals.complexApps.exampleSystems.e2')}</li>
+          <li>{$_('servicesPage.modals.complexApps.exampleSystems.e3')}</li>
+          <li>{$_('servicesPage.modals.complexApps.exampleSystems.e4')}</li>
+          <li>{$_('servicesPage.modals.complexApps.exampleSystems.e5')}</li>
         </ul>
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>Projektdauer:</strong> 12-24 Wochen</p>
-        <p class="text-sm"><strong>Support:</strong> Langfristige Wartung und Weiterentwicklung</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.complexApps.projectDuration')}</strong> {$_('servicesPage.modals.complexApps.projectDurationValue')}</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.complexApps.support')}</strong> {$_('servicesPage.modals.complexApps.supportValue')}</p>
       </div>
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">Schließen</button>
+        <button class="btn">{$_('servicesPage.modals.complexApps.closeButton')}</button>
       </form>
     </div>
   </div>
@@ -1014,29 +1004,29 @@
 <!-- Individual Development Modals -->
 <dialog id="modal-components" class="modal">
   <div class="modal-box">
-    <h3 class="mb-4 text-lg font-bold">Einzelne Komponenten</h3>
+    <h3 class="mb-4 text-lg font-bold">{$_('servicesPage.modals.components.title')}</h3>
     <div class="space-y-4">
-      <p><strong>Perfekt für:</strong> Spezielle UI-Elemente, Widgets, Custom Plugins</p>
+      <p><strong>{$_('servicesPage.modals.components.perfectFor')}</strong> {$_('servicesPage.modals.components.perfectForDescription')}</p>
 
       <div>
-        <h4 class="mb-2 font-semibold">Komponenten-Typen:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.components.componentTypesTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Interaktive UI-Komponenten</li>
-          <li>Spezielle Formulare und Eingabefelder</li>
-          <li>Datenvisualisierung und Charts</li>
-          <li>Custom Widgets für Websites</li>
-          <li>Wiederverwendbare Code-Module</li>
+          <li>{$_('servicesPage.modals.components.componentTypes.c1')}</li>
+          <li>{$_('servicesPage.modals.components.componentTypes.c2')}</li>
+          <li>{$_('servicesPage.modals.components.componentTypes.c3')}</li>
+          <li>{$_('servicesPage.modals.components.componentTypes.c4')}</li>
+          <li>{$_('servicesPage.modals.components.componentTypes.c5')}</li>
         </ul>
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>Projektdauer:</strong> 1-3 Wochen</p>
-        <p class="text-sm"><strong>Integration:</strong> Nahtlose Einbindung in bestehende Systeme</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.components.projectDuration')}</strong> {$_('servicesPage.modals.components.projectDurationValue')}</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.components.integration')}</strong> {$_('servicesPage.modals.components.integrationValue')}</p>
       </div>
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">Schließen</button>
+        <button class="btn">{$_('servicesPage.modals.components.closeButton')}</button>
       </form>
     </div>
   </div>
@@ -1044,29 +1034,29 @@
 
 <dialog id="modal-extensions" class="modal">
   <div class="modal-box">
-    <h3 class="mb-4 text-lg font-bold">System-Erweiterungen</h3>
+    <h3 class="mb-4 text-lg font-bold">{$_('servicesPage.modals.extensions.title')}</h3>
     <div class="space-y-4">
-      <p><strong>Perfekt für:</strong> Bestehende Websites erweitern und optimieren</p>
+      <p><strong>{$_('servicesPage.modals.extensions.perfectFor')}</strong> {$_('servicesPage.modals.extensions.perfectForDescription')}</p>
 
       <div>
-        <h4 class="mb-2 font-semibold">Erweiterungs-Services:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.extensions.extensionServicesTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Neue Features für bestehende Websites</li>
-          <li>API-Integrationen (Payment, CRM, etc.)</li>
-          <li>Performance-Optimierungen</li>
-          <li>Datenbank-Migrationen</li>
-          <li>Security-Updates und Härtung</li>
+          <li>{$_('servicesPage.modals.extensions.extensionServices.e1')}</li>
+          <li>{$_('servicesPage.modals.extensions.extensionServices.e2')}</li>
+          <li>{$_('servicesPage.modals.extensions.extensionServices.e3')}</li>
+          <li>{$_('servicesPage.modals.extensions.extensionServices.e4')}</li>
+          <li>{$_('servicesPage.modals.extensions.extensionServices.e5')}</li>
         </ul>
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>Projektdauer:</strong> 1-4 Wochen</p>
-        <p class="text-sm"><strong>Kompatibilität:</strong> Arbeiten mit allen gängigen Technologien</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.extensions.projectDuration')}</strong> {$_('servicesPage.modals.extensions.projectDurationValue')}</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.extensions.compatibility')}</strong> {$_('servicesPage.modals.extensions.compatibilityValue')}</p>
       </div>
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">Schließen</button>
+        <button class="btn">{$_('servicesPage.modals.extensions.closeButton')}</button>
       </form>
     </div>
   </div>
@@ -1074,29 +1064,29 @@
 
 <dialog id="modal-special-apps" class="modal">
   <div class="modal-box">
-    <h3 class="mb-4 text-lg font-bold">Spezial-Anwendungen</h3>
+    <h3 class="mb-4 text-lg font-bold">{$_('servicesPage.modals.specialApps.title')}</h3>
     <div class="space-y-4">
-      <p><strong>Perfekt für:</strong> Einzigartige Geschäftsanforderungen</p>
+      <p><strong>{$_('servicesPage.modals.specialApps.perfectFor')}</strong> {$_('servicesPage.modals.specialApps.perfectForDescription')}</p>
 
       <div>
-        <h4 class="mb-2 font-semibold">Anwendungsbeispiele:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.specialApps.applicationExamplesTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Event-Registrierungssysteme</li>
-          <li>Business Intelligence Dashboards</li>
-          <li>Reporting und Analytics Tools</li>
-          <li>Automatisierungs-Scripts</li>
-          <li>Datenverarbeitungs-Pipelines</li>
+          <li>{$_('servicesPage.modals.specialApps.applicationExamples.a1')}</li>
+          <li>{$_('servicesPage.modals.specialApps.applicationExamples.a2')}</li>
+          <li>{$_('servicesPage.modals.specialApps.applicationExamples.a3')}</li>
+          <li>{$_('servicesPage.modals.specialApps.applicationExamples.a4')}</li>
+          <li>{$_('servicesPage.modals.specialApps.applicationExamples.a5')}</li>
         </ul>
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>Projektdauer:</strong> 2-8 Wochen</p>
-        <p class="text-sm"><strong>Ansatz:</strong> Agile Entwicklung mit regelmäßigen Reviews</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.specialApps.projectDuration')}</strong> {$_('servicesPage.modals.specialApps.projectDurationValue')}</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.specialApps.approach')}</strong> {$_('servicesPage.modals.specialApps.approachValue')}</p>
       </div>
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">Schließen</button>
+        <button class="btn">{$_('servicesPage.modals.specialApps.closeButton')}</button>
       </form>
     </div>
   </div>
@@ -1104,29 +1094,29 @@
 
 <dialog id="modal-design" class="modal">
   <div class="modal-box">
-    <h3 class="mb-4 text-lg font-bold">UI/UX Design</h3>
+    <h3 class="mb-4 text-lg font-bold">{$_('servicesPage.modals.design.title')}</h3>
     <div class="space-y-4">
-      <p><strong>Perfekt für:</strong> Optimale Benutzererfahrung und modernes Design</p>
+      <p><strong>{$_('servicesPage.modals.design.perfectFor')}</strong> {$_('servicesPage.modals.design.perfectForDescription')}</p>
 
       <div>
-        <h4 class="mb-2 font-semibold">Design-Services:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.design.designServicesTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>User Interface Design</li>
-          <li>User Experience Optimierung</li>
-          <li>Interaktive Prototyping</li>
-          <li>Design-Systeme und Style Guides</li>
-          <li>Usability Testing</li>
+          <li>{$_('servicesPage.modals.design.designServices.d1')}</li>
+          <li>{$_('servicesPage.modals.design.designServices.d2')}</li>
+          <li>{$_('servicesPage.modals.design.designServices.d3')}</li>
+          <li>{$_('servicesPage.modals.design.designServices.d4')}</li>
+          <li>{$_('servicesPage.modals.design.designServices.d5')}</li>
         </ul>
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>Projektdauer:</strong> 2-6 Wochen</p>
-        <p class="text-sm"><strong>Tools:</strong> Figma, Adobe Creative Suite</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.design.projectDuration')}</strong> {$_('servicesPage.modals.design.projectDurationValue')}</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.design.tools')}</strong> {$_('servicesPage.modals.design.toolsValue')}</p>
       </div>
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">Schließen</button>
+        <button class="btn">{$_('servicesPage.modals.design.closeButton')}</button>
       </form>
     </div>
   </div>
@@ -1135,30 +1125,30 @@
 <!-- KI Services Modals -->
 <dialog id="modal-ki-beratung" class="modal">
   <div class="modal-box">
-    <h3 class="mb-4 text-lg font-bold">KI-Beratung & Support</h3>
+    <h3 class="mb-4 text-lg font-bold">{$_('servicesPage.modals.kiConsulting.title')}</h3>
     <div class="space-y-4">
-      <p><strong>Perfekt für:</strong> Unternehmen, die KI strategisch einsetzen möchten</p>
+      <p><strong>{$_('servicesPage.modals.kiConsulting.perfectFor')}</strong> {$_('servicesPage.modals.kiConsulting.perfectForDescription')}</p>
 
       <div>
-        <h4 class="mb-2 font-semibold">Beratungs-Services:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.kiConsulting.consultingServicesTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>KI-Strategieentwicklung für Ihr Unternehmen</li>
-          <li>Prompt Engineering für optimale Ergebnisse</li>
-          <li>Context Engineering für präzise KI-Antworten</li>
-          <li>Use-Case Identifikation und Bewertung</li>
-          <li>ROI-Analyse für KI-Projekte</li>
-          <li>Change Management für KI-Einführung</li>
+          <li>{$_('servicesPage.modals.kiConsulting.consultingServices.c1')}</li>
+          <li>{$_('servicesPage.modals.kiConsulting.consultingServices.c2')}</li>
+          <li>{$_('servicesPage.modals.kiConsulting.consultingServices.c3')}</li>
+          <li>{$_('servicesPage.modals.kiConsulting.consultingServices.c4')}</li>
+          <li>{$_('servicesPage.modals.kiConsulting.consultingServices.c5')}</li>
+          <li>{$_('servicesPage.modals.kiConsulting.consultingServices.c6')}</li>
         </ul>
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>Projektdauer:</strong> 2-4 Wochen</p>
-        <p class="text-sm"><strong>Deliverable:</strong> Umfassende KI-Strategie und Roadmap</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.kiConsulting.projectDuration')}</strong> {$_('servicesPage.modals.kiConsulting.projectDurationValue')}</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.kiConsulting.deliverable')}</strong> {$_('servicesPage.modals.kiConsulting.deliverableValue')}</p>
       </div>
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">Schließen</button>
+        <button class="btn">{$_('servicesPage.modals.kiConsulting.closeButton')}</button>
       </form>
     </div>
   </div>
@@ -1166,30 +1156,30 @@
 
 <dialog id="modal-ki-agenten" class="modal">
   <div class="modal-box">
-    <h3 class="mb-4 text-lg font-bold">KI-Agenten Entwicklung</h3>
+    <h3 class="mb-4 text-lg font-bold">{$_('servicesPage.modals.kiAgentDevelopment.title')}</h3>
     <div class="space-y-4">
-      <p><strong>Perfekt für:</strong> Automatisierte Kundenbetreuung und Content-Generierung</p>
+      <p><strong>{$_('servicesPage.modals.kiAgentDevelopment.perfectFor')}</strong> {$_('servicesPage.modals.kiAgentDevelopment.perfectForDescription')}</p>
 
       <div>
-        <h4 class="mb-2 font-semibold">Agent-Typen:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.kiAgentDevelopment.agentTypesTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Custom Chatbots für Websites</li>
-          <li>Automatisierte Kundenbetreuung</li>
-          <li>Content-Generierung und -Optimierung</li>
-          <li>Datenanalyse und Reporting-Agenten</li>
-          <li>E-Mail-Automation mit KI</li>
-          <li>Integration in bestehende CRM-Systeme</li>
+          <li>{$_('servicesPage.modals.kiAgentDevelopment.agentTypes.a1')}</li>
+          <li>{$_('servicesPage.modals.kiAgentDevelopment.agentTypes.a2')}</li>
+          <li>{$_('servicesPage.modals.kiAgentDevelopment.agentTypes.a3')}</li>
+          <li>{$_('servicesPage.modals.kiAgentDevelopment.agentTypes.a4')}</li>
+          <li>{$_('servicesPage.modals.kiAgentDevelopment.agentTypes.a5')}</li>
+          <li>{$_('servicesPage.modals.kiAgentDevelopment.agentTypes.a6')}</li>
         </ul>
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>Projektdauer:</strong> 4-8 Wochen</p>
-        <p class="text-sm"><strong>Training:</strong> Individuelle Schulung auf Ihre Daten</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.kiAgentDevelopment.projectDuration')}</strong> {$_('servicesPage.modals.kiAgentDevelopment.projectDurationValue')}</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.kiAgentDevelopment.training')}</strong> {$_('servicesPage.modals.kiAgentDevelopment.trainingValue')}</p>
       </div>
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">Schließen</button>
+        <button class="btn">{$_('servicesPage.modals.kiAgentDevelopment.closeButton')}</button>
       </form>
     </div>
   </div>
@@ -1197,40 +1187,40 @@
 
 <dialog id="modal-workflow" class="modal">
   <div class="modal-box">
-    <h3 class="mb-4 text-lg font-bold">Workflow-Optimierung mit KI</h3>
+    <h3 class="mb-4 text-lg font-bold">{$_('servicesPage.modals.workflowOptimization.title')}</h3>
     <div class="space-y-4">
-      <p><strong>Perfekt für:</strong> Effizienzsteigerung durch intelligente Automatisierung</p>
+      <p><strong>{$_('servicesPage.modals.workflowOptimization.perfectFor')}</strong> {$_('servicesPage.modals.workflowOptimization.perfectForDescription')}</p>
 
       <div>
-        <h4 class="mb-2 font-semibold">Optimierungs-Bereiche:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.workflowOptimization.optimizationAreasTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Prozessanalyse und Optimierungspotentiale</li>
-          <li>Automatisierung wiederkehrender Aufgaben</li>
-          <li>Intelligente Dokumentenverarbeitung</li>
-          <li>Predictive Analytics für bessere Entscheidungen</li>
-          <li>Integration von KI in bestehende Workflows</li>
-          <li>Qualitätskontrolle durch KI</li>
+          <li>{$_('servicesPage.modals.workflowOptimization.optimizationAreas.o1')}</li>
+          <li>{$_('servicesPage.modals.workflowOptimization.optimizationAreas.o2')}</li>
+          <li>{$_('servicesPage.modals.workflowOptimization.optimizationAreas.o3')}</li>
+          <li>{$_('servicesPage.modals.workflowOptimization.optimizationAreas.o4')}</li>
+          <li>{$_('servicesPage.modals.workflowOptimization.optimizationAreas.o5')}</li>
+          <li>{$_('servicesPage.modals.workflowOptimization.optimizationAreas.o6')}</li>
         </ul>
       </div>
 
       <div>
-        <h4 class="mb-2 font-semibold">Messbare Vorteile:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.workflowOptimization.measurableBenefitsTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Zeit sparen (bis zu 70% Reduktion)</li>
-          <li>Kosten reduzieren</li>
-          <li>Fehler minimieren</li>
-          <li>Effizienz steigern</li>
+          <li>{$_('servicesPage.modals.workflowOptimization.measurableBenefits.m1')}</li>
+          <li>{$_('servicesPage.modals.workflowOptimization.measurableBenefits.m2')}</li>
+          <li>{$_('servicesPage.modals.workflowOptimization.measurableBenefits.m3')}</li>
+          <li>{$_('servicesPage.modals.workflowOptimization.measurableBenefits.m4')}</li>
         </ul>
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>Projektdauer:</strong> 6-12 Wochen</p>
-        <p class="text-sm"><strong>ROI:</strong> Messbare Effizienzsteigerung bereits nach 4 Wochen</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.workflowOptimization.projectDuration')}</strong> {$_('servicesPage.modals.workflowOptimization.projectDurationValue')}</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.workflowOptimization.roi')}</strong> {$_('servicesPage.modals.workflowOptimization.roiValue')}</p>
       </div>
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">Schließen</button>
+        <button class="btn">{$_('servicesPage.modals.workflowOptimization.closeButton')}</button>
       </form>
     </div>
   </div>
@@ -1238,40 +1228,40 @@
 
 <dialog id="modal-ai-infrastructure" class="modal">
   <div class="modal-box">
-    <h3 class="mb-4 text-lg font-bold">AI as Infrastructure</h3>
+    <h3 class="mb-4 text-lg font-bold">{$_('servicesPage.modals.aiInfrastructure.title')}</h3>
     <div class="space-y-4">
-      <p><strong>Perfekt für:</strong> Skalierbare KI-Lösungen ohne eigene Infrastruktur</p>
+      <p><strong>{$_('servicesPage.modals.aiInfrastructure.perfectFor')}</strong> {$_('servicesPage.modals.aiInfrastructure.perfectForDescription')}</p>
 
       <div>
-        <h4 class="mb-2 font-semibold">Service-Modelle:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.aiInfrastructure.serviceModelsTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Skalierbare KI-Infrastruktur in der Cloud</li>
-          <li>Pay-per-Use Modelle für Kosteneffizienz</li>
-          <li>Managed KI-Services ohne Wartungsaufwand</li>
-          <li>24/7 Monitoring und technischer Support</li>
-          <li>Regelmäßige Updates und Verbesserungen</li>
-          <li>Compliance und Datenschutz inklusive</li>
+          <li>{$_('servicesPage.modals.aiInfrastructure.serviceModels.s1')}</li>
+          <li>{$_('servicesPage.modals.aiInfrastructure.serviceModels.s2')}</li>
+          <li>{$_('servicesPage.modals.aiInfrastructure.serviceModels.s3')}</li>
+          <li>{$_('servicesPage.modals.aiInfrastructure.serviceModels.s4')}</li>
+          <li>{$_('servicesPage.modals.aiInfrastructure.serviceModels.s5')}</li>
+          <li>{$_('servicesPage.modals.aiInfrastructure.serviceModels.s6')}</li>
         </ul>
       </div>
 
       <div>
-        <h4 class="mb-2 font-semibold">Abrechnungsmodelle:</h4>
+        <h4 class="mb-2 font-semibold">{$_('servicesPage.modals.aiInfrastructure.billingModelsTitle')}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>Projekt-basierte Abrechnung</li>
-          <li>Monatliche Miete für kontinuierliche Nutzung</li>
-          <li>Usage-basierte Abrechnung nach Verbrauch</li>
-          <li>Hybrid-Modelle für optimale Flexibilität</li>
+          <li>{$_('servicesPage.modals.aiInfrastructure.billingModels.b1')}</li>
+          <li>{$_('servicesPage.modals.aiInfrastructure.billingModels.b2')}</li>
+          <li>{$_('servicesPage.modals.aiInfrastructure.billingModels.b3')}</li>
+          <li>{$_('servicesPage.modals.aiInfrastructure.billingModels.b4')}</li>
         </ul>
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>Setup-Zeit:</strong> 1-2 Wochen</p>
-        <p class="text-sm"><strong>Skalierung:</strong> Automatisch je nach Bedarf</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.aiInfrastructure.setupTime')}</strong> {$_('servicesPage.modals.aiInfrastructure.setupTimeValue')}</p>
+        <p class="text-sm"><strong>{$_('servicesPage.modals.aiInfrastructure.scaling')}</strong> {$_('servicesPage.modals.aiInfrastructure.scalingValue')}</p>
       </div>
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">Schließen</button>
+        <button class="btn">{$_('servicesPage.modals.aiInfrastructure.closeButton')}</button>
       </form>
     </div>
   </div>

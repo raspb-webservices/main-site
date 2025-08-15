@@ -6,8 +6,8 @@
   import Section from '$lib/components/section.svelte';
   import RaspbPhilosophyModal from '$lib/components/raspb-philosophy-modal.svelte';
   import { goto } from '$app/navigation';
-  import { _ } from 'svelte-i18n'
-
+  import { _ } from 'svelte-i18n';
+  
   const { data } = $props();
 
   let currentUser = $derived(user.get());
@@ -725,14 +725,6 @@
           }
         }
       }
-
-      .balance-image {
-        @apply mt-12 overflow-hidden rounded-2xl shadow-lg;
-
-        img {
-          @apply h-auto w-full;
-        }
-      }
     }
 
     /* Features Section Styles */
@@ -774,12 +766,6 @@
             .contact-info {
               @apply flex items-center gap-4;
 
-              .contact-avatar {
-                img {
-                  @apply h-15 w-15 rounded-full shadow-md;
-                }
-              }
-
               .contact-details {
                 strong {
                   @apply text-darkGrey block font-semibold;
@@ -815,14 +801,6 @@
               }
             }
           }
-        }
-      }
-
-      .features-image {
-        @apply mt-12 overflow-hidden rounded-2xl shadow-lg;
-
-        img {
-          @apply h-auto w-full;
         }
       }
     }

@@ -470,10 +470,10 @@
 
         // Step 5: Show thank you page immediately while publishing happens in background
         showThankYouPage();
-        
+
         // Step 6: Wait 2 seconds to ensure everything is properly saved before publishing
         console.log('Waiting 3 seconds before publishing to ensure data consistency...');
-        await new Promise(resolve => setTimeout(resolve, 3000));
+        await new Promise((resolve) => setTimeout(resolve, 3000));
 
         // Step 7: Publish customer
         try {
@@ -561,14 +561,14 @@
   // Function to validate and set initial parameters
   function initializeFromParams() {
     let shouldAdvance = false;
-    
+
     // Check if initialProjectType is valid
-    if (initialProjectType && projectTypes.some(pt => pt.id === initialProjectType)) {
+    if (initialProjectType && projectTypes.some((pt) => pt.id === initialProjectType)) {
       config.projectType = initialProjectType;
       shouldAdvance = true;
-      
+
       // Check if initialSubType is valid for the selected project type
-      if (initialSubType && subTypes.some(st => st.id === initialSubType && st.parentId === initialProjectType)) {
+      if (initialSubType && subTypes.some((st) => st.id === initialSubType && st.parentId === initialProjectType)) {
         config.subType = initialSubType;
         // If both projectType and subType are valid, skip to step 3
         currentStep = 3;
@@ -579,7 +579,7 @@
         return;
       }
     }
-    
+
     // If no valid parameters, stay on step 1
     currentStep = 1;
   }
@@ -894,7 +894,7 @@
           rows="4"
         ></textarea>
       </div>
-    {:else if currentStep === 5 && (config.projectType === 'website' || config.projectType === 'cms') }
+    {:else if currentStep === 5 && (config.projectType === 'website' || config.projectType === 'cms')}
       <!-- Step 5: Content Details (only for website/cms) -->
       <div class="step-header">
         <h1>Inhalte und <span class="inner-text-special">Struktur</span></h1>
@@ -1112,17 +1112,21 @@
           </div>
         </div>
 
-        <div class="alert mt-4">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info h-6 w-6 shrink-0">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <div>
-            <div class="font-bold">Schriftart-Vorschau:</div>
-            <div style="font-family: {config.customFont || config.desiredFont}, sans-serif; font-size: 1.1em; margin-top: 0.5rem;">
-              Dies ist ein Beispieltext in der gewählten Schriftart "{config.customFont || config.desiredFont}". So wird Ihr Text später aussehen.
+        {#if config.desiredFont}
+          <div class="alert mt-4">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info h-6 w-6 shrink-0">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+
+            <div>
+              <div class="font-bold">Schriftart-Vorschau von {config.desiredFont}:</div>
+              <div class="text-base my-2" style="font-family: {config.desiredFont}">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis minima officia eveniet fugiat ad dicta quia optio quod possimus sint enim
+                doloremque, consectetur ut est quibusdam corporis obcaecati dolore dolores!
+              </div>
             </div>
           </div>
-        </div>
+        {/if}
       </div>
 
       <!-- File Upload -->
@@ -1182,12 +1186,12 @@
                 <div class="font-bold">Upload läuft...</div>
                 <div class="text-sm">{uploadProgress}</div>
               </div>
-              <span class="loading loading-spinner loading-md"></span>
+              <span class="loading loading-ring loading-md"></span>
             </div>
           </div>
         {/if}
       </div>
-    {:else if currentStep === 3 && config.projectType === 'freestyle' || currentStep === 4 && config.projectType === 'artificialIntelligence'}
+    {:else if (currentStep === 3 && config.projectType === 'freestyle') || (currentStep === 4 && config.projectType === 'artificialIntelligence')}
       <!-- Materials Step for Individual Development -->
       <div class="step-header">
         <h1>Materialien und <span class="inner-text-special">Dokumente</span></h1>
@@ -1253,7 +1257,7 @@
           </div>
         {/if}
       </div>
-    {:else if (currentStep === 7 && (config.projectType === 'website' || config.projectType === 'cms')) || (currentStep === 6 && (config.projectType === 'webApplication') || (currentStep === 5 && config.projectType === 'artificialIntelligence') || (currentStep === 4 && config.projectType === 'freestyle'))}
+    {:else if (currentStep === 7 && (config.projectType === 'website' || config.projectType === 'cms')) || (currentStep === 6 && config.projectType === 'webApplication') || (currentStep === 5 && config.projectType === 'artificialIntelligence') || (currentStep === 4 && config.projectType === 'freestyle')}
       <!-- Contact Form Step -->
       <ContactForm bind:customerData bind:isValid={isContactFormValid} onUpdate={(data) => (customerData = data)} />
     {:else if currentStep === maxSteps}
@@ -1275,7 +1279,7 @@
               <div class="text-sm">{assetPreparationProgress}</div>
             </div>
             {#if isPreparingAssets}
-              <span class="loading loading-spinner loading-md"></span>
+              <span class="loading loading-ring loading-md"></span>
             {/if}
           </div>
         </div>
@@ -1442,7 +1446,7 @@
       <div class="flex gap-4">
         <button type="button" class="btn-basic" onclick={generatePDF} disabled={isGeneratingPDF}>
           {#if isGeneratingPDF}
-            <span class="loading loading-spinner loading-sm"></span>
+            <span class="loading loading-ring loading-sm"></span>
             PDF wird erstellt...
           {:else}
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1716,7 +1720,7 @@
     @apply mb-12;
 
     h2 {
-      @apply mb-4;
+      @apply p-0 mb-4 mt-2;
     }
 
     p {

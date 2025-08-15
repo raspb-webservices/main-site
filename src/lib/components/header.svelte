@@ -3,7 +3,7 @@
   import auth from '../../authService';
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
-  import { locale, locales } from 'svelte-i18n';
+  import { locale, locales, _ } from 'svelte-i18n';
 
   let mobileNavOpen = $state(false);
   let logginIn = $state(false);
@@ -64,35 +64,35 @@
         class:active={page.url.pathname === '/services'}
         onclick={() => {
           goto('/services');
-        }}>Services</button
+        }}>{$_('menu.services')}</button
       >
       <button
         class="nav-item"
         class:active={page.url.pathname === '/einblicke'}
         onclick={() => {
           goto('/einblicke');
-        }}>Einblicke</button
+        }}>{$_('menu.insights')}</button
       >
       <button
         class="nav-item"
         class:active={page.url.pathname === '/ueber-uns'}
         onclick={() => {
           goto('/ueber-uns');
-        }}>Über uns</button
+        }}>{$_('menu.aboutUs')}</button
       >
       <button
         class="nav-item"
         class:active={page.url.pathname === '/faq'}
         onclick={() => {
           goto('/faq');
-        }}>FAQ</button
+        }}>{$_('menu.faq')}</button
       >
       <!-- <button
         class="nav-item"
         class:active={page.url.pathname === '/kontakt'}
         onclick={() => {
           goto('/kontakt');
-        }}>Kontakt</button
+        }}>{$_('menu.contact')}</button
       > -->
     </nav>
 
@@ -103,7 +103,7 @@
           onclick={() => {
             login();
           }}
-          >{#if logginIn}<span class="loading loading-ring loading-sm"></span>{:else}<span>Login</span>{/if}</button
+          >{#if logginIn}<span class="loading loading-ring loading-sm"></span>{:else}<span>{$_('menu.login')}</span>{/if}</button
         >
       {:else}
         <button
@@ -111,14 +111,14 @@
           onclick={() => {
             logout();
           }}
-          >{#if logginIn}<span class="loading loading-ring loading-sm"></span>{:else}<span>Logout</span>{/if}</button
+          >{#if logginIn}<span class="loading loading-ring loading-sm"></span>{:else}<span>{$_('menu.logout')}</span>{/if}</button
         >
       {/if}
       <button
         class="btn-basic"
         onclick={() => {
           goto('/get-started');
-        }}><span class="hidden halfXl:block">Projekt konfigurieren</span><span class="halfXl:hidden">Starten</span></button
+        }}><span class="hidden halfXl:block">{$_('menu.configureProject')}</span><span class="halfXl:hidden">{$_('menu.start')}</span></button
       >
       <div class="controls">
         <button
@@ -127,7 +127,7 @@
           class:english={$locale === 'en'}
           onclick={toggleLocale}
           aria-label="Switch language"
-          title={$locale === 'de' ? 'Switch to English' : 'Auf Deutsch wechseln'}
+          title={$locale === 'de' ? $_('menu.switchLanguageToEnglish') : $_('menu.switchLanguageToGerman')}
         >
         </button>
 
@@ -191,7 +191,7 @@
                   onclick={() => {
                     mobileNavOpen = false;
                     goto('/get-started');
-                  }}>Projekt konfigurieren</button
+                  }}>{$_('menu.configureProject')}</button
                 >
                 <button
                   class="nav-item"
@@ -199,7 +199,7 @@
                   onclick={() => {
                     mobileNavOpen = false;
                     goto('/services');
-                  }}>Services</button
+                  }}>{$_('menu.services')}</button
                 >
                 <button
                   class="nav-item"
@@ -207,7 +207,7 @@
                   onclick={() => {
                     mobileNavOpen = false;
                     goto('/einblicke');
-                  }}>Einblicke</button
+                  }}>{$_('menu.insights')}</button
                 >
                 <button
                   class="nav-item"
@@ -215,7 +215,7 @@
                   onclick={() => {
                     mobileNavOpen = false;
                     goto('/ueber-uns');
-                  }}>Über uns</button
+                  }}>{$_('menu.aboutUs')}</button
                 >
                 <button
                   class="nav-item"
@@ -223,7 +223,7 @@
                   onclick={() => {
                     mobileNavOpen = false;
                     goto('/faq');
-                  }}>FAQ</button
+                  }}>{$_('menu.faq')}</button
                 >
                 <!-- <button
                   class="nav-item"
@@ -231,21 +231,21 @@
                   onclick={() => {
                     mobileNavOpen = false;
                     goto('/kontakt');
-                  }}>Kontakt</button
+                  }}>{$_('menu.contact')}</button
                 > -->
                 {#if !isAuth}
                   <button
                     class="nav-item"
                     onclick={() => {
                       login();
-                    }}>Login</button
+                    }}>{$_('menu.login')}</button
                   >
                 {:else}
                   <button
                     class="nav-item"
                     onclick={() => {
                       logout();
-                    }}>Logout</button
+                    }}>{$_('menu.logout')}</button
                   >
                 {/if}
 
@@ -256,7 +256,7 @@
                     class:english={$locale === 'en'}
                     onclick={toggleLocale}
                     aria-label="Switch language"
-                    title={$locale === 'de' ? 'Switch to English' : 'Auf Deutsch wechseln'}
+                    title={$locale === 'de' ? $_('menu.switchLanguageToEnglish') : $_('menu.switchLanguageToGerman')}
                   >
                   </button>
 
@@ -395,17 +395,6 @@
               @apply scale-95 transform;
             }
           }
-          .theme-toggle-btn {
-            @apply flex h-8 w-8 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-white bg-cover bg-center bg-no-repeat p-0 transition-all duration-300 hover:shadow-lg;
-            &.light {
-              background-color: var(--decent-blue);
-              background-image: url('/icons/sun-icon.svg');
-            }
-            &.dark {
-              background-color: var(--dark-grey);
-              background-image: url('/icons/moon-icon.svg');
-            }
-          }
         }
       }
 
@@ -425,17 +414,6 @@
 
           &:active {
             @apply scale-95 transform;
-          }
-        }
-        .theme-toggle-btn {
-          @apply flex h-8 w-8 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-white bg-cover bg-center bg-no-repeat p-0 transition-all duration-300 hover:shadow-lg;
-          &.light {
-            background-color: var(--decent-blue);
-            background-image: url('/icons/sun-icon.svg');
-          }
-          &.dark {
-            background-color: var(--dark-grey);
-            background-image: url('/icons/moon-icon.svg');
           }
         }
       }

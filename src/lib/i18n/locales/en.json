@@ -1,5 +1,18 @@
 {
   "title": "This is the title",
+  "menu": {
+    "services": "Services",
+    "insights": "Insights",
+    "aboutUs": "About us",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "login": "Login",
+    "logout": "Logout",
+    "configureProject": "Configure project",
+    "start": "Start",
+    "switchLanguageToEnglish": "Switch to English",
+    "switchLanguageToGerman": "Switch to German"
+  },
   "homepage": {
     "meta": {
       "title": "raspb Webservices - Digital Solutions Tailored to Your Needs",
@@ -257,20 +270,624 @@
         "skalierbarkeit": "<strong>Scalability:</strong> Automatic scaling without server administration",
         "entwicklerfreundlichkeit": "<strong>Developer-friendly:</strong> Modern development tools and workflows",
         "kosteneffizienz": "<strong>Cost efficiency:</strong> Reduced hosting and maintenance costs"
-      },
-      "absatz4": "Our JAMstack setup includes modern technologies like <strong>Svelte/SvelteKit</strong> for the frontend, <strong>TypeScript</strong> for type-safe development, <strong>Tailwind CSS</strong> for efficient styling and <strong>Netlify</strong> for deployment and hosting. This combination enables us to develop robust and maintainable web applications that are optimized for both developers and end users.",
-      "absatz5": "The <strong>Headless CMS integration</strong> via GraphQL APIs enables our customers to easily manage content while the technical complexity remains hidden in the background. This way you can focus on your business while we ensure a technically flawless and future-proof solution."
-    }
+      }
+    },
+    "absatz4": "Our JAMstack setup includes modern technologies like <strong>Svelte/SvelteKit</strong> for the frontend, <strong>TypeScript</strong> for type-safe development, <strong>Tailwind CSS</strong> for efficient styling and <strong>Netlify</strong> for deployment and hosting. This combination enables us to develop robust and maintainable web applications that are optimized for both developers and end users.",
+    "absatz5": "The <strong>Headless CMS integration</strong> via GraphQL APIs enables our customers to easily manage content while the technical complexity remains hidden in the background. This way you can focus on your business while we ensure a technically flawless and future-proof solution."
   },
-  "services": {
+  "ueberUns": {
     "meta": {
-      "title": "raspb Webservices - Services",
-      "description": "Here can be a description..."
+      "title": "raspb Webservices - About Us",
+      "description": "Get to know the raspb Webservices team - Markus as a solopreneur and our innovative AI team for modern web development."
     },
     "header": {
+      "title": "About",
+      "titleHighlight":"Us",
+      "teaser1": "At raspb Webservices, we combine human creativity with the power of artificial intelligence. As a modern web development studio, we create innovative digital solutions that bring your vision to life.",
+      "teaser2": "And who exactly is raspb now? - Actually, it's just me and my AI Crew 😉"
+    },
+    "markusSection": {
+      "badge": "Solopreneur & Founder",
+      "title": "Markus",
+      "paragraph1": "As the founder and creative mind behind raspb Webservices, I bring almost two decades of experience in the digital world. My passion is developing tailor-made web solutions that are not only technically brilliant, but also user-friendly and future-proof.",
+      "statSpecializationTitle": "Specialization",
+      "statSpecializationValue": "Full-Stack Development",
+      "statExperienceTitle": "Experience",
+      "statExperienceValue": "almost 20 years",
+      "paragraph2": "My approach combines proven development practices with innovative AI tools to realize projects more efficiently and with higher quality.",
+      "philosophyPrefix": "Leveraging the",
+      "philosophyButton": "raspb Philosophy"
+    },
+    "aiTeamSection": {
+      "title": "Our AI Team",
+      "subtitle": "Each of our AI agents brings unique skills and personalities. Together, they form a highly efficient team that works around the clock for your projects.",
+      "memberCardButton": "Learn more"
+    },
+    "teamPhilosophySection": {
+      "title": "Our Philosophy",
+      "innovation": {
+        "title": "Innovation",
+        "description": "We use the latest technologies and AI tools to develop future-oriented solutions."
+      },
+      "precision": {
+        "title": "Precision",
+        "description": "Every detail is carefully thought out and perfected to ensure the highest quality."
+      },
+      "partnership": {
+        "title": "Partnership",
+        "description": "We work closely with our clients to optimally implement their vision."
+      }
+    },
+    "memberModal": {
+      "about": "About {name}",
+      "personality": "Personality",
+      "experience": "Experience & Expertise",
+      "coreCompetencies": "Core Competencies"
+    }
+  },
+  "servicesPage": {
+    "meta": {
+      "title": "raspb Webservices - Services",
+      "description": "Discover our comprehensive service portfolio: websites, CMS solutions, applications, individual development and AI services for your digital project."
+    },
+    "hero": {
       "titleFirst": "Our",
       "titleHighlight": "Services",
-      "teaser": "Tailor-made digital solutions for every need - from simple websites to complex AI integrations."
+      "subtitle": "Tailor-made digital solutions for every need - from simple websites to complex AI integrations",
+      "buttonText": "Configure project"
+    },
+    "intro": {
+      "titleFirst": "From Idea to",
+      "titleHighlight": "Digital Reality",
+      "paragraph1": "Our comprehensive service portfolio covers all aspects of digital transformation. Whether you need a simple web presence or want to develop complex, AI-powered applications - we have the right solution.",
+      "paragraph2": "Every service is implemented according to the proven raspb philosophy: fast, cost-effective and of the highest quality. You always retain full control over your digital property.",
+      "benefits": {
+        "benefit1": "Transparent Fixed Prices",
+        "benefit2": "No Follow-up Costs",
+        "benefit3": "Complete Code Handover",
+        "benefit4": "Modern Technologies",
+        "benefit5": "Personal Contact Person",
+        "benefit6": "Agile Development"
+      }
+    },
+    "categories": {
+      "titleFirst": "Our",
+      "titleHighlight": "Service Categories",
+      "webseiten": {
+        "title": "Websites",
+        "description": "From one-pagers to corporate websites"
+      },
+      "contentManagement": {
+        "title": "Content Management",
+        "description": "Simple to complex CMS solutions"
+      },
+      "applications": {
+        "title": "Applications",
+        "description": "Business Apps, Web Applications, PWAs"
+      },
+      "freestyle": {
+        "title": "Freestyle",
+        "description": "Highly individual solutions"
+      },
+      "aiServices": {
+        "title": "AI Services",
+        "description": "Consulting, Engineering, Automation & Infrastructure"
+      }
+    },
+    "webseitenSection": {
+      "titleFirst": "Websites",
+      "titleHighlight": "for every requirement",
+      "teaser": "From elegant one-pagers to comprehensive corporate websites - we develop websites that inspire your target audience and support your business goals. And all this with a technical standard that is second to none.",
+      "onePage": {
+        "title": "One-Pager Websites",
+        "icon": "🎯",
+        "description": "Compact, focused presentation on a scrollable page. Perfect for a quick start with a clear message.",
+        "highlights": {
+          "h1": "Web Business Card",
+          "h2": "Maintenance Page",
+          "h3": "Minimalist Campaign Page"
+        },
+        "buttonText": "More Details"
+      },
+      "landingPages": {
+        "title": "Landing Pages",
+        "icon": "🚀",
+        "description": "Targeted campaign pages for marketing campaigns, product launches or events with maximum conversion.",
+        "highlights": {
+          "h1": "A/B Testing",
+          "h2": "Analytics",
+          "h3": "Fast Implementation"
+        },
+        "buttonText": "More Details"
+      },
+      "corporateWebsites": {
+        "title": "Corporate Websites",
+        "icon": "🏢",
+        "description": "Professional corporate websites with multiple pages, comprehensive content and extended functions.",
+        "highlights": {
+          "h1": "SEO-optimized",
+          "h2": "Multi-page",
+          "h3": "Professional"
+        },
+        "buttonText": "More Details"
+      }
+    },
+    "cmsSection": {
+      "titleFirst": "Content Management",
+      "titleHighlight": "tailored",
+      "teaser": "Maintain control over your content with tailor-made CMS solutions - from simple page editing to complex content structures.",
+      "simpleCms": {
+        "title": "Simple Content Editing",
+        "icon": "✏️",
+        "description": "Make existing pages editable or enable simple editing of individual content.",
+        "highlights": {
+          "h1": "Inline Editing",
+          "h2": "User-friendly",
+          "h3": "Instant Preview"
+        },
+        "buttonText": "More Details"
+      },
+      "complexCms": {
+        "title": "Complex CMS Systems",
+        "icon": "🏗️",
+        "description": "Individual content management systems with multi-layered information objects and extended functions.",
+        "highlights": {
+          "h1": "Custom Content Types",
+          "h2": "Workflow Management",
+          "h3": "Multilingualism"
+        },
+        "buttonText": "More Details"
+      },
+      "blogCms": {
+        "title": "Blog & Content Platforms",
+        "icon": "📝",
+        "description": "Specialized solutions for blogs, magazines and content-driven websites.",
+        "highlights": {
+          "h1": "SEO Tools",
+          "h2": "Social Media",
+          "h3": "Newsletter"
+        },
+        "buttonText": "More Details"
+      },
+      "headlessCms": {
+        "title": "Headless CMS",
+        "icon": "🔗",
+        "description": "Flexible content management with API-based delivery for multiple channels.",
+        "highlights": {
+          "h1": "API-first",
+          "h2": "Multi-Channel",
+          "h3": "Future-proof"
+        },
+        "buttonText": "More Details"
+      }
+    },
+    "applicationsSection": {
+      "titleFirst": "Applications",
+      "titleHighlight": "for Web & Mobile",
+      "teaser": "From simple browser applications to native mobile apps - we rely on Progressive Web App technology for maximum reach and performance.",
+      "webApps": {
+        "title": "Web Applications",
+        "icon": "💻",
+        "description": "Browser-based applications for specific tasks and workflows.",
+        "highlights": {
+          "h1": "Platform-independent",
+          "h2": "No Installation",
+          "h3": "Auto-Updates"
+        },
+        "buttonText": "More Details"
+      },
+      "pwa": {
+        "title": "Progressive Web Apps (PWA)",
+        "icon": "📱",
+        "description": "The best of web and app - installable, offline-capable and with native features.",
+        "highlights": {
+          "h1": "Installable",
+          "h2": "Offline-capable",
+          "h3": "Push Notifications"
+        },
+        "buttonText": "More Details"
+      },
+      "nativeApps": {
+        "title": "Native Mobile Apps",
+        "icon": "📲",
+        "description": "Full-fledged apps for iOS and Android App Stores with native performance.",
+        "highlights": {
+          "h1": "App Store",
+          "h2": "Native Performance",
+          "h3": "Hardware Access"
+        },
+        "buttonText": "More Details"
+      },
+      "complexApps": {
+        "title": "Complex Applications",
+        "icon": "⚙️",
+        "description": "Extensive applications with advanced functions and integrations.",
+        "highlights": {
+          "h1": "Database Integration",
+          "h2": "Real-time Features",
+          "h3": "Scalable"
+        },
+        "buttonText": "More Details"
+      }
+    },
+    "individualDevelopmentSection": {
+      "titleFirst": "Individual",
+      "titleHighlight": "Development",
+      "teaser": "Do you have special requirements that do not fit into the standard categories? We develop tailor-made solutions for every use case.",
+      "components": {
+        "title": "Individual Components",
+        "icon": "🧩",
+        "description": "UI components, widgets, special forms and custom plugins.",
+        "buttonText": "More Details"
+      },
+      "extensions": {
+        "title": "System Extensions",
+        "icon": "🔧",
+        "description": "Extension of existing websites, API integrations and performance optimizations.",
+        "buttonText": "More Details"
+      },
+      "specialApps": {
+        "title": "Special Applications",
+        "icon": "📊",
+        "description": "Event registration, data dashboards, reporting tools and automation scripts.",
+        "buttonText": "More Details"
+      },
+      "design": {
+        "title": "UI/UX Design",
+        "icon": "🎨",
+        "description": "Interface design, user experience optimization, prototyping and design systems.",
+        "buttonText": "More Details"
+      }
+    },
+    "kiServicesSection": {
+      "titleFirst": "AI Services",
+      "titleHighlight": "& Automation",
+      "teaser": "Leverage the power of Artificial Intelligence for your business. From consulting to ready-made AI solutions.",
+      "consulting": {
+        "title": "AI Consulting & Support",
+        "icon": "🧠",
+        "description": "Comprehensive consulting and support for integrating AI into your business processes.",
+        "highlights": {
+          "h1": "Strategy Development",
+          "h2": "Prompt Engineering",
+          "h3": "ROI Analysis"
+        },
+        "buttonText": "More Details"
+      },
+      "agentDevelopment": {
+        "title": "AI Agent Development",
+        "icon": "🤖",
+        "description": "Tailor-made AI agents for specific tasks and use cases.",
+        "highlights": {
+          "h1": "Custom Chatbots",
+          "h2": "Content Generation",
+          "h3": "System Integration"
+        },
+        "buttonText": "More Details"
+      },
+      "workflowOptimization": {
+        "title": "Workflow Optimization with AI",
+        "icon": "⚡",
+        "description": "Simplify, shorten and reduce costs of digital processes and workflows with AI.",
+        "highlights": {
+          "h1": "Process Analysis",
+          "h2": "Automation",
+          "h3": "Predictive Analytics"
+        },
+        "buttonText": "More Details"
+      },
+      "aiInfrastructure": {
+        "title": "AI as Infrastructure",
+        "icon": "🏗️",
+        "description": "AI infrastructure as a service - rent instead of buy for maximum flexibility.",
+        "highlights": {
+          "h1": "Scalable",
+          "h2": "Pay-per-Use",
+          "h3": "24/7 Support"
+        },
+        "buttonText": "More Details"
+      }
+    },
+    "ctaSection": {
+      "titleFirst": "Ready for your",
+      "titleHighlight": "digital project",
+      "teaser": "Have you found the perfect solution for your project? Our intelligent configurator helps you specify your project and you immediately receive a transparent fixed price.",
+      "benefits": {
+        "benefit1": {
+          "icon": "⚡",
+          "title": "Immediate Price",
+          "description": "Receive a binding fixed price within minutes"
+        },
+        "benefit2": {
+          "icon": "🎯",
+          "title": "Tailored",
+          "description": "Every solution is tailored to your needs"
+        },
+        "benefit3": {
+          "icon": "🤝",
+          "title": "Personal Contact",
+          "description": "A fixed contact person accompanies you through the entire project"
+        }
+      },
+      "button1": "Configure project now",
+      "button2": "Frequently Asked Questions",
+      "note": "💡 <strong>Tip:</strong> The configurator takes only 3-5 minutes and you immediately receive your personal project price. Non-binding and free of charge."
+    },
+    "modals": {
+      "onePage": {
+        "title": "One-Pager Websites",
+        "perfectFor": "Perfect for:",
+        "perfectForDescription": "getting started, with little content, a quick and temporary internet presence or a simple campaign page",
+        "paragraph1": "If you want to be present on the internet NOW, with address, phone number and, if applicable, store opening hours, but are still in the planning phase. Then a web business card as a simple one-pager is a good option. This way, your contact details are at least already findable and you have a basis for more complex projects.",
+        "paragraph2": "But even if you want a single page as a maintenance page (displayed when the page is in maintenance mode) or a single splash page to be implemented, the raspb one-pager is ideal. And that already from €399 (incl. everything = hosting, fees, etc.)",
+        "paragraph3": "A one-page site can also be more complex. With a form at the end or appealing animations. There are hardly any limits to the imagination. Use the one-pager approach to realize your online campaign.",
+        "servicesDetailTitle": "Services in detail:",
+        "servicesDetails": {
+          "d1": "Responsive design for all devices",
+          "d2": "Optimized performance with lightning-fast loading times",
+          "d3": "Basic SEO optimization",
+          "d4": "Flexibly expandable. Bring in your wishes.",
+          "d5": "Domain and SSL certificate included",
+          "d6": "Within the Fair Use area*, no further costs are incurred (hosting, maintenance, operation)"
+        },
+        "technicalFeaturesTitle": "Technical Features:",
+        "technicalFeatures": {
+          "t1": "Optionally with modern CSS animations",
+          "t2": "Smooth Scrolling Navigation",
+          "t3": "Lazy Loading for images"
+        },
+        "projectDuration": "Project duration:",
+        "projectDurationValue": "1-5 days",
+        "maintenance": "Maintenance:",
+        "maintenanceValue": "Included for one year.",
+        "closeButton": "Close"
+      },
+      "landingPages": {
+        "title": "Landing Pages",
+        "perfectFor": "Perfect for:",
+        "perfectForDescription": "Marketing campaigns, product launches, events, lead generation",
+        "conversionOptimizationTitle": "Conversion Optimization:",
+        "conversionOptimization": {
+          "c1": "A/B testing setup for headlines and CTAs",
+          "c2": "Heatmap integration (Hotjar/Crazy Egg)",
+          "c3": "Conversion tracking with Google Analytics",
+          "c4": "Optimized forms with minimal fields",
+          "c5": "Social Proof Integration"
+        },
+        "marketingIntegrationTitle": "Marketing Integration:",
+        "marketingIntegration": {
+          "m1": "Facebook Pixel Integration",
+          "m2": "Google Ads Conversion Tracking",
+          "m3": "Email Marketing Tool Integration",
+          "m4": "CRM Integration (HubSpot, Salesforce)"
+        },
+        "projectDuration": "Project duration:",
+        "projectDurationValue": "3-5 days",
+        "performance": "Performance:",
+        "performanceValue": "Optimized for maximum conversion rate",
+        "closeButton": "Close"
+      },
+      "corporateWebsites": {
+        "title": "Corporate Websites",
+        "perfectFor": "Perfect for:",
+        "perfectForDescription": "Medium-sized companies, agencies, consultancies, B2B companies",
+        "extensiveFeaturesTitle": "Extensive Features:",
+        "extensiveFeatures": {
+          "e1": "Multi-page structure (5-20 pages)",
+          "e2": "Advanced SEO optimization",
+          "e3": "Professional corporate design",
+          "e4": "Contact forms and interactions",
+          "e5": "Team and About Us pages",
+          "e6": "Service/product presentations",
+          "e7": "News/blog integration"
+        },
+        "advancedFunctionsTitle": "Advanced Functions:",
+        "advancedFunctions": {
+          "a1": "Multilingualism (DACH region)",
+          "a2": "Advanced Analytics and Tracking",
+          "a3": "Newsletter Integration",
+          "a4": "Social Media Integration",
+          "a5": "Download area for documents"
+        },
+        "projectDuration": "Project duration:",
+        "projectDurationValue": "3-6 weeks",
+        "maintenance": "Maintenance:",
+        "maintenanceValue": "Recommended for optimal performance",
+        "closeButton": "Close"
+      },
+      "simpleCms": {
+        "title": "Simple Content Editing",
+        "perfectFor": "Perfect for:",
+        "perfectForDescription": "Small businesses, associations, practices, restaurants",
+        "userFriendlyFeaturesTitle": "User-friendly Features:",
+        "userFriendlyFeatures": {
+          "u1": "Inline editing directly on the website",
+          "u2": "WYSIWYG editor for texts",
+          "u3": "Easy image upload and management",
+          "u4": "Instant preview of changes",
+          "u5": "Automatic backups",
+          "u6": "Version control"
+        },
+        "technicalDetailsTitle": "Technical Details:",
+        "technicalDetails": {
+          "t1": "No technical knowledge required",
+          "t2": "Secure user login",
+          "t3": "Mobile editing possible",
+          "t4": "Automatic SEO optimization"
+        },
+        "setupTime": "Setup time:",
+        "setupTimeValue": "1-2 days",
+        "training": "Training:",
+        "trainingValue": "30 minutes online training included",
+        "closeButton": "Close"
+      },
+      "complexCms": {
+        "title": "Complex CMS Systems",
+        "perfectFor": "Perfect for:",
+        "perfectForDescription": "Large companies, publishers, e-commerce, portals",
+        "enterpriseFeaturesTitle": "Enterprise Features:",
+        "enterpriseFeatures": {
+          "e1": "Custom content types",
+          "e2": "Workflow management with approval processes",
+          "e3": "Multilingualism and localization",
+          "e4": "User roles and rights management",
+          "e5": "API integration for third-party systems",
+          "e6": "Advanced search functions"
+        },
+        "scalabilityTitle": "Scalability:",
+        "scalability": {
+          "s1": "High-performance database architecture",
+          "s2": "CDN integration for global availability",
+          "s3": "Automatic scaling",
+          "s4": "Extensive analytics and reporting"
+        },
+        "projectDuration": "Project duration:",
+        "projectDurationValue": "6-12 weeks",
+        "support": "Support:",
+        "supportValue": "Dedicated support team available",
+        "closeButton": "Close"
+      },
+      "blogCms": {
+        "title": "Blog & Content Platforms",
+        "icon": "📝",
+        "description": "Specialized solutions for blogs, magazines and content-driven websites.",
+        "highlights": {
+          "h1": "SEO Tools",
+          "h2": "Social Media",
+          "h3": "Newsletter"
+        },
+        "buttonText": "More Details"
+      },
+      "headlessCms": {
+        "title": "Headless CMS",
+        "icon": "🔗",
+        "description": "Flexible content management with API-based delivery for multiple channels.",
+        "highlights": {
+          "h1": "API-first",
+          "h2": "Multi-Channel",
+          "h3": "Future-proof"
+        },
+        "buttonText": "More Details"
+      },
+      "webApps": {
+        "title": "Web Applications",
+        "icon": "💻",
+        "description": "Browser-based applications for specific tasks and workflows.",
+        "highlights": {
+          "h1": "Platform-independent",
+          "h2": "No Installation",
+          "h3": "Auto-Updates"
+        },
+        "buttonText": "More Details"
+      },
+      "pwa": {
+        "title": "Progressive Web Apps (PWA)",
+        "icon": "📱",
+        "description": "The best of web and app - installable, offline-capable and with native features.",
+        "highlights": {
+          "h1": "Installable",
+          "h2": "Offline-capable",
+          "h3": "Push Notifications"
+        },
+        "buttonText": "More Details"
+      },
+      "nativeApps": {
+        "title": "Native Mobile Apps",
+        "icon": "📲",
+        "description": "Full-fledged apps for iOS and Android App Stores with native performance.",
+        "highlights": {
+          "h1": "App Store",
+          "h2": "Native Performance",
+          "h3": "Hardware Access"
+        },
+        "buttonText": "More Details"
+      },
+      "complexApps": {
+        "title": "Complex Applications",
+        "icon": "⚙️",
+        "description": "Extensive applications with advanced functions and integrations.",
+        "highlights": {
+          "h1": "Database Integration",
+          "h2": "Real-time Features",
+          "h3": "Scalable"
+        },
+        "buttonText": "More Details"
+      },
+      "components": {
+        "title": "Individual Components",
+        "icon": "🧩",
+        "description": "UI components, widgets, special forms and custom plugins.",
+        "buttonText": "More Details"
+      },
+      "extensions": {
+        "title": "System Extensions",
+        "icon": "🔧",
+        "description": "Extension of existing websites, API integrations and performance optimizations.",
+        "buttonText": "More Details"
+      },
+      "specialApps": {
+        "title": "Special Applications",
+        "icon": "📊",
+        "description": "Event registration, data dashboards, reporting tools and automation scripts.",
+        "buttonText": "More Details"
+      },
+      "design": {
+        "title": "UI/UX Design",
+        "icon": "🎨",
+        "description": "Interface design, user experience optimization, prototyping and design systems.",
+        "buttonText": "More Details"
+      },
+      "kiConsulting": {
+        "title": "AI Consulting & Support",
+        "icon": "🧠",
+        "description": "Comprehensive consulting and support for integrating AI into your business processes.",
+        "highlights": {
+          "h1": "Strategy Development",
+          "h2": "Prompt Engineering",
+          "h3": "ROI Analysis"
+        },
+        "buttonText": "More Details"
+      },
+      "kiAgentDevelopment": {
+        "title": "AI Agent Development",
+        "icon": "🤖",
+        "description": "Tailor-made AI agents for specific tasks and use cases.",
+        "highlights": {
+          "h1": "Custom Chatbots",
+          "h2": "Content Generation",
+          "h3": "System Integration"
+        },
+        "buttonText": "More Details"
+      },
+      "workflowOptimization": {
+        "title": "Workflow Optimization with AI",
+        "icon": "⚡",
+        "description": "Simplify, shorten and reduce costs of digital processes and workflows with AI.",
+        "highlights": {
+          "h1": "Process Analysis",
+          "h2": "Automation",
+          "h3": "Predictive Analytics"
+        },
+        "buttonText": "More Details"
+      },
+      "aiInfrastructure": {
+        "title": "AI as Infrastructure",
+        "icon": "🏗️",
+        "description": "AI infrastructure as a service - rent instead of buy for maximum flexibility.",
+        "highlights": {
+          "h1": "Scalable",
+          "h2": "Pay-per-Use",
+          "h3": "24/7 Support"
+        },
+        "buttonText": "More Details"
+      }
     }
+  },
+  "footer": {
+    "copyright": "raspb &copy; {year}",
+    "imprint": "Imprint",
+    "privacyPolicy": "Privacy Policy",
+    "contact": "Contact",
+    "scrollToTop": "Scroll to top"
   }
 }

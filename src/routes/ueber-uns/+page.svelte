@@ -3,6 +3,7 @@
   import { goto } from '$app/navigation';
   import Section from '$lib/components/section.svelte';
   import RaspbPhilosophyModal from '$lib/components/raspb-philosophy-modal.svelte';
+  import { _ } from 'svelte-i18n';
 
 
   let selectedMember: any = null;
@@ -77,22 +78,21 @@
 </script>
 
 <svelte:head>
-  <title>raspb Webservices - Über uns</title>
+  <title>{$_('ueberUns.meta.title')}</title>
   <meta
     name="description"
-    content="Lernen Sie das Team von raspb Webservices kennen - Markus als Solopreneur und unser innovatives KI-Team für moderne Webentwicklung."
+    content={$_('ueberUns.meta.description')}
   />
 </svelte:head>
 
 <div class="content-area">
   <Section>
-    <h1 class="animate-fade-in mb-8 text-center text-4xl font-bold">Über uns</h1>
+    <h1 class="animate-fade-in mb-8 text-center text-4xl font-bold">{$_('ueberUns.header.title')} <span class="inner-text-special">{$_('ueberUns.header.titleHighlight')}</span></h1>
     <p class="teaser animate-fade-in-up mx-auto max-w-4xl text-center text-lg">
-      Bei raspb Webservices verbinden wir menschliche Kreativität mit der Kraft künstlicher Intelligenz. Als modernes Webentwicklungs-Studio schaffen wir
-      innovative digitale Lösungen, die Ihre Vision zum Leben erwecken.
+      {$_('ueberUns.header.teaser1')}
     </p>
     <p class="teaser no-padding animate-fade-in-up mx-auto max-w-4xl text-center text-lg">
-      Und wer genau ist raspb jetzt? - Eigentlich sind das nur ich und meine KI Crew 😉
+      {$_('ueberUns.header.teaser2')}
     </p>
   </Section>
 
@@ -108,20 +108,19 @@
           />
         </div>
         <div class="flex-1">
-          <div class="badge badge-primary badge-lg mb-4 animate-bounce">Solopreneur & Gründer</div>
-          <h2 class="mb-6 text-5xl font-bold">Markus</h2>
+          <div class="badge badge-primary badge-lg mb-4 animate-bounce">{$_('ueberUns.markusSection.badge')}</div>
+          <h2 class="mb-6 text-5xl font-bold">{$_('ueberUns.markusSection.title')}</h2>
           <p class="mb-6 text-xl leading-relaxed">
-            Als Gründer und kreativer Kopf von raspb Webservices bringe ich fast zwei Jahrzehnte Erfahrung in der digitalen Welt mit. Meine Leidenschaft gilt
-            der Entwicklung maßgeschneiderter Weblösungen, die nicht nur technisch brillant, sondern auch benutzerfreundlich und zukunftssicher sind.
+            {$_('ueberUns.markusSection.paragraph1')}
           </p>
           <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
             <div class="stat bg-base-100 rounded-xl shadow-lg">
-              <div class="stat-title">Spezialisierung</div>
-              <div class="stat-value text-primary text-lg">Full-Stack Development</div>
+              <div class="stat-title">{$_('ueberUns.markusSection.statSpecializationTitle')}</div>
+              <div class="stat-value text-primary text-lg">{$_('ueberUns.markusSection.statSpecializationValue')}</div>
             </div>
             <div class="stat bg-base-100 rounded-xl shadow-lg">
-              <div class="stat-title">Erfahrung</div>
-              <div class="stat-value text-primary text-lg">knapp 20 Jahre</div>
+              <div class="stat-title">{$_('ueberUns.markusSection.statExperienceTitle')}</div>
+              <div class="stat-value text-primary text-lg">{$_('ueberUns.markusSection.statExperienceValue')}</div>
             </div>
           </div>
           <div class="mb-6 flex flex-wrap gap-2">
@@ -130,10 +129,10 @@
             {/each}
           </div>
           <p class="text-lg opacity-80">
-            Mein Ansatz kombiniert bewährte Entwicklungspraktiken mit innovativen KI-Tools, um Projekte effizienter und qualitativ hochwertiger zu realisieren.
-            Ganz nach der
+            {$_('ueberUns.markusSection.paragraph2')}
+            {$_('ueberUns.markusSection.philosophyPrefix')}
             <button type="button" class="link link-primary hover:link-hover font-semibold" on:click={() => philosophyModal.openModal()}>
-              raspb Philosophie
+              {$_('ueberUns.markusSection.philosophyButton')}
             </button>.
           </p>
         </div>
@@ -144,10 +143,9 @@
   <!-- AI Team Section -->
   <Section>
     <div class="mb-12 text-center">
-      <h2 class="animate-fade-in mb-4 text-4xl font-bold">Unser KI-Team</h2>
+      <h2 class="animate-fade-in mb-4 text-4xl font-bold">{$_('ueberUns.aiTeamSection.title')}</h2>
       <p class="animate-fade-in-up mx-auto max-w-3xl text-xl opacity-80">
-        Jeder unserer KI-Agenten bringt einzigartige Fähigkeiten und Persönlichkeiten mit. Gemeinsam bilden sie ein hocheffizientes Team, das rund um die Uhr
-        für Ihre Projekte arbeitet.
+        {$_('ueberUns.aiTeamSection.subtitle')}
       </p>
     </div>
 
@@ -175,7 +173,7 @@
               <p class="mb-4 line-clamp-4 text-xs leading-relaxed">{member.description}</p>
             </div>
             <div class="card-actions">
-              <button class="btn btn-primary btn-xs">Mehr erfahren</button>
+              <button class="btn btn-primary btn-xs">{$_('ueberUns.aiTeamSection.memberCardButton')}</button>
             </div>
           </div>
         </div>
@@ -187,22 +185,22 @@
   <Section>
     <div class="from-primary/10 to-secondary/10 animate-fade-in-up rounded-3xl bg-gradient-to-r p-8">
       <div class="text-center">
-        <h2 class="mb-6 text-3xl font-bold">Unsere Philosophie</h2>
+        <h2 class="mb-6 text-3xl font-bold">{$_('ueberUns.teamPhilosophySection.title')}</h2>
         <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div class="text-center">
             <div class="mb-4 text-4xl">⚡</div>
-            <h3 class="mb-2 text-xl font-semibold">Innovation</h3>
-            <p class="opacity-80">Wir nutzen modernste Technologien und KI-Tools, um zukunftsweisende Lösungen zu entwickeln.</p>
+            <h3 class="mb-2 text-xl font-semibold">{$_('ueberUns.teamPhilosophySection.innovation.title')}</h3>
+            <p class="opacity-80">{$_('ueberUns.teamPhilosophySection.innovation.description')}</p>
           </div>
           <div class="text-center">
             <div class="mb-4 text-4xl">🎯</div>
-            <h3 class="mb-2 text-xl font-semibold">Präzision</h3>
-            <p class="opacity-80">Jedes Detail wird sorgfältig durchdacht und perfektioniert, um höchste Qualität zu gewährleisten.</p>
+            <h3 class="mb-2 text-xl font-semibold">{$_('ueberUns.teamPhilosophySection.precision.title')}</h3>
+            <p class="opacity-80">{$_('ueberUns.teamPhilosophySection.precision.description')}</p>
           </div>
           <div class="text-center">
             <div class="mb-4 text-4xl">🤝</div>
-            <h3 class="mb-2 text-xl font-semibold">Partnerschaft</h3>
-            <p class="opacity-80">Wir arbeiten eng mit unseren Kunden zusammen, um ihre Vision optimal umzusetzen.</p>
+            <h3 class="mb-2 text-xl font-semibold">{$_('ueberUns.teamPhilosophySection.partnership.title')}</h3>
+            <p class="opacity-80">{$_('ueberUns.teamPhilosophySection.partnership.description')}</p>
           </div>
         </div>
       </div>
@@ -230,22 +228,22 @@
 
       <div class="space-y-6">
         <div>
-          <h4 class="mb-2 text-xl font-semibold">Über {selectedMember.name}</h4>
+          <h4 class="mb-2 text-xl font-semibold">{$_('ueberUns.memberModal.about', { values: { name: selectedMember.name } })}</h4>
           <p class="leading-relaxed">{selectedMember.description}</p>
         </div>
 
         <div>
-          <h4 class="mb-2 text-xl font-semibold">Persönlichkeit</h4>
+          <h4 class="mb-2 text-xl font-semibold">{$_('ueberUns.memberModal.personality')}</h4>
           <p class="leading-relaxed">{selectedMember.personality}</p>
         </div>
 
         <div>
-          <h4 class="mb-2 text-xl font-semibold">Erfahrung & Expertise</h4>
+          <h4 class="mb-2 text-xl font-semibold">{$_('ueberUns.memberModal.experience')}</h4>
           <p class="leading-relaxed">{selectedMember.experience}</p>
         </div>
 
         <div>
-          <h4 class="mb-3 text-xl font-semibold">Kernkompetenzen</h4>
+          <h4 class="mb-3 text-xl font-semibold">{$_('ueberUns.memberModal.coreCompetencies')}</h4>
           <div class="flex flex-wrap gap-2">
             {#each selectedMember.skills as skill}
               <span class="badge badge-primary badge-lg">{skill}</span>

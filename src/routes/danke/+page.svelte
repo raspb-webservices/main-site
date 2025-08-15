@@ -3,7 +3,7 @@
 </script>
 
 <section class="danke-content-wrapper">
-  <div class="px-20 pt-10">
+  <div class="px-20 pt-10 flex flex-col justify-center items-center">
     <h1 class="text-center">Vielen Dank für Ihre Nachricht</h1>
     <p>Wir haben Ihre Anfrage erhalten und werden uns in Kürze bei Ihnen zurückmelden...</p>
 
