@@ -40,6 +40,7 @@
   prefersdark: false;
   color-scheme: 'light';
   --color-base-100: oklch(98% 0 0);
+  --color-base-inverted-100: oklch(25.33% 0.016 252.42);
   --color-base-200: oklch(96% 0.001 286.375);
   --color-base-300: oklch(92% 0.004 286.32);
   --color-base-content: oklch(21% 0.006 285.885);
@@ -74,6 +75,7 @@
   prefersdark: false;
   color-scheme: 'dark';
   --color-base-100: oklch(25.33% 0.016 252.42);
+  --color-base-inverted-100: oklch(98% 0 0);
   --color-base-200: oklch(23.26% 0.014 253.1);
   --color-base-300: oklch(21.15% 0.012 254.09);
   --color-base-content: oklch(97.807% 0.029 256.847);
@@ -106,6 +108,7 @@
   --font-lato: 'Lato', sans-serif;
   --font-pt-serif: 'PTSerif', serif;
   --font-circular: 'Circular', sans-serif;
+  --color-base-inverted-100: oklch(25.33% 0.016 252.42);
   --spacing-fhd: 120rem;
   --spacing-wqhd: 160rem;
   --color-white: var(--white);
@@ -327,6 +330,25 @@ textarea:not([rows]) {
     @apply cursor-pointer bg-right shadow-none;
   }
 }
+.btn-simple {
+  @apply from-pink to-violet border-0 bg-linear-to-r text-nowrap text-white;
+  &:hover {
+    @apply cursor-pointer from-pink/80 to-pink/80 shadow-none;
+  }
+}
+.btn-outline-basic {
+  @apply from-purple to-pink  border-0 bg-linear-to-r rounded-lg w-fit;
+  .button-inner {
+    @apply bg-base-200 text-nowrap text-base-content m-0.5 rounded-lg px-3 py-1;
+  }
+  &:hover {
+    @apply cursor-pointer;
+    .button-inner {
+      @apply bg-transparent text-white;
+    }
+  }
+}
+
 
 .nav-button-link {
   @apply relative mr-2.5 ml-2.5 min-h-6 px-2 text-lg text-base-content opacity-75;

@@ -963,7 +963,7 @@
           {/each}
         </div>
 
-        <button type="button" class="btn btn-primary mt-4" onclick={addPage}>
+        <button type="button" class="btn btn-simple mt-4" onclick={addPage}>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
           </svg>
@@ -1029,7 +1029,7 @@
             {/each}
           </div>
 
-          <button type="button" class="btn btn-primary mt-4" onclick={addFormField}>
+          <button type="button" class="btn btn-simple mt-4" onclick={addFormField}>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
             </svg>
@@ -1545,7 +1545,7 @@
     </div>
 
     <div class="modal-action">
-      <button type="button" class="btn btn-primary" onclick={closeErrorModal}>
+      <button type="button" class="btn btn-simple" onclick={closeErrorModal}>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
@@ -1600,7 +1600,7 @@
           onclick={() => {
             goto('/');
           }}
-          class="btn btn-primary btn-lg"
+          class="btn btn-simple btn-lg"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path

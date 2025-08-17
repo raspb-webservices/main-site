@@ -117,7 +117,7 @@
   }
 
   .benefit-item {
-    @apply bg-base-100 border-base-200 flex items-start gap-4 rounded-xl border p-6 shadow-sm;
+    @apply bg-base-200 flex items-start gap-4 rounded-xl p-6 shadow-sm text-base-content;
     transition: all 0.3s ease;
 
     &:hover {
@@ -140,7 +140,7 @@
   }
 
   .cta-text {
-    @apply bg-primary/5 border-primary/20 rounded-xl border p-6 text-center;
+    @apply bg-base-200 border-base-300 rounded-xl border p-6 text-center text-base-content;
 
     p {
       @apply text-base-content/80 text-base leading-relaxed;

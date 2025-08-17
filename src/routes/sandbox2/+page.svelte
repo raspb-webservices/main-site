@@ -207,7 +207,7 @@
 
     <!-- Test Button -->
     <div class="mt-8 text-center">
-      <button class="btn btn-primary btn-lg" onclick={generateTestPDF} disabled={isGenerating}>
+      <button class="btn btn-simple btn-lg" onclick={generateTestPDF} disabled={isGenerating}>
         {#if isGenerating}
           <span class="loading loading-spinner loading-sm"></span>
           PDF wird generiert...

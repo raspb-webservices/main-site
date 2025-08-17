@@ -168,7 +168,7 @@
 
     <!-- Close Button -->
     <div class="modal-action flex items-center justify-center">
-      <button type="button" class="btn btn-primary btn-wide" on:click={closeModal}>
+      <button type="button" class="btn btn-simple btn-wide" on:click={closeModal}>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path
             stroke-linecap="round"

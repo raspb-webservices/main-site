@@ -19,8 +19,8 @@
 <style lang="postcss">
   @reference '../../app.css';
   section.base-section {
-    @apply w-full py-10;
-    background-color: var(--backgroundColor);
+    @apply w-full py-10 bg-base-100;
+    /* background-color: var(--backgroundColor); */
 
     &:not(.full) {
       .inner-container {

@@ -98,7 +98,7 @@
 
   <!-- Markus Section -->
   <Section>
-    <div class="hero bg-base-200 animate-fade-in-up rounded-3xl">
+    <div class="hero bg-base-200 animate-fade-in-up rounded-3xl text-base-content">
       <div class="hero-content flex-col gap-12 lg:flex-row-reverse">
         <div class="flex-shrink-0">
           <img
@@ -114,11 +114,11 @@
             {$_('ueberUns.markusSection.paragraph1')}
           </p>
           <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div class="stat bg-base-100 rounded-xl shadow-lg">
+            <div class="stat bg-base-300 rounded-xl shadow-lg">
               <div class="stat-title">{$_('ueberUns.markusSection.statSpecializationTitle')}</div>
               <div class="stat-value text-primary text-lg">{$_('ueberUns.markusSection.statSpecializationValue')}</div>
             </div>
-            <div class="stat bg-base-100 rounded-xl shadow-lg">
+            <div class="stat bg-base-300 rounded-xl shadow-lg">
               <div class="stat-title">{$_('ueberUns.markusSection.statExperienceTitle')}</div>
               <div class="stat-value text-primary text-lg">{$_('ueberUns.markusSection.statExperienceValue')}</div>
             </div>
@@ -152,7 +152,7 @@
     <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
       {#each teamMembers as member, index}
         <div
-          class="card bg-base-100 animate-fade-in-up h-full cursor-pointer shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+          class="card bg-base-200 animate-fade-in-up h-full cursor-pointer shadow-xl text-base-content transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
           style="animation-delay: {index * 0.1}s"
           on:click={() => openModal(member)}
           on:keydown={(e) => e.key === 'Enter' && openModal(member)}
@@ -173,7 +173,7 @@
               <p class="mb-4 line-clamp-4 text-xs leading-relaxed">{member.description}</p>
             </div>
             <div class="card-actions">
-              <button class="btn btn-primary btn-xs">{$_('ueberUns.aiTeamSection.memberCardButton')}</button>
+              <button class="btn btn-simple btn-xs">{$_('ueberUns.aiTeamSection.memberCardButton')}</button>
             </div>
           </div>
         </div>
@@ -183,7 +183,7 @@
 
   <!-- Team Philosophy Section -->
   <Section>
-    <div class="from-primary/10 to-secondary/10 animate-fade-in-up rounded-3xl bg-gradient-to-r p-8">
+    <div class="animate-fade-in-up rounded-3xl bg-base-200 p-8 text-base-content">
       <div class="text-center">
         <h2 class="mb-6 text-3xl font-bold">{$_('ueberUns.teamPhilosophySection.title')}</h2>
         <div class="grid grid-cols-1 gap-8 md:grid-cols-3">

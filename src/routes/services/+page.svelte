@@ -18,6 +18,17 @@
       modal.close();
     }
   }
+
+  // Scroll to section function
+  function scrollToSection(sectionId: string) {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  }
 </script>
 
 <svelte:head>
@@ -75,30 +86,30 @@
       <div class="highlight-content">
         <h2 class="mb-8 text-center">{$_('servicesPage.categories.titleFirst')} <span class="inner-text-special">{$_('servicesPage.categories.titleHighlight')}</span></h2>
         <div class="service-categories-grid">
-          <div class="category-card">
+          <div class="category-card" onclick={() => scrollToSection('webseiten-section')}>
             <div class="category-icon">🌐</div>
             <h3>{$_('servicesPage.categories.webseiten.title')}</h3>
-            <p>{$_('servicesPage.categories.webseiten.description')}</p>
+            <p class="no-padding">{$_('servicesPage.categories.webseiten.description')}</p>
           </div>
-          <div class="category-card">
+          <div class="category-card" onclick={() => scrollToSection('cms-section')}>
             <div class="category-icon">📝</div>
             <h3>{$_('servicesPage.categories.contentManagement.title')}</h3>
-            <p>{$_('servicesPage.categories.contentManagement.description')}</p>
+            <p class="no-padding">{$_('servicesPage.categories.contentManagement.description')}</p>
           </div>
-          <div class="category-card">
+          <div class="category-card" onclick={() => scrollToSection('applications-section')}>
             <div class="category-icon">📱</div>
             <h3>{$_('servicesPage.categories.applications.title')}</h3>
-            <p>{$_('servicesPage.categories.applications.description')}</p>
+            <p class="no-padding">{$_('servicesPage.categories.applications.description')}</p>
           </div>
-          <div class="category-card">
+          <div class="category-card" onclick={() => scrollToSection('individual-development-section')}>
             <div class="category-icon">⚙️</div>
             <h3>{$_('servicesPage.categories.freestyle.title')}</h3>
-            <p>{$_('servicesPage.categories.freestyle.description')}</p>
+            <p class="no-padding">{$_('servicesPage.categories.freestyle.description')}</p>
           </div>
-          <div class="category-card">
+          <div class="category-card" onclick={() => scrollToSection('ki-services-section')}>
             <div class="category-icon">🤖</div>
             <h3>{$_('servicesPage.categories.aiServices.title')}</h3>
-            <p>{$_('servicesPage.categories.aiServices.description')}</p>
+            <p class="no-padding">{$_('servicesPage.categories.aiServices.description')}</p>
           </div>
         </div>
       </div>
@@ -107,7 +118,7 @@
 
   <!-- Webseiten Section -->
   <Section>
-    <div class="service-section">
+    <div id="webseiten-section" class="service-section">
       <div class="service-header">
         <h1>{$_('servicesPage.webseitenSection.titleFirst')} <span class="inner-text-special">{$_('servicesPage.webseitenSection.titleHighlight')}</span></h1>
         <p class="teaser">
@@ -129,7 +140,9 @@
               <span class="highlight">{$_('servicesPage.webseitenSection.onePage.highlights.h2')}</span>
               <span class="highlight">{$_('servicesPage.webseitenSection.onePage.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-onepage')}> {$_('servicesPage.webseitenSection.onePage.buttonText')} </button>
+            <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-onepage')}>
+              <div class="button-inner">{$_('servicesPage.webseitenSection.onePage.buttonText')}</div>
+            </button>
           </div>
         </div>
 
@@ -146,7 +159,9 @@
               <span class="highlight">{$_('servicesPage.webseitenSection.landingPages.highlights.h2')}</span>
               <span class="highlight">{$_('servicesPage.webseitenSection.landingPages.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-landing')}> {$_('servicesPage.webseitenSection.landingPages.buttonText')} </button>
+            <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-landing')}>
+              <div class="button-inner">{$_('servicesPage.webseitenSection.landingPages.buttonText')}</div>
+            </button>
           </div>
         </div>
 
@@ -163,7 +178,9 @@
               <span class="highlight">{$_('servicesPage.webseitenSection.corporateWebsites.highlights.h2')}</span>
               <span class="highlight">{$_('servicesPage.webseitenSection.corporateWebsites.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-corporate')}> {$_('servicesPage.webseitenSection.corporateWebsites.buttonText')} </button>
+            <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-corporate')}>
+              <div class="button-inner">{$_('servicesPage.webseitenSection.corporateWebsites.buttonText')}</div>
+            </button>
           </div>
         </div>
       </div>
@@ -172,7 +189,7 @@
 
   <!-- CMS Section -->
   <Section>
-    <div class="service-section">
+    <div id="cms-section" class="service-section">
       <div class="service-header">
         <h1>{$_('servicesPage.cmsSection.titleFirst')} <span class="inner-text-special">{$_('servicesPage.cmsSection.titleHighlight')}</span></h1>
         <p class="teaser">
@@ -194,7 +211,9 @@
               <span class="highlight">{$_('servicesPage.cmsSection.simpleCms.highlights.h2')}</span>
               <span class="highlight">{$_('servicesPage.cmsSection.simpleCms.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-simple-cms')}> {$_('servicesPage.cmsSection.simpleCms.buttonText')} </button>
+            <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-simple-cms')}>
+              <div class="button-inner">{$_('servicesPage.cmsSection.simpleCms.buttonText')}</div>
+            </button>
           </div>
         </div>
 
@@ -211,7 +230,9 @@
               <span class="highlight">{$_('servicesPage.cmsSection.complexCms.highlights.h2')}</span>
               <span class="highlight">{$_('servicesPage.cmsSection.complexCms.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-complex-cms')}> {$_('servicesPage.cmsSection.complexCms.buttonText')} </button>
+            <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-complex-cms')}>
+              <div class="button-inner">{$_('servicesPage.cmsSection.complexCms.buttonText')}</div>
+            </button>
           </div>
         </div>
 
@@ -228,7 +249,9 @@
               <span class="highlight">{$_('servicesPage.cmsSection.blogCms.highlights.h2')}</span>
               <span class="highlight">{$_('servicesPage.cmsSection.blogCms.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-blog-cms')}> {$_('servicesPage.cmsSection.blogCms.buttonText')} </button>
+            <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-blog-cms')}>
+              <div class="button-inner">{$_('servicesPage.cmsSection.blogCms.buttonText')}</div>
+            </button>
           </div>
         </div>
 
@@ -245,7 +268,9 @@
               <span class="highlight">{$_('servicesPage.cmsSection.headlessCms.highlights.h2')}</span>
               <span class="highlight">{$_('servicesPage.cmsSection.headlessCms.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-headless-cms')}> {$_('servicesPage.cmsSection.headlessCms.buttonText')} </button>
+            <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-headless-cms')}>
+              <div class="button-inner">{$_('servicesPage.cmsSection.headlessCms.buttonText')}</div>
+            </button>
           </div>
         </div>
       </div>
@@ -254,7 +279,7 @@
 
   <!-- Applikationen Section -->
   <Section>
-    <div class="service-section">
+    <div id="applications-section" class="service-section">
       <div class="service-header">
         <h1>{$_('servicesPage.applicationsSection.titleFirst')} <span class="inner-text-special">{$_('servicesPage.applicationsSection.titleHighlight')}</span></h1>
         <p class="teaser">
@@ -276,7 +301,9 @@
               <span class="highlight">{$_('servicesPage.applicationsSection.webApps.highlights.h2')}</span>
               <span class="highlight">{$_('servicesPage.applicationsSection.webApps.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-web-apps')}> {$_('servicesPage.applicationsSection.webApps.buttonText')} </button>
+            <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-web-apps')}>
+              <div class="button-inner">{$_('servicesPage.applicationsSection.webApps.buttonText')}</div>
+            </button>
           </div>
         </div>
 
@@ -293,7 +320,9 @@
               <span class="highlight">{$_('servicesPage.applicationsSection.pwa.highlights.h2')}</span>
               <span class="highlight">{$_('servicesPage.applicationsSection.pwa.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-pwa')}> {$_('servicesPage.applicationsSection.pwa.buttonText')} </button>
+            <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-pwa')}>
+              <div class="button-inner">{$_('servicesPage.applicationsSection.pwa.buttonText')}</div>
+            </button>
           </div>
         </div>
 
@@ -310,7 +339,9 @@
               <span class="highlight">{$_('servicesPage.applicationsSection.nativeApps.highlights.h2')}</span>
               <span class="highlight">{$_('servicesPage.applicationsSection.nativeApps.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-native-apps')}> {$_('servicesPage.applicationsSection.nativeApps.buttonText')} </button>
+            <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-native-apps')}>
+              <div class="button-inner">{$_('servicesPage.applicationsSection.nativeApps.buttonText')}</div>
+            </button>
           </div>
         </div>
 
@@ -327,7 +358,9 @@
               <span class="highlight">{$_('servicesPage.applicationsSection.complexApps.highlights.h2')}</span>
               <span class="highlight">{$_('servicesPage.applicationsSection.complexApps.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-complex-apps')}> {$_('servicesPage.applicationsSection.complexApps.buttonText')} </button>
+            <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-complex-apps')}>
+              <div class="button-inner">{$_('servicesPage.applicationsSection.complexApps.buttonText')}</div>
+            </button>
           </div>
         </div>
       </div>
@@ -336,7 +369,7 @@
 
   <!-- Individualentwicklung Section -->
   <Section>
-    <div class="service-section">
+    <div id="individual-development-section" class="service-section">
       <div class="service-header">
         <h1>{$_('servicesPage.individualDevelopmentSection.titleFirst')}<span class="inner-text-special">{$_('servicesPage.individualDevelopmentSection.titleHighlight')}</span></h1>
         <p class="teaser">
@@ -352,7 +385,9 @@
               <div class="service-icon">{$_('servicesPage.individualDevelopmentSection.components.icon')}</div>
             </div>
             <p>{$_('servicesPage.individualDevelopmentSection.components.description')}</p>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-components')}> {$_('servicesPage.individualDevelopmentSection.components.buttonText')} </button>
+            <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-components')}>
+              <div class="button-inner">{$_('servicesPage.individualDevelopmentSection.components.buttonText')}</div>
+            </button>
           </div>
         </div>
 
@@ -363,7 +398,9 @@
               <div class="service-icon">{$_('servicesPage.individualDevelopmentSection.extensions.icon')}</div>
             </div>
             <p>{$_('servicesPage.individualDevelopmentSection.extensions.description')}</p>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-extensions')}> {$_('servicesPage.individualDevelopmentSection.extensions.buttonText')} </button>
+            <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-extensions')}>
+              <div class="button-inner">{$_('servicesPage.individualDevelopmentSection.extensions.buttonText')}</div>
+            </button>
           </div>
         </div>
 
@@ -374,7 +411,9 @@
               <div class="service-icon">{$_('servicesPage.individualDevelopmentSection.specialApps.icon')}</div>
             </div>
             <p>{$_('servicesPage.individualDevelopmentSection.specialApps.description')}</p>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-special-apps')}> {$_('servicesPage.individualDevelopmentSection.specialApps.buttonText')} </button>
+            <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-special-apps')}>
+              <div class="button-inner">{$_('servicesPage.individualDevelopmentSection.specialApps.buttonText')}</div>
+            </button>
           </div>
         </div>
 
@@ -385,7 +424,9 @@
               <div class="service-icon">{$_('servicesPage.individualDevelopmentSection.design.icon')}</div>
             </div>
             <p>{$_('servicesPage.individualDevelopmentSection.design.description')}</p>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-design')}> {$_('servicesPage.individualDevelopmentSection.design.buttonText')} </button>
+            <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-design')}>
+              <div class="button-inner">{$_('servicesPage.individualDevelopmentSection.design.buttonText')}</div>
+            </button>
           </div>
         </div>
       </div>
@@ -394,7 +435,7 @@
 
   <!-- KI Services Section -->
   <Section>
-    <div class="service-section">
+    <div id="ki-services-section" class="service-section">
       <div class="service-header">
         <h1>{$_('servicesPage.kiServicesSection.titleFirst')} <span class="inner-text-special">{$_('servicesPage.kiServicesSection.titleHighlight')}</span></h1>
         <p class="teaser">{$_('servicesPage.kiServicesSection.teaser')}</p>
@@ -414,7 +455,9 @@
               <span class="highlight">{$_('servicesPage.kiServicesSection.consulting.highlights.h2')}</span>
               <span class="highlight">{$_('servicesPage.kiServicesSection.consulting.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-ki-beratung')}> {$_('servicesPage.kiServicesSection.consulting.buttonText')} </button>
+            <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-ki-beratung')}>
+              <div class="button-inner">{$_('servicesPage.kiServicesSection.consulting.buttonText')}</div>
+            </button>
           </div>
         </div>
 
@@ -431,7 +474,9 @@
               <span class="highlight">{$_('servicesPage.kiServicesSection.agentDevelopment.highlights.h2')}</span>
               <span class="highlight">{$_('servicesPage.kiServicesSection.agentDevelopment.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-ki-agenten')}> {$_('servicesPage.kiServicesSection.agentDevelopment.buttonText')} </button>
+            <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-ki-agenten')}>
+              <div class="button-inner">{$_('servicesPage.kiServicesSection.agentDevelopment.buttonText')}</div>
+            </button>
           </div>
         </div>
 
@@ -448,7 +493,9 @@
               <span class="highlight">{$_('servicesPage.kiServicesSection.workflowOptimization.highlights.h2')}</span>
               <span class="highlight">{$_('servicesPage.kiServicesSection.workflowOptimization.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-workflow')}> {$_('servicesPage.kiServicesSection.workflowOptimization.buttonText')} </button>
+            <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-workflow')}>
+              <div class="button-inner">{$_('servicesPage.kiServicesSection.workflowOptimization.buttonText')}</div>
+            </button>
           </div>
         </div>
 
@@ -465,7 +512,9 @@
               <span class="highlight">{$_('servicesPage.kiServicesSection.aiAsInfrastructure.highlights.h2')}</span>
               <span class="highlight">{$_('servicesPage.kiServicesSection.aiAsInfrastructure.highlights.h3')}</span>
             </div>
-            <button class="btn btn-outline btn-sm mt-4" onclick={() => openModal('modal-ai-infrastructure')}> {$_('servicesPage.kiServicesSection.aiAsInfrastructure.buttonText')} </button>
+            <button class="btn-outline-basic mt-3 ml-auto" onclick={ () => openModal('modal-ai-infrastructure') }>
+              <div class="button-inner">{$_('servicesPage.kiServicesSection.aiAsInfrastructure.buttonText')}</div>
+            </button>
           </div>
         </div>
       </div>
@@ -507,7 +556,7 @@
 
         <div class="cta-buttons">
           <button
-            class="btn btn-primary btn-lg px-8 py-4 text-lg"
+            class="btn-basic"
             onclick={() => {
               goto('/get-started');
             }}
@@ -1286,18 +1335,18 @@
         @apply grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-5;
 
         .category-card {
-          @apply rounded-2xl border border-white/20 bg-white/80 p-6 text-center backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg;
+          @apply rounded-2xl bg-base-200 p-6 text-center text-base-content shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:cursor-pointer;
 
           .category-icon {
             @apply mb-4 text-4xl;
           }
 
           h3 {
-            @apply text-darkGrey mb-2 text-lg font-semibold;
+            @apply mb-2 text-lg font-semibold;
           }
 
           p {
-            @apply text-neutral text-sm;
+            @apply mb-4 flex-grow text-sm text-base-content;
           }
         }
       }
@@ -1312,21 +1361,21 @@
     }
 
     .service-card {
-      @apply from-lightGrey/70 via-lightGrey/90 to-lightGrey/45 border-lightGrey/50 rounded-2xl border bg-gradient-to-br shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+      @apply flex flex-col rounded-2xl bg-base-200 p-6 text-base-content shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
 
       &.large {
         @apply min-h-[280px];
       }
 
       .service-card-content {
-        @apply flex h-full flex-col p-6;
+        @apply flex h-full flex-col;
       }
 
       .service-card-header {
         @apply mb-4 flex items-center justify-between;
 
         h3 {
-          @apply text-darkGrey text-xl font-semibold;
+          @apply text-xl font-semibold;
         }
 
         .service-icon {
@@ -1335,30 +1384,30 @@
       }
 
       p {
-        @apply text-neutral mb-4 flex-grow;
+        @apply mb-4 flex-grow text-base-content;
       }
 
       .service-highlights {
         @apply mb-4 flex flex-wrap gap-2;
 
         .highlight {
-          @apply bg-primary/10 text-primary rounded-full px-3 py-1 text-sm font-medium;
+          @apply rounded-full px-3 py-1 text-sm font-medium bg-primary/10 text-primary;
         }
       }
     }
 
     .cta-section {
-      @apply from-primary/5 to-secondary/5 flex flex-col items-center justify-center rounded-3xl bg-gradient-to-br py-16 text-center;
+      @apply flex flex-col items-center justify-center rounded-3xl bg-base-200 py-16 text-center text-base-content;
 
       .cta-content {
         @apply max-w-4xl px-6;
 
         h1 {
-          @apply text-darkGrey mb-6 text-4xl font-bold md:text-5xl;
+          @apply mb-6 text-4xl font-bold md:text-5xl;
         }
 
         .cta-text {
-          @apply text-neutral mb-8 text-lg leading-relaxed;
+          @apply mb-8 text-lg leading-relaxed text-base-content;
         }
 
         .cta-benefits {
@@ -1372,11 +1421,11 @@
             }
 
             h4 {
-              @apply text-darkGrey mb-1 font-semibold;
+              @apply mb-1 font-semibold;
             }
 
             p {
-              @apply text-neutral text-sm;
+              @apply text-sm text-base-content;
             }
           }
         }
@@ -1386,7 +1435,7 @@
         }
 
         .cta-note {
-          @apply text-neutral bg-lightGrey/50 rounded-lg p-4 text-sm;
+          @apply rounded-lg p-4 text-sm text-base-content bg-base-300;
         }
       }
     }
@@ -1394,7 +1443,7 @@
     .benefits {
       @apply mt-4 flex flex-wrap gap-2;
       .item {
-        @apply text-mediumGrey bg-lightGrey w-fit rounded-lg p-2 text-sm;
+        @apply w-fit rounded-lg py-2 px-4 text-base-content text-sm bg-base-100;
       }
     }
 

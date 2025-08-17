@@ -404,7 +404,7 @@
                 <div class="text-xs">Ihre Rollen: {currentUserRoles.join(', ')}</div>
               </div>
             </div>
-            <button class="btn btn-primary mt-4" onclick={redirectToHome}> Zur Startseite zurückkehren </button>
+            <button class="btn btn-simple mt-4" onclick={redirectToHome}> Zur Startseite zurückkehren </button>
           </div>
         </div>
       </div>
@@ -652,7 +652,7 @@
                   <div class="bg-base-100 flex items-center justify-between rounded p-2">
                     <span class="truncate text-sm">{file.fileName || 'Unbenannte Datei'}</span>
                     {#if file.url}
-                      <button onclick={() => window.open(file.url, '_blank')} class="btn btn-xs btn-primary"> Öffnen </button>
+                      <button onclick={() => window.open(file.url, '_blank')} class="btn btn-xs btn-simple"> Öffnen </button>
                     {/if}
                   </div>
                 {/each}
@@ -792,7 +792,7 @@
             </div>
 
             <div class="mt-4">
-              <button class="btn btn-primary btn-sm" onclick={() => editProjectSetup(selectedProject)}> Setup bearbeiten </button>
+              <button class="btn btn-simple btn-sm" onclick={() => editProjectSetup(selectedProject)}> Setup bearbeiten </button>
             </div>
           </div>
         </div>
@@ -1040,7 +1040,7 @@
 
       <div class="modal-action mt-6">
         <button type="button" class="btn btn-ghost" onclick={closeSetupModal}> Abbrechen </button>
-        <button type="button" class="btn btn-primary" onclick={saveProjectSetup} disabled={setupSaving}>
+        <button type="button" class="btn btn-simple" onclick={saveProjectSetup} disabled={setupSaving}>
           {#if setupSaving}
             <span class="loading loading-spinner loading-sm"></span>
             Speichern...

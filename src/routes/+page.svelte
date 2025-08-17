@@ -107,8 +107,8 @@
     <div class="flex flex-col items-center justify-center">
       <div class="massive-spacer"></div>
       <div class="intro m-auto max-w-5xl text-center">
-        <h1 class="stay-dark">{$_('homepage.services.titleFirst')} <span class="inner-text-special">{$_('homepage.services.titleHighlight')}</span></h1>
-        <p class="teaser stay-dark">
+        <h1>{$_('homepage.services.titleFirst')} <span class="inner-text-special">{$_('homepage.services.titleHighlight')}</span></h1>
+        <p class="teaser">
           {@html $_('homepage.services.subtitle')}
         </p>
       </div>
@@ -142,7 +142,7 @@
             </li>
           </ul>
           <div class="service-card-actions push-right">
-            <button class="btn btn-primary" onclick={() => goto('/get-started?projectType=website')}>{$_('homepage.services.webseiten.buttonText')}</button>
+            <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=website')}>{$_('homepage.services.webseiten.buttonText')}</button>
           </div>
         </div>
 
@@ -172,7 +172,7 @@
             <li>{@html $_('homepage.services.cms.features.headless')}</li>
           </ul>
           <div class="service-card-actions push-right">
-            <button class="btn btn-primary" onclick={() => goto('/get-started?projectType=cms')}>{$_('homepage.services.cms.buttonText')}</button>
+            <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=cms')}>{$_('homepage.services.cms.buttonText')}</button>
           </div>
         </div>
 
@@ -193,7 +193,7 @@
             <li>{@html $_('homepage.services.webanwendungen.features.appStores')}</li>
           </ul>
           <div class="service-card-actions push-right">
-            <button class="btn btn-primary" onclick={() => goto('/get-started?projectType=webApplication')}>{$_('homepage.services.webanwendungen.buttonText')}</button>
+            <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=webApplication')}>{$_('homepage.services.webanwendungen.buttonText')}</button>
           </div>
         </div>
 
@@ -214,7 +214,7 @@
             <span class="example-tag">{$_('homepage.services.freestyle.examples.ui')}</span>
           </div>
           <div class="service-card-actions push-right">
-            <button class="btn btn-primary" onclick={() => goto('/get-started?projectType=freestyle')}>{$_('homepage.services.freestyle.buttonText')}</button>
+            <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=freestyle')}>{$_('homepage.services.freestyle.buttonText')}</button>
           </div>
         </div>
 
@@ -264,7 +264,7 @@
             </div>
           </div>
           <div class="service-card-actions push-right">
-            <button class="btn btn-primary" onclick={() => goto('/get-started?projectType=artificialIntelligence')}>{$_('homepage.services.ki.buttonText')}</button>
+            <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=artificialIntelligence')}>{$_('homepage.services.ki.buttonText')}</button>
           </div>
         </div>
       </div>
@@ -275,8 +275,8 @@
     <div class="balance-section">
       <div class="massive-spacer"></div>
       <div class="intro m-auto max-w-5xl text-center">
-        <h1 class="stay-dark">{$_('homepage.balance.titleFirst')} <span class="inner-text-special">{$_('homepage.balance.titleHighlight')}</span></h1>
-        <p class="teaser stay-dark">
+        <h1>{$_('homepage.balance.titleFirst')} <span class="inner-text-special">{$_('homepage.balance.titleHighlight')}</span></h1>
+        <p class="teaser">
           {@html $_('homepage.balance.subtitleFirst')} <button
             class="text-link-button"
             onclick={openPhilosophyModal}>{$_('homepage.balance.subtitleSecond')}</button
@@ -349,8 +349,8 @@
     <div class="features-section">
       <div class="massive-spacer"></div>
       <div class="intro m-auto max-w-5xl text-center">
-        <h1 class="stay-dark">{$_('homepage.features.titleFirst')} <span class="inner-text-special">{$_('homepage.features.titleHighlight')}</span></h1>
-        <p class="teaser stay-dark">{$_('homepage.features.subtitle')}</p>
+        <h1>{$_('homepage.features.titleFirst')} <span class="inner-text-special">{$_('homepage.features.titleHighlight')}</span></h1>
+        <p class="teaser">{$_('homepage.features.subtitle')}</p>
       </div>
       <div class="spacer"></div>
 
@@ -594,7 +594,7 @@
     .benefits {
       @apply flex flex-wrap gap-2;
       .item {
-        @apply text-mediumGrey bg-lightGrey w-fit rounded-lg p-2;
+        @apply w-fit rounded-lg py-2 px-4 text-base-content text-sm bg-base-100;
       }
     }
     .image-container {
@@ -610,7 +610,7 @@
       @apply grid grid-cols-1 gap-6 lg:grid-cols-2;
 
       .service-card {
-        @apply from-lightGrey/70 via-lightGrey/90 to-lightGrey/45 border-lightGrey/50 flex flex-col justify-between rounded-2xl border bg-gradient-to-br p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+        @apply flex flex-col justify-between rounded-2xl bg-base-200 p-6 text-base-content shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
 
         .service-card-header {
           @apply mb-4 flex min-w-full flex-wrap items-center gap-4;
@@ -620,19 +620,19 @@
           }
 
           h3 {
-            @apply text-darkGrey text-xl font-semibold;
+            @apply text-xl font-semibold;
           }
         }
 
         p {
-          @apply text-neutral mb-4;
+          @apply mb-4 text-base-content;
         }
 
         .service-features {
           @apply mb-6 space-y-2;
 
           li {
-            @apply text-neutral flex items-start text-sm;
+            @apply flex items-start text-sm text-base-content;
 
             &::before {
               @apply from-purple to-pink mt-1.5 mr-3 h-2 w-2 min-w-2 rounded-full bg-gradient-to-r;
@@ -652,11 +652,11 @@
             }
 
             h4 {
-              @apply text-darkGrey font-semibold;
+              @apply font-semibold;
             }
 
             p {
-              @apply text-neutral text-sm;
+              @apply text-sm text-base-content;
             }
           }
         }
@@ -665,7 +665,7 @@
           @apply mb-4 flex flex-wrap gap-2;
 
           .example-tag {
-            @apply bg-primary/10 text-primary rounded-full px-3 py-1 text-sm font-medium;
+            @apply rounded-full px-3 py-1 text-sm font-medium bg-primary/10 text-primary;
           }
         }
 
@@ -686,7 +686,7 @@
         @apply grid grid-cols-1 gap-8 lg:grid-cols-3;
 
         .balance-card {
-          @apply from-primary/5 to-secondary/5 rounded-2xl bg-gradient-to-br p-6 text-center;
+          @apply rounded-2xl bg-base-200 p-6 text-center text-base-content;
 
           .balance-icon {
             @apply mb-4 text-5xl;
@@ -694,18 +694,18 @@
 
           .balance-content {
             h3 {
-              @apply text-darkGrey mb-4 text-xl font-semibold;
+              @apply mb-4 text-xl font-semibold;
             }
 
             p {
-              @apply text-neutral mb-4;
+              @apply mb-4 text-base-content;
             }
 
             .balance-features {
               @apply flex flex-wrap justify-center gap-2;
 
               .feature-tag {
-                @apply bg-primary/10 text-primary rounded-full px-3 py-1 text-sm font-medium;
+                @apply rounded-full px-3 py-1 text-sm font-medium bg-primary/10 text-primary;
               }
             }
 
@@ -735,7 +735,7 @@
         @apply grid grid-cols-1 gap-8 lg:grid-cols-2;
 
         .feature-card {
-          @apply from-accent/5 to-secondary/5 rounded-2xl bg-gradient-to-br p-6;
+          @apply rounded-2xl bg-base-200 p-6 text-base-content;
 
           .feature-icon {
             @apply mb-4 text-4xl;
@@ -743,18 +743,18 @@
 
           .feature-content {
             h3 {
-              @apply text-darkGrey mb-3 text-xl font-semibold;
+              @apply mb-3 text-xl font-semibold;
             }
 
             p {
-              @apply text-neutral mb-4;
+              @apply mb-4 text-base-content;
             }
 
             .feature-list {
               @apply space-y-2;
 
               li {
-                @apply text-neutral flex items-center text-sm;
+                @apply flex items-center text-sm text-base-content;
 
                 &::before {
                   @apply from-accent to-secondary mr-3 h-2 w-2 min-w-2 rounded-full bg-gradient-to-r;
@@ -768,11 +768,11 @@
 
               .contact-details {
                 strong {
-                  @apply text-darkGrey block font-semibold;
+                  @apply block font-semibold;
                 }
 
                 p {
-                  @apply text-neutral text-sm;
+                  @apply text-sm text-base-content;
                 }
               }
             }
@@ -788,7 +788,7 @@
                 }
 
                 span:last-child {
-                  @apply text-neutral text-sm;
+                  @apply text-sm text-base-content;
                 }
               }
             }
@@ -797,7 +797,7 @@
               @apply flex flex-wrap gap-2;
 
               .solution-tag {
-                @apply bg-primary/10 text-primary rounded-full px-3 py-1 text-sm font-medium;
+                @apply rounded-full px-3 py-1 text-sm font-medium bg-primary/10 text-primary;
               }
             }
           }
@@ -807,17 +807,17 @@
 
     /* CTA Section Styles */
     .cta-section {
-      @apply from-primary/5 via-secondary/5 to-accent/5 flex flex-col items-center justify-center rounded-3xl bg-gradient-to-br text-center;
+      @apply flex flex-col items-center justify-center rounded-3xl bg-base-200 text-center text-base-content;
 
       .cta-content {
         @apply max-w-4xl px-6;
 
         h1 {
-          @apply text-darkGrey mb-6 text-4xl font-bold md:text-5xl;
+          @apply mb-6 text-4xl font-bold md:text-5xl;
         }
 
         .cta-text {
-          @apply text-neutral mb-8 text-lg leading-relaxed;
+          @apply mb-8 text-lg leading-relaxed text-base-content;
         }
 
         .cta-benefits {
@@ -831,11 +831,11 @@
             }
 
             h4 {
-              @apply text-darkGrey mb-1 font-semibold;
+              @apply mb-1 font-semibold;
             }
 
             p {
-              @apply text-neutral text-sm;
+              @apply text-sm text-base-content;
             }
           }
         }
@@ -849,7 +849,7 @@
         }
 
         .cta-note {
-          @apply text-neutral bg-lightGrey/50 rounded-lg p-4 text-sm;
+          @apply rounded-lg p-4 text-sm text-base-content bg-base-300;
         }
       }
     }

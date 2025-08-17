@@ -15,7 +15,7 @@
 
 <footer>
   <div class="inner-box">
-    <h4 class="on-dark">raspb &copy; {currentYear}</h4>
+    <h4>raspb &copy; {currentYear}</h4>
     <nav class="footer-navigation">
       <button
         class="nav-item"
@@ -55,7 +55,7 @@
 <style lang="postcss">
   @reference '../../app.css';
   footer {
-    @apply bg-base-content h-20 w-full md:h-12;
+    @apply bg-black h-20 w-full md:h-12;
 
     > div.inner-box {
       @apply flex h-full w-full flex-col items-center md:flex-row md:justify-between;

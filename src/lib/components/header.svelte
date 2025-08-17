@@ -296,7 +296,7 @@
 <style lang="postcss">
   @reference '../../app.css';
   header {
-    @apply h-24 w-full py-10 shadow-lg;
+    @apply h-24 w-full py-10 shadow-lg bg-base-100;
 
     > div.inner-box {
       @apply flex items-center justify-between;
