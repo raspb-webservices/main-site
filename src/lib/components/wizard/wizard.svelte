@@ -596,7 +596,7 @@
   <div class="wizard-header">
     <h1 id="projekt-konfigurator">Projekt <span class="inner-text-special">Konfigurator</span></h1>
     <button type="button" class="btn btn-outline btn-sm" onclick={openResetModal}>
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -604,48 +604,84 @@
           d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
         />
       </svg>
-      Von vorne beginnen
+      zurücksetzen
     </button>
   </div>
 
   <!-- Progress Bar with Dynamic Steps -->
   <div class="progress-wrapper">
-    <div class="relative flex w-full items-center justify-between">
-      <!-- Background connecting line -->
-      <div class="bg-base-300 absolute top-6 right-0 left-0 mx-8 h-0.5"></div>
-      <!-- Progress connecting line -->
-      <div
-        class="bg-primary absolute top-6 right-0 left-0 mx-8 h-0.5 transition-all duration-300"
-        style="width: {currentStep > 1 ? `calc(${((currentStep - 1) / (stepConfig.length - 1)) * 100}% - ${currentStep - 1}rem )` : '0%'}"
-      ></div>
+    <!-- Desktop Progress Bar (horizontal with connecting line) -->
+    <div class="progress-desktop hidden md:block">
+      <div class="relative flex w-full items-center justify-between">
+        <!-- Background connecting line -->
+        <div class="bg-base-300 absolute top-6 right-0 left-0 mx-8 h-0.5"></div>
+        <!-- Progress connecting line -->
+        <div
+          class="bg-primary absolute top-6 right-0 left-0 mx-8 h-0.5 transition-all duration-300"
+          style="width: {currentStep > 1 ? `calc(${((currentStep - 1) / (stepConfig.length - 1)) * 100}% - ${currentStep - 1.5}rem )` : '0%'}"
+        ></div>
 
-      {#each stepConfig as step, i}
-        <button
-          type="button"
-          class="relative z-10 flex min-w-24 cursor-pointer flex-col items-center border-none bg-transparent p-2 transition-all duration-200"
-          onclick={() => goToStep(i + 1)}
-          onkeydown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              goToStep(i + 1);
-            }
-          }}
-          aria-label="Go to step {i + 1}: {step.title}"
-          aria-current={i + 1 === currentStep ? 'step' : undefined}
-        >
-          <!-- Step Circle -->
-          <div
-            class="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 text-sm font-bold transition-all duration-200
-                   {i + 1 <= currentStep ? 'bg-primary text-primary-content border-primary' : 'bg-base-100 border-base-300 hover:bg-base-300'}"
+        {#each stepConfig as step, i}
+          <button
+            type="button"
+            class="progressbar-relative z-10 min-w-24 cursor-pointer flex-col items-center border-none bg-transparent p-2 transition-all duration-200"
+            onclick={() => goToStep(i + 1)}
+            onkeydown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                goToStep(i + 1);
+              }
+            }}
+            aria-label="Go to step {i + 1}: {step.title}"
+            aria-current={i + 1 === currentStep ? 'step' : undefined}
           >
-            {i + 1}
-          </div>
-          <!-- Step Title -->
-          <div class="mt-2 max-w-20 text-center text-xs font-medium">
-            {step.title}
-          </div>
-        </button>
-      {/each}
+            <!-- Step Circle -->
+            <div
+              class="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 text-sm font-bold transition-all duration-200
+                     {i + 1 <= currentStep ? 'bg-primary text-primary-content border-primary' : 'bg-base-100 border-base-300 hover:bg-base-200'}"
+            >
+              {i + 1}
+            </div>
+            <!-- Step Title -->
+            <div class="mt-2 max-w-20 text-center text-xs font-medium text-base-content">
+              {step.title}
+            </div>
+          </button>
+        {/each}
+      </div>
+    </div>
+
+    <!-- Mobile Progress Bar (vertical wrapped without connecting line) -->
+    <div class="progress-mobile block md:hidden">
+      <div class="flex flex-wrap justify-center gap-4">
+        {#each stepConfig as step, i}
+          <button
+            type="button"
+            class="progressbar-flex cursor-pointer flex-col items-center border-none bg-transparent p-2 transition-all duration-200 min-w"
+            onclick={() => goToStep(i + 1)}
+            onkeydown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                goToStep(i + 1);
+              }
+            }}
+            aria-label="Go to step {i + 1}: {step.title}"
+            aria-current={i + 1 === currentStep ? 'step' : undefined}
+          >
+            <!-- Step Circle -->
+            <div
+              class="flex h-8 w-8 items-center justify-center rounded-full border-2 text-sm font-bold transition-all duration-200
+                     {i + 1 <= currentStep ? 'bg-primary text-primary-content border-primary' : 'bg-base-100 border-base-300'}"
+            >
+              {i + 1}
+            </div>
+            <!-- Step Title -->
+            <div class="mt-2 text-center text-xs font-medium text-base-content">
+              {step.title}
+            </div>
+          </button>
+        {/each}
+      </div>
     </div>
   </div>
 
@@ -1419,7 +1455,7 @@
   <!-- Navigation -->
   <div class="wizard-navigation">
     {#if currentStep > 1}
-      <button type="button" class="btn-basic" onclick={prevStep}>
+      <button type="button" class="btn-basic flex-grow md:flex-grow-0" onclick={prevStep}>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
@@ -1432,7 +1468,7 @@
     {#if currentStep < maxSteps}
       <button
         type="button"
-        class="btn-basic"
+        class="btn-basic flex-grow md:flex-grow-0"
         onclick={nextStep}
         disabled={(currentStep === 1 && !config.projectType) ||
           (currentStep === 2 && !config.subType && config.projectType !== 'freestyle') ||
@@ -1444,8 +1480,8 @@
         </svg>
       </button>
     {:else}
-      <div class="flex gap-4">
-        <button type="button" class="btn-basic" onclick={generatePDF} disabled={isGeneratingPDF}>
+      <div class="flex flex-wrap gap-4">
+        <button type="button" class="btn-basic flex-grow md:flex-grow-0" onclick={generatePDF} disabled={isGeneratingPDF}>
           {#if isGeneratingPDF}
             <span class="loading loading-ring loading-sm"></span>
             PDF wird erstellt...
@@ -1461,7 +1497,7 @@
             Konfiguration herunterladen
           {/if}
         </button>
-        <button type="button" class="btn-basic" onclick={submitToAPI}>
+        <button type="button" class="btn-basic flex-grow md:flex-grow-0" onclick={submitToAPI}>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path
               stroke-linecap="round"
@@ -1650,37 +1686,62 @@
 
 <style lang="postcss">
   @reference '../../../app.css';
+  
+  /* Wizard Container - Dark Theme Support */
   .wizard-container {
-    @apply bg-lightGrey rounded-2xl shadow-lg;
+    @apply bg-base-100 rounded-2xl shadow-lg border border-base-300;
+    
     .inner-box {
       @apply mx-0 my-4 p-8;
     }
   }
 
+  /* Header - Dark Theme Support */
   .wizard-header {
-    @apply border-base-300 mb-8 flex items-center justify-between border-b px-6 pb-4;
+    @apply border-base-300 mb-8 flex items-center justify-between border-b px-6 py-4;
 
     h1 {
-      @apply m-0 p-0;
+      @apply m-0 p-0 text-base-content;
     }
   }
 
+  /* Progress Bar Wrapper */
   .progress-wrapper {
     @apply mx-6 mb-12;
   }
 
+  /* Progress Bar - Desktop (horizontal with line) */
+  .progress-desktop {
+    .progressbar-relative {
+      @apply flex items-center justify-center;
+    }
+  }
+
+  /* Progress Bar - Mobile (wrapped without line) */
+  .progress-mobile {
+    .progressbar-flex {
+      @apply flex flex-wrap justify-center md:gap-4 gap-x-2 pb-2 md:pb-0;
+    }
+  }
+
+  /* Step Content */
   .step-content-wrapper {
     @apply mb-8 min-h-96 px-6;
   }
 
   .step-header {
-    @apply mb-12 text-center;
+    @apply pt-10 md:pt-0 mt-8 border-t md:border-t-0 border-t-base-content/40 mb-12 text-center;
 
     h1 {
-      @apply mb-4;
+      @apply mb-4 text-base-content;
+    }
+    
+    p.teaser {
+      @apply text-base-content/70;
     }
   }
 
+  /* Grid Layouts */
   .project-types-grid {
     @apply grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3;
   }
@@ -1693,17 +1754,18 @@
     @apply mb-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3;
   }
 
+  /* Service Cards - Dark Theme Support */
   .service-card {
-    @apply transition-all duration-300;
+    @apply bg-base-100 border border-base-300 transition-all duration-300;
 
     &:hover {
-      @apply bg-base-200;
+      @apply bg-base-200 border-base-300;
     }
 
     &.card-selected {
-      @apply ring-primary ring-2 ring-offset-2;
+      @apply ring-primary ring-2 ring-offset-2 ring-offset-base-100;
       &:hover {
-        @apply cursor-default bg-transparent;
+        @apply cursor-default bg-base-100;
       }
     }
 
@@ -1714,33 +1776,63 @@
         @apply text-3xl;
       }
     }
+
+    .card-body {
+      @apply text-base-content;
+      
+      .card-title {
+        @apply text-base-content;
+      }
+      
+      p {
+        @apply text-base-content/80;
+      }
+    }
   }
 
+  /* Content Sections */
   .content-section {
     @apply mb-12;
 
     h2 {
-      @apply p-0 mb-4 mt-2;
+      @apply p-0 mb-4 mt-2 text-base-content;
     }
 
     p {
-      @apply mb-6;
+      @apply mb-6 text-base-content/80;
     }
   }
 
+  /* Navigation */
   .wizard-navigation {
-    @apply border-base-300 flex items-center justify-between border-t p-6;
+    @apply border-base-300 bg-base-100 flex items-center justify-between border-t p-6 flex-wrap gap-4;
   }
 
-  /* Form styling improvements */
+  /* Form Elements - Dark Theme Support */
   .form-control {
     @apply w-full;
+    
+    .label-text {
+      @apply text-base-content;
+    }
+    
+    .label-text-alt {
+      @apply text-base-content/60;
+    }
   }
 
   .textarea,
   .input,
   .select {
-    @apply w-full;
+    @apply w-full bg-base-100 border-base-300 text-base-content;
+    
+    &:focus {
+      @apply border-primary bg-base-100;
+    }
+    
+    &::placeholder {
+      @apply text-base-content/50;
+    }
   }
 
   .label {
@@ -1751,7 +1843,33 @@
     @apply w-full;
   }
 
-  /* Loading Overlay Styles */
+  /* Cards in Content - Dark Theme Support */
+  .card {
+    @apply bg-base-100 border-base-300;
+    
+    .card-body {
+      @apply text-base-content;
+      
+      .card-title {
+        @apply text-base-content;
+      }
+    }
+  }
+
+  /* Alerts - Dark Theme Support */
+  .alert {
+    @apply bg-base-200 border-base-300 text-base-content;
+    
+    &.alert-info {
+      @apply bg-info/10 border-info/20 text-info-content;
+    }
+    
+    &.alert-error {
+      @apply bg-error/10 border-error/20 text-error-content;
+    }
+  }
+
+  /* Loading Overlay Styles - Dark Theme Support */
   .loading-overlay {
     @apply fixed inset-0 z-50 flex items-center justify-center;
     background: rgba(0, 0, 0, 0.8);
@@ -1759,7 +1877,7 @@
   }
 
   .loading-content {
-    @apply bg-base-100 mx-4 max-w-md rounded-2xl p-12 text-center shadow-2xl;
+    @apply bg-base-100 border border-base-300 mx-4 max-w-md rounded-2xl p-12 text-center shadow-2xl;
   }
 
   .loading-animation {
@@ -1789,7 +1907,7 @@
   }
 
   .loading-step {
-    @apply flex items-center gap-3 text-sm;
+    @apply flex items-center gap-3 text-sm text-base-content;
   }
 
   .loading-step-icon {
@@ -1814,7 +1932,7 @@
     }
   }
 
-  /* Thank You Page Styles */
+  /* Thank You Page Styles - Dark Theme Support */
   .thank-you-overlay {
     @apply fixed inset-0 z-50 flex items-center justify-center p-4;
     background: linear-gradient(135deg, rgba(139, 69, 19, 0.1), rgba(34, 197, 94, 0.1));
@@ -1822,7 +1940,7 @@
   }
 
   .thank-you-content {
-    @apply bg-base-100 w-full max-w-4xl rounded-3xl p-12 text-center shadow-2xl;
+    @apply bg-base-100 border border-base-300 w-full max-w-4xl rounded-3xl p-12 text-center shadow-2xl;
   }
 
   .thank-you-animation {
@@ -1847,7 +1965,7 @@
   }
 
   .thank-you-card {
-    @apply bg-base-200 rounded-2xl p-8;
+    @apply bg-base-200 border border-base-300 rounded-2xl p-8;
   }
 
   .thank-you-card h3 {
@@ -1859,7 +1977,7 @@
   }
 
   .thank-you-steps li {
-    @apply flex items-start gap-4;
+    @apply flex items-start gap-4 text-base-content;
   }
 
   .step-number {
@@ -1893,8 +2011,32 @@
     }
   }
 
-  /* Responsive improvements */
+  /* Mobile Responsive Improvements */
   @media (max-width: 768px) {
+    .wizard-container {
+      @apply mx-2 rounded-xl;
+    }
+    
+    .wizard-header {
+      @apply px-4;
+      
+      h1 {
+        @apply text-2xl;
+      }
+    }
+    
+    .progress-wrapper {
+      @apply mx-4 mb-8;
+    }
+    
+    .step-content-wrapper {
+      @apply px-4;
+    }
+    
+    .wizard-navigation {
+      @apply px-4;
+    }
+
     .loading-content {
       @apply p-8;
     }
@@ -1909,6 +2051,44 @@
 
     .thank-you-subtitle {
       @apply text-lg;
+    }
+    
+    /* Mobile Progress Bar Improvements */
+    .progress-mobile {
+      button {
+        @apply min-w-16;
+        
+        div:last-child {
+          @apply text-xs leading-tight;
+        }
+      }
+    }
+  }
+
+  /* Extra small screens */
+  @media (max-width: 480px) {
+    .progress-mobile {
+
+      button {
+        @apply min-w-14;
+        
+        div:first-child {
+          @apply h-7 w-7 text-xs;
+        }
+        
+        div:last-child {
+          @apply text-xs leading-tight;
+        }
+      }
+    }
+    
+    .project-types-grid,
+    .subtypes-grid {
+      @apply gap-4;
+    }
+    
+    .features-grid {
+      @apply gap-3;
     }
   }
 </style>
