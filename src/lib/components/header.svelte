@@ -46,7 +46,25 @@
 </script>
 
 {#if isAuth}
-  <p class="no-padding text-center">Hallo {currentUser['name']} - Rollen: {JSON.stringify(currentUserRoles)}</p>
+  <div class="logged-in-header">
+    <div class="inner-box flex justify-between items-center">
+      <p class="no-padding">Herzlich Willkommen, {currentUser['first_name']} {currentUser['last_name']}!</p>
+      <div class="ml-auto"></div>
+      <button
+        class="text-link-button"
+        onclick={() => {
+          goto('/dashboard');
+        }}>Zum Dashboard</button
+      >
+      <div class="text-center w-8 opacity-70 text-base"> | </div>
+      <button
+        class="text-link-button"
+          onclick={() => {
+            logout();
+          }}>Abmelden</button
+      >
+    </div>
+  </div>
 {/if}
 <header>
   <div class="inner-box">
@@ -105,20 +123,12 @@
           }}
           >{#if logginIn}<span class="loading loading-ring loading-sm"></span>{:else}<span>{$_('menu.login')}</span>{/if}</button
         >
-      {:else}
-        <button
-          class="nav-button-link"
-          onclick={() => {
-            logout();
-          }}
-          >{#if logginIn}<span class="loading loading-ring loading-sm"></span>{:else}<span>{$_('menu.logout')}</span>{/if}</button
-        >
       {/if}
       <button
         class="btn-basic"
         onclick={() => {
           goto('/get-started');
-        }}><span class="hidden halfXl:block">{$_('menu.configureProject')}</span><span class="halfXl:hidden">{$_('menu.start')}</span></button
+        }}><span class="halfXl:block hidden">{$_('menu.configureProject')}</span><span class="halfXl:hidden">{$_('menu.start')}</span></button
       >
       <div class="controls">
         <button
@@ -295,8 +305,16 @@
 
 <style lang="postcss">
   @reference '../../app.css';
+  .logged-in-header {
+    @apply bg-black w-full py-1.5 text-neutral-content;
+
+    p {
+      @apply text-base text-neutral-content;
+    }
+
+  }
   header {
-    @apply h-24 w-full py-10 shadow-lg bg-base-100;
+    @apply bg-base-100 h-24 w-full py-10 shadow-lg;
 
     > div.inner-box {
       @apply flex items-center justify-between;
@@ -307,7 +325,7 @@
       }
 
       nav.navigation {
-        @apply lg:flex hidden w-fit items-center justify-center;
+        @apply hidden w-fit items-center justify-center lg:flex;
         > button {
           @apply text-base-content/80 relative ml-6 px-2 text-lg font-bold;
 
@@ -320,7 +338,7 @@
             @apply -top-1 origin-left;
           }
           &:hover {
-            @apply cursor-pointer text-base-content;
+            @apply text-base-content cursor-pointer;
             &::before,
             &::after {
               @apply scale-x-100;
@@ -344,7 +362,7 @@
         }
       }
       nav.mobile-navigvation {
-        @apply lg:hidden flex;
+        @apply flex lg:hidden;
 
         .navigation-area {
           @apply flex flex-wrap p-4 pt-0;
@@ -376,7 +394,7 @@
       }
 
       .cta-area {
-        @apply lg:flex hidden items-center justify-center;
+        @apply hidden items-center justify-center lg:flex;
         .controls {
           @apply m-2 flex flex-row gap-2;
           .locale-toggle-btn {
@@ -399,7 +417,7 @@
       }
 
       .mobile-controls {
-        @apply m-4 flex flex-row gap-4 justify-center items-center w-full;
+        @apply m-4 flex w-full flex-row items-center justify-center gap-4;
         .locale-toggle-btn {
           @apply flex h-8 w-8 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-white bg-cover bg-center bg-no-repeat p-0 transition-all duration-300 hover:shadow-lg;
           &.german {

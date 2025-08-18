@@ -349,6 +349,9 @@ textarea:not([rows]) {
   }
 }
 
+.badge-primary {
+  @apply from-pink to-violet border-0 bg-linear-to-r text-nowrap text-white;
+}
 
 .nav-button-link {
   @apply relative mr-2.5 ml-2.5 min-h-6 px-2 text-lg text-base-content opacity-75;

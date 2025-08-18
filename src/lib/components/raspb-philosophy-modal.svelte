@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { _ } from 'svelte-i18n';
+
   let modal: HTMLDialogElement;
 
   export function openModal() {
@@ -19,47 +21,43 @@
     }
   }
 
-  const philosophyItems = [
+  $: philosophyItems = [
     {
-      letter: 'R',
-      title: 'Rapid',
-      subtitle: 'Schnell & Effizient',
-      description:
-        'Wir arbeiten mit modernsten Tools und agilen Methoden, um Ihre Projekte in Rekordzeit zu realisieren. Unsere KI-gestützten Workflows beschleunigen Entwicklungsprozesse ohne Qualitätsverlust. Wir liefern Ergebnisse bereits nach Tagen, nicht Monaten! Ach ja, nicht nur die Projektzeiten sind super schnell, auch die Webseiten und Anwendungen, die daraus hervorgehen, bieten eine unübertroffene Performance.',
-      icon: '🚀',
+      letter: $_('philosophyModal.items.rapid.letter'),
+      title: $_('philosophyModal.items.rapid.title'),
+      subtitle: $_('philosophyModal.items.rapid.subtitle'),
+      description: $_('philosophyModal.items.rapid.description'),
+      icon: $_('philosophyModal.items.rapid.icon'),
       gradient: 'from-yellow-400 to-orange-500',
       bgColor: 'bg-yellow-50',
       textColor: 'text-yellow-800'
     },
     {
-      letter: 'A',
-      title: 'Accurate',
-      subtitle: 'Präzise & Zuverlässig',
-      description:
-        'Jedes Detail wird sorgfältig ausgewählt und perfektioniert. Alles, was überflüssig ist, wird weggelassen: Kein Bloat, kein Schnickschnack. Sie bekommen genau das, was sie wünschen und müssen nicht teure Software lizensieren, nur weil Sie ein einziges Feature brauchen. Genaue Anforderungsaufnahme, exakte Umsätzung - unsere Lösungen laufen akurat, wie ein schweizer Uhrwerk.',
-      icon: '🎯',
+      letter: $_('philosophyModal.items.accurate.letter'),
+      title: $_('philosophyModal.items.accurate.title'),
+      subtitle: $_('philosophyModal.items.accurate.subtitle'),
+      description: $_('philosophyModal.items.accurate.description'),
+      icon: $_('philosophyModal.items.accurate.icon'),
       gradient: 'from-blue-400 to-indigo-500',
       bgColor: 'bg-blue-50',
       textColor: 'text-blue-800'
     },
     {
-      letter: 'S',
-      title: 'Services',
-      subtitle: 'Umfassende Lösungen & Kundenorientiertheit',
-      description:
-        'Von der ersten Idee bis zur finalen Umsetzung bieten wir alle Services aus einer Hand: Konzept, Design (UI/UX), Entwicklung (Frontend/Backend), Datenmodellierung, Content/SEO, Hosting und mehr - alles perfekt aufeinander abgestimmt. Neben dem umfangreichen Portfolio, steht Service bei uns auch noch für absolute Kundenorientierung. Ihre Zufriedenheit ist unser obersted Ziel.',
-      icon: '🛠️',
+      letter: $_('philosophyModal.items.services.letter'),
+      title: $_('philosophyModal.items.services.title'),
+      subtitle: $_('philosophyModal.items.services.subtitle'),
+      description: $_('philosophyModal.items.services.description'),
+      icon: $_('philosophyModal.items.services.icon'),
       gradient: 'from-green-400 to-emerald-500',
       bgColor: 'bg-green-50',
       textColor: 'text-green-800'
     },
     {
-      letter: 'PB',
-      title: 'Perfectly Balanced',
-      subtitle: 'Ausgewogen & Harmonisch',
-      description:
-        'Ein Kunstwerk ist dann perfekt, wenn man nichts mehr hinzufügen muss und nichts mehr entfernen kann. Die akurate Umsetzung Ihrer Anforderungne bedingt sich auch durch die perfekte Balance, die wir in all unseren Projekten leben. Kosten, Zeit und Qualität halten wir stets im Einklang ohne Kompromisse. Dennoch lassen wir Platz für Innovationen. Ausbalanciert, nicht erzeungen.',
-      icon: '⚖️',
+      letter: $_('philosophyModal.items.perfectlyBalanced.letter'),
+      title: $_('philosophyModal.items.perfectlyBalanced.title'),
+      subtitle: $_('philosophyModal.items.perfectlyBalanced.subtitle'),
+      description: $_('philosophyModal.items.perfectlyBalanced.description'),
+      icon: $_('philosophyModal.items.perfectlyBalanced.icon'),
       gradient: 'from-teal-400 to-cyan-500',
       bgColor: 'bg-teal-50',
       textColor: 'text-teal-800'
@@ -77,8 +75,8 @@
       </form>
 
       <div class="my-2 lg:my-8">
-        <h2 class="no-padding"><span class="inner-text-special">raspb</span> Philosophie</h2>
-        <p class="text-base-content/70 mt-3 text-xl">rapid - accurate - services - perfectly balanced</p>
+        <h2 class="no-padding"><span class="inner-text-special">{$_('philosophyModal.header.titleHighlight')}</span> {$_('philosophyModal.header.titleSecond')}</h2>
+        <p class="text-base-content/70 mt-3 text-xl">{$_('philosophyModal.header.subtitle')}</p>
       </div>
 
       <!-- RASPB Letters Display -->
@@ -149,18 +147,16 @@
     <!-- Footer -->
     <div class="border-base-300 mt-8 border-t pt-6 text-center">
       <div class="from-primary/10 to-secondary/10 rounded-2xl bg-gradient-to-r p-6">
-        <h3 class="mb-3 text-xl font-bold">Unsere Mission</h3>
+        <h3 class="mb-3 text-xl font-bold">{$_('philosophyModal.footer.missionTitle')}</h3>
         <p class="text-base-content/80 mx-auto max-w-4xl leading-relaxed">
-          Bei raspb vereinen wir diese vier Prinzipien zu einer einzigartigen Arbeitsphilosophie. Wir glauben daran, dass wahre Exzellenz nur durch das in
-          Einklang bringen aller Aspekte erreicht werden kann. Jedes Projekt ist eine Gelegenheit, diese Philosophie zu leben und außergewöhnliche Ergebnisse zu
-          schaffen.
+          {$_('philosophyModal.footer.missionDescription')}
         </p>
         <div class="mt-4 flex justify-center">
           <div class="flex flex-wrap items-center justify-center gap-2 text-sm opacity-70">
-            <span class="mx-2">🚀 rapid</span>
-            <span class="mx-2">🎯 accurate</span>
-            <span class="mx-2">🛠️ services</span>
-            <span class="mx-2">⚖️ perfectly balanced</span>
+            <span class="mx-2">{$_('philosophyModal.footer.principles.rapid')}</span>
+            <span class="mx-2">{$_('philosophyModal.footer.principles.accurate')}</span>
+            <span class="mx-2">{$_('philosophyModal.footer.principles.services')}</span>
+            <span class="mx-2">{$_('philosophyModal.footer.principles.perfectlyBalanced')}</span>
           </div>
         </div>
       </div>
@@ -177,7 +173,7 @@
             d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
           />
         </svg>
-        Verstanden
+        {$_('philosophyModal.footer.closeButton')}
       </button>
     </div>
   </div>
