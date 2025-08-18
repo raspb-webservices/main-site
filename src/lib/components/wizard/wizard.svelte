@@ -6,6 +6,7 @@
   import { projectTypes, subTypes, availableFeatures, googleFonts, formFieldTypes, featureCategoryColors, getStepConfig } from './wizard-config';
   import { goto } from '$app/navigation';
   import ContactForm from './contact-form.svelte';
+  import { _, locale } from 'svelte-i18n';
 
   // Props for initial values from URL parameters
   interface Props {
@@ -238,27 +239,27 @@
     if (uploadedFiles.length === 0 || uploadedAssetIds.length > 0) return;
 
     isPreparingAssets = true;
-    assetPreparationProgress = 'Bereite Assets vor...';
+    assetPreparationProgress = $_('wizard.steps.stepSummary.preparingAssets.title');
 
     try {
       const preparedAssetIds = await uploadMultipleAssetsWithDelay(
         uploadedFiles,
         3000, // 3 second delay between uploads to avoid rate limiting
         (message, current, total, assetId) => {
-          assetPreparationProgress = `[${current}/${total}] ${message}`;
+          assetPreparationProgress = $_('wizard.steps.stepSummary.preparingAssets.progress', { values: { message, current, total } });
         }
       );
 
       uploadedAssetIds = preparedAssetIds;
 
       if (preparedAssetIds.length > 0) {
-        assetPreparationProgress = `${preparedAssetIds.length} von ${uploadedFiles.length} Assets bereit zum Veröffentlichen`;
+        assetPreparationProgress = $_('wizard.steps.stepSummary.preparingAssets.progress', { values: { message: $_('wizard.steps.stepSummary.preparingAssets.assetsReady'), current: preparedAssetIds.length, total: uploadedFiles.length } });
       } else {
-        assetPreparationProgress = 'Keine Assets konnten vorbereitet werden';
+        assetPreparationProgress = $_('wizard.steps.stepSummary.preparingAssets.noAssets');
       }
     } catch (error) {
-      console.error('Fehler beim Vorbereiten der Assets:', error);
-      assetPreparationProgress = 'Fehler beim Vorbereiten der Assets';
+      console.error($_('wizard.steps.stepSummary.preparingAssets.error'), error);
+      assetPreparationProgress = $_('wizard.steps.stepSummary.preparingAssets.error');
     } finally {
       isPreparingAssets = false;
     }
@@ -269,23 +270,23 @@
     if (uploadedFiles.length === 0) return [];
 
     isUploading = true;
-    uploadProgress = 'Dateien werden hochgeladen...';
+    uploadProgress = $_('wizard.steps.step6.files.uploading.title');
 
     try {
       const uploadedAssetIds = await uploadMultipleAssetsWithDelay(uploadedFiles, 2000, (message, current, total) => {
-        uploadProgress = `[${current}/${total}] ${message}`;
+        uploadProgress = $_('wizard.steps.step6.files.uploading.progress', { values: { message, current, total } });
       });
 
       if (uploadedAssetIds.length > 0) {
-        uploadProgress = `Alle ${uploadedAssetIds.length} von ${uploadedFiles.length} Dateien erfolgreich verarbeitet`;
+        uploadProgress = $_('wizard.steps.step6.files.uploading.progress', { values: { message: $_('wizard.steps.step6.files.uploading.success'), current: uploadedAssetIds.length, total: uploadedFiles.length } });
       } else {
-        uploadProgress = 'Keine Dateien konnten erfolgreich hochgeladen werden';
+        uploadProgress = $_('wizard.steps.step6.files.uploading.noFiles');
       }
 
       return uploadedAssetIds;
     } catch (error) {
-      console.error('Fehler beim Hochladen der Dateien:', error);
-      uploadProgress = 'Fehler beim Hochladen der Dateien';
+      console.error($_('wizard.steps.step6.files.uploading.error'), error);
+      uploadProgress = $_('wizard.steps.step6.files.uploading.error');
       return [];
     } finally {
       isUploading = false;
@@ -310,12 +311,12 @@
             type: file.type
           })),
           customFeatures,
-          filename: `${config.name || 'Projekt'}_Konfiguration_${new Date().toISOString().split('T')[0]}.pdf`
+          filename: `${config.name || $_('wizard.steps.stepSummary.titleHighlight')}_${$_('wizard.steps.stepMaterials.files.title')}_${new Date().toISOString().split('T')[0]}.pdf`
         })
       });
 
       if (!response.ok) {
-        throw new Error('PDF generation failed');
+        throw new Error($_('wizard.steps.stepSummary.pdfGeneration.error'));
       }
 
       // Download the PDF
@@ -323,14 +324,14 @@
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `${config.name || 'Projekt'}_Konfiguration_${new Date().toISOString().split('T')[0]}.pdf`;
+      a.download = `${config.name || $_('wizard.steps.stepSummary.titleHighlight')}_${$_('wizard.steps.stepMaterials.files.title')}_${new Date().toISOString().split('T')[0]}.pdf`;
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
     } catch (error) {
-      console.error('Error generating PDF:', error);
-      alert('Fehler beim Erstellen des PDFs. Bitte versuchen Sie es erneut.');
+      console.error($_('wizard.steps.stepSummary.pdfGeneration.error'), error);
+      alert($_('wizard.steps.stepSummary.pdfGeneration.error'));
     } finally {
       isGeneratingPDF = false;
     }
@@ -364,7 +365,7 @@
 
     try {
       // Step 1: Create customer first
-      console.log('Creating customer:', customerData);
+      console.log($_('wizard.loading.steps.preparing.description'), customerData);
 
       const customerResponse = await fetch('/api/customer/create', {
         method: 'POST',
@@ -377,34 +378,34 @@
       const customerResult = await customerResponse.json();
 
       if (!customerResult.success) {
-        errorDetails.push(`Customer-Fehler: ${customerResult.error || 'Unbekannter Fehler'}`);
+        errorDetails.push(`${$_('wizard.modals.error.customerError')}: ${customerResult.error || $_('wizard.modals.error.unknownError')}`);
         if (customerResult.details) {
           errorDetails.push(...customerResult.details);
         }
-        throw new Error('Customer creation failed');
+        throw new Error($_('wizard.modals.error.customerCreationFailed'));
       }
 
       createdCustomerId = customerResult.data.id;
-      console.log('Customer erstellt/gefunden:', createdCustomerId);
+      console.log($_('wizard.modals.error.customerCreated'), createdCustomerId);
 
       // Step 2: Prepare asset IDs (use pre-uploaded or fallback to upload now)
       let finalAssetIds: string[] = [];
       if (uploadedAssetIds.length > 0) {
-        console.log('Using pre-uploaded assets:', uploadedAssetIds);
+        console.log($_('wizard.modals.error.usingPreUploaded'), uploadedAssetIds);
         finalAssetIds = uploadedAssetIds;
       } else if (uploadedFiles.length > 0) {
         // Fallback: If no pre-uploaded assets, upload them now
-        console.log('No pre-uploaded assets found, uploading now...');
+        console.log($_('wizard.modals.error.noPreUploaded'));
         finalAssetIds = await uploadAllFiles();
 
         if (finalAssetIds.length === 0 && uploadedFiles.length > 0) {
-          errorDetails.push('Fehler beim Hochladen der Dateien');
-          throw new Error('File upload failed');
+          errorDetails.push($_('wizard.modals.error.fileUploadError'));
+          throw new Error($_('wizard.modals.error.fileUploadFailed'));
         }
       }
 
       // Step 3: Create project (without owner initially to avoid circular dependency)
-      console.log('Creating project with assets:', finalAssetIds);
+      console.log($_('wizard.modals.error.creatingProject'), finalAssetIds);
 
       const projectData: Project = {
         name: config.name,
@@ -444,7 +445,7 @@
 
       if (result.success && result.data?.id) {
         const projectId = result.data.id;
-        console.log('Projekt erstellt:', projectId);
+        console.log($_('wizard.modals.error.projectCreated'), projectId);
 
         // Step 4: Link customer to project
         try {
@@ -458,13 +459,13 @@
           const linkResult = await linkResponse.json();
 
           if (linkResponse.ok && linkResult.success) {
-            console.log('Customer mit Projekt verknüpft:', linkResult);
+            console.log($_('wizard.modals.error.customerLinked'), linkResult);
           } else {
-            console.warn('Customer linking failed, but project was created:', linkResult);
+            console.warn($_('wizard.modals.error.customerLinkingFailed'), linkResult);
             // Don't fail the entire process if linking fails
           }
         } catch (linkError) {
-          console.warn('Customer linking error:', linkError);
+          console.warn($_('wizard.modals.error.customerLinkingError'), linkError);
           // Don't fail the entire process if linking fails
         }
 
@@ -472,83 +473,83 @@
         showThankYouPage();
 
         // Step 6: Wait 2 seconds to ensure everything is properly saved before publishing
-        console.log('Waiting 3 seconds before publishing to ensure data consistency...');
+        console.log($_('wizard.modals.error.waiting'));
         await new Promise((resolve) => setTimeout(resolve, 3000));
 
         // Step 7: Publish customer
         try {
-          console.log('Publishing customer:', createdCustomerId);
+          console.log($_('wizard.modals.error.publishingCustomer'), createdCustomerId);
           const publishCustomerResponse = await fetch(`/api/customer/publish/${createdCustomerId}`, {
             method: 'POST'
           });
           const publishCustomerResult = await publishCustomerResponse.json();
 
           if (publishCustomerResponse.ok && publishCustomerResult.success) {
-            console.log('Customer erfolgreich veröffentlicht:', publishCustomerResult);
+            console.log($_('wizard.modals.error.customerPublished'), publishCustomerResult);
           } else {
-            console.warn('Customer publishing failed:', publishCustomerResult);
+            console.warn($_('wizard.modals.error.customerPublishingFailed'), publishCustomerResult);
             // Don't fail the entire process if customer publishing fails
           }
         } catch (publishCustomerError) {
-          console.warn('Customer publishing error:', publishCustomerError);
+          console.warn($_('wizard.modals.error.customerPublishingError'), publishCustomerError);
           // Don't fail the entire process if customer publishing fails
         }
 
         // Step 8: Publish the project
         try {
-          console.log('Publishing project:', projectId);
+          console.log($_('wizard.modals.error.publishingProject'), projectId);
           const publishProjectResponse = await fetch(`/api/project/publish/${projectId}`, {
             method: 'POST'
           });
           const publishProjectResult = await publishProjectResponse.json();
 
           if (publishProjectResponse.ok && publishProjectResult.success) {
-            console.log('Projekt erfolgreich veröffentlicht:', publishProjectResult);
+            console.log($_('wizard.modals.error.projectPublished'), publishProjectResult);
           } else {
-            console.warn('Project publishing failed:', publishProjectResult);
+            console.warn($_('wizard.modals.error.projectPublishingFailed'), publishProjectResult);
             // Don't fail the entire process if publishing fails
           }
         } catch (publishProjectError) {
-          console.warn('Project publishing error:', publishProjectError);
+          console.warn($_('wizard.modals.error.projectPublishingError'), publishProjectError);
           // Don't fail the entire process if publishing fails
         }
 
         // Step 9: Publish all assets that are part of the project
         if (finalAssetIds.length > 0) {
-          console.log('Publishing all project assets:', finalAssetIds);
+          console.log($_('wizard.modals.error.publishingAssets'), finalAssetIds);
 
           try {
             const publishedAssetIds = await publishMultipleAssets(finalAssetIds, (message, current, total) => {
-              console.log(`Asset publishing progress: ${message} (${current}/${total})`);
+              console.log(`${$_('wizard.modals.error.assetPublishingProgress')}: ${message} (${current}/${total})`);
             });
 
             if (publishedAssetIds.length > 0) {
-              console.log('Assets erfolgreich veröffentlicht:', publishedAssetIds);
+              console.log($_('wizard.modals.error.assetsPublished'), publishedAssetIds);
             } else {
-              console.warn('No assets could be published, but project was created and published');
+              console.warn($_('wizard.modals.error.noAssetsPublished'));
             }
           } catch (assetPublishError) {
-            console.warn('Asset publishing error:', assetPublishError);
+            console.warn($_('wizard.modals.error.assetPublishingError'), assetPublishError);
             // Don't fail the entire process if asset publishing fails
           }
         }
 
-        console.log('Submission process completed successfully');
+        console.log($_('wizard.modals.error.submissionCompleted'));
       } else {
         // Collect detailed error information
-        errorDetails.push(`API Fehler: ${result.error || 'Unbekannter Fehler'}`);
+        errorDetails.push(`${$_('wizard.modals.error.apiError')}: ${result.error || $_('wizard.modals.error.unknownError')}`);
         if (result.details) {
           errorDetails.push(...result.details);
         }
-        throw new Error('API request failed');
+        throw new Error($_('wizard.modals.error.apiRequestFailed'));
       }
     } catch (error) {
-      console.error('Submission error:', error);
+      console.error($_('wizard.modals.error.submissionError'), error);
 
       // Add network error if no other errors were collected
       if (errorDetails.length === 0) {
-        errorDetails.push('Netzwerk Fehler: Verbindung zum Server fehlgeschlagen');
-        errorDetails.push('Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut');
+        errorDetails.push($_('wizard.modals.error.networkError'));
+        errorDetails.push($_('wizard.modals.error.checkConnection'));
       }
 
       // Show error modal
@@ -1455,7 +1456,7 @@
   <!-- Navigation -->
   <div class="wizard-navigation">
     {#if currentStep > 1}
-      <button type="button" class="btn-basic flex-grow md:flex-grow-0" onclick={prevStep}>
+      <button type="button" class="btn-basic grow md:grow-0" onclick={prevStep}>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>

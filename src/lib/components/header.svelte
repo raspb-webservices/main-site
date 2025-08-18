@@ -180,7 +180,7 @@
         <div class="drawer-side">
           <label for="mobile-navigation" aria-label="close sidebar" class="drawer-overlay"></label>
           <div class="flex min-h-full w-80 flex-col bg-white">
-            <div class="bg-secondary/30 w-full grow">
+            <div class="bg-base-100 w-full grow">
               <div class="flex w-full items-center justify-end px-4 pt-6 pb-4">
                 <label
                   for="mobile-navigation"
@@ -381,13 +381,14 @@
             }
 
             &.active {
-              @apply font-bold text-black;
+              @apply font-bold;
               &:hover {
-                @apply cursor-default bg-transparent text-black;
+                @apply cursor-default bg-transparent;
+                color: inherit;
               }
             }
             &:hover {
-              @apply text-primary bg-white/30;
+              @apply text-primary;
             }
           }
         }
