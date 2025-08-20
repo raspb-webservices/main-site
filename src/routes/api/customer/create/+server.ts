@@ -126,14 +126,24 @@ export const POST: RequestHandler = async ({ request }) => {
           email: customerData.email.trim(),
           password: customerData.password.trim(),
           givenName: customerData.givenName.trim(),
-          familyName: customerData.familyName.trim()
+          familyName: customerData.familyName.trim(),
+          user_metadata: customerData.user_metadata
         });
-        
+
         auth0UserId = auth0User.user_id;
         console.log('Auth0 user created:', auth0UserId);
       } catch (auth0Error) {
         console.error('Error creating Auth0 user:', auth0Error);
         // Don't fail the entire process if Auth0 user creation fails
+      }
+
+      if (auth0UserId) {
+        try {
+          const roleAssignmentResponse = await auth.assignRole(auth0UserId, ['rol_eqqXJZxCRsW8zLRt']);
+          console.log('roleAssignmentResponse:', roleAssignmentResponse);
+        } catch (auth0Error) {
+          console.error('Error assign role to Auth0 user:', auth0Error);
+        }
       }
     }
 

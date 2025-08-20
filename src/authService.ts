@@ -85,7 +85,7 @@ async function checkAuthState(client: any) {
   }
 }
 
-async function createAuth0User(userData: { email: string; password: string; givenName: string; familyName: string }): Promise<any> {
+async function createAuth0User(userData: { email: string; password: string; givenName: string; familyName: string, user_metadata: Object }): Promise<any> {
   try {
     const response = await API.post('users', {
       email: userData.email,
@@ -93,9 +93,25 @@ async function createAuth0User(userData: { email: string; password: string; give
       given_name: userData.givenName,
       family_name: userData.familyName,
       connection: 'Username-Password-Authentication',
-      verify_email: true
+      verify_email: true,
+      user_metadata: userData.user_metadata
     });
     
+    console.log("AUTH0 create user response", response );
+
+    return response;
+  } catch (error) {
+    console.error('Error creating Auth0 user:', error);
+    throw error;
+  }
+}
+
+async function assignRole(userId: string, rolesToAssign: string[]): Promise<any> {
+  try {
+    const response = await API.post('users/'+userId+'/roles', {
+      roles: rolesToAssign
+    });
+    console.log("AUTH0 assigned roles", response );
     return response;
   } catch (error) {
     console.error('Error creating Auth0 user:', error);
@@ -114,6 +130,7 @@ async function getAuth0UserByEmail(email: string): Promise<any> {
 }
 
 const auth = {
+  assignRole,
   createClient,
   getRoles,
   loginWithPopup,

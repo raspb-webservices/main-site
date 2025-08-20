@@ -14,6 +14,7 @@ export interface Customer {
   salutation?: string;
   password?: string;
   passwordConfirm?: string;
+  user_metadata: Object;
   projects?: {
     id: string;
     name?: string;

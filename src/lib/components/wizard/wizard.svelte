@@ -67,7 +67,15 @@
     address: '',
     postCode: '',
     city: '',
-    country: 'Deutschland'
+    country: 'Deutschland',
+    user_metadata:{
+      "isMember": "ja",
+      "phone": "bla bla",
+      "wert1": "noch etwas",
+      "street": "teststrasse",
+      "first_name": "Maaaaaggus",
+      "last_name": "Hääääärtsch"
+    }
   });
   let isContactFormValid = $state(false);
   let createdCustomerId = $state<string>('');
@@ -369,20 +377,15 @@
     errorDetails = [];
 
     try {
-      // Create a copy of customerData without the password fields for security
-      const customerDataForAPI = { ...customerData };
-      delete customerDataForAPI.password;
-      delete customerDataForAPI.passwordConfirm;
-
       // Step 1: Create customer first
-      console.log($_('wizard.loading.steps.preparing.description'), customerDataForAPI);
+      console.log($_('wizard.loading.steps.preparing.description'), customerData);
 
       const customerResponse = await fetch('/api/customer/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(customerDataForAPI)
+        body: JSON.stringify(customerData)
       });
 
       const customerResult = await customerResponse.json();

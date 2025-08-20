@@ -53,7 +53,11 @@
       <button
         class="text-link-button"
         onclick={() => {
-          goto('/dashboard');
+          if(currentUserRoles.includes('customer')) {
+            goto('/customer-dashboard');
+          } else {
+            goto('/dashboard');
+          }
         }}>Zum Dashboard</button
       >
       <div class="text-center w-8 opacity-70 text-base"> | </div>
