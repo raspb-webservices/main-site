@@ -131,23 +131,23 @@
       "subtitleFirst": "Wir haben verstanden, dass erfolgreiche Projekte das optimale Gleichgewicht zwischen Zeit, Kosten und Qualität erfordern.",
       "subtitleSecond": "Unsere Philosophie",
       "subtitleThird": "\"perfectly balanced\" steht für diese harmonische Abstimmung aller Faktoren.",
-    "zeit": {
-      "title": "Zeit",
-      "description": "Schnelle Umsetzung durch agile Entwicklungsprozesse, KI-Unterstützung und bewährtes System von Best-Practice-Bausteinen kombiniert mit Individualentwicklung von Experten.",
-      "buttonText": "Mehr erfahren ›",
-      "features": {
-        "agile": "Agile Methoden",
-        "ki": "KI-Unterstützung",
-        "bausteine": "Bewährte Bausteine",
-        "experten": "Expertenteam",
-        "oekosystem": "raspb Ökosystem"
+      "zeit": {
+        "title": "Zeit",
+        "description": "Schnelle Umsetzung durch agile Entwicklungsprozesse, KI-Unterstützung und bewährtes System von Best-Practice-Bausteinen kombiniert mit Individualentwicklung von Experten.",
+        "buttonText": "Mehr erfahren ›",
+        "features": {
+          "agile": "Agile Methoden",
+          "ki": "KI-Unterstützung",
+          "bausteine": "Bewährte Bausteine",
+          "experten": "Expertenteam",
+          "oekosystem": "raspb Ökosystem"
+        },
+        "modal": {
+          "paragraph1": "Zeit ist in der digitalen Welt ein entscheidender Faktor. Während andere Agenturen Monate für die Umsetzung benötigen, liefern wir dank unserer einzigartigen raspb-Methode bereits nach wenigen Tagen erste Ergebnisse.",
+          "paragraph2": "Unser Geheimnis liegt in der perfekten Kombination aus bewährten Bausteinen, KI-gestützten Entwicklungsprozessen und der Expertise unseres Teams. Wir haben über Jahre hinweg ein Ökosystem aus wiederverwendbaren Komponenten entwickelt, das es uns ermöglicht, auch komplexe Projekte in Rekordzeit umzusetzen - ohne Kompromisse bei der Qualität.",
+          "paragraph3": "Agile Entwicklungsmethoden sorgen dafür, dass Sie bereits während der Entwicklung Feedback geben können und das Endergebnis genau Ihren Vorstellungen entspricht. So sparen wir nicht nur Zeit, sondern stellen auch sicher, dass das Projekt von Anfang an in die richtige Richtung läuft."
+        }
       },
-      "modal": {
-        "paragraph1": "Zeit ist in der digitalen Welt ein entscheidender Faktor. Während andere Agenturen Monate für die Umsetzung benötigen, liefern wir dank unserer einzigartigen raspb-Methode bereits nach wenigen Tagen erste Ergebnisse.",
-        "paragraph2": "Unser Geheimnis liegt in der perfekten Kombination aus bewährten Bausteinen, KI-gestützten Entwicklungsprozessen und der Expertise unseres Teams. Wir haben über Jahre hinweg ein Ökosystem aus wiederverwendbaren Komponenten entwickelt, das es uns ermöglicht, auch komplexe Projekte in Rekordzeit umzusetzen - ohne Kompromisse bei der Qualität.",
-        "paragraph3": "Agile Entwicklungsmethoden sorgen dafür, dass Sie bereits während der Entwicklung Feedback geben können und das Endergebnis genau Ihren Vorstellungen entspricht. So sparen wir nicht nur Zeit, sondern stellen auch sicher, dass das Projekt von Anfang an in die richtige Richtung läuft."
-      }
-    },
       "kosten": {
         "title": "Kosten",
         "description": "Transparente Festpreise ohne versteckte Kosten - keine nachfolgenden Abogebühren - keine zwangsweise Abnahme. Dank der raspb Methode können wir ein unschlagbares Preis-Leistungs-Verhältnis bieten.",
@@ -255,7 +255,7 @@
     },
     "header": {
       "title": "Über",
-      "titleHighlight":"uns",
+      "titleHighlight": "uns",
       "teaser1": "Bei raspb Webservices verbinden wir menschliche Kreativität mit der Kraft künstlicher Intelligenz. Als modernes Webentwicklungs-Studio schaffen wir innovative digitale Lösungen, die Ihre Vision zum Leben erwecken.",
       "teaser2": "Und wer genau ist raspb jetzt? - Eigentlich sind das nur ich und meine KI Crew 😉"
     },
@@ -1095,7 +1095,7 @@
       },
       "q3": {
         "title": "Wie funktioniert euer Preismodell?",
-        "content": "Wir bieten transparente Festpreise ohne versteckte Kosten. Unser intelligenter Online-Konfigurator ermittelt bereits vor Projektbeginn einen verbindlichen Preis basierend auf Ihren konkreten Anforderungen. Im Gegensatz zu vielen anderen Anbietern gibt es bei uns keine monatlichen Abogebühren. Sie zahlen einmal für die Entwicklung und erhalten Ihre fertige Lösung komplett in Ihrem Besitz."
+        "content": "Wir bieten transparente Festpreise ohne versteckte Kosten. Unser intelligenter Online-Konfigurator ermittelt bereits vor Projektbeginn einen verbindlichen Preis - basierend auf Ihren konkreten Anforderungen. Im Gegensatz zu vielen anderen Anbietern gibt es bei uns keine monatlichen Abogebühren. Sie zahlen einmal für die Entwicklung und erhalten Ihre fertige Lösung - komplett in Ihrem Besitz."
       },
       "q4": {
         "title": "Was ist bei euch anders als bei anderen Webagenturen?",
@@ -1173,209 +1173,58 @@
       "titleHighlight": "Konfigurator",
       "resetButton": "zurücksetzen"
     },
-    "progressBar": {
-      "stepLabel": "Go to step {step}: {title}",
-      "currentStep": "step"
-    },
     "steps": {
       "step1": {
         "titleFirst": "Was möchten Sie",
         "titleHighlight": "realisieren",
-        "teaser": "Wählen Sie den Typ Ihres Projekts aus. Diese Auswahl bestimmt die verfügbaren Optionen in den folgenden Schritten.",
-        "card": {
-          "priceRange": "{lowestPrice}€ - {highestPrice}€"
-        }
+        "teaser": "Wählen Sie den Typ Ihres Projekts aus. Diese Auswahl bestimmt die verfügbaren Optionen in den folgenden Schritten."
       },
       "step2": {
         "titleFirst": "Welche Art von",
-        "titleHighlight": "{projectType}",
-        "teaser": "Wählen Sie die passende Variante für Ihr Projekt. Jede Option hat unterschiedliche Funktionen und Preise.",
-        "card": {
-          "priceFrom": "ab {price}€"
-        }
+        "titleHighlight": "Projekttyp",
+        "titleSecond": "benötigen Sie?",
+        "teaser": "Wählen Sie die passende Variante für Ihr Projekt. Jede Option hat unterschiedliche Funktionen und Preise."
       },
       "step3": {
         "titleFirst": "Beschreiben Sie Ihr",
         "titleHighlight": "Vorhaben",
-        "teaser": "Je detaillierter Sie Ihr Projekt beschreiben, desto genauer können wir Ihnen helfen und den Preis kalkulieren.",
-        "projectName": {
-          "label": "Projektname:",
-          "placeholder": "Geben Sie Ihrem Projekt einen Namen..."
-        },
-        "projectDescription": {
-          "label": "Projektbeschreibung:",
-          "placeholder": {
-            "webApplication": "Beschreiben Sie detailliert die gewünschten Funktionen und Features Ihrer Anwendung: Welche Hauptfunktionen soll sie haben? Wie sollen Benutzer damit interagieren? Welche Daten werden verarbeitet? Gibt es spezielle Anforderungen an Performance oder Sicherheit?",
-            "freestyle": "Beschreiben Sie Ihr individuelles Projekt im Detail: Welches Problem soll gelöst werden? Welche spezifischen Anforderungen haben Sie? Welche Systeme sollen integriert werden? Welche Funktionen sind besonders wichtig?",
-            "default": "Beschreiben Sie Ihr Vorhaben im Detail: Was ist das Ziel? Welche Probleme soll es lösen? Welche Zielgruppe sprechen Sie an? Haben Sie bereits konkrete Vorstellungen zum Design oder Funktionen?"
-          },
-          "characterCount": "Zeichen: {count}"
-        },
-        "targetAudience": {
-          "label": "Wer ist Ihre Zielgruppe?",
-          "placeholder": "z.B. Kleine Unternehmen, Privatpersonen, B2B-Kunden..."
-        },
-        "goals": {
-          "label": "Was sind Ihre Hauptziele?",
-          "placeholder": "z.B. Mehr Kunden gewinnen, Prozesse digitalisieren..."
-        },
-        "inspiration": {
-          "label": "Gibt es Websieten, die als Inspiration dienen können?",
-          "placeholder": "z.B. www.atlassian.com, www.figma.com, ... "
-        },
-        "desiredDomain": {
-          "label": "Gewünschte Domain:",
-          "placeholder": "z.B. meine-firma.de, example.com..."
-        },
-        "domainStatus": {
-          "label": "Domain-Status:",
-          "placeholder": "Bitte wählen...",
-          "options": {
-            "owned": "Domain bereits im Besitz",
-            "needs-registration": "Domain muss registriert werden",
-            "needs-transfer": "Domain muss übertragen werden",
-            "undecided": "Noch nicht entschieden"
-          }
-        },
-        "timeline": {
-          "label": "Gewünschter Zeitrahmen:",
-          "placeholder": "Bitte wählen...",
-          "options": {
-            "asap": "So schnell wie möglich",
-            "5-10-days": "5 - 10 Tage ",
-            "2-4-weeks": "2 - 4 Wochen",
-            "2-6-months": "2 - 6 Monate",
-            "flexible": "Flexibel"
-          }
-        },
-        "budget": {
-          "label": "Ihr Budget:",
-          "placeholder": "Bitte wählen...",
-          "options": {
-            "under-500": "Unter 500€",
-            "1k-3k": "1.000€ - 3.000€",
-            "3k-7k": "3.000€ - 7.000€",
-            "7k-10k": "7.000€ - 10.000€",
-            "10k-15k": "10.000€ - 15.000€",
-            "over-20k": "mehr als 15.000€"
-          }
-        }
+        "teaser": "Je detaillierter Sie Ihr Projekt beschreiben, desto genauer können wir Ihnen einen Preis erstellen."
       },
       "step4": {
         "titleFirst": "Welche",
         "titleHighlight": "Features",
-        "teaser": "Wählen Sie alle gewünschten Funktionen aus. Jedes Feature erweitert die Möglichkeiten Ihres Projekts und beeinflusst den Preis.",
-        "customFeatures": {
-          "label": "Weitere gewünschte Features:",
-          "placeholder": "Beschreiben Sie weitere spezielle Anforderungen, die nicht in der Liste stehen..."
-        }
+        "teaser": "Wählen Sie alle gewünschten Funktionen aus. Jedes Feature erweitert die Möglichkeiten Ihres Projekts und beeinflusst den Preis."
       },
       "step5": {
         "titleFirst": "Inhalte und",
         "titleHighlight": "Struktur",
         "teaser": "Definieren Sie die Struktur und Inhalte Ihres Projekts. Diese Informationen helfen uns bei der Planung und Umsetzung.",
-        "pages": {
-          "title": "Seiten/Bereiche",
-          "description": "Welche Seiten oder Bereiche soll Ihre Website haben? Beschreiben Sie auch die gewünschten Inhalte für jede Seite.",
-          "page": {
-            "title": "Seite {number}",
-            "removeButton": "Entfernen",
-            "pageName": {
-              "label": "Seitenname:",
-              "placeholder": "z.B. Startseite, Über uns, Kontakt, Leistungen..."
-            },
-            "pageContent": {
-              "label": "Gewünschte Inhalte:",
-              "placeholder": "Beschreiben Sie, welche Inhalte auf dieser Seite stehen sollen: Texte, Bilder, Funktionen, etc."
-            },
-            "pageCharacteristics": {
-              "label": "Besonderheiten der Seite:",
-              "placeholder": "Welche Features sollen auf dieser Seite platziert werden? Sollen Inhaltsvorschläge erarbeitet werden oder sollen Inhalte exakt wie vorgegeben übernommen werden?"
-            }
-          },
-          "addPageButton": "Seite hinzufügen"
-        },
-        "formFields": {
-          "title": "Formular-Felder",
-          "description": "Da Sie ein Kontaktformular gewählt haben, definieren Sie hier die gewünschten Felder und deren Bezeichnungen.",
-          "field": {
-            "title": "Feld {number}",
-            "removeButton": "Entfernen",
-            "fieldType": {
-              "label": "Feldtyp:",
-              "placeholder": "Feldtyp wählen..."
-            },
-            "fieldName": {
-              "label": "Feldname/Beschriftung:",
-              "placeholder": "z.B. Name, E-Mail, Nachricht, Telefon..."
-            },
-            "required": "Pflichtfeld"
-          },
-          "addFieldButton": "Feld hinzufügen"
+        "content": {
+          "pages": {
+            "title": "Seiten/Bereiche",
+            "description": "Welche Seiten oder Bereiche soll Ihre Website haben? Beschreiben Sie auch die gewünschten Inhalte für jede Seite.",
+            "pageTitle": "Seite",
+            "removePage": "Seite entfernen",
+            "remove": "Entfernen"
+          }
         }
       },
       "step6": {
         "titleFirst": "Design und",
         "titleHighlight": "Materialien",
-        "teaser": "Definieren Sie das visuelle Erscheinungsbild Ihres Projekts. Diese Einstellungen bestimmen das Look & Feel.",
-        "colors": {
-          "title": "Farbschema",
-          "description": "Wählen Sie die Hauptfarben für Ihr Projekt. Falls Sie bereits Corporate Colors haben, geben Sie diese hier an.",
-          "primary": {
-            "label": "Primärfarbe:"
-          },
-          "secondary": {
-            "label": "Sekundärfarbe:"
-          },
-          "accent": {
-            "label": "Akzentfarbe:"
-          }
-        },
-        "fonts": {
-          "title": "Schriftart",
-          "description": "Wählen Sie eine Schriftart aus unserer Auswahl oder geben Sie Ihre Corporate Font an.",
-          "googleFonts": {
-            "label": "Google Fonts Auswahl:",
-            "otherOption": " < Ich möchte eine andere Google Font nutzen  > "
-          },
-          "customFont": {
-            "label": "Oder eigene Schriftart definieren:",
-            "placeholder": "z.B. Helvetica Neue, Arial, Corporate Font Name..."
-          },
-          "preview": {
-            "title": "Schriftart-Vorschau von {font}:"
-          }
-        },
-        "files": {
-          "title": "Materialien hochladen",
-          "description": "Laden Sie hier Styleguides, Mockups, Logos, Bilder oder andere relevante Dateien hoch, die uns bei der Umsetzung helfen.",
-          "uploadButton": "Dateien auswählen",
-          "supportedFormats": "Unterstützte Formate: Allgemeine Dateien (PDF, .txt, ...), Office Dokumente (Word, Powerpoint, ...), Bildformate (.jpg, .png, ...)",
-          "uploadedFiles": "Hochgeladene Dateien:",
-          "fileItem": "{name} ({size}KB)",
-          "removeFileButton": "Datei entfernen",
-          "uploading": {
-            "title": "Upload läuft...",
-            "progress": "{message} ({current}/{total})"
-          }
-        }
+        "teaser": "Definieren Sie das visuelle Erscheinungsbild Ihres Projekts. Diese Einstellungen bestimmen das Look & Feel."
       },
       "stepMaterials": {
         "titleFirst": "Materialien und",
         "titleHighlight": "Dokumente",
         "teaser": "Laden Sie relevante Dokumente, Spezifikationen oder andere Materialien hoch, die uns bei der Umsetzung helfen.",
         "files": {
-          "title": "Dokumente hochladen",
+          "title": "Dokumente",
+          "upload": "Dokumente hochladen",
           "description": "Laden Sie Spezifikationen, Wireframes, bestehende Dokumentationen oder andere relevante Dateien hoch.",
-          "uploadButton": "Dateien auswählen",
-          "supportedFormats": "Unterstützte Formate: PDF, DOC, JPG, PNG, GIF, SVG, AI, PSD, TXT, XLSX, PPTX",
-          "uploadedFiles": "Hochgeladene Dateien:",
-          "fileItem": "{name} ({size}KB)",
-          "removeFileButton": "Datei entfernen",
-          "uploading": {
-            "title": "Upload läuft...",
-            "progress": "{message} ({current}/{total})"
-          }
+          "formats": "Unterstützte Formate: PDF, DOC, JPG, PNG, GIF, SVG, AI, PSD, TXT, XLSX, PPTX",
+          "uploaded": "Hochgeladene Dateien:",
+          "removeFile": "Datei entfernen"
         }
       },
       "stepSummary": {
@@ -1383,118 +1232,195 @@
         "teaser": "Überprüfen Sie Ihre Konfiguration. Sie können jederzeit zu vorherigen Schritten zurückkehren, um Änderungen vorzunehmen.",
         "preparingAssets": {
           "title": "Assets werden vorbereitet",
-          "progress": "{message} ({current}/{total})"
+          "progress": "[{current}/{total}] {message}",
+          "assetsReady": "Assets bereit zum Veröffentlichen",
+          "noAssets": "Keine Assets konnten vorbereitet werden",
+          "error": "Fehler beim Vorbereiten der Assets"
         },
-        "sections": {
-          "projectType": {
-            "title": "Projekttyp",
-            "subtype": "{subtype}"
-          },
-          "projectDescription": {
-            "title": "Projektbeschreibung",
-            "truncated": "{description}..."
-          },
-          "features": {
-            "title": "Gewählte Features"
-          },
-          "pages": {
-            "title": "Seiten/Bereiche"
-          },
-          "formFields": {
-            "title": "Formular-Felder",
-            "requiredBadge": "Pflicht"
-          },
-          "design": {
-            "title": "Design",
-            "colors": "Farben:",
-            "font": "Schriftart:"
-          }
+        "pdfGeneration": {
+          "error": "Fehler beim Erstellen des PDFs. Bitte versuchen Sie es erneut.",
+          "download": "Konfiguration herunterladen"
         },
-        "priceEstimate": {
-          "title": "Geschätzter Preis",
-          "average": "Durchschnitt: {price}€",
-          "disclaimer": "*Unverbindliche Schätzung. Der finale Preis wird nach einem persönlichen Gespräch festgelegt.",
-          "breakdown": {
-            "base": "Basis ({projectType}):",
-            "subtype": "{subtype}:",
-            "features": "Features ({count}):",
-            "featuresValue": "Inklusive"
-          }
-        }
+        "estimatedPrice": "Geschätzter Preis",
+        "average": "Durchschnitt: {price}€",
+        "disclaimer": "*Unverbindliche Schätzung. Der finale Preis wird nach einem persönlichen Gespräch festgelegt.",
+        "basePrice": "Basis ({projectType}):",
+        "subtypePrice": "{subtype}:",
+        "featuresIncluded": "Features ({count}):",
+        "included": "Inklusive"
+      }
+    },
+    "files": {
+      "uploading": {
+        "title": "Dateien werden hochgeladen...",
+        "progress": "[{current}/{total}] {message}",
+        "success": "Alle {uploaded} von {total} Dateien erfolgreich verarbeitet",
+        "noFiles": "Keine Dateien konnten erfolgreich hochgeladen werden",
+        "error": "Fehler beim Hochladen der Dateien"
+      },
+      "supportedFormats": "Unterstützte Formate: Allgemeine Dateien (PDF, .txt, ...), Office Dokumente (Word, Powerpoint, ...), Bildformate (.jpg, .png, ...)"
+    },
+    "form": {
+      "projectName": "Projektname:",
+      "projectNamePlaceholder": "Geben Sie Ihrem Projekt einen Namen...",
+      "projectDescription": "Projektbeschreibung:",
+      "targetAudience": "Wer ist Ihre Zielgruppe?",
+      "targetAudiencePlaceholder": "z.B. Kleine Unternehmen, Privatpersonen, B2B-Kunden...",
+      "goals": "Was sind Ihre Hauptziele?",
+      "goalsPlaceholder": "z.B. Mehr Kunden gewinnen, Prozesse digitalisieren...",
+      "inspiration": "Gibt es Websieten, die als Inspiration dienen können?",
+      "inspirationPlaceholder": "z.B. www.atlassian.com, www.figma.com, ... ",
+      "desiredDomain": "Gewünschte Domain:",
+      "desiredDomainPlaceholder": "z.B. meine-firma.de, example.com...",
+      "domainStatus": "Domain-Status:",
+      "domainStatusPlaceholder": "Bitte wählen...",
+      "domainStatusOptions": {
+        "owned": "Domain bereits im Besitz",
+        "needs-registration": "Domain muss registriert werden",
+        "needs-transfer": "Domain muss übertragen werden",
+        "undecided": "Noch nicht entschieden"
+      },
+      "timeline": "Gewünschter Zeitrahmen:",
+      "timelinePlaceholder": "Bitte wählen...",
+      "timelineOptions": {
+        "asap": "So schnell wie möglich",
+        "5-10-days": "5 - 10 Tage ",
+        "2-4-weeks": "2 - 4 Wochen",
+        "2-6-months": "2 - 6 Monate",
+        "flexible": "Flexibel"
+      },
+      "budget": "Ihr Budget:",
+      "budgetPlaceholder": "Bitte wählen...",
+      "budgetOptions": {
+        "under-500": "Unter 500€",
+        "1k-3k": "1.000€ - 3.000€",
+        "3k-7k": "3.000€ - 7.000€",
+        "7k-10k": "7.000€ - 10.000€",
+        "10k-15k": "10.000€ - 15.000€",
+        "over-20k": "mehr als 15.000€"
+      },
+      "customFeatures": "Weitere gewünschte Features:",
+      "customFeaturesPlaceholder": "Beschreiben Sie weitere spezielle Anforderungen, die nicht in der Liste stehen...",
+      "characters": "Zeichen: {count}",
+      "placeholders": {
+        "webApplication": "Beschreiben Sie detailliert die gewünschten Funktionen und Features Ihrer Anwendung: Welche Hauptfunktionen soll sie haben? Wie sollen Benutzer damit interagieren? Welche Daten werden verarbeitet? Gibt es spezielle Anforderungen an Performance oder Sicherheit?",
+        "freestyle": "Beschreiben Sie Ihr individuelles Projekt im Detail: Welches Problem soll gelöst werden? Welche spezifischen Anforderungen haben Sie? Welche Systeme sollen integriert werden? Welche Funktionen sind besonders wichtig?",
+        "default": "Beschreiben Sie Ihr Vorhaben im Detail: Was ist das Ziel? Welche Probleme soll es lösen? Welche Zielgruppe sprechen Sie an? Haben Sie bereits konkrete Vorstellungen zum Design oder Funktionen?"
+      }
+    },
+    "design": {
+      "colorScheme": "Farbschema",
+      "colorSchemeDescription": "Wählen Sie die Hauptfarben für Ihr Projekt. Falls Sie bereits Corporate Colors haben, geben Sie diese hier an.",
+      "primaryColor": "Primärfarbe:",
+      "secondaryColor": "Sekundärfarbe:",
+      "accentColor": "Akzentfarbe:",
+      "font": "Schriftart",
+      "fontDescription": "Wählen Sie eine Schriftart aus unserer Auswahl oder geben Sie Ihre Corporate Font an.",
+      "googleFonts": "Google Fonts Auswahl:",
+      "customFont": "Oder eigene Schriftart definieren:",
+      "customFontPlaceholder": "z.B. Helvetica Neue, Arial, Corporate Font Name...",
+      "fontPreview": "Schriftart-Vorschau von {font}:"
+    },
+    "content": {
+      "pages": {
+        "pageName": "Seitenname:",
+        "pageNamePlaceholder": "z.B. Startseite, Über uns, Kontakt, Leistungen...",
+        "pageContent": "Gewünschte Inhalte:",
+        "pageContentPlaceholder": "Beschreiben Sie, welche Inhalte auf dieser Seite stehen sollen: Texte, Bilder, Funktionen, etc.",
+        "pageCharacteristic": "Besonderheiten der Seite:",
+        "pageCharacteristicPlaceholder": "Welche Features sollen auf dieser Seite platziert werden? Sollen Inhaltsvorschläge erarbeitet werden oder sollen Inhalte exakt wie vorgegeben übernommen werden?",
+        "addPage": "Seite hinzufügen"
+      },
+      "formFields": {
+        "title": "Formular-Felder",
+        "description": "Da Sie ein Kontaktformular gewählt haben, definieren Sie hier die gewünschten Felder und deren Bezeichnungen.",
+        "field": "Feld",
+        "fieldType": "Feldtyp:",
+        "fieldTypePlaceholder": "Feldtyp wählen...",
+        "fieldName": "Feldname/Beschriftung:",
+        "fieldNamePlaceholder": "z.B. Name, E-Mail, Nachricht, Telefon...",
+        "required": "Pflichtfeld",
+        "addField": "Feld hinzufügen",
+        "removeField": "Formularfeld entfernen",
+        "remove": "Entfernen"
       }
     },
     "navigation": {
       "back": "Zurück",
       "next": "Weiter",
-      "download": {
-        "button": "Konfiguration herunterladen",
-        "generating": "PDF wird erstellt..."
-      },
-      "submit": "Projekt einreichen"
-    },
-    "modals": {
-      "reset": {
-        "title": "Von vorne beginnen?",
-        "description": "Möchten Sie wirklich von vorne beginnen? Alle Ihre bisherigen Eingaben gehen dabei verloren.",
-        "cancel": "Abbrechen",
-        "confirm": "Ja, zurücksetzen"
-      },
-      "error": {
-        "title": "Fehler beim Übermitteln",
-        "description": "Bei der Übermittlung Ihres Projekts sind folgende Fehler aufgetreten:",
-        "info": {
-          "title": "Was passiert jetzt?",
-          "description": "Nach dem Schließen dieses Dialogs werden Sie zu Schritt 1 zurückgeleitet. Ihre Eingaben bleiben dabei erhalten, sodass Sie das Problem beheben und erneut versuchen können."
-        },
-        "backToStep1": "Zurück zu Schritt 1"
-      },
-      "thankYou": {
-        "title": "Vielen Dank!",
-        "subtitle": "Ihr Projekt wurde erfolgreich übermittelt",
-        "nextSteps": {
-          "title": "Was passiert als nächstes?",
-          "steps": {
-            "step1": {
-              "number": "1",
-              "description": "Wir prüfen Ihre Anfrage innerhalb von 24 Stunden"
-            },
-            "step2": {
-              "number": "2",
-              "description": "Sie erhalten ein detailliertes Angebot per E-Mail"
-            },
-            "step3": {
-              "number": "3",
-              "description": "Wir vereinbaren einen Termin für ein persönliches Gespräch"
-            }
-          }
-        },
-        "details": {
-          "projectName": "Projektname:",
-          "estimatedPrice": "Geschätzter Preis:",
-          "projectType": "Projekttyp:"
-        },
-        "actions": {
-          "home": "Zur Startseite",
-          "contact": "Kontakt aufnehmen"
-        }
-      }
+      "downloadPDF": "PDF wird erstellt...",
+      "submitProject": "Projekt einreichen"
     },
     "loading": {
       "title": "Projekt wird übermittelt...",
       "description": "Bitte warten Sie, während wir Ihr Projekt verarbeiten.",
       "steps": {
-        "preparing": {
-          "icon": "✓",
-          "description": "Daten werden vorbereitet"
+        "preparing": "Daten werden vorbereitet",
+        "creating": "Projekt wird erstellt",
+        "sending": "Bestätigung wird gesendet"
+      }
+    },
+    "modals": {
+      "error": {
+        "title": "Fehler beim Übermitteln",
+        "description": "Bei der Übermittlung Ihres Projekts sind folgende Fehler aufgetreten:",
+        "whatHappens": "Was passiert jetzt?",
+        "whatHappensDescription": "Nach dem Schließen dieses Dialogs werden Sie zu Schritt 1 zurückgeleitet. Ihre Eingaben bleiben dabei erhalten, sodass Sie das Problem beheben und erneut versuchen können.",
+        "backToStep1": "Zurück zu Schritt 1",
+        "customerError": "Customer-Fehler",
+        "unknownError": "Unbekannter Fehler",
+        "customerCreationFailed": "Customer creation failed",
+        "customerCreated": "Customer erstellt/gefunden:",
+        "usingPreUploaded": "Using pre-uploaded assets:",
+        "noPreUploaded": "No pre-uploaded assets found, uploading now...",
+        "fileUploadError": "Fehler beim Hochladen der Dateien",
+        "fileUploadFailed": "File upload failed",
+        "creatingProject": "Creating project with assets:",
+        "projectCreated": "Projekt erstellt:",
+        "customerLinked": "Customer mit Projekt verknüpft:",
+        "customerLinkingFailed": "Customer linking failed, but project was created:",
+        "customerLinkingError": "Customer linking error:",
+        "waiting": "Waiting 3 seconds before publishing to ensure data consistency...",
+        "publishingCustomer": "Publishing customer:",
+        "customerPublished": "Customer erfolgreich veröffentlicht:",
+        "customerPublishingFailed": "Customer publishing failed:",
+        "customerPublishingError": "Customer publishing error:",
+        "publishingProject": "Publishing project:",
+        "projectPublished": "Projekt erfolgreich veröffentlicht:",
+        "projectPublishingFailed": "Project publishing failed:",
+        "projectPublishingError": "Project publishing error:",
+        "publishingAssets": "Publishing all project assets:",
+        "assetPublishingProgress": "Asset publishing progress",
+        "assetsPublished": "Assets erfolgreich veröffentlicht:",
+        "noAssetsPublished": "No assets could be published, but project was created and published",
+        "assetPublishingError": "Asset publishing error:",
+        "submissionCompleted": "Submission process completed successfully",
+        "apiError": "API Fehler",
+        "apiRequestFailed": "API request failed",
+        "submissionError": "Submission error:",
+        "networkError": "Netzwerk Fehler: Verbindung zum Server fehlgeschlagen",
+        "checkConnection": "Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut."
+      },
+      "thankYou": {
+        "title": "Vielen Dank!",
+        "subtitle": "Ihr Projekt wurde erfolgreich übermittelt",
+        "whatHappensNext": "Was passiert als nächstes?",
+        "steps": {
+          "step1": "Wir prüfen Ihre Anfrage innerhalb von 24 Stunden",
+          "step2": "Sie erhalten ein detailliertes Angebot per E-Mail",
+          "step3": "Wir vereinbaren einen Termin für ein persönliches Gespräch"
         },
-        "creating": {
-          "icon": "⏳",
-          "description": "Projekt wird erstellt"
-        },
-        "sending": {
-          "icon": "⏳",
-          "description": "Bestätigung wird gesendet"
-        }
+        "projectName": "Projektname:",
+        "estimatedPrice": "Geschätzter Preis:",
+        "projectType": "Projekttyp:",
+        "home": "Zur Startseite",
+        "contact": "Kontakt aufnehmen"
+      },
+      "reset": {
+        "title": "Von vorne beginnen?",
+        "description": "Möchten Sie wirklich von vorne beginnen? Alle Ihre bisherigen Eingaben gehen dabei verloren.",
+        "cancel": "Abbrechen",
+        "confirm": "Ja, zurücksetzen"
       }
     }
   }

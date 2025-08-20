@@ -6,7 +6,8 @@
   import { projectTypes, subTypes, availableFeatures, googleFonts, formFieldTypes, featureCategoryColors, getStepConfig } from './wizard-config';
   import { goto } from '$app/navigation';
   import ContactForm from './contact-form.svelte';
-  import { _, locale } from 'svelte-i18n';
+  import { _ } from 'svelte-i18n';
+  import { locale } from 'svelte-i18n';
 
   // Props for initial values from URL parameters
   interface Props {
@@ -253,7 +254,9 @@
       uploadedAssetIds = preparedAssetIds;
 
       if (preparedAssetIds.length > 0) {
-        assetPreparationProgress = $_('wizard.steps.stepSummary.preparingAssets.progress', { values: { message: $_('wizard.steps.stepSummary.preparingAssets.assetsReady'), current: preparedAssetIds.length, total: uploadedFiles.length } });
+        assetPreparationProgress = $_('wizard.steps.stepSummary.preparingAssets.progress', {
+          values: { message: $_('wizard.steps.stepSummary.preparingAssets.assetsReady'), current: preparedAssetIds.length, total: uploadedFiles.length }
+        });
       } else {
         assetPreparationProgress = $_('wizard.steps.stepSummary.preparingAssets.noAssets');
       }
@@ -278,7 +281,9 @@
       });
 
       if (uploadedAssetIds.length > 0) {
-        uploadProgress = $_('wizard.steps.step6.files.uploading.progress', { values: { message: $_('wizard.steps.step6.files.uploading.success'), current: uploadedAssetIds.length, total: uploadedFiles.length } });
+        uploadProgress = $_('wizard.steps.step6.files.uploading.progress', {
+          values: { message: $_('wizard.steps.step6.files.uploading.success'), current: uploadedAssetIds.length, total: uploadedFiles.length }
+        });
       } else {
         uploadProgress = $_('wizard.steps.step6.files.uploading.noFiles');
       }
@@ -364,15 +369,20 @@
     errorDetails = [];
 
     try {
+      // Create a copy of customerData without the password fields for security
+      const customerDataForAPI = { ...customerData };
+      delete customerDataForAPI.password;
+      delete customerDataForAPI.passwordConfirm;
+
       // Step 1: Create customer first
-      console.log($_('wizard.loading.steps.preparing.description'), customerData);
+      console.log($_('wizard.loading.steps.preparing.description'), customerDataForAPI);
 
       const customerResponse = await fetch('/api/customer/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(customerData)
+        body: JSON.stringify(customerDataForAPI)
       });
 
       const customerResult = await customerResponse.json();
@@ -595,7 +605,7 @@
 <div class="wizard-container">
   <!-- Header with Reset Button -->
   <div class="wizard-header">
-    <h1 id="projekt-konfigurator">Projekt <span class="inner-text-special">Konfigurator</span></h1>
+    <h1 id="projekt-konfigurator">{$_('wizard.header.titleFirst')} <span class="inner-text-special">{$_('wizard.header.titleHighlight')}</span></h1>
     <button type="button" class="btn btn-outline btn-sm" onclick={openResetModal}>
       <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path
@@ -605,7 +615,7 @@
           d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
         />
       </svg>
-      zurücksetzen
+      {$_('wizard.header.resetButton')}
     </button>
   </div>
 
@@ -644,7 +654,7 @@
               {i + 1}
             </div>
             <!-- Step Title -->
-            <div class="mt-2 max-w-20 text-center text-xs font-medium text-base-content">
+            <div class="text-base-content mt-2 max-w-20 text-center text-xs font-medium">
               {step.title}
             </div>
           </button>
@@ -658,7 +668,7 @@
         {#each stepConfig as step, i}
           <button
             type="button"
-            class="progressbar-flex cursor-pointer flex-col items-center border-none bg-transparent p-2 transition-all duration-200 min-w"
+            class="progressbar-flex min-w cursor-pointer flex-col items-center border-none bg-transparent p-2 transition-all duration-200"
             onclick={() => goToStep(i + 1)}
             onkeydown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
@@ -677,7 +687,7 @@
               {i + 1}
             </div>
             <!-- Step Title -->
-            <div class="mt-2 text-center text-xs font-medium text-base-content">
+            <div class="text-base-content mt-2 text-center text-xs font-medium">
               {step.title}
             </div>
           </button>
@@ -691,8 +701,8 @@
     {#if currentStep === 1}
       <!-- Step 1: Project Type Selection -->
       <div class="step-header">
-        <h1>Was möchten Sie <span class="inner-text-special">realisieren</span>?</h1>
-        <p class="teaser">Wählen Sie den Typ Ihres Projekts aus. Diese Auswahl bestimmt die verfügbaren Optionen in den folgenden Schritten.</p>
+        <h1>{$_('wizard.steps.step1.titleFirst')} <span class="inner-text-special">{$_('wizard.steps.step1.titleHighlight')}</span></h1>
+        <p class="teaser">{$_('wizard.steps.step1.teaser')}</p>
       </div>
 
       <div class="project-types-grid">
@@ -727,8 +737,11 @@
     {:else if currentStep === 2 && config.projectType !== 'freestyle'}
       <!-- Step 2: Subtype Selection -->
       <div class="step-header">
-        <h1>Welche Art von <span class="inner-text-special">{projectTypes.find((p) => p.id === config.projectType)?.title}</span> benötigen Sie?</h1>
-        <p class="teaser">Wählen Sie die passende Variante für Ihr Projekt. Jede Option hat unterschiedliche Funktionen und Preise.</p>
+        <h1>
+          {$_('wizard.steps.step2.titleFirst')} <span class="inner-text-special">{$_('wizard.steps.step2.titleHighlight')}</span>
+          {$_('wizard.steps.step2.titleSecond')}
+        </h1>
+        <p class="teaser">{$_('wizard.steps.step2.teaser')}</p>
       </div>
 
       <div class="subtypes-grid">
@@ -760,81 +773,75 @@
     {:else if (currentStep === 3 && config.projectType !== 'freestyle') || (currentStep === 2 && config.projectType === 'freestyle')}
       <!-- Step 3: Project Description (or Step 2 for freestyle) -->
       <div class="step-header">
-        <h1>Beschreiben Sie Ihr <span class="inner-text-special">Vorhaben</span></h1>
-        <p class="teaser">Je detaillierter Sie Ihr Projekt beschreiben, desto genauer können wir Ihnen helfen und den Preis kalkulieren.</p>
+        <h1>{$_('wizard.steps.step3.titleFirst')} <span class="inner-text-special">{$_('wizard.steps.step3.titleHighlight')}</span></h1>
+        <p class="teaser">{$_('wizard.steps.step3.teaser')}</p>
       </div>
 
       <div class="content-section">
         <div class="form-control mb-8 w-full">
           <label class="label" for="projectName">
-            <span class="label-text text-lg font-semibold">Projektname:</span>
+            <span class="label-text text-lg font-semibold">{$_('wizard.form.projectName')}</span>
           </label>
           <input
             type="text"
             id="projectName"
             class="input input-bordered input-lg w-full"
             bind:value={config.name}
-            placeholder="Geben Sie Ihrem Projekt einen Namen..."
+            placeholder={$_('wizard.form.projectNamePlaceholder')}
           />
         </div>
 
         <div class="form-control mb-8 w-full">
           <label class="label" for="description">
-            <span class="label-text text-lg font-semibold">Projektbeschreibung:</span>
+            <span class="label-text text-lg font-semibold">{$_('wizard.form.projectDescription')}</span>
           </label>
           <textarea
             id="description"
             class="textarea textarea-bordered textarea-lg w-full"
             bind:value={config.description}
             placeholder={config.projectType === 'webApplication' || config.projectType === 'artificialIntelligence'
-              ? 'Beschreiben Sie detailliert die gewünschten Funktionen und Features Ihrer Anwendung: Welche Hauptfunktionen soll sie haben? Wie sollen Benutzer damit interagieren? Welche Daten werden verarbeitet? Gibt es spezielle Anforderungen an Performance oder Sicherheit?'
+              ? $_('wizard.form.placeholders.webApplication')
               : config.projectType === 'freestyle'
-                ? 'Beschreiben Sie Ihr individuelles Projekt im Detail: Welches Problem soll gelöst werden? Welche spezifischen Anforderungen haben Sie? Welche Systeme sollen integriert werden? Welche Funktionen sind besonders wichtig?'
-                : 'Beschreiben Sie Ihr Vorhaben im Detail: Was ist das Ziel? Welche Probleme soll es lösen? Welche Zielgruppe sprechen Sie an? Haben Sie bereits konkrete Vorstellungen zum Design oder Funktionen?'}
+                ? $_('wizard.form.placeholders.freestyle')
+                : $_('wizard.form.placeholders.default')}
             rows="8"
           ></textarea>
           <div class="label">
-            <span class="label-text-alt">Zeichen: {config.description.length}</span>
+            <span class="label-text-alt">{$_('wizard.form.characters', { values: { count: config.description.length } })}</span>
           </div>
         </div>
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div class="form-control w-full">
             <label class="label" for="targetAudience">
-              <span class="label-text font-semibold">Wer ist Ihre Zielgruppe?</span>
+              <span class="label-text font-semibold">{$_('wizard.form.targetAudience')}</span>
             </label>
             <input
               type="text"
               id="targetAudience"
               class="input input-bordered w-full"
               bind:value={config.targetAudience}
-              placeholder="z.B. Kleine Unternehmen, Privatpersonen, B2B-Kunden..."
+              placeholder={$_('wizard.form.targetAudiencePlaceholder')}
             />
           </div>
 
           <div class="form-control w-full">
             <label class="label" for="goals">
-              <span class="label-text font-semibold">Was sind Ihre Hauptziele?</span>
+              <span class="label-text font-semibold">{$_('wizard.form.goals')}</span>
             </label>
-            <input
-              type="text"
-              id="goals"
-              class="input input-bordered w-full"
-              bind:value={config.goals}
-              placeholder="z.B. Mehr Kunden gewinnen, Prozesse digitalisieren..."
-            />
+            <input type="text" id="goals" class="input input-bordered w-full" bind:value={config.goals} placeholder={$_('wizard.form.goalsPlaceholder')} />
           </div>
 
           <div class="form-control w-full">
             <label class="label" for="inspiration">
-              <span class="label-text font-semibold">Gibt es Websieten, die als Inspiration dienen können?</span>
+              <span class="label-text font-semibold">{$_('wizard.form.inspiration')}</span>
             </label>
             <input
               type="text"
               id="inspiration"
               class="input input-bordered w-full"
               bind:value={config.inspiration}
-              placeholder="z.B. www.atlassian.com, www.figma.com, ... "
+              placeholder={$_('wizard.form.inspirationPlaceholder')}
             />
           </div>
 
@@ -897,8 +904,8 @@
     {:else if currentStep === 4 && (config.projectType === 'website' || config.projectType === 'cms' || config.projectType === 'webApplication')}
       <!-- Step 4: Features Selection (only for website/cms) -->
       <div class="step-header">
-        <h1>Welche <span class="inner-text-special">Features</span> benötigen Sie?</h1>
-        <p class="teaser">Wählen Sie alle gewünschten Funktionen aus. Jedes Feature erweitert die Möglichkeiten Ihres Projekts und beeinflusst den Preis.</p>
+        <h1>{$_('wizard.steps.step4.titleFirst')} <span class="inner-text-special">{$_('wizard.steps.step4.titleHighlight')}</span></h1>
+        <p class="teaser">{$_('wizard.steps.step4.teaser')}</p>
       </div>
 
       <div class="features-grid">
@@ -934,26 +941,31 @@
     {:else if currentStep === 5 && (config.projectType === 'website' || config.projectType === 'cms')}
       <!-- Step 5: Content Details (only for website/cms) -->
       <div class="step-header">
-        <h1>Inhalte und <span class="inner-text-special">Struktur</span></h1>
-        <p class="teaser">Definieren Sie die Struktur und Inhalte Ihres Projekts. Diese Informationen helfen uns bei der Planung und Umsetzung.</p>
+        <h1>{$_('wizard.steps.step5.titleFirst')} <span class="inner-text-special">{$_('wizard.steps.step5.titleHighlight')}</span></h1>
+        <p class="teaser">{$_('wizard.steps.step5.teaser')}</p>
       </div>
 
       <!-- Pages/Sections -->
       <div class="content-section">
-        <h2>Seiten/Bereiche</h2>
-        <p>Welche Seiten oder Bereiche soll Ihre Website haben? Beschreiben Sie auch die gewünschten Inhalte für jede Seite.</p>
+        <h2>{$_('wizard.steps.step5.content.pages.title')}</h2>
+        <p>{$_('wizard.steps.step5.content.pages.description')}</p>
 
         <div class="space-y-6">
-          {#each config.pages as _, i}
+          {#each config.pages as page, i}
             <div class="card bg-base-100 border-base-300 border">
               <div class="card-body">
                 <div class="mb-4 flex items-center justify-between">
-                  <h4 class="card-title text-lg">Seite {i + 1}</h4>
-                  <button type="button" class="btn btn-error btn-sm" onclick={() => removePage(i)} aria-label="Seite entfernen">
+                  <h4 class="card-title text-lg">{$_('wizard.steps.step5.content.pages.pageTitle')} {i + 1}</h4>
+                  <button
+                    type="button"
+                    class="btn btn-error btn-sm"
+                    onclick={() => removePage(i)}
+                    aria-label={$_('wizard.steps.step5.content.pages.removePage')}
+                  >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
-                    Entfernen
+                    {$_('wizard.steps.step5.content.pages.remove')}
                   </button>
                 </div>
 
@@ -1077,8 +1089,8 @@
     {:else if (currentStep === 6 && (config.projectType === 'website' || config.projectType === 'cms')) || (currentStep === 5 && config.projectType === 'webApplication')}
       <!-- Design Step (not for individual development) -->
       <div class="step-header">
-        <h1>Design und <span class="inner-text-special">Materialien</span></h1>
-        <p class="teaser">Definieren Sie das visuelle Erscheinungsbild Ihres Projekts. Diese Einstellungen bestimmen das Look & Feel.</p>
+        <h1>{$_('wizard.steps.step6.titleFirst')} <span class="inner-text-special">{$_('wizard.steps.step6.titleHighlight')}</span></h1>
+        <p class="teaser">{$_('wizard.steps.step6.teaser')}</p>
       </div>
 
       <!-- Color Selection -->
@@ -1132,7 +1144,7 @@
               {#each googleFonts as font}
                 <option value={font}>{font}</option>
               {/each}
-              <option value="Other Google Fonts"> &lt; Ich möchte eine andere Google Font nutzen  &gt; </option>
+              <option value="Other Google Fonts"> &lt; Ich möchte eine andere Google Font nutzen &gt; </option>
             </select>
           </div>
 
@@ -1150,7 +1162,7 @@
           </div>
         </div>
 
-        {#if config.desiredFont && config.desiredFont !== "Other Google Fonts"}
+        {#if config.desiredFont && config.desiredFont !== 'Other Google Fonts'}
           <div class="alert mt-4">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info h-6 w-6 shrink-0">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -1158,7 +1170,7 @@
 
             <div>
               <div class="font-bold">Schriftart-Vorschau von {config.desiredFont}:</div>
-              <div class="text-base my-2" style="font-family: {config.desiredFont}">
+              <div class="my-2 text-base" style="font-family: {config.desiredFont}">
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis minima officia eveniet fugiat ad dicta quia optio quod possimus sint enim
                 doloremque, consectetur ut est quibusdam corporis obcaecati dolore dolores!
               </div>
@@ -1295,7 +1307,7 @@
           </div>
         {/if}
       </div>
-    {:else if (currentStep === 7 && (config.projectType === 'website' || config.projectType === 'cms')) || (currentStep === 6 && config.projectType === 'webApplication') || (currentStep === 5 && config.projectType === 'artificialIntelligence') || (currentStep === 4 && config.projectType === 'freestyle')}
+    {:else if currentStep === maxSteps - 1}
       <!-- Contact Form Step -->
       <ContactForm bind:customerData bind:isValid={isContactFormValid} onUpdate={(data) => (customerData = data)} />
     {:else if currentStep === maxSteps}
@@ -1687,11 +1699,11 @@
 
 <style lang="postcss">
   @reference '../../../app.css';
-  
+
   /* Wizard Container - Dark Theme Support */
   .wizard-container {
-    @apply bg-base-100 rounded-2xl shadow-lg border border-base-300;
-    
+    @apply bg-base-100 border-base-300 rounded-2xl border shadow-lg;
+
     .inner-box {
       @apply mx-0 my-4 p-8;
     }
@@ -1702,7 +1714,7 @@
     @apply border-base-300 mb-8 flex items-center justify-between border-b px-6 py-4;
 
     h1 {
-      @apply m-0 p-0 text-base-content;
+      @apply text-base-content m-0 p-0;
     }
   }
 
@@ -1721,7 +1733,7 @@
   /* Progress Bar - Mobile (wrapped without line) */
   .progress-mobile {
     .progressbar-flex {
-      @apply flex flex-wrap justify-center md:gap-4 gap-x-2 pb-2 md:pb-0;
+      @apply flex flex-wrap justify-center gap-x-2 pb-2 md:gap-4 md:pb-0;
     }
   }
 
@@ -1731,12 +1743,12 @@
   }
 
   .step-header {
-    @apply pt-10 md:pt-0 mt-8 border-t md:border-t-0 border-t-base-content/40 mb-12 text-center;
+    @apply border-t-base-content/40 mt-8 mb-12 border-t pt-10 text-center md:border-t-0 md:pt-0;
 
     h1 {
-      @apply mb-4 text-base-content;
+      @apply text-base-content mb-4;
     }
-    
+
     p.teaser {
       @apply text-base-content/70;
     }
@@ -1757,16 +1769,16 @@
 
   /* Service Cards - Dark Theme Support */
   .service-card {
-    @apply bg-base-100 border border-base-300 transition-all duration-300;
+    @apply bg-base-100 border-base-300 border transition-all duration-300;
 
     &:hover {
       @apply bg-base-200 border-base-300;
     }
 
     &.card-selected {
-      @apply ring-primary ring-2 ring-offset-2 ring-offset-base-100;
+      @apply ring-primary ring-offset-base-100 ring-2 ring-offset-2;
       &:hover {
-        @apply cursor-default bg-base-100;
+        @apply bg-base-100 cursor-default;
       }
     }
 
@@ -1780,11 +1792,11 @@
 
     .card-body {
       @apply text-base-content;
-      
+
       .card-title {
         @apply text-base-content;
       }
-      
+
       p {
         @apply text-base-content/80;
       }
@@ -1796,27 +1808,27 @@
     @apply mb-12;
 
     h2 {
-      @apply p-0 mb-4 mt-2 text-base-content;
+      @apply text-base-content mt-2 mb-4 p-0;
     }
 
     p {
-      @apply mb-6 text-base-content/80;
+      @apply text-base-content/80 mb-6;
     }
   }
 
   /* Navigation */
   .wizard-navigation {
-    @apply border-base-300 bg-base-100 flex items-center justify-between border-t p-6 flex-wrap gap-4;
+    @apply border-base-300 bg-base-100 flex flex-wrap items-center justify-between gap-4 border-t p-6;
   }
 
   /* Form Elements - Dark Theme Support */
   .form-control {
     @apply w-full;
-    
+
     .label-text {
       @apply text-base-content;
     }
-    
+
     .label-text-alt {
       @apply text-base-content/60;
     }
@@ -1825,12 +1837,12 @@
   .textarea,
   .input,
   .select {
-    @apply w-full bg-base-100 border-base-300 text-base-content;
-    
+    @apply bg-base-100 border-base-300 text-base-content w-full;
+
     &:focus {
       @apply border-primary bg-base-100;
     }
-    
+
     &::placeholder {
       @apply text-base-content/50;
     }
@@ -1847,10 +1859,10 @@
   /* Cards in Content - Dark Theme Support */
   .card {
     @apply bg-base-100 border-base-300;
-    
+
     .card-body {
       @apply text-base-content;
-      
+
       .card-title {
         @apply text-base-content;
       }
@@ -1860,11 +1872,11 @@
   /* Alerts - Dark Theme Support */
   .alert {
     @apply bg-base-200 border-base-300 text-base-content;
-    
+
     &.alert-info {
       @apply bg-info/10 border-info/20 text-info-content;
     }
-    
+
     &.alert-error {
       @apply bg-error/10 border-error/20 text-error-content;
     }
@@ -1878,7 +1890,7 @@
   }
 
   .loading-content {
-    @apply bg-base-100 border border-base-300 mx-4 max-w-md rounded-2xl p-12 text-center shadow-2xl;
+    @apply bg-base-100 border-base-300 mx-4 max-w-md rounded-2xl border p-12 text-center shadow-2xl;
   }
 
   .loading-animation {
@@ -1908,7 +1920,7 @@
   }
 
   .loading-step {
-    @apply flex items-center gap-3 text-sm text-base-content;
+    @apply text-base-content flex items-center gap-3 text-sm;
   }
 
   .loading-step-icon {
@@ -1941,7 +1953,7 @@
   }
 
   .thank-you-content {
-    @apply bg-base-100 border border-base-300 w-full max-w-4xl rounded-3xl p-12 text-center shadow-2xl;
+    @apply bg-base-100 border-base-300 w-full max-w-4xl rounded-3xl border p-12 text-center shadow-2xl;
   }
 
   .thank-you-animation {
@@ -1966,7 +1978,7 @@
   }
 
   .thank-you-card {
-    @apply bg-base-200 border border-base-300 rounded-2xl p-8;
+    @apply bg-base-200 border-base-300 rounded-2xl border p-8;
   }
 
   .thank-you-card h3 {
@@ -1978,7 +1990,7 @@
   }
 
   .thank-you-steps li {
-    @apply flex items-start gap-4 text-base-content;
+    @apply text-base-content flex items-start gap-4;
   }
 
   .step-number {
@@ -2017,23 +2029,23 @@
     .wizard-container {
       @apply mx-2 rounded-xl;
     }
-    
+
     .wizard-header {
       @apply px-4;
-      
+
       h1 {
         @apply text-2xl;
       }
     }
-    
+
     .progress-wrapper {
       @apply mx-4 mb-8;
     }
-    
+
     .step-content-wrapper {
       @apply px-4;
     }
-    
+
     .wizard-navigation {
       @apply px-4;
     }
@@ -2053,12 +2065,12 @@
     .thank-you-subtitle {
       @apply text-lg;
     }
-    
+
     /* Mobile Progress Bar Improvements */
     .progress-mobile {
       button {
         @apply min-w-16;
-        
+
         div:last-child {
           @apply text-xs leading-tight;
         }
@@ -2069,25 +2081,24 @@
   /* Extra small screens */
   @media (max-width: 480px) {
     .progress-mobile {
-
       button {
         @apply min-w-14;
-        
+
         div:first-child {
           @apply h-7 w-7 text-xs;
         }
-        
+
         div:last-child {
           @apply text-xs leading-tight;
         }
       }
     }
-    
+
     .project-types-grid,
     .subtypes-grid {
       @apply gap-4;
     }
-    
+
     .features-grid {
       @apply gap-3;
     }

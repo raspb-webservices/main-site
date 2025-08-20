@@ -87,7 +87,7 @@
           "push": "Service Worker: Push notifications",
           "appStores": "Developed applications can be placed in the app stores (iOS & Android)"
         },
-        "buttonText": "Request now"
+        "buttonText": "Calculate project"
       },
       "freestyle": {
         "title": "Freestyle (Custom Development)",
@@ -131,23 +131,23 @@
       "subtitleFirst": "We understand that successful projects require the optimal balance between time, cost and quality.",
       "subtitleSecond": "Our Philosophy",
       "subtitleThird": "\"perfectly balanced\" stands for this harmonious coordination of all factors.",
-    "zeit": {
-      "title": "Time",
-      "description": "Fast implementation through agile development processes, AI support and proven system of best practice components combined with individual development by experts.",
-      "buttonText": "Learn more ›",
-      "features": {
-        "agile": "Agile Methods",
-        "ki": "AI Support",
-        "bausteine": "Proven Components",
-        "experten": "Expert Team",
-        "oekosystem": "raspb Ecosystem"
+      "zeit": {
+        "title": "Time",
+        "description": "Fast implementation through agile development processes, AI support and proven system of best practice components combined with individual development by experts.",
+        "buttonText": "Learn more ›",
+        "features": {
+          "agile": "Agile Methods",
+          "ki": "AI Support",
+          "bausteine": "Proven Components",
+          "experten": "Expert Team",
+          "oekosystem": "raspb Ecosystem"
+        },
+        "modal": {
+          "paragraph1": "Time is a crucial factor in the digital world. While other agencies need months for implementation, we deliver first results within a few days thanks to our unique raspb method.",
+          "paragraph2": "Our secret lies in the perfect combination of proven components, AI-supported development processes and the expertise of our team. Over the years we have developed an ecosystem of reusable components that enables us to implement even complex projects at record speed - without compromising on quality.",
+          "paragraph3": "Agile development methods ensure that you can already give feedback during development and the end result exactly matches your ideas. This not only saves us time, but also ensures that the project is heading in the right direction from the start."
+        }
       },
-      "modal": {
-        "paragraph1": "Time is a crucial factor in the digital world. While other agencies need months for implementation, we deliver first results within a few days thanks to our unique raspb method.",
-        "paragraph2": "Our secret lies in the perfect combination of proven components, AI-supported development processes and the expertise of our team. Over the years we have developed an ecosystem of reusable components that enables us to implement even complex projects at record speed - without compromising on quality.",
-        "paragraph3": "Agile development methods ensure that you can already give feedback during development and the end result exactly matches your ideas. This not only saves us time, but also ensures that the project is heading in the right direction from the start."
-      }
-    },
       "kosten": {
         "title": "Costs",
         "description": "Transparent fixed prices without hidden costs - no subsequent subscription fees - no forced acceptance. Thanks to the raspb method, we can offer an unbeatable price-performance ratio.",
@@ -248,33 +248,6 @@
       "note": "💡 <strong>Tip:</strong> The configurator takes only 3-5 minutes and you immediately receive your personal project price. Non-binding and free of charge."
     }
   },
-  "einblicke": {
-    "meta": {
-      "title": "raspb Webservices - Insights",
-      "description": "Here can be a description..."
-    },
-    "header": {
-      "title": "Insights",
-      "teaser": "Trust and transparency are important for a good customer relationship. Here we want to provide insights into our work and a typical project workflow, so it's crystal clear what you can expect."
-    },
-    "webtechnologien": {
-      "titleFirst": "We use",
-      "titleHighlight": "modern web technologies",
-      "subtitle": "We have developed our own technology stack based on the Jamstack that makes everything simpler, faster and more efficient without having to accept limitations.",
-      "absatz1": "<strong>JAMstack</strong> stands for JavaScript, APIs and Markup and represents a modern architecture for web development. This technology enables us to create extremely fast, secure and scalable websites that provide an exceptional user experience.",
-      "absatz2": "The core of the JAMstack approach lies in the <strong>pre-rendering</strong> of content. Instead of creating pages dynamically with each request, all pages are already generated at build time and delivered via a Content Delivery Network (CDN). This leads to lightning-fast loading times and improved performance.",
-      "absatz3": "By <strong>decoupling frontend and backend</strong>, we can flexibly use the best tools for each area. The frontend is delivered as static files, while dynamic functions are implemented via APIs. This architecture offers several decisive advantages:",
-      "vorteile": {
-        "sicherheit": "<strong>Security:</strong> Less attack surface through static files",
-        "performance": "<strong>Performance:</strong> Global CDN distribution for minimal loading times",
-        "skalierbarkeit": "<strong>Scalability:</strong> Automatic scaling without server administration",
-        "entwicklerfreundlichkeit": "<strong>Developer-friendly:</strong> Modern development tools and workflows",
-        "kosteneffizienz": "<strong>Cost efficiency:</strong> Reduced hosting and maintenance costs"
-      }
-    },
-    "absatz4": "Our JAMstack setup includes modern technologies like <strong>Svelte/SvelteKit</strong> for the frontend, <strong>TypeScript</strong> for type-safe development, <strong>Tailwind CSS</strong> for efficient styling and <strong>Netlify</strong> for deployment and hosting. This combination enables us to develop robust and maintainable web applications that are optimized for both developers and end users.",
-    "absatz5": "The <strong>Headless CMS integration</strong> via GraphQL APIs enables our customers to easily manage content while the technical complexity remains hidden in the background. This way you can focus on your business while we ensure a technically flawless and future-proof solution."
-  },
   "ueberUns": {
     "meta": {
       "title": "raspb Webservices - About Us",
@@ -282,7 +255,7 @@
     },
     "header": {
       "title": "About",
-      "titleHighlight":"Us",
+      "titleHighlight": "Us",
       "teaser1": "At raspb Webservices, we combine human creativity with the power of artificial intelligence. As a modern web development studio, we create innovative digital solutions that bring your vision to life.",
       "teaser2": "And who exactly is raspb now? - Actually, it's just me and my AI Crew 😉"
     },
@@ -323,6 +296,34 @@
       "personality": "Personality",
       "experience": "Experience & Expertise",
       "coreCompetencies": "Core Competencies"
+    }
+  },
+  "einblicke": {
+    "meta": {
+      "title": "raspb Webservices - Insights",
+      "description": "Here can be a description..."
+    },
+    "header": {
+      "title": "Insights",
+      "teaser": "Trust and transparency are important for a good customer relationship. Here we want to provide insights into our work and a typical project workflow, so it's crystal clear what you can expect."
+    },
+    "webtechnologien": {
+      "titleFirst": "We use",
+      "titleHighlight": "modern web technologies",
+      "titleSecond": " a",
+      "subtitle": "We have developed our own technology stack based on the Jamstack that makes everything simpler, faster and more efficient without having to accept limitations.",
+      "absatz1": "<strong>JAMstack</strong> stands for JavaScript, APIs and Markup and represents a modern architecture for web development. This technology enables us to create extremely fast, secure and scalable websites that provide an exceptional user experience.",
+      "absatz2": "The core of the JAMstack approach lies in the <strong>pre-rendering</strong> of content. Instead of creating pages dynamically with each request, all pages are already generated at build time and delivered via a Content Delivery Network (CDN). This leads to lightning-fast loading times and improved performance.",
+      "absatz3": "By <strong>decoupling frontend and backend</strong>, we can flexibly use the best tools for each area. The frontend is delivered as static files, while dynamic functions are implemented via APIs. This architecture offers several decisive advantages:",
+      "vorteile": {
+        "sicherheit": "<strong>Security:</strong> Less attack surface through static files",
+        "performance": "<strong>Performance:</strong> Global CDN distribution for minimal loading times",
+        "skalierbarkeit": "<strong>Scalability:</strong> Automatic scaling without server administration",
+        "entwicklerfreundlichkeit": "<strong>Developer-friendly:</strong> Modern development tools and workflows",
+        "kosteneffizienz": "<strong>Cost efficiency:</strong> Reduced hosting and maintenance costs"
+      },
+      "absatz4": "Our JAMstack setup includes modern technologies like <strong>Svelte/SvelteKit</strong> for the frontend, <strong>TypeScript</strong> for type-safe development, <strong>Tailwind CSS</strong> for efficient styling and <strong>Netlify</strong> for deployment and hosting. This combination enables us to develop robust and maintainable web applications that are optimized for both developers and end users.",
+      "absatz5": "The <strong>Headless CMS integration</strong> via GraphQL APIs enables our customers to easily manage content while the technical complexity remains hidden in the background. This way you can focus on your business while we ensure a technically flawless and future-proof solution."
     }
   },
   "servicesPage": {
@@ -377,701 +378,344 @@
     "webseitenSection": {
       "titleFirst": "Websites",
       "titleHighlight": "for every requirement",
-      "teaser": "From elegant one-pagers to comprehensive corporate websites - we develop websites that inspire your target audience and support your business goals. And all this with a technical standard that is second to none.",
-      "onePage": {
-        "title": "One-Pager Websites",
-        "icon": "🎯",
-        "description": "Compact, focused presentation on a scrollable page. Perfect for a quick start with a clear message.",
-        "highlights": {
-          "h1": "Web Business Card",
-          "h2": "Maintenance Page",
-          "h3": "Minimalist Campaign Page"
-        },
-        "buttonText": "More Details"
+      "teaser": "From elegant one-pagers to comprehensive corporate websites - we develop websites that inspire you...ntegration for third-party systems",
+      "e6": "Advanced search functions",
+      "scalabilityTitle": "Scalability:",
+      "scalability": {
+        "s1": "High-performance database architecture",
+        "s2": "CDN integration for global availability",
+        "s3": "Automatic scaling",
+        "s4": "Extensive analytics and reporting"
       },
-      "landingPages": {
-        "title": "Landing Pages",
-        "icon": "🚀",
-        "description": "Targeted campaign pages for marketing campaigns, product launches or events with maximum conversion.",
-        "highlights": {
-          "h1": "A/B Testing",
-          "h2": "Analytics",
-          "h3": "Fast Implementation"
-        },
-        "buttonText": "More Details"
-      },
-      "corporateWebsites": {
-        "title": "Corporate Websites",
-        "icon": "🏢",
-        "description": "Professional corporate websites with multiple pages, comprehensive content and extended functions.",
-        "highlights": {
-          "h1": "SEO-optimized",
-          "h2": "Multi-page",
-          "h3": "Professional"
-        },
-        "buttonText": "More Details"
-      }
+      "projectDuration": "Project duration:",
+      "projectDurationValue": "6-12 weeks",
+      "support": "Support:",
+      "supportValue": "Dedicated support team available",
+      "closeButton": "Close"
     },
-    "cmsSection": {
-      "titleFirst": "Content Management",
-      "titleHighlight": "tailored",
-      "teaser": "Maintain control over your content with tailor-made CMS solutions - from simple page editing to complex content structures.",
-      "simpleCms": {
-        "title": "Simple Content Editing",
-        "icon": "✏️",
-        "description": "Make existing pages editable or enable simple editing of individual content.",
-        "highlights": {
-          "h1": "Inline Editing",
-          "h2": "User-friendly",
-          "h3": "Instant Preview"
-        },
-        "buttonText": "More Details"
+    "blogCms": {
+      "title": "Blog & Content Platforms",
+      "perfectFor": "Perfect for:",
+      "perfectForDescription": "Bloggers, journalists, content creators, magazines",
+      "contentOptimizedFeaturesTitle": "Content-optimized Features:",
+      "contentOptimizedFeatures": {
+        "c1": "Optimized for content creation",
+        "c2": "SEO tools and meta tag management",
+        "c3": "Social media integration and auto-posting",
+        "c4": "Comment system with moderation",
+        "c5": "Newsletter integration (Mailchimp, ConvertKit)",
+        "c6": "Categories and tag system"
       },
-      "complexCms": {
-        "title": "Complex CMS Systems",
-        "icon": "🏗️",
-        "description": "Individual content management systems with multi-layered information objects and extended functions.",
-        "highlights": {
-          "h1": "Custom Content Types",
-          "h2": "Workflow Management",
-          "h3": "Multilingualism"
-        },
-        "buttonText": "More Details"
+      "monetizationTitle": "Monetization:",
+      "monetization": {
+        "m1": "Advertising space management",
+        "m2": "Affiliate link integration",
+        "m3": "Premium content areas",
+        "m4": "Email marketing tools"
       },
-      "blogCms": {
-        "title": "Blog & Content Platforms",
-        "icon": "📝",
-        "description": "Specialized solutions for blogs, magazines and content-driven websites.",
-        "highlights": {
-          "h1": "SEO Tools",
-          "h2": "Social Media",
-          "h3": "Newsletter"
-        },
-        "buttonText": "More Details"
-      },
-      "headlessCms": {
-        "title": "Headless CMS",
-        "icon": "🔗",
-        "description": "Flexible content management with API-based delivery for multiple channels.",
-        "highlights": {
-          "h1": "API-first",
-          "h2": "Multi-Channel",
-          "h3": "Future-proof"
-        },
-        "buttonText": "More Details"
-      }
+      "projectDuration": "Project duration:",
+      "projectDurationValue": "2-4 weeks",
+      "contentMigration": "Content migration:",
+      "contentMigrationValue": "We're happy to take over existing content",
+      "closeButton": "Close"
     },
-    "applicationsSection": {
-      "titleFirst": "Applications",
-      "titleHighlight": "for Web & Mobile",
-      "teaser": "From simple browser applications to native mobile apps - we rely on Progressive Web App technology for maximum reach and performance.",
-      "webApps": {
-        "title": "Web Applications",
-        "icon": "💻",
-        "description": "Browser-based applications for specific tasks and workflows.",
-        "highlights": {
-          "h1": "Platform-independent",
-          "h2": "No Installation",
-          "h3": "Auto-Updates"
-        },
-        "buttonText": "More Details"
+    "headlessCms": {
+      "title": "Headless CMS",
+      "perfectFor": "Perfect for:",
+      "perfectForDescription": "Multi-channel publishing, apps + web, enterprise solutions",
+      "apiFirstTitle": "API-First Approach:",
+      "apiFirst": {
+        "a1": "Create content once, use everywhere",
+        "a2": "RESTful and GraphQL APIs",
+        "a3": "Flexibility in presentation",
+        "a4": "Future-proof and scalable",
+        "a5": "Integration into existing systems",
+        "a6": "Developer-friendly documentation"
       },
-      "pwa": {
-        "title": "Progressive Web Apps (PWA)",
-        "icon": "📱",
-        "description": "The best of web and app - installable, offline-capable and with native features.",
-        "highlights": {
-          "h1": "Installable",
-          "h2": "Offline-capable",
-          "h3": "Push Notifications"
-        },
-        "buttonText": "More Details"
+      "useCasesTitle": "Use Cases:",
+      "useCases": {
+        "u1": "Website + mobile app with the same content",
+        "u2": "Multiple websites from one source",
+        "u3": "IoT devices and digital signage",
+        "u4": "E-commerce with different frontends"
       },
-      "nativeApps": {
-        "title": "Native Mobile Apps",
-        "icon": "📲",
-        "description": "Full-fledged apps for iOS and Android App Stores with native performance.",
-        "highlights": {
-          "h1": "App Store",
-          "h2": "Native Performance",
-          "h3": "Hardware Access"
-        },
-        "buttonText": "More Details"
-      },
-      "complexApps": {
-        "title": "Complex Applications",
-        "icon": "⚙️",
-        "description": "Extensive applications with advanced functions and integrations.",
-        "highlights": {
-          "h1": "Database Integration",
-          "h2": "Real-time Features",
-          "h3": "Scalable"
-        },
-        "buttonText": "More Details"
-      }
+      "projectDuration": "Project duration:",
+      "projectDurationValue": "4-8 weeks",
+      "technology": "Technology:",
+      "technologyValue": "Hygraph, Strapi or custom solution",
+      "closeButton": "Close"
     },
-    "individualDevelopmentSection": {
-      "titleFirst": "Individual",
-      "titleHighlight": "Development",
-      "teaser": "Do you have special requirements that do not fit into the standard categories? We develop tailor-made solutions for every use case.",
-      "components": {
-        "title": "Individual Components",
-        "icon": "🧩",
-        "description": "UI components, widgets, special forms and custom plugins.",
-        "buttonText": "More Details"
+    "webApps": {
+      "title": "Web Applications",
+      "perfectFor": "Perfect for:",
+      "perfectForDescription": "Dashboards, tools, calculators, management systems",
+      "technicalAdvantagesTitle": "Technical Advantages:",
+      "technicalAdvantages": {
+        "t1": "Platform-independent (Windows, Mac, Linux)",
+        "t2": "No installation required",
+        "t3": "Automatic updates",
+        "t4": "Responsive design for all screen sizes",
+        "t5": "Offline functionality possible",
+        "t6": "Secure data transmission"
       },
-      "extensions": {
-        "title": "System Extensions",
-        "icon": "🔧",
-        "description": "Extension of existing websites, API integrations and performance optimizations.",
-        "buttonText": "More Details"
+      "exampleApplicationsTitle": "Example Applications:",
+      "exampleApplications": {
+        "e1": "Business dashboards with real-time data",
+        "e2": "Project management tools",
+        "e3": "Financial calculators",
+        "e4": "Inventory management systems",
+        "e5": "Time tracking tools"
       },
-      "specialApps": {
-        "title": "Special Applications",
-        "icon": "📊",
-        "description": "Event registration, data dashboards, reporting tools and automation scripts.",
-        "buttonText": "More Details"
-      },
-      "design": {
-        "title": "UI/UX Design",
-        "icon": "🎨",
-        "description": "Interface design, user experience optimization, prototyping and design systems.",
-        "buttonText": "More Details"
-      }
+      "projectDuration": "Project duration:",
+      "projectDurationValue": "2-8 weeks depending on complexity",
+      "technology": "Technology:",
+      "technologyValue": "SvelteKit, React or Vue.js",
+      "closeButton": "Close"
     },
-    "kiServicesSection": {
-      "titleFirst": "AI Services",
-      "titleHighlight": "& Automation",
-      "teaser": "Leverage the power of Artificial Intelligence for your business. From consulting to ready-made AI solutions.",
-      "consulting": {
-        "title": "AI Consulting & Support",
-        "icon": "🧠",
-        "description": "Comprehensive consulting and support for integrating AI into your business processes.",
-        "highlights": {
-          "h1": "Strategy Development",
-          "h2": "Prompt Engineering",
-          "h3": "ROI Analysis"
-        },
-        "buttonText": "More Details"
+    "pwa": {
+      "title": "Progressive Web Apps (PWA)",
+      "perfectFor": "Perfect for:",
+      "perfectForDescription": "App-like experiences without app store",
+      "appLikeFeaturesTitle": "App-like Features:",
+      "appLikeFeatures": {
+        "a1": "Installable on all devices",
+        "a2": "Works offline",
+        "a3": "Push notifications",
+        "a4": "Access to device hardware (camera, GPS)",
+        "a5": "App icon on the home screen",
+        "a6": "Full-screen mode without browser UI"
       },
-      "agentDevelopment": {
-        "title": "AI Agent Development",
-        "icon": "🤖",
-        "description": "Tailor-made AI agents for specific tasks and use cases.",
-        "highlights": {
-          "h1": "Custom Chatbots",
-          "h2": "Content Generation",
-          "h3": "System Integration"
-        },
-        "buttonText": "More Details"
+      "technicalFeaturesTitle": "Technical Features:",
+      "technicalFeatures": {
+        "t1": "Service worker for offline functionality",
+        "t2": "App manifest for installation",
+        "t3": "Intelligent caching",
+        "t4": "Background sync",
+        "t5": "Automatic updates"
       },
-      "workflowOptimization": {
-        "title": "Workflow Optimization with AI",
-        "icon": "⚡",
-        "description": "Simplify, shorten and reduce costs of digital processes and workflows with AI.",
-        "highlights": {
-          "h1": "Process Analysis",
-          "h2": "Automation",
-          "h3": "Predictive Analytics"
-        },
-        "buttonText": "More Details"
-      },
-      "aiInfrastructure": {
-        "title": "AI as Infrastructure",
-        "icon": "🏗️",
-        "description": "AI infrastructure as a service - rent instead of buy for maximum flexibility.",
-        "highlights": {
-          "h1": "Scalable",
-          "h2": "Pay-per-Use",
-          "h3": "24/7 Support"
-        },
-        "buttonText": "More Details"
-      }
+      "projectDuration": "Project duration:",
+      "projectDurationValue": "3-6 weeks",
+      "advantage": "Advantage:",
+      "advantageValue": "No app store fees or approvals",
+      "closeButton": "Close"
     },
-    "ctaSection": {
-      "titleFirst": "Ready for your",
-      "titleHighlight": "digital project",
-      "teaser": "Have you found the perfect solution for your project? Our intelligent configurator helps you specify your project and you immediately receive a transparent fixed price.",
-      "benefits": {
-        "benefit1": {
-          "icon": "⚡",
-          "title": "Immediate Price",
-          "description": "Receive a binding fixed price within minutes"
-        },
-        "benefit2": {
-          "icon": "🎯",
-          "title": "Tailored",
-          "description": "Every solution is tailored to your needs"
-        },
-        "benefit3": {
-          "icon": "🤝",
-          "title": "Personal Contact",
-          "description": "A fixed contact person accompanies you through the entire project"
-        }
+    "nativeApps": {
+      "title": "Native Mobile Apps",
+      "perfectFor": "Perfect for:",
+      "perfectForDescription": "Apps with high performance requirements",
+      "nativeAdvantagesTitle": "Native Advantages:",
+      "nativeAdvantages": {
+        "n1": "App Store and Google Play distribution",
+        "n2": "Native performance and speed",
+        "n3": "Full access to all device hardware",
+        "n4": "Platform-specific UI elements",
+        "n5": "Advanced security features",
+        "n6": "Deep system integration"
       },
-      "button1": "Configure project now",
-      "button2": "Frequently Asked Questions",
-      "note": "💡 <strong>Tip:</strong> The configurator takes only 3-5 minutes and you immediately receive your personal project price. Non-binding and free of charge."
+      "developmentApproachTitle": "Development Approach:",
+      "developmentApproach": {
+        "d1": "React Native for iOS and Android",
+        "d2": "Capacitor for web-to-app conversion",
+        "d3": "Shared codebase for efficiency",
+        "d4": "Native modules when needed"
+      },
+      "projectDuration": "Project duration:",
+      "projectDurationValue": "8-16 weeks",
+      "appStore": "App Store:",
+      "appStoreValue": "Support with publication included",
+      "closeButton": "Close"
     },
-    "modals": {
-      "onePage": {
-        "title": "One-Pager Websites",
-        "perfectFor": "Perfect for:",
-        "perfectForDescription": "getting started, with little content, a quick and temporary internet presence or a simple campaign page",
-        "paragraph1": "If you want to be present on the internet NOW, with address, phone number and, if applicable, store opening hours, but are still in the planning phase. Then a web business card as a simple one-pager is a good option. This way, your contact details are at least already findable and you have a basis for more complex projects.",
-        "paragraph2": "But even if you want a single page as a maintenance page (displayed when the page is in maintenance mode) or a single splash page to be implemented, the raspb one-pager is ideal. And that already from €399 (incl. everything = hosting, fees, etc.)",
-        "paragraph3": "A one-page site can also be more complex. With a form at the end or appealing animations. There are hardly any limits to the imagination. Use the one-pager approach to realize your online campaign.",
-        "servicesDetailTitle": "Services in detail:",
-        "servicesDetails": {
-          "d1": "Responsive design for all devices",
-          "d2": "Optimized performance with lightning-fast loading times",
-          "d3": "Basic SEO optimization",
-          "d4": "Flexibly expandable. Bring in your wishes.",
-          "d5": "Domain and SSL certificate included",
-          "d6": "Within the Fair Use area*, no further costs are incurred (hosting, maintenance, operation)"
-        },
-        "technicalFeaturesTitle": "Technical Features:",
-        "technicalFeatures": {
-          "t1": "Optionally with modern CSS animations",
-          "t2": "Smooth Scrolling Navigation",
-          "t3": "Lazy Loading for images"
-        },
-        "projectDuration": "Project duration:",
-        "projectDurationValue": "1-5 days",
-        "maintenance": "Maintenance:",
-        "maintenanceValue": "Included for one year.",
-        "closeButton": "Close"
+    "complexApps": {
+      "title": "Complex Applications",
+      "perfectFor": "Perfect for:",
+      "perfectForDescription": "CRM systems, e-learning platforms, booking systems",
+      "enterpriseFeaturesTitle": "Enterprise Features:",
+      "enterpriseFeatures": {
+        "e1": "Extensive database integration",
+        "e2": "API development and integration",
+        "e3": "User authentication and management",
+        "e4": "Real-time features (chat, notifications)",
+        "e5": "Scalable microservice architecture",
+        "e6": "Extensive reporting functions"
       },
-      "landingPages": {
-        "title": "Landing Pages",
-        "perfectFor": "Perfect for:",
-        "perfectForDescription": "Marketing campaigns, product launches, events, lead generation",
-        "conversionOptimizationTitle": "Conversion Optimization:",
-        "conversionOptimization": {
-          "c1": "A/B testing setup for headlines and CTAs",
-          "c2": "Heatmap integration (Hotjar/Crazy Egg)",
-          "c3": "Conversion tracking with Google Analytics",
-          "c4": "Optimized forms with minimal fields",
-          "c5": "Social Proof Integration"
-        },
-        "marketingIntegrationTitle": "Marketing Integration:",
-        "marketingIntegration": {
-          "m1": "Facebook Pixel Integration",
-          "m2": "Google Ads Conversion Tracking",
-          "m3": "Email Marketing Tool Integration",
-          "m4": "CRM Integration (HubSpot, Salesforce)"
-        },
-        "projectDuration": "Project duration:",
-        "projectDurationValue": "3-5 days",
-        "performance": "Performance:",
-        "performanceValue": "Optimized for maximum conversion rate",
-        "closeButton": "Close"
+      "exampleSystemsTitle": "Example Systems:",
+      "exampleSystems": {
+        "e1": "Customer Relationship Management (CRM)",
+        "e2": "E-learning and course platforms",
+        "e3": "Booking and reservation systems",
+        "e4": "Collaboration and project management tools",
+        "e5": "Inventory management systems"
       },
-      "corporateWebsites": {
-        "title": "Corporate Websites",
-        "perfectFor": "Perfect for:",
-        "perfectForDescription": "Medium-sized companies, agencies, consultancies, B2B companies",
-        "extensiveFeaturesTitle": "Extensive Features:",
-        "extensiveFeatures": {
-          "e1": "Multi-page structure (5-20 pages)",
-          "e2": "Advanced SEO optimization",
-          "e3": "Professional corporate design",
-          "e4": "Contact forms and interactions",
-          "e5": "Team and About Us pages",
-          "e6": "Service/product presentations",
-          "e7": "News/blog integration"
-        },
-        "advancedFunctionsTitle": "Advanced Functions:",
-        "advancedFunctions": {
-          "a1": "Multilingualism (DACH region)",
-          "a2": "Advanced Analytics and Tracking",
-          "a3": "Newsletter Integration",
-          "a4": "Social Media Integration",
-          "a5": "Download area for documents"
-        },
-        "projectDuration": "Project duration:",
-        "projectDurationValue": "3-6 weeks",
-        "maintenance": "Maintenance:",
-        "maintenanceValue": "Recommended for optimal performance",
-        "closeButton": "Close"
+      "projectDuration": "Project duration:",
+      "projectDurationValue": "12-24 weeks",
+      "support": "Support:",
+      "supportValue": "Long-term maintenance and further development",
+      "closeButton": "Close"
+    },
+    "components": {
+      "title": "Individual Components",
+      "perfectFor": "Perfect for:",
+      "perfectForDescription": "Special UI elements, widgets, custom plugins",
+      "componentTypesTitle": "Component Types:",
+      "componentTypes": {
+        "c1": "Interactive UI components",
+        "c2": "Special forms and input fields",
+        "c3": "Data visualization and charts",
+        "c4": "Custom widgets for websites",
+        "c5": "Reusable code modules"
       },
-      "simpleCms": {
-        "title": "Simple Content Editing",
-        "perfectFor": "Perfect for:",
-        "perfectForDescription": "Small businesses, associations, practices, restaurants",
-        "userFriendlyFeaturesTitle": "User-friendly Features:",
-        "userFriendlyFeatures": {
-          "u1": "Inline editing directly on the website",
-          "u2": "WYSIWYG editor for texts",
-          "u3": "Easy image upload and management",
-          "u4": "Instant preview of changes",
-          "u5": "Automatic backups",
-          "u6": "Version control"
-        },
-        "technicalDetailsTitle": "Technical Details:",
-        "technicalDetails": {
-          "t1": "No technical knowledge required",
-          "t2": "Secure user login",
-          "t3": "Mobile editing possible",
-          "t4": "Automatic SEO optimization"
-        },
-        "setupTime": "Setup time:",
-        "setupTimeValue": "1-2 days",
-        "training": "Training:",
-        "trainingValue": "30 minutes online training included",
-        "closeButton": "Close"
+      "projectDuration": "Project duration:",
+      "projectDurationValue": "1-3 weeks",
+      "integration": "Integration:",
+      "integrationValue": "Seamless integration into existing systems",
+      "closeButton": "Close"
+    },
+    "extensions": {
+      "title": "System Extensions",
+      "perfectFor": "Perfect for:",
+      "perfectForDescription": "Extending and optimizing existing websites",
+      "extensionServicesTitle": "Extension Services:",
+      "extensionServices": {
+        "e1": "New features for existing websites",
+        "e2": "API integrations (payment, CRM, etc.)",
+        "e3": "Performance optimizations",
+        "e4": "Database migrations",
+        "e5": "Security updates and hardening"
       },
-      "complexCms": {
-        "title": "Complex CMS Systems",
-        "perfectFor": "Perfect for:",
-        "perfectForDescription": "Large companies, publishers, e-commerce, portals",
-        "enterpriseFeaturesTitle": "Enterprise Features:",
-        "enterpriseFeatures": {
-          "e1": "Custom content types",
-          "e2": "Workflow management with approval processes",
-          "e3": "Multilingualism and localization",
-          "e4": "User roles and rights management",
-          "e5": "API integration for third-party systems",
-          "e6": "Advanced search functions"
-        },
-        "scalabilityTitle": "Scalability:",
-        "scalability": {
-          "s1": "High-performance database architecture",
-          "s2": "CDN integration for global availability",
-          "s3": "Automatic scaling",
-          "s4": "Extensive analytics and reporting"
-        },
-        "projectDuration": "Project duration:",
-        "projectDurationValue": "6-12 weeks",
-        "support": "Support:",
-        "supportValue": "Dedicated support team available",
-        "closeButton": "Close"
+      "projectDuration": "Project duration:",
+      "projectDurationValue": "1-4 weeks",
+      "compatibility": "Compatibility:",
+      "compatibilityValue": "Works with all common technologies",
+      "closeButton": "Close"
+    },
+    "specialApps": {
+      "title": "Special Applications",
+      "perfectFor": "Perfect for:",
+      "perfectForDescription": "Unique business requirements",
+      "applicationExamplesTitle": "Application Examples:",
+      "applicationExamples": {
+        "a1": "Event registration systems",
+        "a2": "Business intelligence dashboards",
+        "a3": "Reporting and analytics tools",
+        "a4": "Automation scripts",
+        "a5": "Data processing pipelines"
       },
-      "blogCms": {
-        "title": "Blog & Content Platforms",
-        "perfectFor": "Perfect for:",
-        "perfectForDescription": "Bloggers, journalists, content creators, magazines",
-        "contentOptimizedFeaturesTitle": "Content-optimized Features:",
-        "contentOptimizedFeatures": {
-          "c1": "Optimized for content creation",
-          "c2": "SEO tools and meta tag management",
-          "c3": "Social media integration and auto-posting",
-          "c4": "Comment system with moderation",
-          "c5": "Newsletter integration (Mailchimp, ConvertKit)",
-          "c6": "Categories and tag system"
-        },
-        "monetizationTitle": "Monetization:",
-        "monetization": {
-          "m1": "Advertising space management",
-          "m2": "Affiliate link integration",
-          "m3": "Premium content areas",
-          "m4": "Email marketing tools"
-        },
-        "projectDuration": "Project duration:",
-        "projectDurationValue": "2-4 weeks",
-        "contentMigration": "Content migration:",
-        "contentMigrationValue": "We're happy to take over existing content",
-        "closeButton": "Close"
+      "projectDuration": "Project duration:",
+      "projectDurationValue": "2-8 weeks",
+      "approach": "Approach:",
+      "approachValue": "Agile development with regular reviews",
+      "closeButton": "Close"
+    },
+    "design": {
+      "title": "UI/UX Design",
+      "perfectFor": "Perfect for:",
+      "perfectForDescription": "Optimal user experience and modern design",
+      "designServicesTitle": "Design Services:",
+      "designServices": {
+        "d1": "User interface design",
+        "d2": "User experience optimization",
+        "d3": "Interactive prototyping",
+        "d4": "Design systems and style guides",
+        "d5": "Usability testing"
       },
-      "headlessCms": {
-        "title": "Headless CMS",
-        "perfectFor": "Perfect for:",
-        "perfectForDescription": "Multi-channel publishing, apps + web, enterprise solutions",
-        "apiFirstTitle": "API-First Approach:",
-        "apiFirst": {
-          "a1": "Create content once, use everywhere",
-          "a2": "RESTful and GraphQL APIs",
-          "a3": "Flexibility in presentation",
-          "a4": "Future-proof and scalable",
-          "a5": "Integration into existing systems",
-          "a6": "Developer-friendly documentation"
-        },
-        "useCasesTitle": "Use Cases:",
-        "useCases": {
-          "u1": "Website + mobile app with the same content",
-          "u2": "Multiple websites from one source",
-          "u3": "IoT devices and digital signage",
-          "u4": "E-commerce with different frontends"
-        },
-        "projectDuration": "Project duration:",
-        "projectDurationValue": "4-8 weeks",
-        "technology": "Technology:",
-        "technologyValue": "Hygraph, Strapi or custom solution",
-        "closeButton": "Close"
+      "projectDuration": "Project duration:",
+      "projectDurationValue": "2-6 weeks",
+      "tools": "Tools:",
+      "toolsValue": "Figma, Adobe Creative Suite",
+      "closeButton": "Close"
+    },
+    "kiConsulting": {
+      "title": "AI Consulting & Support",
+      "perfectFor": "Perfect for:",
+      "perfectForDescription": "Companies that want to strategically use AI",
+      "consultingServicesTitle": "Consulting Services:",
+      "consultingServices": {
+        "c1": "AI strategy development for your company",
+        "c2": "Prompt engineering for optimal results",
+        "c3": "Context engineering for precise AI responses",
+        "c4": "Use case identification and evaluation",
+        "c5": "ROI analysis for AI projects",
+        "c6": "Change management for AI introduction"
       },
-      "webApps": {
-        "title": "Web Applications",
-        "perfectFor": "Perfect for:",
-        "perfectForDescription": "Dashboards, tools, calculators, management systems",
-        "technicalAdvantagesTitle": "Technical Advantages:",
-        "technicalAdvantages": {
-          "t1": "Platform-independent (Windows, Mac, Linux)",
-          "t2": "No installation required",
-          "t3": "Automatic updates",
-          "t4": "Responsive design for all screen sizes",
-          "t5": "Offline functionality possible",
-          "t6": "Secure data transmission"
-        },
-        "exampleApplicationsTitle": "Example Applications:",
-        "exampleApplications": {
-          "e1": "Business dashboards with real-time data",
-          "e2": "Project management tools",
-          "e3": "Financial calculators",
-          "e4": "Inventory management systems",
-          "e5": "Time tracking tools"
-        },
-        "projectDuration": "Project duration:",
-        "projectDurationValue": "2-8 weeks depending on complexity",
-        "technology": "Technology:",
-        "technologyValue": "SvelteKit, React or Vue.js",
-        "closeButton": "Close"
+      "projectDuration": "Project duration:",
+      "projectDurationValue": "2-4 weeks",
+      "deliverable": "Deliverable:",
+      "deliverableValue": "Comprehensive AI strategy and roadmap",
+      "closeButton": "Close"
+    },
+    "kiAgentDevelopment": {
+      "title": "AI Agent Development",
+      "perfectFor": "Perfect for:",
+      "perfectForDescription": "Automated customer service and content generation",
+      "agentTypesTitle": "Agent Types:",
+      "agentTypes": {
+        "a1": "Custom chatbots for websites",
+        "a2": "Automated customer service",
+        "a3": "Content generation and optimization",
+        "a4": "Data analysis and reporting agents",
+        "a5": "Email automation with AI",
+        "a6": "Integration into existing CRM systems"
       },
-      "pwa": {
-        "title": "Progressive Web Apps (PWA)",
-        "perfectFor": "Perfect for:",
-        "perfectForDescription": "App-like experiences without app store",
-        "appLikeFeaturesTitle": "App-like Features:",
-        "appLikeFeatures": {
-          "a1": "Installable on all devices",
-          "a2": "Works offline",
-          "a3": "Push notifications",
-          "a4": "Access to device hardware (camera, GPS)",
-          "a5": "App icon on the home screen",
-          "a6": "Full-screen mode without browser UI"
-        },
-        "technicalFeaturesTitle": "Technical Features:",
-        "technicalFeatures": {
-          "t1": "Service worker for offline functionality",
-          "t2": "App manifest for installation",
-          "t3": "Intelligent caching",
-          "t4": "Background sync",
-          "t5": "Automatic updates"
-        },
-        "projectDuration": "Project duration:",
-        "projectDurationValue": "3-6 weeks",
-        "advantage": "Advantage:",
-        "advantageValue": "No app store fees or approvals",
-        "closeButton": "Close"
+      "projectDuration": "Project duration:",
+      "projectDurationValue": "4-8 weeks",
+      "training": "Training:",
+      "trainingValue": "Individual training on your data",
+      "closeButton": "Close"
+    },
+    "workflowOptimization": {
+      "title": "Workflow Optimization with AI",
+      "perfectFor": "Perfect for:",
+      "perfectForDescription": "Efficiency improvement through intelligent automation",
+      "optimizationAreasTitle": "Optimization Areas:",
+      "optimizationAreas": {
+        "o1": "Process analysis and optimization potentials",
+        "o2": "Automation of recurring tasks",
+        "o3": "Intelligent document processing",
+        "o4": "Predictive analytics for better decisions",
+        "o5": "Integration of AI into existing workflows",
+        "o6": "Quality control through AI"
       },
-      "nativeApps": {
-        "title": "Native Mobile Apps",
-        "perfectFor": "Perfect for:",
-        "perfectForDescription": "Apps with high performance requirements",
-        "nativeAdvantagesTitle": "Native Advantages:",
-        "nativeAdvantages": {
-          "n1": "App Store and Google Play distribution",
-          "n2": "Native performance and speed",
-          "n3": "Full access to all device hardware",
-          "n4": "Platform-specific UI elements",
-          "n5": "Advanced security features",
-          "n6": "Deep system integration"
-        },
-        "developmentApproachTitle": "Development Approach:",
-        "developmentApproach": {
-          "d1": "React Native for iOS and Android",
-          "d2": "Capacitor for web-to-app conversion",
-          "d3": "Shared codebase for efficiency",
-          "d4": "Native modules when needed"
-        },
-        "projectDuration": "Project duration:",
-        "projectDurationValue": "8-16 weeks",
-        "appStore": "App Store:",
-        "appStoreValue": "Support with publication included",
-        "closeButton": "Close"
+      "measurableBenefitsTitle": "Measurable Benefits:",
+      "measurableBenefits": {
+        "m1": "Save time (up to 70% reduction)",
+        "m2": "Reduce costs",
+        "m3": "Minimize errors",
+        "m4": "Increase efficiency"
       },
-      "complexApps": {
-        "title": "Complex Applications",
-        "perfectFor": "Perfect for:",
-        "perfectForDescription": "CRM systems, e-learning platforms, booking systems",
-        "enterpriseFeaturesTitle": "Enterprise Features:",
-        "enterpriseFeatures": {
-          "e1": "Extensive database integration",
-          "e2": "API development and integration",
-          "e3": "User authentication and management",
-          "e4": "Real-time features (chat, notifications)",
-          "e5": "Scalable microservice architecture",
-          "e6": "Extensive reporting functions"
-        },
-        "exampleSystemsTitle": "Example Systems:",
-        "exampleSystems": {
-          "e1": "Customer Relationship Management (CRM)",
-          "e2": "E-learning and course platforms",
-          "e3": "Booking and reservation systems",
-          "e4": "Collaboration and project management tools",
-          "e5": "Inventory management systems"
-        },
-        "projectDuration": "Project duration:",
-        "projectDurationValue": "12-24 weeks",
-        "support": "Support:",
-        "supportValue": "Long-term maintenance and further development",
-        "closeButton": "Close"
+      "projectDuration": "Project duration:",
+      "projectDurationValue": "6-12 weeks",
+      "roi": "ROI:",
+      "roiValue": "Measurable efficiency improvement already after 4 weeks",
+      "closeButton": "Close"
+    },
+    "aiInfrastructure": {
+      "title": "AI as Infrastructure",
+      "perfectFor": "Perfect for:",
+      "perfectForDescription": "Scalable AI solutions without own infrastructure",
+      "serviceModelsTitle": "Service Models:",
+      "serviceModels": {
+        "s1": "Scalable AI infrastructure in the cloud",
+        "s2": "Pay-per-use models for cost efficiency",
+        "s3": "Managed AI services without maintenance effort",
+        "s4": "24/7 monitoring and technical support",
+        "s5": "Regular updates and improvements",
+        "s6": "Compliance and data protection included"
       },
-      "components": {
-        "title": "Individual Components",
-        "perfectFor": "Perfect for:",
-        "perfectForDescription": "Special UI elements, widgets, custom plugins",
-        "componentTypesTitle": "Component Types:",
-        "componentTypes": {
-          "c1": "Interactive UI components",
-          "c2": "Special forms and input fields",
-          "c3": "Data visualization and charts",
-          "c4": "Custom widgets for websites",
-          "c5": "Reusable code modules"
-        },
-        "projectDuration": "Project duration:",
-        "projectDurationValue": "1-3 weeks",
-        "integration": "Integration:",
-        "integrationValue": "Seamless integration into existing systems",
-        "closeButton": "Close"
+      "billingModelsTitle": "Billing Models:",
+      "billingModels": {
+        "b1": "Project-based billing",
+        "b2": "Monthly fee for continuous usage",
+        "b3": "Usage-based billing according to consumption",
+        "b4": "Hybrid models for optimal flexibility"
       },
-      "extensions": {
-        "title": "System Extensions",
-        "perfectFor": "Perfect for:",
-        "perfectForDescription": "Extending and optimizing existing websites",
-        "extensionServicesTitle": "Extension Services:",
-        "extensionServices": {
-          "e1": "New features for existing websites",
-          "e2": "API integrations (payment, CRM, etc.)",
-          "e3": "Performance optimizations",
-          "e4": "Database migrations",
-          "e5": "Security updates and hardening"
-        },
-        "projectDuration": "Project duration:",
-        "projectDurationValue": "1-4 weeks",
-        "compatibility": "Compatibility:",
-        "compatibilityValue": "Works with all common technologies",
-        "closeButton": "Close"
-      },
-      "specialApps": {
-        "title": "Special Applications",
-        "perfectFor": "Perfect for:",
-        "perfectForDescription": "Unique business requirements",
-        "applicationExamplesTitle": "Application Examples:",
-        "applicationExamples": {
-          "a1": "Event registration systems",
-          "a2": "Business intelligence dashboards",
-          "a3": "Reporting and analytics tools",
-          "a4": "Automation scripts",
-          "a5": "Data processing pipelines"
-        },
-        "projectDuration": "Project duration:",
-        "projectDurationValue": "2-8 weeks",
-        "approach": "Approach:",
-        "approachValue": "Agile development with regular reviews",
-        "closeButton": "Close"
-      },
-      "design": {
-        "title": "UI/UX Design",
-        "perfectFor": "Perfect for:",
-        "perfectForDescription": "Optimal user experience and modern design",
-        "designServicesTitle": "Design Services:",
-        "designServices": {
-          "d1": "User interface design",
-          "d2": "User experience optimization",
-          "d3": "Interactive prototyping",
-          "d4": "Design systems and style guides",
-          "d5": "Usability testing"
-        },
-        "projectDuration": "Project duration:",
-        "projectDurationValue": "2-6 weeks",
-        "tools": "Tools:",
-        "toolsValue": "Figma, Adobe Creative Suite",
-        "closeButton": "Close"
-      },
-      "kiConsulting": {
-        "title": "AI Consulting & Support",
-        "perfectFor": "Perfect for:",
-        "perfectForDescription": "Companies that want to strategically use AI",
-        "consultingServicesTitle": "Consulting Services:",
-        "consultingServices": {
-          "c1": "AI strategy development for your company",
-          "c2": "Prompt engineering for optimal results",
-          "c3": "Context engineering for precise AI responses",
-          "c4": "Use case identification and evaluation",
-          "c5": "ROI analysis for AI projects",
-          "c6": "Change management for AI introduction"
-        },
-        "projectDuration": "Project duration:",
-        "projectDurationValue": "2-4 weeks",
-        "deliverable": "Deliverable:",
-        "deliverableValue": "Comprehensive AI strategy and roadmap",
-        "closeButton": "Close"
-      },
-      "kiAgentDevelopment": {
-        "title": "AI Agent Development",
-        "perfectFor": "Perfect for:",
-        "perfectForDescription": "Automated customer service and content generation",
-        "agentTypesTitle": "Agent Types:",
-        "agentTypes": {
-          "a1": "Custom chatbots for websites",
-          "a2": "Automated customer service",
-          "a3": "Content generation and optimization",
-          "a4": "Data analysis and reporting agents",
-          "a5": "Email automation with AI",
-          "a6": "Integration into existing CRM systems"
-        },
-        "projectDuration": "Project duration:",
-        "projectDurationValue": "4-8 weeks",
-        "training": "Training:",
-        "trainingValue": "Individual training on your data",
-        "closeButton": "Close"
-      },
-      "workflowOptimization": {
-        "title": "Workflow Optimization with AI",
-        "perfectFor": "Perfect for:",
-        "perfectForDescription": "Efficiency improvement through intelligent automation",
-        "optimizationAreasTitle": "Optimization Areas:",
-        "optimizationAreas": {
-          "o1": "Process analysis and optimization potentials",
-          "o2": "Automation of recurring tasks",
-          "o3": "Intelligent document processing",
-          "o4": "Predictive analytics for better decisions",
-          "o5": "Integration of AI into existing workflows",
-          "o6": "Quality control through AI"
-        },
-        "measurableBenefitsTitle": "Measurable Benefits:",
-        "measurableBenefits": {
-          "m1": "Save time (up to 70% reduction)",
-          "m2": "Reduce costs",
-          "m3": "Minimize errors",
-          "m4": "Increase efficiency"
-        },
-        "projectDuration": "Project duration:",
-        "projectDurationValue": "6-12 weeks",
-        "roi": "ROI:",
-        "roiValue": "Measurable efficiency improvement already after 4 weeks",
-        "closeButton": "Close"
-      },
-      "aiInfrastructure": {
-        "title": "AI as Infrastructure",
-        "perfectFor": "Perfect for:",
-        "perfectForDescription": "Scalable AI solutions without own infrastructure",
-        "serviceModelsTitle": "Service Models:",
-        "serviceModels": {
-          "s1": "Scalable AI infrastructure in the cloud",
-          "s2": "Pay-per-use models for cost efficiency",
-          "s3": "Managed AI services without maintenance effort",
-          "s4": "24/7 monitoring and technical support",
-          "s5": "Regular updates and improvements",
-          "s6": "Compliance and data protection included"
-        },
-        "billingModelsTitle": "Billing Models:",
-        "billingModels": {
-          "b1": "Project-based billing",
-          "b2": "Monthly fee for continuous usage",
-          "b3": "Usage-based billing according to consumption",
-          "b4": "Hybrid models for optimal flexibility"
-        },
-        "setupTime": "Setup time:",
-        "setupTimeValue": "1-2 weeks",
-        "scaling": "Scaling:",
-        "scalingValue": "Automatically according to demand",
-        "closeButton": "Close"
-      }
+      "setupTime": "Setup time:",
+      "setupTimeValue": "1-2 weeks",
+      "scaling": "Scaling:",
+      "scalingValue": "Automatically according to demand",
+      "closeButton": "Close"
     }
   },
   "footer": {
-    "copyright": "raspb &copy; {year}",
     "imprint": "Imprint",
     "privacyPolicy": "Privacy Policy",
     "contact": "Contact",
@@ -1173,209 +817,58 @@
       "titleHighlight": "Configurator",
       "resetButton": "reset"
     },
-    "progressBar": {
-      "stepLabel": "Go to step {step}: {title}",
-      "currentStep": "step"
-    },
     "steps": {
       "step1": {
         "titleFirst": "What would you like to",
         "titleHighlight": "realize",
-        "teaser": "Choose the type of your project. This selection determines the available options in the following steps.",
-        "card": {
-          "priceRange": "{lowestPrice}€ - {highestPrice}€"
-        }
+        "teaser": "Choose the type of your project. This selection determines the available options in the following steps."
       },
       "step2": {
-        "titleFirst": "What type of",
-        "titleHighlight": "{projectType}",
-        "teaser": "Choose the appropriate variant for your project. Each option has different features and prices.",
-        "card": {
-          "priceFrom": "from {price}€"
-        }
+        "titleFirst": "What kind of",
+        "titleHighlight": "project type",
+        "titleSecond": "do you need?",
+        "teaser": "Choose the appropriate variant for your project. Each option has different features and prices."
       },
       "step3": {
         "titleFirst": "Describe your",
         "titleHighlight": "project",
-        "teaser": "The more detailed you describe your project, the better we can help you and calculate the price.",
-        "projectName": {
-          "label": "Project name:",
-          "placeholder": "Give your project a name..."
-        },
-        "projectDescription": {
-          "label": "Project description:",
-          "placeholder": {
-            "webApplication": "Describe the desired functions and features of your application in detail: What main functions should it have? How should users interact with it? What data will be processed? Are there special requirements for performance or security?",
-            "freestyle": "Describe your individual project in detail: What problem should be solved? What specific requirements do you have? Which systems should be integrated? Which features are particularly important?",
-            "default": "Describe your project in detail: What is the goal? What problems should it solve? Which target group are you addressing? Do you already have concrete ideas about the design or functions?"
-          },
-          "characterCount": "Characters: {count}"
-        },
-        "targetAudience": {
-          "label": "Who is your target audience?",
-          "placeholder": "e.g. Small businesses, private individuals, B2B customers..."
-        },
-        "goals": {
-          "label": "What are your main goals?",
-          "placeholder": "e.g. Gain more customers, digitize processes..."
-        },
-        "inspiration": {
-          "label": "Are there websites that can serve as inspiration?",
-          "placeholder": "e.g. www.atlassian.com, www.figma.com, ... "
-        },
-        "desiredDomain": {
-          "label": "Desired domain:",
-          "placeholder": "e.g. my-company.de, example.com..."
-        },
-        "domainStatus": {
-          "label": "Domain status:",
-          "placeholder": "Please select...",
-          "options": {
-            "owned": "Domain already owned",
-            "needs-registration": "Domain needs to be registered",
-            "needs-transfer": "Domain needs to be transferred",
-            "undecided": "Not decided yet"
-          }
-        },
-        "timeline": {
-          "label": "Desired timeframe:",
-          "placeholder": "Please select...",
-          "options": {
-            "asap": "As soon as possible",
-            "5-10-days": "5 - 10 days ",
-            "2-4-weeks": "2 - 4 weeks",
-            "2-6-months": "2 - 6 months",
-            "flexible": "Flexible"
-          }
-        },
-        "budget": {
-          "label": "Your budget:",
-          "placeholder": "Please select...",
-          "options": {
-            "under-500": "Under 500€",
-            "1k-3k": "1,000€ - 3,000€",
-            "3k-7k": "3,000€ - 7,000€",
-            "7k-10k": "7,000€ - 10,000€",
-            "10k-15k": "10,000€ - 15,000€",
-            "over-20k": "more than 15,000€"
-          }
-        }
+        "teaser": "The more detailed you describe your project, the more accurately we can calculate a price for you."
       },
       "step4": {
         "titleFirst": "Which",
-        "titleHighlight": "Features",
-        "teaser": "Select all desired features. Each feature expands the possibilities of your project and affects the price.",
-        "customFeatures": {
-          "label": "Additional desired features:",
-          "placeholder": "Describe other special requirements that are not in the list..."
-        }
+        "titleHighlight": "features",
+        "teaser": "Select all the features you want. Each feature expands the possibilities of your project and affects the price."
       },
       "step5": {
         "titleFirst": "Content and",
-        "titleHighlight": "Structure",
-        "teaser": "Define the structure and content of your project. This information helps us in planning and implementation.",
-        "pages": {
-          "title": "Pages/Sections",
-          "description": "Which pages or sections should your website have? Also describe the desired content for each page.",
-          "page": {
-            "title": "Page {number}",
-            "removeButton": "Remove",
-            "pageName": {
-              "label": "Page name:",
-              "placeholder": "e.g. Homepage, About Us, Contact, Services..."
-            },
-            "pageContent": {
-              "label": "Desired content:",
-              "placeholder": "Describe what content should be on this page: texts, images, functions, etc."
-            },
-            "pageCharacteristics": {
-              "label": "Page characteristics:",
-              "placeholder": "Which features should be placed on this page? Should content suggestions be developed or should content be taken exactly as specified?"
-            }
-          },
-          "addPageButton": "Add page"
-        },
-        "formFields": {
-          "title": "Form Fields",
-          "description": "Since you have selected a contact form, define here the desired fields and their labels.",
-          "field": {
-            "title": "Field {number}",
-            "removeButton": "Remove",
-            "fieldType": {
-              "label": "Field type:",
-              "placeholder": "Select field type..."
-            },
-            "fieldName": {
-              "label": "Field name/label:",
-              "placeholder": "e.g. Name, Email, Message, Phone..."
-            },
-            "required": "Required field"
-          },
-          "addFieldButton": "Add field"
+        "titleHighlight": "structure",
+        "teaser": "Define the structure and content of your project. This information helps us with planning and implementation.",
+        "content": {
+          "pages": {
+            "title": "Pages/Sections",
+            "description": "What pages or sections should your website have? Also describe the desired content for each page.",
+            "pageTitle": "Page",
+            "removePage": "Remove page",
+            "remove": "Remove"
+          }
         }
       },
       "step6": {
         "titleFirst": "Design and",
-        "titleHighlight": "Materials",
-        "teaser": "Define the visual appearance of your project. These settings determine the look & feel.",
-        "colors": {
-          "title": "Color scheme",
-          "description": "Choose the main colors for your project. If you already have corporate colors, enter them here.",
-          "primary": {
-            "label": "Primary color:"
-          },
-          "secondary": {
-            "label": "Secondary color:"
-          },
-          "accent": {
-            "label": "Accent color:"
-          }
-        },
-        "fonts": {
-          "title": "Font",
-          "description": "Choose a font from our selection or enter your corporate font.",
-          "googleFonts": {
-            "label": "Google Fonts selection:",
-            "otherOption": " < I want to use a different Google Font  > "
-          },
-          "customFont": {
-            "label": "Or define your own font:",
-            "placeholder": "e.g. Helvetica Neue, Arial, Corporate Font Name..."
-          },
-          "preview": {
-            "title": "Font preview of {font}:"
-          }
-        },
-        "files": {
-          "title": "Upload materials",
-          "description": "Upload style guides, mockups, logos, images or other relevant files here that will help us with the implementation.",
-          "uploadButton": "Select files",
-          "supportedFormats": "Supported formats: General files (PDF, .txt, ...), Office documents (Word, Powerpoint, ...), Image formats (.jpg, .png, ...)",
-          "uploadedFiles": "Uploaded files:",
-          "fileItem": "{name} ({size}KB)",
-          "removeFileButton": "Remove file",
-          "uploading": {
-            "title": "Upload in progress...",
-            "progress": "{message} ({current}/{total})"
-          }
-        }
+        "titleHighlight": "materials",
+        "teaser": "Define the visual appearance of your project. These settings determine the look and feel."
       },
       "stepMaterials": {
         "titleFirst": "Materials and",
-        "titleHighlight": "Documents",
-        "teaser": "Upload relevant documents, specifications or other materials that will help us with the implementation.",
+        "titleHighlight": "documents",
+        "teaser": "Upload relevant documents, specifications or other materials that help us with implementation.",
         "files": {
-          "title": "Upload documents",
+          "title": "Documents",
+          "upload": "Upload documents",
           "description": "Upload specifications, wireframes, existing documentation or other relevant files.",
-          "uploadButton": "Select files",
-          "supportedFormats": "Supported formats: PDF, DOC, JPG, PNG, GIF, SVG, AI, PSD, TXT, XLSX, PPTX",
-          "uploadedFiles": "Uploaded files:",
-          "fileItem": "{name} ({size}KB)",
-          "removeFileButton": "Remove file",
-          "uploading": {
-            "title": "Upload in progress...",
-            "progress": "{message} ({current}/{total})"
-          }
+          "formats": "Supported formats: PDF, DOC, JPG, PNG, GIF, SVG, AI, PSD, TXT, XLSX, PPTX",
+          "uploaded": "Uploaded files:",
+          "removeFile": "Remove file"
         }
       },
       "stepSummary": {
@@ -1383,118 +876,195 @@
         "teaser": "Review your configuration. You can return to previous steps at any time to make changes.",
         "preparingAssets": {
           "title": "Preparing assets",
-          "progress": "{message} ({current}/{total})"
+          "progress": "[{current}/{total}] {message}",
+          "assetsReady": "Assets ready for publishing",
+          "noAssets": "No assets could be prepared",
+          "error": "Error preparing assets"
         },
-        "sections": {
-          "projectType": {
-            "title": "Project type",
-            "subtype": "{subtype}"
-          },
-          "projectDescription": {
-            "title": "Project description",
-            "truncated": "{description}..."
-          },
-          "features": {
-            "title": "Selected features"
-          },
-          "pages": {
-            "title": "Pages/Sections"
-          },
-          "formFields": {
-            "title": "Form fields",
-            "requiredBadge": "Required"
-          },
-          "design": {
-            "title": "Design",
-            "colors": "Colors:",
-            "font": "Font:"
-          }
+        "pdfGeneration": {
+          "error": "Error creating PDF. Please try again.",
+          "download": "Download configuration"
         },
-        "priceEstimate": {
-          "title": "Estimated price",
-          "average": "Average: {price}€",
-          "disclaimer": "*Non-binding estimate. The final price will be determined after a personal conversation.",
-          "breakdown": {
-            "base": "Base ({projectType}):",
-            "subtype": "{subtype}:",
-            "features": "Features ({count}):",
-            "featuresValue": "Included"
-          }
-        }
+        "estimatedPrice": "Estimated price",
+        "average": "Average: {price}€",
+        "disclaimer": "*Non-binding estimate. The final price will be determined after a personal conversation.",
+        "basePrice": "Base ({projectType}):",
+        "subtypePrice": "{subtype}:",
+        "featuresIncluded": "Features ({count}):",
+        "included": "Included"
+      }
+    },
+    "files": {
+      "uploading": {
+        "title": "Uploading files...",
+        "progress": "[{current}/{total}] {message}",
+        "success": "All {uploaded} of {total} files processed successfully",
+        "noFiles": "No files could be uploaded successfully",
+        "error": "Error uploading files"
+      },
+      "supportedFormats": "Supported formats: General files (PDF, .txt, ...), Office documents (Word, Powerpoint, ...), Image formats (.jpg, .png, ...)"
+    },
+    "form": {
+      "projectName": "Project name:",
+      "projectNamePlaceholder": "Give your project a name...",
+      "projectDescription": "Project description:",
+      "targetAudience": "Who is your target audience?",
+      "targetAudiencePlaceholder": "e.g. Small businesses, individuals, B2B customers...",
+      "goals": "What are your main goals?",
+      "goalsPlaceholder": "e.g. Acquire more customers, digitize processes...",
+      "inspiration": "Are there websites that can serve as inspiration?",
+      "inspirationPlaceholder": "e.g. www.atlassian.com, www.figma.com, ... ",
+      "desiredDomain": "Desired domain:",
+      "desiredDomainPlaceholder": "e.g. my-company.de, example.com...",
+      "domainStatus": "Domain status:",
+      "domainStatusPlaceholder": "Please select...",
+      "domainStatusOptions": {
+        "owned": "Domain already owned",
+        "needs-registration": "Domain needs to be registered",
+        "needs-transfer": "Domain needs to be transferred",
+        "undecided": "Not decided yet"
+      },
+      "timeline": "Desired timeframe:",
+      "timelinePlaceholder": "Please select...",
+      "timelineOptions": {
+        "asap": "As soon as possible",
+        "5-10-days": "5 - 10 days",
+        "2-4-weeks": "2 - 4 weeks",
+        "2-6-months": "2 - 6 months",
+        "flexible": "Flexible"
+      },
+      "budget": "Your budget:",
+      "budgetPlaceholder": "Please select...",
+      "budgetOptions": {
+        "under-500": "Under 500€",
+        "1k-3k": "1,000€ - 3,000€",
+        "3k-7k": "3,000€ - 7,000€",
+        "7k-10k": "7,000€ - 10,000€",
+        "10k-15k": "10,000€ - 15,000€",
+        "over-20k": "more than 15,000€"
+      },
+      "customFeatures": "Additional desired features:",
+      "customFeaturesPlaceholder": "Describe additional special requirements that are not in the list...",
+      "characters": "Characters: {count}",
+      "placeholders": {
+        "webApplication": "Describe in detail the desired functions and features of your application: What main functions should it have? How should users interact with it? What data will be processed? Are there special requirements for performance or security?",
+        "freestyle": "Describe your individual project in detail: What problem should be solved? What specific requirements do you have? Which systems should be integrated? Which functions are particularly important?",
+        "default": "Describe your project in detail: What is the goal? What problems should it solve? Which target group are you addressing? Do you already have concrete ideas about design or functions?"
+      }
+    },
+    "design": {
+      "colorScheme": "Color scheme",
+      "colorSchemeDescription": "Select the main colors for your project. If you already have corporate colors, enter them here.",
+      "primaryColor": "Primary color:",
+      "secondaryColor": "Secondary color:",
+      "accentColor": "Accent color:",
+      "font": "Font",
+      "fontDescription": "Select a font from our selection or specify your corporate font.",
+      "googleFonts": "Google Fonts selection:",
+      "customFont": "Or define custom font:",
+      "customFontPlaceholder": "e.g. Helvetica Neue, Arial, Corporate Font Name...",
+      "fontPreview": "Font preview of {font}:"
+    },
+    "content": {
+      "pages": {
+        "pageName": "Page name:",
+        "pageNamePlaceholder": "e.g. Home, About us, Contact, Services...",
+        "pageContent": "Desired content:",
+        "pageContentPlaceholder": "Describe what content should be on this page: Texts, images, functions, etc.",
+        "pageCharacteristic": "Page characteristics:",
+        "pageCharacteristicPlaceholder": "Which features should be placed on this page? Should content suggestions be developed or should content be used exactly as specified?",
+        "addPage": "Add page"
+      },
+      "formFields": {
+        "title": "Form fields",
+        "description": "Since you have selected a contact form, define the desired fields and their labels here.",
+        "field": "Field",
+        "fieldType": "Field type:",
+        "fieldTypePlaceholder": "Select field type...",
+        "fieldName": "Field name/label:",
+        "fieldNamePlaceholder": "e.g. Name, Email, Message, Phone...",
+        "required": "Required field",
+        "addField": "Add field",
+        "removeField": "Remove form field",
+        "remove": "Remove"
       }
     },
     "navigation": {
       "back": "Back",
       "next": "Next",
-      "download": {
-        "button": "Download configuration",
-        "generating": "Creating PDF..."
-      },
-      "submit": "Submit project"
-    },
-    "modals": {
-      "reset": {
-        "title": "Start over?",
-        "description": "Do you really want to start over? All your previous entries will be lost.",
-        "cancel": "Cancel",
-        "confirm": "Yes, reset"
-      },
-      "error": {
-        "title": "Error submitting",
-        "description": "The following errors occurred while submitting your project:",
-        "info": {
-          "title": "What happens now?",
-          "description": "After closing this dialog, you will be taken back to step 1. Your entries will remain, so you can fix the problem and try again."
-        },
-        "backToStep1": "Back to step 1"
-      },
-      "thankYou": {
-        "title": "Thank you!",
-        "subtitle": "Your project has been submitted successfully",
-        "nextSteps": {
-          "title": "What happens next?",
-          "steps": {
-            "step1": {
-              "number": "1",
-              "description": "We will review your request within 24 hours"
-            },
-            "step2": {
-              "number": "2",
-              "description": "You will receive a detailed offer by email"
-            },
-            "step3": {
-              "number": "3",
-              "description": "We will schedule a meeting for a personal conversation"
-            }
-          }
-        },
-        "details": {
-          "projectName": "Project name:",
-          "estimatedPrice": "Estimated price:",
-          "projectType": "Project type:"
-        },
-        "actions": {
-          "home": "Go to homepage",
-          "contact": "Contact us"
-        }
-      }
+      "downloadPDF": "Creating PDF...",
+      "submitProject": "Submit project"
     },
     "loading": {
       "title": "Submitting project...",
       "description": "Please wait while we process your project.",
       "steps": {
-        "preparing": {
-          "icon": "✓",
-          "description": "Data is being prepared"
+        "preparing": "Preparing data",
+        "creating": "Creating project",
+        "sending": "Sending confirmation"
+      }
+    },
+    "modals": {
+      "error": {
+        "title": "Error submitting",
+        "description": "The following errors occurred when submitting your project:",
+        "whatHappens": "What happens now?",
+        "whatHappensDescription": "After closing this dialog, you will be redirected to step 1. Your entries will be retained so that you can fix the problem and try again.",
+        "backToStep1": "Back to step 1",
+        "customerError": "Customer error",
+        "unknownError": "Unknown error",
+        "customerCreationFailed": "Customer creation failed",
+        "customerCreated": "Customer created/found:",
+        "usingPreUploaded": "Using pre-uploaded assets:",
+        "noPreUploaded": "No pre-uploaded assets found, uploading now...",
+        "fileUploadError": "Error uploading files",
+        "fileUploadFailed": "File upload failed",
+        "creatingProject": "Creating project with assets:",
+        "projectCreated": "Project created:",
+        "customerLinked": "Customer linked to project:",
+        "customerLinkingFailed": "Customer linking failed, but project was created:",
+        "customerLinkingError": "Customer linking error:",
+        "waiting": "Waiting 3 seconds before publishing to ensure data consistency...",
+        "publishingCustomer": "Publishing customer:",
+        "customerPublished": "Customer published successfully:",
+        "customerPublishingFailed": "Customer publishing failed:",
+        "customerPublishingError": "Customer publishing error:",
+        "publishingProject": "Publishing project:",
+        "projectPublished": "Project published successfully:",
+        "projectPublishingFailed": "Project publishing failed:",
+        "projectPublishingError": "Project publishing error:",
+        "publishingAssets": "Publishing all project assets:",
+        "assetPublishingProgress": "Asset publishing progress",
+        "assetsPublished": "Assets published successfully:",
+        "noAssetsPublished": "No assets could be published, but project was created and published",
+        "assetPublishingError": "Asset publishing error:",
+        "submissionCompleted": "Submission process completed successfully",
+        "apiError": "API error",
+        "apiRequestFailed": "API request failed",
+        "submissionError": "Submission error:",
+        "networkError": "Network error: Connection to server failed",
+        "checkConnection": "Please check your internet connection and try again."
+      },
+      "thankYou": {
+        "title": "Thank you!",
+        "subtitle": "Your project has been submitted successfully",
+        "whatHappensNext": "What happens next?",
+        "steps": {
+          "step1": "We review your request within 24 hours",
+          "step2": "You receive a detailed offer by email",
+          "step3": "We schedule an appointment for a personal conversation"
         },
-        "creating": {
-          "icon": "⏳",
-          "description": "Project is being created"
-        },
-        "sending": {
-          "icon": "⏳",
-          "description": "Confirmation is being sent"
-        }
+        "projectName": "Project name:",
+        "estimatedPrice": "Estimated price:",
+        "projectType": "Project type:",
+        "home": "Go to homepage",
+        "contact": "Contact us"
+      },
+      "reset": {
+        "title": "Start over?",
+        "description": "Do you really want to start over? All your previous entries will be lost.",
+        "cancel": "Cancel",
+        "confirm": "Yes, reset"
       }
     }
   }

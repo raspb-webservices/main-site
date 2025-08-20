@@ -12,6 +12,8 @@ export interface Customer {
   phone?: string;
   postCode?: string;
   salutation?: string;
+  password?: string;
+  passwordConfirm?: string;
   projects?: {
     id: string;
     name?: string;

@@ -1,6 +1,7 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import type { Customer } from '$interfaces/customer.interface';
+import auth from '$lib/../authService';
 
 const GRAPHQL_ENDPOINT = 'https://api-eu-west-2.hygraph.com/v2/cm20c164y00dh07ut82c04dgs/master';
 const GRAPHQL_TOKEN =
@@ -117,6 +118,25 @@ export const POST: RequestHandler = async ({ request }) => {
       });
     }
 
+    // Create Auth0 user if password is provided
+    let auth0UserId: string | undefined;
+    if (customerData.password && customerData.password.trim()) {
+      try {
+        const auth0User = await auth.createAuth0User({
+          email: customerData.email.trim(),
+          password: customerData.password.trim(),
+          givenName: customerData.givenName.trim(),
+          familyName: customerData.familyName.trim()
+        });
+        
+        auth0UserId = auth0User.user_id;
+        console.log('Auth0 user created:', auth0UserId);
+      } catch (auth0Error) {
+        console.error('Error creating Auth0 user:', auth0Error);
+        // Don't fail the entire process if Auth0 user creation fails
+      }
+    }
+
     // Customer erstellen
     const createCustomerMutation = `
       mutation CreateCustomer($data: CustomerCreateInput!) {
@@ -132,6 +152,7 @@ export const POST: RequestHandler = async ({ request }) => {
           postCode
           city
           country
+          auth0Id
           createdAt
         }
       }
@@ -141,6 +162,7 @@ export const POST: RequestHandler = async ({ request }) => {
       email: customerData.email.trim(),
       givenName: customerData.givenName.trim(),
       familyName: customerData.familyName.trim(),
+      ...(auth0UserId && { auth0Id: auth0UserId }),
       ...(customerData.salutation && { salutation: customerData.salutation }),
       ...(customerData.company && { company: customerData.company.trim() }),
       ...(customerData.phone && { phone: customerData.phone.trim() }),

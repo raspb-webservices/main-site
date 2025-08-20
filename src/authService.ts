@@ -1,6 +1,7 @@
 import { createAuth0Client } from '@auth0/auth0-spa-js';
 import { user, isAuthenticated, popupOpen, userroles } from '$store/sharedStates.svelte';
 import authConfig from './auth_config';
+import API from './lib/helper/auth0Api';
 
 async function createClient() {
   return await createAuth0Client({
@@ -84,13 +85,43 @@ async function checkAuthState(client: any) {
   }
 }
 
+async function createAuth0User(userData: { email: string; password: string; givenName: string; familyName: string }): Promise<any> {
+  try {
+    const response = await API.post('users', {
+      email: userData.email,
+      password: userData.password,
+      given_name: userData.givenName,
+      family_name: userData.familyName,
+      connection: 'Username-Password-Authentication',
+      verify_email: true
+    });
+    
+    return response;
+  } catch (error) {
+    console.error('Error creating Auth0 user:', error);
+    throw error;
+  }
+}
+
+async function getAuth0UserByEmail(email: string): Promise<any> {
+  try {
+    const response = await API.get(`users-by-email?email=${encodeURIComponent(email)}`, {});
+    return response;
+  } catch (error) {
+    console.error('Error fetching Auth0 user by email:', error);
+    throw error;
+  }
+}
+
 const auth = {
   createClient,
   getRoles,
   loginWithPopup,
   logout,
   getIdTokenClaims,
-  checkAuthState
+  checkAuthState,
+  createAuth0User,
+  getAuth0UserByEmail
 };
 
 export default auth;

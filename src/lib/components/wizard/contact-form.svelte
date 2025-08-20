@@ -11,7 +11,12 @@
 
   // Reaktive Validierung
   $effect(() => {
-    isValid = !!(customerData.givenName?.trim() && customerData.familyName?.trim() && customerData.email?.trim() && isValidEmail(customerData.email));
+    isValid = !!(customerData.givenName?.trim() && 
+                customerData.familyName?.trim() && 
+                customerData.email?.trim() && 
+                isValidEmail(customerData.email) && 
+                customerData.password?.trim() && 
+                customerData.password === customerData.passwordConfirm);
   });
 
   function isValidEmail(email: string): boolean {
@@ -210,6 +215,45 @@
           <option value="Tschechien">Tschechien</option>
           <option value="Andere">Andere</option>
         </select>
+      </div>
+
+      <!-- Password -->
+      <div class="form-control w-full md:col-span-2">
+        <label class="label" for="password">
+          <span class="label-text font-semibold">Passwort: <span class="text-error">*</span></span>
+        </label>
+        <input
+          type="password"
+          id="password"
+          class="input input-bordered w-full"
+          class:input-error={customerData.password !== undefined && !customerData.password?.trim()}
+          value={customerData.password || ''}
+          oninput={(e) => updateField('password', e.currentTarget.value)}
+          placeholder="Geben Sie ein sicheres Passwort ein"
+          required
+        />
+      </div>
+
+      <!-- Password Confirmation -->
+      <div class="form-control w-full md:col-span-2">
+        <label class="label" for="passwordConfirm">
+          <span class="label-text font-semibold">Passwort bestätigen: <span class="text-error">*</span></span>
+        </label>
+        <input
+          type="password"
+          id="passwordConfirm"
+          class="input input-bordered w-full"
+          class:input-error={customerData.passwordConfirm !== undefined && customerData.password !== customerData.passwordConfirm}
+          value={customerData.passwordConfirm || ''}
+          oninput={(e) => updateField('passwordConfirm', e.currentTarget.value)}
+          placeholder="Passwort erneut eingeben"
+          required
+        />
+        {#if customerData.passwordConfirm && customerData.password !== customerData.passwordConfirm}
+          <div class="label">
+            <span class="label-text-alt text-error">Die Passwörter stimmen nicht überein</span>
+          </div>
+        {/if}
       </div>
     </div>
 
