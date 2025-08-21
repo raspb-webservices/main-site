@@ -74,17 +74,21 @@
   .my-accordion-wrapper {
     @apply grid grid-cols-12 gap-8;
     .my-accordion {
-      @apply bg-secondary/15 col-span-full lg:col-span-8;
+      @apply col-span-full lg:col-span-8 rounded-lg overflow-hidden;
       .accordion-item {
+        @apply border-base-300;
         > .collapse-title {
-          @apply font-semibold;
+          @apply font-semibold bg-base-200 text-base-content transition-colors duration-300;
+        }
+        > .collapse-content {
+          @apply text-base-content;
         }
         &.active {
           > .collapse-title {
-            @apply bg-lightGrey font-bold;
+            @apply bg-base-300 font-bold text-base-content;
           }
           > .collapse-content {
-            @apply bg-white p-4;
+            @apply bg-base-200 p-4 text-base-content;
           }
         }
       }
