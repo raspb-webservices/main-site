@@ -8,6 +8,7 @@
   import ContactForm from './contact-form.svelte';
   import { _ } from 'svelte-i18n';
   import { locale } from 'svelte-i18n';
+  import auth from '../../../authService';
 
   // Props for initial values from URL parameters
   interface Props {
@@ -20,6 +21,8 @@
   // State
   let currentStep = $state(1);
   let showResetModal = $state(false);
+  let custom_metadata = $state({});
+  let auth0Id = $state('');
 
   let config: WizardConfig = $state({
     step: 1,
@@ -67,14 +70,18 @@
     address: '',
     postCode: '',
     city: '',
-    country: 'Deutschland',
+    country: '',
     user_metadata:{
-      "isMember": "ja",
-      "phone": "bla bla",
-      "wert1": "noch etwas",
-      "street": "teststrasse",
-      "first_name": "Maaaaaggus",
-      "last_name": "Hääääärtsch"
+      phone: '',
+      address: '',
+      city: '',
+      company: '',
+      country: '',
+      familyName: '',
+      givenName: '',
+      postCode: '',
+      projectIds: [],
+      salutation: ''
     }
   });
   let isContactFormValid = $state(false);
@@ -379,7 +386,6 @@
     try {
       // Step 1: Create customer first
       console.log($_('wizard.loading.steps.preparing.description'), customerData);
-
       const customerResponse = await fetch('/api/customer/create', {
         method: 'POST',
         headers: {
@@ -399,6 +405,7 @@
       }
 
       createdCustomerId = customerResult.data.id;
+      auth0Id = customerResult.data.auth0Id;
       console.log($_('wizard.modals.error.customerCreated'), createdCustomerId);
 
       // Step 2: Prepare asset IDs (use pre-uploaded or fallback to upload now)
@@ -459,6 +466,23 @@
       if (result.success && result.data?.id) {
         const projectId = result.data.id;
         console.log($_('wizard.modals.error.projectCreated'), projectId);
+        console.log("customerData ", customerData);
+
+        custom_metadata = {
+          "phone": customerData.phone,
+          "address": customerData.address,
+          "city": customerData.city,
+          "company": customerData.company,
+          "country":  customerData.country,
+          "familyName":customerData.familyName,
+          "givenName": customerData.givenName,
+          "postCode": customerData.postCode,
+          "projectIds": [projectId],
+          "salutation": customerData.salutation
+        };
+
+        const updateMetaResponse = await auth.updateMetadata(auth0Id, custom_metadata);
+        console.log("updateMetaResponse ", updateMetaResponse);
 
         // Step 4: Link customer to project
         try {
@@ -894,12 +918,13 @@
             </label>
             <select id="budget" class="select select-bordered w-full" bind:value={config.budget}>
               <option value="">Bitte wählen...</option>
-              <option value="under-500">Unter 500€</option>
+              <option value="under-500">unter 500€</option>
               <option value="1k-3k">1.000€ - 3.000€</option>
               <option value="3k-7k">3.000€ - 7.000€</option>
               <option value="7k-10k">7.000€ - 10.000€</option>
               <option value="10k-15k">10.000€ - 15.000€</option>
-              <option value="over-20k">mehr als 15.000€</option>
+              <option value="15k-20k">15.000€ - 25.000€</option>
+              <option value="more-than-25k">mehr als 25.000€</option>
             </select>
           </div>
         </div>
@@ -1860,7 +1885,7 @@
   }
 
   /* Cards in Content - Dark Theme Support */
-  .card {
+  /* .card {
     @apply bg-base-100 border-base-300;
 
     .card-body {
@@ -1870,10 +1895,10 @@
         @apply text-base-content;
       }
     }
-  }
+  } */
 
   /* Alerts - Dark Theme Support */
-  .alert {
+  /* .alert {
     @apply bg-base-200 border-base-300 text-base-content;
 
     &.alert-info {
@@ -1883,7 +1908,7 @@
     &.alert-error {
       @apply bg-error/10 border-error/20 text-error-content;
     }
-  }
+  } */
 
   /* Loading Overlay Styles - Dark Theme Support */
   .loading-overlay {

@@ -85,7 +85,7 @@ async function checkAuthState(client: any) {
   }
 }
 
-async function createAuth0User(userData: { email: string; password: string; givenName: string; familyName: string, user_metadata: Object }): Promise<any> {
+async function createAuth0User(userData: { email: string; password: string; givenName: string; familyName: string; user_metadata: Object }): Promise<any> {
   try {
     const response = await API.post('users', {
       email: userData.email,
@@ -96,8 +96,8 @@ async function createAuth0User(userData: { email: string; password: string; give
       verify_email: true,
       user_metadata: userData.user_metadata
     });
-    
-    console.log("AUTH0 create user response", response );
+
+    console.log('AUTH0 create user response', response);
 
     return response;
   } catch (error) {
@@ -108,10 +108,23 @@ async function createAuth0User(userData: { email: string; password: string; give
 
 async function assignRole(userId: string, rolesToAssign: string[]): Promise<any> {
   try {
-    const response = await API.post('users/'+userId+'/roles', {
+    const response = await API.post('users/' + userId + '/roles', {
       roles: rolesToAssign
     });
-    console.log("AUTH0 assigned roles", response );
+    console.log('AUTH0 assigned roles', response);
+    return response;
+  } catch (error) {
+    console.error('Error creating Auth0 user:', error);
+    throw error;
+  }
+}
+
+async function updateMetadata(userId: string, metadata: Object): Promise<any> {
+  try {
+    const response = await API.patch('users/' + userId, {
+      user_metadata: metadata
+    });
+    console.log('AUTH0 updated metadata roles', response);
     return response;
   } catch (error) {
     console.error('Error creating Auth0 user:', error);
@@ -138,7 +151,8 @@ const auth = {
   getIdTokenClaims,
   checkAuthState,
   createAuth0User,
-  getAuth0UserByEmail
+  getAuth0UserByEmail,
+  updateMetadata
 };
 
 export default auth;

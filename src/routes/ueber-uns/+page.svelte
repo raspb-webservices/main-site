@@ -5,7 +5,6 @@
   import RaspbPhilosophyModal from '$lib/components/raspb-philosophy-modal.svelte';
   import { _ } from 'svelte-i18n';
 
-
   let selectedMember: any = null;
   let philosophyModal: RaspbPhilosophyModal;
 
@@ -170,7 +169,7 @@
             <div class="flex-grow">
               <h3 class="card-title mb-2 justify-center text-xl">{member.name}</h3>
               <p class="mb-3 text-xs font-medium opacity-70">{member.role}</p>
-              <p class="mb-4 line-clamp-4 text-xs leading-relaxed">{member.description}</p>
+              <p class="mb-4 line-clamp-4 text-xs leading-relaxed">{$_(`ueberUns.teamMembers.${member.id}.description`)}</p>
             </div>
             <div class="card-actions">
               <button class="btn btn-simple btn-xs">{$_('ueberUns.aiTeamSection.memberCardButton')}</button>
@@ -229,17 +228,17 @@
       <div class="space-y-6">
         <div>
           <h4 class="mb-2 text-xl font-semibold">{$_('ueberUns.memberModal.about', { values: { name: selectedMember.name } })}</h4>
-          <p class="leading-relaxed">{selectedMember.description}</p>
+          <p class="leading-relaxed">{$_(`ueberUns.teamMembers.${selectedMember.id}.description`)}</p>
         </div>
 
         <div>
           <h4 class="mb-2 text-xl font-semibold">{$_('ueberUns.memberModal.personality')}</h4>
-          <p class="leading-relaxed">{selectedMember.personality}</p>
+          <p class="leading-relaxed">{$_(`ueberUns.teamMembers.${selectedMember.id}.personality`)}</p>
         </div>
 
         <div>
           <h4 class="mb-2 text-xl font-semibold">{$_('ueberUns.memberModal.experience')}</h4>
-          <p class="leading-relaxed">{selectedMember.experience}</p>
+          <p class="leading-relaxed">{$_(`ueberUns.teamMembers.${selectedMember.id}.experience`)}</p>
         </div>
 
         <div>

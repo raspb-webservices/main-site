@@ -424,8 +424,8 @@
             {/if}
             {#if selectedProject.customFeature}
               <div class="mt-2">
-                <span class="text-xs text-base-content/60">Custom Feature:</span>
-                <div class="badge badge-info badge-sm ml-2">{selectedProject.customFeature}</div>
+                <div class="text-sm text-base-content/60">Custom Feature:</div>
+                <div class="text-sm pt-1">{selectedProject.customFeature}</div>
               </div>
             {/if}
           </div>

@@ -48,7 +48,7 @@
 {#if isAuth}
   <div class="logged-in-header">
     <div class="inner-box flex justify-between items-center">
-      <p class="no-padding">Herzlich Willkommen, {currentUser['first_name']} {currentUser['last_name']}!</p>
+      <p class="no-padding">Herzlich Willkommen, {currentUser['givenName']} {currentUser['familyName']}!</p>
       <div class="ml-auto"></div>
       <button
         class="text-link-button"

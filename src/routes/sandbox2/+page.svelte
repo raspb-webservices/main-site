@@ -1,92 +1,149 @@
 <script lang="ts">
   import Section from '$lib/components/section.svelte';
 
-  // Sample-Konfiguration für PDF-Test
+  // Sample-Konfiguration für PDF-Test - E-Commerce Plattform
   const sampleConfig = {
-    name: 'Moderne Unternehmenswebsite für TechStart GmbH',
-    projectType: 'website',
-    subType: 'corporateWebsite',
+    name: 'Premium E-Commerce Plattform für GreenLife Naturkosmetik',
+    projectType: 'webApplication',
+    subType: 'eCommerce',
     description:
-      'Eine professionelle Unternehmenswebsite mit modernem Design, die das innovative Image von TechStart GmbH widerspiegelt und potenzielle Kunden überzeugt.',
-    targetAudience: 'B2B-Kunden, Technologie-Entscheider, potenzielle Investoren und Fachkräfte',
-    goals: 'Steigerung der Online-Präsenz, Lead-Generierung, Vertrauensaufbau und Positionierung als Technologieführer',
-    desiredDomain: 'techstart-solutions.de',
-    domainStatus: 'Noch nicht registriert',
-    timeline: '6-8 Wochen',
-    budget: '5000-8000€',
-    estimatedPrice: 6500,
-    features: ['kontaktformular', 'seo', 'bildergalerie', 'analyticsIntegration', 'newsletterRegistrierung', 'suchfunktion'],
+      'Eine hochmoderne E-Commerce Plattform für nachhaltige Naturkosmetik mit integriertem CMS, Kundenverwaltung, Zahlungsabwicklung und umfassenden Marketing-Tools. Die Plattform soll das Wachstum von GreenLife unterstützen und eine nahtlose Shopping-Experience bieten.',
+    projectDetails: 'Vollständige E-Commerce Lösung mit Produktkatalog, Warenkorb, Checkout-Prozess, Kundenkonto-Verwaltung, Bestellverfolgung, Inventory Management und Admin-Dashboard',
+    targetAudience: 'Umweltbewusste Verbraucher, Naturkosmetik-Enthusiasten, Wellness-Interessierte, Frauen und Männer zwischen 25-55 Jahren mit mittlerem bis höherem Einkommen',
+    goals: 'Online-Umsatz steigern, Markenbekanntheit erhöhen, Kundenbindung stärken, nachhaltiges Image kommunizieren, internationale Expansion vorbereiten',
+    inspiration: 'Minimalistisches, natürliches Design inspiriert von skandinavischen E-Commerce Seiten wie Goop, The Ordinary und lokalen Naturkosmetik-Brands',
+    desiredDomain: 'greenlife-naturkosmetik.com',
+    domainStatus: 'Bereits registriert, Transfer erforderlich',
+    projectStatus: 'created',
+    timeline: '12-16 Wochen',
+    budget: '15000-25000€',
+    estimatedPrice: 18500,
+    features: [
+      'eCommerce',
+      'zahlungsbawicklung',
+      'benutzerkonten',
+      'suchfunktion',
+      'bildergalerie',
+      'portfolioGrid',
+      'kontaktformular',
+      'newsletterRegistrierung',
+      'mehrsprachigkeit',
+      'analyticsIntegration',
+      'seo',
+      'bewertungsmechanismus',
+      'kalender',
+      'downloadbereich',
+      'cookieConsent',
+      'barrierefreiheitTools',
+      'marketingTools',
+      'customFilter',
+      'akkordeon',
+      'tabs'
+    ],
+    customFeature: 'Nachhaltigkeits-Tracker für CO2-Fußabdruck, Ingredient-Scanner mit KI-basierter Hauttyp-Analyse, Subscription-Box Service, Loyalty-Programm mit Punktesystem, AR-basierte Produktvisualisierung',
     pages: [
       {
         name: 'Startseite',
-        content: 'Hero-Bereich mit Unternehmensvision, Service-Übersicht, Testimonials und Call-to-Action',
-        characteristic: 'Animierte Elemente und interaktive Komponenten'
+        content: 'Hero-Slider mit saisonalen Produkten, Featured Categories, Bestseller-Sektion, Nachhaltigkeits-Mission, Kundenbewertungen und Newsletter-Anmeldung',
+        characteristic: 'Parallax-Scrolling, animierte Produktkarten, Video-Hintergründe'
+      },
+      {
+        name: 'Shop',
+        content: 'Produktkatalog mit erweiterten Filtermöglichkeiten, Kategorien, Suchfunktion, Sortieroptionen und Produktvergleich',
+        characteristic: 'Ajax-basierte Filter, Infinite Scroll, Quick-View Modals'
+      },
+      {
+        name: 'Produktdetails',
+        content: 'Hochauflösende Produktbilder, 360°-Ansicht, Inhaltsstoffe, Anwendungshinweise, Kundenbewertungen, verwandte Produkte',
+        characteristic: 'Zoom-Funktion, Bildergalerie, Bewertungs-Widget, Wishlist-Integration'
+      },
+      {
+        name: 'Warenkorb & Checkout',
+        content: 'Übersichtlicher Warenkorb, Gutschein-Codes, Versandoptionen, sichere Zahlungsabwicklung, Gastbestellung',
+        characteristic: 'Multi-Step Checkout, Progress-Indicator, Auto-Save Funktionalität'
+      },
+      {
+        name: 'Mein Konto',
+        content: 'Bestellhistorie, Adressverwaltung, Wishlist, Abonnements, Treuepunkte, persönliche Empfehlungen',
+        characteristic: 'Dashboard-Layout, Bestellverfolgung, Download-Bereich für Rechnungen'
       },
       {
         name: 'Über uns',
-        content: 'Unternehmensgeschichte, Team-Vorstellung, Werte und Mission',
-        characteristic: 'Team-Galerie mit Hover-Effekten'
+        content: 'Unternehmensgeschichte, Nachhaltigkeits-Mission, Team-Vorstellung, Zertifizierungen, Auszeichnungen',
+        characteristic: 'Timeline-Design, Zertifikats-Galerie, Team-Slider'
       },
       {
-        name: 'Services',
-        content: 'Detaillierte Beschreibung aller Dienstleistungen mit Preisübersicht',
-        characteristic: 'Interaktive Service-Karten'
+        name: 'Nachhaltigkeit',
+        content: 'CO2-neutrale Produktion, Verpackungskonzept, Lieferkette, Umwelt-Initiativen, Impact-Berichte',
+        characteristic: 'Interaktive Infografiken, Progress-Bars, Impact-Counter'
       },
       {
-        name: 'Portfolio',
-        content: 'Showcase erfolgreicher Projekte mit Case Studies',
-        characteristic: 'Filterfunktion nach Kategorien'
+        name: 'Beauty Guide',
+        content: 'Hauttyp-Test, Produktempfehlungen, Anwendungstipps, Video-Tutorials, Ingredient-Lexikon',
+        characteristic: 'Quiz-Funktionalität, Video-Player, Accordion-Layout'
       },
       {
         name: 'Blog',
-        content: 'Fachbeiträge, News und Insights aus der Tech-Branche',
-        characteristic: 'CMS-Integration für einfache Verwaltung'
+        content: 'Beauty-Tipps, Nachhaltigkeits-Artikel, Produktneuheiten, Experteninterviews, Kundenstories',
+        characteristic: 'CMS-Integration, Kategorien-Filter, Social Sharing, Kommentarfunktion'
       },
       {
-        name: 'Kontakt',
-        content: 'Kontaktformular, Standort-Karte und Anfahrtsbeschreibung',
-        characteristic: 'Interaktive Karte mit Mapbox'
+        name: 'Kontakt & Support',
+        content: 'Kontaktformular, Live-Chat, FAQ, Rückgabe-Portal, Standort-Informationen, Support-Tickets',
+        characteristic: 'Chatbot-Integration, FAQ-Suche, Ticket-System'
       }
     ],
     formFields: [
+      { name: 'Anrede', type: 'select', required: true },
       { name: 'Vorname', type: 'text', required: true },
       { name: 'Nachname', type: 'text', required: true },
       { name: 'E-Mail', type: 'email', required: true },
-      { name: 'Unternehmen', type: 'text', required: false },
       { name: 'Telefon', type: 'tel', required: false },
-      { name: 'Betreff', type: 'select', required: true },
-      { name: 'Nachricht', type: 'textarea', required: true },
-      { name: 'Newsletter', type: 'checkbox', required: false }
+      { name: 'Geburtsdatum', type: 'date', required: false },
+      { name: 'Hauttyp', type: 'select', required: false },
+      { name: 'Produktinteresse', type: 'checkbox', required: false },
+      { name: 'Newsletter', type: 'checkbox', required: false },
+      { name: 'Datenschutz', type: 'checkbox', required: true },
+      { name: 'Nachricht', type: 'textarea', required: false }
     ],
-    primaryColour: '#2563eb',
-    secondaryColour: '#64748b',
-    accentColour: '#f59e0b',
-    desiredFont: 'Inter',
-    customFont: 'Inter, system-ui, sans-serif'
+    primaryColour: '#2d5a27',
+    secondaryColour: '#8fbc8f',
+    accentColour: '#f4a261',
+    desiredFont: 'Poppins',
+    customFont: 'Poppins, system-ui, sans-serif',
+    relatedFiles: [
+      { fileName: 'Brand_Guidelines_GreenLife.pdf', url: '/uploads/brand-guidelines.pdf' },
+      { fileName: 'Product_Catalog_2024.xlsx', url: '/uploads/product-catalog.xlsx' },
+      { fileName: 'Logo_Variations.zip', url: '/uploads/logo-pack.zip' }
+    ]
   };
 
   const sampleCustomerData = {
-    salutation: 'Herr',
-    givenName: 'Markus',
-    familyName: 'Schmidt',
-    email: 'markus.schmidt@techstart.de',
-    phone: '+49 30 12345678',
-    company: 'TechStart GmbH',
-    address: 'Technologiepark 15',
-    postCode: '10115',
-    city: 'Berlin',
+    salutation: 'Frau',
+    givenName: 'Sarah',
+    familyName: 'Müller',
+    email: 'sarah.mueller@greenlife-kosmetik.de',
+    phone: '+49 89 98765432',
+    company: 'GreenLife Naturkosmetik GmbH',
+    address: 'Biopark Straße 42',
+    postCode: '80339',
+    city: 'München',
     country: 'Deutschland'
   };
 
   const sampleUploadedFiles = [
-    { name: 'Logo_TechStart.svg', size: 45678 },
-    { name: 'Corporate_Design_Guide.pdf', size: 2345678 },
-    { name: 'Produktbilder.zip', size: 15678901 },
-    { name: 'Testimonial_Videos.mp4', size: 89012345 }
+    { name: 'GreenLife_Logo_Primary.svg', size: 67890, type: 'image/svg+xml' },
+    { name: 'Brand_Guidelines_2024.pdf', size: 4567890, type: 'application/pdf' },
+    { name: 'Product_Images_Collection.zip', size: 45678901, type: 'application/zip' },
+    { name: 'Sustainability_Report.pdf', size: 3456789, type: 'application/pdf' },
+    { name: 'Customer_Testimonials.mp4', size: 123456789, type: 'video/mp4' },
+    { name: 'Ingredient_Database.xlsx', size: 2345678, type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' },
+    { name: 'Packaging_Mockups.psd', size: 78901234, type: 'image/vnd.adobe.photoshop' },
+    { name: 'Website_Inspiration.pdf', size: 5678901, type: 'application/pdf' }
   ];
 
   const sampleCustomFeatures =
-    'Mehrsprachigkeit (DE/EN), Live-Chat Integration, Kundenportal mit Login-Bereich, Newsletter-System mit Automation, Social Media Integration';
+    'KI-basierte Hautanalyse mit Kamera-Integration, AR-Produktvisualisierung für virtuelle Anprobe, Subscription-Box Service mit personalisierten Produktempfehlungen, Loyalty-Programm mit Punktesystem und Belohnungen, CO2-Fußabdruck-Tracker für jede Bestellung, Multi-Vendor Marketplace für Partner-Brands, Live-Shopping Events mit Video-Streaming, Chatbot mit NLP für Produktberatung, Progressive Web App (PWA) für Mobile-First Experience, Headless CMS für Content-Management, API-Integration zu ERP-System und Warenwirtschaft';
 
   let isGenerating = $state(false);
   let error = $state('');
