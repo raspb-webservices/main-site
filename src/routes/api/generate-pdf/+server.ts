@@ -7,40 +7,44 @@ export const POST: RequestHandler = async ({ request }) => {
   try {
     const { config, customerData, uploadedFiles, customFeatures, filename } = await request.json();
     const htmlContent = generateHTMLContent(config, customerData, uploadedFiles, customFeatures);
-
     const isLocal = process.env.NETLIFY_LOCAL === 'true' || process.env.NETLIFY_DEV === 'true' || process.env.NODE_ENV === 'development';
-    const myPuppeteer = isLocal ? (await import('puppeteer')).default : (await import('puppeteer-core')).default;
-    const myChrome = isLocal ? null : (await import('@sparticuz/chromium')).default;
 
-    console.log('myPuppeteer ', myPuppeteer);
-    console.log('myChrome ', myChrome);
-
-    const chromePath = myChrome?.executablePath() ?? '/chrome/linux-139.0.7258.66/chrome-linux64/chrome';
-
-    console.log('chromePath ', chromePath);
-
-    let launchOptions;
     if (isLocal) {
-      launchOptions = {
+      // Local development - use regular puppeteer
+      const puppeteer = (await import('puppeteer')).default;
+      const launchOptions = {
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox']
       };
+      browser = await puppeteer.launch(launchOptions);
     } else {
-      launchOptions = {
+      // Production - use puppeteer-core with chromium-min
+      const puppeteerCore = (await import('puppeteer-core')).default;
+      const chromium = (await import('@sparticuz/chromium-min')).default;
+
+      // Configure chromium for Netlify
+      await chromium.font('https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2');
+
+      const launchOptions = {
         args: [
+          ...chromium.args,
           '--no-sandbox',
           '--disable-setuid-sandbox',
           '--disable-dev-shm-usage',
           '--disable-gpu',
           '--single-process',
           '--disable-web-security',
-          '--disable-features=VizDisplayCompositor'
+          '--disable-features=VizDisplayCompositor',
+          '--disable-background-timer-throttling',
+          '--disable-backgrounding-occluded-windows',
+          '--disable-renderer-backgrounding'
         ],
-        executablePath: chromePath,
-        headless: true
+        executablePath: await chromium.executablePath(),
+        headless: true,
+        ignoreHTTPSErrors: true
       };
+      browser = await puppeteerCore.launch(launchOptions);
     }
-    browser = await myPuppeteer.launch(launchOptions);
     const page = await browser.newPage();
 
     // Set content and wait for fonts to load
