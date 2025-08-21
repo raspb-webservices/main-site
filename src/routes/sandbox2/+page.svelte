@@ -1,96 +1,116 @@
 <script lang="ts">
   import Section from '$lib/components/section.svelte';
 
-  // Sample-Konfiguration für PDF-Test - E-Commerce Plattform
+  // Sample-Konfiguration für PDF-Test - SaaS Immobilienverwaltung
   const sampleConfig = {
-    name: 'Premium E-Commerce Plattform für GreenLife Naturkosmetik',
+    name: 'PropTech360 - Intelligente Immobilienverwaltungsplattform',
     projectType: 'webApplication',
-    subType: 'eCommerce',
+    subType: 'customApp',
     description:
-      'Eine hochmoderne E-Commerce Plattform für nachhaltige Naturkosmetik mit integriertem CMS, Kundenverwaltung, Zahlungsabwicklung und umfassenden Marketing-Tools. Die Plattform soll das Wachstum von GreenLife unterstützen und eine nahtlose Shopping-Experience bieten.',
-    projectDetails: 'Vollständige E-Commerce Lösung mit Produktkatalog, Warenkorb, Checkout-Prozess, Kundenkonto-Verwaltung, Bestellverfolgung, Inventory Management und Admin-Dashboard',
-    targetAudience: 'Umweltbewusste Verbraucher, Naturkosmetik-Enthusiasten, Wellness-Interessierte, Frauen und Männer zwischen 25-55 Jahren mit mittlerem bis höherem Einkommen',
-    goals: 'Online-Umsatz steigern, Markenbekanntheit erhöhen, Kundenbindung stärken, nachhaltiges Image kommunizieren, internationale Expansion vorbereiten',
-    inspiration: 'Minimalistisches, natürliches Design inspiriert von skandinavischen E-Commerce Seiten wie Goop, The Ordinary und lokalen Naturkosmetik-Brands',
-    desiredDomain: 'greenlife-naturkosmetik.com',
-    domainStatus: 'Bereits registriert, Transfer erforderlich',
-    projectStatus: 'created',
-    timeline: '12-16 Wochen',
-    budget: '15000-25000€',
-    estimatedPrice: 18500,
+      'Eine umfassende SaaS-Plattform für die digitale Immobilienverwaltung mit KI-gestützten Analysen, automatisierten Workflows, Mieter-Portal, Eigentümer-Dashboard und integriertem Facility Management. Die Lösung revolutioniert die traditionelle Hausverwaltung durch Digitalisierung und Automatisierung.',
+    projectDetails: 'Multi-Tenant SaaS-Anwendung mit Rollen-basiertem Zugriff, API-First Architektur, Real-time Notifications, Mobile Apps, IoT-Integration für Smart Building Features, Machine Learning für Predictive Maintenance und automatisierte Buchhaltung',
+    targetAudience: 'Hausverwaltungsunternehmen, Immobilieneigentümer, Property Manager, Facility Manager, Mieter und Gewerbetreibende - primär B2B mit B2C Komponenten',
+    goals: 'Digitalisierung der Immobilienverwaltung, Effizienzsteigerung um 40%, Kostensenkung durch Automatisierung, Verbesserung der Mieter-Zufriedenheit, Skalierung auf 10.000+ verwaltete Einheiten',
+    inspiration: 'Moderne SaaS-Dashboards wie Notion, Linear und Figma kombiniert mit Immobilien-spezifischen Lösungen wie Buildium, AppFolio und deutschen Marktführern wie DOMUS und ista',
+    desiredDomain: 'proptech360.de',
+    domainStatus: 'Verfügbar, Registrierung erforderlich',
+    projectStatus: 'prototype',
+    timeline: '20-24 Wochen',
+    budget: '35000-50000€',
+    estimatedPrice: 42500,
     features: [
-      'eCommerce',
-      'zahlungsbawicklung',
       'benutzerkonten',
+      'zahlungsbawicklung',
       'suchfunktion',
-      'bildergalerie',
-      'portfolioGrid',
-      'kontaktformular',
-      'newsletterRegistrierung',
-      'mehrsprachigkeit',
+      'kalender',
+      'terminbuchung',
+      'dateiupload',
+      'downloadbereich',
       'analyticsIntegration',
       'seo',
+      'mehrsprachigkeit',
+      'kontaktformular',
+      'newsletterRegistrierung',
+      'customFilter',
+      'customCarousel',
+      'megaMenu',
+      'portfolioGrid',
+      'akkordeon',
+      'tabs',
+      'multiStepDialog',
+      'chatbot',
+      'konfigurator',
+      'assistent',
       'bewertungsmechanismus',
-      'kalender',
-      'downloadbereich',
+      'themeSwitcher',
       'cookieConsent',
+      'videoEmbedding',
       'barrierefreiheitTools',
       'marketingTools',
-      'customFilter',
-      'akkordeon',
-      'tabs'
+      'mapsIntegration',
+      'socialMedieIntegration'
     ],
-    customFeature: 'Nachhaltigkeits-Tracker für CO2-Fußabdruck, Ingredient-Scanner mit KI-basierter Hauttyp-Analyse, Subscription-Box Service, Loyalty-Programm mit Punktesystem, AR-basierte Produktvisualisierung',
+    customFeature: 'KI-basierte Mietpreis-Optimierung, IoT-Sensoren für Predictive Maintenance, Blockchain-basierte Mietverträge, AR-Besichtigungen, Automatische Nebenkostenabrechnung mit OCR, Chatbot für Mieteranfragen, Mobile App mit Push-Notifications, API-Integration zu Banken und Versicherungen, Machine Learning für Leerstandsprognosen',
     pages: [
       {
-        name: 'Startseite',
-        content: 'Hero-Slider mit saisonalen Produkten, Featured Categories, Bestseller-Sektion, Nachhaltigkeits-Mission, Kundenbewertungen und Newsletter-Anmeldung',
-        characteristic: 'Parallax-Scrolling, animierte Produktkarten, Video-Hintergründe'
+        name: 'Landing Page',
+        content: 'Hero-Section mit Produktdemo, Feature-Highlights, Kundenstimmen, Preismodelle, ROI-Rechner und Demo-Anfrage',
+        characteristic: 'Animated Dashboard-Preview, Interactive ROI Calculator, Video-Testimonials'
       },
       {
-        name: 'Shop',
-        content: 'Produktkatalog mit erweiterten Filtermöglichkeiten, Kategorien, Suchfunktion, Sortieroptionen und Produktvergleich',
-        characteristic: 'Ajax-basierte Filter, Infinite Scroll, Quick-View Modals'
+        name: 'Dashboard (Verwalter)',
+        content: 'Übersicht aller Immobilien, KPIs, Umsatz-Charts, Aufgaben-Management, Benachrichtigungen, Quick-Actions',
+        characteristic: 'Real-time Data Updates, Drag & Drop Widgets, Responsive Charts'
       },
       {
-        name: 'Produktdetails',
-        content: 'Hochauflösende Produktbilder, 360°-Ansicht, Inhaltsstoffe, Anwendungshinweise, Kundenbewertungen, verwandte Produkte',
-        characteristic: 'Zoom-Funktion, Bildergalerie, Bewertungs-Widget, Wishlist-Integration'
+        name: 'Immobilien-Verwaltung',
+        content: 'Objektliste, Detailansichten, Grundrisse, Dokumente, Mieter-Übersicht, Wartungshistorie, Finanzen',
+        characteristic: 'Interactive Floor Plans, Document Management, Photo Galleries'
       },
       {
-        name: 'Warenkorb & Checkout',
-        content: 'Übersichtlicher Warenkorb, Gutschein-Codes, Versandoptionen, sichere Zahlungsabwicklung, Gastbestellung',
-        characteristic: 'Multi-Step Checkout, Progress-Indicator, Auto-Save Funktionalität'
+        name: 'Mieter-Portal',
+        content: 'Persönliches Dashboard, Mietvertrag, Nebenkostenabrechnungen, Schadensmeldungen, Kommunikation, Zahlungen',
+        characteristic: 'Mobile-First Design, Push Notifications, Secure Document Vault'
       },
       {
-        name: 'Mein Konto',
-        content: 'Bestellhistorie, Adressverwaltung, Wishlist, Abonnements, Treuepunkte, persönliche Empfehlungen',
-        characteristic: 'Dashboard-Layout, Bestellverfolgung, Download-Bereich für Rechnungen'
+        name: 'Wartung & Service',
+        content: 'Wartungskalender, Aufträge-Management, Handwerker-Portal, Kostentracking, Qualitätskontrolle, Reporting',
+        characteristic: 'Workflow Automation, Photo Documentation, Rating System'
       },
       {
-        name: 'Über uns',
-        content: 'Unternehmensgeschichte, Nachhaltigkeits-Mission, Team-Vorstellung, Zertifizierungen, Auszeichnungen',
-        characteristic: 'Timeline-Design, Zertifikats-Galerie, Team-Slider'
+        name: 'Finanzen & Buchhaltung',
+        content: 'Mieteingang-Tracking, Nebenkostenabrechnung, Rechnungsstellung, DATEV-Export, Steuer-Reports, Cashflow-Prognosen',
+        characteristic: 'Automated Calculations, Bank Integration, Tax Compliance'
       },
       {
-        name: 'Nachhaltigkeit',
-        content: 'CO2-neutrale Produktion, Verpackungskonzept, Lieferkette, Umwelt-Initiativen, Impact-Berichte',
-        characteristic: 'Interaktive Infografiken, Progress-Bars, Impact-Counter'
+        name: 'Kommunikation',
+        content: 'Nachrichten-Center, Rundschreiben, Aushänge, Mieter-App Notifications, E-Mail Templates, SMS-Versand',
+        characteristic: 'Multi-Channel Communication, Template Engine, Delivery Tracking'
       },
       {
-        name: 'Beauty Guide',
-        content: 'Hauttyp-Test, Produktempfehlungen, Anwendungstipps, Video-Tutorials, Ingredient-Lexikon',
-        characteristic: 'Quiz-Funktionalität, Video-Player, Accordion-Layout'
+        name: 'Berichte & Analytics',
+        content: 'Performance-KPIs, Leerstand-Analysen, Mietpreis-Benchmarks, Wartungskosten, Mieter-Zufriedenheit, Custom Reports',
+        characteristic: 'Interactive Charts, Export Functions, Scheduled Reports'
       },
       {
-        name: 'Blog',
-        content: 'Beauty-Tipps, Nachhaltigkeits-Artikel, Produktneuheiten, Experteninterviews, Kundenstories',
-        characteristic: 'CMS-Integration, Kategorien-Filter, Social Sharing, Kommentarfunktion'
+        name: 'Einstellungen & Admin',
+        content: 'Benutzer-Verwaltung, Rollen & Rechte, System-Konfiguration, API-Keys, Backup-Management, Audit-Logs',
+        characteristic: 'Role-Based Access Control, Security Settings, System Monitoring'
       },
       {
-        name: 'Kontakt & Support',
-        content: 'Kontaktformular, Live-Chat, FAQ, Rückgabe-Portal, Standort-Informationen, Support-Tickets',
-        characteristic: 'Chatbot-Integration, FAQ-Suche, Ticket-System'
+        name: 'Mobile App',
+        content: 'Native iOS/Android Apps für Mieter und Verwalter mit Offline-Funktionalität, Push-Notifications und Kamera-Integration',
+        characteristic: 'Progressive Web App, Offline Sync, Camera Integration'
+      },
+      {
+        name: 'API-Dokumentation',
+        content: 'REST API Dokumentation, Webhooks, SDK Downloads, Code-Beispiele, Sandbox-Umgebung, Rate Limits',
+        characteristic: 'Interactive API Explorer, Code Generators, Testing Tools'
+      },
+      {
+        name: 'Support & Hilfe',
+        content: 'Knowledge Base, Video-Tutorials, Live-Chat, Ticket-System, Webinar-Kalender, Community-Forum',
+        characteristic: 'Searchable Knowledge Base, Video Library, Community Features'
       }
     ],
     formFields: [
@@ -98,52 +118,63 @@
       { name: 'Vorname', type: 'text', required: true },
       { name: 'Nachname', type: 'text', required: true },
       { name: 'E-Mail', type: 'email', required: true },
-      { name: 'Telefon', type: 'tel', required: false },
-      { name: 'Geburtsdatum', type: 'date', required: false },
-      { name: 'Hauttyp', type: 'select', required: false },
-      { name: 'Produktinteresse', type: 'checkbox', required: false },
+      { name: 'Telefon', type: 'tel', required: true },
+      { name: 'Unternehmen', type: 'text', required: true },
+      { name: 'Position', type: 'text', required: false },
+      { name: 'Anzahl verwaltete Einheiten', type: 'number', required: true },
+      { name: 'Aktuelles System', type: 'select', required: false },
+      { name: 'Budget-Rahmen', type: 'select', required: false },
+      { name: 'Gewünschter Start', type: 'date', required: false },
+      { name: 'Besondere Anforderungen', type: 'textarea', required: false },
+      { name: 'Demo gewünscht', type: 'checkbox', required: false },
       { name: 'Newsletter', type: 'checkbox', required: false },
       { name: 'Datenschutz', type: 'checkbox', required: true },
-      { name: 'Nachricht', type: 'textarea', required: false }
+      { name: 'AGB', type: 'checkbox', required: true }
     ],
-    primaryColour: '#2d5a27',
-    secondaryColour: '#8fbc8f',
-    accentColour: '#f4a261',
-    desiredFont: 'Poppins',
-    customFont: 'Poppins, system-ui, sans-serif',
+    primaryColour: '#1e40af',
+    secondaryColour: '#64748b',
+    accentColour: '#10b981',
+    desiredFont: 'Inter',
+    customFont: 'Inter, system-ui, -apple-system, sans-serif',
     relatedFiles: [
-      { fileName: 'Brand_Guidelines_GreenLife.pdf', url: '/uploads/brand-guidelines.pdf' },
-      { fileName: 'Product_Catalog_2024.xlsx', url: '/uploads/product-catalog.xlsx' },
-      { fileName: 'Logo_Variations.zip', url: '/uploads/logo-pack.zip' }
+      { fileName: 'PropTech360_Brand_Guidelines.pdf', url: '/uploads/brand-guidelines.pdf' },
+      { fileName: 'Technical_Specifications.pdf', url: '/uploads/tech-specs.pdf' },
+      { fileName: 'UI_Mockups_Collection.fig', url: '/uploads/ui-mockups.fig' },
+      { fileName: 'Logo_Assets.zip', url: '/uploads/logo-assets.zip' },
+      { fileName: 'API_Documentation.pdf', url: '/uploads/api-docs.pdf' }
     ]
   };
 
   const sampleCustomerData = {
-    salutation: 'Frau',
-    givenName: 'Sarah',
-    familyName: 'Müller',
-    email: 'sarah.mueller@greenlife-kosmetik.de',
-    phone: '+49 89 98765432',
-    company: 'GreenLife Naturkosmetik GmbH',
-    address: 'Biopark Straße 42',
-    postCode: '80339',
-    city: 'München',
+    salutation: 'Herr',
+    givenName: 'Michael',
+    familyName: 'Schmidt',
+    email: 'michael.schmidt@immobilien-schmidt.de',
+    phone: '+49 30 12345678',
+    company: 'Schmidt Immobilienverwaltung GmbH',
+    address: 'Potsdamer Platz 15',
+    postCode: '10785',
+    city: 'Berlin',
     country: 'Deutschland'
   };
 
   const sampleUploadedFiles = [
-    { name: 'GreenLife_Logo_Primary.svg', size: 67890, type: 'image/svg+xml' },
-    { name: 'Brand_Guidelines_2024.pdf', size: 4567890, type: 'application/pdf' },
-    { name: 'Product_Images_Collection.zip', size: 45678901, type: 'application/zip' },
-    { name: 'Sustainability_Report.pdf', size: 3456789, type: 'application/pdf' },
-    { name: 'Customer_Testimonials.mp4', size: 123456789, type: 'video/mp4' },
-    { name: 'Ingredient_Database.xlsx', size: 2345678, type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' },
-    { name: 'Packaging_Mockups.psd', size: 78901234, type: 'image/vnd.adobe.photoshop' },
-    { name: 'Website_Inspiration.pdf', size: 5678901, type: 'application/pdf' }
+    { name: 'PropTech360_Logo_Variants.svg', size: 89123, type: 'image/svg+xml' },
+    { name: 'Corporate_Identity_Manual.pdf', size: 6789012, type: 'application/pdf' },
+    { name: 'UI_UX_Wireframes.fig', size: 23456789, type: 'application/octet-stream' },
+    { name: 'Database_Schema_Documentation.pdf', size: 4567890, type: 'application/pdf' },
+    { name: 'API_Integration_Requirements.docx', size: 1234567, type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' },
+    { name: 'Property_Management_Workflow.xlsx', size: 3456789, type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' },
+    { name: 'Competitor_Analysis_Report.pdf', size: 5678901, type: 'application/pdf' },
+    { name: 'User_Journey_Maps.pdf', size: 2345678, type: 'application/pdf' },
+    { name: 'Technical_Architecture_Diagram.png', size: 1567890, type: 'image/png' },
+    { name: 'Security_Requirements.pdf', size: 2789012, type: 'application/pdf' },
+    { name: 'GDPR_Compliance_Checklist.pdf', size: 1890123, type: 'application/pdf' },
+    { name: 'Mobile_App_Mockups.sketch', size: 12345678, type: 'application/octet-stream' }
   ];
 
   const sampleCustomFeatures =
-    'KI-basierte Hautanalyse mit Kamera-Integration, AR-Produktvisualisierung für virtuelle Anprobe, Subscription-Box Service mit personalisierten Produktempfehlungen, Loyalty-Programm mit Punktesystem und Belohnungen, CO2-Fußabdruck-Tracker für jede Bestellung, Multi-Vendor Marketplace für Partner-Brands, Live-Shopping Events mit Video-Streaming, Chatbot mit NLP für Produktberatung, Progressive Web App (PWA) für Mobile-First Experience, Headless CMS für Content-Management, API-Integration zu ERP-System und Warenwirtschaft';
+    'KI-basierte Mietpreis-Optimierung mit Marktdaten-Integration, IoT-Sensoren für Predictive Maintenance und Energieoptimierung, Blockchain-basierte Smart Contracts für Mietverträge, AR-gestützte Immobilienbesichtigungen mit 3D-Rundgängen, Automatische Nebenkostenabrechnung mit OCR-Rechnungserkennung, Multilingualer Chatbot für Mieteranfragen mit NLP, Native Mobile Apps mit Offline-Synchronisation, API-Integration zu Banken für automatische Mietzahlungsabgleich, Machine Learning für Leerstandsprognosen und Wartungsplanung, Digitale Unterschriften mit rechtsgültiger Dokumentation, Real-time Dashboard mit WebSocket-Updates, Automatisierte Compliance-Checks für Mietrecht und Steuervorschriften';
 
   let isGenerating = $state(false);
   let error = $state('');

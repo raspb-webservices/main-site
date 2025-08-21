@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { goto } from '$app/navigation';
+  import { _ } from 'svelte-i18n';
   import Wizard from '$lib/components/wizard/wizard.svelte';
 
   interface PageData {
@@ -30,54 +31,57 @@
   });
 </script>
 
+<svelte:head>
+  <title>{$_('getStarted.meta.title')}</title>
+  <meta name="description" content={$_('getStarted.meta.description')} />
+</svelte:head>
+
 <section class="get-started-content-wrapper">
   <div class="hero-section">
-    <h1>Projekt <span class="inner-text-special">konfigurieren</span></h1>
+    <h1>{$_('getStarted.hero.title')} <span class="inner-text-special">{$_('getStarted.hero.titleHighlight')}</span></h1>
 
     <div class="teaser-content">
       <p class="lead-text">
-        In nur wenigen Minuten zu Ihrem maßgeschneiderten Angebot - unser intelligenter Konfigurator führt Sie Schritt für Schritt durch alle wichtigen
-        Entscheidungen.
+        {$_('getStarted.teaser.description')}
       </p>
 
       <div class="benefits-grid">
         <div class="benefit-item">
           <div class="benefit-icon">⚡</div>
           <div class="benefit-text">
-            <h3>Schnell & Effizient</h3>
-            <p>Keine langen Gespräche - definieren Sie Ihr Projekt in 5-10 Minuten</p>
+            <h3>{$_('getStarted.benefits.fast.title')}</h3>
+            <p>{$_('getStarted.benefits.fast.description')}</p>
           </div>
         </div>
 
         <div class="benefit-item">
           <div class="benefit-icon">💰</div>
           <div class="benefit-text">
-            <h3>Transparente Preise</h3>
-            <p>Erhalten Sie sofort eine realistische Kostenschätzung für Ihr Vorhaben</p>
+            <h3>{$_('getStarted.benefits.transparent.title')}</h3>
+            <p>{$_('getStarted.benefits.transparent.description')}</p>
           </div>
         </div>
 
         <div class="benefit-item">
           <div class="benefit-icon">🎯</div>
           <div class="benefit-text">
-            <h3>Präzise Planung</h3>
-            <p>Alle Details werden erfasst - für ein perfekt auf Sie zugeschnittenes Ergebnis</p>
+            <h3>{$_('getStarted.benefits.precise.title')}</h3>
+            <p>{$_('getStarted.benefits.precise.description')}</p>
           </div>
         </div>
 
         <div class="benefit-item">
           <div class="benefit-icon">📋</div>
           <div class="benefit-text">
-            <h3>Komplette Dokumentation</h3>
-            <p>Am Ende erhalten Sie eine detaillierte Projektbeschreibung zum Download</p>
+            <h3>{$_('getStarted.benefits.documentation.title')}</h3>
+            <p>{$_('getStarted.benefits.documentation.description')}</p>
           </div>
         </div>
       </div>
 
       <div class="cta-text">
         <p class="no-padding">
-          <strong>So funktioniert's:</strong> Wählen Sie Ihren Projekttyp, beschreiben Sie Ihre Anforderungen, definieren Sie gewünschte Features und Design - fertig!
-          Sie erhalten sofort eine Kostenschätzung und können Ihre Konfiguration als PDF herunterladen.
+          <strong>{$_('getStarted.cta.title')}</strong> {$_('getStarted.cta.description')}
         </p>
       </div>
     </div>

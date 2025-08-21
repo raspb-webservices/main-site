@@ -7,7 +7,6 @@
   import { goto } from '$app/navigation';
   import ContactForm from './contact-form.svelte';
   import { _ } from 'svelte-i18n';
-  import { locale } from 'svelte-i18n';
   import auth from '../../../authService';
 
   // Props for initial values from URL parameters
@@ -682,7 +681,7 @@
             </div>
             <!-- Step Title -->
             <div class="text-base-content mt-2 max-w-20 text-center text-xs font-medium">
-              {step.title}
+              {$_(step.title)}
             </div>
           </button>
         {/each}
@@ -715,7 +714,7 @@
             </div>
             <!-- Step Title -->
             <div class="text-base-content mt-2 text-center text-xs font-medium">
-              {step.title}
+              {$_(step.title)}
             </div>
           </button>
         {/each}
@@ -750,10 +749,10 @@
           >
             <div class="card-body">
               <div class="service-card-header">
-                <h3 class="card-title no-padding">{type.title}</h3>
+                <h3 class="card-title no-padding">{$_(type.title)}</h3>
                 <div class="service-icon">{type.icon}</div>
               </div>
-              <p class="no-padding">{type.description}</p>
+              <p class="no-padding">{$_(type.description)}</p>
               <div class="card-actions justify-end">
                 <div class="badge badge-primary">{type.lowestPrice.toLocaleString()}€ - {type.highestPrice.toLocaleString()}€</div>
               </div>
@@ -788,8 +787,8 @@
             aria-label="Select subtype: {subtype.title}"
           >
             <div class="card-body">
-              <h3 class="card-title">{subtype.title}</h3>
-              <p class="no-padding">{subtype.description}</p>
+            <h3 class="card-title">{$_(subtype.title)}</h3>
+            <p class="no-padding">{$_(subtype.description)}</p>
               <div class="card-actions justify-end">
                 <div class="badge badge-success">ab {subtype.price.toLocaleString()}€</div>
               </div>
@@ -874,57 +873,57 @@
 
           <div class="form-control w-full">
             <label class="label" for="desiredDomain">
-              <span class="label-text font-semibold">Gewünschte Domain:</span>
+              <span class="label-text font-semibold">{$_('wizard.form.desiredDomain')}</span>
             </label>
             <input
               type="text"
               id="desiredDomain"
               class="input input-bordered w-full"
               bind:value={config.desiredDomain}
-              placeholder="z.B. meine-firma.de, example.com..."
+              placeholder={$_('wizard.form.desiredDomainPlaceholder')}
             />
           </div>
 
           <div class="form-control w-full">
             <label class="label" for="domainStatus">
-              <span class="label-text font-semibold">Domain-Status:</span>
+              <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.domainStatus.label')}</span>
             </label>
             <select id="domainStatus" class="select select-bordered w-full" bind:value={config.domainStatus}>
-              <option value="">Bitte wählen...</option>
-              <option value="owned">Domain bereits im Besitz</option>
-              <option value="needs-registration">Domain muss registriert werden</option>
-              <option value="needs-transfer">Domain muss übertragen werden</option>
-              <option value="undecided">Noch nicht entschieden</option>
+              <option value="">{$_('wizard.hardcodedTexts.domainStatus.placeholder')}</option>
+              <option value="owned">{$_('wizard.hardcodedTexts.domainStatus.owned')}</option>
+              <option value="needs-registration">{$_('wizard.hardcodedTexts.domainStatus.needsRegistration')}</option>
+              <option value="needs-transfer">{$_('wizard.hardcodedTexts.domainStatus.needsTransfer')}</option>
+              <option value="undecided">{$_('wizard.hardcodedTexts.domainStatus.undecided')}</option>
             </select>
           </div>
 
           <div class="form-control w-full">
             <label class="label" for="timeline">
-              <span class="label-text font-semibold">Gewünschter Zeitrahmen:</span>
+              <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.timeline.label')}</span>
             </label>
             <select id="timeline" class="select select-bordered w-full" bind:value={config.timeline}>
-              <option value="">Bitte wählen...</option>
-              <option value="asap">So schnell wie möglich</option>
-              <option value="5-10-days">5 - 10 Tage </option>
-              <option value="2-4-weeks">2 - 4 Wochen</option>
-              <option value="2-6-months">2 - 6 Monate</option>
-              <option value="flexible">Flexibel</option>
+              <option value="">{$_('wizard.hardcodedTexts.timeline.placeholder')}</option>
+              <option value="asap">{$_('wizard.hardcodedTexts.timeline.asap')}</option>
+              <option value="5-10-days">{$_('wizard.hardcodedTexts.timeline.fiveToTenDays')}</option>
+              <option value="2-4-weeks">{$_('wizard.hardcodedTexts.timeline.twoToFourWeeks')}</option>
+              <option value="2-6-months">{$_('wizard.hardcodedTexts.timeline.twoToSixMonths')}</option>
+              <option value="flexible">{$_('wizard.hardcodedTexts.timeline.flexible')}</option>
             </select>
           </div>
 
           <div class="form-control w-full">
             <label class="label" for="budget">
-              <span class="label-text font-semibold">Ihr Budget:</span>
+              <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.budget.label')}</span>
             </label>
             <select id="budget" class="select select-bordered w-full" bind:value={config.budget}>
-              <option value="">Bitte wählen...</option>
-              <option value="under-500">unter 500€</option>
-              <option value="1k-3k">1.000€ - 3.000€</option>
-              <option value="3k-7k">3.000€ - 7.000€</option>
-              <option value="7k-10k">7.000€ - 10.000€</option>
-              <option value="10k-15k">10.000€ - 15.000€</option>
-              <option value="15k-20k">15.000€ - 25.000€</option>
-              <option value="more-than-25k">mehr als 25.000€</option>
+              <option value="">{$_('wizard.hardcodedTexts.budget.placeholder')}</option>
+              <option value="under-500">{$_('wizard.hardcodedTexts.budget.under500')}</option>
+              <option value="1k-3k">{$_('wizard.hardcodedTexts.budget.oneToThreeK')}</option>
+              <option value="3k-7k">{$_('wizard.hardcodedTexts.budget.threeToSevenK')}</option>
+              <option value="7k-10k">{$_('wizard.hardcodedTexts.budget.sevenToTenK')}</option>
+              <option value="10k-15k">{$_('wizard.hardcodedTexts.budget.tenToFifteenK')}</option>
+              <option value="15k-20k">{$_('wizard.hardcodedTexts.budget.fifteenToTwentyK')}</option>
+              <option value="more-than-25k">{$_('wizard.hardcodedTexts.budget.moreThanTwentyFiveK')}</option>
             </select>
           </div>
         </div>
@@ -942,12 +941,12 @@
             <div class="card-body">
               <div class="card-actions items-center justify-start">
                 <input type="checkbox" class="checkbox checkbox-primary" bind:group={config.features} value={feature.name} onchange={() => calculatePrice()} />
-                <h3 class="card-title no-padding">{feature.title}</h3>
+                <h3 class="card-title no-padding">{$_(feature.title)}</h3>
               </div>
-              <p class="no-padding">{feature.description}</p>
+              <p class="no-padding">{$_(feature.description)}</p>
 
               <div class="card-actions justify-end">
-                <div class="badge {featureCategoryColors[feature.category || 'Funktionalität']}">{feature.category}</div>
+                <div class="badge {featureCategoryColors[feature.category || 'wizard.config.categories.funktionalitaet']}">{$_(feature.category)}</div>
               </div>
             </div>
           </label>
@@ -956,13 +955,13 @@
 
       <div class="form-control mt-8 w-full">
         <label class="label" for="customFeatures">
-          <span class="label-text text-lg font-semibold">Weitere gewünschte Features:</span>
+          <span class="label-text text-lg font-semibold">{$_('wizard.hardcodedTexts.customFeatures.label')}</span>
         </label>
         <textarea
           id="customFeatures"
           class="textarea textarea-bordered textarea-lg w-full"
           bind:value={customFeatures}
-          placeholder="Beschreiben Sie weitere spezielle Anforderungen, die nicht in der Liste stehen..."
+          placeholder={$_('wizard.hardcodedTexts.customFeatures.placeholder')}
           rows="4"
         ></textarea>
       </div>
@@ -999,39 +998,39 @@
 
                 <div class="form-control mb-4 w-full">
                   <label class="label" for="pageName{i}">
-                    <span class="label-text font-semibold">Seitenname:</span>
+                    <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.pages.pageName')}</span>
                   </label>
                   <input
                     type="text"
                     id="pageName{i}"
                     class="input input-bordered w-full"
                     bind:value={config.pages[i].name}
-                    placeholder="z.B. Startseite, Über uns, Kontakt, Leistungen..."
+                    placeholder={$_('wizard.hardcodedTexts.pages.pageNamePlaceholder')}
                   />
                 </div>
 
                 <div class="form-control mb-4 w-full">
                   <label class="label" for="pageContent{i}">
-                    <span class="label-text font-semibold">Gewünschte Inhalte:</span>
+                    <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.pages.pageContent')}</span>
                   </label>
                   <textarea
                     id="pageContent{i}"
                     class="textarea textarea-bordered w-full"
                     bind:value={config.pages[i].content}
-                    placeholder="Beschreiben Sie, welche Inhalte auf dieser Seite stehen sollen: Texte, Bilder, Funktionen, etc."
+                    placeholder={$_('wizard.hardcodedTexts.pages.pageContentPlaceholder')}
                     rows="3"
                   ></textarea>
                 </div>
 
                 <div class="form-control w-full">
                   <label class="label" for="pageCharacteristic{i}">
-                    <span class="label-text font-semibold">Besonderheiten der Seite:</span>
+                    <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.pages.pageCharacteristic')}</span>
                   </label>
                   <textarea
                     id="pageCharacteristic{i}"
                     class="textarea textarea-bordered w-full"
                     bind:value={config.pages[i].characteristic}
-                    placeholder="Welche Features sollen auf dieser Seite platziert werden? Sollen Inhaltsvorschläge erarbeitet werden oder sollen Inhalte exakt wie vorgegeben übernommen werden?"
+                    placeholder={$_('wizard.hardcodedTexts.pages.pageCharacteristicPlaceholder')}
                     rows="3"
                   ></textarea>
                 </div>
@@ -1044,53 +1043,53 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
           </svg>
-          Seite hinzufügen
+          {$_('wizard.hardcodedTexts.pages.addPage')}
         </button>
       </div>
 
       <!-- Form Fields (only if contact form is selected) -->
       {#if config.features.includes('kontaktformular')}
         <div class="content-section">
-          <h2>Formular-Felder</h2>
-          <p>Da Sie ein Kontaktformular gewählt haben, definieren Sie hier die gewünschten Felder und deren Bezeichnungen.</p>
+          <h2>{$_('wizard.hardcodedTexts.formFields.title')}</h2>
+          <p>{$_('wizard.hardcodedTexts.formFields.description')}</p>
 
           <div class="space-y-4">
-            {#each config.formFields as _, i}
+            {#each config.formFields as field, i}
               <div class="card bg-base-100 border-base-300 border">
                 <div class="card-body">
                   <div class="mb-4 flex items-center justify-between">
-                    <h4 class="card-title text-lg">Feld {i + 1}</h4>
-                    <button type="button" class="btn btn-error btn-sm" onclick={() => removeFormField(i)} aria-label="Formularfeld entfernen">
+                    <h4 class="card-title text-lg">{$_('wizard.hardcodedTexts.formFields.field')} {i + 1}</h4>
+                    <button type="button" class="btn btn-error btn-sm" onclick={() => removeFormField(i)} aria-label={$_('wizard.hardcodedTexts.formFields.removeField')}>
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                       </svg>
-                      Entfernen
+                      {$_('wizard.hardcodedTexts.formFields.remove')}
                     </button>
                   </div>
 
                   <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div class="form-control w-full">
                       <label class="label" for="fieldType{i}">
-                        <span class="label-text font-semibold">Feldtyp:</span>
+                        <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.formFields.fieldType')}</span>
                       </label>
                       <select id="fieldType{i}" class="select select-bordered w-full" bind:value={config.formFields[i].type}>
-                        <option value="">Feldtyp wählen...</option>
+                        <option value="">{$_('wizard.hardcodedTexts.formFields.fieldTypePlaceholder')}</option>
                         {#each formFieldTypes as fieldType}
-                          <option value={fieldType.id}>{fieldType.title}</option>
+                          <option value={fieldType.id}>{$_(fieldType.title)}</option>
                         {/each}
                       </select>
                     </div>
 
                     <div class="form-control w-full">
                       <label class="label" for="fieldName{i}">
-                        <span class="label-text font-semibold">Feldname/Beschriftung:</span>
+                        <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.formFields.fieldName')}</span>
                       </label>
                       <input
                         type="text"
                         id="fieldName{i}"
                         class="input input-bordered w-full"
                         bind:value={config.formFields[i].name}
-                        placeholder="z.B. Name, E-Mail, Nachricht, Telefon..."
+                        placeholder={$_('wizard.hardcodedTexts.formFields.fieldNamePlaceholder')}
                       />
                     </div>
                   </div>
@@ -1098,7 +1097,7 @@
                   <div class="form-control mt-4">
                     <label class="label cursor-pointer justify-start gap-4">
                       <input type="checkbox" class="checkbox checkbox-primary" bind:checked={config.formFields[i].required} />
-                      <span class="label-text">Pflichtfeld</span>
+                      <span class="label-text">{$_('wizard.hardcodedTexts.formFields.required')}</span>
                     </label>
                   </div>
                 </div>
@@ -1110,7 +1109,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
             </svg>
-            Feld hinzufügen
+            {$_('wizard.hardcodedTexts.formFields.addField')}
           </button>
         </div>
       {/if}
@@ -1123,12 +1122,12 @@
 
       <!-- Color Selection -->
       <div class="content-section">
-        <h2>Farbschema</h2>
-        <p>Wählen Sie die Hauptfarben für Ihr Projekt. Falls Sie bereits Corporate Colors haben, geben Sie diese hier an.</p>
+        <h2>{$_('wizard.hardcodedTexts.design.colorScheme.title')}</h2>
+        <p>{$_('wizard.hardcodedTexts.design.colorScheme.description')}</p>
         <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
           <div class="form-control w-full">
             <label class="label" for="primaryColor">
-              <span class="label-text font-semibold">Primärfarbe:</span>
+              <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.design.colorScheme.primaryColor')}</span>
             </label>
             <div class="join w-full">
               <input type="color" id="primaryColor" class="join-item h-12 w-16 border-0" bind:value={config.primaryColour} />
@@ -1138,7 +1137,7 @@
 
           <div class="form-control w-full">
             <label class="label" for="secondaryColor">
-              <span class="label-text font-semibold">Sekundärfarbe:</span>
+              <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.design.colorScheme.secondaryColor')}</span>
             </label>
             <div class="join w-full">
               <input type="color" id="secondaryColor" class="join-item h-12 w-16 border-0" bind:value={config.secondaryColour} />
@@ -1148,7 +1147,7 @@
 
           <div class="form-control w-full">
             <label class="label" for="accentColor">
-              <span class="label-text font-semibold">Akzentfarbe:</span>
+              <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.design.colorScheme.accentColor')}</span>
             </label>
             <div class="join w-full">
               <input type="color" id="accentColor" class="join-item h-12 w-16 border-0" bind:value={config.accentColour} />
@@ -1160,32 +1159,32 @@
 
       <!-- Font Selection -->
       <div class="content-section">
-        <h2>Schriftart</h2>
-        <p>Wählen Sie eine Schriftart aus unserer Auswahl oder geben Sie Ihre Corporate Font an.</p>
+        <h2>{$_('wizard.hardcodedTexts.design.font.title')}</h2>
+        <p>{$_('wizard.hardcodedTexts.design.font.description')}</p>
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div class="form-control w-full">
             <label class="label" for="googleFonts">
-              <span class="label-text font-semibold">Google Fonts Auswahl:</span>
+              <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.design.font.googleFontsLabel')}</span>
             </label>
             <select id="googleFonts" class="select select-bordered w-full" bind:value={config.desiredFont}>
               {#each googleFonts as font}
                 <option value={font}>{font}</option>
               {/each}
-              <option value="Other Google Fonts"> &lt; Ich möchte eine andere Google Font nutzen &gt; </option>
+              <option value="Other Google Fonts">{$_('wizard.hardcodedTexts.design.font.otherGoogleFonts')}</option>
             </select>
           </div>
 
           <div class="form-control w-full">
             <label class="label" for="customFont">
-              <span class="label-text font-semibold">Oder eigene Schriftart definieren:</span>
+              <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.design.font.customFontLabel')}</span>
             </label>
             <input
               type="text"
               id="customFont"
               class="input input-bordered w-full"
               bind:value={config.customFont}
-              placeholder="z.B. Helvetica Neue, Arial, Corporate Font Name..."
+              placeholder={$_('wizard.hardcodedTexts.design.font.customFontPlaceholder')}
             />
           </div>
         </div>
@@ -1197,10 +1196,9 @@
             </svg>
 
             <div>
-              <div class="font-bold">Schriftart-Vorschau von {config.desiredFont}:</div>
+              <div class="font-bold">{$_('wizard.hardcodedTexts.design.font.previewTitle', { values: { fontName: config.desiredFont } })}</div>
               <div class="my-2 text-base" style="font-family: {config.desiredFont}">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis minima officia eveniet fugiat ad dicta quia optio quod possimus sint enim
-                doloremque, consectetur ut est quibusdam corporis obcaecati dolore dolores!
+                {$_('wizard.hardcodedTexts.design.font.previewText')}
               </div>
             </div>
           </div>
@@ -1209,8 +1207,8 @@
 
       <!-- File Upload -->
       <div class="content-section">
-        <h2>Materialien hochladen</h2>
-        <p>Laden Sie hier Styleguides, Mockups, Logos, Bilder oder andere relevante Dateien hoch, die uns bei der Umsetzung helfen.</p>
+        <h2>{$_('wizard.hardcodedTexts.materials.title')}</h2>
+        <p>{$_('wizard.hardcodedTexts.materials.description')}</p>
 
         <div class="form-control w-full">
           <input
@@ -1222,15 +1220,13 @@
             onchange={handleFileUpload}
           />
           <div class="label">
-            <span class="label-text-alt"
-              >Unterstützte Formate: Allgemeine Dateien (PDF, .txt, ...), Office Dokumente (Word, Powerpoint, ...), Bildformate (.jpg, .png, ...)</span
-            >
+            <span class="label-text-alt">{$_('wizard.hardcodedTexts.materials.supportedFormats')}</span>
           </div>
         </div>
 
         {#if uploadedFiles.length > 0}
           <div class="mt-6">
-            <h3>Hochgeladene Dateien:</h3>
+            <h3>{$_('wizard.hardcodedTexts.materials.uploadedFiles')}</h3>
             <div class="space-y-2">
               {#each uploadedFiles as file, i}
                 <div class="alert">
@@ -1243,7 +1239,7 @@
                     ></path>
                   </svg>
                   <span>{file.name} ({Math.round(file.size / 1024)}KB)</span>
-                  <button type="button" class="btn btn-sm btn-error" onclick={() => removeFile(i)} aria-label="Datei entfernen">
+                  <button type="button" class="btn btn-sm btn-error" onclick={() => removeFile(i)} aria-label={$_('wizard.hardcodedTexts.materials.removeFile')}>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -1261,7 +1257,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
               <div>
-                <div class="font-bold">Upload läuft...</div>
+                <div class="font-bold">{$_('wizard.hardcodedTexts.materials.uploadRunning')}</div>
                 <div class="text-sm">{uploadProgress}</div>
               </div>
               <span class="loading loading-ring loading-md"></span>
@@ -1272,13 +1268,13 @@
     {:else if (currentStep === 3 && config.projectType === 'freestyle') || (currentStep === 4 && config.projectType === 'artificialIntelligence')}
       <!-- Materials Step for Individual Development -->
       <div class="step-header">
-        <h1>Materialien und <span class="inner-text-special">Dokumente</span></h1>
-        <p class="teaser">Laden Sie relevante Dokumente, Spezifikationen oder andere Materialien hoch, die uns bei der Umsetzung helfen.</p>
+        <h1>{$_('wizard.steps.stepMaterials.titleFirst')} <span class="inner-text-special">{$_('wizard.steps.stepMaterials.titleHighlight')}</span></h1>
+        <p class="teaser">{$_('wizard.steps.stepMaterials.teaser')}</p>
       </div>
 
       <div class="content-section">
-        <h2>Dokumente hochladen</h2>
-        <p>Laden Sie Spezifikationen, Wireframes, bestehende Dokumentationen oder andere relevante Dateien hoch.</p>
+        <h2>{$_('wizard.steps.stepMaterials.content.title')}</h2>
+        <p>{$_('wizard.steps.stepMaterials.content.description')}</p>
 
         <div class="form-control w-full">
           <input
@@ -1290,13 +1286,13 @@
             onchange={handleFileUpload}
           />
           <div class="label">
-            <span class="label-text-alt">Unterstützte Formate: PDF, DOC, JPG, PNG, GIF, SVG, AI, PSD, TXT, XLSX, PPTX</span>
+            <span class="label-text-alt">{$_('wizard.steps.stepMaterials.content.supportedFormats')}</span>
           </div>
         </div>
 
         {#if uploadedFiles.length > 0}
           <div class="mt-6">
-            <h3>Hochgeladene Dateien:</h3>
+            <h3>{$_('wizard.steps.stepMaterials.content.uploadedFiles')}</h3>
             <div class="space-y-2">
               {#each uploadedFiles as file, i}
                 <div class="alert">
@@ -1309,7 +1305,7 @@
                     ></path>
                   </svg>
                   <span>{file.name} ({Math.round(file.size / 1024)}KB)</span>
-                  <button type="button" class="btn btn-sm btn-error" onclick={() => removeFile(i)} aria-label="Datei entfernen">
+                  <button type="button" class="btn btn-sm btn-error" onclick={() => removeFile(i)} aria-label={$_('wizard.steps.stepMaterials.content.removeFile')}>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -1327,7 +1323,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
               <div>
-                <div class="font-bold">Upload läuft...</div>
+                <div class="font-bold">{$_('wizard.steps.stepMaterials.content.uploadRunning')}</div>
                 <div class="text-sm">{uploadProgress}</div>
               </div>
               <span class="loading loading-spinner loading-md"></span>
@@ -1341,8 +1337,8 @@
     {:else if currentStep === maxSteps}
       <!-- Final Step: Summary -->
       <div class="step-header">
-        <h1><span class="inner-text-special">Zusammenfassung</span></h1>
-        <p class="teaser">Überprüfen Sie Ihre Konfiguration. Sie können jederzeit zu vorherigen Schritten zurückkehren, um Änderungen vorzunehmen.</p>
+        <h1><span class="inner-text-special">{$_('wizard.hardcodedTexts.summary.title')}</span></h1>
+        <p class="teaser">{$_('wizard.hardcodedTexts.summary.description')}</p>
       </div>
 
       <!-- Asset Preparation Progress -->
@@ -1353,7 +1349,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
             <div>
-              <div class="font-bold">Assets werden vorbereitet</div>
+              <div class="font-bold">{$_('wizard.hardcodedTexts.summary.assetsBeingPrepared')}</div>
               <div class="text-sm">{assetPreparationProgress}</div>
             </div>
             {#if isPreparingAssets}
@@ -1367,10 +1363,10 @@
         <div class="space-y-6">
           <div class="card bg-base-200">
             <div class="card-body">
-              <h3 class="card-title">Projekttyp</h3>
-              <p class="no-padding">{projectTypes.find((p) => p.id === config.projectType)?.title}</p>
+              <h3 class="card-title">{$_('wizard.hardcodedTexts.summary.projectType')}</h3>
+              <p class="no-padding">{$_(projectTypes.find((p) => p.id === config.projectType)?.title)}</p>
               <p class="text-base-content/70 no-padding text-sm">
-                {subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType)?.title}
+                {$_(subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType)?.title)}
               </p>
             </div>
           </div>
@@ -1378,7 +1374,7 @@
           {#if config.description}
             <div class="card bg-base-200">
               <div class="card-body">
-                <h3 class="card-title">Projektbeschreibung</h3>
+                <h3 class="card-title">{$_('wizard.hardcodedTexts.summary.projectDescription')}</h3>
                 <p class="no-padding text-sm">{config.description.substring(0, 200)}{config.description.length > 200 ? '...' : ''}</p>
               </div>
             </div>
@@ -1387,10 +1383,10 @@
           {#if config.features.length > 0}
             <div class="card bg-base-200">
               <div class="card-body">
-                <h3 class="card-title">Gewählte Features</h3>
+                <h3 class="card-title">{$_('wizard.hardcodedTexts.summary.selectedFeatures')}</h3>
                 <div class="flex flex-wrap gap-2">
                   {#each config.features as featureId}
-                    <div class="badge badge-primary">{availableFeatures.find((f) => f.name === featureId)?.title}</div>
+                    <div class="badge badge-primary">{$_(availableFeatures.find((f) => f.name === featureId)?.title)}</div>
                   {/each}
                 </div>
               </div>
@@ -1400,7 +1396,7 @@
           {#if config.pages.length > 0}
             <div class="card bg-base-200">
               <div class="card-body">
-                <h3 class="card-title">Seiten/Bereiche</h3>
+                <h3 class="card-title">{$_('wizard.hardcodedTexts.summary.pagesAreas')}</h3>
                 <div class="space-y-2">
                   {#each config.pages as page}
                     {#if page.name.trim()}
@@ -1415,15 +1411,15 @@
           {#if config.formFields.length > 0}
             <div class="card bg-base-200">
               <div class="card-body">
-                <h3 class="card-title">Formular-Felder</h3>
+                <h3 class="card-title">{$_('wizard.hardcodedTexts.summary.formFields')}</h3>
                 <div class="space-y-1">
                   {#each config.formFields as field}
                     {#if field.name.trim()}
                       <div class="flex items-center gap-2">
-                        <div class="badge badge-outline">{formFieldTypes.find((f) => f.id === field.type)?.title}</div>
+                        <div class="badge badge-outline">{$_(formFieldTypes.find((f) => f.id === field.type)?.title)}</div>
                         <span class="text-sm">{field.name}</span>
                         {#if field.required}
-                          <div class="badge badge-error badge-xs">Pflicht</div>
+                          <div class="badge badge-error badge-xs">{$_('wizard.hardcodedTexts.summary.required')}</div>
                         {/if}
                       </div>
                     {/if}
@@ -1436,10 +1432,10 @@
           {#if config.projectType !== 'individual'}
             <div class="card bg-base-200">
               <div class="card-body">
-                <h3 class="card-title">Design</h3>
+                <h3 class="card-title">{$_('wizard.hardcodedTexts.summary.design')}</h3>
                 <div class="space-y-4">
                   <div class="flex items-center gap-4">
-                    <span class="font-semibold">Farben:</span>
+                    <span class="font-semibold">{$_('wizard.hardcodedTexts.summary.colors')}</span>
                     <div class="flex gap-2">
                       <div class="border-base-300 h-8 w-8 rounded border-2" style="background-color: {config.primaryColour}"></div>
                       <div class="border-base-300 h-8 w-8 rounded border-2" style="background-color: {config.secondaryColour}"></div>
@@ -1447,7 +1443,7 @@
                     </div>
                   </div>
                   <div>
-                    <span class="font-semibold">Schriftart:</span>
+                    <span class="font-semibold">{$_('wizard.hardcodedTexts.summary.font')}</span>
                     <span style="font-family: {config.customFont || config.desiredFont}, sans-serif">{config.customFont || config.desiredFont}</span>
                   </div>
                 </div>
@@ -1458,16 +1454,16 @@
 
         <div class="card bg-success text-success-content">
           <div class="card-body text-center">
-            <h2 class="card-title justify-center text-3xl">Geschätzter Preis</h2>
+            <h2 class="card-title justify-center text-3xl">{$_('wizard.hardcodedTexts.summary.estimatedPrice')}</h2>
             <div class="text-5xl font-bold">{config.estimatedPrice}€</div>
-            <div class="text-sm opacity-80">Durchschnitt: {config.estimatedPrice.toLocaleString()}€</div>
-            <p class="no-padding text-sm opacity-80">*Unverbindliche Schätzung. Der finale Preis wird nach einem persönlichen Gespräch festgelegt.</p>
+            <div class="text-sm opacity-80">{$_('wizard.hardcodedTexts.summary.average', { values: { price: config.estimatedPrice.toLocaleString() } })}</div>
+            <p class="no-padding text-sm opacity-80">{$_('wizard.hardcodedTexts.summary.priceDisclaimer')}</p>
 
             <div class="divider"></div>
 
             <div class="space-y-2 text-left">
               <div class="flex justify-between">
-                <span>Basis ({projectTypes.find((p) => p.id === config.projectType)?.title}):</span>
+                <span>{$_('wizard.hardcodedTexts.summary.base', { values: { projectType: $_(projectTypes.find((p) => p.id === config.projectType)?.title) } })}</span>
                 <span
                   >{projectTypes.find((p) => p.id === config.projectType)?.lowestPrice.toLocaleString()}€ - {projectTypes
                     .find((p) => p.id === config.projectType)
@@ -1476,14 +1472,14 @@
               </div>
               {#if config.subType}
                 <div class="flex justify-between">
-                  <span>{subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType)?.title}:</span>
+                  <span>{$_(subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType)?.title)}:</span>
                   <span>{subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType)?.price.toLocaleString()}€</span>
                 </div>
               {/if}
               {#if config.features.length > 0}
                 <div class="flex justify-between">
-                  <span>Features ({config.features.length}):</span>
-                  <span>Inklusive</span>
+                  <span>{$_('wizard.hardcodedTexts.summary.featuresCount', { values: { count: config.features.length } })}</span>
+                  <span>{$_('wizard.hardcodedTexts.summary.included')}</span>
                 </div>
               {/if}
             </div>
@@ -1500,7 +1496,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
-        Zurück
+        {$_('wizard.hardcodedTexts.navigation.back')}
       </button>
     {:else}
       <div></div>
@@ -1515,7 +1511,7 @@
           (currentStep === 2 && !config.subType && config.projectType !== 'freestyle') ||
           (stepConfig[currentStep - 1]?.title === 'Kontakt' && !isContactFormValid)}
       >
-        Weiter
+        {$_('wizard.hardcodedTexts.navigation.next')}
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
@@ -1525,7 +1521,7 @@
         <button type="button" class="btn-basic flex-grow md:flex-grow-0" onclick={generatePDF} disabled={isGeneratingPDF}>
           {#if isGeneratingPDF}
             <span class="loading loading-ring loading-sm"></span>
-            PDF wird erstellt...
+            {$_('wizard.hardcodedTexts.navigation.pdfGenerating')}
           {:else}
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
@@ -1535,7 +1531,7 @@
                 d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
               />
             </svg>
-            Konfiguration herunterladen
+            {$_('wizard.hardcodedTexts.navigation.downloadConfiguration')}
           {/if}
         </button>
         <button type="button" class="btn-basic flex-grow md:flex-grow-0" onclick={submitToAPI}>
@@ -1547,7 +1543,7 @@
               d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
             />
           </svg>
-          Projekt einreichen
+          {$_('wizard.hardcodedTexts.navigation.submitProject')}
         </button>
       </div>
     {/if}
@@ -1562,20 +1558,20 @@
         <div class="loading-spinner"></div>
         <div class="loading-pulse"></div>
       </div>
-      <h2 class="loading-title">Projekt wird übermittelt...</h2>
-      <p class="loading-text">Bitte warten Sie, während wir Ihr Projekt verarbeiten.</p>
+      <h2 class="loading-title">{$_('wizard.hardcodedTexts.modals.loading.title')}</h2>
+      <p class="loading-text">{$_('wizard.hardcodedTexts.modals.loading.description')}</p>
       <div class="loading-steps">
         <div class="loading-step">
           <span class="loading-step-icon">✓</span>
-          <span>Daten werden vorbereitet</span>
+          <span>{$_('wizard.hardcodedTexts.modals.loading.step1')}</span>
         </div>
         <div class="loading-step">
           <span class="loading-step-icon">⏳</span>
-          <span>Projekt wird erstellt</span>
+          <span>{$_('wizard.hardcodedTexts.modals.loading.step2')}</span>
         </div>
         <div class="loading-step">
           <span class="loading-step-icon">⏳</span>
-          <span>Bestätigung wird gesendet</span>
+          <span>{$_('wizard.hardcodedTexts.modals.loading.step3')}</span>
         </div>
       </div>
     </div>
@@ -1589,10 +1585,10 @@
       <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2">✕</button>
     </form>
 
-    <h3 class="text-error mb-4 text-lg font-bold">Fehler beim Übermitteln</h3>
+    <h3 class="text-error mb-4 text-lg font-bold">{$_('wizard.hardcodedTexts.modals.error.title')}</h3>
 
     <div class="space-y-4">
-      <p>Bei der Übermittlung Ihres Projekts sind folgende Fehler aufgetreten:</p>
+      <p>{$_('wizard.hardcodedTexts.modals.error.description')}</p>
 
       <div class="alert alert-error">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
@@ -1612,11 +1608,8 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
         </svg>
         <div>
-          <div class="font-bold">Was passiert jetzt?</div>
-          <div class="text-sm">
-            Nach dem Schließen dieses Dialogs werden Sie zu Schritt 1 zurückgeleitet. Ihre Eingaben bleiben dabei erhalten, sodass Sie das Problem beheben und
-            erneut versuchen können.
-          </div>
+          <div class="font-bold">{$_('wizard.hardcodedTexts.modals.error.whatHappensNext')}</div>
+          <div class="text-sm">{$_('wizard.hardcodedTexts.modals.error.whatHappensNextDescription')}</div>
         </div>
       </div>
     </div>
@@ -1626,7 +1619,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
-        Zurück zu Schritt 1
+        {$_('wizard.hardcodedTexts.modals.error.backToStep1')}
       </button>
     </div>
   </div>
@@ -1646,30 +1639,30 @@
           </svg>
         </div>
       </div>
-      <h1 class="thank-you-title">Vielen Dank!</h1>
-      <p class="thank-you-subtitle">Ihr Projekt wurde erfolgreich übermittelt</p>
+      <h1 class="thank-you-title">{$_('wizard.hardcodedTexts.modals.thankYou.title')}</h1>
+      <p class="thank-you-subtitle">{$_('wizard.hardcodedTexts.modals.thankYou.subtitle')}</p>
       <div class="thank-you-details">
         <div class="thank-you-card">
-          <h3>Was passiert als nächstes?</h3>
+          <h3>{$_('wizard.hardcodedTexts.modals.thankYou.whatHappensNext')}</h3>
           <ul class="thank-you-steps">
             <li>
               <span class="step-number">1</span>
-              <span>Wir prüfen Ihre Anfrage innerhalb von 24 Stunden</span>
+              <span>{$_('wizard.hardcodedTexts.modals.thankYou.step1')}</span>
             </li>
             <li>
               <span class="step-number">2</span>
-              <span>Sie erhalten ein detailliertes Angebot per E-Mail</span>
+              <span>{$_('wizard.hardcodedTexts.modals.thankYou.step2')}</span>
             </li>
             <li>
               <span class="step-number">3</span>
-              <span>Wir vereinbaren einen Termin für ein persönliches Gespräch</span>
+              <span>{$_('wizard.hardcodedTexts.modals.thankYou.step3')}</span>
             </li>
           </ul>
         </div>
         <div class="thank-you-info">
-          <p><strong>Projektname:</strong> {config.name}</p>
-          <p><strong>Geschätzter Preis:</strong> {config.estimatedPrice.toLocaleString()}€</p>
-          <p><strong>Projekttyp:</strong> {projectTypes.find((p) => p.id === config.projectType)?.title}</p>
+          <p><strong>{$_('wizard.hardcodedTexts.modals.thankYou.projectName')}</strong> {config.name}</p>
+          <p><strong>{$_('wizard.hardcodedTexts.modals.thankYou.estimatedPrice')}</strong> {config.estimatedPrice.toLocaleString()}€</p>
+          <p><strong>{$_('wizard.hardcodedTexts.modals.thankYou.projectType')}</strong> {projectTypes.find((p) => p.id === config.projectType)?.title}</p>
         </div>
       </div>
       <div class="thank-you-actions">
@@ -1687,7 +1680,7 @@
               d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
             />
           </svg>
-          Zur Startseite
+          {$_('wizard.hardcodedTexts.modals.thankYou.toHomepage')}
         </button>
         <a href="/kontakt" class="btn btn-link btn-lg">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1698,7 +1691,7 @@
               d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
             />
           </svg>
-          Kontakt aufnehmen
+          {$_('wizard.hardcodedTexts.modals.thankYou.getInTouch')}
         </a>
       </div>
     </div>
@@ -1712,12 +1705,12 @@
       <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2">✕</button>
     </form>
 
-    <h3 class="mb-4 text-lg font-bold">Von vorne beginnen?</h3>
-    <p class="py-4">Möchten Sie wirklich von vorne beginnen? Alle Ihre bisherigen Eingaben gehen dabei verloren.</p>
+    <h3 class="mb-4 text-lg font-bold">{$_('wizard.hardcodedTexts.modals.reset.title')}</h3>
+    <p class="py-4">{$_('wizard.hardcodedTexts.modals.reset.description')}</p>
 
     <div class="modal-action">
-      <button type="button" class="btn btn-outline" onclick={closeResetModal}>Abbrechen</button>
-      <button type="button" class="btn btn-error" onclick={confirmReset}>Ja, zurücksetzen</button>
+      <button type="button" class="btn btn-outline" onclick={closeResetModal}>{$_('wizard.hardcodedTexts.modals.reset.cancel')}</button>
+      <button type="button" class="btn btn-error" onclick={confirmReset}>{$_('wizard.hardcodedTexts.modals.reset.confirm')}</button>
     </div>
   </div>
   <form method="dialog" class="modal-backdrop">
