@@ -332,7 +332,12 @@
         "basePrice": "Base ({projectType}):",
         "subtypePrice": "{subtype}:",
         "featuresIncluded": "Features ({count}):",
-        "included": "Included"
+        "included": "Included",
+        "projectType": "Chosen project type",
+        "selectedFeatures": "Selected features",
+        "design": "Projec's look & feel ",
+        "colors": "Color scheme",
+        "font": "Font"
       }
     },
     "files": {

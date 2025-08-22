@@ -626,8 +626,8 @@
   onMount(async () => {
     const wizardMessagesDe = (await import('$lib/i18n/locales/de/wizard.json')).default;
     const wizardMessagesEn = (await import('$lib/i18n/locales/en/wizard.json')).default;
-    addMessages('de', wizardMessagesDe);
-    addMessages('en', wizardMessagesEn);
+    addMessages('de', wizardMessagesDe as any);
+    addMessages('en', wizardMessagesEn as any);
 
     calculatePrice();
     initializeFromParams();
@@ -1278,8 +1278,8 @@
       </div>
 
       <div class="content-section">
-        <h2>{$_('wizard.steps.stepMaterials.content.title')}</h2>
-        <p>{$_('wizard.steps.stepMaterials.content.description')}</p>
+        <h2>{$_('wizard.steps.stepMaterials.files.title')}</h2>
+        <p>{$_('wizard.steps.stepMaterials.files.description')}</p>
 
         <div class="form-control w-full">
           <input
@@ -1291,13 +1291,13 @@
             onchange={handleFileUpload}
           />
           <div class="label">
-            <span class="label-text-alt">{$_('wizard.steps.stepMaterials.content.supportedFormats')}</span>
+            <span class="label-text-alt">{$_('wizard.steps.stepMaterials.files.formats')}</span>
           </div>
         </div>
 
         {#if uploadedFiles.length > 0}
           <div class="mt-6">
-            <h3>{$_('wizard.steps.stepMaterials.content.uploadedFiles')}</h3>
+            <h3>{$_('wizard.steps.stepMaterials.files.uploaded')}</h3>
             <div class="space-y-2">
               {#each uploadedFiles as file, i}
                 <div class="alert">
@@ -1310,7 +1310,7 @@
                     ></path>
                   </svg>
                   <span>{file.name} ({Math.round(file.size / 1024)}KB)</span>
-                  <button type="button" class="btn btn-sm btn-error" onclick={() => removeFile(i)} aria-label={$_('wizard.steps.stepMaterials.content.removeFile')}>
+                  <button type="button" class="btn btn-sm btn-error" onclick={() => removeFile(i)} aria-label={$_('wizard.steps.stepMaterials.file.removeFile')}>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -1328,7 +1328,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
               <div>
-                <div class="font-bold">{$_('wizard.steps.stepMaterials.content.uploadRunning')}</div>
+                <div class="font-bold">{$_('wizard.steps.stepMaterials.file.upload')}</div>
                 <div class="text-sm">{uploadProgress}</div>
               </div>
               <span class="loading loading-spinner loading-md"></span>
@@ -1342,8 +1342,8 @@
     {:else if currentStep === maxSteps}
       <!-- Final Step: Summary -->
       <div class="step-header">
-        <h1><span class="inner-text-special">{$_('wizard.steps.stepSummary.title')}</span></h1>
-        <p class="teaser">{$_('wizard.steps.stepSummary.description')}</p>
+        <h1><span class="inner-text-special">{$_('wizard.steps.stepSummary.titleHighlight')}</span></h1>
+        <p class="teaser">{$_('wizard.steps.stepSummary.teaser')}</p>
       </div>
 
       <!-- Asset Preparation Progress -->
@@ -1368,7 +1368,7 @@
         <div class="space-y-6">
           <div class="card bg-base-200">
             <div class="card-body">
-              <h3 class="card-title">{$_('wizard.steps.stepSummary.content.projectType')}</h3>
+              <h3 class="card-title">{$_('wizard.steps.stepSummary.projectType')}</h3>
               <p class="no-padding">{$_(projectTypes.find((p) => p.id === config.projectType)?.title)}</p>
               <p class="text-base-content/70 no-padding text-sm">
                 {$_(subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType)?.title)}
@@ -1379,7 +1379,7 @@
           {#if config.description}
             <div class="card bg-base-200">
               <div class="card-body">
-                <h3 class="card-title">{$_('wizard.steps.stepSummary.content.projectDescription')}</h3>
+                <h3 class="card-title">{$_('wizard.steps.stepSummary.projectDescription')}</h3>
                 <p class="no-padding text-sm">{config.description.substring(0, 200)}{config.description.length > 200 ? '...' : ''}</p>
               </div>
             </div>
@@ -1388,7 +1388,7 @@
           {#if config.features.length > 0}
             <div class="card bg-base-200">
               <div class="card-body">
-                <h3 class="card-title">{$_('wizard.steps.stepSummary.content.selectedFeatures')}</h3>
+                <h3 class="card-title">{$_('wizard.steps.stepSummary.selectedFeatures')}</h3>
                 <div class="flex flex-wrap gap-2">
                   {#each config.features as featureId}
                     <div class="badge badge-primary">{$_(availableFeatures.find((f) => f.name === featureId)?.title)}</div>
@@ -1401,7 +1401,7 @@
           {#if config.pages.length > 0}
             <div class="card bg-base-200">
               <div class="card-body">
-                <h3 class="card-title">{$_('wizard.steps.stepSummary.content.pagesSections')}</h3>
+                <h3 class="card-title">{$_('wizard.steps.stepSummary.pagesSections')}</h3>
                 <div class="space-y-2">
                   {#each config.pages as page}
                     {#if page.name.trim()}
@@ -1416,7 +1416,7 @@
           {#if config.formFields.length > 0}
             <div class="card bg-base-200">
               <div class="card-body">
-                <h3 class="card-title">{$_('wizard.steps.stepSummary.content.formFields')}</h3>
+                <h3 class="card-title">{$_('wizard.steps.stepSummary.formFields')}</h3>
                 <div class="space-y-1">
                   {#each config.formFields as field}
                     {#if field.name.trim()}
@@ -1424,7 +1424,7 @@
                         <div class="badge badge-outline">{$_(formFieldTypes.find((f) => f.id === field.type)?.title)}</div>
                         <span class="text-sm">{field.name}</span>
                         {#if field.required}
-                          <div class="badge badge-error badge-xs">{$_('wizard.steps.stepSummary.content.required')}</div>
+                          <div class="badge badge-error badge-xs">{$_('wizard.steps.stepSummary.required')}</div>
                         {/if}
                       </div>
                     {/if}
@@ -1437,10 +1437,10 @@
           {#if config.projectType !== 'individual'}
             <div class="card bg-base-200">
               <div class="card-body">
-                <h3 class="card-title">{$_('wizard.steps.stepSummary.content.design')}</h3>
+                <h3 class="card-title">{$_('wizard.steps.stepSummary.design')}</h3>
                 <div class="space-y-4">
                   <div class="flex items-center gap-4">
-                    <span class="font-semibold">{$_('wizard.steps.stepSummary.content.colors')}</span>
+                    <span class="font-semibold">{$_('wizard.steps.stepSummary.colors')}</span>
                     <div class="flex gap-2">
                       <div class="border-base-300 h-8 w-8 rounded border-2" style="background-color: {config.primaryColour}"></div>
                       <div class="border-base-300 h-8 w-8 rounded border-2" style="background-color: {config.secondaryColour}"></div>
@@ -1448,7 +1448,7 @@
                     </div>
                   </div>
                   <div>
-                    <span class="font-semibold">{$_('wizard.steps.stepSummary.content.font')}</span>
+                    <span class="font-semibold">{$_('wizard.steps.stepSummary.font')}</span>
                     <span style="font-family: {config.customFont || config.desiredFont}, sans-serif">{config.customFont || config.desiredFont}</span>
                   </div>
                 </div>
@@ -1459,16 +1459,16 @@
 
         <div class="card bg-success text-success-content">
           <div class="card-body text-center">
-            <h2 class="card-title justify-center text-3xl">{$_('wizard.steps.stepSummary.content.estimatedPrice')}</h2>
+            <h2 class="card-title justify-center text-3xl">{$_('wizard.steps.stepSummary.estimatedPrice')}</h2>
             <div class="text-5xl font-bold">{config.estimatedPrice}€</div>
-            <div class="text-sm opacity-80">{$_('wizard.steps.stepSummary.content.average', { values: { price: config.estimatedPrice.toLocaleString() } })}</div>
-            <p class="no-padding text-sm opacity-80">{$_('wizard.steps.stepSummary.content.priceDisclaimer')}</p>
+            <div class="text-sm opacity-80">{$_('wizard.steps.stepSummary.average', { values: { price: config.estimatedPrice.toLocaleString() } })}</div>
+            <p class="no-padding text-sm opacity-80">{$_('wizard.steps.stepSummary.disclaimer')}</p>
 
             <div class="divider"></div>
 
             <div class="space-y-2 text-left">
               <div class="flex justify-between">
-                <span>{$_('wizard.steps.stepSummary.content.base', { values: { projectType: $_(projectTypes.find((p) => p.id === config.projectType)?.title) } })}</span>
+                <span>{$_('wizard.steps.stepSummary.basePrice', { values: { projectType: $_(projectTypes.find((p) => p.id === config.projectType)?.title) } })}</span>
                 <span
                   >{projectTypes.find((p) => p.id === config.projectType)?.lowestPrice.toLocaleString()}€ - {projectTypes
                     .find((p) => p.id === config.projectType)
@@ -1483,8 +1483,8 @@
               {/if}
               {#if config.features.length > 0}
                 <div class="flex justify-between">
-                  <span>{$_('wizard.steps.stepSummary.content.featuresCount', { values: { count: config.features.length } })}</span>
-                  <span>{$_('wizard.steps.stepSummary.content.included')}</span>
+                  <span>{$_('wizard.steps.stepSummary.featuresIncluded', { values: { count: config.features.length } })}</span>
+                  <span>{$_('wizard.steps.stepSummary.included')}</span>
                 </div>
               {/if}
             </div>
