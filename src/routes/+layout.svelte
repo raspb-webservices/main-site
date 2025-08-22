@@ -3,14 +3,14 @@
   import FOOTER from '$lib/components/footer.svelte';
   import CookieConsentComponent from '$lib/components/cookieconsent.svelte';
   import { isLoading } from 'svelte-i18n';
+  import { navigating } from '$app/state';
   import Loader from '$lib/components/loader.svelte';
   import '../app.css';
-
   let { children } = $props();
 </script>
 
 <div class="wrapper">
-  {#if $isLoading}
+  {#if $isLoading || navigating.to}
   <div class="loading-wrapper">
     <Loader size={'large'}></Loader>
   </div>

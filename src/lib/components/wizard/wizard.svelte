@@ -287,7 +287,7 @@
     if (uploadedFiles.length === 0) return [];
 
     isUploading = true;
-    uploadProgress = $_('wizard.steps.step6.files.uploading.title');
+    uploadProgress = $_('wizard.steps.stepMaterials.files.upload');
 
     try {
       const uploadedAssetIds = await uploadMultipleAssetsWithDelay(uploadedFiles, 2000, (message, current, total) => {
@@ -1127,12 +1127,12 @@
 
       <!-- Color Selection -->
       <div class="content-section">
-        <h2>{$_('wizard.steps.step6.content.colorScheme.title')}</h2>
-        <p>{$_('wizard.steps.step6.content.colorScheme.description')}</p>
+        <h2>{$_('wizard.design.colorScheme')}</h2>
+        <p>{$_('wizard.design.colorSchemeDescription')}</p>
         <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
           <div class="form-control w-full">
             <label class="label" for="primaryColor">
-              <span class="label-text font-semibold">{$_('wizard.steps.step6.content.colorScheme.primaryColor')}</span>
+              <span class="label-text font-semibold">{$_('wizard.design.primaryColor')}</span>
             </label>
             <div class="join w-full">
               <input type="color" id="primaryColor" class="join-item h-12 w-16 border-0" bind:value={config.primaryColour} />
@@ -1142,7 +1142,7 @@
 
           <div class="form-control w-full">
             <label class="label" for="secondaryColor">
-              <span class="label-text font-semibold">{$_('wizard.steps.step6.content.colorScheme.secondaryColor')}</span>
+              <span class="label-text font-semibold">{$_('wizard.design.secondaryColor')}</span>
             </label>
             <div class="join w-full">
               <input type="color" id="secondaryColor" class="join-item h-12 w-16 border-0" bind:value={config.secondaryColour} />
@@ -1152,7 +1152,7 @@
 
           <div class="form-control w-full">
             <label class="label" for="accentColor">
-              <span class="label-text font-semibold">{$_('wizard.steps.step6.content.colorScheme.accentColor')}</span>
+              <span class="label-text font-semibold">{$_('wizard.design.accentColor')}</span>
             </label>
             <div class="join w-full">
               <input type="color" id="accentColor" class="join-item h-12 w-16 border-0" bind:value={config.accentColour} />
@@ -1164,8 +1164,8 @@
 
       <!-- Font Selection -->
       <div class="content-section">
-        <h2>{$_('wizard.design.font.title')}</h2>
-        <p>{$_('wizard.design.font.description')}</p>
+        <h2>{$_('wizard.design.font')}</h2>
+        <p>{$_('wizard.design.fontDescription')}</p>
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div class="form-control w-full">
@@ -1176,7 +1176,7 @@
               {#each googleFonts as font}
                 <option value={font}>{font}</option>
               {/each}
-              <option value="Other Google Fonts">{$_('wizard.design.font.otherGoogleFonts')}</option>
+              <option value="Other Google Fonts">{$_('wizard.design.otherGoogleFonts')}</option>
             </select>
           </div>
 
@@ -1201,9 +1201,9 @@
             </svg>
 
             <div>
-              <div class="font-bold">{$_('wizard.steps.step6.content.font.previewTitle', { values: { fontName: config.desiredFont } })}</div>
+              <div class="font-bold">{$_('wizard.design.font.previewTitle', { values: { fontName: config.desiredFont } })}</div>
               <div class="my-2 text-base" style="font-family: {config.desiredFont}">
-                {$_('wizard.steps.step6.content.font.previewText')}
+                {$_('wizard.design.font.previewText')}
               </div>
             </div>
           </div>
@@ -1212,8 +1212,8 @@
 
       <!-- File Upload -->
       <div class="content-section">
-        <h2>{$_('wizard.steps.step6.content.materials.title')}</h2>
-        <p>{$_('wizard.steps.step6.content.materials.description')}</p>
+        <h2>{$_('wizard.steps.stepMaterials.files.title')}</h2>
+        <p>{$_('wizard.steps.stepMaterials.files.description')}</p>
 
         <div class="form-control w-full">
           <input
@@ -1225,13 +1225,13 @@
             onchange={handleFileUpload}
           />
           <div class="label">
-            <span class="label-text-alt">{$_('wizard.steps.step6.content.materials.supportedFormats')}</span>
+            <span class="label-text-alt">{$_('wizard.steps.stepMaterials.files.formats')}</span>
           </div>
         </div>
 
         {#if uploadedFiles.length > 0}
           <div class="mt-6">
-            <h3>{$_('wizard.steps.step6.content.materials.uploadedFiles')}</h3>
+            <h3>{$_('wizard.steps.stepMaterials.files.uploaded')}</h3>
             <div class="space-y-2">
               {#each uploadedFiles as file, i}
                 <div class="alert">
@@ -1244,7 +1244,7 @@
                     ></path>
                   </svg>
                   <span>{file.name} ({Math.round(file.size / 1024)}KB)</span>
-                  <button type="button" class="btn btn-sm btn-error" onclick={() => removeFile(i)} aria-label={$_('wizard.steps.step6.content.materials.removeFile')}>
+                  <button type="button" class="btn btn-sm btn-error" onclick={() => removeFile(i)} aria-label={$_('wizard.steps.stepMaterials.files.removeFile')}>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -1262,7 +1262,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
               <div>
-                <div class="font-bold">{$_('wizard.steps.step6.content.materials.uploadRunning')}</div>
+                <div class="font-bold">{$_('wizard.steps.stepMaterials.files.uploadRunning')}</div>
                 <div class="text-sm">{uploadProgress}</div>
               </div>
               <span class="loading loading-ring loading-md"></span>
