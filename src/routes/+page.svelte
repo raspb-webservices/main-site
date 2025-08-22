@@ -57,7 +57,7 @@
       <button
         class="btn-basic"
         onclick={() => {
-          goto('/insights');
+          goto('/services');
         }}>{$_('homepage.hero.buttonText')}</button
       >
     </div>

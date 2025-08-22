@@ -1,9 +1,10 @@
 <script lang="ts">
+  import { _ } from 'svelte-i18n';
   import { goto } from '$app/navigation';
 </script>
 
 <section class="contact-content-wrapper">
-  <h1>Kontakt</h1>
+  <h1>{$_('contact.title')}</h1>
   <div class="px-20 pt-10">
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio hic voluptatem neque consequuntur porro, accusantium sit, doloribus perferendis, reiciendis
