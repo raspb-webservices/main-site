@@ -337,7 +337,8 @@
         "selectedFeatures": "Ausgewählte Features",
         "design": "Look and Feel des Projekts",
         "colors": "Farbschema",
-        "font": "Schrift"
+        "font": "Schrift",
+        "pagesSections": "Definierte Seiten und Sektionen"
       }
     },
     "files": {

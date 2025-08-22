@@ -337,7 +337,8 @@
         "selectedFeatures": "Selected features",
         "design": "Projec's look & feel ",
         "colors": "Color scheme",
-        "font": "Font"
+        "font": "Font",
+        "pagesSections": "Defined pages and sections"
       }
     },
     "files": {
