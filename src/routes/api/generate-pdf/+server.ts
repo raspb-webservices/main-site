@@ -1,8 +1,8 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { projectTypes, subTypes, availableFeatures, formFieldTypes } from '$lib/components/wizard/wizard-config';
-import deTranslations from '$lib/i18n/locales/de.json';
-import enTranslations from '$lib/i18n/locales/en.json';
+import deTranslations from '$lib/i18n/locales/de/pdf-generator.json';
+import enTranslations from '$lib/i18n/locales/en/pdf-generator.json';
 
 // Translation function for server-side use
 function getTranslation(key: string, locale: string = 'de'): string {
@@ -14,10 +14,9 @@ function getTranslation(key: string, locale: string = 'de'): string {
     if (value && typeof value === 'object' && k in value) {
       value = value[k];
     } else {
-      return key; // Return key if translation not found
+      return key;
     }
   }
-
   return typeof value === 'string' ? value : key;
 }
 
