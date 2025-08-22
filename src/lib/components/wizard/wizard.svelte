@@ -6,7 +6,7 @@
   import { projectTypes, subTypes, availableFeatures, googleFonts, formFieldTypes, featureCategoryColors, getStepConfig } from './wizard-config';
   import { goto } from '$app/navigation';
   import ContactForm from './contact-form.svelte';
-  import { _ } from 'svelte-i18n';
+  import { addMessages, _ } from 'svelte-i18n';
   import auth from '../../../authService';
 
   // Props for initial values from URL parameters
@@ -403,6 +403,8 @@
         throw new Error($_('wizard.modals.error.customerCreationFailed'));
       }
 
+      console.log("customerResult",customerResult)
+
       createdCustomerId = customerResult.data.id;
       auth0Id = customerResult.data.auth0Id;
       console.log($_('wizard.modals.error.customerCreated'), createdCustomerId);
@@ -621,9 +623,13 @@
     currentStep = 1;
   }
 
-  onMount(() => {
+  onMount(async () => {
+    const wizardMessagesDe = (await import('$lib/i18n/locales/de/wizard.json')).default;
+    const wizardMessagesEn = (await import('$lib/i18n/locales/en/wizard.json')).default;
+    addMessages('de', wizardMessagesDe);
+    addMessages('en', wizardMessagesEn);
+
     calculatePrice();
-    // Initialize wizard with URL parameters if provided
     initializeFromParams();
   });
 </script>
@@ -886,44 +892,43 @@
 
           <div class="form-control w-full">
             <label class="label" for="domainStatus">
-              <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.domainStatus.label')}</span>
+              <span class="label-text font-semibold">{$_('wizard.form.domainStatus')}</span>
             </label>
             <select id="domainStatus" class="select select-bordered w-full" bind:value={config.domainStatus}>
-              <option value="">{$_('wizard.hardcodedTexts.domainStatus.placeholder')}</option>
-              <option value="owned">{$_('wizard.hardcodedTexts.domainStatus.owned')}</option>
-              <option value="needs-registration">{$_('wizard.hardcodedTexts.domainStatus.needsRegistration')}</option>
-              <option value="needs-transfer">{$_('wizard.hardcodedTexts.domainStatus.needsTransfer')}</option>
-              <option value="undecided">{$_('wizard.hardcodedTexts.domainStatus.undecided')}</option>
+              <option value="">{$_('wizard.form.domainStatusPlaceholder')}</option>
+              <option value="owned">{$_('wizard.form.domainStatusOptions.owned')}</option>
+              <option value="needs-registration">{$_('wizard.form.domainStatusOptions.needs-registration')}</option>
+              <option value="needs-transfer">{$_('wizard.form.domainStatusOptions.needs-transfer')}</option>
+              <option value="undecided">{$_('wizard.form.domainStatusOptions.undecided')}</option>
             </select>
           </div>
 
           <div class="form-control w-full">
             <label class="label" for="timeline">
-              <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.timeline.label')}</span>
+              <span class="label-text font-semibold">{$_('wizard.form.timeline')}</span>
             </label>
             <select id="timeline" class="select select-bordered w-full" bind:value={config.timeline}>
-              <option value="">{$_('wizard.hardcodedTexts.timeline.placeholder')}</option>
-              <option value="asap">{$_('wizard.hardcodedTexts.timeline.asap')}</option>
-              <option value="5-10-days">{$_('wizard.hardcodedTexts.timeline.fiveToTenDays')}</option>
-              <option value="2-4-weeks">{$_('wizard.hardcodedTexts.timeline.twoToFourWeeks')}</option>
-              <option value="2-6-months">{$_('wizard.hardcodedTexts.timeline.twoToSixMonths')}</option>
-              <option value="flexible">{$_('wizard.hardcodedTexts.timeline.flexible')}</option>
+              <option value="">{$_('wizard.form.timelinePlaceholder')}</option>
+              <option value="asap">{$_('wizard.form.timelineOptions.asap')}</option>
+              <option value="5-10-days">{$_('wizard.form.timelineOptions.5-10-days')}</option>
+              <option value="2-4-weeks">{$_('wizard.form.timelineOptions.2-4-weeks')}</option>
+              <option value="2-6-months">{$_('wizard.form.timelineOptions.2-6-months')}</option>
+              <option value="flexible">{$_('wizard.form.timelineOptions.flexible')}</option>
             </select>
           </div>
 
           <div class="form-control w-full">
             <label class="label" for="budget">
-              <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.budget.label')}</span>
+              <span class="label-text font-semibold">{$_('wizard.form.budget')}</span>
             </label>
             <select id="budget" class="select select-bordered w-full" bind:value={config.budget}>
-              <option value="">{$_('wizard.hardcodedTexts.budget.placeholder')}</option>
-              <option value="under-500">{$_('wizard.hardcodedTexts.budget.under500')}</option>
-              <option value="1k-3k">{$_('wizard.hardcodedTexts.budget.oneToThreeK')}</option>
-              <option value="3k-7k">{$_('wizard.hardcodedTexts.budget.threeToSevenK')}</option>
-              <option value="7k-10k">{$_('wizard.hardcodedTexts.budget.sevenToTenK')}</option>
-              <option value="10k-15k">{$_('wizard.hardcodedTexts.budget.tenToFifteenK')}</option>
-              <option value="15k-20k">{$_('wizard.hardcodedTexts.budget.fifteenToTwentyK')}</option>
-              <option value="more-than-25k">{$_('wizard.hardcodedTexts.budget.moreThanTwentyFiveK')}</option>
+              <option value="">{$_('wizard.form.budgetPlaceholder')}</option>
+              <option value="under-500">{$_('wizard.form.budgetOptions.under-500')}</option>
+              <option value="1k-3k">{$_('wizard.form.budgetOptions.1k-3k')}</option>
+              <option value="3k-7k">{$_('wizard.form.budgetOptions.3k-7k')}</option>
+              <option value="7k-10k">{$_('wizard.form.budgetOptions.7k-10k')}</option>
+              <option value="10k-15k">{$_('wizard.form.budgetOptions.10k-15k')}</option>
+              <option value="over-20k">{$_('wizard.form.budgetOptions.over-20k')}</option>
             </select>
           </div>
         </div>
@@ -955,13 +960,13 @@
 
       <div class="form-control mt-8 w-full">
         <label class="label" for="customFeatures">
-          <span class="label-text text-lg font-semibold">{$_('wizard.hardcodedTexts.customFeatures.label')}</span>
+          <span class="label-text text-lg font-semibold">{$_('wizard.form.customFeatures')}</span>
         </label>
         <textarea
           id="customFeatures"
           class="textarea textarea-bordered textarea-lg w-full"
           bind:value={customFeatures}
-          placeholder={$_('wizard.hardcodedTexts.customFeatures.placeholder')}
+          placeholder={$_('wizard.form.customFeaturesPlaceholder')}
           rows="4"
         ></textarea>
       </div>
@@ -998,39 +1003,39 @@
 
                 <div class="form-control mb-4 w-full">
                   <label class="label" for="pageName{i}">
-                    <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.pages.pageName')}</span>
+                    <span class="label-text font-semibold">{$_('wizard.content.pages.pageName')}</span>
                   </label>
                   <input
                     type="text"
                     id="pageName{i}"
                     class="input input-bordered w-full"
                     bind:value={config.pages[i].name}
-                    placeholder={$_('wizard.hardcodedTexts.pages.pageNamePlaceholder')}
+                    placeholder={$_('wizard.content.pages.pageNamePlaceholder')}
                   />
                 </div>
 
                 <div class="form-control mb-4 w-full">
                   <label class="label" for="pageContent{i}">
-                    <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.pages.pageContent')}</span>
+                    <span class="label-text font-semibold">{$_('wizard.content.pages.pageContent')}</span>
                   </label>
                   <textarea
                     id="pageContent{i}"
                     class="textarea textarea-bordered w-full"
                     bind:value={config.pages[i].content}
-                    placeholder={$_('wizard.hardcodedTexts.pages.pageContentPlaceholder')}
+                    placeholder={$_('wizard.content.pages.pageContentPlaceholder')}
                     rows="3"
                   ></textarea>
                 </div>
 
                 <div class="form-control w-full">
                   <label class="label" for="pageCharacteristic{i}">
-                    <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.pages.pageCharacteristic')}</span>
+                    <span class="label-text font-semibold">{$_('wizard.content.pages.pageCharacteristic')}</span>
                   </label>
                   <textarea
                     id="pageCharacteristic{i}"
                     class="textarea textarea-bordered w-full"
                     bind:value={config.pages[i].characteristic}
-                    placeholder={$_('wizard.hardcodedTexts.pages.pageCharacteristicPlaceholder')}
+                    placeholder={$_('wizard.content.pages.pageCharacteristicPlaceholder')}
                     rows="3"
                   ></textarea>
                 </div>
@@ -1043,37 +1048,37 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
           </svg>
-          {$_('wizard.hardcodedTexts.pages.addPage')}
+          {$_('wizard.content.pages.addPage')}
         </button>
       </div>
 
       <!-- Form Fields (only if contact form is selected) -->
       {#if config.features.includes('kontaktformular')}
         <div class="content-section">
-          <h2>{$_('wizard.hardcodedTexts.formFields.title')}</h2>
-          <p>{$_('wizard.hardcodedTexts.formFields.description')}</p>
+          <h2>{$_('wizard.content.formFields.title')}</h2>
+          <p>{$_('wizard.content.formFields.description')}</p>
 
           <div class="space-y-4">
             {#each config.formFields as field, i}
               <div class="card bg-base-100 border-base-300 border">
                 <div class="card-body">
                   <div class="mb-4 flex items-center justify-between">
-                    <h4 class="card-title text-lg">{$_('wizard.hardcodedTexts.formFields.field')} {i + 1}</h4>
-                    <button type="button" class="btn btn-error btn-sm" onclick={() => removeFormField(i)} aria-label={$_('wizard.hardcodedTexts.formFields.removeField')}>
+                    <h4 class="card-title text-lg">{$_('wizard.content.formFields.field')} {i + 1}</h4>
+                    <button type="button" class="btn btn-error btn-sm" onclick={() => removeFormField(i)} aria-label={$_('wizard.content.formFields.removeField')}>
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                       </svg>
-                      {$_('wizard.hardcodedTexts.formFields.remove')}
+                      {$_('wizard.content.formFields.remove')}
                     </button>
                   </div>
 
                   <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div class="form-control w-full">
                       <label class="label" for="fieldType{i}">
-                        <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.formFields.fieldType')}</span>
+                        <span class="label-text font-semibold">{$_('wizard.content.formFields.fieldType')}</span>
                       </label>
                       <select id="fieldType{i}" class="select select-bordered w-full" bind:value={config.formFields[i].type}>
-                        <option value="">{$_('wizard.hardcodedTexts.formFields.fieldTypePlaceholder')}</option>
+                        <option value="">{$_('wizard.content.formFields.fieldTypePlaceholder')}</option>
                         {#each formFieldTypes as fieldType}
                           <option value={fieldType.id}>{$_(fieldType.title)}</option>
                         {/each}
@@ -1082,14 +1087,14 @@
 
                     <div class="form-control w-full">
                       <label class="label" for="fieldName{i}">
-                        <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.formFields.fieldName')}</span>
+                        <span class="label-text font-semibold">{$_('wizard.content.formFields.fieldName')}</span>
                       </label>
                       <input
                         type="text"
                         id="fieldName{i}"
                         class="input input-bordered w-full"
                         bind:value={config.formFields[i].name}
-                        placeholder={$_('wizard.hardcodedTexts.formFields.fieldNamePlaceholder')}
+                        placeholder={$_('wizard.content.formFields.fieldNamePlaceholder')}
                       />
                     </div>
                   </div>
@@ -1097,7 +1102,7 @@
                   <div class="form-control mt-4">
                     <label class="label cursor-pointer justify-start gap-4">
                       <input type="checkbox" class="checkbox checkbox-primary" bind:checked={config.formFields[i].required} />
-                      <span class="label-text">{$_('wizard.hardcodedTexts.formFields.required')}</span>
+                      <span class="label-text">{$_('wizard.content.formFields.required')}</span>
                     </label>
                   </div>
                 </div>
@@ -1109,7 +1114,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
             </svg>
-            {$_('wizard.hardcodedTexts.formFields.addField')}
+            {$_('wizard.content.formFields.addField')}
           </button>
         </div>
       {/if}
@@ -1122,12 +1127,12 @@
 
       <!-- Color Selection -->
       <div class="content-section">
-        <h2>{$_('wizard.hardcodedTexts.design.colorScheme.title')}</h2>
-        <p>{$_('wizard.hardcodedTexts.design.colorScheme.description')}</p>
+        <h2>{$_('wizard.steps.step6.content.colorScheme.title')}</h2>
+        <p>{$_('wizard.steps.step6.content.colorScheme.description')}</p>
         <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
           <div class="form-control w-full">
             <label class="label" for="primaryColor">
-              <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.design.colorScheme.primaryColor')}</span>
+              <span class="label-text font-semibold">{$_('wizard.steps.step6.content.colorScheme.primaryColor')}</span>
             </label>
             <div class="join w-full">
               <input type="color" id="primaryColor" class="join-item h-12 w-16 border-0" bind:value={config.primaryColour} />
@@ -1137,7 +1142,7 @@
 
           <div class="form-control w-full">
             <label class="label" for="secondaryColor">
-              <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.design.colorScheme.secondaryColor')}</span>
+              <span class="label-text font-semibold">{$_('wizard.steps.step6.content.colorScheme.secondaryColor')}</span>
             </label>
             <div class="join w-full">
               <input type="color" id="secondaryColor" class="join-item h-12 w-16 border-0" bind:value={config.secondaryColour} />
@@ -1147,7 +1152,7 @@
 
           <div class="form-control w-full">
             <label class="label" for="accentColor">
-              <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.design.colorScheme.accentColor')}</span>
+              <span class="label-text font-semibold">{$_('wizard.steps.step6.content.colorScheme.accentColor')}</span>
             </label>
             <div class="join w-full">
               <input type="color" id="accentColor" class="join-item h-12 w-16 border-0" bind:value={config.accentColour} />
@@ -1159,32 +1164,32 @@
 
       <!-- Font Selection -->
       <div class="content-section">
-        <h2>{$_('wizard.hardcodedTexts.design.font.title')}</h2>
-        <p>{$_('wizard.hardcodedTexts.design.font.description')}</p>
+        <h2>{$_('wizard.design.font.title')}</h2>
+        <p>{$_('wizard.design.font.description')}</p>
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div class="form-control w-full">
             <label class="label" for="googleFonts">
-              <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.design.font.googleFontsLabel')}</span>
+              <span class="label-text font-semibold">{$_('wizard.design.googleFonts')}</span>
             </label>
             <select id="googleFonts" class="select select-bordered w-full" bind:value={config.desiredFont}>
               {#each googleFonts as font}
                 <option value={font}>{font}</option>
               {/each}
-              <option value="Other Google Fonts">{$_('wizard.hardcodedTexts.design.font.otherGoogleFonts')}</option>
+              <option value="Other Google Fonts">{$_('wizard.design.font.otherGoogleFonts')}</option>
             </select>
           </div>
 
           <div class="form-control w-full">
             <label class="label" for="customFont">
-              <span class="label-text font-semibold">{$_('wizard.hardcodedTexts.design.font.customFontLabel')}</span>
+              <span class="label-text font-semibold">{$_('wizard.design.customFont')}</span>
             </label>
             <input
               type="text"
               id="customFont"
               class="input input-bordered w-full"
               bind:value={config.customFont}
-              placeholder={$_('wizard.hardcodedTexts.design.font.customFontPlaceholder')}
+              placeholder={$_('wizard.design.customFontPlaceholder')}
             />
           </div>
         </div>
@@ -1196,9 +1201,9 @@
             </svg>
 
             <div>
-              <div class="font-bold">{$_('wizard.hardcodedTexts.design.font.previewTitle', { values: { fontName: config.desiredFont } })}</div>
+              <div class="font-bold">{$_('wizard.steps.step6.content.font.previewTitle', { values: { fontName: config.desiredFont } })}</div>
               <div class="my-2 text-base" style="font-family: {config.desiredFont}">
-                {$_('wizard.hardcodedTexts.design.font.previewText')}
+                {$_('wizard.steps.step6.content.font.previewText')}
               </div>
             </div>
           </div>
@@ -1207,8 +1212,8 @@
 
       <!-- File Upload -->
       <div class="content-section">
-        <h2>{$_('wizard.hardcodedTexts.materials.title')}</h2>
-        <p>{$_('wizard.hardcodedTexts.materials.description')}</p>
+        <h2>{$_('wizard.steps.step6.content.materials.title')}</h2>
+        <p>{$_('wizard.steps.step6.content.materials.description')}</p>
 
         <div class="form-control w-full">
           <input
@@ -1220,13 +1225,13 @@
             onchange={handleFileUpload}
           />
           <div class="label">
-            <span class="label-text-alt">{$_('wizard.hardcodedTexts.materials.supportedFormats')}</span>
+            <span class="label-text-alt">{$_('wizard.steps.step6.content.materials.supportedFormats')}</span>
           </div>
         </div>
 
         {#if uploadedFiles.length > 0}
           <div class="mt-6">
-            <h3>{$_('wizard.hardcodedTexts.materials.uploadedFiles')}</h3>
+            <h3>{$_('wizard.steps.step6.content.materials.uploadedFiles')}</h3>
             <div class="space-y-2">
               {#each uploadedFiles as file, i}
                 <div class="alert">
@@ -1239,7 +1244,7 @@
                     ></path>
                   </svg>
                   <span>{file.name} ({Math.round(file.size / 1024)}KB)</span>
-                  <button type="button" class="btn btn-sm btn-error" onclick={() => removeFile(i)} aria-label={$_('wizard.hardcodedTexts.materials.removeFile')}>
+                  <button type="button" class="btn btn-sm btn-error" onclick={() => removeFile(i)} aria-label={$_('wizard.steps.step6.content.materials.removeFile')}>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -1257,7 +1262,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
               <div>
-                <div class="font-bold">{$_('wizard.hardcodedTexts.materials.uploadRunning')}</div>
+                <div class="font-bold">{$_('wizard.steps.step6.content.materials.uploadRunning')}</div>
                 <div class="text-sm">{uploadProgress}</div>
               </div>
               <span class="loading loading-ring loading-md"></span>
@@ -1337,8 +1342,8 @@
     {:else if currentStep === maxSteps}
       <!-- Final Step: Summary -->
       <div class="step-header">
-        <h1><span class="inner-text-special">{$_('wizard.hardcodedTexts.summary.title')}</span></h1>
-        <p class="teaser">{$_('wizard.hardcodedTexts.summary.description')}</p>
+        <h1><span class="inner-text-special">{$_('wizard.steps.stepSummary.title')}</span></h1>
+        <p class="teaser">{$_('wizard.steps.stepSummary.description')}</p>
       </div>
 
       <!-- Asset Preparation Progress -->
@@ -1349,7 +1354,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
             <div>
-              <div class="font-bold">{$_('wizard.hardcodedTexts.summary.assetsBeingPrepared')}</div>
+              <div class="font-bold">{$_('wizard.steps.stepSummary.preparingAssets.title')}</div>
               <div class="text-sm">{assetPreparationProgress}</div>
             </div>
             {#if isPreparingAssets}
@@ -1363,7 +1368,7 @@
         <div class="space-y-6">
           <div class="card bg-base-200">
             <div class="card-body">
-              <h3 class="card-title">{$_('wizard.hardcodedTexts.summary.projectType')}</h3>
+              <h3 class="card-title">{$_('wizard.steps.stepSummary.content.projectType')}</h3>
               <p class="no-padding">{$_(projectTypes.find((p) => p.id === config.projectType)?.title)}</p>
               <p class="text-base-content/70 no-padding text-sm">
                 {$_(subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType)?.title)}
@@ -1374,7 +1379,7 @@
           {#if config.description}
             <div class="card bg-base-200">
               <div class="card-body">
-                <h3 class="card-title">{$_('wizard.hardcodedTexts.summary.projectDescription')}</h3>
+                <h3 class="card-title">{$_('wizard.steps.stepSummary.content.projectDescription')}</h3>
                 <p class="no-padding text-sm">{config.description.substring(0, 200)}{config.description.length > 200 ? '...' : ''}</p>
               </div>
             </div>
@@ -1383,7 +1388,7 @@
           {#if config.features.length > 0}
             <div class="card bg-base-200">
               <div class="card-body">
-                <h3 class="card-title">{$_('wizard.hardcodedTexts.summary.selectedFeatures')}</h3>
+                <h3 class="card-title">{$_('wizard.steps.stepSummary.content.selectedFeatures')}</h3>
                 <div class="flex flex-wrap gap-2">
                   {#each config.features as featureId}
                     <div class="badge badge-primary">{$_(availableFeatures.find((f) => f.name === featureId)?.title)}</div>
@@ -1396,7 +1401,7 @@
           {#if config.pages.length > 0}
             <div class="card bg-base-200">
               <div class="card-body">
-                <h3 class="card-title">{$_('wizard.hardcodedTexts.summary.pagesAreas')}</h3>
+                <h3 class="card-title">{$_('wizard.steps.stepSummary.content.pagesSections')}</h3>
                 <div class="space-y-2">
                   {#each config.pages as page}
                     {#if page.name.trim()}
@@ -1411,7 +1416,7 @@
           {#if config.formFields.length > 0}
             <div class="card bg-base-200">
               <div class="card-body">
-                <h3 class="card-title">{$_('wizard.hardcodedTexts.summary.formFields')}</h3>
+                <h3 class="card-title">{$_('wizard.steps.stepSummary.content.formFields')}</h3>
                 <div class="space-y-1">
                   {#each config.formFields as field}
                     {#if field.name.trim()}
@@ -1419,7 +1424,7 @@
                         <div class="badge badge-outline">{$_(formFieldTypes.find((f) => f.id === field.type)?.title)}</div>
                         <span class="text-sm">{field.name}</span>
                         {#if field.required}
-                          <div class="badge badge-error badge-xs">{$_('wizard.hardcodedTexts.summary.required')}</div>
+                          <div class="badge badge-error badge-xs">{$_('wizard.steps.stepSummary.content.required')}</div>
                         {/if}
                       </div>
                     {/if}
@@ -1432,10 +1437,10 @@
           {#if config.projectType !== 'individual'}
             <div class="card bg-base-200">
               <div class="card-body">
-                <h3 class="card-title">{$_('wizard.hardcodedTexts.summary.design')}</h3>
+                <h3 class="card-title">{$_('wizard.steps.stepSummary.content.design')}</h3>
                 <div class="space-y-4">
                   <div class="flex items-center gap-4">
-                    <span class="font-semibold">{$_('wizard.hardcodedTexts.summary.colors')}</span>
+                    <span class="font-semibold">{$_('wizard.steps.stepSummary.content.colors')}</span>
                     <div class="flex gap-2">
                       <div class="border-base-300 h-8 w-8 rounded border-2" style="background-color: {config.primaryColour}"></div>
                       <div class="border-base-300 h-8 w-8 rounded border-2" style="background-color: {config.secondaryColour}"></div>
@@ -1443,7 +1448,7 @@
                     </div>
                   </div>
                   <div>
-                    <span class="font-semibold">{$_('wizard.hardcodedTexts.summary.font')}</span>
+                    <span class="font-semibold">{$_('wizard.steps.stepSummary.content.font')}</span>
                     <span style="font-family: {config.customFont || config.desiredFont}, sans-serif">{config.customFont || config.desiredFont}</span>
                   </div>
                 </div>
@@ -1454,16 +1459,16 @@
 
         <div class="card bg-success text-success-content">
           <div class="card-body text-center">
-            <h2 class="card-title justify-center text-3xl">{$_('wizard.hardcodedTexts.summary.estimatedPrice')}</h2>
+            <h2 class="card-title justify-center text-3xl">{$_('wizard.steps.stepSummary.content.estimatedPrice')}</h2>
             <div class="text-5xl font-bold">{config.estimatedPrice}€</div>
-            <div class="text-sm opacity-80">{$_('wizard.hardcodedTexts.summary.average', { values: { price: config.estimatedPrice.toLocaleString() } })}</div>
-            <p class="no-padding text-sm opacity-80">{$_('wizard.hardcodedTexts.summary.priceDisclaimer')}</p>
+            <div class="text-sm opacity-80">{$_('wizard.steps.stepSummary.content.average', { values: { price: config.estimatedPrice.toLocaleString() } })}</div>
+            <p class="no-padding text-sm opacity-80">{$_('wizard.steps.stepSummary.content.priceDisclaimer')}</p>
 
             <div class="divider"></div>
 
             <div class="space-y-2 text-left">
               <div class="flex justify-between">
-                <span>{$_('wizard.hardcodedTexts.summary.base', { values: { projectType: $_(projectTypes.find((p) => p.id === config.projectType)?.title) } })}</span>
+                <span>{$_('wizard.steps.stepSummary.content.base', { values: { projectType: $_(projectTypes.find((p) => p.id === config.projectType)?.title) } })}</span>
                 <span
                   >{projectTypes.find((p) => p.id === config.projectType)?.lowestPrice.toLocaleString()}€ - {projectTypes
                     .find((p) => p.id === config.projectType)
@@ -1478,8 +1483,8 @@
               {/if}
               {#if config.features.length > 0}
                 <div class="flex justify-between">
-                  <span>{$_('wizard.hardcodedTexts.summary.featuresCount', { values: { count: config.features.length } })}</span>
-                  <span>{$_('wizard.hardcodedTexts.summary.included')}</span>
+                  <span>{$_('wizard.steps.stepSummary.content.featuresCount', { values: { count: config.features.length } })}</span>
+                  <span>{$_('wizard.steps.stepSummary.content.included')}</span>
                 </div>
               {/if}
             </div>
@@ -1496,7 +1501,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
-        {$_('wizard.hardcodedTexts.navigation.back')}
+        {$_('wizard.navigation.back')}
       </button>
     {:else}
       <div></div>
@@ -1511,7 +1516,7 @@
           (currentStep === 2 && !config.subType && config.projectType !== 'freestyle') ||
           (stepConfig[currentStep - 1]?.title === 'Kontakt' && !isContactFormValid)}
       >
-        {$_('wizard.hardcodedTexts.navigation.next')}
+        {$_('wizard.navigation.next')}
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
@@ -1521,7 +1526,7 @@
         <button type="button" class="btn-basic flex-grow md:flex-grow-0" onclick={generatePDF} disabled={isGeneratingPDF}>
           {#if isGeneratingPDF}
             <span class="loading loading-ring loading-sm"></span>
-            {$_('wizard.hardcodedTexts.navigation.pdfGenerating')}
+            {$_('wizard.navigation.downloadPDF')}
           {:else}
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
@@ -1531,7 +1536,7 @@
                 d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
               />
             </svg>
-            {$_('wizard.hardcodedTexts.navigation.downloadConfiguration')}
+            {$_('wizard.navigation.downloadPDF')}
           {/if}
         </button>
         <button type="button" class="btn-basic flex-grow md:flex-grow-0" onclick={submitToAPI}>
@@ -1543,7 +1548,7 @@
               d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
             />
           </svg>
-          {$_('wizard.hardcodedTexts.navigation.submitProject')}
+          {$_('wizard.navigation.submitProject')}
         </button>
       </div>
     {/if}
@@ -1558,20 +1563,20 @@
         <div class="loading-spinner"></div>
         <div class="loading-pulse"></div>
       </div>
-      <h2 class="loading-title">{$_('wizard.hardcodedTexts.modals.loading.title')}</h2>
-      <p class="loading-text">{$_('wizard.hardcodedTexts.modals.loading.description')}</p>
+      <h2 class="loading-title">{$_('wizard.loading.title')}</h2>
+      <p class="loading-text">{$_('wizard.loading.description')}</p>
       <div class="loading-steps">
         <div class="loading-step">
           <span class="loading-step-icon">✓</span>
-          <span>{$_('wizard.hardcodedTexts.modals.loading.step1')}</span>
+          <span>{$_('wizard.loading.steps.preparing')}</span>
         </div>
         <div class="loading-step">
           <span class="loading-step-icon">⏳</span>
-          <span>{$_('wizard.hardcodedTexts.modals.loading.step2')}</span>
+          <span>{$_('wizard.loading.steps.creating')}</span>
         </div>
         <div class="loading-step">
           <span class="loading-step-icon">⏳</span>
-          <span>{$_('wizard.hardcodedTexts.modals.loading.step3')}</span>
+          <span>{$_('wizard.loading.steps.sending')}</span>
         </div>
       </div>
     </div>
@@ -1585,10 +1590,10 @@
       <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2">✕</button>
     </form>
 
-    <h3 class="text-error mb-4 text-lg font-bold">{$_('wizard.hardcodedTexts.modals.error.title')}</h3>
+    <h3 class="text-error mb-4 text-lg font-bold">{$_('wizard.modals.error.title')}</h3>
 
     <div class="space-y-4">
-      <p>{$_('wizard.hardcodedTexts.modals.error.description')}</p>
+      <p>{$_('wizard.modals.error.description')}</p>
 
       <div class="alert alert-error">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
@@ -1608,8 +1613,8 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
         </svg>
         <div>
-          <div class="font-bold">{$_('wizard.hardcodedTexts.modals.error.whatHappensNext')}</div>
-          <div class="text-sm">{$_('wizard.hardcodedTexts.modals.error.whatHappensNextDescription')}</div>
+          <div class="font-bold">{$_('wizard.modals.error.whatHappens')}</div>
+          <div class="text-sm">{$_('wizard.modals.error.whatHappensDescription')}</div>
         </div>
       </div>
     </div>
@@ -1619,7 +1624,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
-        {$_('wizard.hardcodedTexts.modals.error.backToStep1')}
+        {$_('wizard.modals.error.backToStep1')}
       </button>
     </div>
   </div>
@@ -1639,30 +1644,30 @@
           </svg>
         </div>
       </div>
-      <h1 class="thank-you-title">{$_('wizard.hardcodedTexts.modals.thankYou.title')}</h1>
-      <p class="thank-you-subtitle">{$_('wizard.hardcodedTexts.modals.thankYou.subtitle')}</p>
+      <h1 class="thank-you-title">{$_('wizard.modals.thankYou.title')}</h1>
+      <p class="thank-you-subtitle">{$_('wizard.modals.thankYou.subtitle')}</p>
       <div class="thank-you-details">
         <div class="thank-you-card">
-          <h3>{$_('wizard.hardcodedTexts.modals.thankYou.whatHappensNext')}</h3>
+          <h3>{$_('wizard.modals.thankYou.whatHappensNext')}</h3>
           <ul class="thank-you-steps">
             <li>
               <span class="step-number">1</span>
-              <span>{$_('wizard.hardcodedTexts.modals.thankYou.step1')}</span>
+              <span>{$_('wizard.modals.thankYou.steps.step1')}</span>
             </li>
             <li>
               <span class="step-number">2</span>
-              <span>{$_('wizard.hardcodedTexts.modals.thankYou.step2')}</span>
+              <span>{$_('wizard.modals.thankYou.steps.step2')}</span>
             </li>
             <li>
               <span class="step-number">3</span>
-              <span>{$_('wizard.hardcodedTexts.modals.thankYou.step3')}</span>
+              <span>{$_('wizard.modals.thankYou.steps.step3')}</span>
             </li>
           </ul>
         </div>
         <div class="thank-you-info">
-          <p><strong>{$_('wizard.hardcodedTexts.modals.thankYou.projectName')}</strong> {config.name}</p>
-          <p><strong>{$_('wizard.hardcodedTexts.modals.thankYou.estimatedPrice')}</strong> {config.estimatedPrice.toLocaleString()}€</p>
-          <p><strong>{$_('wizard.hardcodedTexts.modals.thankYou.projectType')}</strong> {projectTypes.find((p) => p.id === config.projectType)?.title}</p>
+          <p><strong>{$_('wizard.modals.thankYou.projectName')}</strong> {config.name}</p>
+          <p><strong>{$_('wizard.modals.thankYou.estimatedPrice')}</strong> {config.estimatedPrice.toLocaleString()}€</p>
+          <p><strong>{$_('wizard.modals.thankYou.projectType')}</strong> {projectTypes.find((p) => p.id === config.projectType)?.title}</p>
         </div>
       </div>
       <div class="thank-you-actions">
@@ -1680,9 +1685,9 @@
               d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
             />
           </svg>
-          {$_('wizard.hardcodedTexts.modals.thankYou.toHomepage')}
+          {$_('wizard.modals.thankYou.home')}
         </button>
-        <a href="/kontakt" class="btn btn-link btn-lg">
+        <a href="/contact" class="btn btn-link btn-lg">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path
               stroke-linecap="round"
@@ -1691,7 +1696,7 @@
               d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
             />
           </svg>
-          {$_('wizard.hardcodedTexts.modals.thankYou.getInTouch')}
+          {$_('wizard.modals.thankYou.contact')}
         </a>
       </div>
     </div>
@@ -1705,12 +1710,12 @@
       <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2">✕</button>
     </form>
 
-    <h3 class="mb-4 text-lg font-bold">{$_('wizard.hardcodedTexts.modals.reset.title')}</h3>
-    <p class="py-4">{$_('wizard.hardcodedTexts.modals.reset.description')}</p>
+    <h3 class="mb-4 text-lg font-bold">{$_('wizard.modals.reset.title')}</h3>
+    <p class="py-4">{$_('wizard.modals.reset.description')}</p>
 
     <div class="modal-action">
-      <button type="button" class="btn btn-outline" onclick={closeResetModal}>{$_('wizard.hardcodedTexts.modals.reset.cancel')}</button>
-      <button type="button" class="btn btn-error" onclick={confirmReset}>{$_('wizard.hardcodedTexts.modals.reset.confirm')}</button>
+      <button type="button" class="btn btn-outline" onclick={closeResetModal}>{$_('wizard.modals.reset.cancel')}</button>
+      <button type="button" class="btn btn-error" onclick={confirmReset}>{$_('wizard.modals.reset.confirm')}</button>
     </div>
   </div>
   <form method="dialog" class="modal-backdrop">

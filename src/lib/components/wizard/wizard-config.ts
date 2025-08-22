@@ -351,7 +351,7 @@ export function getStepConfig(projectType: string): WizardStep[] {
       { id: 4, title: 'wizard.config.steps.features', required: false },
       { id: 5, title: 'wizard.config.steps.inhalte', required: false },
       { id: 6, title: 'wizard.config.steps.materialien', required: false },
-      { id: 7, title: 'wizard.config.steps.kontakt', required: true },
+      { id: 7, title: 'wizard.config.steps.contact', required: true },
       { id: 8, title: 'wizard.config.steps.ergebnis', required: false }
     ];
   } else if (projectType === 'webApplication') {
@@ -361,7 +361,7 @@ export function getStepConfig(projectType: string): WizardStep[] {
       { id: 3, title: 'wizard.config.steps.beschreibung', required: false },
       { id: 4, title: 'wizard.config.steps.features', required: false },
       { id: 5, title: 'wizard.config.steps.materialien', required: false },
-      { id: 6, title: 'wizard.config.steps.kontakt', required: true },
+      { id: 6, title: 'wizard.config.steps.contact', required: true },
       { id: 7, title: 'wizard.config.steps.ergebnis', required: false }
     ];
   } else if (projectType === 'artificialIntelligence') {
@@ -370,7 +370,7 @@ export function getStepConfig(projectType: string): WizardStep[] {
       { id: 2, title: 'wizard.config.steps.details', required: true },
       { id: 3, title: 'wizard.config.steps.beschreibung', required: false },
       { id: 4, title: 'wizard.config.steps.materialien', required: false },
-      { id: 5, title: 'wizard.config.steps.kontakt', required: true },
+      { id: 5, title: 'wizard.config.steps.contact', required: true },
       { id: 6, title: 'wizard.config.steps.ergebnis', required: false }
     ];
   } else if (projectType === 'freestyle') {
@@ -378,7 +378,7 @@ export function getStepConfig(projectType: string): WizardStep[] {
       ...baseSteps,
       { id: 2, title: 'wizard.config.steps.beschreibung', required: false },
       { id: 3, title: 'wizard.config.steps.materialien', required: false },
-      { id: 4, title: 'wizard.config.steps.kontakt', required: true },
+      { id: 4, title: 'wizard.config.steps.contact', required: true },
       { id: 5, title: 'wizard.config.steps.ergebnis', required: false }
     ];
   } else {
@@ -388,7 +388,7 @@ export function getStepConfig(projectType: string): WizardStep[] {
       { id: 2, title: 'wizard.config.steps.details', required: true },
       { id: 3, title: 'wizard.config.steps.beschreibung', required: false },
       { id: 4, title: 'wizard.config.steps.materialien', required: false },
-      { id: 5, title: 'wizard.config.steps.kontakt', required: true },
+      { id: 5, title: 'wizard.config.steps.contact', required: true },
       { id: 6, title: 'wizard.config.steps.ergebnis', required: false }
     ];
   }

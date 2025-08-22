@@ -1,0 +1,15 @@
+{
+  "menu": {
+    "services": "Services",
+    "insights": "Einblicke",
+    "aboutUs": "Über uns",
+    "faq": "FAQ",
+    "contact": "Kontakt",
+    "login": "Login",
+    "logout": "Logout",
+    "configureProject": "Projekt konfigurieren",
+    "start": "Starten",
+    "switchLanguageToEnglish": "Switch to English",
+    "switchLanguageToGerman": "Auf Deutsch wechseln"
+  }
+}

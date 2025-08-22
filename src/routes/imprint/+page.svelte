@@ -9,7 +9,7 @@
 </svelte:head>
 
   <Section>
-    <div class="impressum-content">
+    <div class="imprint-content">
       <h1>Impressum</h1>
 
       <h2>Angaben gemäß § 5 TMG</h2>
@@ -24,7 +24,7 @@
       <h3>Kontakt</h3>
       <div class="contact-details">
         <p class="no-padding"><strong>Telefon:</strong> 06732 - 9648113</p>
-        <p><strong>E-Mail:</strong> <a href="mailto:kontakt@raspb.de">kontakt@raspb.de</a></p>
+        <p><strong>E-Mail:</strong> <a href="mailto:contact@raspb.de">contact@raspb.de</a></p>
       </div>
 
       <h3>Registereintrag</h3>

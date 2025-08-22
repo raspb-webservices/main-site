@@ -1,9 +1,11 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
+  import { _ } from 'svelte-i18n';
 </script>
 
-<section class="danke-content-wrapper">
+<section class="thank-you-content-wrapper">
   <div class="px-20 pt-10 flex flex-col justify-center items-center">
+    <h1>{$_('thankYou.title')}</h1>
     <h1 class="text-center">Vielen Dank für Ihre Nachricht</h1>
     <p>Wir haben Ihre Anfrage erhalten und werden uns in Kürze bei Ihnen zurückmelden...</p>
 
@@ -22,7 +24,7 @@
 
 <style lang="postcss">
   @reference '../../app.css';
-  section.danke-content-wrapper {
+  section.thank-you-content-wrapper {
     @apply m-auto h-full w-full max-w-7xl px-4 py-12;
   }
 </style>

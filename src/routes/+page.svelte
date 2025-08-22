@@ -7,8 +7,6 @@
   import RaspbPhilosophyModal from '$lib/components/raspb-philosophy-modal.svelte';
   import { goto } from '$app/navigation';
   import { _ } from 'svelte-i18n';
-  
-  const { data } = $props();
 
   let currentUser = $derived(user.get());
   const md = markdownit();
@@ -21,7 +19,7 @@
   // Hero button action for testing
   function handleHeroButton() {
     console.log('Hero button clicked!');
-    goto('/einblicke');
+    goto('/insights');
   }
 
   function openPhilosophyModal() {
@@ -59,7 +57,7 @@
       <button
         class="btn-basic"
         onclick={() => {
-          goto('/einblicke');
+          goto('/insights');
         }}>{$_('homepage.hero.buttonText')}</button
       >
     </div>
@@ -451,8 +449,8 @@
           <div class="cta-benefit">
             <div class="benefit-icon">🤝</div>
             <div>
-              <h4>{$_('homepage.cta.benefits.kontakt.title')}</h4>
-              <p>{$_('homepage.cta.benefits.kontakt.description')}</p>
+              <h4>{$_('homepage.cta.benefits.contact.title')}</h4>
+              <p>{$_('homepage.cta.benefits.contact.description')}</p>
             </div>
           </div>
         </div>
@@ -476,15 +474,6 @@
       <div class="massive-spacer"></div>
     </div>
   </Section>
-
-  <section class="direct-section hidden">
-    {#each data.contents as snippet}
-      <h2>{snippet.headline}</h2>
-      <h4>{snippet.subheadline}</h4>
-      <div>{@html renderMarkdown(snippet.text)}</div>
-      <div class="spacer"></div>
-    {/each}
-  </section>
 </div>
 
 <!-- Philosophy Modal -->

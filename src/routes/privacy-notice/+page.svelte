@@ -8,7 +8,7 @@
   <meta name="description" content="Datenschutzerklärung der raspb Webservices UG (in Gründung)" />
 </svelte:head>
 
-<div class="content-area datenschutz">
+<div class="content-area privacy-notice">
   <Section>
     <h1>Datenschutzerklärung</h1>
 
@@ -89,7 +89,7 @@
       </p>
       <p>
         <strong>Telefon:</strong> 06732 - 9648113<br />
-        <strong>E-Mail:</strong> <a href="mailto:kontakt@raspb.de">kontakt@raspb.de</a>
+        <strong>E-Mail:</strong> <a href="mailto:contact@raspb.de">contact@raspb.de</a>
       </p>
     </div>
     <p>
@@ -233,7 +233,7 @@
       <li><strong>Recht auf Datenübertragbarkeit:</strong> Sie haben das Recht, Ihre Daten in einem strukturierten Format zu erhalten.</li>
       <li><strong>Widerspruchsrecht:</strong> Sie können der Verarbeitung Ihrer Daten widersprechen.</li>
     </ul>
-    <p>Zur Ausübung Ihrer Rechte wenden Sie sich bitte an: <a href="mailto:kontakt@raspb.de">kontakt@raspb.de</a></p>
+    <p>Zur Ausübung Ihrer Rechte wenden Sie sich bitte an: <a href="mailto:contact@raspb.de">contact@raspb.de</a></p>
 
     <h2>7. Änderungen dieser Datenschutzerklärung</h2>
     <p>
@@ -257,7 +257,7 @@
 
 <style lang="postcss">
   @reference '../../app.css';
-  .content-area.datenschutz {
+  .content-area.privacy-notice {
     ul {
       @apply mb-7 pl-5;
       list-style-type: square;

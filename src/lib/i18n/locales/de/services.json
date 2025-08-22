@@ -1,0 +1,747 @@
+{
+    "servicesPage": {
+    "meta": {
+      "title": "raspb Webservices - Services",
+      "description": "Entdecken Sie unser umfassendes Service-Portfolio: Webseiten, CMS-Lösungen, Applikationen, Individualentwicklung und KI-Services für Ihr digitales Projekt."
+    },
+    "hero": {
+      "titleFirst": "Unsere",
+      "titleHighlight": "Services",
+      "subtitle": "Maßgeschneiderte digitale Lösungen für jeden Bedarf - von der einfachen Website bis zur komplexen KI-Integration",
+      "buttonText": "Projekt konfigurieren"
+    },
+    "intro": {
+      "titleFirst": "Von der Idee zur",
+      "titleHighlight": "digitalen Realität",
+      "paragraph1": "Unser umfassendes Service-Portfolio deckt alle Aspekte der digitalen Transformation ab. Ob Sie eine einfache Präsenz im Web benötigen oder komplexe, KI-gestützte Anwendungen entwickeln möchten - wir haben die passende Lösung.",
+      "paragraph2": "Jeder Service wird nach der bewährten raspb-Philosophie umgesetzt: schnell, kostengünstig und in höchster Qualität. Dabei behalten Sie stets die volle Kontrolle über Ihr digitales Eigentum.",
+      "benefits": {
+        "benefit1": "Transparente Festpreise",
+        "benefit2": "Keine Folgekosten",
+        "benefit3": "Vollständige Code-Übergabe",
+        "benefit4": "Moderne Technologien",
+        "benefit5": "Persönlicher Ansprechpartner",
+        "benefit6": "Agile Entwicklung"
+      }
+    },
+    "categories": {
+      "titleFirst": "Unsere",
+      "titleHighlight": "Service-Kategorien",
+      "webseiten": {
+        "title": "Webseiten",
+        "description": "Von One-Pagern bis Corporate Websites"
+      },
+      "contentManagement": {
+        "title": "Content Management",
+        "description": "Einfache bis komplexe CMS-Lösungen"
+      },
+      "applications": {
+        "title": "Applikationen",
+        "description": "Business Apps, Webanwendungen, PWAs"
+      },
+      "freestyle": {
+        "title": "Freestyle",
+        "description": "Hochindividuelle Lösungen"
+      },
+      "aiServices": {
+        "title": "KI-Services",
+        "description": "Beratung, Engineering, Automation & Infrastructure"
+      }
+    },
+    "webseitenSection": {
+      "titleFirst": "Webseiten",
+      "titleHighlight": "für jeden Anspruch",
+      "teaser": "Von eleganten One-Pagern bis hin zu umfassenden Corporate Websites - wir entwickeln Webseiten, die Ihre Zielgruppe begeistern und Ihre Geschäftsziele unterstützen. Und all das mit einem technischen Standard, der seines Gleichen sucht.",
+      "onePage": {
+        "title": "One-Pager Websites",
+        "icon": "🎯",
+        "description": "Kompakte, fokussierte Präsentation auf einer scrollbaren Seite. Perfekt für für den schnellen Einstieg mit klarer Botschaft.",
+        "highlights": {
+          "h1": "Webvisitenkarte",
+          "h2": "Maintenance Seite",
+          "h3": "Minmalistische Kampagnenseite"
+        },
+        "buttonText": "Mehr Details"
+      },
+      "landingPages": {
+        "title": "Landing Pages",
+        "icon": "🚀",
+        "description": "Zielgerichtete Kampagnenseiten für Marketing-Aktionen, Produktlaunches oder Events mit maximaler Conversion.",
+        "highlights": {
+          "h1": "A/B-Testing",
+          "h2": "Analytics",
+          "h3": "Schnelle Umsetzung"
+        },
+        "buttonText": "Mehr Details"
+      },
+      "corporateWebsites": {
+        "title": "Corporate Websites",
+        "icon": "🏢",
+        "description": "Professionelle Unternehmensauftritte mit mehreren Seiten, umfassenden Inhalten und erweiterten Funktionen.",
+        "highlights": {
+          "h1": "SEO-optimiert",
+          "h2": "Mehrseitig",
+          "h3": "Professionell"
+        },
+        "buttonText": "Mehr Details"
+      }
+    },
+    "cmsSection": {
+      "titleFirst": "Content Management",
+      "titleHighlight": "nach Maß",
+      "teaser": "Behalten Sie die Kontrolle über Ihre Inhalte mit maßgeschneiderten CMS-Lösungen - von einfacher Seitenbearbeitung bis hin zu komplexen Content-Strukturen.",
+      "simpleCms": {
+        "title": "Einfache Inhaltsbearbeitung",
+        "icon": "✏️",
+        "description": "Machen Sie bestehende Seiten editierbar oder ermöglichen Sie die einfache Bearbeitung einzelner Inhalte.",
+        "highlights": {
+          "h1": "Inline-Editing",
+          "h2": "Benutzerfreundlich",
+          "h3": "Sofortige Vorschau"
+        },
+        "buttonText": "Mehr Details"
+      },
+      "complexCms": {
+        "title": "Komplexe CMS-Systeme",
+        "icon": "🏗️",
+        "description": "Individuelle Content-Management-Systeme mit vielschichtigen Informationsobjekten und erweiterten Funktionen.",
+        "highlights": {
+          "h1": "Custom Content-Typen",
+          "h2": "Workflow-Management",
+          "h3": "Mehrsprachigkeit"
+        },
+        "buttonText": "Mehr Details"
+      },
+      "blogCms": {
+        "title": "Blog & Content-Plattformen",
+        "icon": "📝",
+        "description": "Spezialisierte Lösungen für Blogs, Magazine und content-getriebene Websites.",
+        "highlights": {
+          "h1": "SEO-Tools",
+          "h2": "Social Media",
+          "h3": "Newsletter"
+        },
+        "buttonText": "Mehr Details"
+      },
+      "headlessCms": {
+        "title": "Headless CMS",
+        "icon": "🔗",
+        "description": "Flexible Content-Verwaltung mit API-basierter Auslieferung für multiple Kanäle.",
+        "highlights": {
+          "h1": "API-first",
+          "h2": "Multi-Channel",
+          "h3": "Zukunftssicher"
+        },
+        "buttonText": "Mehr Details"
+      }
+    },
+    "applicationsSection": {
+      "titleFirst": "Applikationen",
+      "titleHighlight": "für Web & Mobile",
+      "teaser": "Von einfachen Browser-Anwendungen bis hin zu nativen Mobile Apps - wir setzen auf Progressive Web App Technologie für maximale Reichweite und Performance.",
+      "webApps": {
+        "title": "Web Applications",
+        "icon": "💻",
+        "description": "Browser-basierte Anwendungen für spezifische Aufgaben und Workflows.",
+        "highlights": {
+          "h1": "Plattformunabhängig",
+          "h2": "Keine Installation",
+          "h3": "Auto-Updates"
+        },
+        "buttonText": "Mehr Details"
+      },
+      "pwa": {
+        "title": "Progressive Web Apps (PWA)",
+        "icon": "📱",
+        "description": "Das Beste aus Web und App - installierbar, offline-fähig und mit nativen Features.",
+        "highlights": {
+          "h1": "Installierbar",
+          "h2": "Offline-fähig",
+          "h3": "Push-Notifications"
+        },
+        "buttonText": "Mehr Details"
+      },
+      "nativeApps": {
+        "title": "Native Mobile Apps",
+        "icon": "📲",
+        "description": "Vollwertige Apps für iOS und Android App Stores mit nativer Performance.",
+        "highlights": {
+          "h1": "App Store",
+          "h2": "Native Performance",
+          "h3": "Hardware-Zugriff"
+        },
+        "buttonText": "Mehr Details"
+      },
+      "complexApps": {
+        "title": "Komplexe Anwendungen",
+        "icon": "⚙️",
+        "description": "Umfangreiche Anwendungen mit erweiterten Funktionen und Integrationen.",
+        "highlights": {
+          "h1": "Datenbank-Integration",
+          "h2": "Real-time Features",
+          "h3": "Skalierbar"
+        },
+        "buttonText": "Mehr Details"
+      }
+    },
+    "individualDevelopmentSection": {
+      "titleFirst": "Individual",
+      "titleHighlight": "entwicklung",
+      "teaser": "Haben Sie spezielle Anforderungen, die nicht in die Standard-Kategorien passen? Wir entwickeln maßgeschneiderte Lösungen für jeden Use-Case.",
+      "components": {
+        "title": "Einzelne Komponenten",
+        "icon": "🧩",
+        "description": "UI-Komponenten, Widgets, spezielle Formulare und Custom Plugins.",
+        "buttonText": "Mehr Details"
+      },
+      "extensions": {
+        "title": "System-Erweiterungen",
+        "icon": "🔧",
+        "description": "Erweiterung bestehender Websites, API-Integrationen und Performance-Optimierungen.",
+        "buttonText": "Mehr Details"
+      },
+      "specialApps": {
+        "title": "Spezial-Anwendungen",
+        "icon": "📊",
+        "description": "Event-Registrierung, Daten-Dashboards, Reporting-Tools und Automatisierungs-Scripts.",
+        "buttonText": "Mehr Details"
+      },
+      "design": {
+        "title": "UI/UX Design",
+        "icon": "🎨",
+        "description": "Interface-Design, User Experience Optimierung, Prototyping und Design-Systeme.",
+        "buttonText": "Mehr Details"
+      }
+    },
+    "kiServicesSection": {
+      "titleFirst": "KI-Services",
+      "titleHighlight": "& Automation",
+      "teaser": "Nutzen Sie die Kraft der Künstlichen Intelligenz für Ihr Unternehmen. Von der Beratung bis zur fertigen KI-Lösung.",
+      "consulting": {
+        "title": "KI-Beratung & Support",
+        "icon": "🧠",
+        "description": "Umfassende Beratung und Unterstützung bei der Integration von KI in Ihre Geschäftsprozesse.",
+        "highlights": {
+          "h1": "Strategieentwicklung",
+          "h2": "Prompt Engineering",
+          "h3": "ROI-Analyse"
+        },
+        "buttonText": "Mehr Details"
+      },
+      "agentDevelopment": {
+        "title": "KI-Agenten Entwicklung",
+        "icon": "🤖",
+        "description": "Maßgeschneiderte KI-Agenten für spezifische Aufgaben und Anwendungsfälle.",
+        "highlights": {
+          "h1": "Custom Chatbots",
+          "h2": "Content-Generierung",
+          "h3": "System-Integration"
+        },
+        "buttonText": "Mehr Details"
+      },
+      "workflowOptimization": {
+        "title": "Workflow-Optimierung mit KI",
+        "icon": "⚡",
+        "description": "Digitale Prozesse und Abläufe mit KI vereinfachen, verkürzen und vergünstigen.",
+        "highlights": {
+          "h1": "Prozessanalyse",
+          "h2": "Automatisierung",
+          "h3": "Predictive Analytics"
+        },
+        "buttonText": "Mehr Details"
+      },
+      "aiAsInfrastructure": {
+        "title": "AI as Infrastructure",
+        "icon": "🏗️",
+        "description": "KI-Infrastruktur als Service - mieten statt kaufen für maximale Flexibilität.",
+        "highlights": {
+          "h1": "Skalierbar",
+          "h2": "Pay-per-Use",
+          "h3": "24/7 Support"
+        },
+        "buttonText": "Mehr Details"
+      }
+    },
+    "ctaSection": {
+      "titleFirst": "Bereit für Ihr",
+      "titleHighlight": "digitales Projekt",
+      "teaser": "Sie haben die perfekte Lösung für Ihr Vorhaben gefunden? Unser intelligenter Konfigurator hilft Ihnen dabei, Ihr Projekt zu spezifizieren und erhalten Sie sofort einen transparenten Festpreis.",
+      "benefits": {
+        "benefit1": {
+          "icon": "⚡",
+          "title": "Sofortiger Preis",
+          "description": "Erhalten Sie binnen Minuten einen verbindlichen Festpreis"
+        },
+        "benefit2": {
+          "icon": "🎯",
+          "title": "Maßgeschneidert",
+          "description": "Jede Lösung wird individuell auf Ihre Bedürfnisse zugeschnitten"
+        },
+        "benefit3": {
+          "icon": "🤝",
+          "title": "Persönlicher Kontakt",
+          "description": "Ein fester Ansprechpartner begleitet Sie durch das gesamte Projekt"
+        }
+      },
+      "button1": "Projekt jetzt konfigurieren",
+      "button2": "Häufige Fragen",
+      "note": "💡 <strong>Tipp:</strong> Der Konfigurator dauert nur 3-5 Minuten und Sie erhalten sofort Ihren persönlichen Projektpreis. Unverbindlich und kostenlos."
+    },
+    "modals": {
+      "onePage": {
+        "title": "One-Pager Websites",
+        "perfectFor": "Perfekt für:",
+        "perfectForDescription": "den Einstieg, mit wenigen Inhalten, eine schnelle und vorübergehende Internetpäsenz oder eine einfache Kampagnenseite",
+        "paragraph1": "Möchte man JETZT im Internet präsent sein, mit Anschrift, Telefonnummer und ggf. den Laden-Öffnungszeiten, ist aber noch in der Planung. Dann bietet sich eine Webvisitenkarte als simpler One-Pager an. So sind Sie mit Ihren Kontaktdaten wenigstens schone einmal auffindbar und haben ein Grundlage für komplexere Vorhaben.",
+        "paragraph2": "Aber auch wenn Sie eine einzelnen Seite als Maintenance-Seite (wird angezeigt, wenn die Seite im Wartungsmodus ist) wünschen oder eine einzelne Vorschaltseite implementiert werden soll, ist der One-Pager on raspb ideal. Und das sochon ab 399 € (inkl. allem = Hosting, Gebühren, etc.)",
+        "paragraph3": "Eine One-Pager-Seite, lässt sich auch komplexer aufziehen. Mit einem Formular am Ende oder ansprechenden Animationen. Der Phantasie sind kaum grenzen gesetzt. Nutzen Sie den One-Pager Ansatz um Ihre Online-Kampagne zu realisieren.",
+        "servicesDetailTitle": "Leistungen im Detail:",
+        "servicesDetails": {
+          "d1": "Responsive Design für alle Geräte",
+          "d2": "Optimierte Performance mit blitzschnellen Ladezeiten",
+          "d3": "SEO-Grundoptimierung",
+          "d4": "Flexibel erweiterbar. Bringen Sie ihre Wünsche ein.",
+          "d5": "Doamin und SSL-Zertifikat inklusive",
+          "d6": "Im Fair Use Bereich* entstehen keine weiteren Kosten (Hosting, Wartung, Betrieb)"
+        },
+        "technicalFeaturesTitle": "Technische Features:",
+        "technicalFeatures": {
+          "t1": "Auf Wunsch mit modernen CSS-Animationen",
+          "t2": "Smooth Scrolling Navigation",
+          "t3": "Lazy Loading für Bilder"
+        },
+        "projectDuration": "Projektdauer:",
+        "projectDurationValue": "1-5 Tage",
+        "maintenance": "Wartung:",
+        "maintenanceValue": "Für ein Jahr inklusive.",
+        "closeButton": "Schließen"
+      },
+      "landingPages": {
+        "title": "Landing Pages",
+        "perfectFor": "Perfekt für:",
+        "perfectForDescription": "Marketing-Kampagnen, Produktlaunches, Events, Lead-Generierung",
+        "conversionOptimizationTitle": "Conversion-Optimierung:",
+        "conversionOptimization": {
+          "c1": "A/B-Testing Setup für Headlines und CTAs",
+          "c2": "Heatmap-Integration (Hotjar/Crazy Egg)",
+          "c3": "Conversion-Tracking mit Google Analytics",
+          "c4": "Optimierte Formulare mit minimalen Feldern",
+          "c5": "Social Proof Integration"
+        },
+        "marketingIntegrationTitle": "Marketing-Integration:",
+        "marketingIntegration": {
+          "m1": "Facebook Pixel Integration",
+          "m2": "Google Ads Conversion-Tracking",
+          "m3": "E-Mail-Marketing-Tool Anbindung",
+          "m4": "CRM-Integration (HubSpot, Salesforce)"
+        },
+        "projectDuration": "Projektdauer:",
+        "projectDurationValue": "3-5 Tage",
+        "performance": "Performance:",
+        "performanceValue": "Optimiert für maximale Conversion-Rate",
+        "closeButton": "Schließen"
+      },
+      "corporateWebsites": {
+        "title": "Corporate Websites",
+        "perfectFor": "Perfekt für:",
+        "perfectForDescription": "Mittelständische Unternehmen, Agenturen, Beratungen, B2B-Firmen",
+        "extensiveFeaturesTitle": "Umfangreiche Features:",
+        "extensiveFeatures": {
+          "e1": "Mehrseitige Struktur (5-20 Seiten)",
+          "e2": "Erweiterte SEO-Optimierung",
+          "e3": "Professionelles Corporate Design",
+          "e4": "Kontaktformulare und Interaktionen",
+          "e5": "Team- und Über-uns-Seiten",
+          "e6": "Service-/Produktpräsentationen",
+          "e7": "News/Blog-Integration"
+        },
+        "advancedFunctionsTitle": "Erweiterte Funktionen:",
+        "advancedFunctions": {
+          "a1": "Mehrsprachigkeit (DACH-Region)",
+          "a2": "Erweiterte Analytics und Tracking",
+          "a3": "Newsletter-Integration",
+          "a4": "Social Media Anbindung",
+          "a5": "Downloadbereich für Dokumente"
+        },
+        "projectDuration": "Projektdauer:",
+        "projectDurationValue": "3-6 Wochen",
+        "maintenance": "Wartung:",
+        "maintenanceValue": "Empfohlen für optimale Performance",
+        "closeButton": "Schließen"
+      },
+      "simpleCms": {
+        "title": "Einfache Inhaltsbearbeitung",
+        "perfectFor": "Perfekt für:",
+        "perfectForDescription": "Kleine Unternehmen, Vereine, Praxen, Restaurants",
+        "userFriendlyFeaturesTitle": "Benutzerfreundliche Features:",
+        "userFriendlyFeatures": {
+          "u1": "Inline-Editing direkt auf der Website",
+          "u2": "WYSIWYG-Editor für Texte",
+          "u3": "Einfacher Bildupload und -verwaltung",
+          "u4": "Sofortige Vorschau der Änderungen",
+          "u5": "Automatische Backups",
+          "u6": "Versionskontrolle"
+        },
+        "technicalDetailsTitle": "Technische Details:",
+        "technicalDetails": {
+          "t1": "Keine technischen Kenntnisse erforderlich",
+          "t2": "Sichere Benutzeranmeldung",
+          "t3": "Mobile Bearbeitung möglich",
+          "t4": "Automatische SEO-Optimierung"
+        },
+        "setupTime": "Setup-Zeit:",
+        "setupTimeValue": "1-2 Tage",
+        "training": "Schulung:",
+        "trainingValue": "30 Minuten Online-Training inklusive",
+        "closeButton": "Schließen"
+      },
+      "complexCms": {
+        "title": "Komplexe CMS-Systeme",
+        "perfectFor": "Perfekt für:",
+        "perfectForDescription": "Große Unternehmen, Verlage, E-Commerce, Portale",
+        "enterpriseFeaturesTitle": "Enterprise Features:",
+        "enterpriseFeatures": {
+          "e1": "Benutzerdefinierte Content-Typen",
+          "e2": "Workflow-Management mit Freigabeprozessen",
+          "e3": "Mehrsprachigkeit und Lokalisierung",
+          "e4": "Benutzerrollen und Rechteverwaltung",
+          "e5": "API-Integration für Drittsysteme",
+          "e6": "Erweiterte Suchfunktionen"
+        },
+        "scalabilityTitle": "Skalierbarkeit:",
+        "scalability": {
+          "s1": "Hochperformante Datenbank-Architektur",
+          "s2": "CDN-Integration für globale Verfügbarkeit",
+          "s3": "Automatische Skalierung",
+          "s4": "Umfangreiche Analytics und Reporting"
+        },
+        "projectDuration": "Projektdauer:",
+        "projectDurationValue": "6-12 Wochen",
+        "support": "Support:",
+        "supportValue": "Dedicated Support-Team verfügbar",
+        "closeButton": "Schließen"
+      },
+      "blogCms": {
+        "title": "Blog & Content-Plattformen",
+        "perfectFor": "Perfekt für:",
+        "perfectForDescription": "Blogger, Journalisten, Content Creator, Magazine",
+        "contentOptimizedFeaturesTitle": "Content-optimierte Features:",
+        "contentOptimizedFeatures": {
+          "c1": "Optimiert für Content-Erstellung",
+          "c2": "SEO-Tools und Meta-Tag-Management",
+          "c3": "Social Media Integration und Auto-Posting",
+          "c4": "Kommentar-System mit Moderation",
+          "c5": "Newsletter-Integration (Mailchimp, ConvertKit)",
+          "c6": "Kategorien und Tag-System"
+        },
+        "monetizationTitle": "Monetarisierung:",
+        "monetization": {
+          "m1": "Werbeplatz-Management",
+          "m2": "Affiliate-Link-Integration",
+          "m3": "Premium-Content-Bereiche",
+          "m4": "E-Mail-Marketing-Tools"
+        },
+        "projectDuration": "Projektdauer:",
+        "projectDurationValue": "2-4 Wochen",
+        "contentMigration": "Content-Migration:",
+        "contentMigrationValue": "Bestehende Inhalte übernehmen wir gerne",
+        "closeButton": "Schließen"
+      },
+      "headlessCms": {
+        "title": "Headless CMS",
+        "perfectFor": "Perfekt für:",
+        "perfectForDescription": "Multi-Channel-Publishing, Apps + Web, Enterprise-Lösungen",
+        "apiFirstTitle": "API-First Ansatz:",
+        "apiFirst": {
+          "a1": "Content einmal erstellen, überall nutzen",
+          "a2": "RESTful und GraphQL APIs",
+          "a3": "Flexibilität bei der Darstellung",
+          "a4": "Zukunftssicher und skalierbar",
+          "a5": "Integration in bestehende Systeme",
+          "a6": "Entwicklerfreundliche Dokumentation"
+        },
+        "useCasesTitle": "Use Cases:",
+        "useCases": {
+          "u1": "Website + Mobile App mit gleichen Inhalten",
+          "u2": "Mehrere Websites aus einer Quelle",
+          "u3": "IoT-Geräte und Digital Signage",
+          "u4": "E-Commerce mit verschiedenen Frontends"
+        },
+        "projectDuration": "Projektdauer:",
+        "projectDurationValue": "4-8 Wochen",
+        "technology": "Technologie:",
+        "technologyValue": "Hygraph, Strapi oder Custom Solution",
+        "closeButton": "Schließen"
+      },
+      "webApps": {
+        "title": "Web Applications",
+        "perfectFor": "Perfekt für:",
+        "perfectForDescription": "Dashboards, Tools, Kalkulatoren, Verwaltungssysteme",
+        "technicalAdvantagesTitle": "Technische Vorteile:",
+        "technicalAdvantages": {
+          "t1": "Plattformunabhängig (Windows, Mac, Linux)",
+          "t2": "Keine Installation erforderlich",
+          "t3": "Automatische Updates",
+          "t4": "Responsive Design für alle Bildschirmgrößen",
+          "t5": "Offline-Funktionalität möglich",
+          "t6": "Sichere Datenübertragung"
+        },
+        "exampleApplicationsTitle": "Beispiel-Anwendungen:",
+        "exampleApplications": {
+          "e1": "Business Dashboards mit Real-time Daten",
+          "e2": "Projektmanagement-Tools",
+          "e3": "Finanz-Kalkulatoren",
+          "e4": "Inventar-Verwaltungssysteme",
+          "e5": "Zeiterfassungs-Tools"
+        },
+        "projectDuration": "Projektdauer:",
+        "projectDurationValue": "2-8 Wochen je nach Komplexität",
+        "technology": "Technologie:",
+        "technologyValue": "SvelteKit, React oder Vue.js",
+        "closeButton": "Schließen"
+      },
+      "pwa": {
+        "title": "Progressive Web Apps (PWA)",
+        "perfectFor": "Perfekt für:",
+        "perfectForDescription": "App-ähnliche Erfahrungen ohne App Store",
+        "appLikeFeaturesTitle": "App-ähnliche Features:",
+        "appLikeFeatures": {
+          "a1": "Installierbar auf allen Geräten",
+          "a2": "Funktioniert offline",
+          "a3": "Push-Benachrichtigungen",
+          "a4": "Zugriff auf Gerätehardware (Kamera, GPS)",
+          "a5": "App-Icon auf dem Homescreen",
+          "a6": "Vollbild-Modus ohne Browser-UI"
+        },
+        "technicalFeaturesTitle": "Technische Features:",
+        "technicalFeatures": {
+          "t1": "Service Worker für Offline-Funktionalität",
+          "t2": "App Manifest für Installation",
+          "t3": "Intelligentes Caching",
+          "t4": "Background Sync",
+          "t5": "Automatische Updates"
+        },
+        "projectDuration": "Projektdauer:",
+        "projectDurationValue": "3-6 Wochen",
+        "advantage": "Vorteil:",
+        "advantageValue": "Keine App Store Gebühren oder Genehmigungen",
+        "closeButton": "Schließen"
+      },
+      "nativeApps": {
+        "title": "Native Mobile Apps",
+        "perfectFor": "Perfekt für:",
+        "perfectForDescription": "Apps mit hohen Performance-Anforderungen",
+        "nativeAdvantagesTitle": "Native Vorteile:",
+        "nativeAdvantages": {
+          "n1": "App Store und Google Play Distribution",
+          "n2": "Native Performance und Geschwindigkeit",
+          "n3": "Vollzugriff auf alle Gerätehardware",
+          "n4": "Plattformspezifische UI-Elemente",
+          "n5": "Erweiterte Sicherheitsfeatures",
+          "n6": "Tiefe System-Integration"
+        },
+        "developmentApproachTitle": "Entwicklungsansatz:",
+        "developmentApproach": {
+          "d1": "React Native für iOS und Android",
+          "d2": "Capacitor für Web-zu-App Konvertierung",
+          "d3": "Shared Codebase für Effizienz",
+          "d4": "Native Module bei Bedarf"
+        },
+        "projectDuration": "Projektdauer:",
+        "projectDurationValue": "8-16 Wochen",
+        "appStore": "App Store:",
+        "appStoreValue": "Unterstützung bei Veröffentlichung inklusive",
+        "closeButton": "Schließen"
+      },
+      "complexApps": {
+        "title": "Komplexe Anwendungen",
+        "perfectFor": "Perfekt für:",
+        "perfectForDescription": "CRM-Systeme, E-Learning-Plattformen, Booking-Systeme",
+        "enterpriseFeaturesTitle": "Enterprise-Features:",
+        "enterpriseFeatures": {
+          "e1": "Umfangreiche Datenbank-Integration",
+          "e2": "API-Entwicklung und -Integration",
+          "e3": "Benutzerauthentifizierung und -verwaltung",
+          "e4": "Real-time Features (Chat, Notifications)",
+          "e5": "Skalierbare Microservice-Architektur",
+          "e6": "Umfangreiche Reporting-Funktionen"
+        },
+        "exampleSystemsTitle": "Beispiel-Systeme:",
+        "exampleSystems": {
+          "e1": "Customer Relationship Management (CRM)",
+          "e2": "E-Learning und Kursplattformen",
+          "e3": "Buchungs- und Reservierungssysteme",
+          "e4": "Collaboration und Projektmanagement-Tools",
+          "e5": "Inventar Management Systeme"
+        },
+        "projectDuration": "Projektdauer:",
+        "projectDurationValue": "12-24 Wochen",
+        "support": "Support:",
+        "supportValue": "Langfristige Wartung und Weiterentwicklung",
+        "closeButton": "Schließen"
+      },
+      "components": {
+        "title": "Einzelne Komponenten",
+        "perfectFor": "Perfekt für:",
+        "perfectForDescription": "Spezielle UI-Elemente, Widgets, Custom Plugins",
+        "componentTypesTitle": "Komponenten-Typen:",
+        "componentTypes": {
+          "c1": "Interaktive UI-Komponenten",
+          "c2": "Spezielle Formulare und Eingabefelder",
+          "c3": "Datenvisualisierung und Charts",
+          "c4": "Custom Widgets für Websites",
+          "c5": "Wiederverwendbare Code-Module"
+        },
+        "projectDuration": "Projektdauer:",
+        "projectDurationValue": "1-3 Wochen",
+        "integration": "Integration:",
+        "integrationValue": "Nahtlose Einbindung in bestehende Systeme",
+        "closeButton": "Schließen"
+      },
+      "extensions": {
+        "title": "System-Erweiterungen",
+        "perfectFor": "Perfekt für:",
+        "perfectForDescription": "Bestehende Websites erweitern und optimieren",
+        "extensionServicesTitle": "Erweiterungs-Services:",
+        "extensionServices": {
+          "e1": "Neue Features für bestehende Websites",
+          "e2": "API-Integrationen (Payment, CRM, etc.)",
+          "e3": "Performance-Optimierungen",
+          "e4": "Datenbank-Migrationen",
+          "e5": "Security-Updates und Härtung"
+        },
+        "projectDuration": "Projektdauer:",
+        "projectDurationValue": "1-4 Wochen",
+        "compatibility": "Kompatibilität:",
+        "compatibilityValue": "Arbeiten mit allen gängigen Technologien",
+        "closeButton": "Schließen"
+      },
+      "specialApps": {
+        "title": "Spezial-Anwendungen",
+        "perfectFor": "Perfekt für:",
+        "perfectForDescription": "Einzigartige Geschäftsanforderungen",
+        "applicationExamplesTitle": "Anwendungsbeispiele:",
+        "applicationExamples": {
+          "a1": "Event-Registrierungssysteme",
+          "a2": "Business Intelligence Dashboards",
+          "a3": "Reporting und Analytics Tools",
+          "a4": "Automatisierungs-Scripts",
+          "a5": "Datenverarbeitungs-Pipelines"
+        },
+        "projectDuration": "Projektdauer:",
+        "projectDurationValue": "2-8 Wochen",
+        "approach": "Ansatz:",
+        "approachValue": "Agile Entwicklung mit regelmäßigen Reviews",
+        "closeButton": "Schließen"
+      },
+      "design": {
+        "title": "UI/UX Design",
+        "perfectFor": "Perfekt für:",
+        "perfectForDescription": "Optimale Benutzererfahrung und modernes Design",
+        "designServicesTitle": "Design-Services:",
+        "designServices": {
+          "d1": "User Interface Design",
+          "d2": "User Experience Optimierung",
+          "d3": "Interaktive Prototyping",
+          "d4": "Design-Systeme und Style Guides",
+          "d5": "Usability Testing"
+        },
+        "projectDuration": "Projektdauer:",
+        "projectDurationValue": "2-6 Wochen",
+        "tools": "Tools:",
+        "toolsValue": "Figma, Adobe Creative Suite",
+        "closeButton": "Schließen"
+      },
+      "kiConsulting": {
+        "title": "KI-Beratung & Support",
+        "perfectFor": "Perfekt für:",
+        "perfectForDescription": "Unternehmen, die KI strategisch einsetzen möchten",
+        "consultingServicesTitle": "Beratungs-Services:",
+        "consultingServices": {
+          "c1": "KI-Strategieentwicklung für Ihr Unternehmen",
+          "c2": "Prompt Engineering für optimale Ergebnisse",
+          "c3": "Context Engineering für präzise KI-Antworten",
+          "c4": "Use-Case Identifikation und Bewertung",
+          "c5": "ROI-Analyse für KI-Projekte",
+          "c6": "Change Management für KI-Einführung"
+        },
+        "projectDuration": "Projektdauer:",
+        "projectDurationValue": "2-4 Wochen",
+        "deliverable": "Deliverable:",
+        "deliverableValue": "Umfassende KI-Strategie und Roadmap",
+        "closeButton": "Schließen"
+      },
+      "kiAgentDevelopment": {
+        "title": "KI-Agenten Entwicklung",
+        "perfectFor": "Perfekt für:",
+        "perfectForDescription": "Automatisierte Kundenbetreuung und Content-Generierung",
+        "agentTypesTitle": "Agent-Typen:",
+        "agentTypes": {
+          "a1": "Custom Chatbots für Websites",
+          "a2": "Automatisierte Kundenbetreuung",
+          "a3": "Content-Generierung und -Optimierung",
+          "a4": "Datenanalyse und Reporting-Agenten",
+          "a5": "E-Mail-Automation mit KI",
+          "a6": "Integration in bestehende CRM-Systeme"
+        },
+        "projectDuration": "Projektdauer:",
+        "projectDurationValue": "4-8 Wochen",
+        "training": "Training:",
+        "trainingValue": "Individuelle Schulung auf Ihre Daten",
+        "closeButton": "Schließen"
+      },
+      "workflowOptimization": {
+        "title": "Workflow-Optimierung mit KI",
+        "perfectFor": "Perfekt für:",
+        "perfectForDescription": "Effizienzsteigerung durch intelligente Automatisierung",
+        "optimizationAreasTitle": "Optimierungs-Bereiche:",
+        "optimizationAreas": {
+          "o1": "Prozessanalyse und Optimierungspotentiale",
+          "o2": "Automatisierung wiederkehrender Aufgaben",
+          "o3": "Intelligente Dokumentenverarbeitung",
+          "o4": "Predictive Analytics für bessere Entscheidungen",
+          "o5": "Integration von KI in bestehende Workflows",
+          "o6": "Qualitätskontrolle durch KI"
+        },
+        "measurableBenefitsTitle": "Messbare Vorteile:",
+        "measurableBenefits": {
+          "m1": "Zeit sparen (bis zu 70% Reduktion)",
+          "m2": "Kosten reduzieren",
+          "m3": "Fehler minimieren",
+          "m4": "Effizienz steigern"
+        },
+        "projectDuration": "Projektdauer:",
+        "projectDurationValue": "6-12 Wochen",
+        "roi": "ROI:",
+        "roiValue": "Messbare Effizienzsteigerung bereits nach 4 Wochen",
+        "closeButton": "Schließen"
+      },
+      "aiInfrastructure": {
+        "title": "AI as Infrastructure",
+        "perfectFor": "Perfekt für:",
+        "perfectForDescription": "Skalierbare KI-Lösungen ohne eigene Infrastruktur",
+        "serviceModelsTitle": "Service-Modelle:",
+        "serviceModels": {
+          "s1": "Skalierbare KI-Infrastruktur in der Cloud",
+          "s2": "Pay-per-Use Modelle für Kosteneffizienz",
+          "s3": "Managed KI-Services ohne Wartungsaufwand",
+          "s4": "24/7 Monitoring und technischer Support",
+          "s5": "Regelmäßige Updates und Verbesserungen",
+          "s6": "Compliance und Datenschutz inklusive"
+        },
+        "billingModelsTitle": "Abrechnungsmodelle:",
+        "billingModels": {
+          "b1": "Projekt-basierte Abrechnung",
+          "b2": "Monatliche Miete für kontinuierliche Nutzung",
+          "b3": "Usage-basierte Abrechnung nach Verbrauch",
+          "b4": "Hybrid-Modelle für optimale Flexibilität"
+        },
+        "setupTime": "Setup-Zeit:",
+        "setupTimeValue": "1-2 Wochen",
+        "scaling": "Skalierung:",
+        "scalingValue": "Automatisch je nach Bedarf",
+        "closeButton": "Schließen"
+      }
+    }
+  }
+}

@@ -17,12 +17,38 @@
                 customerData.email?.trim() && 
                 isValidEmail(customerData.email) && 
                 customerData.password?.trim() && 
+                isValidPassword(customerData.password) &&
                 customerData.password === customerData.passwordConfirm);
   });
 
   function isValidEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+  }
+
+  function isValidPassword(password: string): boolean {
+    if (!password || password.length < 8) return false;
+    
+    const hasSpecialChar = /[!@#$%^&*]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    
+    return hasSpecialChar && hasLowerCase && hasUpperCase && hasNumber;
+  }
+
+  function getPasswordValidationMessage(password: string): string {
+    if (!password) return '';
+    
+    const requirements = [];
+    if (password.length < 8) requirements.push('mindestens 8 Zeichen');
+    if (!/[!@#$%^&*]/.test(password)) requirements.push('Sonderzeichen (!@#$%^&*)');
+    if (!/[a-z]/.test(password)) requirements.push('Kleinbuchstaben (a-z)');
+    if (!/[A-Z]/.test(password)) requirements.push('Großbuchstaben (A-Z)');
+    if (!/[0-9]/.test(password)) requirements.push('Zahlen (0-9)');
+    
+    if (requirements.length === 0) return '';
+    return `Passwort benötigt: ${requirements.join(', ')}`;
   }
 
   function updateField(field: keyof Customer, value: string) {
@@ -226,12 +252,17 @@
           type="password"
           id="password"
           class="input input-bordered w-full"
-          class:input-error={customerData.password !== undefined && !customerData.password?.trim()}
+          class:input-error={customerData.password !== undefined && (!customerData.password?.trim() || !isValidPassword(customerData.password))}
           value={customerData.password || ''}
           oninput={(e) => updateField('password', e.currentTarget.value)}
           placeholder={$_('wizard.contactForm.fields.password.placeholder')}
           required
         />
+        {#if customerData.password && !isValidPassword(customerData.password)}
+          <div class="label">
+            <span class="label-text-alt text-error">{getPasswordValidationMessage(customerData.password)}</span>
+          </div>
+        {/if}
       </div>
 
       <!-- Password Confirmation -->
@@ -266,7 +297,7 @@
         <div>
           <div class="font-bold">{$_('wizard.contactForm.privacy.title')}</div>
           <div class="text-sm">
-            {$_('wizard.contactForm.privacy.description')} <a href="/datenschutz" class="link link-primary" target="_blank">{$_('wizard.contactForm.privacy.link')}</a>.
+            {$_('wizard.contactForm.privacy.description')} <a href="/privacy-notice" class="link link-primary" target="_blank">{$_('wizard.contactForm.privacy.link')}</a>.
           </div>
         </div>
       </div>

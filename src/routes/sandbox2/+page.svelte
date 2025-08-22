@@ -1,5 +1,6 @@
 <script lang="ts">
   import Section from '$lib/components/section.svelte';
+  import { locale } from 'svelte-i18n';
 
   // Sample-Konfiguration für PDF-Test - SaaS Immobilienverwaltung
   const sampleConfig = {
@@ -194,7 +195,8 @@
           customerData: sampleCustomerData,
           uploadedFiles: sampleUploadedFiles,
           customFeatures: sampleCustomFeatures,
-          filename: `RASPB_Projekt_${sampleConfig.name.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`
+          filename: `RASPB_Projekt_${sampleConfig.name.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`,
+          locale: $locale
         })
       });
 

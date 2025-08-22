@@ -1,0 +1,50 @@
+{
+  "philosophyModal": {
+    "header": {
+      "titleHighlight": "raspb",
+      "titleSecond": "Philosophy",
+      "subtitle": "rapid - accurate - services - perfectly balanced"
+    },
+    "items": {
+      "rapid": {
+        "letter": "R",
+        "title": "Rapid",
+        "subtitle": "Fast & Efficient",
+        "description": "We work with the latest tools and agile methods to realize your projects in record time. Our AI-supported workflows accelerate development processes without loss of quality. We deliver results in days, not months! Oh yes, not only are the project times super fast, but the websites and applications that emerge from them also offer unmatched performance.",
+        "icon": "🚀"
+      },
+      "accurate": {
+        "letter": "A",
+        "title": "Accurate",
+        "subtitle": "Precise & Reliable",
+        "description": "Every detail is carefully selected and perfected. Everything that is superfluous is omitted: no bloat, no frills. You get exactly what you want and don't have to license expensive software just because you need a single feature. Precise requirements gathering, exact implementation - our solutions run accurately, like Swiss clockwork.",
+        "icon": "🎯"
+      },
+      "services": {
+        "letter": "S",
+        "title": "Services",
+        "subtitle": "Comprehensive Solutions & Customer Orientation",
+        "description": "From the first idea to the final implementation, we offer all services from one source: concept, design (UI/UX), development (frontend/backend), data modeling, content/SEO, hosting and more - all perfectly coordinated. In addition to our extensive portfolio, service also stands for absolute customer orientation. Your satisfaction is our top priority.",
+        "icon": "🛠️"
+      },
+      "perfectlyBalanced": {
+        "letter": "PB",
+        "title": "Perfectly Balanced",
+        "subtitle": "Balanced & Harmonious",
+        "description": "A work of art is perfect when you can't add anything more and can't remove anything more. The accurate implementation of your requirements is also conditioned by the perfect balance that we live in all our projects. We always keep costs, time and quality in harmony without compromises. Nevertheless, we leave room for innovations. Balanced, not forced.",
+        "icon": "⚖️"
+      }
+    },
+    "footer": {
+      "missionTitle": "Our Mission",
+      "missionDescription": "At raspb, we unite these four principles into a unique work philosophy. We believe that true excellence can only be achieved by harmonizing all aspects. Every project is an opportunity to live this philosophy and create extraordinary results.",
+      "principles": {
+        "rapid": "🚀 rapid",
+        "accurate": "🎯 accurate",
+        "services": "🛠️ services",
+        "perfectlyBalanced": "⚖️ perfectly balanced"
+      },
+      "closeButton": "Understood"
+    }
+  }
+}

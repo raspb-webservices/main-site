@@ -1,7 +1,11 @@
-export const load = async ({ fetch }) => {
-  const res = await fetch('/api/content/home');
-  if (res.ok) {
-    const content = await res.json();
-    return content;
-  }
-};
+import { addMessages } from 'svelte-i18n';
+
+export async function load() {
+  const pageMessagesDe = (await import(`$lib/i18n/locales/de/home.json`)).default;
+  const pageMessagesEn = (await import(`$lib/i18n/locales/en/home.json`)).default;
+
+  addMessages('de', pageMessagesDe);
+  addMessages('en', pageMessagesEn);
+
+  return {};
+}

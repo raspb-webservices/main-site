@@ -35,7 +35,7 @@ const config: CookieConsent.CookieConsentConfig = {
           acceptAllBtn: 'Alle akzeptieren',
           acceptNecessaryBtn: 'Alle ablehnen',
           showPreferencesBtn: 'Individuelle Einstellungen',
-          footer: `<a href="/impressum" target="_blank">Impressum</a> <a href="/datenschutz" target="_blank">Datenschutzbestimmungen</a>`
+          footer: `<a href="/imprint" target="_blank">Impressum</a> <a href="/privacy-notice" target="_blank">Datenschutzbestimmungen</a>`
         },
         preferencesModal: {
           title: 'Cookie Einstellungen',
@@ -56,7 +56,7 @@ const config: CookieConsent.CookieConsentConfig = {
             },
             {
               title: 'Weitere Informationen',
-              description: 'Bei Fragen zu unseren Richtlinien zu Cookies und Ihren Auswahlmöglichkeiten <a href="/kontakt">wenden Sie sich bitte an uns</a>.'
+              description: 'Bei Fragen zu unseren Richtlinien zu Cookies und Ihren Auswahlmöglichkeiten <a href="/contact">wenden Sie sich bitte an uns</a>.'
             }
           ]
         }

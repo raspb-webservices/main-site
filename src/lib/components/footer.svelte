@@ -19,23 +19,23 @@
     <nav class="footer-navigation">
       <button
         class="nav-item"
-        class:active={page.url.pathname === '/impressum'}
+        class:active={page.url.pathname === '/imprint'}
         onclick={() => {
-          goto('/impressum');
+          goto('/imprint');
         }}>{$_('footer.imprint')}</button
       >
       <button
         class="nav-item"
-        class:active={page.url.pathname === '/datenschutz'}
+        class:active={page.url.pathname === '/privacy-notice'}
         onclick={() => {
-          goto('/datenschutz');
+          goto('/privacy-notice');
         }}>{$_('footer.privacyPolicy')}</button
       >
       <button
         class="nav-item"
-        class:active={page.url.pathname === '/kontakt'}
+        class:active={page.url.pathname === '/contact'}
         onclick={() => {
-          goto('/kontakt');
+          goto('/contact');
         }}>{$_('footer.contact')}</button
       >
       <button

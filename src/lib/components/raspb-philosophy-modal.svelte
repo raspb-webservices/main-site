@@ -1,5 +1,13 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n';
+  import { addMessages, _ } from 'svelte-i18n';
+  import { onMount } from 'svelte';
+
+  onMount(async () => {
+    const modalMessagesDe = (await import('$lib/i18n/locales/de/modal-dialogues.json')).default;
+    const modalMessagesEn = (await import('$lib/i18n/locales/en/modal-dialogues.json')).default;
+    addMessages('de', modalMessagesDe);
+    addMessages('en', modalMessagesEn);
+  });
 
   let modal: HTMLDialogElement;
 

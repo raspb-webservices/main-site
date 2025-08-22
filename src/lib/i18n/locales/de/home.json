@@ -1,0 +1,237 @@
+{
+  "homepage": {
+    "meta": {
+      "title": "raspb Webservices - Digitale Lösungen nach Maß",
+      "description": "Professionelle Webentwicklung, CMS-Lösungen und KI-Services für KMUs, Vereine und Stiftungen. Transparent, günstig und nach bewährter raspb Philosophie."
+    },
+    "hero": {
+      "titleFirst": "Digital Experience",
+      "titleHighlight": "nach Maß",
+      "subtitleFirst": "skalierbar - sicher - nach bewährter",
+      "subtitleSecond": "raspb Philosophie",
+      "subtitleThird": "- super günstig",
+      "buttonText": "mehr erfahren"
+    },
+    "intro": {
+      "titleFirst": "Für KMUs, für Vereine, für Stiftungen, ...",
+      "titleHighlight": "für alle",
+      "paragraph1": "Jeder, der im Internet sichtbar sein will, braucht eine Webseite. Diese ist so individuell wie Sie selbst und Wünsche und Anforderungen variieren. Egal ob einfache Webvisitenkarte, umfangreicher Unternehmensauftritt oder mächtige Content Management Plattform. Bei raspb finden Sie die perfekte Lösung für Ihre Vorhaben.",
+      "paragraph2": "Darüber hinaus entwickeln wir für Sie auf Wunsch auch komplexe Webanwendungen (PWA) oder unterstützen Sie bei individuellen Herausforderungen in Ihrem Unternehmen (Freestyle Development, spezielle KI-Use-Cases).",
+      "paragraph3": "Dank unseres einzigartigen Ansatzes, können wir die gängigsten IT-Services unglaublich schnell und kosteneffizient anbieten. Dabei erhalten Sie alles aus einer Hand, perfekt aufeinander abgestimmt: Koherente Ergebnisse, weniger Reibungspunkte, weniger Fehlerpotenziale, weniger Projektstress.",
+      "benefitsTitle": "Sie müssen sich um nichts kümmern (außer Ihre Idee so detailliert wie möglich zu beschreiben). Wir liefern ab - in jeder Disziplin:",
+      "benefits": {
+        "konzept": "Konzept",
+        "design": "Design",
+        "uiux": "UI / UX",
+        "programmierung": "Programmierung (Frontend & Backend)",
+        "datenmodellierung": "Datenmodellierung",
+        "hosting": "Hosting / Administration",
+        "domain": "Domain- / DNS-Konfiguration",
+        "projektdurchfuehrung": "Projektdurchführung",
+        "monitoring": "Monitoring"
+      }
+    },
+    "services": {
+      "titleFirst": "Unsere",
+      "titleHighlight": "Services",
+      "subtitle": "Von der ersten Idee bis zur finalen Umsetzung - wir begleiten Sie mit modernster Technologie und jahrelanger Expertise zu Ihrem digitalen Erfolg.",
+      "webseiten": {
+        "title": "Webseiten",
+        "description": "Von eleganten One-Pagern bis hin zu umfassenden Unternehmensauftritten und professionellen Blogs - wir entwickeln Webseiten, die Ihre Zielgruppe begeistern.",
+        "features": {
+          "responsive": "Responsives Design - perfekte Darstellung auf jedem Gerät",
+          "modern": "State-of-the-art - Nutzung modernster Webtechnologien",
+          "performant": "Performant, sicher, benutzerfreundlich",
+          "individuell": "Individuell und flexibel erweiterbar",
+          "eigentum": "Ihre Webseite, Ihr Code - kein geschlossenes System",
+          "keineFolgekosten": "Keine Folgekosten, kein Mietmodell"
+        },
+        "tooltip": "Bereits nach wenigen Tagen liefern wir Ihre neue Webseite aus. Für das erste Jahr sind Wartung und Hosting inklusive. Im Anschluss können Sie mit Ihrer Webseite machen, was Sie möchten...",
+        "buttonText": "Projekt kalkulieren"
+      },
+      "cms": {
+        "title": "Custom CMS",
+        "description": "Ein Content-Management-System gibt Ihnen auch zukünftig die volle Kontrolle über Ihre Inhalte. Wir entwickeln für Sie eine maßgeschneiderte Lösung, die all Ihre Anforderungen erfüllt.",
+        "features": {
+          "kontrolle": "Volle Kontrolle über Ihre Inhalte",
+          "datenstrukturen": "Beliebige Datenstrukturen abbilden",
+          "datenstrukturenTooltip": "Sie können als Informationsobjekt auch Nachrichten, Termine, Produkte, Kunden, usw. - was immer Sie möchten - speichern und verwalten. Starten Sie jetzt ihr persönliches CMS-Projekt mit uns.",
+          "sicher": "Sicher, schnell und einfach",
+          "wartungsarm": "Wartungsarm und beliebig erweiterbar",
+          "editierbar": "Bestehende Webseiten nachträglich \"editierbar\" machen",
+          "headless": "Headless: erfasste Inhalte auch an anderer Stelle nutzen"
+        },
+        "buttonText": "Projekt kalkulieren"
+      },
+      "webanwendungen": {
+        "title": "Webanwendungen",
+        "description": "Webanwendungen und Mobile-Applications - mit überschaubarer Komplexität - können ebenfalls mit der raspb Methode schnell und günstig von uns entwickelt werden!",
+        "features": {
+          "app": "Ihre Webseite als App - oder Start auf weißer Leinwand",
+          "pwa": "PWA - (Progressive Web Application) powered",
+          "offline": "Service Worker: Offline-Fähigkeiten",
+          "push": "Service Worker: Push-Benachrichtigungen",
+          "appStores": "Entwickelte Anwendungen können in die App Stores (iOS & Android)"
+        },
+        "buttonText": "Projekt kalkulieren"
+      },
+      "freestyle": {
+        "title": "Freestyle (Individualentwicklung)",
+        "description": "Möchten Sie einen ganz bestimmten Use-Case umsetzen, der in keine der Kategorien passt? Wir entwickeln auch einzelne Bestandteile, Module, Komponenten - nach Ihren Vorgaben.",
+        "examples": {
+          "event": "Event-Registrierung",
+          "dashboard": "Daten-Dashboard",
+          "api": "API-Visualisierung",
+          "module": "Einzelne Module, Plugins, Komponenten",
+          "ui": "UI Bausteine"
+        },
+        "buttonText": "Jetzt anfragen"
+      },
+      "ki": {
+        "title": "KI Services",
+        "description": "Künstliche Intelligenz (KI oder auch Artificial Intelligence = AI) ist in aller Munde, aber wie kann man sie am besten für sich nutzbar machen? Wir modellieren für Sie KI-gestützte Workflows oder ganze KI-Anwendungen für Ihr Business.",
+        "services": {
+          "beratung": {
+            "title": "KI-Beratung & Strategie",
+            "description": "Prompt Engineering, Context Engineering, ROI-Analyse"
+          },
+          "agenten": {
+            "title": "KI-Agenten Entwicklung",
+            "description": "Custom Chatbots, Content-Generierung, System-Integration"
+          },
+          "workflow": {
+            "title": "Workflow-Optimierung",
+            "description": "Prozessanalyse, Automatisierung, Predictive Analytics"
+          },
+          "infrastructure": {
+            "title": "AI as Infrastructure",
+            "description": "Skalierbare KI-Infrastruktur, Pay-per-Use, 24/7 Support"
+          }
+        },
+        "buttonText": "KI-Beratung anfragen"
+      }
+    },
+    "balance": {
+      "titleFirst": "Die perfekte",
+      "titleHighlight": "Balance",
+      "subtitleFirst": "Wir haben verstanden, dass erfolgreiche Projekte das optimale Gleichgewicht zwischen Zeit, Kosten und Qualität erfordern.",
+      "subtitleSecond": "Unsere Philosophie",
+      "subtitleThird": "\"perfectly balanced\" steht für diese harmonische Abstimmung aller Faktoren.",
+      "zeit": {
+        "title": "Zeit",
+        "description": "Schnelle Umsetzung durch agile Entwicklungsprozesse, KI-Unterstützung und bewährtes System von Best-Practice-Bausteinen kombiniert mit Individualentwicklung von Experten.",
+        "buttonText": "Mehr erfahren ›",
+        "features": {
+          "agile": "Agile Methoden",
+          "ki": "KI-Unterstützung",
+          "bausteine": "Bewährte Bausteine",
+          "experten": "Expertenteam",
+          "oekosystem": "raspb Ökosystem"
+        },
+        "modal": {
+          "paragraph1": "Zeit ist in der digitalen Welt ein entscheidender Faktor. Während andere Agenturen Monate für die Umsetzung benötigen, liefern wir dank unserer einzigartigen raspb-Methode bereits nach wenigen Tagen erste Ergebnisse.",
+          "paragraph2": "Unser Geheimnis liegt in der perfekten Kombination aus bewährten Bausteinen, KI-gestützten Entwicklungsprozessen und der Expertise unseres Teams. Wir haben über Jahre hinweg ein Ökosystem aus wiederverwendbaren Komponenten entwickelt, das es uns ermöglicht, auch komplexe Projekte in Rekordzeit umzusetzen - ohne Kompromisse bei der Qualität.",
+          "paragraph3": "Agile Entwicklungsmethoden sorgen dafür, dass Sie bereits während der Entwicklung Feedback geben können und das Endergebnis genau Ihren Vorstellungen entspricht. So sparen wir nicht nur Zeit, sondern stellen auch sicher, dass das Projekt von Anfang an in die richtige Richtung läuft."
+        }
+      },
+      "kosten": {
+        "title": "Kosten",
+        "description": "Transparente Festpreise ohne versteckte Kosten - keine nachfolgenden Abogebühren - keine zwangsweise Abnahme. Dank der raspb Methode können wir ein unschlagbares Preis-Leistungs-Verhältnis bieten.",
+        "buttonText": "Mehr erfahren ›",
+        "features": {
+          "festpreise": "Festpreise",
+          "keineFolgekosten": "Keine Folgekosten",
+          "transparenz": "Transparenz",
+          "fair": "Fair & günstig",
+          "konfigurator": "Unverbindlicher Projektkonfigurator"
+        },
+        "modal": {
+          "paragraph1": "Schluss mit bösen Überraschungen! Bei raspb erhalten Sie von Anfang an transparente Festpreise ohne versteckte Kosten. Unser intelligenter Online-Konfigurator ermittelt bereits vor Projektbeginn einen verbindlichen Preis - basierend auf Ihren konkreten Anforderungen.",
+          "paragraph2": "Im Gegensatz zu vielen anderen Anbietern gibt es bei uns keine monatlichen Abogebühren oder Zwangsabnahmen. Sie zahlen einmal für die Entwicklung und erhalten Ihre fertige Lösung - komplett in Ihrem Besitz. Das erste Jahr Hosting und Wartung ist bereits inklusive, danach können Sie frei entscheiden, wie Sie mit Ihrem Projekt verfahren möchten.",
+          "paragraph3": "Dank unserer effizienten Entwicklungsmethoden und dem raspb-Ökosystem können wir Ihnen ein unschlagbares Preis-Leistungs-Verhältnis bieten. Qualität muss nicht teuer sein - bei uns bekommen Sie beides: Höchste Standards zu fairen Preisen."
+        }
+      },
+      "qualitaet": {
+        "title": "Qualität",
+        "description": "Höchste Standards in Design und Programmierung. Bewährte und geprüfte Qualität durch Verwendung modernster Webtechnologien, Frameworks und eigenentwickelter Module - erstellt und geprüft von Experten.",
+        "buttonText": "Mehr erfahren ›",
+        "features": {
+          "sicherheit": "Sicherheit",
+          "performance": "Performance",
+          "skalierbarkeit": "Skalierbarkeit",
+          "entwicklerfreundlichkeit": "Entwicklerfreundlichkeit",
+          "kosteneffizienz": "Kosteneffizienz"
+        },
+        "modal": {
+          "paragraph1": "Qualität ist bei raspb nicht verhandelbar. Wir setzen ausschließlich auf modernste Webtechnologien und bewährte Frameworks wie SvelteKit, TypeScript, TailwindCSS und Node.js. Jede Zeile Code wird von unseren Experten geschrieben und durchläuft strenge Qualitätskontrollen.",
+          "paragraph2": "Unsere eigenentwickelten Module und Komponenten sind über Jahre hinweg gewachsen und in unzähligen Projekten erprobt. Sie profitieren von dieser Erfahrung und erhalten Lösungen, die nicht nur heute funktionieren, sondern auch zukunftssicher sind. Performance, Sicherheit und Benutzerfreundlichkeit stehen dabei immer im Fokus.",
+          "paragraph3": "Durch kontinuierliche Code-Reviews, automatisierte Tests und den Einsatz modernster Entwicklungstools stellen wir sicher, dass Ihr Projekt den höchsten Qualitätsstandards entspricht. Das Ergebnis: Robuste, skalierbare und wartungsfreundliche Lösungen, die Ihnen langfristig Freude bereiten."
+        }
+      }
+    },
+    "features": {
+      "titleFirst": "Was uns",
+      "titleHighlight": "auszeichnet",
+      "subtitle": "Unsere Alleinstellungsmerkmale machen den Unterschied für Ihren Erfolg. Erfahren Sie, warum Kunden raspb wählen.",
+      "allesAusEinerHand": {
+        "title": "Alles aus einer Hand",
+        "description": "Von der ersten Beratung über Design und Programmierung bis hin zur Wartung - wir begleiten Sie durch den gesamten Prozess.",
+        "features": {
+          "konzeption": "Konzeption & Beratung",
+          "design": "Design & UX/UI",
+          "entwicklung": "Entwicklung & Testing",
+          "hosting": "Hosting & Wartung"
+        }
+      },
+      "ansprechpartner": {
+        "title": "Persönlicher Ansprechpartner",
+        "description": "Sie haben einen festen Ansprechpartner, der Ihr Projekt von Anfang bis Ende betreut und Ihre Anforderungen genau versteht.",
+        "contact": {
+          "title": "Direkter Draht zu Ihrem Projektleiter",
+          "description": "Keine Warteschleifen, keine Umwege"
+        }
+      },
+      "preise": {
+        "title": "Transparente Festpreise",
+        "description": "Durch unseren Online-Konfigurator erhalten Sie klare, verbindliche Festpreise ohne versteckte Kosten oder böse Überraschungen.",
+        "benefits": {
+          "sofort": "Sofortiger Festpreis",
+          "keineVersteckten": "Keine versteckten Kosten",
+          "keineFolgegebuehren": "Keine Folgegebühren"
+        }
+      },
+      "massgeschneidert": {
+        "title": "Maßgeschneiderte Lösungen",
+        "description": "Jedes Projekt ist einzigartig. Wir entwickeln individuell auf Ihre Bedürfnisse zugeschnittene Lösungen statt 08/15-Produkte.",
+        "types": {
+          "individual": "Individual",
+          "flexibel": "Flexibel",
+          "skalierbar": "Skalierbar",
+          "zukunftssicher": "Zukunftssicher"
+        }
+      }
+    },
+    "cta": {
+      "titleFirst": "Lassen Sie uns",
+      "titleHighlight": "gemeinsam starten",
+      "description": "Bereit für Ihr nächstes digitales Projekt? Unser intelligenter Konfigurator hilft Ihnen dabei, Ihr Projekt zu spezifizieren und Sie erhalten sofort einen transparenten Festpreis.",
+      "benefits": {
+        "zeit": {
+          "title": "Sofortiger Preis",
+          "description": "Erhalten Sie binnen Minuten einen verbindlichen Festpreis"
+        },
+        "massgeschneidert": {
+          "title": "Maßgeschneidert",
+          "description": "Jede Lösung wird individuell auf Ihre Bedürfnisse zugeschnitten"
+        },
+        "contact": {
+          "title": "Persönlicher Kontakt",
+          "description": "Ein fester Ansprechpartner begleitet Sie durch das gesamte Projekt"
+        }
+      },
+      "buttonText": "Projekt jetzt konfigurieren",
+      "faqButtonText": "Häufige Fragen",
+      "note": "💡 <strong>Tipp:</strong> Der Konfigurator dauert nur 3-5 Minuten und Sie erhalten sofort Ihren persönlichen Projektpreis. Unverbindlich und kostenlos."
+    }
+  }
+}

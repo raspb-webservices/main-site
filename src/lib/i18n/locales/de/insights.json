@@ -1,0 +1,30 @@
+{
+  "insights": {
+    "meta": {
+      "title": "raspb Webservices - Einblicke",
+      "description": "Hier kann eine Beschreibung stehen..."
+    },
+    "header": {
+      "title": "Einblicke",
+      "teaser": "Vertrauen und Transparenz sind wichtig für eine gute Kundenbeziehhung. Hier möchten wir Einblicke in unserer Arbeit und einen typischen Projektablauf geben, damit glasklar ist, womit sie rechnen können."
+    },
+    "webtechnologien": {
+      "titleFirst": "Wir setzen",
+      "titleHighlight": "moderne Webtechnologien",
+      "titleSecond": " ein",
+      "subtitle": "Wir haben unseren eigenen Technologie-Stack entwickelt, der auf dem Jamstack basiert und alles einfacher, schneller und effizienter macht, ohne dabei Einschränkungen in Kauf nehmen zu müssen.",
+      "absatz1": "<strong>JAMstack</strong> steht für JavaScript, APIs und Markup und repräsentiert eine moderne Architektur für Webentwicklung. Diese Technologie ermöglicht es uns, extrem schnelle, sichere und skalierbare Websites zu erstellen, die eine außergewöhnliche Benutzererfahrung bieten.",
+      "absatz2": "Der Kern des JAMstack-Ansatzes liegt in der <strong>Vorab-Generierung</strong> von Inhalten. Anstatt Seiten bei jeder Anfrage dynamisch zu erstellen, werden alle Seiten bereits zur Build-Zeit generiert und über ein Content Delivery Network (CDN) ausgeliefert. Dies führt zu blitzschnellen Ladezeiten und einer verbesserten Performance.",
+      "absatz3": "Durch die <strong>Entkopplung von Frontend und Backend</strong> können wir flexibel die besten Tools für jeden Bereich einsetzen. Das Frontend wird als statische Dateien ausgeliefert, während dynamische Funktionen über APIs realisiert werden. Diese Architektur bietet mehrere entscheidende Vorteile:",
+      "vorteile": {
+        "sicherheit": "<strong>Sicherheit:</strong>Weniger Angriffsfläche durch statische Dateien",
+        "performance": "<strong>Performance:</strong> Globale CDN-Verteilung für minimale Ladezeiten",
+        "skalierbarkeit": "<strong>Skalierbarkeit:</strong> Automatische Skalierung ohne Serveradministration",
+        "entwicklerfreundlichkeit": "<strong>Entwicklerfreundlichkeit:</strong> Moderne Entwicklungstools und Workflows",
+        "kosteneffizienz": "<strong>Kosteneffizienz:</strong> Reduzierte Hosting- und Wartungskosten"
+      },
+      "absatz4": "Unser JAMstack-Setup umfasst moderne Technologien wie <strong>Svelte/SvelteKit</strong> für das Frontend, <strong>TypeScript</strong> für typsichere Entwicklung, <strong>Tailwind CSS</strong> für effizientes Styling und <strong>Netlify</strong> für Deployment und Hosting. Diese Kombination ermöglicht es uns, robuste und wartbare Webanwendungen zu entwickeln, die sowohl für Entwickler als auch für Endnutzer optimiert sind.",
+      "absatz5": "Die <strong>Headless CMS-Integration</strong> über GraphQL APIs ermöglicht es unseren Kunden, Inhalte einfach zu verwalten, während die technische Komplexität im Hintergrund verborgen bleibt. So können Sie sich auf Ihr Geschäft konzentrieren, während wir für eine technisch einwandfreie und zukunftssichere Lösung sorgen."
+    }
+  }
+}

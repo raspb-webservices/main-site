@@ -2,7 +2,7 @@
   import { goto } from '$app/navigation';
 </script>
 
-<section class="kontakt-content-wrapper">
+<section class="contact-content-wrapper">
   <h1>Kontakt</h1>
   <div class="px-20 pt-10">
     <p>
@@ -12,7 +12,7 @@
 
     <div class="spacer"></div>
 
-    <form name="contact" method="POST" action="/danke" netlify>
+    <form name="contact" method="POST" action="/than" netlify>
       <input type="hidden" name="form-name" value="contact" />
 
       <div class="form-field-container">
@@ -63,7 +63,7 @@
 
 <style lang="postcss">
   @reference '../../app.css';
-  section.kontakt-content-wrapper {
+  section.contact-content-wrapper {
     @apply m-auto h-full w-full max-w-7xl px-4 py-12;
     form {
       @apply w-full max-w-4xl pb-2;

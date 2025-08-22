@@ -1,12 +1,31 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { projectTypes, subTypes, availableFeatures, formFieldTypes } from '$lib/components/wizard/wizard-config';
+import deTranslations from '$lib/i18n/locales/de.json';
+import enTranslations from '$lib/i18n/locales/en.json';
+
+// Translation function for server-side use
+function getTranslation(key: string, locale: string = 'de'): string {
+  const translations = locale === 'en' ? enTranslations : deTranslations;
+  const keys = key.split('.');
+  let value: any = translations;
+
+  for (const k of keys) {
+    if (value && typeof value === 'object' && k in value) {
+      value = value[k];
+    } else {
+      return key; // Return key if translation not found
+    }
+  }
+
+  return typeof value === 'string' ? value : key;
+}
 
 export const POST: RequestHandler = async ({ request }) => {
   let browser;
   try {
-    const { config, customerData, uploadedFiles, customFeatures, filename } = await request.json();
-    const htmlContent = generateHTMLContent(config, customerData, uploadedFiles, customFeatures);
+    const { config, customerData, uploadedFiles, customFeatures, filename, locale = 'de' } = await request.json();
+    const htmlContent = generateHTMLContent(config, customerData, uploadedFiles, customFeatures, locale);
     const isLocal = process.env.NETLIFY_LOCAL === 'true' || process.env.NETLIFY_DEV === 'true' || process.env.NODE_ENV === 'development';
 
     if (isLocal) {
@@ -18,11 +37,11 @@ export const POST: RequestHandler = async ({ request }) => {
       };
       browser = await puppeteer.launch(launchOptions);
     } else {
-      // Production - use puppeteer-core with chromium-min
+      // Production - use puppeteer-core with @sparticuz/chromium
       const puppeteerCore = (await import('puppeteer-core')).default;
-      const chromium = (await import('@sparticuz/chromium-min')).default;
+      const chromium = (await import('@sparticuz/chromium')).default;
 
-      // Configure chromium for Netlify
+      // Configure chromium for serverless environment
       await chromium.font('https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2');
 
       const launchOptions = {
@@ -37,11 +56,29 @@ export const POST: RequestHandler = async ({ request }) => {
           '--disable-features=VizDisplayCompositor',
           '--disable-background-timer-throttling',
           '--disable-backgrounding-occluded-windows',
-          '--disable-renderer-backgrounding'
+          '--disable-renderer-backgrounding',
+          '--disable-ipc-flooding-protection',
+          '--disable-extensions',
+          '--disable-default-apps',
+          '--disable-sync',
+          '--disable-translate',
+          '--hide-scrollbars',
+          '--metrics-recording-only',
+          '--mute-audio',
+          '--no-first-run',
+          '--safebrowsing-disable-auto-update',
+          '--ignore-gpu-blacklist',
+          '--ignore-certificate-errors',
+          '--ignore-ssl-errors',
+          '--ignore-certificate-errors-spki-list'
         ],
         executablePath: await chromium.executablePath(),
         headless: true,
-        ignoreHTTPSErrors: true
+        ignoreHTTPSErrors: true,
+        defaultViewport: {
+          width: 1280,
+          height: 720
+        }
       };
       browser = await puppeteerCore.launch(launchOptions);
     }
@@ -105,9 +142,12 @@ export const POST: RequestHandler = async ({ request }) => {
   }
 };
 
-function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[], customFeatures: string): string {
+function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[], customFeatures: string, locale: string = 'de'): string {
   const projectType = projectTypes.find((p) => p.id === config.projectType);
   const subType = subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType);
+
+  // Helper function to get translations
+  const t = (key: string) => getTranslation(key, locale);
 
   return `
 <!DOCTYPE html>
@@ -389,10 +429,10 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
     <div class="container">
 
         <header class="header">
-            <div class="date">Erstellt am ${new Date().toLocaleDateString('de-DE')}</div>
+            <div class="date">${t('wizard.hardcodedTexts.summary.createdOn')} ${new Date().toLocaleDateString(locale === 'en' ? 'en-US' : 'de-DE')}</div>
             <div class="header-content">
                 <div class="logo">raspb Webservices</div>
-                <div class="subtitle">Ihre Projekt Konfiguration</div>
+                <div class="subtitle">${t('wizard.hardcodedTexts.summary.projectConfiguration')}</div>
             </div>
         </header>
         
@@ -400,17 +440,17 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             <!-- Project Overview -->
             <div class="project-overview">
                 <div class="project-name">
-                    <span class="gradient-text">${config.name || 'Unbenanntes Projekt'}</span>
+                    <span class="gradient-text">${config.name || t('wizard.hardcodedTexts.summary.projectType')}</span>
                 </div>
                 <div class="project-type">
-                    ${projectType?.title}${subType ? ` - ${subType.title}` : ''}
+                    ${projectType ? t(projectType.title) : ''}${subType ? ` - ${t(subType.title)}` : ''}
                 </div>
                 ${
                   config.estimatedPrice > 0
                     ? `
                 <div class="price-highlight">
                     <div class="price">${config.estimatedPrice.toLocaleString()}€</div>
-                    <div class="price-label">Geschätzter Preis</div>
+                    <div class="price-label">${t('wizard.hardcodedTexts.summary.estimatedPrice')}</div>
                 </div>
                 `
                     : ''
@@ -421,7 +461,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
               config.description
                 ? `
             <div class="section">
-                <div class="section-header">Projektbeschreibung</div>
+                <div class="section-header">${t('wizard.hardcodedTexts.summary.projectDescription')}</div>
                 <div class="detail-value add-padding">${config.description}</div>
             </div>
             `
@@ -430,13 +470,13 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             
             <!-- Project Details -->
             <div class="section">
-                <div class="section-header">Projekt Details</div>
+                <div class="section-header">${t('wizard.hardcodedTexts.summary.projectType')}</div>
                 <div class="detail-grid">
                     ${
                       config.targetAudience
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">Zielgruppe</div>
+                        <div class="detail-label">${t('wizard.form.targetAudience')}</div>
                         <div class="detail-value">${config.targetAudience}</div>
                     </div>
                     `
@@ -446,7 +486,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                       config.goals
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">Hauptziele</div>
+                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.goals')}</div>
                         <div class="detail-value">${config.goals}</div>
                     </div>
                     `
@@ -456,7 +496,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                       config.desiredDomain
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">Gewünschte Domain</div>
+                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.desiredDomain')}</div>
                         <div class="detail-value">${config.desiredDomain}</div>
                     </div>
                     `
@@ -466,7 +506,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                       config.domainStatus
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">Domain-Status</div>
+                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.domainStatus')}</div>
                         <div class="detail-value">${config.domainStatus}</div>
                     </div>
                     `
@@ -476,7 +516,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                       config.timeline
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">Zeitrahmen</div>
+                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.timeline')}</div>
                         <div class="detail-value">${config.timeline}</div>
                     </div>
                     `
@@ -486,7 +526,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                       config.budget
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">Budget</div>
+                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.budget')}</div>
                         <div class="detail-value">${config.budget}</div>
                     </div>
                     `
@@ -499,7 +539,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
               config.features && config.features.length > 0
                 ? `
             <div class="section">
-                <div class="section-header">Gewählte Features</div>
+                <div class="section-header">${t('wizard.hardcodedTexts.summary.selectedFeatures')}</div>
                 <div class="features-grid">
                     ${config.features
                       .map((featureId: string) => {
@@ -507,8 +547,8 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                         return feature
                           ? `
                         <div class="feature-item">
-                            <div class="feature-title">${feature.title}</div>
-                            ${feature.description ? `<div class="feature-description">${feature.description}</div>` : ''}
+                            <div class="feature-title">${t(feature.title)}</div>
+                            ${feature.description ? `<div class="feature-description">${t(feature.description)}</div>` : ''}
                         </div>
                         `
                           : '';
@@ -519,7 +559,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                   customFeatures
                     ? `
                 <div class="detail-item">
-                    <div class="detail-label">Weitere Features</div>
+                    <div class="detail-label">${t('wizard.hardcodedTexts.customFeatures.label')}</div>
                     <div class="detail-value">${customFeatures}</div>
                 </div>
                 `
@@ -534,16 +574,16 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
               config.pages && config.pages.length > 0
                 ? `
             <div class="section">
-                <div class="section-header">Seiten/Bereiche</div>
+                <div class="section-header">${t('wizard.hardcodedTexts.summary.pages')}</div>
 
                     ${config.pages
                       .map((page: any, index: number) => {
                         if (!page.name?.trim()) return '';
                         return `
                         <div class="detail-item">
-                            <div class="detail-label">Seite ${index + 1}: ${page.name}</div>
+                            <div class="detail-label">${t('wizard.hardcodedTexts.summary.page')} ${index + 1}: ${page.name}</div>
                             ${page.content ? `<div class="detail-value">${page.content}</div>` : ''}
-                            ${page.characteristic ? `<div class="detail-value"><strong>Besonderheiten:</strong> ${page.characteristic}</div>` : ''}
+                            ${page.characteristic ? `<div class="detail-value"><strong>${t('wizard.hardcodedTexts.summary.characteristics')}:</strong> ${page.characteristic}</div>` : ''}
                         </div>
                         `;
                       })
@@ -558,7 +598,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
               config.formFields && config.formFields.length > 0
                 ? `
             <div class="section">
-                <div class="section-header">Formular-Felder</div>
+                <div class="section-header">${t('wizard.hardcodedTexts.summary.formFields')}</div>
                 <div class="detail-grid">
                     ${config.formFields
                       .map((field: any) => {
@@ -566,8 +606,8 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                         const fieldType = formFieldTypes.find((f) => f.id === field.type);
                         return `
                         <div class="detail-item">
-                            <div class="detail-label">${field.name} (${fieldType?.title || field.type})</div>
-                            <div class="detail-value">${field.required ? 'Pflichtfeld' : 'Optional'}</div>
+                            <div class="detail-label">${field.name} (${fieldType ? t(fieldType.title) : field.type})</div>
+                            <div class="detail-value">${field.required ? t('wizard.hardcodedTexts.summary.required') : t('wizard.hardcodedTexts.summary.optional')}</div>
                         </div>
                         `;
                       })
@@ -579,16 +619,16 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             }
             
             ${
-              config.projectType !== 'individual' && (config.primaryColour || config.desiredFont || config.customFont)
+              config.projectType !== 'freestyle' && (config.primaryColour || config.desiredFont || config.customFont)
                 ? `
             <div class="section">
-                <div class="section-header">Design</div>
+                <div class="section-header">${t('wizard.hardcodedTexts.summary.design')}</div>
                 <div class="detail-grid">
                     ${
                       config.primaryColour
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">Primärfarbe</div>
+                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.primaryColor')}</div>
                         <div class="detail-value">${config.primaryColour} <span class="color-box" style="background:${config.primaryColour}"></span></div>
                     </div>
                     `
@@ -598,7 +638,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                       config.secondaryColour
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">Sekundärfarbe</div>
+                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.secondaryColor')}</div>
                         <div class="detail-value">${config.secondaryColour} <span class="color-box" style="background:${config.secondaryColour}"></span></div>
                     </div>
                     `
@@ -608,7 +648,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                       config.accentColour
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">Akzentfarbe</div>
+                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.accentColor')}</div>
                         <div class="detail-value">${config.accentColour} <span class="color-box" style="background:${config.accentColour}"></span></div>
                     </div>
                     `
@@ -618,7 +658,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                       config.customFont || config.desiredFont
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">Schriftart</div>
+                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.font')}</div>
                         <div class="detail-value">${config.customFont || config.desiredFont}</div>
                     </div>
                     `
@@ -634,7 +674,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
               uploadedFiles && uploadedFiles.length > 0
                 ? `
             <div class="section">
-                <div class="section-header">Hochgeladene Dateien</div>
+                <div class="section-header">${t('wizard.hardcodedTexts.summary.uploadedFiles')}</div>
                 <div class="detail-grid">
                     ${uploadedFiles
                       .map(
@@ -656,13 +696,13 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
               customerData && (customerData.givenName || customerData.familyName || customerData.email)
                 ? `
             <div class="section">
-                <div class="section-header">Kontaktinformationen</div>
+                <div class="section-header">${t('wizard.hardcodedTexts.summary.contactInformation')}</div>
                 <div class="detail-grid">
                     ${
                       customerData.salutation
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">Anrede</div>
+                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.salutation')}</div>
                         <div class="detail-value">${customerData.salutation}</div>
                     </div>
                     `
@@ -672,7 +712,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                       customerData.givenName || customerData.familyName
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">Name</div>
+                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.name')}</div>
                         <div class="detail-value">${(customerData.givenName || '') + ' ' + (customerData.familyName || '')}</div>
                     </div>
                     `
@@ -682,7 +722,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                       customerData.email
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">E-Mail</div>
+                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.email')}</div>
                         <div class="detail-value">${customerData.email}</div>
                     </div>
                     `
@@ -692,7 +732,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                       customerData.phone
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">Telefon</div>
+                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.phone')}</div>
                         <div class="detail-value">${customerData.phone}</div>
                     </div>
                     `
@@ -702,7 +742,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                       customerData.company
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">Unternehmen</div>
+                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.company')}</div>
                         <div class="detail-value">${customerData.company}</div>
                     </div>
                     `
@@ -719,7 +759,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             <div class="footer-content">
                 <div class="footer-logo">raspb &copy;</div>
                 <div class="footer-info">
-                    Erstellt am ${new Date().toLocaleDateString('de-DE')} | raspb Webservices | www.raspb.de
+                    ${t('wizard.hardcodedTexts.summary.createdOn')} ${new Date().toLocaleDateString(locale === 'en' ? 'en-US' : 'de-DE')} | raspb Webservices | www.raspb.de
                 </div>
             </div>
         </footer>

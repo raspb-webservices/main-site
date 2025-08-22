@@ -120,15 +120,23 @@ async function assignRole(userId: string, rolesToAssign: string[]): Promise<any>
 }
 
 async function updateMetadata(userId: string, metadata: Object): Promise<any> {
-  try {
-    const response = await API.patch('users/' + userId, {
-      user_metadata: metadata
-    });
-    console.log('AUTH0 updated metadata roles', response);
-    return response;
-  } catch (error) {
-    console.error('Error creating Auth0 user:', error);
-    throw error;
+
+  console.log("userId ", userId)
+  console.log("metadata ", metadata)
+
+  if (userId) {
+    try {
+      const response = await API.patch('users/' + userId, {
+        user_metadata: metadata
+      });
+      console.log('AUTH0 updated metadata roles', response);
+      return response;
+    } catch (error) {
+      console.error('Error creating Auth0 user:', error);
+      throw error;
+    }
+  } else {
+    return 'error - no id';
   }
 }
 

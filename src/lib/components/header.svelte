@@ -20,7 +20,7 @@
     await auth.loginWithPopup(auth0Client);
 
     if (currentUserRoles.includes('admin')) {
-      goto('/dashboard');
+      goto('/admin-dashboard');
     }
     logginIn = false;
   }
@@ -56,7 +56,7 @@
           if(currentUserRoles.includes('customer')) {
             goto('/customer-dashboard');
           } else {
-            goto('/dashboard');
+            goto('/admin-dashboard');
           }
         }}>Zum Dashboard</button
       >
@@ -90,16 +90,16 @@
       >
       <button
         class="nav-item"
-        class:active={page.url.pathname === '/einblicke'}
+        class:active={page.url.pathname === '/insights'}
         onclick={() => {
-          goto('/einblicke');
+          goto('/insights');
         }}>{$_('menu.insights')}</button
       >
       <button
         class="nav-item"
-        class:active={page.url.pathname === '/ueber-uns'}
+        class:active={page.url.pathname === '/about-us'}
         onclick={() => {
-          goto('/ueber-uns');
+          goto('/about-us');
         }}>{$_('menu.aboutUs')}</button
       >
       <button
@@ -111,9 +111,9 @@
       >
       <!-- <button
         class="nav-item"
-        class:active={page.url.pathname === '/kontakt'}
+        class:active={page.url.pathname === '/contact'}
         onclick={() => {
-          goto('/kontakt');
+          goto('/contact');
         }}>{$_('menu.contact')}</button
       > -->
     </nav>
@@ -217,18 +217,18 @@
                 >
                 <button
                   class="nav-item"
-                  class:active={page.url.pathname === '/einblicke'}
+                  class:active={page.url.pathname === '/insights'}
                   onclick={() => {
                     mobileNavOpen = false;
-                    goto('/einblicke');
+                    goto('/insights');
                   }}>{$_('menu.insights')}</button
                 >
                 <button
                   class="nav-item"
-                  class:active={page.url.pathname === '/ueber-uns'}
+                  class:active={page.url.pathname === '/about-us'}
                   onclick={() => {
                     mobileNavOpen = false;
-                    goto('/ueber-uns');
+                    goto('/about-us');
                   }}>{$_('menu.aboutUs')}</button
                 >
                 <button
@@ -241,10 +241,10 @@
                 >
                 <!-- <button
                   class="nav-item"
-                  class:active={page.url.pathname === '/kontakt'}
+                  class:active={page.url.pathname === '/contact'}
                   onclick={() => {
                     mobileNavOpen = false;
-                    goto('/kontakt');
+                    goto('/contact');
                   }}>{$_('menu.contact')}</button
                 > -->
                 {#if !isAuth}

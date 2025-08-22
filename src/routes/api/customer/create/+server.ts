@@ -121,6 +121,8 @@ export const POST: RequestHandler = async ({ request }) => {
     // Create Auth0 user if password is provided
     let auth0UserId: string | undefined;
     if (customerData.password && customerData.password.trim()) {
+
+      console.log("try to create customert...", customerData)
       try {
         const auth0User = await auth.createAuth0User({
           email: customerData.email.trim(),

@@ -1,0 +1,50 @@
+{
+  "philosophyModal": {
+    "header": {
+      "titleHighlight": "raspb",
+      "titleSecond": "Philosophie",
+      "subtitle": "rapid - accurate - services - perfectly balanced"
+    },
+    "items": {
+      "rapid": {
+        "letter": "R",
+        "title": "Rapid",
+        "subtitle": "Schnell & Effizient",
+        "description": "Wir arbeiten mit modernsten Tools und agilen Methoden, um Ihre Projekte in Rekordzeit zu realisieren. Unsere KI-gestützten Workflows beschleunigen Entwicklungsprozesse ohne Qualitätsverlust. Wir liefern Ergebnisse bereits nach Tagen, nicht erst nach Monaten! Ach ja, nicht nur die Projektzeiten sind super schnell, auch die Webseiten und Anwendungen, die daraus hervorgehen, bieten eine unübertroffene Performance.",
+        "icon": "🚀"
+      },
+      "accurate": {
+        "letter": "A",
+        "title": "Accurate",
+        "subtitle": "Präzise & Zuverlässig",
+        "description": "Jedes Detail wird sorgfältig ausgewählt und perfektioniert. Alles, was überflüssig ist, wird weggelassen: Kein Bloat, kein Overhead, kein Schnickschnack. Sie bekommen genau das, was sie wünschen und müssen nicht teure Software lizensieren, nur weil Sie ein einziges Feature brauchen. Genaue Anforderungsaufnahme, exakte Umsätzung - unsere Lösungen laufen akurat, wie ein schweizer Uhrwerk.",
+        "icon": "🎯"
+      },
+      "services": {
+        "letter": "S",
+        "title": "Services",
+        "subtitle": "Umfassende Lösungen & Kundenorientiertheit",
+        "description": "Von der ersten Idee bis zur finalen Umsetzung bieten wir alle Services aus einer Hand: Konzept, Design (UI/UX), Entwicklung (Frontend/Backend), Datenmodellierung, Content/SEO, Hosting und mehr - alles perfekt aufeinander abgestimmt. Neben dem umfangreichen Portfolio, steht Service bei uns auch noch für absolute Kundenorientierung. Ihre Zufriedenheit ist unser oberstes Ziel.",
+        "icon": "🛠️"
+      },
+      "perfectlyBalanced": {
+        "letter": "PB",
+        "title": "Perfectly Balanced",
+        "subtitle": "Ausgewogen & Harmonisch",
+        "description": "Ein Kunstwerk ist dann perfekt, wenn man nichts mehr hinzufügen muss und nichts mehr entfernen kann. Die akurate Umsetzung Ihrer Anforderungne bedingt sich auch durch die perfekte Balance, die wir in all unseren Projekten leben: Kosten, Zeit und Qualität halten wir stets im Einklang ohne Kompromisse. Dennoch lassen wir Platz für Innovationen. Ausbalanciert, nicht erzwungen.",
+        "icon": "⚖️"
+      }
+    },
+    "footer": {
+      "missionTitle": "Unsere Mission",
+      "missionDescription": "Bei raspb vereinen wir diese vier Prinzipien zu einer einzigartigen Arbeitsphilosophie. Wir glauben daran, dass wahre Exzellenz nur durch das in Einklang bringen aller Aspekte erreicht werden kann. Jedes Projekt ist eine Gelegenheit, diese Philosophie zu leben und außergewöhnliche Ergebnisse zu schaffen.",
+      "principles": {
+        "rapid": "🚀 rapid",
+        "accurate": "🎯 accurate",
+        "services": "🛠️ services",
+        "perfectlyBalanced": "⚖️ perfectly balanced"
+      },
+      "closeButton": "Verstanden"
+    }
+  }
+}
