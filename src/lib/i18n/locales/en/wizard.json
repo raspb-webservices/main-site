@@ -334,6 +334,7 @@
         "featuresIncluded": "Features ({count}):",
         "included": "Included",
         "projectType": "Chosen project type",
+        "projectDescription": "Project description",
         "selectedFeatures": "Selected features",
         "design": "Projec's look & feel ",
         "colors": "Color scheme",
