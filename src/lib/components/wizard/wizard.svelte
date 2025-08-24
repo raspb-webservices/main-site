@@ -770,7 +770,7 @@
       <!-- Step 2: Subtype Selection -->
       <div class="step-header">
         <h1>
-          {$_('wizard.steps.step2.titleFirst')} <span class="inner-text-special">{$_('wizard.steps.step2.titleHighlight')}</span>
+          {$_('wizard.steps.step2.titleFirst')} <span class="inner-text-special">{$_('wizard.config.projectTypes.' + config.projectType + '.title')}</span>
           {$_('wizard.steps.step2.titleSecond')}
         </h1>
         <p class="teaser">{$_('wizard.steps.step2.teaser')}</p>
