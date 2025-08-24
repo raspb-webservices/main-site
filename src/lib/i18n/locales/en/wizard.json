@@ -342,7 +342,8 @@
         "pagesSections": "Defined pages and sections",
         "formFields": "Defined form fields",
         "previewTitle": "Font preview of {font}:",
-        "fontPreview": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis minima officia eveniet fugiat ad dicta quia optio quod possimus sint enim doloremque, consectetur ut est quibusdam corporis obcaecati dolore dolores!"
+        "fontPreview": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis minima officia eveniet fugiat ad dicta quia optio quod possimus sint enim doloremque, consectetur ut est quibusdam corporis obcaecati dolore dolores!",
+        "required": "Required field"
       }
     },
     "files": {
