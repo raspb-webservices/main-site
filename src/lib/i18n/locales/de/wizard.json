@@ -339,7 +339,10 @@
         "design": "Look and Feel des Projekts",
         "colors": "Farbschema",
         "font": "Schrift",
-        "pagesSections": "Definierte Seiten und Sektionen"
+        "pagesSections": "Definierte Seiten und Sektionen",
+        "formFields": "Definierte Formularfelder",
+        "previewTitle": "Schriftart-Vorschau von {font}:",
+        "fontPreview": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis minima officia eveniet fugiat ad dicta quia optio quod possimus sint enim doloremque, consectetur ut est quibusdam corporis obcaecati dolore dolores!"
       }
     },
     "files": {
@@ -409,9 +412,11 @@
       "font": "Schriftart",
       "fontDescription": "Wählen Sie eine Schriftart aus unserer Auswahl oder geben Sie Ihre Corporate Font an.",
       "googleFonts": "Google Fonts Auswahl:",
+      "otherGoogleFonts": "Ich möchte eine andere Google Font nutzen",
       "customFont": "Oder eigene Schriftart definieren:",
       "customFontPlaceholder": "z.B. Helvetica Neue, Arial, Corporate Font Name...",
-      "fontPreview": "Schriftart-Vorschau von {font}:"
+      "fontPreviewTitle": "Schriftart-Vorschau von {font}:",
+      "fontPreview": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis minima officia eveniet fugiat ad dicta quia optio quod!"
     },
     "content": {
       "pages": {

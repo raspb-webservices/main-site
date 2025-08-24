@@ -1119,7 +1119,7 @@
         </div>
       {/if}
     {:else if (currentStep === 6 && (config.projectType === 'website' || config.projectType === 'cms')) || (currentStep === 5 && config.projectType === 'webApplication')}
-      <!-- Design Step (not for individual development) -->
+      <!-- Design Step (not for individual development / freestyle) -->
       <div class="step-header">
         <h1>{$_('wizard.steps.step6.titleFirst')} <span class="inner-text-special">{$_('wizard.steps.step6.titleHighlight')}</span></h1>
         <p class="teaser">{$_('wizard.steps.step6.teaser')}</p>
@@ -1176,7 +1176,7 @@
               {#each googleFonts as font}
                 <option value={font}>{font}</option>
               {/each}
-              <option value="Other Google Fonts">{$_('wizard.design.otherGoogleFonts')}</option>
+              <option value="Other Google Fonts">&lt; {$_('wizard.design.otherGoogleFonts')}  &gt;</option>
             </select>
           </div>
 
@@ -1201,9 +1201,9 @@
             </svg>
 
             <div>
-              <div class="font-bold">{$_('wizard.design.font.previewTitle', { values: { fontName: config.desiredFont } })}</div>
-              <div class="my-2 text-base" style="font-family: {config.desiredFont}">
-                {$_('wizard.design.font.previewText')}
+              <div class="font-bold pt-3">{$_('wizard.design.fontPreviewTitle', { values: { font: config.desiredFont } })}</div>
+              <div class="my-2 text-2xl" style="font-family: {config.desiredFont}">
+                {$_('wizard.design.fontPreview')}
               </div>
             </div>
           </div>
@@ -1271,7 +1271,7 @@
         {/if}
       </div>
     {:else if (currentStep === 3 && config.projectType === 'freestyle') || (currentStep === 4 && config.projectType === 'artificialIntelligence')}
-      <!-- Materials Step for Individual Development -->
+      <!-- Materials Step for Individual Development (= freestyle) -->
       <div class="step-header">
         <h1>{$_('wizard.steps.stepMaterials.titleFirst')} <span class="inner-text-special">{$_('wizard.steps.stepMaterials.titleHighlight')}</span></h1>
         <p class="teaser">{$_('wizard.steps.stepMaterials.teaser')}</p>
@@ -1402,10 +1402,10 @@
             <div class="card bg-base-200">
               <div class="card-body">
                 <h3 class="card-title">{$_('wizard.steps.stepSummary.pagesSections')}</h3>
-                <div class="space-y-2">
+                <div class="flex items-center flex-wrap gap-2">
                   {#each config.pages as page}
                     {#if page.name.trim()}
-                      <div class="badge badge-outline badge-lg">{page.name}</div>
+                      <div class="badge badge-outline">{page.name}</div>
                     {/if}
                   {/each}
                 </div>
@@ -1434,21 +1434,21 @@
             </div>
           {/if}
 
-          {#if config.projectType !== 'individual'}
+          {#if config.projectType !== 'freestyle'}
             <div class="card bg-base-200">
               <div class="card-body">
                 <h3 class="card-title">{$_('wizard.steps.stepSummary.design')}</h3>
-                <div class="space-y-4">
-                  <div class="flex items-center gap-4">
-                    <span class="font-semibold">{$_('wizard.steps.stepSummary.colors')}</span>
-                    <div class="flex gap-2">
-                      <div class="border-base-300 h-8 w-8 rounded border-2" style="background-color: {config.primaryColour}"></div>
-                      <div class="border-base-300 h-8 w-8 rounded border-2" style="background-color: {config.secondaryColour}"></div>
-                      <div class="border-base-300 h-8 w-8 rounded border-2" style="background-color: {config.accentColour}"></div>
-                    </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+
+                  <span class="font-semibold">{$_('wizard.steps.stepSummary.colors')}</span>
+                  <div class="flex gap-2 md:col-span-2">
+                    <div class="border-base-300 h-8 w-8 rounded border-2" style="background-color: {config.primaryColour}"></div>
+                    <div class="border-base-300 h-8 w-8 rounded border-2" style="background-color: {config.secondaryColour}"></div>
+                    <div class="border-base-300 h-8 w-8 rounded border-2" style="background-color: {config.accentColour}"></div>
                   </div>
-                  <div>
-                    <span class="font-semibold">{$_('wizard.steps.stepSummary.font')}</span>
+
+                  <span class="font-semibold">{$_('wizard.steps.stepSummary.font')}</span>
+                  <div class="flex gap-2 md:col-span-2">
                     <span style="font-family: {config.customFont || config.desiredFont}, sans-serif">{config.customFont || config.desiredFont}</span>
                   </div>
                 </div>
@@ -1665,9 +1665,9 @@
           </ul>
         </div>
         <div class="thank-you-info">
-          <p><strong>{$_('wizard.modals.thankYou.projectName')}</strong> {config.name}</p>
-          <p><strong>{$_('wizard.modals.thankYou.estimatedPrice')}</strong> {config.estimatedPrice.toLocaleString()}€</p>
-          <p><strong>{$_('wizard.modals.thankYou.projectType')}</strong> {projectTypes.find((p) => p.id === config.projectType)?.title}</p>
+          <p><strong>{$_('wizard.modals.thankYou.projectName')}</strong><br /> {config.name}</p>
+          <p><strong>{$_('wizard.modals.thankYou.estimatedPrice')}</strong> {config.estimatedPrice.toLocaleString()} €</p>
+          <p><strong>{$_('wizard.modals.thankYou.projectType')}</strong><br /> {$_(projectTypes.find((p) => p.id === config.projectType)?.title)}</p>
         </div>
       </div>
       <div class="thank-you-actions">

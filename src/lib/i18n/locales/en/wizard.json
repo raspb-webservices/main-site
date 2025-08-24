@@ -339,7 +339,10 @@
         "design": "Projec's look & feel ",
         "colors": "Color scheme",
         "font": "Font",
-        "pagesSections": "Defined pages and sections"
+        "pagesSections": "Defined pages and sections",
+        "formFields": "Defined form fields",
+        "previewTitle": "Font preview of {font}:",
+        "fontPreview": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis minima officia eveniet fugiat ad dicta quia optio quod possimus sint enim doloremque, consectetur ut est quibusdam corporis obcaecati dolore dolores!"
       }
     },
     "files": {
@@ -409,9 +412,11 @@
       "font": "Font",
       "fontDescription": "Select a font from our selection or specify your corporate font.",
       "googleFonts": "Google Fonts selection:",
+      "otherGoogleFonts": "I'd rather use a different Google Font",
       "customFont": "Or define custom font:",
       "customFontPlaceholder": "e.g. Helvetica Neue, Arial, Corporate Font Name...",
-      "fontPreview": "Font preview of {font}:"
+      "fontPreviewTitle": "Font preview of {font}:",
+      "fontPreview": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis minima officia eveniet fugiat ad dicta quia optio quod!"
     },
     "content": {
       "pages": {
