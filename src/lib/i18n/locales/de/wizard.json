@@ -176,7 +176,7 @@
         },
         "zahlungsbawicklung": {
           "title": "Zahlungsabwicklung",
-          "description": "Sichere Online-Zahlungsabwicklung mit verschiedenen Payment-Providern"
+          "description": "Sichere Online-Zahlungsabwicklung mit verschiedenen Payment-Anbietern"
         },
         "benutzerkonten": {
           "title": "Benutzerkonten",
@@ -204,7 +204,7 @@
         },
         "analyticsIntegration": {
           "title": "Analytics Integration",
-          "description": "Google Analytics, Matomo oder andere Tracking-Tools Integration"
+          "description": "Google Analytics, Matomo oder andere Tracking-Tools-Integration"
         },
         "seo": {
           "title": "SEO Optimierung",

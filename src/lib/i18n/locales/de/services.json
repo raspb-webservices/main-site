@@ -59,7 +59,7 @@
         "highlights": {
           "h1": "Webvisitenkarte",
           "h2": "Maintenance Seite",
-          "h3": "Minmalistische Kampagnenseite"
+          "h3": "Minimalistische Kampagnenseite"
         },
         "buttonText": "Mehr Details"
       },
@@ -292,8 +292,8 @@
         "title": "One-Pager Websites",
         "perfectFor": "Perfekt für:",
         "perfectForDescription": "den Einstieg, mit wenigen Inhalten, eine schnelle und vorübergehende Internetpäsenz oder eine einfache Kampagnenseite",
-        "paragraph1": "Möchte man JETZT im Internet präsent sein, mit Anschrift, Telefonnummer und ggf. den Laden-Öffnungszeiten, ist aber noch in der Planung. Dann bietet sich eine Webvisitenkarte als simpler One-Pager an. So sind Sie mit Ihren Kontaktdaten wenigstens schone einmal auffindbar und haben ein Grundlage für komplexere Vorhaben.",
-        "paragraph2": "Aber auch wenn Sie eine einzelnen Seite als Maintenance-Seite (wird angezeigt, wenn die Seite im Wartungsmodus ist) wünschen oder eine einzelne Vorschaltseite implementiert werden soll, ist der One-Pager on raspb ideal. Und das sochon ab 399 € (inkl. allem = Hosting, Gebühren, etc.)",
+        "paragraph1": "Möchte man JETZT im Internet präsent sein, mit Anschrift, Telefonnummer und ggf. den Laden-Öffnungszeiten, ist aber noch in der Planung. Dann bietet sich eine Webvisitenkarte als simpler One-Pager an. So sind Sie mit Ihren Kontaktdaten wenigstens schon einmal auffindbar und haben eine Grundlage für komplexere Vorhaben.",
+        "paragraph2": "Aber auch wenn Sie eine einzelne Seite als Maintenance-Seite (wird angezeigt, wenn die Seite im Wartungsmodus ist) wünschen oder eine einzelne Vorschaltseite implementiert werden soll, ist der One-Pager bei raspb ideal. Und das schon ab 399 € (inkl. allem = Hosting, Gebühren, etc.)",
         "paragraph3": "Eine One-Pager-Seite, lässt sich auch komplexer aufziehen. Mit einem Formular am Ende oder ansprechenden Animationen. Der Phantasie sind kaum grenzen gesetzt. Nutzen Sie den One-Pager Ansatz um Ihre Online-Kampagne zu realisieren.",
         "servicesDetailTitle": "Leistungen im Detail:",
         "servicesDetails": {
@@ -301,7 +301,7 @@
           "d2": "Optimierte Performance mit blitzschnellen Ladezeiten",
           "d3": "SEO-Grundoptimierung",
           "d4": "Flexibel erweiterbar. Bringen Sie ihre Wünsche ein.",
-          "d5": "Doamin und SSL-Zertifikat inklusive",
+          "d5": "Domain und SSL-Zertifikat inklusive",
           "d6": "Im Fair Use Bereich* entstehen keine weiteren Kosten (Hosting, Wartung, Betrieb)"
         },
         "technicalFeaturesTitle": "Technische Features:",
