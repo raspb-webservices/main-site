@@ -71,7 +71,8 @@
   </div>
 {/if}
 <header>
-  <div class="inner-box">
+  <p>{JSON.stringify(import.meta.env)}</p>
+  <div class="inner-box">´
     <button
       aria-label="raspb Logo"
       class="logo"
