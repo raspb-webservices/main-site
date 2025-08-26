@@ -5,9 +5,9 @@ interface AuthConfig {
 }
 
 const authConfig: AuthConfig = {
-  domain: import.meta.env.VITE_AUTH0_DOMAIN || '',
-  clientId: import.meta.env.VITE_AUTH0_CLIENT_ID || '',
-  callbackUrl: import.meta.env.VITE_AUTH0_CALLBACK_URL || ''
+  domain: import.meta.env.AUTH0_DOMAIN || '',
+  clientId: import.meta.env.AUTH0_CLIENT_ID || '',
+  callbackUrl: import.meta.env.AUTH0_CALLBACK_URL || ''
 };
 
 // Validierung hinzufügen
