@@ -9,15 +9,3 @@
 [functions."*"]
   timeout = 30
   memory = 1024
-
-[context.production.environment]
-  PUPPETEER_CACHE_DIR = "/opt/buildhome/.cache/puppeteer"
-  PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "true"
-
-[context.deploy-preview.environment]
-  PUPPETEER_CACHE_DIR = "/opt/buildhome/.cache/puppeteer"
-  PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "true"
-
-[context.branch-deploy.environment]
-  PUPPETEER_CACHE_DIR = "/opt/buildhome/.cache/puppeteer"
-  PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "true"

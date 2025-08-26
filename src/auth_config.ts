@@ -5,13 +5,14 @@ interface AuthConfig {
 }
 
 const authConfig: AuthConfig = {
-  domain: import.meta.env.AUTH0_DOMAIN || '',
-  clientId: import.meta.env.AUTH0_CLIENT_ID || '',
-  callbackUrl: import.meta.env.AUTH0_CALLBACK_URL || ''
+  domain: import.meta.env.VITE_AUTH0_DOMAIN || '',
+  clientId: import.meta.env.VITE_AUTH0_CLIENT_ID || '',
+  callbackUrl: import.meta.env.VITE_AUTH0_CALLBACK_URL || ''
 };
 
 // Validierung hinzufügen
 if (!authConfig.domain || !authConfig.clientId) {
+  console.log("ENV ", import.meta.env)
   console.error('Auth0 Konfiguration fehlt! Bitte Environment Variables setzen.');
 }
 
