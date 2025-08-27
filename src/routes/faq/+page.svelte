@@ -14,14 +14,18 @@
 
 <div class="content-area">
   <Section>
-    <h1>{$_('faq.title')}</h1>
-    <p class="teaser no-padding">
-      {$_('faq.teaser')}
-    </p>
+    <div class="text-center animate-fade-in-up">
+      <h1 class="mb-6 text-4xl md:text-6xl font-bold">
+        {$_('faq.title')}
+      </h1>
+      <p class="teaser animate-fade-in-up mx-auto max-w-4xl text-center text-lg">
+        {$_('faq.teaser')}
+      </p>
+    </div>
   </Section>
 
   <Section>
-    <div class="my-accordion-wrapper">
+    <div class="my-accordion-wrapper mx-auto max-w-3xl ">
       <div class="my-accordion join join-vertical">
         <div class="collapse-arrow join-item border-base-300 accordion-item collapse border" class:active={myFaqSelection == 'q1'}>
           <input type="radio" value="q1" name="faq" bind:group={myFaqSelection} />
@@ -72,9 +76,9 @@
   @reference '../../app.css';
 
   .my-accordion-wrapper {
-    @apply grid grid-cols-12 gap-8;
+   
     .my-accordion {
-      @apply col-span-full lg:col-span-8 rounded-lg overflow-hidden;
+      
       .accordion-item {
         @apply border-base-300;
         > .collapse-title {

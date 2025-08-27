@@ -130,7 +130,7 @@
             <li>{@html $_('homepage.services.webseiten.features.individuell')}</li>
             <li>{@html $_('homepage.services.webseiten.features.eigentum')}</li>
             <li>
-              <span class="tooltip tooltip-secondary tooltip-left"
+              <span class="tooltip tooltip-accent tooltip-top"
                 ><span class="tooltip-content"
                   ><p class="no-padding p-2 text-sm">
                     {@html $_('homepage.services.webseiten.tooltip')}
@@ -334,7 +334,7 @@
               <img src="icons/tech-logos/typescript-logo.svg" alt="TypeScript" class="tech-logo smaller" />
               <img src="icons/tech-logos/GitHub-logo.svg" alt="GitHub" class="tech-logo" />
               <img src="icons/tech-logos/netlify-logo.svg" alt="Netlify" class="tech-logo long" />
-              <img src="icons/tech-logos/tailwindcss-logo.svg" alt="TailwindCSS" class="tech-logo long" />
+              <img src="icons/tech-logos/tailwind-css-logo-full.svg" alt="TailwindCSS" class="tech-logo long" />
               <img src="icons/tech-logos/GraphQL-logo.svg" alt="GraphQL" class="tech-logo long" />
             </div>
           </div>
