@@ -9,3 +9,6 @@
 [functions."*"]
   timeout = 30
   memory = 1024
+
+[[plugins]]
+  package = "netlify-plugin-chromium"
