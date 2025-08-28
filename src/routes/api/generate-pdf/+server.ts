@@ -27,7 +27,7 @@ export const POST: RequestHandler = async ({ request }) => {
     const htmlContent = generateHTMLContent(config, customerData, uploadedFiles, customFeatures, locale);
     const isLocal = process.env.NETLIFY_LOCAL === 'true' || process.env.NETLIFY_DEV === 'true' || process.env.NODE_ENV === 'development';
 
-    if (true) {
+    if (isLocal) {
       // Local development - use regular puppeteer
       const puppeteer = (await import('puppeteer')).default;
       const launchOptions = {
