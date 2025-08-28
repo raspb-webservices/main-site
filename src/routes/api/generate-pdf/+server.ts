@@ -21,7 +21,7 @@ function getTranslation(key: string, locale: string = 'de'): string {
 }
 
 export const POST: RequestHandler = async ({ request }) => {
-  let browser;
+  let browser = null;
   try {
     const { config, customerData, uploadedFiles, customFeatures, filename, locale = 'de' } = await request.json();
     const htmlContent = generateHTMLContent(config, customerData, uploadedFiles, customFeatures, locale);
@@ -36,16 +36,12 @@ export const POST: RequestHandler = async ({ request }) => {
       };
       browser = await puppeteer.launch(launchOptions);
     } else {
-      // Production - use puppeteer-core with @sparticuz/chromium
+      // Production - use puppeteer-core
+      const executablePath = process.env.CHROMIUM_PATH || '/opt/build/repo/node_modules/chromium/lib/chromium/chrome-linux/chrome';
       const puppeteerCore = (await import('puppeteer-core')).default;
-      const chromium = (await import('@sparticuz/chromium')).default;
-
-      // Configure chromium for serverless environment
-      await chromium.font('https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2');
 
       const launchOptions = {
         args: [
-          ...chromium.args,
           '--no-sandbox',
           '--disable-setuid-sandbox',
           '--disable-dev-shm-usage',
@@ -69,9 +65,10 @@ export const POST: RequestHandler = async ({ request }) => {
           '--ignore-gpu-blacklist',
           '--ignore-certificate-errors',
           '--ignore-ssl-errors',
-          '--ignore-certificate-errors-spki-list'
+          '--ignore-certificate-errors-spki-list',
+          '--no-zygote'
         ],
-        executablePath: await chromium.executablePath(),
+        executablePath: executablePath,
         headless: true,
         ignoreHTTPSErrors: true,
         defaultViewport: {
