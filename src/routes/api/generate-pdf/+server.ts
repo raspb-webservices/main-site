@@ -37,6 +37,9 @@ export const POST: RequestHandler = async ({ request }) => {
       browser = await puppeteer.launch(launchOptions);
     } else {
       // Production - use puppeteer-core
+
+      console.log("process.env.CHROMIUM_PATH", process.env.CHROMIUM_PATH )
+
       const executablePath = process.env.CHROMIUM_PATH || '/opt/build/repo/node_modules/chromium/lib/chromium/chrome-linux/chrome';
       const puppeteerCore = (await import('puppeteer-core')).default;
 
