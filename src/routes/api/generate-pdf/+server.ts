@@ -37,50 +37,17 @@ export const POST: RequestHandler = async ({ request }) => {
       browser = await puppeteer.launch(launchOptions);
     } else {
       // Production - use puppeteer-core
-
-      console.log("process.env.CHROMIUM_PATH", process.env.CHROMIUM_PATH )
-
-      const executablePath = process.env.CHROMIUM_PATH || '/opt/build/repo/node_modules/chromium/lib/chromium/chrome-linux/chrome';
+      const executablePath = '/opt/build/repo/node_modules/chromium/lib/chromium/chrome-linux/chrome';
       const puppeteerCore = (await import('puppeteer-core')).default;
 
       const launchOptions = {
-        args: [
-          '--no-sandbox',
-          '--disable-setuid-sandbox',
-          '--disable-dev-shm-usage',
-          '--disable-gpu',
-          '--single-process',
-          '--disable-web-security',
-          '--disable-features=VizDisplayCompositor',
-          '--disable-background-timer-throttling',
-          '--disable-backgrounding-occluded-windows',
-          '--disable-renderer-backgrounding',
-          '--disable-ipc-flooding-protection',
-          '--disable-extensions',
-          '--disable-default-apps',
-          '--disable-sync',
-          '--disable-translate',
-          '--hide-scrollbars',
-          '--metrics-recording-only',
-          '--mute-audio',
-          '--no-first-run',
-          '--safebrowsing-disable-auto-update',
-          '--ignore-gpu-blacklist',
-          '--ignore-certificate-errors',
-          '--ignore-ssl-errors',
-          '--ignore-certificate-errors-spki-list',
-          '--no-zygote'
-        ],
         executablePath: executablePath,
-        headless: true,
-        ignoreHTTPSErrors: true,
-        defaultViewport: {
-          width: 1280,
-          height: 720
-        }
+        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu', '--no-zygote'],
+        headless: true
       };
       browser = await puppeteerCore.launch(launchOptions);
     }
+
     const page = await browser.newPage();
 
     // Set content and wait for fonts to load
