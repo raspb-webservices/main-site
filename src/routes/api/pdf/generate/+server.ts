@@ -2,6 +2,7 @@ import { json, type RequestHandler } from '@sveltejs/kit';
 import { addMessages, _, dictionary, waitLocale } from 'svelte-i18n';
 import { get } from 'svelte/store';
 import { projectTypes, subTypes, availableFeatures, formFieldTypes } from '$lib/components/wizard/wizard-config';
+import chromium from '@sparticuz/chromium';
 
 export const POST: RequestHandler = async ({ request }) => {
   // First load the pdf  related dictioneries and add them to the global messages
@@ -27,13 +28,12 @@ export const POST: RequestHandler = async ({ request }) => {
       browser = await puppeteer.launch(launchOptions);
     } else {
       // Production - use puppeteer-core
-      const executablePath = '/opt/build/repo/node_modules/chromium/lib/chromium/chrome-linux/chrome';
       const puppeteerCore = (await import('puppeteer-core')).default;
-
       const launchOptions = {
-        executablePath: executablePath,
-        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu', '--no-zygote'],
-        headless: true
+        args: chromium.args,
+        executablePath: await chromium.executablePath(),
+        headless: true,
+        ignoreHTTPSErrors: true,
       };
       browser = await puppeteerCore.launch(launchOptions);
     }
