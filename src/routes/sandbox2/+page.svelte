@@ -200,6 +200,8 @@
         })
       });
 
+      console.log("PDF res ", response)
+
       if (response.ok) {
         // PDF erfolgreich generiert - Download starten
         const blob = await response.blob();

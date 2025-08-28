@@ -27,13 +27,16 @@ export const POST: RequestHandler = async ({ request }) => {
     const htmlContent = generateHTMLContent(config, customerData, uploadedFiles, customFeatures, locale);
     const isLocal = process.env.NETLIFY_LOCAL === 'true' || process.env.NETLIFY_DEV === 'true' || process.env.NODE_ENV === 'development';
 
-    if (isLocal) {
+    if (true) {
       // Local development - use regular puppeteer
       const puppeteer = (await import('puppeteer')).default;
       const launchOptions = {
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox']
       };
+
+      console.log("launchOptions ", launchOptions)
+
       browser = await puppeteer.launch(launchOptions);
     } else {
       // Production - use puppeteer-core
@@ -45,6 +48,9 @@ export const POST: RequestHandler = async ({ request }) => {
         args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu', '--no-zygote'],
         headless: true
       };
+
+      console.log("launchOptions ", launchOptions)
+
       browser = await puppeteerCore.launch(launchOptions);
     }
 
