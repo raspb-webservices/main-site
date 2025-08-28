@@ -29,8 +29,15 @@ export async function POST({ request }) {
     });
 
   } catch (error) {
+    const errorInfo = {
+      name: error?.name,
+      message: error?.message,
+      stack: error?.stack,
+      details: error
+    };
+
     console.error('Fehler beim Rendern des PDFs:', error);
-    return json({ error: 'PDF-Generierung fehlgeschlagen' }, { status: 500 });
+    return json({ error: 'PDF-Generierung fehlgeschlagen', timestamp: new Date().toISOString(), errorInfo}, { status: 500 });
   } finally {
     if (browser !== null) {
       await browser.close();
