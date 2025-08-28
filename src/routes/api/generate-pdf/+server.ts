@@ -35,7 +35,7 @@ export const POST: RequestHandler = async ({ request }) => {
         args: ['--no-sandbox', '--disable-setuid-sandbox']
       };
 
-      console.log("launchOptions ", launchOptions)
+      console.log("launchOptions local", launchOptions)
 
       browser = await puppeteer.launch(launchOptions);
     } else {
@@ -49,7 +49,7 @@ export const POST: RequestHandler = async ({ request }) => {
         headless: true
       };
 
-      console.log("launchOptions ", launchOptions)
+      console.log("launchOptions nonLocal", launchOptions)
 
       browser = await puppeteerCore.launch(launchOptions);
     }
