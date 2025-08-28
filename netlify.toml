@@ -6,3 +6,8 @@
   directory = "functions"
   node_bundler = "esbuild"
   included_files = ["./node_modules/@sparticuz/chromium/bin/**"]
+
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/sveltekit-render"
+  status = 200
