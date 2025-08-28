@@ -185,7 +185,7 @@
     error = '';
 
     try {
-      const response = await fetch('/api/generate-pdf', {
+      const response = await fetch('/api/pdf/generate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -196,7 +196,7 @@
           uploadedFiles: sampleUploadedFiles,
           customFeatures: sampleCustomFeatures,
           filename: `RASPB_Projekt_${sampleConfig.name.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`,
-          locale: $locale
+          submittedLocale: $locale
         })
       });
 

@@ -1,30 +1,20 @@
-import { json } from '@sveltejs/kit';
-import type { RequestHandler } from './$types';
+import { json, type RequestHandler } from '@sveltejs/kit';
+import { addMessages, _, dictionary, waitLocale } from 'svelte-i18n';
+import { get } from 'svelte/store';
 import { projectTypes, subTypes, availableFeatures, formFieldTypes } from '$lib/components/wizard/wizard-config';
-import deTranslations from '$lib/i18n/locales/de/pdf-generator.json';
-import enTranslations from '$lib/i18n/locales/en/pdf-generator.json';
-
-// Translation function for server-side use
-function getTranslation(key: string, locale: string = 'de'): string {
-  const translations = locale === 'en' ? enTranslations : deTranslations;
-  const keys = key.split('.');
-  let value: any = translations;
-
-  for (const k of keys) {
-    if (value && typeof value === 'object' && k in value) {
-      value = value[k];
-    } else {
-      return key;
-    }
-  }
-  return typeof value === 'string' ? value : key;
-}
 
 export const POST: RequestHandler = async ({ request }) => {
+  // First load the pdf  related dictioneries and add them to the global messages
+  const pdfMessagesDE = (await import(`$lib/i18n/locales/de/pdf-generator.json`)).default;
+  const pdfMessagesEN = (await import(`$lib/i18n/locales/en/pdf-generator.json`)).default;
+  addMessages('de', pdfMessagesDE);
+  addMessages('en', pdfMessagesEN);
+
   let browser = null;
+  const { config, customerData, uploadedFiles, customFeatures, filename, submittedLocale = 'de' } = await request.json();
+
   try {
-    const { config, customerData, uploadedFiles, customFeatures, filename, locale = 'de' } = await request.json();
-    const htmlContent = generateHTMLContent(config, customerData, uploadedFiles, customFeatures, locale);
+    const htmlContent = generateHTMLContent(config, customerData, uploadedFiles, customFeatures, submittedLocale);
     const isLocal = process.env.NETLIFY_LOCAL === 'true' || process.env.NETLIFY_DEV === 'true' || process.env.NODE_ENV === 'development';
 
     if (isLocal) {
@@ -34,9 +24,6 @@ export const POST: RequestHandler = async ({ request }) => {
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox']
       };
-
-      console.log("launchOptions local", launchOptions)
-
       browser = await puppeteer.launch(launchOptions);
     } else {
       // Production - use puppeteer-core
@@ -48,9 +35,6 @@ export const POST: RequestHandler = async ({ request }) => {
         args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu', '--no-zygote'],
         headless: true
       };
-
-      console.log("launchOptions nonLocal", launchOptions)
-
       browser = await puppeteerCore.launch(launchOptions);
     }
 
@@ -135,7 +119,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Circular Std', 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
@@ -143,7 +127,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             background: #fafafa;
             min-height: 100vh;
         }
-        
+
         .container {
             max-width: 210mm;
             margin: 0 auto;
@@ -152,7 +136,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             overflow: hidden;
             border-radius: 16px;
         }
-        
+
         .header {
             background: linear-gradient(135deg, #9333ea 0%, #ec4899 50%, #8b5cf6 100%);
             color: white;
@@ -160,11 +144,11 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             position: relative;
             border-radius: 16px 16px 0 0;
         }
-        
+
         .header-content {
             position: relative;
         }
-        
+
         .logo {
             font-size: 36px;
             font-weight: 700;
@@ -173,14 +157,14 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             color: white;
             font-family: 'Circular Std', sans-serif;
         }
-        
+
         .subtitle {
             font-size: 18px;
             font-weight: 400;
             color: rgba(255, 255, 255, 0.9);
             margin-bottom: 0;
         }
-        
+
         .date {
             font-size: 12px;
             color: rgba(255, 255, 255, 0.8);
@@ -192,17 +176,17 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             border-radius: 6px;
             backdrop-filter: blur(10px);
         }
-        
+
         .content {
             padding-bottom: 40px;
             background: #fefefe;
         }
-        
+
         .section {
             margin-bottom: 40px;
             page-break-inside: avoid;
         }
-        
+
         .section-header {
             background: linear-gradient(135deg, #9333ea 0%, #ec4899 50%, #f472b6 100%);
             color: white;
@@ -216,7 +200,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             font-family: 'Circular Std', sans-serif;
             font-weight: 700;
         }
-        
+
         .project-overview {
             background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
             color: #010101;
@@ -226,7 +210,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             position: relative;
             overflow: hidden;
         }
-        
+
         .project-name {
             font-size: 28px;
             line-height: 32px;
@@ -234,7 +218,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             color: #010101;
             font-family: 'Circular Std', sans-serif;
         }
-        
+
         .project-name-special {
             background: linear-gradient(135deg, #9333ea 0%, #ec4899 50%, #8b5cf6 100%);
             -webkit-background-clip: text;
@@ -242,14 +226,14 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             -webkit-text-fill-color: transparent;
             display: inline-block;
         }
-        
+
         .project-type {
             font-size: 16px;
             color: #9333ea;
             margin-bottom: 20px;
             font-weight: 500;
         }
-        
+
         .price-highlight {
             background: linear-gradient(135deg, #f09b1b 0%, #f3c739 100%);
             padding: 20px;
@@ -258,7 +242,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             margin-top: 25px;
             color: white;
         }
-        
+
         .price {
             font-size: 32px;
             font-weight: 700;
@@ -266,20 +250,20 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             color: white;
             font-family: 'Circular Std', sans-serif;
         }
-        
+
         .price-label {
             font-size: 14px;
             color: rgba(255, 255, 255, 0.9);
             font-weight: 500;
         }
-        
+
         .detail-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
-        
+
         .detail-item {
             background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
             border: 1px solid #e9d5ff;
@@ -293,7 +277,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
         .detail-grid .detail-item {
             margin-bottom: 0;
         }
-        
+
         .detail-label {
             font-weight: 600;
             color: #7c3aed;
@@ -303,7 +287,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             letter-spacing: 0.5px;
             font-family: 'Circular Std', sans-serif;
         }
-        
+
         .detail-value {
             color: #010101;
             font-size: 16px;
@@ -313,14 +297,14 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             justify-content: start;
             align-items: center;
         }
-        
+
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 15px;
             margin-bottom: 20px;
         }
-        
+
         .feature-item {
             background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
             border: 1px solid #e9d5ff;
@@ -328,20 +312,20 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             border-radius: 12px;
             border-left: 4px solid #c084fc;
         }
-        
+
         .feature-title {
             font-weight: 600;
             color: #7c3aed;
             margin-bottom: 5px;
             font-family: 'Circular Std', sans-serif;
         }
-        
+
         .feature-description {
             font-size: 14px;
             color: #9333ea;
             font-weight: 300;
         }
-        
+
         .footer {
             background: linear-gradient(135deg, #9333ea 0%, #ec4899 50%, #f472b6 100%);
             color: white;
@@ -350,7 +334,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             margin-top: 60px;
             border-radius: 0 0 20px 20px;
         }
-        
+
         .footer-content {
             display: flex;
             justify-content: space-between;
@@ -358,26 +342,26 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             flex-wrap: wrap;
             gap: 20px;
         }
-        
+
         .footer-logo {
             font-size: 20px;
             font-weight: 700;
             letter-spacing: 1px;
             font-family: 'Circular Std', sans-serif;
         }
-        
+
         .footer-info {
             font-size: 12px;
             color: rgba(255, 255, 255, 0.8);
         }
-        
+
         /* RASPB Brand Typography */
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Circular Std', sans-serif;
             font-weight: 700;
             line-height: 1.1;
         }
-        
+
         .gradient-text {
             background: linear-gradient(135deg, #9333ea 0%, #ec4899 50%, #8b5cf6 100%);
             -webkit-background-clip: text;
@@ -385,7 +369,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             -webkit-text-fill-color: transparent;
             display: inline-block;
         }
-        
+
         .add-padding {
             padding: 0 20px 0 20px;
         }
@@ -401,54 +385,54 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
     <div class="container">
 
         <header class="header">
-            <div class="date">${t('wizard.hardcodedTexts.summary.createdOn')} ${new Date().toLocaleDateString(locale === 'en' ? 'en-US' : 'de-DE')}</div>
+            <div class="date">${t('pdf.header.createdOn')} ${new Date().toLocaleDateString(locale === 'en' ? 'en-US' : 'de-DE')}</div>
             <div class="header-content">
                 <div class="logo">raspb Webservices</div>
-                <div class="subtitle">${t('wizard.hardcodedTexts.summary.projectConfiguration')}</div>
+                <div class="subtitle">${t('pdf.header.subheadline')}</div>
             </div>
         </header>
-        
+
         <div class="content">
             <!-- Project Overview -->
             <div class="project-overview">
                 <div class="project-name">
-                    <span class="gradient-text">${config.name || t('wizard.hardcodedTexts.summary.projectType')}</span>
+                    <span class="gradient-text">${config.name || t('pdf.hardcodedTexts.summary.projectType')}</span>
                 </div>
                 <div class="project-type">
-                    ${projectType ? t(projectType.title) : ''}${subType ? ` - ${t(subType.title)}` : ''}
+                    ${config.projectType ? t('pdf.config.projectTypes.' + config.projectType + '.title') : ''} - ${config.subType ? t('pdf.config.subTypes.' + config.subType + '.title') : ''}
                 </div>
                 ${
                   config.estimatedPrice > 0
                     ? `
                 <div class="price-highlight">
                     <div class="price">${config.estimatedPrice.toLocaleString()}€</div>
-                    <div class="price-label">${t('wizard.hardcodedTexts.summary.estimatedPrice')}</div>
+                    <div class="price-label">${t('pdf.hardcodedTexts.summary.estimatedPrice')}</div>
                 </div>
                 `
                     : ''
                 }
             </div>
-            
+
             ${
               config.description
                 ? `
             <div class="section">
-                <div class="section-header">${t('wizard.hardcodedTexts.summary.projectDescription')}</div>
+                <div class="section-header">${t('pdf.hardcodedTexts.summary.projectDescription')}</div>
                 <div class="detail-value add-padding">${config.description}</div>
             </div>
             `
                 : ''
             }
-            
+
             <!-- Project Details -->
             <div class="section">
-                <div class="section-header">${t('wizard.hardcodedTexts.summary.projectType')}</div>
+                <div class="section-header">${t('pdf.hardcodedTexts.summary.projectType')}</div>
                 <div class="detail-grid">
                     ${
                       config.targetAudience
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">${t('wizard.form.targetAudience')}</div>
+                        <div class="detail-label">${t('pdf.hardcodedTexts.summary.targetAudience')}</div>
                         <div class="detail-value">${config.targetAudience}</div>
                     </div>
                     `
@@ -458,7 +442,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                       config.goals
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.goals')}</div>
+                        <div class="detail-label">${t('pdf.hardcodedTexts.summary.goals')}</div>
                         <div class="detail-value">${config.goals}</div>
                     </div>
                     `
@@ -468,7 +452,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                       config.desiredDomain
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.desiredDomain')}</div>
+                        <div class="detail-label">${t('pdf.hardcodedTexts.summary.desiredDomain')}</div>
                         <div class="detail-value">${config.desiredDomain}</div>
                     </div>
                     `
@@ -478,7 +462,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                       config.domainStatus
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.domainStatus')}</div>
+                        <div class="detail-label">${t('pdf.hardcodedTexts.summary.domainStatus')}</div>
                         <div class="detail-value">${config.domainStatus}</div>
                     </div>
                     `
@@ -488,7 +472,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                       config.timeline
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.timeline')}</div>
+                        <div class="detail-label">${t('pdf.hardcodedTexts.summary.timeline')}</div>
                         <div class="detail-value">${config.timeline}</div>
                     </div>
                     `
@@ -498,7 +482,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                       config.budget
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.budget')}</div>
+                        <div class="detail-label">${t('pdf.hardcodedTexts.summary.budget')}</div>
                         <div class="detail-value">${config.budget}</div>
                     </div>
                     `
@@ -506,12 +490,12 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                     }
                 </div>
             </div>
-            
+
             ${
               config.features && config.features.length > 0
                 ? `
             <div class="section">
-                <div class="section-header">${t('wizard.hardcodedTexts.summary.selectedFeatures')}</div>
+                <div class="section-header">${t('pdf.hardcodedTexts.summary.selectedFeatures')}</div>
                 <div class="features-grid">
                     ${config.features
                       .map((featureId: string) => {
@@ -519,8 +503,8 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                         return feature
                           ? `
                         <div class="feature-item">
-                            <div class="feature-title">${t(feature.title)}</div>
-                            ${feature.description ? `<div class="feature-description">${t(feature.description)}</div>` : ''}
+                            <div class="feature-title">${t('pdf.config.features.' + feature.name + '.title')}</div>
+                            <div class="feature-description">${t('pdf.config.features.' + feature.name + '.description')}</div>
                         </div>
                         `
                           : '';
@@ -531,7 +515,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                   customFeatures
                     ? `
                 <div class="detail-item">
-                    <div class="detail-label">${t('wizard.hardcodedTexts.customFeatures.label')}</div>
+                    <div class="detail-label">${t('pdf.hardcodedTexts.customFeatures.label')}</div>
                     <div class="detail-value">${customFeatures}</div>
                 </div>
                 `
@@ -541,21 +525,21 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             `
                 : ''
             }
-            
+
             ${
               config.pages && config.pages.length > 0
                 ? `
             <div class="section">
-                <div class="section-header">${t('wizard.hardcodedTexts.summary.pages')}</div>
+                <div class="section-header">${t('pdf.hardcodedTexts.summary.pages')}</div>
 
                     ${config.pages
                       .map((page: any, index: number) => {
                         if (!page.name?.trim()) return '';
                         return `
                         <div class="detail-item">
-                            <div class="detail-label">${t('wizard.hardcodedTexts.summary.page')} ${index + 1}: ${page.name}</div>
+                            <div class="detail-label">${t('pdf.hardcodedTexts.summary.page')} ${index + 1}: ${page.name}</div>
                             ${page.content ? `<div class="detail-value">${page.content}</div>` : ''}
-                            ${page.characteristic ? `<div class="detail-value"><strong>${t('wizard.hardcodedTexts.summary.characteristics')}:</strong> ${page.characteristic}</div>` : ''}
+                            ${page.characteristic ? `<div class="detail-value"><strong>${t('pdf.hardcodedTexts.summary.characteristics')}:</strong> ${page.characteristic}</div>` : ''}
                         </div>
                         `;
                       })
@@ -565,21 +549,20 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             `
                 : ''
             }
-            
+
             ${
               config.formFields && config.formFields.length > 0
                 ? `
             <div class="section">
-                <div class="section-header">${t('wizard.hardcodedTexts.summary.formFields')}</div>
+                <div class="section-header">${t('pdf.hardcodedTexts.summary.formFields')}</div>
                 <div class="detail-grid">
                     ${config.formFields
                       .map((field: any) => {
                         if (!field.name?.trim()) return '';
-                        const fieldType = formFieldTypes.find((f) => f.id === field.type);
                         return `
                         <div class="detail-item">
-                            <div class="detail-label">${field.name} (${fieldType ? t(fieldType.title) : field.type})</div>
-                            <div class="detail-value">${field.required ? t('wizard.hardcodedTexts.summary.required') : t('wizard.hardcodedTexts.summary.optional')}</div>
+                            <div class="detail-label">${field.name} (${field.type ? t('pdf.config.formFieldTypes.'+field.type) : ''})</div>
+                            <div class="detail-value">${field.required ? t('pdf.hardcodedTexts.summary.required') : t('pdf.hardcodedTexts.summary.optional')}</div>
                         </div>
                         `;
                       })
@@ -589,18 +572,18 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             `
                 : ''
             }
-            
+
             ${
               config.projectType !== 'freestyle' && (config.primaryColour || config.desiredFont || config.customFont)
                 ? `
             <div class="section">
-                <div class="section-header">${t('wizard.hardcodedTexts.summary.design')}</div>
+                <div class="section-header">${t('pdf.hardcodedTexts.summary.design')}</div>
                 <div class="detail-grid">
                     ${
                       config.primaryColour
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.primaryColor')}</div>
+                        <div class="detail-label">${t('pdf.hardcodedTexts.summary.primaryColor')}</div>
                         <div class="detail-value">${config.primaryColour} <span class="color-box" style="background:${config.primaryColour}"></span></div>
                     </div>
                     `
@@ -610,7 +593,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                       config.secondaryColour
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.secondaryColor')}</div>
+                        <div class="detail-label">${t('pdf.hardcodedTexts.summary.secondaryColor')}</div>
                         <div class="detail-value">${config.secondaryColour} <span class="color-box" style="background:${config.secondaryColour}"></span></div>
                     </div>
                     `
@@ -620,7 +603,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                       config.accentColour
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.accentColor')}</div>
+                        <div class="detail-label">${t('pdf.hardcodedTexts.summary.accentColor')}</div>
                         <div class="detail-value">${config.accentColour} <span class="color-box" style="background:${config.accentColour}"></span></div>
                     </div>
                     `
@@ -630,7 +613,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                       config.customFont || config.desiredFont
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.font')}</div>
+                        <div class="detail-label">${t('pdf.hardcodedTexts.summary.font')}</div>
                         <div class="detail-value">${config.customFont || config.desiredFont}</div>
                     </div>
                     `
@@ -641,12 +624,12 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             `
                 : ''
             }
-            
+
             ${
               uploadedFiles && uploadedFiles.length > 0
                 ? `
             <div class="section">
-                <div class="section-header">${t('wizard.hardcodedTexts.summary.uploadedFiles')}</div>
+                <div class="section-header">${t('pdf.hardcodedTexts.summary.uploadedFiles')}</div>
                 <div class="detail-grid">
                     ${uploadedFiles
                       .map(
@@ -663,18 +646,18 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
             `
                 : ''
             }
-            
+
             ${
               customerData && (customerData.givenName || customerData.familyName || customerData.email)
                 ? `
             <div class="section">
-                <div class="section-header">${t('wizard.hardcodedTexts.summary.contactInformation')}</div>
+                <div class="section-header">${t('pdf.hardcodedTexts.summary.contactInformation')}</div>
                 <div class="detail-grid">
                     ${
                       customerData.salutation
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.salutation')}</div>
+                        <div class="detail-label">${t('pdf.hardcodedTexts.summary.salutation')}</div>
                         <div class="detail-value">${customerData.salutation}</div>
                     </div>
                     `
@@ -684,7 +667,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                       customerData.givenName || customerData.familyName
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.name')}</div>
+                        <div class="detail-label">${t('pdf.hardcodedTexts.summary.name')}</div>
                         <div class="detail-value">${(customerData.givenName || '') + ' ' + (customerData.familyName || '')}</div>
                     </div>
                     `
@@ -694,7 +677,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                       customerData.email
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.email')}</div>
+                        <div class="detail-label">${t('pdf.hardcodedTexts.summary.email')}</div>
                         <div class="detail-value">${customerData.email}</div>
                     </div>
                     `
@@ -704,7 +687,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                       customerData.phone
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.phone')}</div>
+                        <div class="detail-label">${t('pdf.hardcodedTexts.summary.phone')}</div>
                         <div class="detail-value">${customerData.phone}</div>
                     </div>
                     `
@@ -714,7 +697,7 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                       customerData.company
                         ? `
                     <div class="detail-item">
-                        <div class="detail-label">${t('wizard.hardcodedTexts.summary.company')}</div>
+                        <div class="detail-label">${t('pdf.hardcodedTexts.summary.company')}</div>
                         <div class="detail-value">${customerData.company}</div>
                     </div>
                     `
@@ -726,17 +709,30 @@ function generateHTMLContent(config: any, customerData: any, uploadedFiles: any[
                 : ''
             }
         </div>
-        
+
         <footer class="footer">
             <div class="footer-content">
                 <div class="footer-logo">raspb &copy;</div>
                 <div class="footer-info">
-                    ${t('wizard.hardcodedTexts.summary.createdOn')} ${new Date().toLocaleDateString(locale === 'en' ? 'en-US' : 'de-DE')} | raspb Webservices | www.raspb.de
+                    ${t('pdf.hardcodedTexts.summary.createdOn')} ${new Date().toLocaleDateString(locale === 'en' ? 'en-US' : 'de-DE')} | raspb Webservices | www.raspb.de
                 </div>
             </div>
         </footer>
     </div>
 </body>
-</html>
-    `;
+</html>`;
+}
+
+function getTranslation(key: string, locale): string {
+  const keys = key.split('.');
+  let value: any = get(dictionary)[locale];
+
+  for (const k of keys) {
+    if (value && typeof value === 'object' && k in value) {
+      value = value[k];
+    } else {
+      return key;
+    }
+  }
+  return typeof value === 'string' ? value : key;
 }

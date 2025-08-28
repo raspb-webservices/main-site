@@ -1,1 +1,367 @@
-{}
+{
+  "pdf": {
+    "header": {
+      "subheadline": "Your individual project configuration",
+      "createdOn": "Created at "
+    },
+    "hardcodedTexts": {
+      "domainStatus": {
+        "label": "Domain status:",
+        "placeholder": "Please select...",
+        "owned": "Domain already owned",
+        "needsRegistration": "Domain needs to be registered",
+        "needsTransfer": "Domain needs to be transferred",
+        "undecided": "Not decided yet"
+      },
+      "timeline": {
+        "label": "Desired timeframe:",
+        "placeholder": "Please select...",
+        "asap": "As soon as possible",
+        "fiveToTenDays": "5 - 10 days",
+        "twoToFourWeeks": "2 - 4 weeks",
+        "twoToSixMonths": "2 - 6 months",
+        "flexible": "Flexible"
+      },
+      "budget": {
+        "label": "Your budget:",
+        "placeholder": "Please select...",
+        "under500": "Under 500€",
+        "oneToThreeK": "1,000€ - 3,000€",
+        "threeToSevenK": "3,000€ - 7,000€",
+        "sevenToTenK": "7,000€ - 10,000€",
+        "tenToFifteenK": "10,000€ - 15,000€",
+        "fifteenToTwentyK": "15,000€ - 25,000€",
+        "moreThanTwentyFiveK": "more than 25,000€"
+      },
+      "customFeatures": {
+        "label": "Additional desired features:",
+        "placeholder": "Describe additional special requirements that are not in the list..."
+      },
+      "colorScheme": {
+        "title": "Color scheme",
+        "description": "Select the main colors for your project. If you already have corporate colors, enter them here."
+      },
+      "font": {
+        "title": "Font",
+        "description": "Select a font from our selection or specify your corporate font.",
+        "otherGoogleFonts": "< I want to use another Google Font >"
+      },
+      "materials": {
+        "title": "Upload materials",
+        "description": "Upload style guides, mockups, logos, images or other relevant files that help us with implementation.",
+        "documentsTitle": "Upload documents",
+        "documentsDescription": "Upload specifications, wireframes, existing documentation or other relevant files."
+      },
+      "pages": {
+        "pageName": "Page name:",
+        "pageNamePlaceholder": "e.g. Home, About us, Contact, Services...",
+        "pageContent": "Desired content:",
+        "pageContentPlaceholder": "Describe what content should be on this page: texts, images, functions, etc.",
+        "pageCharacteristic": "Page characteristics:",
+        "pageCharacteristicPlaceholder": "Which features should be placed on this page? Should content suggestions be developed or should content be used exactly as specified?",
+        "addPage": "Add page"
+      },
+      "formFields": {
+        "title": "Form fields",
+        "description": "Since you have selected a contact form, define the desired fields and their labels here.",
+        "field": "Field",
+        "fieldType": "Field type:",
+        "fieldTypePlaceholder": "Select field type...",
+        "fieldName": "Field name/label:",
+        "fieldNamePlaceholder": "e.g. Name, Email, Message, Phone...",
+        "required": "Required field",
+        "addField": "Add field",
+        "removeField": "Remove form field",
+        "remove": "Remove"
+      },
+      "navigation": {
+        "back": "Back",
+        "next": "Next",
+        "downloadConfiguration": "Download configuration",
+        "submitProject": "Submit project"
+      },
+      "summary": {
+        "projectType": "Project type",
+        "projectDescription": "Project description",
+        "selectedFeatures": "Selected features",
+        "pagesSections": "Pages/Sections",
+        "formFields": "Form fields",
+        "design": "Design",
+        "colors": "Colors:",
+        "estimatedPrice": "Estimated price",
+        "average": "Average: {price}€",
+        "disclaimer": "*Non-binding estimate. The final price will be determined after a personal conversation.",
+        "base": "Base ({projectType}):",
+        "features": "Features ({count}):",
+        "included": "Included",
+        "required": "Required",
+        "optional": "Optional",
+        "createdOn": "Created on",
+        "projectConfiguration": "Project Configuration",
+        "targetAudience": "Target audience",
+        "goals": "Goals",
+        "desiredDomain": "Desired Domain",
+        "domainStatus": "Domain Status",
+        "timeline": "Timeline",
+        "budget": "Budget",
+        "pages": "Pages",
+        "page": "Page",
+        "characteristics": "Characteristics",
+        "primaryColor": "Primary Color",
+        "secondaryColor": "Secondary Color",
+        "accentColor": "Accent Color",
+        "font": "Font",
+        "uploadedFiles": "Uploaded Files",
+        "contactInformation": "Contact Information",
+        "salutation": "Salutation",
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone",
+        "company": "Company"
+      }
+    },
+    "config": {
+      "projectTypes": {
+        "website": {
+          "title": "Website",
+          "description": "Classic corporate website or simple web business card"
+        },
+        "cms": {
+          "title": "Content Management System",
+          "description": "Website with independent content management"
+        },
+        "webApplication": {
+          "title": "Web Application",
+          "description": "Interactive web application or PWA"
+        },
+        "artificialIntelligence": {
+          "title": "AI Use Case",
+          "description": "AI solutions for consulting, workflows, agents and individual applications"
+        },
+        "freestyle": {
+          "title": "Individual Development",
+          "description": "Tailor-made solution according to your specific requirements"
+        }
+      },
+      "subTypes": {
+        "onepager": {
+          "title": "Web Business Card",
+          "description": "Simple one-pager with contact details and basic information"
+        },
+        "onepagerPlus": {
+          "title": "Campaign Page",
+          "description": "Targeted landing page for marketing campaigns with call-to-action"
+        },
+        "corporateWebsite": {
+          "title": "Corporate Website",
+          "description": "Professional company website with multiple pages and company information"
+        },
+        "corporateWebsitePremium": {
+          "title": "Corporate Website Premium",
+          "description": "Comprehensive corporate website with advanced features and individual design"
+        },
+        "cmsSimple": {
+          "title": "Simple CMS",
+          "description": "Basic content management system for simple content maintenance"
+        },
+        "cmsPremium": {
+          "title": "Premium CMS",
+          "description": "Advanced content management solution with custom fields and workflows"
+        },
+        "blogSystem": {
+          "title": "Blog System",
+          "description": "Complete blog system with categories, tags and comment function"
+        },
+        "headlessCms": {
+          "title": "Headless CMS",
+          "description": "API-based content management system for flexible frontend solutions"
+        },
+        "pwa": {
+          "title": "Progressive Web App",
+          "description": "App-like web application with offline functionality and push notifications"
+        },
+        "customApp": {
+          "title": "Individual Application",
+          "description": "Tailor-made web application according to specific requirements"
+        },
+        "apiIntegration": {
+          "title": "API Integration",
+          "description": "Integration of external services and APIs into existing systems"
+        },
+        "customTool": {
+          "title": "Individual Tool",
+          "description": "Specialized web tools for specific business processes"
+        },
+        "aiConsulting": {
+          "title": "AI Consulting",
+          "description": "Strategic consulting and concept development for AI implementations"
+        },
+        "aiWorkflows": {
+          "title": "AI Workflows",
+          "description": "Automated business processes and intelligent workflow systems"
+        },
+        "aiAgents": {
+          "title": "AI Agents",
+          "description": "Intelligent agents for customer service, support and automation"
+        },
+        "aiIndividual": {
+          "title": "Individual AI Solution",
+          "description": "Tailor-made AI applications according to specific requirements"
+        }
+      },
+      "features": {
+        "kontaktformular": {
+          "title": "Contact Form",
+          "description": "An individual contact form that captures all inquiries."
+        },
+        "newsletterRegistrierung": {
+          "title": "Newsletter Registration",
+          "description": "Newsletter registration with email validation and double opt-in"
+        },
+        "chatbot": {
+          "title": "Chatbot",
+          "description": "AI-powered chatbot for customer service and consulting"
+        },
+        "terminbuchung": {
+          "title": "Appointment Booking",
+          "description": "Online appointment booking system with calendar integration"
+        },
+        "bildergalerie": {
+          "title": "Image Gallery",
+          "description": "Responsive image gallery with lightbox functionality and categorization"
+        },
+        "videoEmbedding": {
+          "title": "Video Embedding",
+          "description": "Responsive video integration with player controls"
+        },
+        "portfolioGrid": {
+          "title": "Portfolio Grid",
+          "description": "Responsive portfolio grid for presenting work"
+        },
+        "kalender": {
+          "title": "Calendar",
+          "description": "Interactive calendar with event management and appointment display"
+        },
+        "dateiupload": {
+          "title": "File Upload",
+          "description": "Secure file upload functionality with validation and preview"
+        },
+        "megaMenu": {
+          "title": "Mega Menu",
+          "description": "Advanced navigation with multi-level dropdown menus"
+        },
+        "customTeaser": {
+          "title": "Custom Teaser",
+          "description": "Individual teaser components for content and products"
+        },
+        "customCarousel": {
+          "title": "Custom Carousel",
+          "description": "Tailor-made carousel component for images and content"
+        },
+        "akkordeon": {
+          "title": "Accordion",
+          "description": "Collapsible content sections for FAQ and structured content"
+        },
+        "tabs": {
+          "title": "Tabs",
+          "description": "Tab navigation for clear presentation of content"
+        },
+        "themeSwitcher": {
+          "title": "Theme Switcher",
+          "description": "Dark/Light mode toggle and individual theme selection"
+        },
+        "suchfunktion": {
+          "title": "Search Function",
+          "description": "Intelligent search function for website content with filter options"
+        },
+        "customFilter": {
+          "title": "Custom Filter",
+          "description": "Advanced filter functions for product catalogs and content"
+        },
+        "multiStepDialog": {
+          "title": "Multi-Step Dialog",
+          "description": "Multi-step forms and dialogs for complex inputs"
+        },
+        "konfigurator": {
+          "title": "Configurator",
+          "description": "Interactive product or service configurator"
+        },
+        "assistent": {
+          "title": "Assistant",
+          "description": "Digital assistant for user guidance and assistance"
+        },
+        "bewertungsmechanismus": {
+          "title": "Rating Mechanism",
+          "description": "Rating and review system for products or services"
+        },
+        "zahlungsbawicklung": {
+          "title": "Payment Processing",
+          "description": "Secure online payment processing with various payment providers"
+        },
+        "benutzerkonten": {
+          "title": "User Accounts",
+          "description": "User management with registration, login and profile management"
+        },
+        "altersverifikation": {
+          "title": "Age Verification",
+          "description": "Age verification system for age-restricted content"
+        },
+        "cookieConsent": {
+          "title": "Cookie Consent",
+          "description": "GDPR-compliant cookie consent declaration and management"
+        },
+        "barrierefreiheitTools": {
+          "title": "Accessibility Tools",
+          "description": "Accessibility features for better usability and WCAG compliance"
+        },
+        "mapsIntegration": {
+          "title": "Maps Integration",
+          "description": "Google Maps, Mapbox or OpenStreetMap integration with location markers"
+        },
+        "socialMediaIntegration": {
+          "title": "Social Media Integration",
+          "description": "Integration of social media feeds and sharing buttons"
+        },
+        "analyticsIntegration": {
+          "title": "Analytics Integration",
+          "description": "Google Analytics, Matomo or other tracking tools integration"
+        },
+        "seo": {
+          "title": "SEO Optimization",
+          "description": "Search engine optimization with meta tags, schema markup and performance"
+        },
+        "marketingTools": {
+          "title": "Marketing Tools",
+          "description": "A/B testing, conversion tracking and marketing automation"
+        },
+        "mehrsprachigkeit": {
+          "title": "Multilingual",
+          "description": "Multi-language support with automatic language detection"
+        }
+      },
+      "categories": {
+        "kommunikation": "Communication",
+        "content": "Content",
+        "navigation": "Navigation",
+        "funktionalitaet": "Functionality",
+        "ecommerce": "E-Commerce",
+        "benutzer": "User",
+        "integration": "Integration",
+        "marketing": "Marketing",
+        "lokalisierung": "Localization"
+      },
+      "formFieldTypes": {
+        "text": "Text Field",
+        "email": "Email",
+        "phone": "Phone",
+        "textarea": "Text Area",
+        "select": "Select List",
+        "checkbox": "Checkbox",
+        "radio": "Radio Button",
+        "file": "File Upload",
+        "date": "Date",
+        "number": "Number"
+      }
+    }
+  }
+}

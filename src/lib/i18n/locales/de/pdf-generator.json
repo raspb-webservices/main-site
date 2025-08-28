@@ -1,1 +1,367 @@
-{}
+{
+  "pdf": {
+    "header": {
+      "subheadline": "Ihre individuelle Projektkonfiguration",
+      "createdOn": "Erstellt am "
+    },
+    "hardcodedTexts": {
+      "domainStatus": {
+        "label": "Domain-Status:",
+        "placeholder": "Bitte wählen...",
+        "owned": "Domain bereits im Besitz",
+        "needsRegistration": "Domain muss registriert werden",
+        "needsTransfer": "Domain muss übertragen werden",
+        "undecided": "Noch nicht entschieden"
+      },
+      "timeline": {
+        "label": "Gewünschter Zeitrahmen:",
+        "placeholder": "Bitte wählen...",
+        "asap": "So schnell wie möglich",
+        "fiveToTenDays": "5 - 10 Tage",
+        "twoToFourWeeks": "2 - 4 Wochen",
+        "twoToSixMonths": "2 - 6 Monate",
+        "flexible": "Flexibel"
+      },
+      "budget": {
+        "label": "Ihr Budget:",
+        "placeholder": "Bitte wählen...",
+        "under500": "unter 500€",
+        "oneToThreeK": "1.000€ - 3.000€",
+        "threeToSevenK": "3.000€ - 7.000€",
+        "sevenToTenK": "7.000€ - 10.000€",
+        "tenToFifteenK": "10.000€ - 15.000€",
+        "fifteenToTwentyK": "15.000€ - 25.000€",
+        "moreThanTwentyFiveK": "mehr als 25.000€"
+      },
+      "customFeatures": {
+        "label": "Weitere gewünschte Features:",
+        "placeholder": "Beschreiben Sie weitere spezielle Anforderungen, die nicht in der Liste stehen..."
+      },
+      "colorScheme": {
+        "title": "Farbschema",
+        "description": "Wählen Sie die Hauptfarben für Ihr Projekt. Falls Sie bereits Corporate Colors haben, geben Sie diese hier an."
+      },
+      "font": {
+        "title": "Schriftart",
+        "description": "Wählen Sie eine Schriftart aus unserer Auswahl oder geben Sie Ihre Corporate Font an.",
+        "otherGoogleFonts": "< Ich möchte eine andere Google Font nutzen >"
+      },
+      "materials": {
+        "title": "Materialien hochladen",
+        "description": "Laden Sie hier Styleguides, Mockups, Logos, Bilder oder andere relevante Dateien hoch, die uns bei der Umsetzung helfen.",
+        "documentsTitle": "Dokumente hochladen",
+        "documentsDescription": "Laden Sie Spezifikationen, Wireframes, bestehende Dokumentationen oder andere relevante Dateien hoch."
+      },
+      "pages": {
+        "pageName": "Seitenname:",
+        "pageNamePlaceholder": "z.B. Startseite, Über uns, Kontakt, Leistungen...",
+        "pageContent": "Gewünschte Inhalte:",
+        "pageContentPlaceholder": "Beschreiben Sie, welche Inhalte auf dieser Seite stehen sollen: Texte, Bilder, Funktionen, etc.",
+        "pageCharacteristic": "Besonderheiten der Seite:",
+        "pageCharacteristicPlaceholder": "Welche Features sollen auf dieser Seite platziert werden? Sollen Inhaltsvorschläge erarbeitet werden oder sollen Inhalte exakt wie vorgegeben übernommen werden?",
+        "addPage": "Seite hinzufügen"
+      },
+      "formFields": {
+        "title": "Formular-Felder",
+        "description": "Da Sie ein Kontaktformular gewählt haben, definieren Sie hier die gewünschten Felder und deren Bezeichnungen.",
+        "field": "Feld",
+        "fieldType": "Feldtyp:",
+        "fieldTypePlaceholder": "Feldtyp wählen...",
+        "fieldName": "Feldname/Beschriftung:",
+        "fieldNamePlaceholder": "z.B. Name, E-Mail, Nachricht, Telefon...",
+        "required": "Pflichtfeld",
+        "addField": "Feld hinzufügen",
+        "removeField": "Formularfeld entfernen",
+        "remove": "Entfernen"
+      },
+      "navigation": {
+        "back": "Zurück",
+        "next": "Weiter",
+        "downloadConfiguration": "Konfiguration herunterladen",
+        "submitProject": "Projekt einreichen"
+      },
+      "summary": {
+        "projectType": "Projekttyp",
+        "projectDescription": "Projektbeschreibung",
+        "selectedFeatures": "Gewählte Features",
+        "pagesSections": "Seiten/Bereiche",
+        "formFields": "Formular-Felder",
+        "design": "Design",
+        "colors": "Farben:",
+        "estimatedPrice": "Geschätzter Preis",
+        "average": "Durchschnitt: {price}€",
+        "disclaimer": "*Unverbindliche Schätzung. Der finale Preis wird nach einem persönlichen Gespräch festgelegt.",
+        "base": "Basis ({projectType}):",
+        "features": "Features ({count}):",
+        "included": "Inklusive",
+        "required": "Pflicht",
+        "optional": "Optional",
+        "createdOn": "Erstellt am",
+        "projectConfiguration": "Projekt-Konfiguration",
+        "targetAudience": "Zielgruppe",
+        "goals": "Ziele",
+        "desiredDomain": "Gewünschte Domain",
+        "domainStatus": "Domain-Status",
+        "timeline": "Zeitrahmen",
+        "budget": "Budget",
+        "pages": "Seiten",
+        "page": "Seite",
+        "characteristics": "Besonderheiten",
+        "primaryColor": "Primärfarbe",
+        "secondaryColor": "Sekundärfarbe",
+        "accentColor": "Akzentfarbe",
+        "font": "Schriftart",
+        "uploadedFiles": "Hochgeladene Dateien",
+        "contactInformation": "Kontaktinformationen",
+        "salutation": "Anrede",
+        "name": "Name",
+        "email": "E-Mail",
+        "phone": "Telefon",
+        "company": "Firma"
+      }
+    },
+    "config": {
+      "projectTypes": {
+        "website": {
+          "title": "Website",
+          "description": "Klassische Unternehmenswebsite oder einfache Webvisitenkarte"
+        },
+        "cms": {
+          "title": "Content Management System",
+          "description": "Website mit eigenständiger Inhaltsverwaltung"
+        },
+        "webApplication": {
+          "title": "Web Application",
+          "description": "Interaktive Webanwendung oder PWA"
+        },
+        "artificialIntelligence": {
+          "title": "KI Use-Case",
+          "description": "KI-Lösungen für Beratung, Workflows, Agenten und individuelle Anwendungen"
+        },
+        "freestyle": {
+          "title": "Individuelle Entwicklung",
+          "description": "Maßgeschneiderte Lösung nach Ihren spezifischen Anforderungen"
+        }
+      },
+      "subTypes": {
+        "onepager": {
+          "title": "Webvisitenkarte",
+          "description": "Einfacher Onepager mit Kontaktdaten und grundlegenden Informationen"
+        },
+        "onepagerPlus": {
+          "title": "Kampagnen Seite",
+          "description": "Zielgerichtete Landing Page für Marketing-Kampagnen mit Call-to-Action"
+        },
+        "corporateWebsite": {
+          "title": "Unternehmenswebseite",
+          "description": "Professionelle Firmenwebsite mit mehreren Seiten und Unternehmensinformationen"
+        },
+        "corporateWebsitePremium": {
+          "title": "Unternehmenswebseite Premium",
+          "description": "Umfassende Unternehmenswebsite mit erweiterten Funktionen und individuellem Design"
+        },
+        "cmsSimple": {
+          "title": "Einfaches CMS",
+          "description": "Grundlegendes Content Management System für einfache Inhaltspflege"
+        },
+        "cmsPremium": {
+          "title": "Premium CMS",
+          "description": "Erweiterte Content-Management-Lösung mit benutzerdefinierten Feldern und Workflows"
+        },
+        "blogSystem": {
+          "title": "Blog System",
+          "description": "Vollständiges Blog-System mit Kategorien, Tags und Kommentarfunktion"
+        },
+        "headlessCms": {
+          "title": "Headless CMS",
+          "description": "API-basiertes Content Management System für flexible Frontend-Lösungen"
+        },
+        "pwa": {
+          "title": "Progressive Web App",
+          "description": "App-ähnliche Webanwendung mit Offline-Funktionalität und Push-Benachrichtigungen"
+        },
+        "customApp": {
+          "title": "Individuelle Anwendung",
+          "description": "Maßgeschneiderte Webanwendung nach spezifischen Anforderungen"
+        },
+        "apiIntegration": {
+          "title": "API Integration",
+          "description": "Integration externer Dienste und APIs in bestehende Systeme"
+        },
+        "customTool": {
+          "title": "Individuelles Tool",
+          "description": "Spezialisierte Web-Tools für spezifische Geschäftsprozesse"
+        },
+        "aiConsulting": {
+          "title": "KI-Beratung",
+          "description": "Strategische Beratung und Konzeptentwicklung für KI-Implementierungen"
+        },
+        "aiWorkflows": {
+          "title": "KI-Workflows",
+          "description": "Automatisierte Geschäftsprozesse und intelligente Workflow-Systeme"
+        },
+        "aiAgents": {
+          "title": "KI-Agenten",
+          "description": "Intelligente Agenten für Kundenservice, Support und Automatisierung"
+        },
+        "aiIndividual": {
+          "title": "Individuelle KI-Lösung",
+          "description": "Maßgeschneiderte KI-Anwendungen nach spezifischen Anforderungen"
+        }
+      },
+      "features": {
+        "kontaktformular": {
+          "title": "Kontaktformular",
+          "description": "Ein individuelles Kontaktformular, welches alle Anfragen erfasst."
+        },
+        "newsletterRegistrierung": {
+          "title": "Newsletter Registrierung",
+          "description": "Newsletter-Anmeldung mit E-Mail-Validierung und Double-Opt-In"
+        },
+        "chatbot": {
+          "title": "Chatbot",
+          "description": "KI-gestützter Chatbot für Kundenservice und Beratung"
+        },
+        "terminbuchung": {
+          "title": "Terminbuchung",
+          "description": "Online-Terminbuchungssystem mit Kalenderintegration"
+        },
+        "bildergalerie": {
+          "title": "Bildergalerie",
+          "description": "Responsive Bildergalerie mit Lightbox-Funktionalität und Kategorisierung"
+        },
+        "videoEmbedding": {
+          "title": "Video Embedding",
+          "description": "Responsive Video-Einbindung mit Player-Kontrollen"
+        },
+        "portfolioGrid": {
+          "title": "Portfolio Grid",
+          "description": "Responsive Portfolio-Raster zur Präsentation von Arbeiten"
+        },
+        "kalender": {
+          "title": "Kalender",
+          "description": "Interaktiver Kalender mit Event-Management und Terminanzeige"
+        },
+        "dateiupload": {
+          "title": "Datei Upload",
+          "description": "Sichere Datei-Upload-Funktionalität mit Validierung und Vorschau"
+        },
+        "megaMenu": {
+          "title": "Mega Menu",
+          "description": "Erweiterte Navigation mit mehrstufigen Dropdown-Menüs"
+        },
+        "customTeaser": {
+          "title": "Custom Teaser",
+          "description": "Individuelle Teaser-Komponenten für Inhalte und Produkte"
+        },
+        "customCarousel": {
+          "title": "Custom Carousel",
+          "description": "Maßgeschneiderte Karussell-Komponente für Bilder und Inhalte"
+        },
+        "akkordeon": {
+          "title": "Akkordeon",
+          "description": "Zusammenklappbare Inhaltsabschnitte für FAQ und strukturierte Inhalte"
+        },
+        "tabs": {
+          "title": "Tabs",
+          "description": "Tab-Navigation zur übersichtlichen Darstellung von Inhalten"
+        },
+        "themeSwitcher": {
+          "title": "Theme Switcher",
+          "description": "Dark/Light Mode Toggle und individuelle Theme-Auswahl"
+        },
+        "suchfunktion": {
+          "title": "Suchfunktion",
+          "description": "Intelligente Suchfunktion für Website-Inhalte mit Filteroptionen"
+        },
+        "customFilter": {
+          "title": "Custom Filter",
+          "description": "Erweiterte Filterfunktionen für Produktkataloge und Inhalte"
+        },
+        "multiStepDialog": {
+          "title": "Multi-Step Dialog",
+          "description": "Mehrstufige Formulare und Dialoge für komplexe Eingaben"
+        },
+        "konfigurator": {
+          "title": "Konfigurator",
+          "description": "Interaktiver Produkt- oder Service-Konfigurator"
+        },
+        "assistent": {
+          "title": "Assistent",
+          "description": "Digitaler Assistent zur Benutzerführung und Hilfestellung"
+        },
+        "bewertungsmechanismus": {
+          "title": "Bewertungsmechanismus",
+          "description": "Bewertungs- und Review-System für Produkte oder Services"
+        },
+        "zahlungsbawicklung": {
+          "title": "Zahlungsabwicklung",
+          "description": "Sichere Online-Zahlungsabwicklung mit verschiedenen Payment-Anbietern"
+        },
+        "benutzerkonten": {
+          "title": "Benutzerkonten",
+          "description": "User-Management mit Registrierung, Login und Profilverwaltung"
+        },
+        "altersverifikation": {
+          "title": "Altersverifikation",
+          "description": "Altersverifikationssystem für altersbeschränkte Inhalte"
+        },
+        "cookieConsent": {
+          "title": "Cookie Consent",
+          "description": "DSGVO-konforme Cookie-Einverständniserklärung und -verwaltung"
+        },
+        "barrierefreiheitTools": {
+          "title": "Barrierefreiheit Tools",
+          "description": "Accessibility-Features für bessere Nutzbarkeit und WCAG-Konformität"
+        },
+        "mapsIntegration": {
+          "title": "Maps Integration",
+          "description": "Google Maps, Mapbox oder OpenStreetMap Integration mit Standortmarkierungen"
+        },
+        "socialMediaIntegration": {
+          "title": "Social Media Integration",
+          "description": "Einbindung von Social Media Feeds und Sharing-Buttons"
+        },
+        "analyticsIntegration": {
+          "title": "Analytics Integration",
+          "description": "Google Analytics, Matomo oder andere Tracking-Tools-Integration"
+        },
+        "seo": {
+          "title": "SEO Optimierung",
+          "description": "Suchmaschinenoptimierung mit Meta-Tags, Schema Markup und Performance"
+        },
+        "marketingTools": {
+          "title": "Marketing Tools",
+          "description": "A/B-Testing, Conversion-Tracking und Marketing-Automation"
+        },
+        "mehrsprachigkeit": {
+          "title": "Mehrsprachigkeit",
+          "description": "Multi-Language Support mit automatischer Spracherkennung"
+        }
+      },
+      "categories": {
+        "kommunikation": "Kommunikation",
+        "content": "Content",
+        "navigation": "Navigation",
+        "funktionalitaet": "Funktionalität",
+        "ecommerce": "E-Commerce",
+        "benutzer": "Benutzer",
+        "integration": "Integration",
+        "marketing": "Marketing",
+        "lokalisierung": "Lokalisierung"
+      },
+      "formFieldTypes": {
+        "text": "Textfeld",
+        "email": "E-Mail",
+        "phone": "Telefon",
+        "textarea": "Textbereich",
+        "select": "Auswahlliste",
+        "checkbox": "Checkbox",
+        "radio": "Radio Button",
+        "file": "Datei Upload",
+        "date": "Datum",
+        "number": "Zahl"
+      }
+    }
+  }
+}

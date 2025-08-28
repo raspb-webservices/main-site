@@ -316,7 +316,7 @@
     isGeneratingPDF = true;
     try {
       // Send project data to server-side PDF generation
-      const response = await fetch('/api/generate-pdf', {
+      const response = await fetch('/api/pdf/generate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
