@@ -124,7 +124,7 @@
           </button>
         </div>
       {:else}
-        <form on:submit|preventDefault={handleSubmit} class="space-y-6">
+        <form onsubmit|preventDefault={handleSubmit} class="space-y-6">
           {#if errorMessage}
             <div class="alert alert-error shadow-lg">
               <div>
