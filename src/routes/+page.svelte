@@ -7,6 +7,7 @@
   import RaspbPhilosophyModal from '$lib/components/raspb-philosophy-modal.svelte';
   import { goto } from '$app/navigation';
   import { _ } from 'svelte-i18n';
+  import Stage from '$lib/components/ui/stage.svelte';
 
   let currentUser = $derived(user.get());
   const md = markdownit();
@@ -49,20 +50,25 @@
   <meta name="description" content={$_('homepage.meta.description')} />
 </svelte:head>
 
-<div class="home-content-wrapper">
-  <Section type={'centerTeaser'}>
-    <div class="animate-fade-in-up flex w-full flex-col items-center justify-center text-center">
-      <h1 class="massive">{$_('homepage.hero.titleFirst')} <span class="inner-text-special">{$_('homepage.hero.titleHighlight')}</span></h1>
-      <h3>{$_('homepage.hero.subtitleFirst')} <button class="text-link-button" onclick={openPhilosophyModal}>{$_('homepage.hero.subtitleSecond')}</button> {$_('homepage.hero.subtitleThird')}</h3>
-      <button
-        class="btn-basic"
+
+<Stage style={'svg-gradient'}>
+  <div class="inner-box reduced py-36">
+    <h1 class="massive animate-fade-in-up">{$_('homepage.hero.title')}</h1>
+    <p class="teaser animate-fade-in-up">
+      {$_('homepage.hero.subtitleFirst')} <button class="text-link-button" onclick={openPhilosophyModal}>{$_('homepage.hero.subtitleSecond')}</button> {$_('homepage.hero.subtitleThird')}
+    </p>
+    <button
+      class="btn-basic animate-fade-in-from-side"
         onclick={() => {
           goto('/services');
         }}>{$_('homepage.hero.buttonText')}</button
-      >
-    </div>
+    >
+  </div>
+</Stage>
 
-    <div class="massive-spacer"></div>
+<div class="home-content-wrapper">
+  <Section type={'centerTeaser'}>
+
     <div class="massive-spacer"></div>
 
     <div class="grid grid-cols-1 items-center gap-12 gap-y-10 lg:grid-cols-2 lg:gap-14 lg:gap-y-4">

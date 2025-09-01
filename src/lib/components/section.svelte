@@ -14,13 +14,21 @@
       {@render children()}
     </div>
   </section>
+{:else if type === 'fullCenterTeaser'}
+  <section class="base-section full-center-teaser">
+    <div class="inner-container animate-fade-in-up">
+      {@render children()}
+    </div>
+  </section>
 {/if}
+
+
+
 
 <style lang="postcss">
   @reference '../../app.css';
   section.base-section {
-    @apply w-full py-10 bg-base-100;
-    /* background-color: var(--backgroundColor); */
+    @apply w-full bg-white py-24;
 
     &:not(.full) {
       .inner-container {
@@ -29,6 +37,15 @@
     }
     &.center-teaser {
       @apply from-secondary/30 via-primary/10 to-secondary/20 bg-gradient-to-br py-36;
+    }
+    &.full-center-teaser {
+      @apply from-secondary/30 via-primary/10 to-secondary/20 bg-gradient-to-br py-10;
+      .inner-container {
+        @apply min-h-[calc(100vh-160px)] flex flex-col justify-center items-center;
+        > *  {
+          @apply grow;
+        }
+      }
     }
   }
 </style>

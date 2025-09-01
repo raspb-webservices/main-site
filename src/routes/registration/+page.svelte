@@ -119,7 +119,7 @@
           </div>
           <h2 class="text-2xl font-bold mb-4">Registrierung erfolgreich!</h2>
           <p class="mb-6">Ihr Konto wurde erfolgreich erstellt. Sie erhalten in Kürze eine Bestätigungs-E-Mail.</p>
-          <button class="btn-basic mx-auto" on:click={() => isSuccess = false}>
+          <button class="btn-basic mx-auto" onclick={() => isSuccess = false}>
             Zurück zum Formular
           </button>
         </div>
@@ -192,7 +192,7 @@
               <button
                 type="button"
                 class="absolute inset-y-0 right-0 flex items-center pr-3 z-10"
-                on:click={() => showPassword = !showPassword}
+                onclick={() => showPassword = !showPassword}
                 aria-label={showPassword ? 'Passwort verbergen' : 'Passwort anzeigen'}
               >
                 {#if showPassword}
@@ -222,14 +222,14 @@
                 id="confirmPassword"
                 class={`input input-bordered w-full pr-12 relative z-0 ${!isPasswordMatch ? 'input-error' : ''}`}
                 bind:value={confirmPassword}
-                on:input={checkPasswordMatch}
+                oninput={checkPasswordMatch}
                 placeholder="••••••••"
                 required
               />
               <button
                 type="button"
                 class="absolute inset-y-0 right-0 flex items-center pr-3 z-10"
-                on:click={() => showConfirmPassword = !showConfirmPassword}
+                onclick={() => showConfirmPassword = !showConfirmPassword}
                 aria-label={showConfirmPassword ? 'Passwort verbergen' : 'Passwort anzeigen'}
               >
                 {#if showConfirmPassword}

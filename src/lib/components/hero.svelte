@@ -21,7 +21,7 @@
       {/if}
 
       {#if showButton && buttonText}
-        <button class="btn-basic hero-button" on:click={buttonAction}>
+        <button class="btn-basic hero-button" onclick={buttonAction}>
           {buttonText}
         </button>
       {/if}

@@ -27,6 +27,22 @@
   --purple: oklch(0.6056 0.2189 292.72);
   --pink: oklch(0.6559 0.2118 354.31);
   --violet: oklch(0.6668 0.2591 322.15);
+
+  --color-persian-rose-50: #fef1f9;
+  --color-persian-rose-100: #fde6f4;
+  --color-persian-rose-200: #fdcdea;
+  --color-persian-rose-300: #fda4d8;
+  --color-persian-rose-400: #fa6cbc;
+  --color-persian-rose-500: #f33199;
+  --color-persian-rose-600: #e41e7e;
+  --color-persian-rose-700: #c61064;
+  --color-persian-rose-800: #a31152;
+  --color-persian-rose-900: #881347;
+  --color-persian-rose-950: #540326;
+
+  --iconic-blue: #121D33;
+
+
 }
 
 @plugin "daisyui" {
@@ -68,6 +84,7 @@
   --border: 1px;
   --depth: 1;
   --noise: 1;
+  --color-iconic-blue: #121D33;
 }
 @plugin "daisyui/theme" {
   name: 'dark';
@@ -103,6 +120,7 @@
   --border: 1px;
   --depth: 1;
   --noise: 0;
+    --color-iconic-blue: #121D33;
 }
 @theme {
   --font-lato: 'Lato', sans-serif;
@@ -141,6 +159,7 @@
   --color-violet: oklch(0.6668 0.2591 322.15);
   --animate-fade-in-up: fadeInUp 0.5s ease-out;
   --animate-fade-in-from-side: fadeInFromSide 0.5s ease-out;
+  --color-iconic-blue: #121D33;
 }
 
 /* BASICS */
@@ -171,9 +190,12 @@ p {
     @apply pb-0;
   }
   &.teaser {
-    @apply pb-8 text-2xl;
+    @apply pb-8 text-2xl leading-normal;
     &.no-padding {
       @apply pb-0;
+    }
+    &.boxed {
+      @apply max-w-4xl mx-auto;
     }
   }
   &.stay-dark {
@@ -275,17 +297,17 @@ textarea:not([rows]) {
 
 /* LAYOUT */
 .wrapper {
-  @apply w-full;
-
-  .content-container {
-    @apply min-h-[calc(100vh-176px)] md:min-h-[calc(100vh-144px)];
+  .global-loading {
+    @apply w-full h-dvh flex justify-center items-center;
   }
-
-  .inner-box {
-    @apply m-auto h-full w-full max-w-7xl px-4;
-  }
-  .inner-box-full-width {
-    @apply m-auto h-full w-full px-4;
+  main {
+    @apply bg-white min-h-[calc(100vh-464px)];
+    .inner-box {
+      @apply mx-auto h-full w-full max-w-7xl px-10;
+      &.reduced {
+        @apply max-w-5xl px-10
+      }
+    }
   }
 }
 
@@ -311,7 +333,28 @@ textarea:not([rows]) {
 
 /* Special Button Style */
 .btn-basic {
-  @apply from-purple via-pink to-violet flex items-center justify-center rounded-md border-0 bg-linear-to-r bg-size-[200%_auto] px-12 py-4 text-lg leading-none font-bold text-nowrap text-white shadow-md transition-all duration-500;
+  @apply from-purple via-pink to-violet flex items-center justify-center rounded-md border-0 bg-linear-to-r bg-size-[200%_auto] px-12 py-5 text-lg leading-none font-bold text-nowrap text-white shadow-md transition-all duration-500;
+
+  &:disabled, &[disabled] {
+    @apply cursor-not-allowed opacity-40;
+    &:hover {
+      @apply cursor-not-allowed bg-left;
+    }
+  }
+  svg {
+    @apply mx-1;
+  }
+  &.block-button {
+    @apply h-[50px] px-4 py-0;
+  }
+
+  &:hover {
+    @apply cursor-pointer bg-right shadow-none;
+  }
+}
+
+.btn-basic-header {
+  @apply from-purple via-pink to-violet flex items-center justify-center h-11.5 rounded-md border-0 bg-linear-to-r bg-size-[200%_auto] px-7 text-lg leading-none font-bold text-nowrap text-white shadow-md transition-all duration-500;
 
   &:disabled, &[disabled] {
     @apply cursor-not-allowed opacity-40;
@@ -348,11 +391,22 @@ textarea:not([rows]) {
     }
   }
 }
+.btn-outline-header {
+  @apply from-purple to-pink border-0 bg-linear-to-r rounded-lg w-fit h-11.5 mr-3;
+  .button-inner {
+    @apply bg-base-200 text-nowrap text-base-content h-[calc(100%-4px)] rounded-md px-4 m-0.5 flex items-center justify-center font-bold;
+  }
+  &:hover {
+    @apply cursor-pointer opacity-60;
+
+  }
+}
+
+
 
 .badge-primary {
   @apply from-pink to-violet border-0 bg-linear-to-r text-nowrap text-white;
 }
-
 .nav-button-link {
   @apply relative mr-2.5 ml-2.5 min-h-6 px-2 text-lg text-base-content opacity-75;
   &::after {

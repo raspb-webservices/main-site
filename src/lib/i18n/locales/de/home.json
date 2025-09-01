@@ -5,11 +5,12 @@
       "description": "Professionelle Webentwicklung, CMS-Lösungen und KI-Services für KMUs, Vereine und Stiftungen. Transparent, günstig und nach bewährter raspb Philosophie."
     },
     "hero": {
+      "title": "Digital Experience nach Maß",
       "titleFirst": "Digital Experience",
       "titleHighlight": "nach Maß",
-      "subtitleFirst": "skalierbar - sicher - nach bewährter",
+      "subtitleFirst": "skalierbar  -  sicher  -  nach bewährter",
       "subtitleSecond": "raspb Philosophie",
-      "subtitleThird": "- super günstig",
+      "subtitleThird": " -  super günstig",
       "buttonText": "mehr erfahren"
     },
     "intro": {

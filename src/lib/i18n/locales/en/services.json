@@ -5,10 +5,11 @@
       "description": "Discover our comprehensive service portfolio: websites, CMS solutions, applications, individual development and AI services for your digital project."
     },
     "hero": {
+      "title": "Our Services",
       "titleFirst": "Our",
       "titleHighlight": "Services",
       "subtitle": "Tailor-made digital solutions for every need - from simple websites to complex AI integrations",
-      "buttonText": "Configure project"
+      "buttonText": "Start now"
     },
     "intro": {
       "titleFirst": "From Idea to",

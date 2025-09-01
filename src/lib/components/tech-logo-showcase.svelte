@@ -42,7 +42,7 @@
     const animate = () => {
       if (!isHovered) {
         position -= speed;
-        if(position < -1000) { position = 0}
+        if(position < -600 || position > 600 ) { position = 0}
         if (container) {
           container.style.transform = `translateX(${position}%)`;
         }
@@ -67,8 +67,8 @@
   }
 </script>
 
-<div class="bg-base-200 my-12 w-full overflow-hidden rounded-3xl py-12">
-  <div class="mb-8 text-center">
+<div class="bg-base-200 my-12 w-full overflow-hidden py-12">
+  <div class="mb-2 text-center">
     <h2 class="mb-2 text-3xl font-bold">Unser Technologie-Stack</h2>
     <p class="text-base-content/70">Moderne Tools für außergewöhnliche Ergebnisse</p>
   </div>
@@ -77,7 +77,7 @@
     <div class="flex whitespace-nowrap" bind:this={container}>
       {#each techLogos as logo, i}
         <div class="mx-8 inline-flex items-center justify-center">
-          <div class="bg-base-100 rounded-xl p-4 shadow-lg transition-shadow duration-300 hover:cursor-pointer">
+          <div class="bg-white rounded-xl p-4 shadow-lg transition-shadow duration-300 hover:cursor-pointer">
             <img src={logo.src} alt={logo.name} class="block h-24 w-auto grayscale filter transition-all duration-300 hover:grayscale-0" loading="lazy" />
           </div>
         </div>

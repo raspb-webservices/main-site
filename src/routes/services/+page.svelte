@@ -2,7 +2,8 @@
   import Section from '$lib/components/section.svelte';
   import { goto } from '$app/navigation';
   import { _ } from 'svelte-i18n';
-  import { locale, locales } from 'svelte-i18n'
+  import { locale, locales } from 'svelte-i18n';
+  import Stage from '$lib/components/ui/stage.svelte';
 
   // Modal control functions
   function openModal(modalId: string) {
@@ -36,21 +37,22 @@
   <meta name="description" content={$_('servicesPage.meta.description')} />
 </svelte:head>
 
+<Stage style={'basic-gradient'}>
+  <div class="inner-box reduced py-36">
+    <h1 class="massive animate-fade-in-up">{$_('servicesPage.hero.title')}</h1>
+    <p class="teaser animate-fade-in-up">{$_('servicesPage.hero.subtitle')}</p>
+    <button
+      class="btn-basic animate-fade-in-from-side"
+      onclick={() => {
+        goto('/get-started');
+      }}>{$_('servicesPage.hero.buttonText')}</button
+    >
+  </div>
+</Stage>
+
 <div class="services-content-wrapper">
   <!-- Hero/Teaser Section -->
   <Section type={'centerTeaser'}>
-    <div class="animate-fade-in-up flex w-full flex-col items-center justify-center text-center">
-      <h1 class="massive">{$_('servicesPage.hero.titleFirst')}  <span class="inner-text-special">{$_('servicesPage.hero.titleHighlight')}</span></h1>
-      <h3>{$_('servicesPage.hero.subtitle')}</h3>
-      <button
-        class="btn-basic"
-        onclick={() => {
-          goto('/get-started');
-        }}>{$_('servicesPage.hero.buttonText')}</button
-      >
-    </div>
-
-    <div class="massive-spacer"></div>
     <div class="massive-spacer"></div>
 
     <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-14">
@@ -84,7 +86,9 @@
   <Section>
     <div class="service-overview-highlight">
       <div class="highlight-content">
-        <h2 class="mb-8 text-center">{$_('servicesPage.categories.titleFirst')} <span class="inner-text-special">{$_('servicesPage.categories.titleHighlight')}</span></h2>
+        <h2 class="mb-8 text-center">
+          {$_('servicesPage.categories.titleFirst')} <span class="inner-text-special">{$_('servicesPage.categories.titleHighlight')}</span>
+        </h2>
         <div class="service-categories-grid">
           <div class="category-card" onclick={() => scrollToSection('webseiten-section')}>
             <div class="category-icon">🌐</div>
@@ -281,7 +285,9 @@
   <Section>
     <div id="applications-section" class="service-section">
       <div class="service-header">
-        <h1>{$_('servicesPage.applicationsSection.titleFirst')} <span class="inner-text-special">{$_('servicesPage.applicationsSection.titleHighlight')}</span></h1>
+        <h1>
+          {$_('servicesPage.applicationsSection.titleFirst')} <span class="inner-text-special">{$_('servicesPage.applicationsSection.titleHighlight')}</span>
+        </h1>
         <p class="teaser">
           {$_('servicesPage.applicationsSection.teaser')}
         </p>
@@ -371,7 +377,11 @@
   <Section>
     <div id="individual-development-section" class="service-section">
       <div class="service-header">
-        <h1>{$_('servicesPage.individualDevelopmentSection.titleFirst')}<span class="inner-text-special">{$_('servicesPage.individualDevelopmentSection.titleHighlight')}</span></h1>
+        <h1>
+          {$_('servicesPage.individualDevelopmentSection.titleFirst')}<span class="inner-text-special"
+            >{$_('servicesPage.individualDevelopmentSection.titleHighlight')}</span
+          >
+        </h1>
         <p class="teaser">
           {$_('servicesPage.individualDevelopmentSection.teaser')}
         </p>
@@ -512,7 +522,7 @@
               <span class="highlight">{$_('servicesPage.kiServicesSection.aiAsInfrastructure.highlights.h2')}</span>
               <span class="highlight">{$_('servicesPage.kiServicesSection.aiAsInfrastructure.highlights.h3')}</span>
             </div>
-            <button class="btn-outline-basic mt-3 ml-auto" onclick={ () => openModal('modal-ai-infrastructure') }>
+            <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-ai-infrastructure')}>
               <div class="button-inner">{$_('servicesPage.kiServicesSection.aiAsInfrastructure.buttonText')}</div>
             </button>
           </div>
@@ -655,7 +665,10 @@
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>{$_('servicesPage.modals.landingPages.projectDuration')}</strong> {$_('servicesPage.modals.landingPages.projectDurationValue')}</p>
+        <p class="text-sm">
+          <strong>{$_('servicesPage.modals.landingPages.projectDuration')}</strong>
+          {$_('servicesPage.modals.landingPages.projectDurationValue')}
+        </p>
         <p class="text-sm"><strong>{$_('servicesPage.modals.landingPages.performance')}</strong> {$_('servicesPage.modals.landingPages.performanceValue')}</p>
       </div>
     </div>
@@ -699,8 +712,14 @@
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>{$_('servicesPage.modals.corporateWebsites.projectDuration')}</strong> {$_('servicesPage.modals.corporateWebsites.projectDurationValue')}</p>
-        <p class="text-sm"><strong>{$_('servicesPage.modals.corporateWebsites.maintenance')}</strong> {$_('servicesPage.modals.corporateWebsites.maintenanceValue')}</p>
+        <p class="text-sm">
+          <strong>{$_('servicesPage.modals.corporateWebsites.projectDuration')}</strong>
+          {$_('servicesPage.modals.corporateWebsites.projectDurationValue')}
+        </p>
+        <p class="text-sm">
+          <strong>{$_('servicesPage.modals.corporateWebsites.maintenance')}</strong>
+          {$_('servicesPage.modals.corporateWebsites.maintenanceValue')}
+        </p>
       </div>
     </div>
     <div class="modal-action">
@@ -783,7 +802,10 @@
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>{$_('servicesPage.modals.complexCms.projectDuration')}</strong> {$_('servicesPage.modals.complexCms.projectDurationValue')}</p>
+        <p class="text-sm">
+          <strong>{$_('servicesPage.modals.complexCms.projectDuration')}</strong>
+          {$_('servicesPage.modals.complexCms.projectDurationValue')}
+        </p>
         <p class="text-sm"><strong>{$_('servicesPage.modals.complexCms.support')}</strong> {$_('servicesPage.modals.complexCms.supportValue')}</p>
       </div>
     </div>
@@ -867,7 +889,10 @@
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>{$_('servicesPage.modals.headlessCms.projectDuration')}</strong> {$_('servicesPage.modals.headlessCms.projectDurationValue')}</p>
+        <p class="text-sm">
+          <strong>{$_('servicesPage.modals.headlessCms.projectDuration')}</strong>
+          {$_('servicesPage.modals.headlessCms.projectDurationValue')}
+        </p>
         <p class="text-sm"><strong>{$_('servicesPage.modals.headlessCms.technology')}</strong> {$_('servicesPage.modals.headlessCms.technologyValue')}</p>
       </div>
     </div>
@@ -995,7 +1020,10 @@
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>{$_('servicesPage.modals.nativeApps.projectDuration')}</strong> {$_('servicesPage.modals.nativeApps.projectDurationValue')}</p>
+        <p class="text-sm">
+          <strong>{$_('servicesPage.modals.nativeApps.projectDuration')}</strong>
+          {$_('servicesPage.modals.nativeApps.projectDurationValue')}
+        </p>
         <p class="text-sm"><strong>{$_('servicesPage.modals.nativeApps.appStore')}</strong> {$_('servicesPage.modals.nativeApps.appStoreValue')}</p>
       </div>
     </div>
@@ -1038,7 +1066,10 @@
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>{$_('servicesPage.modals.complexApps.projectDuration')}</strong> {$_('servicesPage.modals.complexApps.projectDurationValue')}</p>
+        <p class="text-sm">
+          <strong>{$_('servicesPage.modals.complexApps.projectDuration')}</strong>
+          {$_('servicesPage.modals.complexApps.projectDurationValue')}
+        </p>
         <p class="text-sm"><strong>{$_('servicesPage.modals.complexApps.support')}</strong> {$_('servicesPage.modals.complexApps.supportValue')}</p>
       </div>
     </div>
@@ -1069,7 +1100,10 @@
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>{$_('servicesPage.modals.components.projectDuration')}</strong> {$_('servicesPage.modals.components.projectDurationValue')}</p>
+        <p class="text-sm">
+          <strong>{$_('servicesPage.modals.components.projectDuration')}</strong>
+          {$_('servicesPage.modals.components.projectDurationValue')}
+        </p>
         <p class="text-sm"><strong>{$_('servicesPage.modals.components.integration')}</strong> {$_('servicesPage.modals.components.integrationValue')}</p>
       </div>
     </div>
@@ -1099,7 +1133,10 @@
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>{$_('servicesPage.modals.extensions.projectDuration')}</strong> {$_('servicesPage.modals.extensions.projectDurationValue')}</p>
+        <p class="text-sm">
+          <strong>{$_('servicesPage.modals.extensions.projectDuration')}</strong>
+          {$_('servicesPage.modals.extensions.projectDurationValue')}
+        </p>
         <p class="text-sm"><strong>{$_('servicesPage.modals.extensions.compatibility')}</strong> {$_('servicesPage.modals.extensions.compatibilityValue')}</p>
       </div>
     </div>
@@ -1129,7 +1166,10 @@
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>{$_('servicesPage.modals.specialApps.projectDuration')}</strong> {$_('servicesPage.modals.specialApps.projectDurationValue')}</p>
+        <p class="text-sm">
+          <strong>{$_('servicesPage.modals.specialApps.projectDuration')}</strong>
+          {$_('servicesPage.modals.specialApps.projectDurationValue')}
+        </p>
         <p class="text-sm"><strong>{$_('servicesPage.modals.specialApps.approach')}</strong> {$_('servicesPage.modals.specialApps.approachValue')}</p>
       </div>
     </div>
@@ -1191,7 +1231,10 @@
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>{$_('servicesPage.modals.kiConsulting.projectDuration')}</strong> {$_('servicesPage.modals.kiConsulting.projectDurationValue')}</p>
+        <p class="text-sm">
+          <strong>{$_('servicesPage.modals.kiConsulting.projectDuration')}</strong>
+          {$_('servicesPage.modals.kiConsulting.projectDurationValue')}
+        </p>
         <p class="text-sm"><strong>{$_('servicesPage.modals.kiConsulting.deliverable')}</strong> {$_('servicesPage.modals.kiConsulting.deliverableValue')}</p>
       </div>
     </div>
@@ -1222,8 +1265,14 @@
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>{$_('servicesPage.modals.kiAgentDevelopment.projectDuration')}</strong> {$_('servicesPage.modals.kiAgentDevelopment.projectDurationValue')}</p>
-        <p class="text-sm"><strong>{$_('servicesPage.modals.kiAgentDevelopment.training')}</strong> {$_('servicesPage.modals.kiAgentDevelopment.trainingValue')}</p>
+        <p class="text-sm">
+          <strong>{$_('servicesPage.modals.kiAgentDevelopment.projectDuration')}</strong>
+          {$_('servicesPage.modals.kiAgentDevelopment.projectDurationValue')}
+        </p>
+        <p class="text-sm">
+          <strong>{$_('servicesPage.modals.kiAgentDevelopment.training')}</strong>
+          {$_('servicesPage.modals.kiAgentDevelopment.trainingValue')}
+        </p>
       </div>
     </div>
     <div class="modal-action">
@@ -1263,7 +1312,10 @@
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>{$_('servicesPage.modals.workflowOptimization.projectDuration')}</strong> {$_('servicesPage.modals.workflowOptimization.projectDurationValue')}</p>
+        <p class="text-sm">
+          <strong>{$_('servicesPage.modals.workflowOptimization.projectDuration')}</strong>
+          {$_('servicesPage.modals.workflowOptimization.projectDurationValue')}
+        </p>
         <p class="text-sm"><strong>{$_('servicesPage.modals.workflowOptimization.roi')}</strong> {$_('servicesPage.modals.workflowOptimization.roiValue')}</p>
       </div>
     </div>
@@ -1304,7 +1356,10 @@
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>{$_('servicesPage.modals.aiInfrastructure.setupTime')}</strong> {$_('servicesPage.modals.aiInfrastructure.setupTimeValue')}</p>
+        <p class="text-sm">
+          <strong>{$_('servicesPage.modals.aiInfrastructure.setupTime')}</strong>
+          {$_('servicesPage.modals.aiInfrastructure.setupTimeValue')}
+        </p>
         <p class="text-sm"><strong>{$_('servicesPage.modals.aiInfrastructure.scaling')}</strong> {$_('servicesPage.modals.aiInfrastructure.scalingValue')}</p>
       </div>
     </div>
@@ -1335,7 +1390,7 @@
         @apply grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-5;
 
         .category-card {
-          @apply rounded-2xl bg-base-200 p-6 text-center text-base-content shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:cursor-pointer;
+          @apply bg-base-200 text-base-content rounded-2xl p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:cursor-pointer hover:shadow-lg;
 
           .category-icon {
             @apply mb-4 text-4xl;
@@ -1346,7 +1401,7 @@
           }
 
           p {
-            @apply mb-4 flex-grow text-sm text-base-content;
+            @apply text-base-content mb-4 flex-grow text-sm;
           }
         }
       }
@@ -1361,7 +1416,7 @@
     }
 
     .service-card {
-      @apply flex flex-col rounded-2xl bg-base-200 p-6 text-base-content shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+      @apply bg-base-200 text-base-content flex flex-col rounded-2xl p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
 
       &.large {
         @apply min-h-[280px];
@@ -1384,20 +1439,20 @@
       }
 
       p {
-        @apply mb-4 flex-grow text-base-content;
+        @apply text-base-content mb-4 flex-grow;
       }
 
       .service-highlights {
         @apply mb-4 flex flex-wrap gap-2;
 
         .highlight {
-          @apply rounded-full px-3 py-1 text-sm font-medium bg-primary/10 text-primary;
+          @apply bg-primary/10 text-primary rounded-full px-3 py-1 text-sm font-medium;
         }
       }
     }
 
     .cta-section {
-      @apply flex flex-col items-center justify-center rounded-3xl bg-base-200 py-16 text-center text-base-content;
+      @apply bg-base-200 text-base-content flex flex-col items-center justify-center rounded-3xl py-16 text-center;
 
       .cta-content {
         @apply max-w-4xl px-6;
@@ -1407,7 +1462,7 @@
         }
 
         .cta-text {
-          @apply mb-8 text-lg leading-relaxed text-base-content;
+          @apply text-base-content mb-8 text-lg leading-relaxed;
         }
 
         .cta-benefits {
@@ -1425,7 +1480,7 @@
             }
 
             p {
-              @apply text-sm text-base-content;
+              @apply text-base-content text-sm;
             }
           }
         }
@@ -1435,7 +1490,7 @@
         }
 
         .cta-note {
-          @apply rounded-lg p-4 text-sm text-base-content bg-base-300;
+          @apply text-base-content bg-base-300 rounded-lg p-4 text-sm;
         }
       }
     }
@@ -1443,7 +1498,7 @@
     .benefits {
       @apply mt-4 flex flex-wrap gap-2;
       .item {
-        @apply w-fit rounded-lg py-2 px-4 text-base-content text-sm bg-base-100;
+        @apply text-base-content bg-base-100 w-fit rounded-lg px-4 py-2 text-sm;
       }
     }
 

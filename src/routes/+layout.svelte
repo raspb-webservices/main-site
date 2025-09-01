@@ -1,32 +1,34 @@
 <script>
+  import { isLoading } from 'svelte-i18n';
+  import { navigating } from '$app/state';
+  import { onMount } from 'svelte';
+  import Loader from '$lib/components/loader.svelte';
   import HEADER from '$lib/components/header.svelte';
   import FOOTER from '$lib/components/footer.svelte';
   import CookieConsentComponent from '$lib/components/cookieconsent.svelte';
-  import { isLoading } from 'svelte-i18n';
-  import { navigating } from '$app/state';
-  import Loader from '$lib/components/loader.svelte';
   import '../app.css';
+
   let { children } = $props();
+  let showInitialLoader = $state(true);
+
+  onMount(() => {
+    setTimeout(() => {
+      showInitialLoader = false;
+    }, 250);
+  });
 </script>
 
 <div class="wrapper">
-  {#if $isLoading || navigating.to}
-  <div class="loading-wrapper">
+  {#if $isLoading || navigating.to || showInitialLoader}
+  <div class="global-loading">
     <Loader size={'large'}></Loader>
   </div>
   {:else}
     <HEADER />
-    <div class="content-container">
+    <main>
       {@render children?.()}
-    </div>
+    </main>
     <FOOTER />
   {/if}
   <CookieConsentComponent></CookieConsentComponent>
 </div>
-
-<style lang="postcss">
-  @reference '../app.css';
-  .loading-wrapper {
-    @apply w-full h-dvh flex justify-center items-center;
-  }
-</style>

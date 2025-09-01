@@ -5,11 +5,13 @@
       "description": "Hier kann eine Beschreibung stehen..."
     },
     "header": {
-      "title": "Einblicke in",
+      "title": "Einblicke in unsere Arbeit",
+      "titleFirst": "Einblicke in",
       "titleHighlight": "unsere Arbeit",
-      "teaser": "Vertrauen und Transparenz sind wichtig für eine gute Kundenbeziehung. Hier möchten wir Einblicke in unsere Arbeit und einen typischen Projektablauf geben, damit glasklar ist, womit sie rechnen können."
+      "subtitle": "Vertrauen und Transparenz sind wichtig für eine gute Kundenbeziehung. Hier möchten wir Einblicke in unsere Arbeit und einen typischen Projektablauf geben, damit glasklar ist, womit sie rechnen können."
     },
     "webtechnologien": {
+      "title": "Wir setzen modernste Webtechnologien ein",
       "titleFirst": "Wir setzen",
       "titleHighlight": "modernste Webtechnologien",
       "titleSecond": " ein",

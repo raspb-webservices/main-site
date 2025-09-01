@@ -79,7 +79,7 @@
     <!-- Header -->
     <div class="mb-8 text-center">
       <form method="dialog">
-        <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2" on:click={closeModal}>✕</button>
+        <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2" onclick={closeModal}>✕</button>
       </form>
 
       <div class="my-2 lg:my-8">
@@ -94,7 +94,7 @@
             <button
               type="button"
               class="mx-2 h-12 w-12 rounded-full bg-gradient-to-br md:mx-3 md:h-16 md:w-16 {item.gradient} flex transform cursor-pointer items-center justify-center text-2xl font-bold text-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl"
-              on:click={() => scrollToSection(item.letter)}
+              onclick={() => scrollToSection(item.letter)}
               title="Zu {item.title} springen"
             >
               {item.letter}
@@ -172,7 +172,7 @@
 
     <!-- Close Button -->
     <div class="modal-action flex items-center justify-center">
-      <button type="button" class="btn btn-simple btn-wide" on:click={closeModal}>
+      <button type="button" class="btn btn-simple btn-wide" onclick={closeModal}>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path
             stroke-linecap="round"
@@ -188,7 +188,7 @@
 
   <!-- Modal Backdrop -->
   <form method="dialog" class="modal-backdrop">
-    <button on:click={closeModal}>close</button>
+    <button onclick={closeModal}>close</button>
   </form>
 </dialog>
 

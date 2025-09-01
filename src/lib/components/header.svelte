@@ -1,18 +1,17 @@
 <script lang="ts">
-  import { user, isAuthenticated, popupOpen, userroles } from '$store/sharedStates.svelte';
+  import { user, isAuthenticated, userroles } from '$store/sharedStates.svelte';
   import auth from '../../authService';
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
-  import { locale, locales, _ } from 'svelte-i18n';
+  import { locale, _ } from 'svelte-i18n';
 
   let mobileNavOpen = $state(false);
   let logginIn = $state(false);
+  let logginOut = $state(false);
 
-  // Erstelle eine reaktive Variable, die sich automatisch aktualisiert
   let isAuth = $derived(isAuthenticated.get());
   let currentUser = $derived(user.get());
   let currentUserRoles = $derived(userroles.get());
-  let currentTheme = $state('light');
 
   async function login() {
     logginIn = true;
@@ -26,22 +25,10 @@
   }
 
   async function logout() {
-    logginIn = true;
+    logginOut = true;
     const auth0Client = await auth.createClient();
     await auth.logout(auth0Client);
-    logginIn = false;
-  }
-
-  function toggleLocale() {
-    const newLocale = $locale === 'de' ? 'en' : 'de';
-    locale.set(newLocale);
-  }
-  function toggleTheme() {
-    if (currentTheme === 'light') {
-      currentTheme = 'dark';
-    } else {
-      currentTheme = 'light';
-    }
+    logginOut = false;
   }
 </script>
 
@@ -109,66 +96,24 @@
           goto('/faq');
         }}>{$_('menu.faq')}</button
       >
-      <!-- <button
-        class="nav-item"
-        class:active={page.url.pathname === '/contact'}
-        onclick={() => {
-          goto('/contact');
-        }}>{$_('menu.contact')}</button
-      > -->
     </nav>
 
     <div class="cta-area">
       {#if !isAuth}
         <button
-          class="nav-button-link"
+          class="btn-outline-header"
           onclick={() => {
             login();
           }}
-          >{#if logginIn}<span class="loading loading-ring loading-sm"></span>{:else}<span>{$_('menu.login')}</span>{/if}</button
+          ><div class="button-inner">{#if logginIn || logginOut}<span class="loading loading-ring loading-sm"></span>{:else}<span>{$_('menu.login')}</span>{/if}</div></button
         >
       {/if}
       <button
-        class="btn-basic"
+        class="btn-basic-header"
         onclick={() => {
           goto('/get-started');
         }}><span class="halfXl:block hidden">{$_('menu.configureProject')}</span><span class="halfXl:hidden">{$_('menu.start')}</span></button
       >
-      <div class="controls">
-        <button
-          class="locale-toggle-btn"
-          class:german={$locale === 'de'}
-          class:english={$locale === 'en'}
-          onclick={toggleLocale}
-          aria-label="Switch language"
-          title={$locale === 'de' ? $_('menu.switchLanguageToEnglish') : $_('menu.switchLanguageToGerman')}
-        >
-        </button>
-
-        <label class="swap swap-rotate">
-          <input type="checkbox" class="theme-controller" value="dark" />
-          <svg class="swap-off fill-warning h-8 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path
-              d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"
-            />
-          </svg>
-          <svg class="swap-on fill-warning h-8 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path
-              d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"
-            />
-          </svg>
-        </label>
-
-        <!-- <button
-          class="theme-toggle-btn"
-          class:light={currentTheme === 'light'}
-          class:dark={currentTheme === 'dark'}
-          onclick={toggleTheme}
-          aria-label="Switch theme"
-          title={currentTheme === 'light' ? 'dark mode' : 'light mode'}
-        >
-        </button> -->
-      </div>
     </div>
 
     <nav class="mobile-navigvation">
@@ -239,14 +184,6 @@
                     goto('/faq');
                   }}>{$_('menu.faq')}</button
                 >
-                <!-- <button
-                  class="nav-item"
-                  class:active={page.url.pathname === '/contact'}
-                  onclick={() => {
-                    mobileNavOpen = false;
-                    goto('/contact');
-                  }}>{$_('menu.contact')}</button
-                > -->
                 {#if !isAuth}
                   <button
                     class="nav-item"
@@ -262,42 +199,6 @@
                     }}>{$_('menu.logout')}</button
                   >
                 {/if}
-
-                <div class="mobile-controls">
-                  <button
-                    class="locale-toggle-btn"
-                    class:german={$locale === 'de'}
-                    class:english={$locale === 'en'}
-                    onclick={toggleLocale}
-                    aria-label="Switch language"
-                    title={$locale === 'de' ? $_('menu.switchLanguageToEnglish') : $_('menu.switchLanguageToGerman')}
-                  >
-                  </button>
-
-                  <label class="swap swap-rotate">
-                    <input type="checkbox" class="theme-controller" value="dark" />
-                    <svg class="swap-off fill-warning h-8 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <path
-                        d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"
-                      />
-                    </svg>
-                    <svg class="swap-on fill-warning h-8 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <path
-                        d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"
-                      />
-                    </svg>
-                  </label>
-
-                  <!-- <button
-          class="theme-toggle-btn"
-          class:light={currentTheme === 'light'}
-          class:dark={currentTheme === 'dark'}
-          onclick={toggleTheme}
-          aria-label="Switch theme"
-          title={currentTheme === 'light' ? 'dark mode' : 'light mode'}
-        >
-        </button> -->
-                </div>
               </div>
             </div>
           </div>
@@ -310,28 +211,25 @@
 <style lang="postcss">
   @reference '../../app.css';
   .logged-in-header {
-    @apply bg-black w-full py-1.5 text-neutral-content;
-
+    @apply bg-iconic-blue w-full py-1.5;
     p {
       @apply text-base text-neutral-content;
     }
-
   }
-  header {
-    @apply bg-base-100 h-24 w-full py-10 shadow-lg;
 
-    > div.inner-box {
-      @apply flex items-center justify-between;
-
+    header {
+    @apply w-full h-20 sticky top-0 z-10 bg-white shadow-lg;
+    .inner-box {
+      @apply m-auto h-full w-full max-w-7xl px-4 flex items-center justify-between;
+      
       .logo {
-        @apply aspect-video h-24 cursor-pointer bg-cover bg-center bg-no-repeat;
+        @apply aspect-video h-[72px] cursor-pointer bg-cover bg-center bg-no-repeat;
         background-image: url(/images/logo.png);
       }
-
       nav.navigation {
-        @apply hidden w-fit items-center justify-center lg:flex;
+        @apply hidden w-fit items-center justify-center md:flex;
         > button {
-          @apply text-base-content/80 relative ml-6 px-2 text-lg font-bold;
+          @apply text-base-content/80 relative ml-4 md:ml-6 px-2 text-lg font-bold;
 
           &::before,
           &::after {
@@ -365,8 +263,13 @@
           }
         }
       }
+
+      div.cta-area {
+        @apply hidden md:flex justify-center items-center;
+      }
+
       nav.mobile-navigvation {
-        @apply flex lg:hidden;
+        @apply flex md:hidden;
 
         .navigation-area {
           @apply flex flex-wrap p-4 pt-0;
@@ -397,30 +300,6 @@
           }
         }
       }
-
-      .cta-area {
-        @apply hidden items-center justify-center lg:flex;
-        .controls {
-          @apply m-2 flex flex-row gap-2;
-          .locale-toggle-btn {
-            @apply flex h-8 w-8 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-white bg-cover bg-center bg-no-repeat p-0 transition-all duration-300 hover:shadow-lg;
-            &.german {
-              background-image: url('/icons/flags/germany-flag.svg');
-            }
-            &.english {
-              background-image: url('/icons/flags/uk-flag.svg');
-            }
-            &:hover {
-              @apply scale-105 transform;
-            }
-
-            &:active {
-              @apply scale-95 transform;
-            }
-          }
-        }
-      }
-
       .mobile-controls {
         @apply m-4 flex w-full flex-row items-center justify-center gap-4;
         .locale-toggle-btn {

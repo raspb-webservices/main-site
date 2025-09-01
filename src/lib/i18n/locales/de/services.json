@@ -5,10 +5,11 @@
       "description": "Entdecken Sie unser umfassendes Service-Portfolio: Webseiten, CMS-Lösungen, Applikationen, Individualentwicklung und KI-Services für Ihr digitales Projekt."
     },
     "hero": {
+      "title": "Unsere Services",
       "titleFirst": "Unsere",
       "titleHighlight": "Services",
-      "subtitle": "Maßgeschneiderte digitale Lösungen für jeden Bedarf - von der einfachen Website bis zur komplexen KI-Integration",
-      "buttonText": "Projekt konfigurieren"
+      "subtitle": "Maßgeschneiderte digitale Lösungen für jeden Bedarf - von der einfachen Webseite bis zur komplexen KI-Integration.",
+      "buttonText": "Jetzt loslegen"
     },
     "intro": {
       "titleFirst": "Von der Idee zur",
