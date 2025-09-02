@@ -14,7 +14,7 @@
   onMount(() => {
     setTimeout(() => {
       showInitialLoader = false;
-    }, 250);
+    }, 333);
   });
 </script>
 

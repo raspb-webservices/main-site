@@ -20,7 +20,7 @@
 
 <footer>
   <div class="inner-box">
-    <h4>raspb &copy; {currentYear}</h4>
+    <h3 class="text-iconic-blue no-padding">raspb &copy; {currentYear}</h3>
 
     <div class="controls">
       <button
@@ -98,8 +98,9 @@
     }
 
     .controls {
+      @apply flex ml-auto mr-4;
       .locale-toggle-btn {
-        @apply flex h-8 w-8 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-white bg-cover bg-center bg-no-repeat p-0 transition-all duration-300 hover:shadow-lg;
+        @apply flex h-8 w-8 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-white bg-cover bg-center bg-no-repeat p-0 transition-all duration-300 hover:shadow-lg mx-2;
         &.german {
           background-image: url('/icons/flags/germany-flag.svg');
         }
@@ -116,11 +117,11 @@
       }
     }
     nav.footer-navigation {
-      @apply flex md:ml-auto md:py-2;
+      @apply flex md:py-2;
       > button {
-        @apply relative mr-2.5 ml-2.5 min-h-6 px-1 font-medium text-white opacity-75 md:mr-0 md:ml-6;
+        @apply relative mr-2.5 ml-2.5 min-h-6 px-1 font-medium text-iconic-blue opacity-75 md:mr-0 md:ml-6;
         &::after {
-          @apply absolute -bottom-1 left-0 block h-0.5 w-full origin-left scale-x-0 bg-white transition-transform duration-500;
+          @apply absolute -bottom-1 left-0 block h-0.5 w-full origin-left scale-x-0 bg-iconic-blue transition-transform duration-500;
           content: '';
         }
         &:hover {
