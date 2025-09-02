@@ -9,7 +9,7 @@
 <style lang="postcss">
   @reference '../../../app.css';
   section {
-    @apply min-h-80 flex flex-col justify-start items-center bg-primary text-white;
+    @apply min-h-80 flex flex-col justify-start items-center bg-purple2 text-white;
     position: relative;
     &.basic-gradient {
       background-image: radial-gradient(100% 308.42% at 102.05% 0%, rgb(13, 116, 224) 0%, rgb(160, 61, 206) 36.98%, rgb(18, 29, 51) 100%);

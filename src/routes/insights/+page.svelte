@@ -19,33 +19,29 @@
   </div>
 
   <div class="inner-box reduced -mt-12 -mb-24">
-    <div class="flex flex-wrap items-center justify-center gap-12 lg:flex-nowrap">
-      <div
-        class="flex aspect-square w-52 cursor-pointer flex-col items-center justify-center rounded-2xl border border-white bg-white text-center font-bold text-black shadow-2xl hover:shadow-md hover:bg-base-200"
-        onclick={() => (activeContent = 'tech')}
-      >
-        Wir funktioniert raspb - Unser Technologie-Stack
-      </div>
-      <div
-        class="flex aspect-square w-52 cursor-pointer flex-col items-center justify-center rounded-2xl border border-white bg-white text-center font-bold text-black shadow-2xl hover:shadow-md hover:bg-base-200"
-        onclick={() => (activeContent = 'project')}
-      >
-        Wie sieht ein typisches Projekt bei raspb aus?
-      </div>
-      <div
-        class="flex aspect-square w-52 cursor-pointer flex-col items-center justify-center rounded-2xl border border-white bg-white text-center font-bold text-black shadow-2xl hover:shadow-md hover:bg-base-200"
-        onclick={() => (activeContent = 'showcase')}
-      >
-        Wie sehen Projektergebnisse von raspb aus?
-      </div>
+    <div class="tab-tile-collection">
+      <button class="tab-tile tech" onclick={() => (activeContent = 'tech')}>
+        <h3>Wir funktioniert raspb?</h3>
+        <p class="no-padding">Hier gibt es Einblicke in unsere Technolgisches Ökossystem.</p>
+      </button>
+      <button class="tab-tile project" onclick={() => (activeContent = 'project')}>
+        <h3>Wie läuft ein Projekt bei raspb?</h3>
+        <p class="no-padding">Ein typisches Projekt vom Konfigurator zum Go-Live.</p>
+      </button>
+      <button class="tab-tile showcase" onclick={() => (activeContent = 'showcase')}>
+        <h3>Wie sehen die Ergebnisse aus?</h3>
+        <p class="no-padding">Finden Sie hier eine Auswahl von Referenzprojekten.</p>
+      </button>
     </div>
   </div>
 </Stage>
 
 {#if activeContent === 'tech'}
   <Section fullWidth={true}>
+    <div class="big-spacer"></div>
     <TechLogoShowcase speed={0.15} />
     <div class="inner-box animate-fade-in-up">
+      <div class="big-spacer"></div>
       <h2>{$_('insights.webtechnologien.title')}</h2>
       <p class="teaser">
         {$_('insights.webtechnologien.subtitle')}
@@ -110,6 +106,7 @@
 {:else if activeContent === 'project'}
   <Section>
     <div class="inner-box animate-fade-in-up">
+      <div class="massive-spacer"></div>
       <h2 class="mb-4 text-4xl font-bold">
         {$_('insights.projectInsights.titleFirst')} <span class="inner-text-special">{$_('insights.projectInsights.titleHighlight')}</span>
         {$_('insights.projectInsights.titleSecond')}?
@@ -142,7 +139,8 @@
   </Section>
 {:else if activeContent === 'showcase'}
   <Section>
-    <h2>Digital Erfolge ein paar BeispieleS</h2>
+    <div class="massive-spacer"></div>
+    <h2>Digital Erfolge ein paar Beispiele</h2>
   </Section>
 {/if}
 
@@ -292,4 +290,32 @@
 
 <style lang="postcss">
   @reference '../../app.css';
+
+  .tab-tile-collection {
+    @apply flex flex-wrap items-center justify-center gap-12 lg:flex-nowrap;
+    .tab-tile {
+      @apply hover:bg-base-100 flex aspect-square w-60 cursor-pointer flex-col items-center justify-center rounded-2xl border border-white bg-white p-6 text-center font-bold text-black shadow-2xl hover:shadow-md;
+      &.tech {
+        &:hover {
+          h3 {
+            @apply text-lightBlue;
+          }
+        }
+      }
+      &.project {
+        &:hover {
+          h3 {
+            @apply text-purple2;
+          }
+        }
+      }
+      &.showcase {
+        &:hover {
+          h3 {
+            @apply text-pink;
+          }
+        }
+      }
+    }
+  }
 </style>

@@ -41,6 +41,7 @@
 
   // Handle form submission
   async function handleSubmit() {
+
     if (!validateForm()) return;
     
     isLoading = true;
@@ -124,7 +125,7 @@
           </button>
         </div>
       {:else}
-        <form onsubmit|preventDefault={handleSubmit} class="space-y-6">
+        <form onsubmit={() =>  {event.preventDefault(); handleSubmit();}} class="space-y-6">
           {#if errorMessage}
             <div class="alert alert-error shadow-lg">
               <div>
