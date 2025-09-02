@@ -67,7 +67,7 @@
   }
 </script>
 
-<div class="bg-base-200 my-12 w-full overflow-hidden py-12">
+<div class="bg-base-200 py-12 w-full overflow-hidden">
   <div class="mb-2 text-center">
     <h2 class="mb-2 text-3xl font-bold">Unser Technologie-Stack</h2>
     <p class="text-base-content/70">Moderne Tools für außergewöhnliche Ergebnisse</p>
@@ -103,7 +103,7 @@
   </div>
 
   <div class="mt-6 text-center">
-    <p class="text-base-content/60 text-sm">Fahren Sie mit der Maus darüber, um die Animation zu pausieren</p>
+    <p class="text-base-content/60 text-sm no-padding">Fahren Sie mit der Maus darüber, um die Animation zu pausieren</p>
   </div>
 </div>
 

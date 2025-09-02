@@ -605,7 +605,7 @@
       @apply grid grid-cols-1 gap-6 lg:grid-cols-2;
 
       .service-card {
-        @apply flex flex-col justify-between rounded-2xl bg-base-200 p-6 text-base-content shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+        @apply flex flex-col justify-between rounded-2xl bg-base-100 p-6 text-base-content shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
 
         .service-card-header {
           @apply mb-4 flex min-w-full flex-wrap items-center gap-4;
@@ -681,7 +681,7 @@
         @apply grid grid-cols-1 gap-8 lg:grid-cols-3;
 
         .balance-card {
-          @apply rounded-2xl bg-base-200 p-6 text-center text-base-content;
+          @apply rounded-2xl bg-base-100 p-6 text-center text-base-content;
 
           .balance-icon {
             @apply mb-4 text-5xl;
@@ -730,7 +730,7 @@
         @apply grid grid-cols-1 gap-8 lg:grid-cols-2;
 
         .feature-card {
-          @apply rounded-2xl bg-base-200 p-6 text-base-content;
+          @apply rounded-2xl bg-base-100 p-6 text-base-content;
 
           .feature-icon {
             @apply mb-4 text-4xl;
@@ -802,7 +802,7 @@
 
     /* CTA Section Styles */
     .cta-section {
-      @apply flex flex-col items-center justify-center rounded-3xl bg-base-200 text-center text-base-content;
+      @apply flex flex-col items-center justify-center rounded-3xl bg-base-100 text-center text-base-content;
 
       .cta-content {
         @apply max-w-4xl px-6;

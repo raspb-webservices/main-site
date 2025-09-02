@@ -2,9 +2,44 @@
   import Section from '$lib/components/section.svelte';
   import TechLogoShowcase from '$lib/components/tech-logo-showcase.svelte';
   import Stage from '$lib/components/ui/stage.svelte';
+  import { onDestroy, onMount } from 'svelte';
   import { locale, _ } from 'svelte-i18n';
 
   let activeContent = $state('tech');
+
+  const handleHashChange = (event: HashChangeEvent) => {
+    const newHash = new URL(event.newURL).hash.slice(1);
+    if (newHash === 'tech' || newHash === 'project' || newHash === 'showcase') {
+      activeContent = newHash;
+      setTimeout(() => {
+        scrollToSection('insights-content-container');
+      }, 250);
+    }
+  };
+
+  function scrollToSection(sectionId: string) {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  }
+
+  onMount(() => {
+    const { hash } = document.location;
+    const hashString = hash.slice(1);
+    if (hashString === 'tech' || hashString === 'project' || hashString === 'showcase') {
+      activeContent = hashString;
+      scrollToSection('insights-content-container');
+    }
+    window.addEventListener('hashchange', handleHashChange);
+  });
+
+  onDestroy(() => {
+    window.removeEventListener('hashchange', handleHashChange);
+  });
 </script>
 
 <svelte:head>
@@ -19,16 +54,16 @@
   </div>
 
   <div class="inner-box reduced -mt-12 -mb-24">
-    <div class="tab-tile-collection">
-      <button class="tab-tile tech" onclick={() => (activeContent = 'tech')}>
+    <div class="tab-tile-collection fade-in">
+      <button class="tab-tile tech" class:active={activeContent === 'tech'} onclick={() => (activeContent = 'tech')}>
         <h3>Wir funktioniert raspb?</h3>
         <p class="no-padding">Hier gibt es Einblicke in unsere Technolgisches Ökossystem.</p>
       </button>
-      <button class="tab-tile project" onclick={() => (activeContent = 'project')}>
+      <button class="tab-tile project" class:active={activeContent === 'project'} onclick={() => (activeContent = 'project')}>
         <h3>Wie läuft ein Projekt bei raspb?</h3>
         <p class="no-padding">Ein typisches Projekt vom Konfigurator zum Go-Live.</p>
       </button>
-      <button class="tab-tile showcase" onclick={() => (activeContent = 'showcase')}>
+      <button class="tab-tile showcase" class:active={activeContent === 'showcase'} onclick={() => (activeContent = 'showcase')}>
         <h3>Wie sehen die Ergebnisse aus?</h3>
         <p class="no-padding">Finden Sie hier eine Auswahl von Referenzprojekten.</p>
       </button>
@@ -36,113 +71,124 @@
   </div>
 </Stage>
 
-{#if activeContent === 'tech'}
-  <Section fullWidth={true}>
-    <div class="big-spacer"></div>
-    <TechLogoShowcase speed={0.15} />
-    <div class="inner-box animate-fade-in-up">
-      <div class="big-spacer"></div>
-      <h2>{$_('insights.webtechnologien.title')}</h2>
-      <p class="teaser">
-        {$_('insights.webtechnologien.subtitle')}
-      </p>
-      <div class="bg-base-200 rounded-2xl p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl">
-        <h3 class="text-primary mb-4 text-2xl font-bold">{$_('insights.webtechnologien.absatz1headline')}</h3>
-        <p class="leading-relaxed">
-          {@html $_('insights.webtechnologien.absatz1')}
-        </p>
+<div id="insights-content-container" class="mt-16">
+  {#if activeContent === 'tech'}
+    <Section noSpacing={true}>
+      <div class="inner-box fade-in pt-36 pb-16">
+        <h2>raspb - ein harmonisches System für Ihren Unternehmenserfolg</h2>
+        <p class="teaser">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id dignissimos veniam quam quae itaque, officiis blanditiis non, aspernatur adipisci ad porro magnam eum fugit aut labore laudantium optio nostrum. Doloribus!</p>
+        <p class="teaser">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id dignissimos veniam quam quae itaque, officiis blanditiis non, aspernatur adipisci ad porro magnam eum fugit aut labore laudantium optio nostrum. Doloribus!</p>
       </div>
+    </Section>
 
-      <div class="bg-base-200 rounded-2xl p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl">
-        <h3 class="text-primary mb-4 text-2xl font-bold">{$_('insights.webtechnologien.absatz2headline')}</h3>
-        <p class="leading-relaxed">
-          {@html $_('insights.webtechnologien.absatz2')}
+    <Section fullWidth={true} noSpacing={true}>
+      <TechLogoShowcase speed={0.15} />
+    </Section>
+
+    <Section noSpacing={true}>
+      <div class="inner-box animate-fade-in-up py-24">
+        <h2>{$_('insights.webtechnologien.title')}</h2>
+        <p class="teaser">
+          {$_('insights.webtechnologien.subtitle')}
         </p>
-      </div>
+        <div class="bg-base-200 rounded-2xl p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl">
+          <h3 class="text-primary mb-4 text-2xl font-bold">{$_('insights.webtechnologien.absatz1headline')}</h3>
+          <p class="leading-relaxed">
+            {@html $_('insights.webtechnologien.absatz1')}
+          </p>
+        </div>
 
-      <div class="bg-base-200 rounded-2xl p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl">
-        <h3 class="text-primary mb-4 text-2xl font-bold">{$_('insights.webtechnologien.absatz3headline')}</h3>
-        <p class="mb-4 leading-relaxed">
-          {@html $_('insights.webtechnologien.absatz3')}
-        </p>
+        <div class="bg-base-200 rounded-2xl p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl">
+          <h3 class="text-primary mb-4 text-2xl font-bold">{$_('insights.webtechnologien.absatz2headline')}</h3>
+          <p class="leading-relaxed">
+            {@html $_('insights.webtechnologien.absatz2')}
+          </p>
+        </div>
 
-        <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-          <div class="bg-base-100 rounded-xl p-4">
-            <p class="no-padding">{@html $_('insights.webtechnologien.vorteile.sicherheit')}</p>
-          </div>
-          <div class="bg-base-100 rounded-xl p-4">
-            <p class="no-padding">{@html $_('insights.webtechnologien.vorteile.performance')}</p>
-          </div>
-          <div class="bg-base-100 rounded-xl p-4">
-            <p class="no-padding">{@html $_('insights.webtechnologien.vorteile.skalierbarkeit')}</p>
-          </div>
-          <div class="bg-base-100 rounded-xl p-4">
-            <p class="no-padding">{@html $_('insights.webtechnologien.vorteile.skalierbarkeit2')}</p>
-          </div>
-          <div class="bg-base-100 rounded-xl p-4">
-            <p class="no-padding">{@html $_('insights.webtechnologien.vorteile.entwicklerfreundlichkeit')}</p>
-          </div>
-          <div class="bg-base-100 rounded-xl p-4">
-            <p class="no-padding">{@html $_('insights.webtechnologien.vorteile.kosteneffizienz')}</p>
+        <div class="bg-base-200 rounded-2xl p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl">
+          <h3 class="text-primary mb-4 text-2xl font-bold">{$_('insights.webtechnologien.absatz3headline')}</h3>
+          <p class="mb-4 leading-relaxed">
+            {@html $_('insights.webtechnologien.absatz3')}
+          </p>
+
+          <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div class="bg-base-100 rounded-xl p-4">
+              <p class="no-padding">{@html $_('insights.webtechnologien.vorteile.sicherheit')}</p>
+            </div>
+            <div class="bg-base-100 rounded-xl p-4">
+              <p class="no-padding">{@html $_('insights.webtechnologien.vorteile.performance')}</p>
+            </div>
+            <div class="bg-base-100 rounded-xl p-4">
+              <p class="no-padding">{@html $_('insights.webtechnologien.vorteile.skalierbarkeit')}</p>
+            </div>
+            <div class="bg-base-100 rounded-xl p-4">
+              <p class="no-padding">{@html $_('insights.webtechnologien.vorteile.skalierbarkeit2')}</p>
+            </div>
+            <div class="bg-base-100 rounded-xl p-4">
+              <p class="no-padding">{@html $_('insights.webtechnologien.vorteile.entwicklerfreundlichkeit')}</p>
+            </div>
+            <div class="bg-base-100 rounded-xl p-4">
+              <p class="no-padding">{@html $_('insights.webtechnologien.vorteile.kosteneffizienz')}</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="bg-base-200 rounded-2xl p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl">
-        <h3 class="text-primary mb-4 text-2xl font-bold">{$_('insights.webtechnologien.absatz4headline')}</h3>
-        <p class="leading-relaxed">
-          {@html $_('insights.webtechnologien.absatz4')}
+        <div class="bg-base-200 rounded-2xl p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl">
+          <h3 class="text-primary mb-4 text-2xl font-bold">{$_('insights.webtechnologien.absatz4headline')}</h3>
+          <p class="leading-relaxed">
+            {@html $_('insights.webtechnologien.absatz4')}
+          </p>
+        </div>
+
+        <div class="bg-base-200 rounded-2xl p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl">
+          <h3 class="text-primary mb-4 text-2xl font-bold">{$_('insights.webtechnologien.absatz5headline')}</h3>
+          <p class="leading-relaxed">
+            {@html $_('insights.webtechnologien.absatz5')}
+          </p>
+        </div>
+      </div>
+    </Section>
+  {:else if activeContent === 'project'}
+    <Section noSpacing={true}>
+      <div class="inner-box animate-fade-in-up pt-36 pb-24">
+        <h2 class="mb-4 text-4xl font-bold">
+          {$_('insights.projectInsights.titleFirst')} <span class="inner-text-special">{$_('insights.projectInsights.titleHighlight')}</span>
+          {$_('insights.projectInsights.titleSecond')}?
+        </h2>
+        <p class="animate-fade-in-up">
+          {@html $_('insights.projectInsights.paragraph1')}
+        </p>
+        <p class="animate-fade-in-up">
+          {@html $_('insights.projectInsights.paragraph2')}
+        </p>
+        <p class="animate-fade-in-up">
+          {@html $_('insights.projectInsights.paragraph3')}
+        </p>
+        <p class="animate-fade-in-up">
+          {@html $_('insights.projectInsights.paragraph4')}
+        </p>
+        <p class="animate-fade-in-up">
+          {@html $_('insights.projectInsights.paragraph5')}
+        </p>
+        <p class="animate-fade-in-up">
+          {@html $_('insights.projectInsights.paragraph6')}
+        </p>
+        <p class="animate-fade-in-up">
+          {@html $_('insights.projectInsights.paragraph7')}
+        </p>
+        <p class="animate-fade-in-up">
+          {@html $_('insights.projectInsights.paragraph8')}
         </p>
       </div>
-
-      <div class="bg-base-200 rounded-2xl p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl">
-        <h3 class="text-primary mb-4 text-2xl font-bold">{$_('insights.webtechnologien.absatz5headline')}</h3>
-        <p class="leading-relaxed">
-          {@html $_('insights.webtechnologien.absatz5')}
-        </p>
-      </div>
-    </div>
-  </Section>
-{:else if activeContent === 'project'}
-  <Section>
-    <div class="inner-box animate-fade-in-up">
-      <div class="massive-spacer"></div>
-      <h2 class="mb-4 text-4xl font-bold">
-        {$_('insights.projectInsights.titleFirst')} <span class="inner-text-special">{$_('insights.projectInsights.titleHighlight')}</span>
-        {$_('insights.projectInsights.titleSecond')}?
-      </h2>
-      <p class="animate-fade-in-up">
-        {@html $_('insights.projectInsights.paragraph1')}
-      </p>
-      <p class="animate-fade-in-up">
-        {@html $_('insights.projectInsights.paragraph2')}
-      </p>
-      <p class="animate-fade-in-up">
-        {@html $_('insights.projectInsights.paragraph3')}
-      </p>
-      <p class="animate-fade-in-up">
-        {@html $_('insights.projectInsights.paragraph4')}
-      </p>
-      <p class="animate-fade-in-up">
-        {@html $_('insights.projectInsights.paragraph5')}
-      </p>
-      <p class="animate-fade-in-up">
-        {@html $_('insights.projectInsights.paragraph6')}
-      </p>
-      <p class="animate-fade-in-up">
-        {@html $_('insights.projectInsights.paragraph7')}
-      </p>
-      <p class="animate-fade-in-up">
-        {@html $_('insights.projectInsights.paragraph8')}
-      </p>
-    </div>
-  </Section>
-{:else if activeContent === 'showcase'}
-  <Section>
-    <div class="massive-spacer"></div>
-    <h2>Digital Erfolge ein paar Beispiele</h2>
-  </Section>
-{/if}
+    </Section>
+  {:else if activeContent === 'showcase'}
+    <Section noSpacing={true}>
+      <div class="inner-box animate-fade-in-up pt-36 pb-24">
+        <h2>Digital Erfolge ein paar Beispiele</h2>
+      </div>  
+    </Section>
+  {/if}
+</div>
 
 {#if false}
   <div class="content-area">
@@ -294,23 +340,31 @@
   .tab-tile-collection {
     @apply flex flex-wrap items-center justify-center gap-12 lg:flex-nowrap;
     .tab-tile {
-      @apply hover:bg-base-100 flex aspect-square w-60 cursor-pointer flex-col items-center justify-center rounded-2xl border border-white bg-white p-6 text-center font-bold text-black shadow-2xl hover:shadow-md;
+      @apply w-60 aspect-square flex flex-col items-center justify-center rounded-3xl bg-white text-black p-6 text-center drop-shadow-2xl;
+      &:hover {
+        @apply bg-base-100 cursor-pointer drop-shadow-lg;
+      }
+      &.active, &.active:hover {
+        @apply bg-base-100 cursor-default drop-shadow-lg;
+      }
+
       &.tech {
-        &:hover {
+        &:hover, &.active {
           h3 {
             @apply text-lightBlue;
           }
         }
+
       }
       &.project {
-        &:hover {
+        &:hover, &.active {
           h3 {
             @apply text-purple2;
           }
         }
       }
       &.showcase {
-        &:hover {
+        &:hover, &.active {
           h3 {
             @apply text-pink;
           }

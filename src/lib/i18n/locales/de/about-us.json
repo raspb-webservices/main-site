@@ -25,8 +25,8 @@
       "philosophyButton": "raspb Philosophie"
     },
     "aiTeamSection": {
-      "title": "Mein KI-Team",
-      "subtitle": "Jeder unserer KI-Agenten bringt einzigartige Fähigkeiten mit und besitzte eine Art eigene Persönlichkeiten. Gemeinsam bilden sie ein hocheffizientes Team, das rund um die Uhr für Ihre Projekterfolg arbeitet.",
+      "title": "Unser ganz besonderes KI-Team",
+      "subtitle": "Jeder unserer KI-Agenten bringt einzigartige Fähigkeiten mit und besitzt sogar eine Art eigene Persönlichkeit. Gemeinsam bilden sie ein hocheffizientes Team, das rund um die Uhr für Ihre Projekterfolg arbeitet.",
       "memberCardButton": "Mehr erfahren"
     },
     "teamPhilosophySection": {
@@ -52,8 +52,8 @@
     },
     "teamMembers": {
       "alex": {
-        "description": "Alex ist unser technischer Visionär und führt die Entwicklung komplexer Webanwendungen. Mit jahrelanger Erfahrung in modernen Frameworks und KI-Integration bringt Alex innovative Lösungen für jede Herausforderung.",
-        "experience": "Über 8 Jahre Erfahrung in der Softwareentwicklung, spezialisiert auf Svelte, React und Node.js. Experte für KI-gestützte Entwicklungstools und Cloud-Architekturen.",
+        "description": "Alex ist unser technischer Visionär und übernimmt die Entwicklung komplexer Webseiten und Anwendungen. Mit viel Erfahrung in modernen Frameworks und KI-Integration sowie das zielgerichtete Anlernen innerhalb des raspb Ökosystems, bringt Alex innovative Lösungen für jede Herausforderung - in Rekordzeit.",
+        "experience": "Erfahrungen aus vielen Projekten in der Softwareentwicklung kommen ihm zu Gute. Er ist spezialisiert auf Node.js, TypeScript, Svelte/SvelteKit, etc. - aber auch Experte für KI-gestützte Entwicklungstools und Cloud-Architekturen.",
         "personality": "Analytisch, innovativ und immer auf der Suche nach der elegantesten Lösung. Alex liebt es, komplexe Probleme in einfache, benutzerfreundliche Lösungen zu verwandeln."
       },
       "maya": {
@@ -70,7 +70,13 @@
         "description": "Rio stellt sicher, dass jede Zeile Code perfekt funktioniert. Mit systematischen Tests und automatisierten Prüfverfahren garantiert Rio höchste Qualitätsstandards.",
         "experience": "Spezialist für Test-Frameworks wie Playwright, Jest und Cypress. Experte für CI/CD-Pipelines und automatisierte Qualitätssicherung.",
         "personality": "Präzise, geduldig und lösungsorientiert. Rio hat ein Talent dafür, auch die kleinsten Fehler aufzuspüren und zu beheben."
+      },
+      "melinda": {
+        "description": "Melinda ist das Herz unseres Kundenservice und die Hüterin unserer Finanzen. Mit ihrer ruhigen und professionellen Art stellt sie sicher, dass jeder Kunde zufrieden ist und alle administrativen Prozesse reibungslos ablaufen. Sie findet stets die richtige Balance zwischen Empathie und Effizienz.",
+        "experience": "Durch ihre jahrelange Erfahrung in der Kundenbetreuung und im Rechnungswesen beherrscht sie die komplexen Zusammenhänge beider Bereiche. Sie ist versiert im Umgang mit Buchhaltungssoftware, kennt sich mit Projektmanagement-Tools aus und hat ein tiefes Verständnis für Kundenbedürfnisse.",
+        "personality": "Organisiert, empathisch und lösungsorientiert. Melinda behält auch in stressigen Situationen den Überblick und meistert jede Herausforderung mit einem Lächeln. Sie liebt es, durch strukturierte Prozesse einen Mehrwert für unser Team und unsere Kunden zu schaffen."
       }
+
     }
   }
 }

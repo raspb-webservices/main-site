@@ -1,9 +1,9 @@
 <script lang="ts">
-  let { children, fullWidth = false, customColor = 'white', type = 'default' } = $props();
+  let { children, fullWidth = false, noSpacing = false, customColor = 'white', type = 'default' } = $props();
 </script>
 
 {#if type === 'default'}
-  <section class="base-section" class:full={fullWidth} style="--backgroundColor:{customColor}">
+  <section class="base-section" class:full={fullWidth} class:noSpacing={noSpacing} style="--backgroundColor:{customColor}">
     <div class="inner-container">
       {@render children()}
     </div>
@@ -30,11 +30,16 @@
   section.base-section {
     @apply w-full bg-white py-24;
 
+    &.noSpacing  {
+      @apply py-0;
+    }
+
     &:not(.full) {
       .inner-container {
-        @apply m-auto h-full w-full max-w-7xl px-4;
+        @apply m-auto h-full w-full max-w-7xl;
       }
     }
+    
     &.center-teaser {
       @apply from-secondary/30 via-primary/10 to-secondary/20 bg-gradient-to-br py-36;
     }
@@ -42,9 +47,6 @@
       @apply from-secondary/30 via-primary/10 to-secondary/20 bg-gradient-to-br py-10;
       .inner-container {
         @apply min-h-[calc(100vh-160px)] flex flex-col justify-center items-center;
-        > *  {
-          @apply grow;
-        }
       }
     }
   }

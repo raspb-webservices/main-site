@@ -98,4 +98,7 @@
 
 <style lang="postcss">
   @reference '../../app.css';
+  .imprint-content {
+    @apply px-4;
+  }
 </style>
