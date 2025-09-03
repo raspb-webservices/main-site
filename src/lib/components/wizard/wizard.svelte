@@ -3,7 +3,7 @@
   import type { WizardConfig, Project } from '$interfaces/project.interface';
   import type { Customer } from '$interfaces/customer.interface';
   import { uploadAsset, publishAsset, createAsset, uploadMultipleAssetsWithDelay, publishMultipleAssets } from '$helper/uploadAsset';
-  import { projectTypes, subTypes, availableFeatures, googleFonts, formFieldTypes, featureCategoryColors, getStepConfig } from './wizard-config';
+  import { projectTypes, subTypes, availableFeatures, googleFonts, formFieldTypes, featureCategoryColors, getStepConfig } from '$lib/configs/wizard-config';
   import { goto } from '$app/navigation';
   import ContactForm from './contact-form.svelte';
   import { addMessages, _ } from 'svelte-i18n';

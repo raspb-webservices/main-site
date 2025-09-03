@@ -60,7 +60,7 @@
 </div>
 
 <style lang="postcss">
-  @reference '../../app.css';
+  @reference '../../../app.css';
 
   .swiper-image {
     @apply bg-primary/5 block h-[450px] w-full bg-cover bg-center bg-no-repeat;

@@ -1,10 +1,10 @@
 <script lang="ts">
   import { user, isAuthenticated, popupOpen } from '$store/sharedStates.svelte';
-  import SLIDER from '$lib/components/slider.svelte';
-  import Hero from '$lib/components/hero.svelte';
+  import SLIDER from '$lib/components/ui/slider.svelte';
+  import Hero from '$lib/components/ui/hero.svelte';
   import markdownit from 'markdown-it';
-  import Section from '$lib/components/section.svelte';
-  import RaspbPhilosophyModal from '$lib/components/raspb-philosophy-modal.svelte';
+  import Section from '$lib/components/ui/section.svelte';
+  import RaspbPhilosophyModal from '$lib/components/modals/raspb-philosophy-modal.svelte';
   import { goto } from '$app/navigation';
   import { _ } from 'svelte-i18n';
   import Stage from '$lib/components/ui/stage.svelte';
@@ -583,9 +583,6 @@
   @reference '../app.css';
 
   .home-content-wrapper {
-    .direct-section {
-      @apply m-auto mb-10 w-full max-w-7xl p-4;
-    }
     .benefits {
       @apply flex flex-wrap gap-2;
       .item {

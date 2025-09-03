@@ -3,6 +3,7 @@
   import { goto } from '$app/navigation';
   import { _ } from 'svelte-i18n';
   import Wizard from '$lib/components/wizard/wizard.svelte';
+  import WizardBasic from '$lib/components/wizard/wizard-basic.svelte';
 
   interface PageData {
     projectType: string | null;
@@ -37,9 +38,9 @@
 </svelte:head>
 
 <section class="get-started-content-wrapper">
+
   <div class="hero-section">
     <h1>{$_('getStarted.hero.title')} <span class="inner-text-special">{$_('getStarted.hero.titleHighlight')}</span></h1>
-
     <div class="teaser-content">
       <p class="lead-text">
         {$_('getStarted.teaser.description')}
@@ -87,8 +88,14 @@
     </div>
   </div>
 
+  <div class="auswahl-box">
+
+  </div>
+
+
   <div class="wizard-section" id="wizard">
     <Wizard initialProjectType={data.projectType} initialSubType={data.subType} />
+    <WizardBasic />
   </div>
 </section>
 

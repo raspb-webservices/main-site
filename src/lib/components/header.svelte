@@ -300,25 +300,6 @@
           }
         }
       }
-      .mobile-controls {
-        @apply m-4 flex w-full flex-row items-center justify-center gap-4;
-        .locale-toggle-btn {
-          @apply flex h-8 w-8 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-white bg-cover bg-center bg-no-repeat p-0 transition-all duration-300 hover:shadow-lg;
-          &.german {
-            background-image: url('/icons/flags/germany-flag.svg');
-          }
-          &.english {
-            background-image: url('/icons/flags/uk-flag.svg');
-          }
-          &:hover {
-            @apply scale-105 transform;
-          }
-
-          &:active {
-            @apply scale-95 transform;
-          }
-        }
-      }
     }
   }
 </style>

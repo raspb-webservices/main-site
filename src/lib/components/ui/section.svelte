@@ -1,9 +1,9 @@
 <script lang="ts">
-  let { children, fullWidth = false, noSpacing = false, customColor = 'white', type = 'default' } = $props();
+  let { children, fullWidth = false, fullHeight = false, noSpacing = false, customColor = 'white', type = 'default' } = $props();
 </script>
 
 {#if type === 'default'}
-  <section class="base-section" class:full={fullWidth} class:noSpacing={noSpacing} style="--backgroundColor:{customColor}">
+  <section class="base-section" class:full={fullWidth} class:stretch={fullHeight}  class:noSpacing={noSpacing} style="--backgroundColor:{customColor}">
     <div class="inner-container">
       {@render children()}
     </div>
@@ -22,13 +22,14 @@
   </section>
 {/if}
 
-
-
-
 <style lang="postcss">
-  @reference '../../app.css';
+  @reference '../../../app.css';
   section.base-section {
     @apply w-full bg-white py-24;
+
+    &.stretch {
+      @apply min-h-[100vh];
+    }
 
     &.noSpacing  {
       @apply py-0;
@@ -36,7 +37,7 @@
 
     &:not(.full) {
       .inner-container {
-        @apply m-auto h-full w-full max-w-7xl;
+        @apply m-auto h-full w-full max-w-7xl px-4;
       }
     }
     

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import TEASER from '$lib/components/teaser.svelte';
+  import TEASER from '$lib/components/ui/teaser.svelte';
   import { goto } from '$app/navigation';
-  import Slider from '$lib/components/slider.svelte';
+  import Slider from '$lib/components/ui/slider.svelte';
 </script>
 
 <TEASER customImageURL={'https://picsum.photos/id/46/1920/1080'} headline={'Hier kommt eine tolle Headline'} subheadline={'Und eine super SubHeadline'}

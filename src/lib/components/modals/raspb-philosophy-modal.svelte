@@ -193,7 +193,7 @@
 </dialog>
 
 <style lang="postcss">
-  @reference '../../app.css';
+  @reference '../../../app.css';
   @media (max-width: 768px) {
     .modal-box {
       max-height: 85vh;

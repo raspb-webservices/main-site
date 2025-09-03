@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Section from '$lib/components/section.svelte';
+  import Section from '$lib/components/ui/section.svelte';
   import { locale } from 'svelte-i18n';
 
   // Sample-Konfiguration für PDF-Test - SaaS Immobilienverwaltung

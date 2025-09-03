@@ -1,7 +1,7 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n';
   import auth from '../../authService';
-  import Section from '$lib/components/section.svelte';
+  import Section from '$lib/components/ui/section.svelte';
   import Loader from '$lib/components/loader.svelte';
 
   // Form state

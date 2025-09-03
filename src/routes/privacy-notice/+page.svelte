@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import Section from '$lib/components/section.svelte';
+  import Section from '$lib/components/ui/section.svelte';
 </script>
 
 <svelte:head>

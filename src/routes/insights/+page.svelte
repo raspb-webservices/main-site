@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Section from '$lib/components/section.svelte';
+  import Section from '$lib/components/ui/section.svelte';
   import TechLogoShowcase from '$lib/components/tech-logo-showcase.svelte';
   import Stage from '$lib/components/ui/stage.svelte';
   import { onDestroy, onMount } from 'svelte';

@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import type { WizardConfig, Project } from '$interfaces/project.interface';
   import type { Customer } from '$interfaces/customer.interface';
-  import { projectTypes, subTypes, availableFeatures, getStepConfig } from './wizard-config';
+  import { projectTypes, subTypes, availableFeatures, getStepConfig } from '$lib/configs/wizard-config';
   import { goto } from '$app/navigation';
   import { addMessages, _ } from 'svelte-i18n';
 

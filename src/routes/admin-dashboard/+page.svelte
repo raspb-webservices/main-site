@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from '$app/state';
   import { goto } from '$app/navigation';
-  import Section from '$lib/components/section.svelte';
+  import Section from '$lib/components/ui/section.svelte';
   import { user, isAuthenticated, userroles } from '$store/sharedStates.svelte';
   import { onMount } from 'svelte';
   import type { Project } from '$interfaces/project.interface';
