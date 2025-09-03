@@ -344,6 +344,20 @@
         "previewTitle": "Schriftart-Vorschau von {font}:",
         "fontPreview": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis minima officia eveniet fugiat ad dicta quia optio quod possimus sint enim doloremque, consectetur ut est quibusdam corporis obcaecati dolore dolores!",
         "required": "Pflichtfeld"
+      },
+      "priceTiers": {
+        "tier1": {
+          "message": "Ihr Vorhaben ist überschaubar, da bewegen wir uns am unteren Ende der Preisskala."
+        },
+        "tier2": {
+          "message": "Ihr Vorhaben ist gut umsetzbar, der Preis liegt im mittleren Bereich."
+        },
+        "tier3": {
+          "message": "Ihr Vorhaben ist anspruchsvoll, der Preis liegt im oberen Bereich."
+        },
+        "tier4": {
+          "message": "Oh, das ist eine Menge, das Sie da wünschen. Da liegen wir sicherlich über {upperBound}€."
+        }
       }
     },
     "files": {

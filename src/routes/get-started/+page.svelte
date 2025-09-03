@@ -12,6 +12,8 @@
 
   const { data }: { data: PageData } = $props();
 
+  let selectedWizard = $state<('basic' | 'advanced' | null)>(null);
+
   function scrollToWizard(offset = 0) {
     const target = document.getElementById('wizard');
     if (!target) return;
@@ -30,6 +32,13 @@
       }, 300);
     }
   });
+
+  function selectWizard(type: 'basic' | 'advanced') {
+    selectedWizard = type;
+    setTimeout(() => {
+      scrollToWizard(100);
+    }, 100);
+  }
 </script>
 
 <svelte:head>
@@ -38,7 +47,6 @@
 </svelte:head>
 
 <section class="get-started-content-wrapper">
-
   <div class="hero-section">
     <h1>{$_('getStarted.hero.title')} <span class="inner-text-special">{$_('getStarted.hero.titleHighlight')}</span></h1>
     <div class="teaser-content">
@@ -82,20 +90,41 @@
 
       <div class="cta-text">
         <p class="no-padding">
-          <strong>{$_('getStarted.cta.title')}</strong> {$_('getStarted.cta.description')}
+          <strong>{$_('getStarted.cta.title')}</strong>
+          {$_('getStarted.cta.description')}
         </p>
       </div>
     </div>
   </div>
 
-  <div class="auswahl-box">
+  <div class="auswahl-box wizard-selection mb-16 grid grid-cols-1 gap-8 md:grid-cols-2">
+    <button
+      class="wizard-card transform rounded-xl p-8 shadow-lg transition-all duration-300 ease-in-out hover:scale-105
+             {selectedWizard === 'basic' ? 'bg-primary text-primary-content ring-primary ring-4' : 'bg-base-200 text-base-content'}"
+      onclick={() => selectWizard('basic')}
+    >
+      <div class="wizard-icon">✨</div>
+      <h2 class="mb-4 text-2xl font-bold">Basic-Konfigurator</h2>
+      <p class="text-lg">Schnell zu einer ungefähren Preisabschätzung. Der Basic-Konfigurator kann als erster Indikator dienen und ist in 1 Minute erledigt.</p>
+    </button>
 
+    <button
+      class="wizard-card transform rounded-xl p-8 shadow-lg transition-all duration-300 ease-in-out hover:scale-105
+             {selectedWizard === 'advanced' ? 'bg-primary text-primary-content ring-primary ring-4' : 'bg-base-200 text-base-content'}"
+      onclick={() => selectWizard('advanced')}
+    >
+      <div class="wizard-icon">⚙️</div>
+      <h2 class="mb-4 text-2xl font-bold">Erweiterter Konfigurator</h2>
+      <p class="text-lg">Erfassen Sie ihr gesamtes Projekt im Detail. Verwalten Sie das Ergebnis im persönlichen Dashboard.</p>
+    </button>
   </div>
 
-
   <div class="wizard-section" id="wizard">
-    <Wizard initialProjectType={data.projectType} initialSubType={data.subType} />
-    <WizardBasic />
+    {#if selectedWizard === 'basic'}
+      <WizardBasic />
+    {:else if selectedWizard === 'advanced'}
+      <Wizard initialProjectType={data.projectType} initialSubType={data.subType} />
+    {/if}
   </div>
 </section>
 
@@ -128,12 +157,20 @@
   }
 
   .benefit-item {
-    @apply bg-base-200 flex items-start gap-4 rounded-xl p-6 shadow-sm text-base-content;
+    @apply bg-base-200 text-base-content flex items-start gap-4 rounded-xl p-6 shadow-sm;
     transition: all 0.3s ease;
 
     &:hover {
       @apply translate-y-[-2px] shadow-md;
     }
+  }
+
+  .wizard-card {
+    cursor: pointer;
+  }
+
+  .wizard-icon {
+    @apply text-5xl mb-4 text-center;
   }
 
   .benefit-icon {
@@ -151,7 +188,7 @@
   }
 
   .cta-text {
-    @apply bg-base-200 border-base-300 rounded-xl border p-6 text-center text-base-content;
+    @apply bg-base-200 border-base-300 text-base-content rounded-xl border p-6 text-center;
 
     p {
       @apply text-base-content/80 text-base leading-relaxed;
@@ -166,5 +203,4 @@
   .wizard-section {
     @apply mb-16;
   }
-
 </style>

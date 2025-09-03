@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import type { WizardConfig, Project } from '$interfaces/project.interface';
   import type { Customer } from '$interfaces/customer.interface';
-  import { projectTypes, subTypes, availableFeatures, getStepConfig } from '$lib/configs/wizard-config';
+  import { projectTypes, subTypes, availableFeatures, getStepConfig, featureCategoryColors, featureCategoryComplexity } from '$lib/configs/wizard-config';
   import { goto } from '$app/navigation';
   import { addMessages, _ } from 'svelte-i18n';
 
@@ -72,10 +72,10 @@
 
   // Basic steps configuration for wizard-basic
   const basicSteps = [
-    { id: 1, title: 'wizard.basic.steps.projectType', required: true },
-    { id: 2, title: 'wizard.basic.steps.subType', required: true },
-    { id: 3, title: 'wizard.basic.steps.features', required: false },
-    { id: 4, title: 'wizard.basic.steps.summary', required: false }
+    { id: 1, title: 'wizard.config.steps.projekttyp', required: true },
+    { id: 2, title: 'wizard.config.steps.details', required: true },
+    { id: 3, title: 'wizard.config.steps.features', required: false },
+    { id: 4, title: 'wizard.config.steps.ergebnis', required: false }
   ];
 
   const maxSteps = basicSteps.length;
@@ -95,6 +95,7 @@
 
   function calculatePrice() {
     let basePrice = 0;
+    let totalFeatureComplexity = 0;
 
     // Base price from project type
     const projectType = projectTypes.find((p) => p.id === config.projectType);
@@ -108,10 +109,20 @@
       basePrice = subTypeData.price;
     }
 
-    // Additional complexity from features (simplified calculation)
-    const featureMultiplier = 1 + (config.features.length - 1) * 0.1; // 10% per additional feature
+    // Calculate total feature complexity
+    config.features.forEach(featureName => {
+      const feature = availableFeatures.find(f => f.name === featureName);
+      if (feature && feature.category) {
+        totalFeatureComplexity += featureCategoryComplexity[feature.category] || 0;
+      }
+    });
 
-    config.estimatedPrice = Math.round(basePrice * featureMultiplier);
+    // Adjust estimated price based on total feature complexity
+    // This is a simplified example, actual logic might be more complex
+    config.estimatedPrice = Math.round(basePrice + (totalFeatureComplexity * 500)); // Example: 500€ per complexity point
+
+    console.log('Estimated Price:', config.estimatedPrice);
+    console.log('Total Feature Complexity:', totalFeatureComplexity);
   }
 
   function scrollToTop() {
@@ -266,7 +277,7 @@
 
     } catch (error) {
       console.error('Error submitting project request:', error);
-      alert($_('wizard.basic.errors.submitFailed'));
+      alert($_('wizard.modals.error.apiError'));
     } finally {
       isSubmitting = false;
     }
@@ -304,12 +315,12 @@
 <div class="wizard-basic-container">
   <!-- Header -->
   <div class="wizard-basic-header">
-    <h1>{$_('wizard.basic.header.title')}</h1>
+    <h1>{$_('wizard.header.titleFirst')} <span class="inner-text-special">{$_('wizard.header.titleHighlight')}</span></h1>
     <button type="button" class="btn btn-outline btn-sm" onclick={openResetModal}>
       <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
       </svg>
-      {$_('wizard.basic.header.resetButton')}
+      {$_('wizard.header.resetButton')}
     </button>
   </div>
 
@@ -361,8 +372,8 @@
     {#if currentStep === 1}
       <!-- Step 1: Project Type Selection -->
       <div class="step-header">
-        <h1>{$_('wizard.basic.steps.step1.title')}</h1>
-        <p class="teaser">{$_('wizard.basic.steps.step1.teaser')}</p>
+        <h1>{$_('wizard.steps.step1.titleFirst')} <span class="inner-text-special">{$_('wizard.steps.step1.titleHighlight')}</span></h1>
+        <p class="teaser">{$_('wizard.steps.step1.teaser')}</p>
       </div>
 
       <div class="project-types-grid">
@@ -398,11 +409,11 @@
       <!-- Step 2: Subtype Selection -->
       <div class="step-header">
         <h1>
-          {$_('wizard.basic.steps.step2.titleFirst')}
+          {$_('wizard.steps.step2.titleFirst')}
           <span class="inner-text-special">{$_(projectTypes.find((p) => p.id === config.projectType)?.title)}</span>
-          {$_('wizard.basic.steps.step2.titleSecond')}
+          {$_('wizard.steps.step2.titleSecond')}
         </h1>
-        <p class="teaser">{$_('wizard.basic.steps.step2.teaser')}</p>
+        <p class="teaser">{$_('wizard.steps.step2.teaser')}</p>
       </div>
 
       <div class="subtypes-grid">
@@ -434,58 +445,100 @@
     {:else if currentStep === 3}
       <!-- Step 3: Features Selection -->
       <div class="step-header">
-        <h1>{$_('wizard.basic.steps.step3.title')}</h1>
-        <p class="teaser">{$_('wizard.basic.steps.step3.teaser')}</p>
+        <h1>{$_('wizard.steps.step4.titleFirst')} <span class="inner-text-special">{$_('wizard.steps.step4.titleHighlight')}</span></h1>
+        <p class="teaser">{$_('wizard.steps.step4.teaser')}</p>
       </div>
 
       <div class="features-grid">
-        {#each availableFeatures.slice(0, 12) as feature} <!-- Limit to first 12 features for simplicity -->
+        {#each availableFeatures as feature}
           <label class="card service-card cursor-pointer transition-all duration-300" class:card-selected={config.features.includes(feature.name)}>
             <div class="card-body">
               <div class="card-actions items-center justify-start">
                 <input type="checkbox" class="checkbox checkbox-primary" bind:group={config.features} value={feature.name} onchange={() => calculatePrice()} />
-                <h3 class="card-title no-padding">{$_(feature.title)}</h3>
-              </div>
-              <p class="no-padding text-sm">{$_(feature.description)}</p>
+              <h3 class="card-title no-padding">{$_(feature.title)}</h3>
+            </div>
+            <p class="no-padding text-sm">{$_(feature.description)}</p>
+            <div class="card-actions justify-end">
+              <div class="badge {featureCategoryColors[feature.category || 'wizard.config.categories.funktionalitaet']}">{$_(feature.category)}</div>
+            </div>
             </div>
           </label>
         {/each}
       </div>
+
+      <div class="form-control mt-8 w-full">
+        <label class="label" for="description">
+          <span class="label-text text-lg font-semibold">{$_('wizard.form.projectDescription')}</span>
+        </label>
+        <textarea
+          id="description"
+          class="textarea textarea-bordered textarea-lg w-full"
+          bind:value={config.description}
+          placeholder={$_('wizard.form.placeholders.default')}
+          rows="4"
+        ></textarea>
+        <div class="label">
+          <span class="label-text-alt">{$_('wizard.form.characters', { values: { count: config.description.length } })}</span>
+        </div>
+      </div>
     {:else if currentStep === 4}
       <!-- Step 4: Summary -->
       <div class="step-header">
-        <h1>{$_('wizard.basic.steps.step4.title')}</h1>
-        <p class="teaser">{$_('wizard.basic.steps.step4.teaser')}</p>
+        <h1><span class="inner-text-special">{$_('wizard.steps.stepSummary.titleHighlight')}</span></h1>
+        <p class="teaser">{$_('wizard.steps.stepSummary.teaser')}</p>
       </div>
 
       <div class="summary-grid">
         <div class="summary-card">
-          <h3>{$_('wizard.basic.summary.projectType')}</h3>
+          <h3>{$_('wizard.steps.stepSummary.projectType')}</h3>
           <p class="summary-value">{$_(projectTypes.find((p) => p.id === config.projectType)?.title)}</p>
           <p class="summary-subvalue">{$_(subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType)?.title)}</p>
         </div>
 
         {#if config.features.length > 1}
           <div class="summary-card">
-            <h3>{$_('wizard.basic.summary.selectedFeatures')}</h3>
-            <div class="features-list">
+            <h3>{$_('wizard.steps.stepSummary.selectedFeatures')}</h3>
+            <div class="flex flex-wrap gap-2">
               {#each config.features.filter(f => f !== 'cookieConsent') as featureId}
-                <span class="feature-badge">{$_(availableFeatures.find((f) => f.name === featureId)?.title)}</span>
+                <div class="badge {featureCategoryColors[availableFeatures.find((f) => f.name === featureId)?.category || 'wizard.config.categories.funktionalitaet']}">{$_(availableFeatures.find((f) => f.name === featureId)?.title)}</div>
               {/each}
             </div>
           </div>
         {/if}
 
         <div class="price-card">
-          <h3>{$_('wizard.basic.summary.estimatedPrice')}</h3>
-          <div class="price-display">
-            <div class="price-range">
-              <span class="price-min">{Math.round(config.estimatedPrice * 0.8).toLocaleString()}€</span>
-              <span class="price-separator">-</span>
-              <span class="price-max">{Math.round(config.estimatedPrice * 1.2).toLocaleString()}€</span>
+          <h3>{$_('wizard.steps.stepSummary.estimatedPrice')}</h3>
+          {#key config.estimatedPrice}
+            <div class="price-display">
+              {#if config.estimatedPrice <= 1000}
+                <p class="price-message">{$_('wizard.steps.stepSummary.priceTiers.tier1.message')}</p>
+                <div class="price-range">
+                  <span class="price-min">{Math.round(config.estimatedPrice * 0.8).toLocaleString()}€</span>
+                  <span class="price-separator">-</span>
+                  <span class="price-max">{Math.round(config.estimatedPrice * 1.0).toLocaleString()}€</span>
+                </div>
+              {:else if config.estimatedPrice > 1000 && config.estimatedPrice <= 5000}
+                <p class="price-message">{$_('wizard.steps.stepSummary.priceTiers.tier2.message')}</p>
+                <div class="price-range">
+                  <span class="price-min">{Math.round(config.estimatedPrice * 0.9).toLocaleString()}€</span>
+                  <span class="price-separator">-</span>
+                  <span class="price-max">{Math.round(config.estimatedPrice * 1.1).toLocaleString()}€</span>
+                </div>
+              {:else if config.estimatedPrice > 5000 && config.estimatedPrice <= 15000}
+                <p class="price-message">{$_('wizard.steps.stepSummary.priceTiers.tier3.message')}</p>
+                <div class="price-range">
+                  <span class="price-min">{Math.round(config.estimatedPrice * 1.0).toLocaleString()}€</span>
+                  <span class="price-separator">-</span>
+                  <span class="price-max">{Math.round(config.estimatedPrice * 1.2).toLocaleString()}€</span>
+                </div>
+              {:else}
+                <p class="price-message">{$_('wizard.steps.stepSummary.priceTiers.tier4.message', { values: { upperBound: Math.round(config.estimatedPrice * 1.2).toLocaleString() } })}</p>
+                <div class="price-range">
+                  <span class="price-min">{$_('wizard.steps.stepSummary.disclaimer')}</span>
+                </div>
+              {/if}
             </div>
-            <p class="price-note">{$_('wizard.basic.summary.priceNote')}</p>
-          </div>
+          {/key}
         </div>
       </div>
 
@@ -494,7 +547,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
           </svg>
-          {$_('wizard.basic.summary.requestProject')}
+          {$_('wizard.navigation.submitProject')}
         </button>
       </div>
     {/if}
@@ -507,7 +560,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
-        {$_('wizard.basic.navigation.back')}
+        {$_('wizard.navigation.back')}
       </button>
     {:else}
       <div></div>
@@ -521,7 +574,7 @@
         disabled={(currentStep === 1 && !config.projectType) ||
           (currentStep === 2 && !config.subType)}
       >
-        {$_('wizard.basic.navigation.next')}
+        {$_('wizard.navigation.next')}
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
@@ -537,99 +590,99 @@
       <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2" onclick={closeContactModal}>✕</button>
     </form>
 
-    <h3 class="mb-6 text-lg font-bold">{$_('wizard.basic.contact.title')}</h3>
+    <h3 class="mb-6 text-lg font-bold">{$_('wizard.modals.contact.title')}</h3>
 
     <div class="space-y-4">
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
         <div class="form-control w-full">
           <label class="label" for="salutation">
-            <span class="label-text">{$_('wizard.basic.contact.salutation')}</span>
+            <span class="label-text">{$_('wizard.modals.contact.salutation')}</span>
           </label>
           <select id="salutation" class="select select-bordered w-full" bind:value={customerData.salutation}>
-            <option value="">{$_('wizard.basic.contact.salutationPlaceholder')}</option>
-            <option value="Herr">{$_('wizard.basic.contact.mr')}</option>
-            <option value="Frau">{$_('wizard.basic.contact.ms')}</option>
+            <option value="">{$_('wizard.modals.contact.salutationPlaceholder')}</option>
+            <option value="Herr">{$_('wizard.modals.contact.mr')}</option>
+            <option value="Frau">{$_('wizard.modals.contact.ms')}</option>
           </select>
         </div>
 
         <div class="form-control w-full">
           <label class="label" for="givenName">
-            <span class="label-text">{$_('wizard.basic.contact.firstName')} *</span>
+            <span class="label-text">{$_('wizard.modals.contact.firstName')} *</span>
           </label>
           <input
             type="text"
             id="givenName"
             class="input input-bordered w-full"
             bind:value={customerData.givenName}
-            placeholder={$_('wizard.basic.contact.firstNamePlaceholder')}
+            placeholder={$_('wizard.modals.contact.firstNamePlaceholder')}
             required
           />
         </div>
 
         <div class="form-control w-full">
           <label class="label" for="familyName">
-            <span class="label-text">{$_('wizard.basic.contact.lastName')} *</span>
+            <span class="label-text">{$_('wizard.modals.contact.lastName')} *</span>
           </label>
           <input
             type="text"
             id="familyName"
             class="input input-bordered w-full"
             bind:value={customerData.familyName}
-            placeholder={$_('wizard.basic.contact.lastNamePlaceholder')}
+            placeholder={$_('wizard.modals.contact.lastNamePlaceholder')}
             required
           />
         </div>
 
         <div class="form-control w-full">
           <label class="label" for="email">
-            <span class="label-text">{$_('wizard.basic.contact.email')} *</span>
+            <span class="label-text">{$_('wizard.modals.contact.email')} *</span>
           </label>
           <input
             type="email"
             id="email"
             class="input input-bordered w-full"
             bind:value={customerData.email}
-            placeholder={$_('wizard.basic.contact.emailPlaceholder')}
+            placeholder={$_('wizard.modals.contact.emailPlaceholder')}
             required
           />
         </div>
 
         <div class="form-control w-full">
           <label class="label" for="company">
-            <span class="label-text">{$_('wizard.basic.contact.company')}</span>
+            <span class="label-text">{$_('wizard.modals.contact.company')}</span>
           </label>
           <input
             type="text"
             id="company"
             class="input input-bordered w-full"
             bind:value={customerData.company}
-            placeholder={$_('wizard.basic.contact.companyPlaceholder')}
+            placeholder={$_('wizard.modals.contact.companyPlaceholder')}
           />
         </div>
 
         <div class="form-control w-full">
           <label class="label" for="phone">
-            <span class="label-text">{$_('wizard.basic.contact.phone')}</span>
+            <span class="label-text">{$_('wizard.modals.contact.phone')}</span>
           </label>
           <input
             type="tel"
             id="phone"
             class="input input-bordered w-full"
             bind:value={customerData.phone}
-            placeholder={$_('wizard.basic.contact.phonePlaceholder')}
+            placeholder={$_('wizard.modals.contact.phonePlaceholder')}
           />
         </div>
       </div>
 
       <div class="form-control w-full">
         <label class="label" for="comment">
-          <span class="label-text">{$_('wizard.basic.contact.comment')}</span>
+          <span class="label-text">{$_('wizard.modals.contact.comment')}</span>
         </label>
         <textarea
           id="comment"
           class="textarea textarea-bordered w-full"
           bind:value={contactComment}
-          placeholder={$_('wizard.basic.contact.commentPlaceholder')}
+          placeholder={$_('wizard.modals.contact.commentPlaceholder')}
           rows="4"
         ></textarea>
       </div>
@@ -639,15 +692,15 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
         </svg>
         <div>
-          <div class="font-bold">{$_('wizard.basic.contact.privacy')}</div>
-          <div class="text-sm">{$_('wizard.basic.contact.privacyText')}</div>
+          <div class="font-bold">{$_('wizard.modals.contact.privacy')}</div>
+          <div class="text-sm">{$_('wizard.modals.contact.privacyText')}</div>
         </div>
       </div>
     </div>
 
     <div class="modal-action">
       <button type="button" class="btn btn-outline" onclick={closeContactModal}>
-        {$_('wizard.basic.contact.cancel')}
+        {$_('wizard.modals.contact.cancel')}
       </button>
       <button
         type="button"
@@ -657,9 +710,9 @@
       >
         {#if isSubmitting}
           <span class="loading loading-spinner loading-sm"></span>
-          {$_('wizard.basic.contact.sending')}
+          {$_('wizard.modals.contact.sending')}
         {:else}
-          {$_('wizard.basic.contact.send')}
+          {$_('wizard.modals.contact.send')}
         {/if}
       </button>
     </div>
@@ -677,8 +730,8 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
       <div>
-        <div class="font-bold">{$_('wizard.basic.success.title')}</div>
-        <div class="text-sm">{$_('wizard.basic.success.message')}</div>
+        <div class="font-bold">{$_('wizard.modals.thankYou.title')}</div>
+        <div class="text-sm">{$_('wizard.modals.thankYou.subtitle')}</div>
       </div>
       <button type="button" class="btn btn-sm btn-circle btn-ghost" onclick={() => showSuccessMessage = false}>✕</button>
     </div>
@@ -692,12 +745,12 @@
       <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2">✕</button>
     </form>
 
-    <h3 class="mb-4 text-lg font-bold">{$_('wizard.basic.reset.title')}</h3>
-    <p class="py-4">{$_('wizard.basic.reset.description')}</p>
+    <h3 class="mb-4 text-lg font-bold">{$_('wizard.modals.reset.title')}</h3>
+    <p class="py-4">{$_('wizard.modals.reset.description')}</p>
 
     <div class="modal-action">
-      <button type="button" class="btn btn-outline" onclick={closeResetModal}>{$_('wizard.basic.reset.cancel')}</button>
-      <button type="button" class="btn btn-error" onclick={confirmReset}>{$_('wizard.basic.reset.confirm')}</button>
+      <button type="button" class="btn btn-outline" onclick={closeResetModal}>{$_('wizard.modals.reset.cancel')}</button>
+      <button type="button" class="btn btn-error" onclick={confirmReset}>{$_('wizard.modals.reset.confirm')}</button>
     </div>
   </div>
   <form method="dialog" class="modal-backdrop">

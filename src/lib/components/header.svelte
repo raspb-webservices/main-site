@@ -218,7 +218,7 @@
   }
 
     header {
-    @apply w-full h-20 sticky top-0 z-10 bg-white shadow-lg;
+    @apply w-full h-20 sticky top-0 z-20 bg-white shadow-lg;
     .inner-box {
       @apply m-auto h-full w-full max-w-7xl px-4 flex items-center justify-between;
       

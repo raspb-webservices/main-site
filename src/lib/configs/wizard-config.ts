@@ -284,6 +284,18 @@ export const featureCategoryColors: Record<string, string> = {
   'wizard.config.categories.lokalisierung': 'badge-ghost'
 };
 
+export const featureCategoryComplexity: Record<string, number> = {
+  'wizard.config.categories.kommunikation': 1,
+  'wizard.config.categories.content': 1,
+  'wizard.config.categories.navigation': 2,
+  'wizard.config.categories.funktionalitaet': 3,
+  'wizard.config.categories.ecommerce': 4,
+  'wizard.config.categories.benutzer': 3,
+  'wizard.config.categories.integration': 4,
+  'wizard.config.categories.marketing': 2,
+  'wizard.config.categories.lokalisierung': 2
+};
+
 export const googleFonts: string[] = [
 'Anton',
 'Arimo',

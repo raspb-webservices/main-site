@@ -344,6 +344,20 @@
         "previewTitle": "Font preview of {font}:",
         "fontPreview": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis minima officia eveniet fugiat ad dicta quia optio quod possimus sint enim doloremque, consectetur ut est quibusdam corporis obcaecati dolore dolores!",
         "required": "Required field"
+      },
+      "priceTiers": {
+        "tier1": {
+          "message": "Your project is manageable, we are certainly at the lower end of the price range."
+        },
+        "tier2": {
+          "message": "Your project is well feasible, the price is in the middle range."
+        },
+        "tier3": {
+          "message": "Your project is demanding, the price is in the upper range."
+        },
+        "tier4": {
+          "message": "Oh, that's a lot you're asking for. We're certainly above {upperBound}€."
+        }
       }
     },
     "files": {
