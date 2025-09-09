@@ -130,7 +130,7 @@
 
 <Section noSpacing={true}>
   <div id="raspb" class="inner-box animate-fade-in-up pt-30 pb-24">
-    <h2>Das ist raspb - Ihr innovaiver IT-Dienstleister</h2>
+    <h2>Das ist <span class="inner-text-special">raspb</span> - Ihr innovaiver IT-Dienstleister</h2>
     <p class="teaser">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Id dignissimos veniam quam quae itaque, officiis blanditiis non, aspernatur adipisci ad porro
       magnam eum fugit aut labore laudantium optio nostrum. Doloribus!
@@ -198,7 +198,7 @@
 <Section noSpacing={true}>
   <div id="ai-team" class="inner-box animate-fade-in-up pt-36">
     <div class="m-auto mb-12 max-w-5xl text-center">
-      <h2>{$_('ueberUns.aiTeamSection.title')}</h2>
+      <h2>{$_('ueberUns.aiTeamSection.titleFirst')} <span class="inner-text-special">{$_('ueberUns.aiTeamSection.titleHighlight')}</span></h2>
       <p class="teaser boxed no-padding">{$_('ueberUns.aiTeamSection.subtitle')}</p>
     </div>
   </div>

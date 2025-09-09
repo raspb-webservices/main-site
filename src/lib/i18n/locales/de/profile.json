@@ -1,0 +1,25 @@
+{
+  "profile": {
+    "title": "Ihre Profildaten",
+    "details": "Profil Details",
+    "editTitle": "Bearbeiten Sie Ihr Profil",
+    "closeButton": "Schließen",
+    "givenName": "Vorname",
+    "familyName": "Nachname",
+    "company": "Firma",
+    "phone": "Telefon",
+    "address": "Adresse",
+    "city": "Ort",
+    "postCode": "PLZ",
+    "country": "Land",
+    "salutation": "Anrede",
+    "cancelButton": "Abbrechen",
+    "saveButton": "Abspeichern",
+    "salutationOptions": {
+      "mr": "Herr",
+      "mrs": "Frau",
+      "diverse": "divers"
+    },
+    "salutationPlaceholder": "Bitte wählen Sie eine Anrede"
+  }
+}

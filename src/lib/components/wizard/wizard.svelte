@@ -1,13 +1,13 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import type { WizardConfig, Project } from '$interfaces/project.interface';
-  import type { Customer } from '$interfaces/customer.interface';
+  import type { User } from '$interfaces/user.interface';
   import { uploadAsset, publishAsset, createAsset, uploadMultipleAssetsWithDelay, publishMultipleAssets } from '$helper/uploadAsset';
   import { projectTypes, subTypes, availableFeatures, googleFonts, formFieldTypes, featureCategoryColors, getStepConfig } from '$lib/configs/wizard-config';
   import { goto } from '$app/navigation';
-  import ContactForm from './contact-form.svelte';
   import { addMessages, _ } from 'svelte-i18n';
   import auth from '../../../authService';
+  import { user } from '$store/sharedStates.svelte';
 
   // Props for initial values from URL parameters
   interface Props {
@@ -21,7 +21,7 @@
   let currentStep = $state(1);
   let showResetModal = $state(false);
   let custom_metadata = $state({});
-  let auth0Id = $state('');
+  let currentUser = $derived(user.get()) as User;
 
   let config: WizardConfig = $state({
     step: 1,
@@ -57,34 +57,6 @@
   let isUploading = $state(false);
   let uploadProgress = $state('');
   let isGeneratingPDF = $state(false);
-
-  // Customer data for contact form
-  let customerData: Partial<Customer> = $state({
-    salutation: '',
-    givenName: '',
-    familyName: '',
-    email: '',
-    company: '',
-    phone: '',
-    address: '',
-    postCode: '',
-    city: '',
-    country: '',
-    user_metadata:{
-      phone: '',
-      address: '',
-      city: '',
-      company: '',
-      country: '',
-      familyName: '',
-      givenName: '',
-      postCode: '',
-      projectIds: [],
-      salutation: ''
-    }
-  });
-  let isContactFormValid = $state(false);
-  let createdCustomerId = $state<string>('');
 
   // Loading and error states
   let isSubmitting = $state(false);
@@ -224,13 +196,17 @@
     // Subtype price (replaces base price)
     const subTypeData = subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType);
     if (subTypeData) {
-      basePrice = subTypeData.price;
+      basePrice = (subTypeData.lowestPrice + subTypeData.highestPrice) / 2;
     }
 
-    // Additional complexity factors
-    const complexityFactor = 1 + (config.description.length / 1000) * 0.2 + (config.features.length / 10) * 0.3;
+    const featureComplexitySum = 1;
 
-    config.estimatedPrice = Math.round(basePrice * complexityFactor);
+    for(let i = 0; i < config.features.length; i++ ) {
+      const currentFeature = config.features[i];
+
+    
+    }
+
   }
 
   async function handleFileUpload(event: Event) {
@@ -323,7 +299,6 @@
         },
         body: JSON.stringify({
           config,
-          customerData,
           uploadedFiles: uploadedFiles.map((file) => ({
             name: file.name,
             size: file.size,
@@ -383,33 +358,7 @@
     errorDetails = [];
 
     try {
-      // Step 1: Create customer first
-      console.log($_('wizard.loading.steps.preparing.description'), customerData);
-      const customerResponse = await fetch('/api/customer/create', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(customerData)
-      });
-
-      const customerResult = await customerResponse.json();
-
-      if (!customerResult.success) {
-        errorDetails.push(`${$_('wizard.modals.error.customerError')}: ${customerResult.error || $_('wizard.modals.error.unknownError')}`);
-        if (customerResult.details) {
-          errorDetails.push(...customerResult.details);
-        }
-        throw new Error($_('wizard.modals.error.customerCreationFailed'));
-      }
-
-      console.log("customerResult",customerResult)
-
-      createdCustomerId = customerResult.data.id;
-      auth0Id = customerResult.data.auth0Id;
-      console.log($_('wizard.modals.error.customerCreated'), createdCustomerId);
-
-      // Step 2: Prepare asset IDs (use pre-uploaded or fallback to upload now)
+      // Prepare asset IDs (use pre-uploaded or fallback to upload now)
       let finalAssetIds: string[] = [];
       if (uploadedAssetIds.length > 0) {
         console.log($_('wizard.modals.error.usingPreUploaded'), uploadedAssetIds);
@@ -425,7 +374,7 @@
         }
       }
 
-      // Step 3: Create project (without owner initially to avoid circular dependency)
+      // Create project
       console.log($_('wizard.modals.error.creatingProject'), finalAssetIds);
 
       const projectData: Project = {
@@ -451,7 +400,6 @@
         formFields: config.formFields,
         pages: config.pages,
         relatedFiles: finalAssetIds.map((id) => ({ id }))
-        // Note: owner will be linked separately
       };
 
       const response = await fetch('/api/project/create', {
@@ -466,74 +414,34 @@
 
       if (result.success && result.data?.id) {
         const projectId = result.data.id;
+
         console.log($_('wizard.modals.error.projectCreated'), projectId);
-        console.log("customerData ", customerData);
 
-        custom_metadata = {
-          "phone": customerData.phone,
-          "address": customerData.address,
-          "city": customerData.city,
-          "company": customerData.company,
-          "country":  customerData.country,
-          "familyName":customerData.familyName,
-          "givenName": customerData.givenName,
-          "postCode": customerData.postCode,
-          "projectIds": [projectId],
-          "salutation": customerData.salutation
-        };
-
-        const updateMetaResponse = await auth.updateMetadata(auth0Id, custom_metadata);
-        console.log("updateMetaResponse ", updateMetaResponse);
-
-        // Step 4: Link customer to project
-        try {
-          const linkResponse = await fetch(`/api/project/link-customer/${projectId}`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ customerId: createdCustomerId })
-          });
-          const linkResult = await linkResponse.json();
-
-          if (linkResponse.ok && linkResult.success) {
-            console.log($_('wizard.modals.error.customerLinked'), linkResult);
+        // Update Auth0 metadata with projectId
+        if (currentUser) {
+          if(Array.isArray(currentUser.projectIds)) {
+            currentUser.projectIds.push(projectId);
           } else {
-            console.warn($_('wizard.modals.error.customerLinkingFailed'), linkResult);
-            // Don't fail the entire process if linking fails
+            currentUser.projectIds =  [projectId];
           }
-        } catch (linkError) {
-          console.warn($_('wizard.modals.error.customerLinkingError'), linkError);
-          // Don't fail the entire process if linking fails
+
+          custom_metadata = {
+            "projectIds": currentUser.projectIds,
+          };
+
+          const updateMetaResponse = await auth.updateMetadata(currentUser.sub, custom_metadata);
+        } else {
+          console.warn("User not logged in or user ID not available, cannot update Auth0 metadata.");
         }
 
-        // Step 5: Show thank you page immediately while publishing happens in background
+        // Show thank you page immediately while publishing happens in background
         showThankYouPage();
 
-        // Step 6: Wait 2 seconds to ensure everything is properly saved before publishing
+        // Wait 2 seconds to ensure everything is properly saved before publishing
         console.log($_('wizard.modals.error.waiting'));
         await new Promise((resolve) => setTimeout(resolve, 3000));
 
-        // Step 7: Publish customer
-        try {
-          console.log($_('wizard.modals.error.publishingCustomer'), createdCustomerId);
-          const publishCustomerResponse = await fetch(`/api/customer/publish/${createdCustomerId}`, {
-            method: 'POST'
-          });
-          const publishCustomerResult = await publishCustomerResponse.json();
-
-          if (publishCustomerResponse.ok && publishCustomerResult.success) {
-            console.log($_('wizard.modals.error.customerPublished'), publishCustomerResult);
-          } else {
-            console.warn($_('wizard.modals.error.customerPublishingFailed'), publishCustomerResult);
-            // Don't fail the entire process if customer publishing fails
-          }
-        } catch (publishCustomerError) {
-          console.warn($_('wizard.modals.error.customerPublishingError'), publishCustomerError);
-          // Don't fail the entire process if customer publishing fails
-        }
-
-        // Step 8: Publish the project
+        // Publish the project
         try {
           console.log($_('wizard.modals.error.publishingProject'), projectId);
           const publishProjectResponse = await fetch(`/api/project/publish/${projectId}`, {
@@ -552,7 +460,7 @@
           // Don't fail the entire process if publishing fails
         }
 
-        // Step 9: Publish all assets that are part of the project
+        // Publish all assets that are part of the project
         if (finalAssetIds.length > 0) {
           console.log($_('wizard.modals.error.publishingAssets'), finalAssetIds);
 
@@ -796,7 +704,7 @@
             <h3 class="card-title">{$_(subtype.title)}</h3>
             <p class="no-padding">{$_(subtype.description)}</p>
               <div class="card-actions justify-end">
-                <div class="badge badge-success">ab {subtype.price.toLocaleString()}€</div>
+                <div class="badge badge-success">ab {subtype.lowestPrice}€</div>
               </div>
             </div>
           </div>
@@ -809,7 +717,7 @@
         <p class="teaser">{$_('wizard.steps.step3.teaser')}</p>
       </div>
 
-      <div class="content-section">
+      <div class="content-section max-w-3xl m-auto">
         <div class="form-control mb-8 w-full">
           <label class="label" for="projectName">
             <span class="label-text text-lg font-semibold">{$_('wizard.form.projectName')}</span>
@@ -1336,9 +1244,6 @@
           </div>
         {/if}
       </div>
-    {:else if currentStep === maxSteps - 1}
-      <!-- Contact Form Step -->
-      <ContactForm bind:customerData bind:isValid={isContactFormValid} onUpdate={(data) => (customerData = data)} />
     {:else if currentStep === maxSteps}
       <!-- Final Step: Summary -->
       <div class="step-header">
@@ -1478,7 +1383,7 @@
               {#if config.subType}
                 <div class="flex justify-between">
                   <span>{$_(subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType)?.title)}:</span>
-                  <span>{subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType)?.price.toLocaleString()}€</span>
+                  <span>{subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType)?.lowestPrice}€</span>
                 </div>
               {/if}
               {#if config.features.length > 0}
@@ -1513,8 +1418,7 @@
         class="btn-basic flex-grow md:flex-grow-0"
         onclick={nextStep}
         disabled={(currentStep === 1 && !config.projectType) ||
-          (currentStep === 2 && !config.subType && config.projectType !== 'freestyle') ||
-          (stepConfig[currentStep - 1]?.title === 'Kontakt' && !isContactFormValid)}
+          (currentStep === 2 && !config.subType && config.projectType !== 'freestyle')}
       >
         {$_('wizard.navigation.next')}
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

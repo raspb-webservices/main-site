@@ -1,3 +1,5 @@
+import type { User } from '$interfaces/user.interface';
+
 // Store für Authentifizierungsstatus
 export const isAuthenticated = createIsAuthenticated();
 export function createIsAuthenticated() {
@@ -15,12 +17,12 @@ export function createIsAuthenticated() {
 // Store für User-Daten
 export const user = createUser();
 export function createUser() {
-  let value = $state({});
+  let value = $state<User | {}>({});
   return {
     get() {
       return value;
     },
-    set(user: any) {
+    set(user: User) {
       value = user;
     }
   };

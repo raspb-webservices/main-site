@@ -188,6 +188,9 @@ body {
 /* TYPOGRAPHY */
 p {
   @apply font-circular pb-7 text-lg font-light;
+  &.tiny-label {
+    @apply pb-0 text-xs text-base-content/60;
+  }
   &.no-padding {
     @apply pb-0;
   }

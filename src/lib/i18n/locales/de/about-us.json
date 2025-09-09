@@ -25,7 +25,8 @@
       "philosophyButton": "raspb Philosophie"
     },
     "aiTeamSection": {
-      "title": "Unser ganz besonderes KI-Team",
+      "titleFirst": "Unser ganz besonderes",
+      "titleHighlight": "KI-Team",
       "subtitle": "Jeder unserer KI-Agenten bringt einzigartige Fähigkeiten mit und besitzt sogar eine Art eigene Persönlichkeit. Gemeinsam bilden sie ein hocheffizientes Team, das rund um die Uhr für Ihre Projekterfolg arbeitet.",
       "memberCardButton": "Mehr erfahren"
     },

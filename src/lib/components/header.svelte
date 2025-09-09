@@ -4,13 +4,14 @@
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
   import { locale, _ } from 'svelte-i18n';
+  import type { User } from '$interfaces/user.interface';
 
   let mobileNavOpen = $state(false);
   let logginIn = $state(false);
   let logginOut = $state(false);
 
   let isAuth = $derived(isAuthenticated.get());
-  let currentUser = $derived(user.get());
+  let currentUser = $derived(user.get()) as User;
   let currentUserRoles = $derived(userroles.get());
 
   async function login() {
@@ -34,25 +35,32 @@
 
 {#if isAuth}
   <div class="logged-in-header">
-    <div class="inner-box flex justify-between items-center">
-      <p class="no-padding">Herzlich Willkommen, {currentUser['givenName']} {currentUser['familyName']}!</p>
+    <div class="inner-box flex items-center justify-between">
+      <p class="no-padding">Herzlich Willkommen, {currentUser.givenName} {currentUser.familyName}!</p>
       <div class="ml-auto"></div>
       <button
-        class="text-link-button"
+        class="text-link-button white-link"
         onclick={() => {
-          if(currentUserRoles.includes('customer')) {
+          if (currentUserRoles.includes('customer')) {
             goto('/customer-dashboard');
           } else {
             goto('/admin-dashboard');
           }
         }}>Zum Dashboard</button
       >
-      <div class="text-center w-8 opacity-70 text-base"> | </div>
+            <div class="w-8 text-center text-white opacity-70">|</div>
       <button
-        class="text-link-button"
-          onclick={() => {
-            logout();
-          }}>Abmelden</button
+        class="text-link-button white-link"
+        onclick={() => {
+          goto('/profile');
+        }}>Profil</button
+      >
+      <div class="w-8 text-center text-white opacity-70">|</div>
+      <button
+        class="text-link-button white-link"
+        onclick={() => {
+          logout();
+        }}>Abmelden</button
       >
     </div>
   </div>
@@ -105,7 +113,9 @@
           onclick={() => {
             login();
           }}
-          ><div class="button-inner">{#if logginIn || logginOut}<span class="loading loading-ring loading-sm"></span>{:else}<span>{$_('menu.login')}</span>{/if}</div></button
+          ><div class="button-inner">
+            {#if logginIn || logginOut}<span class="loading loading-ring loading-sm"></span>{:else}<span>{$_('menu.login')}</span>{/if}
+          </div></button
         >
       {/if}
       <button
@@ -212,16 +222,19 @@
   @reference '../../app.css';
   .logged-in-header {
     @apply bg-iconic-blue w-full py-1.5;
-    p {
-      @apply text-base text-neutral-content;
+    .inner-box {
+      @apply m-auto flex h-full w-full max-w-7xl items-center justify-between px-4;
+      p {
+        @apply text-neutral-content text-base;
+      }
     }
   }
 
-    header {
-    @apply w-full h-20 sticky top-0 z-20 bg-white shadow-lg;
+  header {
+    @apply sticky top-0 z-20 h-20 w-full bg-white shadow-lg;
     .inner-box {
-      @apply m-auto h-full w-full max-w-7xl px-4 flex items-center justify-between;
-      
+      @apply m-auto flex h-full w-full max-w-7xl items-center justify-between px-4;
+
       .logo {
         @apply aspect-video h-[72px] cursor-pointer bg-cover bg-center bg-no-repeat;
         background-image: url(/images/logo.png);
@@ -229,7 +242,7 @@
       nav.navigation {
         @apply hidden w-fit items-center justify-center md:flex;
         > button {
-          @apply text-base-content/80 relative ml-4 md:ml-6 px-2 text-lg font-bold;
+          @apply text-base-content/80 relative ml-4 px-2 text-lg font-bold md:ml-6;
 
           &::before,
           &::after {
@@ -265,7 +278,7 @@
       }
 
       div.cta-area {
-        @apply hidden md:flex justify-center items-center;
+        @apply hidden items-center justify-center md:flex;
       }
 
       nav.mobile-navigvation {

@@ -27,26 +27,16 @@ async function getRoles(userid: string): Promise<string[]> {
 }
 
 async function loginWithPopup(client: any, options?: any) {
-  console.log('loginWithPopup called');
   popupOpen.set(true);
 
-  console.log(' popupOpen ', popupOpen.get());
-
   try {
-    const login = await client.loginWithPopup(options);
-
-    console.log(' login ', login);
-
+    await client.loginWithPopup(options);
     const currentUser = await client.getUser();
     const currentUserRole = await getRoles(currentUser.sub);
 
-    console.log(' currentUser ', currentUser);
-    console.log(' currentUserRole ', currentUserRole);
-
     userroles.set(currentUserRole);
-
     user.set(currentUser);
-    isAuthenticated.set(true); // Verwende .set() Methode
+    isAuthenticated.set(true); 
   } catch (e) {
     console.error(e);
   } finally {
@@ -55,8 +45,8 @@ async function loginWithPopup(client: any, options?: any) {
 }
 
 function logout(client: any) {
-  isAuthenticated.set(false); // Verwende .set() Methode
-  user.set({ name: '', nickname: '', user_id: '', email: '' }); // Setze User zurück
+  isAuthenticated.set(false);
+  user.set({ email: '' });
   return client.logout({
     clientId: authConfig.clientId,
     logoutParams: {
@@ -75,13 +65,13 @@ async function checkAuthState(client: any) {
     if (isAuth) {
       const currentUser = await client.getUser();
       user.set(currentUser);
-      isAuthenticated.set(true); // Verwende .set() Methode
+      isAuthenticated.set(true); 
     } else {
-      isAuthenticated.set(false); // Verwende .set() Methode
+      isAuthenticated.set(false);
     }
   } catch (e) {
     console.error('Error checking auth state:', e);
-    isAuthenticated.set(false); // Verwende .set() Methode
+    isAuthenticated.set(false);
   }
 }
 
@@ -96,9 +86,6 @@ async function createAuth0User(userData: { email: string; password: string; give
       verify_email: true,
       user_metadata: userData.user_metadata
     });
-
-    console.log('AUTH0 create user response', response);
-
     return response;
   } catch (error) {
     console.error('Error creating Auth0 user:', error);
@@ -111,7 +98,6 @@ async function assignRole(userId: string, rolesToAssign: string[]): Promise<any>
     const response = await API.post('users/' + userId + '/roles', {
       roles: rolesToAssign
     });
-    console.log('AUTH0 assigned roles', response);
     return response;
   } catch (error) {
     console.error('Error creating Auth0 user:', error);
@@ -120,16 +106,11 @@ async function assignRole(userId: string, rolesToAssign: string[]): Promise<any>
 }
 
 async function updateMetadata(userId: string, metadata: Object): Promise<any> {
-
-  console.log("userId ", userId)
-  console.log("metadata ", metadata)
-
   if (userId) {
     try {
       const response = await API.patch('users/' + userId, {
         user_metadata: metadata
       });
-      console.log('AUTH0 updated metadata roles', response);
       return response;
     } catch (error) {
       console.error('Error creating Auth0 user:', error);

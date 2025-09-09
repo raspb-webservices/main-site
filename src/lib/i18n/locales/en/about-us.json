@@ -23,7 +23,8 @@
       "philosophyButton": "raspb Philosophy"
     },
     "aiTeamSection": {
-      "title": "Our AI Team",
+      "titleFirst": "This is our exceptionel",
+      "titleHighlight": "AI Team",
       "subtitle": "Each of our AI agents brings unique skills and personalities. Together, they form a highly efficient team that works around the clock for your projects.",
       "memberCardButton": "Learn more"
     },

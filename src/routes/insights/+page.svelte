@@ -55,15 +55,15 @@
 
   <div class="inner-box reduced -mt-12 -mb-24">
     <div class="tab-tile-collection fade-in">
-      <button class="tab-tile tech" class:active={activeContent === 'tech'} onclick={() => (activeContent = 'tech')}>
+      <button class="tab-tile tech" class:active={activeContent === 'tech'} onclick={() => {activeContent = 'tech'; scrollToSection('insights-content-container');}}>
         <h3>Wir funktioniert raspb?</h3>
         <p class="no-padding">Hier gibt es Einblicke in unsere Technolgisches Ökossystem.</p>
       </button>
-      <button class="tab-tile project" class:active={activeContent === 'project'} onclick={() => (activeContent = 'project')}>
+      <button class="tab-tile project" class:active={activeContent === 'project'} onclick={() => {activeContent = 'project'; scrollToSection('insights-content-container'); }}>
         <h3>Wie läuft ein Projekt bei raspb?</h3>
         <p class="no-padding">Ein typisches Projekt vom Konfigurator zum Go-Live.</p>
       </button>
-      <button class="tab-tile showcase" class:active={activeContent === 'showcase'} onclick={() => (activeContent = 'showcase')}>
+      <button class="tab-tile showcase" class:active={activeContent === 'showcase'} onclick={() => {activeContent = 'showcase'; scrollToSection('insights-content-container');}}>
         <h3>Wie sehen die Ergebnisse aus?</h3>
         <p class="no-padding">Finden Sie hier eine Auswahl von Referenzprojekten.</p>
       </button>

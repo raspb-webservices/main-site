@@ -12,7 +12,7 @@
 
   const { data }: { data: PageData } = $props();
 
-  let selectedWizard = $state<('basic' | 'advanced' | null)>(null);
+  let selectedWizard = $state<'basic' | 'advanced' | null>(null);
 
   function scrollToWizard(offset = 0) {
     const target = document.getElementById('wizard');
@@ -123,7 +123,21 @@
     {#if selectedWizard === 'basic'}
       <WizardBasic />
     {:else if selectedWizard === 'advanced'}
-      <Wizard initialProjectType={data.projectType} initialSubType={data.subType} />
+      <h2>Bitte registrieren Sie sich</h2>
+      <p>
+        Möchten Sie Ihr Projektvorhaben im Detail konfigurieren und konkreter machen? Um den erweiterten Wizard nutzen zu können und Ihr vorhaben abspeichern zu
+        können, erstellen Sie bitte einen Account.
+      </p>
+      <p>
+        Damit erhalten Sie den Zugriff auf Ihr persönliches Dashboard, in dem Sie mehrere Projekte verwalten können. Ihre E-Mail-Adresse ist für die
+        Registrierung ausreichend.
+      </p>
+      <button
+        class="btn-basic animate-fade-in-from-side"
+        onclick={() => {
+          goto('/registration');
+        }}>Zur Registrierung</button
+      >
     {/if}
   </div>
 </section>
@@ -170,7 +184,7 @@
   }
 
   .wizard-icon {
-    @apply text-5xl mb-4 text-center;
+    @apply mb-4 text-center text-5xl;
   }
 
   .benefit-icon {

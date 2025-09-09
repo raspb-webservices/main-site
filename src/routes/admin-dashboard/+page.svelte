@@ -6,10 +6,11 @@
   import { onMount } from 'svelte';
   import type { Project } from '$interfaces/project.interface';
   import { projectStatus } from '$interfaces/project.interface';
+  import type { User } from '$interfaces/user.interface';
 
   // Reaktive Variablen für Authentifizierung und Rollen
   let isAuth = $derived(isAuthenticated.get());
-  let currentUser = $derived(user.get());
+  let currentUser = $derived(user.get()) as User;
   let currentUserRoles = $derived(userroles.get());
   let hasAdminAccess = $derived(isAuth && currentUserRoles.includes('admin'));
 
