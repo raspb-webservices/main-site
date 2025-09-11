@@ -1,10 +1,10 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import type { WizardConfig, Project } from '$interfaces/project.interface';
-  import type { Customer } from '$interfaces/customer.interface';
-  import { projectTypes, subTypes, availableFeatures, getStepConfig, featureCategoryColors, featureCategoryComplexity } from '$lib/configs/wizard-config';
+  import { projectTypes, subTypes, availableFeatures, getStepConfig, featureCategoryColors } from '$lib/configs/wizard-config';
   import { goto } from '$app/navigation';
   import { addMessages, _ } from 'svelte-i18n';
+  import type { User } from '$interfaces/user.interface';
 
   // State
   let currentStep = $state(1);
@@ -42,29 +42,18 @@
   });
 
   // Customer data for contact form
-  let customerData: Partial<Customer> = $state({
+  let customerData: Partial<User> = $state({
     salutation: '',
     givenName: '',
     familyName: '',
     email: '',
     company: '',
     phone: '',
-    address: '',
+    companyAddress: '',
     postCode: '',
     city: '',
     country: '',
-    user_metadata: {
-      phone: '',
-      address: '',
-      city: '',
-      company: '',
-      country: '',
-      familyName: '',
-      givenName: '',
-      postCode: '',
-      projectIds: [],
-      salutation: ''
-    }
+    projectIds: []
   });
 
   let contactComment = $state('');
@@ -106,20 +95,20 @@
     // Subtype price (replaces base price)
     const subTypeData = subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType);
     if (subTypeData) {
-      basePrice = subTypeData.price;
+      basePrice = subTypeData.lowestPrice;
     }
 
     // Calculate total feature complexity
-    config.features.forEach(featureName => {
-      const feature = availableFeatures.find(f => f.name === featureName);
+    config.features.forEach((featureName) => {
+      const feature = availableFeatures.find((f) => f.name === featureName);
       if (feature && feature.category) {
-        totalFeatureComplexity += featureCategoryComplexity[feature.category] || 0;
+        totalFeatureComplexity += feature.complexityFactor || 0;
       }
     });
 
     // Adjust estimated price based on total feature complexity
     // This is a simplified example, actual logic might be more complex
-    config.estimatedPrice = Math.round(basePrice + (totalFeatureComplexity * 500)); // Example: 500€ per complexity point
+    config.estimatedPrice = Math.round(basePrice + totalFeatureComplexity * 500); // Example: 500€ per complexity point
 
     console.log('Estimated Price:', config.estimatedPrice);
     console.log('Total Feature Complexity:', totalFeatureComplexity);
@@ -211,22 +200,11 @@
       email: '',
       company: '',
       phone: '',
-      address: '',
+      companyAddress: '',
       postCode: '',
       city: '',
       country: '',
-      user_metadata: {
-        phone: '',
-        address: '',
-        city: '',
-        company: '',
-        country: '',
-        familyName: '',
-        givenName: '',
-        postCode: '',
-        projectIds: [],
-        salutation: ''
-      }
+      projectIds: []
     };
     contactComment = '';
     isContactFormValid = false;
@@ -234,7 +212,7 @@
 
   function validateContactForm() {
     const requiredFields = ['givenName', 'familyName', 'email'];
-    isContactFormValid = requiredFields.every(field => customerData[field as keyof Customer]?.toString().trim());
+    isContactFormValid = requiredFields.every((field) => customerData[field as keyof User]?.toString().trim());
   }
 
   async function submitProjectRequest() {
@@ -274,7 +252,6 @@
       setTimeout(() => {
         showSuccessMessage = false;
       }, 5000);
-
     } catch (error) {
       console.error('Error submitting project request:', error);
       alert($_('wizard.modals.error.apiError'));
@@ -318,7 +295,12 @@
     <h1>{$_('wizard.header.titleFirst')} <span class="inner-text-special">{$_('wizard.header.titleHighlight')}</span></h1>
     <button type="button" class="btn btn-outline btn-sm" onclick={openResetModal}>
       <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+        />
       </svg>
       {$_('wizard.header.resetButton')}
     </button>
@@ -436,7 +418,7 @@
               <h3 class="card-title">{$_(subtype.title)}</h3>
               <p class="no-padding">{$_(subtype.description)}</p>
               <div class="card-actions justify-end">
-                <div class="badge badge-success">ab {subtype.price.toLocaleString()}€</div>
+                <div class="badge badge-success">ab {subtype.lowestPrice.toLocaleString()}€</div>
               </div>
             </div>
           </div>
@@ -455,12 +437,12 @@
             <div class="card-body">
               <div class="card-actions items-center justify-start">
                 <input type="checkbox" class="checkbox checkbox-primary" bind:group={config.features} value={feature.name} onchange={() => calculatePrice()} />
-              <h3 class="card-title no-padding">{$_(feature.title)}</h3>
-            </div>
-            <p class="no-padding text-sm">{$_(feature.description)}</p>
-            <div class="card-actions justify-end">
-              <div class="badge {featureCategoryColors[feature.category || 'wizard.config.categories.funktionalitaet']}">{$_(feature.category)}</div>
-            </div>
+                <h3 class="card-title no-padding">{$_(feature.title)}</h3>
+              </div>
+              <p class="no-padding text-sm">{$_(feature.description)}</p>
+              <div class="card-actions justify-end">
+                <div class="badge {featureCategoryColors[feature.category || 'wizard.config.categories.funktionalitaet']}">{$_(feature.category)}</div>
+              </div>
             </div>
           </label>
         {/each}
@@ -499,8 +481,14 @@
           <div class="summary-card">
             <h3>{$_('wizard.steps.stepSummary.selectedFeatures')}</h3>
             <div class="flex flex-wrap gap-2">
-              {#each config.features.filter(f => f !== 'cookieConsent') as featureId}
-                <div class="badge {featureCategoryColors[availableFeatures.find((f) => f.name === featureId)?.category || 'wizard.config.categories.funktionalitaet']}">{$_(availableFeatures.find((f) => f.name === featureId)?.title)}</div>
+              {#each config.features.filter((f) => f !== 'cookieConsent') as featureId}
+                <div
+                  class="badge {featureCategoryColors[
+                    availableFeatures.find((f) => f.name === featureId)?.category || 'wizard.config.categories.funktionalitaet'
+                  ]}"
+                >
+                  {$_(availableFeatures.find((f) => f.name === featureId)?.title)}
+                </div>
               {/each}
             </div>
           </div>
@@ -532,7 +520,11 @@
                   <span class="price-max">{Math.round(config.estimatedPrice * 1.2).toLocaleString()}€</span>
                 </div>
               {:else}
-                <p class="price-message">{$_('wizard.steps.stepSummary.priceTiers.tier4.message', { values: { upperBound: Math.round(config.estimatedPrice * 1.2).toLocaleString() } })}</p>
+                <p class="price-message">
+                  {$_('wizard.steps.stepSummary.priceTiers.tier4.message', {
+                    values: { upperBound: Math.round(config.estimatedPrice * 1.2).toLocaleString() }
+                  })}
+                </p>
                 <div class="price-range">
                   <span class="price-min">{$_('wizard.steps.stepSummary.disclaimer')}</span>
                 </div>
@@ -545,7 +537,12 @@
       <div class="action-buttons">
         <button type="button" class="btn btn-primary btn-lg" onclick={openContactModal}>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+            />
           </svg>
           {$_('wizard.navigation.submitProject')}
         </button>
@@ -571,8 +568,7 @@
         type="button"
         class="btn-basic flex-grow md:flex-grow-0"
         onclick={nextStep}
-        disabled={(currentStep === 1 && !config.projectType) ||
-          (currentStep === 2 && !config.subType)}
+        disabled={(currentStep === 1 && !config.projectType) || (currentStep === 2 && !config.subType)}
       >
         {$_('wizard.navigation.next')}
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -702,12 +698,7 @@
       <button type="button" class="btn btn-outline" onclick={closeContactModal}>
         {$_('wizard.modals.contact.cancel')}
       </button>
-      <button
-        type="button"
-        class="btn btn-primary"
-        onclick={submitProjectRequest}
-        disabled={!isContactFormValid || isSubmitting}
-      >
+      <button type="button" class="btn btn-primary" onclick={submitProjectRequest} disabled={!isContactFormValid || isSubmitting}>
         {#if isSubmitting}
           <span class="loading loading-spinner loading-sm"></span>
           {$_('wizard.modals.contact.sending')}
@@ -733,7 +724,7 @@
         <div class="font-bold">{$_('wizard.modals.thankYou.title')}</div>
         <div class="text-sm">{$_('wizard.modals.thankYou.subtitle')}</div>
       </div>
-      <button type="button" class="btn btn-sm btn-circle btn-ghost" onclick={() => showSuccessMessage = false}>✕</button>
+      <button type="button" class="btn btn-sm btn-circle btn-ghost" onclick={() => (showSuccessMessage = false)}>✕</button>
     </div>
   </div>
 {/if}
@@ -876,7 +867,8 @@
     }
     .price-range {
       @apply mb-2 flex items-center justify-center gap-2;
-      .price-min, .price-max {
+      .price-min,
+      .price-max {
         @apply text-success text-3xl font-bold;
       }
       .price-separator {
@@ -928,7 +920,8 @@
     }
     .price-card {
       @apply p-4;
-      .price-min, .price-max {
+      .price-min,
+      .price-max {
         @apply text-2xl;
       }
     }
