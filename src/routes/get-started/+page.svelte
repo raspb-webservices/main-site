@@ -2,7 +2,6 @@
   import { onMount } from 'svelte';
   import { goto } from '$app/navigation';
   import { _ } from 'svelte-i18n';
-  import Wizard from '$lib/components/wizard/wizard.svelte';
   import WizardBasic from '$lib/components/wizard/wizard-basic.svelte';
 
   interface PageData {
