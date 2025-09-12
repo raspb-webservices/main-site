@@ -18,7 +18,7 @@
 </svelte:head>
 
 <Section>
-  <div class="text-center">
+  <div class="text-center prose">
     <h1><span class="inner-text-special">{$_('profile.title')}</span></h1>
     <!-- <p>{JSON.stringify(currentUser)}</p> -->
   </div>

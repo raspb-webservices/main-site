@@ -305,6 +305,10 @@ a,
   &.active {
     @apply text-secondary no-underline;
   }
+
+  &.white-link {
+    @apply text-white;
+  }
 }
 
 img,

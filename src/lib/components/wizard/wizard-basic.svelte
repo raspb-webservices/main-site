@@ -5,6 +5,11 @@
   import { goto } from '$app/navigation';
   import { addMessages, _ } from 'svelte-i18n';
   import type { User } from '$interfaces/user.interface';
+  import ResetModal from '../modals/general/reset-modal.svelte';
+  import ProjectType from './steps/project-type.svelte';
+  import ProjectSubType from './steps/project-sub-type.svelte';
+  import ProjectFeatures from './steps/project-features.svelte';
+  import ProjectSummary from './steps/project-summary.svelte';
 
   // State
   let currentStep = $state(1);
@@ -40,24 +45,6 @@
     relatedFiles: [],
     uploadedFiles: []
   });
-
-  // Customer data for contact form
-  let customerData: Partial<User> = $state({
-    salutation: '',
-    givenName: '',
-    familyName: '',
-    email: '',
-    company: '',
-    phone: '',
-    companyAddress: '',
-    postCode: '',
-    city: '',
-    country: '',
-    projectIds: []
-  });
-
-  let contactComment = $state('');
-  let isContactFormValid = $state(false);
 
   // Basic steps configuration for wizard-basic
   const basicSteps = [
@@ -194,90 +181,18 @@
     closeResetModal();
   }
 
-  function openContactModal() {
-    showContactModal = true;
-  }
-
-  function closeContactModal() {
-    showContactModal = false;
-    customerData = {
-      salutation: '',
-      givenName: '',
-      familyName: '',
-      email: '',
-      company: '',
-      phone: '',
-      companyAddress: '',
-      postCode: '',
-      city: '',
-      country: '',
-      projectIds: []
-    };
-    contactComment = '';
-    isContactFormValid = false;
-  }
-
-  function validateContactForm() {
-    const requiredFields = ['givenName', 'familyName', 'email'];
-    isContactFormValid = requiredFields.every((field) => customerData[field as keyof User]?.toString().trim());
-  }
-
-  async function submitProjectRequest() {
-    if (!isContactFormValid) return;
-
-    isSubmitting = true;
-
-    try {
-      // Prepare project request data
-      const projectRequest = {
-        projectType: config.projectType,
-        subType: config.subType,
-        features: config.features,
-        estimatedPrice: config.estimatedPrice,
-        customer: customerData,
-        comment: contactComment,
-        timestamp: new Date().toISOString()
-      };
-
-      // Send email via API
-      const response = await fetch('/api/send-project-request', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(projectRequest)
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to send project request');
-      }
-
-      closeContactModal();
-      showSuccessMessage = true;
-
-      // Auto-hide success message after 5 seconds
-      setTimeout(() => {
-        showSuccessMessage = false;
-      }, 5000);
-    } catch (error) {
-      console.error('Error submitting project request:', error);
-      alert($_('wizard.modals.error.apiError'));
-    } finally {
-      isSubmitting = false;
-    }
-  }
+  function openContact() {}
 
   function openResetModal() {
-    resetModal?.showModal();
+    resetModal?.openModal();
   }
 
   function closeResetModal() {
-    resetModal?.close();
+    resetModal?.closeModal();
     showResetModal = false;
   }
 
-  let resetModal: HTMLDialogElement;
-  let contactModal: HTMLDialogElement;
+  let resetModal: ResetModal;
 
   onMount(async () => {
     const wizardMessagesDe = (await import('$lib/i18n/locales/de/wizard.json')).default;
@@ -286,13 +201,6 @@
     addMessages('en', wizardMessagesEn as any);
 
     calculatePrice();
-  });
-
-  // Reactive validation
-  $effect(() => {
-    if (customerData.givenName || customerData.familyName || customerData.email) {
-      validateContactForm();
-    }
   });
 
   function getTop() {
@@ -315,22 +223,6 @@
 </script>
 
 <div class="wizard-basic-container">
-  <!-- Header -->
-  <div class="wizard-basic-header">
-    <h1>{$_('wizard.header.titleFirst')} <span class="inner-text-special">{$_('wizard.header.titleHighlight')}</span></h1>
-    <button type="button" class="btn btn-outline btn-sm" onclick={openResetModal}>
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-        />
-      </svg>
-      {$_('wizard.header.resetButton')}
-    </button>
-  </div>
-
   <!-- Progress Bar -->
   <div class="progress-wrapper">
     <div class="progress-basic">
@@ -377,213 +269,44 @@
   <!-- Step Content -->
   <div class="step-content-wrapper">
     {#if currentStep === 1}
-      <!-- Step 1: Project Type Selection -->
-      <div class="step-header">
-        <h1>{$_('wizard.steps.step1.titleFirst')} <span class="inner-text-special">{$_('wizard.steps.step1.titleHighlight')}</span></h1>
-        <p class="teaser">{$_('wizard.steps.step1.teaser')}</p>
-      </div>
-
-      <div class="project-types-grid">
-        {#each projectTypes as type}
-          <div
-            class="card service-card cursor-pointer transition-all duration-300"
-            class:card-selected={config.projectType === type.id}
-            role="button"
-            tabindex="0"
-            onclick={() => selectProjectType(type.id)}
-            onkeydown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                selectProjectType(type.id);
-              }
-            }}
-            aria-label="Select project type: {type.title}"
-          >
-            <div class="card-body">
-              <div class="service-card-header">
-                <h3 class="card-title no-padding">{$_(type.title)}</h3>
-                <div class="service-icon">{type.icon}</div>
-              </div>
-              <p class="no-padding">{$_(type.description)}</p>
-              <div class="card-actions justify-end">
-                <div class="badge badge-primary">{type.lowestPrice.toLocaleString()}€ - {type.highestPrice.toLocaleString()}€</div>
-              </div>
-            </div>
-          </div>
-        {/each}
-      </div>
+      <ProjectType {config} {selectProjectType}></ProjectType>
     {:else if currentStep === 2}
-      <!-- Step 2: Subtype Selection -->
-      <div class="step-header">
-        <h1>
-          {$_('wizard.steps.step2.titleFirst')}
-          <span class="inner-text-special">{$_(projectTypes.find((p) => p.id === config.projectType)?.title)}</span>
-          {$_('wizard.steps.step2.titleSecond')}
-        </h1>
-        <p class="teaser">{$_('wizard.steps.step2.teaser')}</p>
-      </div>
-
-      <div class="subtypes-grid">
-        {#each subTypes.filter((st) => st.parentId === config.projectType) as subtype}
-          <div
-            class="card service-card cursor-pointer transition-all duration-300"
-            class:card-selected={config.subType === subtype.id}
-            role="button"
-            tabindex="0"
-            onclick={() => selectSubType(subtype.id)}
-            onkeydown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                selectSubType(subtype.id);
-              }
-            }}
-            aria-label="Select subtype: {subtype.title}"
-          >
-            <div class="card-body">
-              <h3 class="card-title">{$_(subtype.title)}</h3>
-              <p class="no-padding">{$_(subtype.description)}</p>
-              <div class="card-actions justify-end">
-                <div class="badge badge-success">ab {subtype.lowestPrice.toLocaleString()}€</div>
-              </div>
-            </div>
-          </div>
-        {/each}
-      </div>
+      <ProjectSubType {config} {selectSubType}></ProjectSubType>
     {:else if currentStep === 3}
-      <!-- Step 3: Features Selection -->
-      <div class="step-header">
-        <h1>{$_('wizard.steps.step4.titleFirst')} <span class="inner-text-special">{$_('wizard.steps.step4.titleHighlight')}</span></h1>
-        <p class="teaser">{$_('wizard.steps.step4.teaser')}</p>
-      </div>
-
-      <div class="features-grid">
-        {#each availableFeatures as feature}
-          <label class="card service-card cursor-pointer transition-all duration-300" class:card-selected={config.features.includes(feature.name)}>
-            <div class="card-body">
-              <div class="card-actions items-center justify-start">
-                <input type="checkbox" class="checkbox checkbox-primary" bind:group={config.features} value={feature.name} onchange={() => calculatePrice()} />
-                <h3 class="card-title no-padding">{$_(feature.title)}</h3>
-              </div>
-              <p class="no-padding text-sm">{$_(feature.description)}</p>
-              <div class="card-actions justify-end">
-                <div class="badge {featureCategoryColors[feature.category || 'wizard.config.categories.funktionalitaet']}">{$_(feature.category)}</div>
-              </div>
-            </div>
-          </label>
-        {/each}
-      </div>
-
-      <div class="form-control mt-8 w-full">
-        <label class="label" for="description">
-          <span class="label-text text-lg font-semibold">{$_('wizard.form.projectDescription')}</span>
-        </label>
-        <textarea
-          id="description"
-          class="textarea textarea-bordered textarea-lg w-full"
-          bind:value={config.description}
-          placeholder={$_('wizard.form.placeholders.default')}
-          rows="4"
-        ></textarea>
-        <div class="label">
-          <span class="label-text-alt">{$_('wizard.form.characters', { values: { count: config.description.length } })}</span>
-        </div>
-      </div>
+      <ProjectFeatures {config} {calculatePrice}></ProjectFeatures>
     {:else if currentStep === 4}
-      <!-- Step 4: Summary -->
-      <div class="step-header">
-        <h1><span class="inner-text-special">{$_('wizard.steps.stepSummary.titleHighlight')}</span></h1>
-        <p class="teaser">{$_('wizard.steps.stepSummary.teaser')}</p>
-      </div>
-
-      <div class="summary-grid">
-        <div class="summary-card">
-          <h3>{$_('wizard.steps.stepSummary.projectType')}</h3>
-          <p class="summary-value">{$_(projectTypes.find((p) => p.id === config.projectType)?.title)}</p>
-          <p class="summary-subvalue">{$_(subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType)?.title)}</p>
-        </div>
-
-        {#if config.features.length > 1}
-          <div class="summary-card">
-            <h3>{$_('wizard.steps.stepSummary.selectedFeatures')}</h3>
-            <div class="flex flex-wrap gap-2">
-              {#each config.features.filter((f) => f !== 'cookieConsent') as featureId}
-                <div
-                  class="badge {featureCategoryColors[
-                    availableFeatures.find((f) => f.name === featureId)?.category || 'wizard.config.categories.funktionalitaet'
-                  ]}"
-                >
-                  {$_(availableFeatures.find((f) => f.name === featureId)?.title)}
-                </div>
-              {/each}
-            </div>
-          </div>
-        {/if}
-
-        <div class="price-card">
-          <h3>{$_('wizard.steps.stepSummary.estimatedPrice')}</h3>
-          {#key config.estimatedPrice}
-            <div class="price-display">
-              {#if config.estimatedPrice === getTop()}
-                <p class="price-message">{$_('wizard.steps.stepSummary.priceTiers.tier4.message')}</p>
-                <div class="price">mind. {Math.round(config.estimatedPrice)}€</div>
-              {:else if config.estimatedPrice == getLow()}
-                <p class="price-message">{$_('wizard.steps.stepSummary.priceTiers.tier1.message')}</p>
-                <div class="price">ca. {Math.round(config.estimatedPrice)}€</div>
-              {:else if config.estimatedPrice < getTop() && getTop() - config.estimatedPrice < 1000}
-                <p class="price-message">{$_('wizard.steps.stepSummary.priceTiers.tier3.message')}</p>
-                <div class="price">ca. {Math.round(config.estimatedPrice)}€</div>
-              {:else if config.estimatedPrice < getTop() && getTop() - config.estimatedPrice >= 1000}
-                <p class="price-message">{$_('wizard.steps.stepSummary.priceTiers.tier2.message')}</p>
-                <div class="price">ca. {Math.round(config.estimatedPrice)}€</div>
-              {/if}
-            </div>
-          {/key}
-        </div>
-      </div>
-
-      <div class="action-buttons">
-        <button type="button" class="btn btn-primary btn-lg" onclick={openContactModal}>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-            />
+      <ProjectSummary {config} {featureCategoryColors} {getTop} {getLow} {openContact} {openResetModal}></ProjectSummary>
+    {/if}
+  </div>
+  {#if currentStep != 4}
+    <!-- Navigation -->
+    <div class="wizard-basic-navigation">
+      {#if currentStep > 1}
+        <button type="button" class="btn-basic grow md:grow-0" onclick={prevStep}>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
           </svg>
-          {$_('wizard.navigation.submitProject')}
+          {$_('wizard.navigation.back')}
         </button>
-      </div>
-    {/if}
-  </div>
+      {:else}
+        <div></div>
+      {/if}
 
-  <!-- Navigation -->
-  <div class="wizard-basic-navigation">
-    {#if currentStep > 1}
-      <button type="button" class="btn-basic grow md:grow-0" onclick={prevStep}>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-        {$_('wizard.navigation.back')}
-      </button>
-    {:else}
-      <div></div>
-    {/if}
-
-    {#if currentStep < maxSteps}
-      <button
-        type="button"
-        class="btn-basic flex-grow md:flex-grow-0"
-        onclick={nextStep}
-        disabled={(currentStep === 1 && !config.projectType) || (currentStep === 2 && !config.subType)}
-      >
-        {$_('wizard.navigation.next')}
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-    {/if}
-  </div>
+      {#if currentStep < maxSteps}
+        <button
+          type="button"
+          class="btn-basic flex-grow md:flex-grow-0"
+          onclick={nextStep}
+          disabled={(currentStep === 1 && !config.projectType) || (currentStep === 2 && !config.subType)}
+        >
+          {$_('wizard.navigation.next')}
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      {/if}
+    </div>
+  {/if}
 </div>
 
 <!-- Success Message -->
@@ -603,24 +326,7 @@
 {/if}
 
 <!-- Reset Modal -->
-<dialog bind:this={resetModal} class="modal">
-  <div class="modal-box">
-    <form method="dialog">
-      <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2">✕</button>
-    </form>
-
-    <h3 class="mb-4 text-lg font-bold">{$_('wizard.modals.reset.title')}</h3>
-    <p class="py-4">{$_('wizard.modals.reset.description')}</p>
-
-    <div class="modal-action">
-      <button type="button" class="btn btn-outline" onclick={closeResetModal}>{$_('wizard.modals.reset.cancel')}</button>
-      <button type="button" class="btn btn-error" onclick={confirmReset}>{$_('wizard.modals.reset.confirm')}</button>
-    </div>
-  </div>
-  <form method="dialog" class="modal-backdrop">
-    <button>close</button>
-  </form>
-</dialog>
+<ResetModal bind:this={resetModal} {confirmReset} />
 
 <style lang="postcss">
   @reference '../../../app.css';
@@ -632,7 +338,7 @@
 
   /* Header */
   .wizard-basic-header {
-    @apply border-base-300 mb-8 flex items-center justify-between border-b px-6 py-4;
+    @apply border-base-300 flex items-center justify-between border-b px-6 py-4;
     h1 {
       @apply text-base-content m-0 p-0;
     }
@@ -640,7 +346,7 @@
 
   /* Progress Bar */
   .progress-wrapper {
-    @apply mx-6 mb-12;
+    @apply mx-6 my-12;
   }
 
   .progress-basic {
@@ -664,134 +370,8 @@
     }
   }
 
-  /* Grid Layouts */
-  .project-types-grid {
-    @apply grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3;
-  }
-
-  .subtypes-grid {
-    @apply grid grid-cols-1 gap-6 md:grid-cols-2;
-  }
-
-  .features-grid {
-    @apply mb-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3;
-  }
-
-  .summary-grid {
-    @apply mb-8 grid grid-cols-1 gap-6 lg:grid-cols-2;
-  }
-
-  /* Service Cards */
-  .service-card {
-    @apply bg-base-100 border-base-300 border transition-all duration-300;
-    &:hover {
-      @apply bg-base-200 border-base-300;
-    }
-    &.card-selected {
-      @apply ring-primary ring-offset-base-100 ring-2 ring-offset-2;
-      &:hover {
-        @apply bg-base-100 cursor-default;
-      }
-    }
-    .service-card-header {
-      @apply mb-4 flex items-center justify-between;
-      .service-icon {
-        @apply text-3xl;
-      }
-    }
-    .card-body {
-      @apply text-base-content;
-      .card-title {
-        @apply text-base-content;
-      }
-      p {
-        @apply text-base-content/80;
-      }
-    }
-  }
-
-  /* Summary Cards */
-  .summary-card {
-    @apply bg-base-200 border-base-300 rounded-xl border p-6;
-    h3 {
-      @apply text-base-content mb-3 text-lg font-semibold;
-    }
-    .summary-value {
-      @apply text-base-content mb-1 text-xl font-bold;
-    }
-    .summary-subvalue {
-      @apply text-base-content/70 text-sm;
-    }
-    .features-list {
-      @apply flex flex-wrap gap-2;
-    }
-    .feature-badge {
-      @apply bg-primary/10 text-primary rounded-full px-3 py-1 text-sm;
-    }
-  }
-
-  .price-card {
-    @apply bg-success/10 border-success/20 rounded-xl border p-6 lg:col-span-2;
-    h3 {
-      @apply text-base-content mb-4 text-xl font-bold;
-    }
-    .price-display {
-      @apply text-center;
-    }
-
-    .price {
-      @apply text-success text-3xl font-bold;
-    }
-
-    .price-note {
-      @apply text-base-content/70 text-sm;
-    }
-  }
-
-  /* Action Buttons */
-  .action-buttons {
-    @apply flex justify-center;
-  }
-
   /* Navigation */
   .wizard-basic-navigation {
     @apply border-base-300 bg-base-100 flex flex-wrap items-center justify-between gap-4 border-t p-6;
-  }
-
-  /* Success Toast */
-  .success-toast {
-    @apply fixed top-4 right-4 z-50 max-w-sm;
-  }
-
-  /* Mobile Responsive */
-  @media (max-width: 768px) {
-    .wizard-basic-container {
-      @apply mx-2 rounded-xl;
-    }
-    .wizard-basic-header {
-      @apply px-4;
-      h1 {
-        @apply text-2xl;
-      }
-    }
-    .progress-wrapper {
-      @apply mx-4 mb-8;
-    }
-    .step-content-wrapper {
-      @apply px-4;
-    }
-    .wizard-basic-navigation {
-      @apply px-4;
-    }
-    .summary-grid {
-      @apply gap-4;
-    }
-    .price-card {
-      @apply p-4;
-      .price-min,
-      .price-max {
-        @apply text-2xl;
-      }
-    }
   }
 </style>

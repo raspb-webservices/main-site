@@ -8,6 +8,16 @@
   import { addMessages, _ } from 'svelte-i18n';
   import auth from '../../../authService';
   import { user } from '$store/sharedStates.svelte';
+  import ProjectContent from './steps/project-content.svelte';
+  import ProjectType from './steps/project-type.svelte';
+  import ProjectSubType from './steps/project-sub-type.svelte';
+  import ProjectDetails from './steps/project-details.svelte';
+  import ProjectFeatures from './steps/project-features.svelte';
+  import ProjectMaterials from './steps/project-materials.svelte';
+  import ProjectResult from './steps/project-result.svelte';
+  import ThankYou from './steps/thank-you.svelte';
+  import ResetModal from '../modals/general/reset-modal.svelte';
+  import ErrorModal from '../modals/general/error-modal.svelte';
 
   // Props for initial values from URL parameters
   interface Props {
@@ -22,6 +32,7 @@
   let showResetModal = $state(false);
   let custom_metadata = $state({});
   let currentUser = $derived(user.get()) as User;
+  let disableHeader = true;
 
   let config: WizardConfig = $state({
     step: 1,
@@ -63,8 +74,8 @@
   let showErrorModal = $state(false);
   let errorDetails = $state<string[]>([]);
   let showThankYou = $state(false);
-  let errorModal: HTMLDialogElement;
-  let resetModal: HTMLDialogElement;
+  let errorModal: ErrorModal;
+  let resetModal: ResetModal;
 
   // Asset upload states
   let uploadedAssetIds: string[] = $state([]);
@@ -201,12 +212,9 @@
 
     const featureComplexitySum = 1;
 
-    for(let i = 0; i < config.features.length; i++ ) {
+    for (let i = 0; i < config.features.length; i++) {
       const currentFeature = config.features[i];
-
-    
     }
-
   }
 
   async function handleFileUpload(event: Event) {
@@ -332,7 +340,7 @@
   }
 
   function closeErrorModal() {
-    errorModal?.close();
+    errorModal?.closeModal();
     showErrorModal = false;
     errorDetails = [];
     // Redirect back to step 1 while preserving user input
@@ -340,11 +348,11 @@
   }
 
   function openResetModal() {
-    resetModal?.showModal();
+    resetModal?.openModal();
   }
 
   function closeResetModal() {
-    resetModal?.close();
+    resetModal?.closeModal();
     showResetModal = false;
   }
 
@@ -419,19 +427,19 @@
 
         // Update Auth0 metadata with projectId
         if (currentUser) {
-          if(Array.isArray(currentUser.projectIds)) {
+          if (Array.isArray(currentUser.projectIds)) {
             currentUser.projectIds.push(projectId);
           } else {
-            currentUser.projectIds =  [projectId];
+            currentUser.projectIds = [projectId];
           }
 
           custom_metadata = {
-            "projectIds": currentUser.projectIds,
+            projectIds: currentUser.projectIds
           };
 
           const updateMetaResponse = await auth.updateMetadata(currentUser.sub, custom_metadata);
         } else {
-          console.warn("User not logged in or user ID not available, cannot update Auth0 metadata.");
+          console.warn('User not logged in or user ID not available, cannot update Auth0 metadata.');
         }
 
         // Show thank you page immediately while publishing happens in background
@@ -544,20 +552,22 @@
 
 <div class="wizard-container">
   <!-- Header with Reset Button -->
-  <div class="wizard-header">
-    <h1 id="projekt-konfigurator">{$_('wizard.header.titleFirst')} <span class="inner-text-special">{$_('wizard.header.titleHighlight')}</span></h1>
-    <button type="button" class="btn btn-outline btn-sm" onclick={openResetModal}>
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-        />
-      </svg>
-      {$_('wizard.header.resetButton')}
-    </button>
-  </div>
+  {#if !disableHeader}
+    <div class="wizard-header">
+      <h1 id="projekt-konfigurator">{$_('wizard.header.titleFirst')} <span class="inner-text-special">{$_('wizard.header.titleHighlight')}</span></h1>
+      <button type="button" class="btn btn-outline btn-sm" onclick={openResetModal}>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+          />
+        </svg>
+        {$_('wizard.header.resetButton')}
+      </button>
+    </div>
+  {/if}
 
   <!-- Progress Bar with Dynamic Steps -->
   <div class="progress-wrapper">
@@ -639,763 +649,21 @@
   <!-- Step Content -->
   <div class="step-content-wrapper">
     {#if currentStep === 1}
-      <!-- Step 1: Project Type Selection -->
-      <div class="step-header">
-        <h1>{$_('wizard.steps.step1.titleFirst')} <span class="inner-text-special">{$_('wizard.steps.step1.titleHighlight')}</span></h1>
-        <p class="teaser">{$_('wizard.steps.step1.teaser')}</p>
-      </div>
-
-      <div class="project-types-grid">
-        {#each projectTypes as type}
-          <div
-            class="card service-card cursor-pointer transition-all duration-300"
-            class:card-selected={config.projectType === type.id}
-            role="button"
-            tabindex="0"
-            onclick={() => selectProjectType(type.id)}
-            onkeydown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                selectProjectType(type.id);
-              }
-            }}
-            aria-label="Select project type: {type.title}"
-          >
-            <div class="card-body">
-              <div class="service-card-header">
-                <h3 class="card-title no-padding">{$_(type.title)}</h3>
-                <div class="service-icon">{type.icon}</div>
-              </div>
-              <p class="no-padding">{$_(type.description)}</p>
-              <div class="card-actions justify-end">
-                <div class="badge badge-primary">{type.lowestPrice.toLocaleString()}€ - {type.highestPrice.toLocaleString()}€</div>
-              </div>
-            </div>
-          </div>
-        {/each}
-      </div>
+      <ProjectType {config} {selectProjectType}></ProjectType>
     {:else if currentStep === 2 && config.projectType !== 'freestyle'}
-      <!-- Step 2: Subtype Selection -->
-      <div class="step-header">
-        <h1>
-          {$_('wizard.steps.step2.titleFirst')} <span class="inner-text-special">{$_('wizard.config.projectTypes.' + config.projectType + '.title')}</span>
-          {$_('wizard.steps.step2.titleSecond')}
-        </h1>
-        <p class="teaser">{$_('wizard.steps.step2.teaser')}</p>
-      </div>
-
-      <div class="subtypes-grid">
-        {#each subTypes.filter((st) => st.parentId === config.projectType) as subtype}
-          <div
-            class="card service-card cursor-pointer transition-all duration-300"
-            class:card-selected={config.subType === subtype.id}
-            role="button"
-            tabindex="0"
-            onclick={() => selectSubType(subtype.id)}
-            onkeydown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                selectSubType(subtype.id);
-              }
-            }}
-            aria-label="Select subtype: {subtype.title}"
-          >
-            <div class="card-body">
-            <h3 class="card-title">{$_(subtype.title)}</h3>
-            <p class="no-padding">{$_(subtype.description)}</p>
-              <div class="card-actions justify-end">
-                <div class="badge badge-success">ab {subtype.lowestPrice}€</div>
-              </div>
-            </div>
-          </div>
-        {/each}
-      </div>
+      <ProjectSubType {config} {selectSubType}></ProjectSubType>
     {:else if (currentStep === 3 && config.projectType !== 'freestyle') || (currentStep === 2 && config.projectType === 'freestyle')}
-      <!-- Step 3: Project Description (or Step 2 for freestyle) -->
-      <div class="step-header">
-        <h1>{$_('wizard.steps.step3.titleFirst')} <span class="inner-text-special">{$_('wizard.steps.step3.titleHighlight')}</span></h1>
-        <p class="teaser">{$_('wizard.steps.step3.teaser')}</p>
-      </div>
-
-      <div class="content-section max-w-3xl m-auto">
-        <div class="form-control mb-8 w-full">
-          <label class="label" for="projectName">
-            <span class="label-text text-lg font-semibold">{$_('wizard.form.projectName')}</span>
-          </label>
-          <input
-            type="text"
-            id="projectName"
-            class="input input-bordered input-lg w-full"
-            bind:value={config.name}
-            placeholder={$_('wizard.form.projectNamePlaceholder')}
-          />
-        </div>
-
-        <div class="form-control mb-8 w-full">
-          <label class="label" for="description">
-            <span class="label-text text-lg font-semibold">{$_('wizard.form.projectDescription')}</span>
-          </label>
-          <textarea
-            id="description"
-            class="textarea textarea-bordered textarea-lg w-full"
-            bind:value={config.description}
-            placeholder={config.projectType === 'webApplication' || config.projectType === 'artificialIntelligence'
-              ? $_('wizard.form.placeholders.webApplication')
-              : config.projectType === 'freestyle'
-                ? $_('wizard.form.placeholders.freestyle')
-                : $_('wizard.form.placeholders.default')}
-            rows="8"
-          ></textarea>
-          <div class="label">
-            <span class="label-text-alt">{$_('wizard.form.characters', { values: { count: config.description.length } })}</span>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-          <div class="form-control w-full">
-            <label class="label" for="targetAudience">
-              <span class="label-text font-semibold">{$_('wizard.form.targetAudience')}</span>
-            </label>
-            <input
-              type="text"
-              id="targetAudience"
-              class="input input-bordered w-full"
-              bind:value={config.targetAudience}
-              placeholder={$_('wizard.form.targetAudiencePlaceholder')}
-            />
-          </div>
-
-          <div class="form-control w-full">
-            <label class="label" for="goals">
-              <span class="label-text font-semibold">{$_('wizard.form.goals')}</span>
-            </label>
-            <input type="text" id="goals" class="input input-bordered w-full" bind:value={config.goals} placeholder={$_('wizard.form.goalsPlaceholder')} />
-          </div>
-
-          <div class="form-control w-full">
-            <label class="label" for="inspiration">
-              <span class="label-text font-semibold">{$_('wizard.form.inspiration')}</span>
-            </label>
-            <input
-              type="text"
-              id="inspiration"
-              class="input input-bordered w-full"
-              bind:value={config.inspiration}
-              placeholder={$_('wizard.form.inspirationPlaceholder')}
-            />
-          </div>
-
-          <div class="form-control w-full">
-            <label class="label" for="desiredDomain">
-              <span class="label-text font-semibold">{$_('wizard.form.desiredDomain')}</span>
-            </label>
-            <input
-              type="text"
-              id="desiredDomain"
-              class="input input-bordered w-full"
-              bind:value={config.desiredDomain}
-              placeholder={$_('wizard.form.desiredDomainPlaceholder')}
-            />
-          </div>
-
-          <div class="form-control w-full">
-            <label class="label" for="domainStatus">
-              <span class="label-text font-semibold">{$_('wizard.form.domainStatus')}</span>
-            </label>
-            <select id="domainStatus" class="select select-bordered w-full" bind:value={config.domainStatus}>
-              <option value="">{$_('wizard.form.domainStatusPlaceholder')}</option>
-              <option value="owned">{$_('wizard.form.domainStatusOptions.owned')}</option>
-              <option value="needs-registration">{$_('wizard.form.domainStatusOptions.needs-registration')}</option>
-              <option value="needs-transfer">{$_('wizard.form.domainStatusOptions.needs-transfer')}</option>
-              <option value="undecided">{$_('wizard.form.domainStatusOptions.undecided')}</option>
-            </select>
-          </div>
-
-          <div class="form-control w-full">
-            <label class="label" for="timeline">
-              <span class="label-text font-semibold">{$_('wizard.form.timeline')}</span>
-            </label>
-            <select id="timeline" class="select select-bordered w-full" bind:value={config.timeline}>
-              <option value="">{$_('wizard.form.timelinePlaceholder')}</option>
-              <option value="asap">{$_('wizard.form.timelineOptions.asap')}</option>
-              <option value="5-10-days">{$_('wizard.form.timelineOptions.5-10-days')}</option>
-              <option value="2-4-weeks">{$_('wizard.form.timelineOptions.2-4-weeks')}</option>
-              <option value="2-6-months">{$_('wizard.form.timelineOptions.2-6-months')}</option>
-              <option value="flexible">{$_('wizard.form.timelineOptions.flexible')}</option>
-            </select>
-          </div>
-
-          <div class="form-control w-full">
-            <label class="label" for="budget">
-              <span class="label-text font-semibold">{$_('wizard.form.budget')}</span>
-            </label>
-            <select id="budget" class="select select-bordered w-full" bind:value={config.budget}>
-              <option value="">{$_('wizard.form.budgetPlaceholder')}</option>
-              <option value="under-500">{$_('wizard.form.budgetOptions.under-500')}</option>
-              <option value="1k-3k">{$_('wizard.form.budgetOptions.1k-3k')}</option>
-              <option value="3k-7k">{$_('wizard.form.budgetOptions.3k-7k')}</option>
-              <option value="7k-10k">{$_('wizard.form.budgetOptions.7k-10k')}</option>
-              <option value="10k-15k">{$_('wizard.form.budgetOptions.10k-15k')}</option>
-              <option value="over-20k">{$_('wizard.form.budgetOptions.over-20k')}</option>
-            </select>
-          </div>
-        </div>
-      </div>
+      <ProjectDetails {config}></ProjectDetails>
     {:else if currentStep === 4 && (config.projectType === 'website' || config.projectType === 'cms' || config.projectType === 'webApplication')}
-      <!-- Step 4: Features Selection (only for website/cms) -->
-      <div class="step-header">
-        <h1>{$_('wizard.steps.step4.titleFirst')} <span class="inner-text-special">{$_('wizard.steps.step4.titleHighlight')}</span></h1>
-        <p class="teaser">{$_('wizard.steps.step4.teaser')}</p>
-      </div>
-
-      <div class="features-grid">
-        {#each availableFeatures as feature}
-          <label class="card service-card cursor-pointer transition-all duration-300" class:card-selected={config.features.includes(feature.name)}>
-            <div class="card-body">
-              <div class="card-actions items-center justify-start">
-                <input type="checkbox" class="checkbox checkbox-primary" bind:group={config.features} value={feature.name} onchange={() => calculatePrice()} />
-                <h3 class="card-title no-padding">{$_(feature.title)}</h3>
-              </div>
-              <p class="no-padding">{$_(feature.description)}</p>
-
-              <div class="card-actions justify-end">
-                <div class="badge {featureCategoryColors[feature.category || 'wizard.config.categories.funktionalitaet']}">{$_(feature.category)}</div>
-              </div>
-            </div>
-          </label>
-        {/each}
-      </div>
-
-      <div class="form-control mt-8 w-full">
-        <label class="label" for="customFeatures">
-          <span class="label-text text-lg font-semibold">{$_('wizard.form.customFeatures')}</span>
-        </label>
-        <textarea
-          id="customFeatures"
-          class="textarea textarea-bordered textarea-lg w-full"
-          bind:value={customFeatures}
-          placeholder={$_('wizard.form.customFeaturesPlaceholder')}
-          rows="4"
-        ></textarea>
-      </div>
+      <ProjectFeatures {config} {customFeatures} {calculatePrice} ></ProjectFeatures>
     {:else if currentStep === 5 && (config.projectType === 'website' || config.projectType === 'cms')}
-      <!-- Step 5: Content Details (only for website/cms) -->
-      <div class="step-header">
-        <h1>{$_('wizard.steps.step5.titleFirst')} <span class="inner-text-special">{$_('wizard.steps.step5.titleHighlight')}</span></h1>
-        <p class="teaser">{$_('wizard.steps.step5.teaser')}</p>
-      </div>
-
-      <!-- Pages/Sections -->
-      <div class="content-section">
-        <h2>{$_('wizard.steps.step5.content.pages.title')}</h2>
-        <p>{$_('wizard.steps.step5.content.pages.description')}</p>
-
-        <div class="space-y-6">
-          {#each config.pages as page, i}
-            <div class="card bg-base-100 border-base-300 border">
-              <div class="card-body">
-                <div class="mb-4 flex items-center justify-between">
-                  <h4 class="card-title text-lg">{$_('wizard.steps.step5.content.pages.pageTitle')} {i + 1}</h4>
-                  <button
-                    type="button"
-                    class="btn btn-error btn-sm"
-                    onclick={() => removePage(i)}
-                    aria-label={$_('wizard.steps.step5.content.pages.removePage')}
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                    {$_('wizard.steps.step5.content.pages.remove')}
-                  </button>
-                </div>
-
-                <div class="form-control mb-4 w-full">
-                  <label class="label" for="pageName{i}">
-                    <span class="label-text font-semibold">{$_('wizard.content.pages.pageName')}</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="pageName{i}"
-                    class="input input-bordered w-full"
-                    bind:value={config.pages[i].name}
-                    placeholder={$_('wizard.content.pages.pageNamePlaceholder')}
-                  />
-                </div>
-
-                <div class="form-control mb-4 w-full">
-                  <label class="label" for="pageContent{i}">
-                    <span class="label-text font-semibold">{$_('wizard.content.pages.pageContent')}</span>
-                  </label>
-                  <textarea
-                    id="pageContent{i}"
-                    class="textarea textarea-bordered w-full"
-                    bind:value={config.pages[i].content}
-                    placeholder={$_('wizard.content.pages.pageContentPlaceholder')}
-                    rows="3"
-                  ></textarea>
-                </div>
-
-                <div class="form-control w-full">
-                  <label class="label" for="pageCharacteristic{i}">
-                    <span class="label-text font-semibold">{$_('wizard.content.pages.pageCharacteristic')}</span>
-                  </label>
-                  <textarea
-                    id="pageCharacteristic{i}"
-                    class="textarea textarea-bordered w-full"
-                    bind:value={config.pages[i].characteristic}
-                    placeholder={$_('wizard.content.pages.pageCharacteristicPlaceholder')}
-                    rows="3"
-                  ></textarea>
-                </div>
-              </div>
-            </div>
-          {/each}
-        </div>
-
-        <button type="button" class="btn btn-simple mt-4" onclick={addPage}>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-          </svg>
-          {$_('wizard.content.pages.addPage')}
-        </button>
-      </div>
-
-      <!-- Form Fields (only if contact form is selected) -->
-      {#if config.features.includes('kontaktformular')}
-        <div class="content-section">
-          <h2>{$_('wizard.content.formFields.title')}</h2>
-          <p>{$_('wizard.content.formFields.description')}</p>
-
-          <div class="space-y-4">
-            {#each config.formFields as field, i}
-              <div class="card bg-base-100 border-base-300 border">
-                <div class="card-body">
-                  <div class="mb-4 flex items-center justify-between">
-                    <h4 class="card-title text-lg">{$_('wizard.content.formFields.field')} {i + 1}</h4>
-                    <button type="button" class="btn btn-error btn-sm" onclick={() => removeFormField(i)} aria-label={$_('wizard.content.formFields.removeField')}>
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                      {$_('wizard.content.formFields.remove')}
-                    </button>
-                  </div>
-
-                  <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                    <div class="form-control w-full">
-                      <label class="label" for="fieldType{i}">
-                        <span class="label-text font-semibold">{$_('wizard.content.formFields.fieldType')}</span>
-                      </label>
-                      <select id="fieldType{i}" class="select select-bordered w-full" bind:value={config.formFields[i].type}>
-                        <option value="">{$_('wizard.content.formFields.fieldTypePlaceholder')}</option>
-                        {#each formFieldTypes as fieldType}
-                          <option value={fieldType.id}>{$_(fieldType.title)}</option>
-                        {/each}
-                      </select>
-                    </div>
-
-                    <div class="form-control w-full">
-                      <label class="label" for="fieldName{i}">
-                        <span class="label-text font-semibold">{$_('wizard.content.formFields.fieldName')}</span>
-                      </label>
-                      <input
-                        type="text"
-                        id="fieldName{i}"
-                        class="input input-bordered w-full"
-                        bind:value={config.formFields[i].name}
-                        placeholder={$_('wizard.content.formFields.fieldNamePlaceholder')}
-                      />
-                    </div>
-                  </div>
-
-                  <div class="form-control mt-4">
-                    <label class="label cursor-pointer justify-start gap-4">
-                      <input type="checkbox" class="checkbox checkbox-primary" bind:checked={config.formFields[i].required} />
-                      <span class="label-text">{$_('wizard.content.formFields.required')}</span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-            {/each}
-          </div>
-
-          <button type="button" class="btn btn-simple mt-4" onclick={addFormField}>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-            </svg>
-            {$_('wizard.content.formFields.addField')}
-          </button>
-        </div>
-      {/if}
+      <ProjectContent {config} {addPage} {removePage} {removeFormField} {addFormField} {formFieldTypes}></ProjectContent>
     {:else if (currentStep === 6 && (config.projectType === 'website' || config.projectType === 'cms')) || (currentStep === 5 && config.projectType === 'webApplication')}
-      <!-- Design Step (not for individual development / freestyle) -->
-      <div class="step-header">
-        <h1>{$_('wizard.steps.step6.titleFirst')} <span class="inner-text-special">{$_('wizard.steps.step6.titleHighlight')}</span></h1>
-        <p class="teaser">{$_('wizard.steps.step6.teaser')}</p>
-      </div>
-
-      <!-- Color Selection -->
-      <div class="content-section">
-        <h2>{$_('wizard.design.colorScheme')}</h2>
-        <p>{$_('wizard.design.colorSchemeDescription')}</p>
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-          <div class="form-control w-full">
-            <label class="label" for="primaryColor">
-              <span class="label-text font-semibold">{$_('wizard.design.primaryColor')}</span>
-            </label>
-            <div class="join w-full">
-              <input type="color" id="primaryColor" class="join-item h-12 w-16 border-0" bind:value={config.primaryColour} />
-              <input type="text" class="input input-bordered join-item flex-1" bind:value={config.primaryColour} />
-            </div>
-          </div>
-
-          <div class="form-control w-full">
-            <label class="label" for="secondaryColor">
-              <span class="label-text font-semibold">{$_('wizard.design.secondaryColor')}</span>
-            </label>
-            <div class="join w-full">
-              <input type="color" id="secondaryColor" class="join-item h-12 w-16 border-0" bind:value={config.secondaryColour} />
-              <input type="text" class="input input-bordered join-item flex-1" bind:value={config.secondaryColour} />
-            </div>
-          </div>
-
-          <div class="form-control w-full">
-            <label class="label" for="accentColor">
-              <span class="label-text font-semibold">{$_('wizard.design.accentColor')}</span>
-            </label>
-            <div class="join w-full">
-              <input type="color" id="accentColor" class="join-item h-12 w-16 border-0" bind:value={config.accentColour} />
-              <input type="text" class="input input-bordered join-item flex-1" bind:value={config.accentColour} />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Font Selection -->
-      <div class="content-section">
-        <h2>{$_('wizard.design.font')}</h2>
-        <p>{$_('wizard.design.fontDescription')}</p>
-
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-          <div class="form-control w-full">
-            <label class="label" for="googleFonts">
-              <span class="label-text font-semibold">{$_('wizard.design.googleFonts')}</span>
-            </label>
-            <select id="googleFonts" class="select select-bordered w-full" bind:value={config.desiredFont}>
-              {#each googleFonts as font}
-                <option value={font}>{font}</option>
-              {/each}
-              <option value="Other Google Fonts">&lt; {$_('wizard.design.otherGoogleFonts')}  &gt;</option>
-            </select>
-          </div>
-
-          <div class="form-control w-full">
-            <label class="label" for="customFont">
-              <span class="label-text font-semibold">{$_('wizard.design.customFont')}</span>
-            </label>
-            <input
-              type="text"
-              id="customFont"
-              class="input input-bordered w-full"
-              bind:value={config.customFont}
-              placeholder={$_('wizard.design.customFontPlaceholder')}
-            />
-          </div>
-        </div>
-
-        {#if config.desiredFont && config.desiredFont !== 'Other Google Fonts'}
-          <div class="alert mt-4">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info h-6 w-6 shrink-0">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-
-            <div>
-              <div class="font-bold pt-3">{$_('wizard.design.fontPreviewTitle', { values: { font: config.desiredFont } })}</div>
-              <div class="my-2 text-2xl" style="font-family: {config.desiredFont}">
-                {$_('wizard.design.fontPreview')}
-              </div>
-            </div>
-          </div>
-        {/if}
-      </div>
-
-      <!-- File Upload -->
-      <div class="content-section">
-        <h2>{$_('wizard.steps.stepMaterials.files.title')}</h2>
-        <p>{$_('wizard.steps.stepMaterials.files.description')}</p>
-
-        <div class="form-control w-full">
-          <input
-            type="file"
-            id="fileUpload"
-            class="file-input file-input-bordered file-input-primary w-full"
-            multiple
-            accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif,.svg,.ai,.psd"
-            onchange={handleFileUpload}
-          />
-          <div class="label">
-            <span class="label-text-alt">{$_('wizard.steps.stepMaterials.files.formats')}</span>
-          </div>
-        </div>
-
-        {#if uploadedFiles.length > 0}
-          <div class="mt-6">
-            <h3>{$_('wizard.steps.stepMaterials.files.uploaded')}</h3>
-            <div class="space-y-2">
-              {#each uploadedFiles as file, i}
-                <div class="alert">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                    ></path>
-                  </svg>
-                  <span>{file.name} ({Math.round(file.size / 1024)}KB)</span>
-                  <button type="button" class="btn btn-sm btn-error" onclick={() => removeFile(i)} aria-label={$_('wizard.steps.stepMaterials.files.removeFile')}>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                </div>
-              {/each}
-            </div>
-          </div>
-        {/if}
-
-        {#if isUploading && uploadProgress}
-          <div class="mt-6">
-            <div class="alert alert-info">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              <div>
-                <div class="font-bold">{$_('wizard.steps.stepMaterials.files.uploadRunning')}</div>
-                <div class="text-sm">{uploadProgress}</div>
-              </div>
-              <span class="loading loading-ring loading-md"></span>
-            </div>
-          </div>
-        {/if}
-      </div>
+      <ProjectMaterials {config} {uploadedFiles} {handleFileUpload} {removeFile} {isUploading} {uploadProgress}></ProjectMaterials>
     {:else if (currentStep === 3 && config.projectType === 'freestyle') || (currentStep === 4 && config.projectType === 'artificialIntelligence')}
-      <!-- Materials Step for Individual Development (= freestyle) -->
-      <div class="step-header">
-        <h1>{$_('wizard.steps.stepMaterials.titleFirst')} <span class="inner-text-special">{$_('wizard.steps.stepMaterials.titleHighlight')}</span></h1>
-        <p class="teaser">{$_('wizard.steps.stepMaterials.teaser')}</p>
-      </div>
-
-      <div class="content-section">
-        <h2>{$_('wizard.steps.stepMaterials.files.title')}</h2>
-        <p>{$_('wizard.steps.stepMaterials.files.description')}</p>
-
-        <div class="form-control w-full">
-          <input
-            type="file"
-            id="fileUpload"
-            class="file-input file-input-bordered file-input-primary w-full"
-            multiple
-            accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif,.svg,.ai,.psd,.txt,.xlsx,.pptx"
-            onchange={handleFileUpload}
-          />
-          <div class="label">
-            <span class="label-text-alt">{$_('wizard.steps.stepMaterials.files.formats')}</span>
-          </div>
-        </div>
-
-        {#if uploadedFiles.length > 0}
-          <div class="mt-6">
-            <h3>{$_('wizard.steps.stepMaterials.files.uploaded')}</h3>
-            <div class="space-y-2">
-              {#each uploadedFiles as file, i}
-                <div class="alert">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                    ></path>
-                  </svg>
-                  <span>{file.name} ({Math.round(file.size / 1024)}KB)</span>
-                  <button type="button" class="btn btn-sm btn-error" onclick={() => removeFile(i)} aria-label={$_('wizard.steps.stepMaterials.file.removeFile')}>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                </div>
-              {/each}
-            </div>
-          </div>
-        {/if}
-
-        {#if isUploading && uploadProgress}
-          <div class="mt-6">
-            <div class="alert alert-info">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              <div>
-                <div class="font-bold">{$_('wizard.steps.stepMaterials.file.upload')}</div>
-                <div class="text-sm">{uploadProgress}</div>
-              </div>
-              <span class="loading loading-spinner loading-md"></span>
-            </div>
-          </div>
-        {/if}
-      </div>
+      <ProjectMaterials {config} {uploadedFiles} {handleFileUpload} {removeFile} {isUploading} {uploadProgress}></ProjectMaterials>
     {:else if currentStep === maxSteps}
-      <!-- Final Step: Summary -->
-      <div class="step-header">
-        <h1><span class="inner-text-special">{$_('wizard.steps.stepSummary.titleHighlight')}</span></h1>
-        <p class="teaser">{$_('wizard.steps.stepSummary.teaser')}</p>
-      </div>
-
-      <!-- Asset Preparation Progress -->
-      {#if isPreparingAssets || assetPreparationProgress}
-        <div class="mb-8">
-          <div class="alert alert-info">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <div>
-              <div class="font-bold">{$_('wizard.steps.stepSummary.preparingAssets.title')}</div>
-              <div class="text-sm">{assetPreparationProgress}</div>
-            </div>
-            {#if isPreparingAssets}
-              <span class="loading loading-ring loading-md"></span>
-            {/if}
-          </div>
-        </div>
-      {/if}
-
-      <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
-        <div class="space-y-6">
-          <div class="card bg-base-200">
-            <div class="card-body">
-              <h3 class="card-title">{$_('wizard.steps.stepSummary.projectType')}</h3>
-              <p class="no-padding">{$_(projectTypes.find((p) => p.id === config.projectType)?.title)}</p>
-              <p class="text-base-content/70 no-padding text-sm">
-                {$_(subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType)?.title)}
-              </p>
-            </div>
-          </div>
-
-          {#if config.description}
-            <div class="card bg-base-200">
-              <div class="card-body">
-                <h3 class="card-title">{$_('wizard.steps.stepSummary.projectDescription')}</h3>
-                <p class="no-padding text-sm">{config.description.substring(0, 200)}{config.description.length > 200 ? '...' : ''}</p>
-              </div>
-            </div>
-          {/if}
-
-          {#if config.features.length > 0}
-            <div class="card bg-base-200">
-              <div class="card-body">
-                <h3 class="card-title">{$_('wizard.steps.stepSummary.selectedFeatures')}</h3>
-                <div class="flex flex-wrap gap-2">
-                  {#each config.features as featureId}
-                    <div class="badge badge-primary">{$_(availableFeatures.find((f) => f.name === featureId)?.title)}</div>
-                  {/each}
-                </div>
-              </div>
-            </div>
-          {/if}
-
-          {#if config.pages.length > 0}
-            <div class="card bg-base-200">
-              <div class="card-body">
-                <h3 class="card-title">{$_('wizard.steps.stepSummary.pagesSections')}</h3>
-                <div class="flex items-center flex-wrap gap-2">
-                  {#each config.pages as page}
-                    {#if page.name.trim()}
-                      <div class="badge badge-outline">{page.name}</div>
-                    {/if}
-                  {/each}
-                </div>
-              </div>
-            </div>
-          {/if}
-
-          {#if config.formFields.length > 0}
-            <div class="card bg-base-200">
-              <div class="card-body">
-                <h3 class="card-title">{$_('wizard.steps.stepSummary.formFields')}</h3>
-                <div class="space-y-1">
-                  {#each config.formFields as field}
-                    {#if field.name.trim()}
-                      <div class="flex items-center gap-2">
-                        <div class="badge badge-outline">{$_(formFieldTypes.find((f) => f.id === field.type)?.title)}</div>
-                        <span class="text-sm">{field.name}</span>
-                        {#if field.required}
-                          <div class="badge badge-error badge-xs">{$_('wizard.steps.stepSummary.required')}</div>
-                        {/if}
-                      </div>
-                    {/if}
-                  {/each}
-                </div>
-              </div>
-            </div>
-          {/if}
-
-          {#if config.projectType !== 'freestyle'}
-            <div class="card bg-base-200">
-              <div class="card-body">
-                <h3 class="card-title">{$_('wizard.steps.stepSummary.design')}</h3>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-
-                  <span class="font-semibold">{$_('wizard.steps.stepSummary.colors')}</span>
-                  <div class="flex gap-2 md:col-span-2">
-                    <div class="border-base-300 h-8 w-8 rounded border-2" style="background-color: {config.primaryColour}"></div>
-                    <div class="border-base-300 h-8 w-8 rounded border-2" style="background-color: {config.secondaryColour}"></div>
-                    <div class="border-base-300 h-8 w-8 rounded border-2" style="background-color: {config.accentColour}"></div>
-                  </div>
-
-                  <span class="font-semibold">{$_('wizard.steps.stepSummary.font')}</span>
-                  <div class="flex gap-2 md:col-span-2">
-                    <span style="font-family: {config.customFont || config.desiredFont}, sans-serif">{config.customFont || config.desiredFont}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          {/if}
-        </div>
-
-        <div class="card bg-success text-success-content">
-          <div class="card-body text-center">
-            <h2 class="card-title justify-center text-3xl">{$_('wizard.steps.stepSummary.estimatedPrice')}</h2>
-            <div class="text-5xl font-bold">{config.estimatedPrice}€</div>
-            <div class="text-sm opacity-80">{$_('wizard.steps.stepSummary.average', { values: { price: config.estimatedPrice.toLocaleString() } })}</div>
-            <p class="no-padding text-sm opacity-80">{$_('wizard.steps.stepSummary.disclaimer')}</p>
-
-            <div class="divider"></div>
-
-            <div class="space-y-2 text-left">
-              <div class="flex justify-between">
-                <span>{$_('wizard.steps.stepSummary.basePrice', { values: { projectType: $_(projectTypes.find((p) => p.id === config.projectType)?.title) } })}</span>
-                <span
-                  >{projectTypes.find((p) => p.id === config.projectType)?.lowestPrice.toLocaleString()}€ - {projectTypes
-                    .find((p) => p.id === config.projectType)
-                    ?.highestPrice.toLocaleString()}€</span
-                >
-              </div>
-              {#if config.subType}
-                <div class="flex justify-between">
-                  <span>{$_(subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType)?.title)}:</span>
-                  <span>{subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType)?.lowestPrice}€</span>
-                </div>
-              {/if}
-              {#if config.features.length > 0}
-                <div class="flex justify-between">
-                  <span>{$_('wizard.steps.stepSummary.featuresIncluded', { values: { count: config.features.length } })}</span>
-                  <span>{$_('wizard.steps.stepSummary.included')}</span>
-                </div>
-              {/if}
-            </div>
-          </div>
-        </div>
-      </div>
+      <ProjectResult {config} {isPreparingAssets} {assetPreparationProgress}></ProjectResult>
     {/if}
   </div>
 
@@ -1417,8 +685,7 @@
         type="button"
         class="btn-basic flex-grow md:flex-grow-0"
         onclick={nextStep}
-        disabled={(currentStep === 1 && !config.projectType) ||
-          (currentStep === 2 && !config.subType && config.projectType !== 'freestyle')}
+        disabled={(currentStep === 1 && !config.projectType) || (currentStep === 2 && !config.subType && config.projectType !== 'freestyle')}
       >
         {$_('wizard.navigation.next')}
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1487,149 +754,18 @@
   </div>
 {/if}
 
-<!-- Error Modal -->
-<dialog bind:this={errorModal} class="modal">
-  <div class="modal-box max-w-2xl">
-    <form method="dialog">
-      <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2">✕</button>
-    </form>
-
-    <h3 class="text-error mb-4 text-lg font-bold">{$_('wizard.modals.error.title')}</h3>
-
-    <div class="space-y-4">
-      <p>{$_('wizard.modals.error.description')}</p>
-
-      <div class="alert alert-error">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <div>
-          <ul class="space-y-1">
-            {#each errorDetails as error}
-              <li class="text-sm">{error}</li>
-            {/each}
-          </ul>
-        </div>
-      </div>
-
-      <div class="alert alert-info">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
-        <div>
-          <div class="font-bold">{$_('wizard.modals.error.whatHappens')}</div>
-          <div class="text-sm">{$_('wizard.modals.error.whatHappensDescription')}</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal-action">
-      <button type="button" class="btn btn-simple" onclick={closeErrorModal}>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-        {$_('wizard.modals.error.backToStep1')}
-      </button>
-    </div>
-  </div>
-  <form method="dialog" class="modal-backdrop">
-    <button>close</button>
-  </form>
-</dialog>
-
 <!-- Thank You Page -->
 {#if showThankYou}
-  <div class="thank-you-overlay">
-    <div class="thank-you-content">
-      <div class="thank-you-animation">
-        <div class="success-checkmark flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="text-success h-24 w-24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-        </div>
-      </div>
-      <h1 class="thank-you-title">{$_('wizard.modals.thankYou.title')}</h1>
-      <p class="thank-you-subtitle">{$_('wizard.modals.thankYou.subtitle')}</p>
-      <div class="thank-you-details">
-        <div class="thank-you-card">
-          <h3>{$_('wizard.modals.thankYou.whatHappensNext')}</h3>
-          <ul class="thank-you-steps">
-            <li>
-              <span class="step-number">1</span>
-              <span>{$_('wizard.modals.thankYou.steps.step1')}</span>
-            </li>
-            <li>
-              <span class="step-number">2</span>
-              <span>{$_('wizard.modals.thankYou.steps.step2')}</span>
-            </li>
-            <li>
-              <span class="step-number">3</span>
-              <span>{$_('wizard.modals.thankYou.steps.step3')}</span>
-            </li>
-          </ul>
-        </div>
-        <div class="thank-you-info">
-          <p><strong>{$_('wizard.modals.thankYou.projectName')}</strong><br /> {config.name}</p>
-          <p><strong>{$_('wizard.modals.thankYou.estimatedPrice')}</strong> {config.estimatedPrice.toLocaleString()} €</p>
-          <p><strong>{$_('wizard.modals.thankYou.projectType')}</strong><br /> {$_(projectTypes.find((p) => p.id === config.projectType)?.title)}</p>
-        </div>
-      </div>
-      <div class="thank-you-actions">
-        <button
-          onclick={() => {
-            goto('/');
-          }}
-          class="btn btn-simple btn-lg"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-            />
-          </svg>
-          {$_('wizard.modals.thankYou.home')}
-        </button>
-        <a href="/contact" class="btn btn-link btn-lg">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-            />
-          </svg>
-          {$_('wizard.modals.thankYou.contact')}
-        </a>
-      </div>
-    </div>
-  </div>
+  <ThankYou {config}></ThankYou>
 {/if}
-
+<!-- Error Modal -->
+<ErrorModal bind:this={errorModal} {errorDetails}></ErrorModal>
 <!-- Reset Modal -->
-<dialog bind:this={resetModal} class="modal">
-  <div class="modal-box">
-    <form method="dialog">
-      <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2">✕</button>
-    </form>
+<ResetModal bind:this={resetModal} {confirmReset}></ResetModal>
 
-    <h3 class="mb-4 text-lg font-bold">{$_('wizard.modals.reset.title')}</h3>
-    <p class="py-4">{$_('wizard.modals.reset.description')}</p>
-
-    <div class="modal-action">
-      <button type="button" class="btn btn-outline" onclick={closeResetModal}>{$_('wizard.modals.reset.cancel')}</button>
-      <button type="button" class="btn btn-error" onclick={confirmReset}>{$_('wizard.modals.reset.confirm')}</button>
-    </div>
-  </div>
-  <form method="dialog" class="modal-backdrop">
-    <button>close</button>
-  </form>
-</dialog>
 
 <style lang="postcss">
   @reference '../../../app.css';
-
   /* Wizard Container - Dark Theme Support */
   .wizard-container {
     @apply bg-base-100 border-base-300 rounded-2xl border shadow-lg;
@@ -1641,7 +777,7 @@
 
   /* Header - Dark Theme Support */
   .wizard-header {
-    @apply border-base-300 mb-8 flex items-center justify-between border-b px-6 py-4;
+    @apply border-base-300 flex items-center justify-between border-b px-6 py-4;
 
     h1 {
       @apply text-base-content m-0 p-0;
@@ -1650,7 +786,7 @@
 
   /* Progress Bar Wrapper */
   .progress-wrapper {
-    @apply mx-6 mb-12;
+    @apply mx-6 my-12;
   }
 
   /* Progress Bar - Desktop (horizontal with line) */
@@ -1669,368 +805,11 @@
 
   /* Step Content */
   .step-content-wrapper {
-    @apply mb-8 min-h-96 px-6;
-  }
-
-  .step-header {
-    @apply border-t-base-content/40 mt-8 mb-12 border-t pt-10 text-center md:border-t-0 md:pt-0;
-
-    h1 {
-      @apply text-base-content mb-4;
-    }
-
-    p.teaser {
-      @apply text-base-content/70;
-    }
-  }
-
-  /* Grid Layouts */
-  .project-types-grid {
-    @apply grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3;
-  }
-
-  .subtypes-grid {
-    @apply grid grid-cols-1 gap-6 md:grid-cols-2;
-  }
-
-  .features-grid {
-    @apply mb-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3;
-  }
-
-  /* Service Cards - Dark Theme Support */
-  .service-card {
-    @apply bg-base-100 border-base-300 border transition-all duration-300;
-
-    &:hover {
-      @apply bg-base-200 border-base-300;
-    }
-
-    &.card-selected {
-      @apply ring-primary ring-offset-base-100 ring-2 ring-offset-2;
-      &:hover {
-        @apply bg-base-100 cursor-default;
-      }
-    }
-
-    .service-card-header {
-      @apply mb-4 flex items-center justify-between;
-
-      .service-icon {
-        @apply text-3xl;
-      }
-    }
-
-    .card-body {
-      @apply text-base-content;
-
-      .card-title {
-        @apply text-base-content;
-      }
-
-      p {
-        @apply text-base-content/80;
-      }
-    }
-  }
-
-  /* Content Sections */
-  .content-section {
-    @apply mb-12;
-
-    h2 {
-      @apply text-base-content mt-2 mb-4 p-0;
-    }
-
-    p {
-      @apply text-base-content/80 mb-6;
-    }
+    @apply mb-8 min-h-96 px-6 py-8; /* Added py-8 for vertical padding */
   }
 
   /* Navigation */
   .wizard-navigation {
     @apply border-base-300 bg-base-100 flex flex-wrap items-center justify-between gap-4 border-t p-6;
-  }
-
-  /* Form Elements - Dark Theme Support */
-  .form-control {
-    @apply w-full;
-
-    .label-text {
-      @apply text-base-content;
-    }
-
-    .label-text-alt {
-      @apply text-base-content/60;
-    }
-  }
-
-  .textarea,
-  .input,
-  .select {
-    @apply bg-base-100 border-base-300 text-base-content w-full;
-
-    &:focus {
-      @apply border-primary bg-base-100;
-    }
-
-    &::placeholder {
-      @apply text-base-content/50;
-    }
-  }
-
-  .label {
-    @apply w-full;
-  }
-
-  .join {
-    @apply w-full;
-  }
-
-  /* Cards in Content - Dark Theme Support */
-  /* .card {
-    @apply bg-base-100 border-base-300;
-
-    .card-body {
-      @apply text-base-content;
-
-      .card-title {
-        @apply text-base-content;
-      }
-    }
-  } */
-
-  /* Alerts - Dark Theme Support */
-  /* .alert {
-    @apply bg-base-200 border-base-300 text-base-content;
-
-    &.alert-info {
-      @apply bg-info/10 border-info/20 text-info-content;
-    }
-
-    &.alert-error {
-      @apply bg-error/10 border-error/20 text-error-content;
-    }
-  } */
-
-  /* Loading Overlay Styles - Dark Theme Support */
-  .loading-overlay {
-    @apply fixed inset-0 z-50 flex items-center justify-center;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(8px);
-  }
-
-  .loading-content {
-    @apply bg-base-100 border-base-300 mx-4 max-w-md rounded-2xl border p-12 text-center shadow-2xl;
-  }
-
-  .loading-animation {
-    @apply relative mb-8;
-  }
-
-  .loading-spinner {
-    @apply border-primary/20 border-t-primary mx-auto h-16 w-16 rounded-full border-4;
-    animation: spin 1s linear infinite;
-  }
-
-  .loading-pulse {
-    @apply border-primary/40 absolute inset-0 mx-auto h-16 w-16 rounded-full border-4;
-    animation: pulse 2s ease-in-out infinite;
-  }
-
-  .loading-title {
-    @apply text-base-content mb-4 text-2xl font-bold;
-  }
-
-  .loading-text {
-    @apply text-base-content/70 mb-8;
-  }
-
-  .loading-steps {
-    @apply space-y-3 text-left;
-  }
-
-  .loading-step {
-    @apply text-base-content flex items-center gap-3 text-sm;
-  }
-
-  .loading-step-icon {
-    @apply bg-primary/10 text-primary flex h-6 w-6 items-center justify-center rounded-full font-bold;
-  }
-
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  @keyframes pulse {
-    0%,
-    100% {
-      transform: scale(1);
-      opacity: 0.3;
-    }
-    50% {
-      transform: scale(1.1);
-      opacity: 0.1;
-    }
-  }
-
-  /* Thank You Page Styles - Dark Theme Support */
-  .thank-you-overlay {
-    @apply fixed inset-0 z-50 flex items-center justify-center p-4;
-    background: linear-gradient(135deg, rgba(139, 69, 19, 0.1), rgba(34, 197, 94, 0.1));
-    backdrop-filter: blur(12px);
-  }
-
-  .thank-you-content {
-    @apply bg-base-100 border-base-300 w-full max-w-4xl rounded-3xl border p-12 text-center shadow-2xl;
-  }
-
-  .thank-you-animation {
-    @apply mb-8;
-  }
-
-  .success-checkmark {
-    @apply mx-auto mb-6;
-    animation: checkmark-bounce 0.6s ease-in-out;
-  }
-
-  .thank-you-title {
-    @apply text-success mb-4 text-4xl font-bold;
-  }
-
-  .thank-you-subtitle {
-    @apply text-base-content/70 mb-12 text-xl;
-  }
-
-  .thank-you-details {
-    @apply mb-12 grid grid-cols-1 gap-8 lg:grid-cols-2;
-  }
-
-  .thank-you-card {
-    @apply bg-base-200 border-base-300 rounded-2xl border p-8;
-  }
-
-  .thank-you-card h3 {
-    @apply text-base-content mb-6 text-xl font-bold;
-  }
-
-  .thank-you-steps {
-    @apply space-y-4;
-  }
-
-  .thank-you-steps li {
-    @apply text-base-content flex items-start gap-4;
-  }
-
-  .step-number {
-    @apply bg-primary text-primary-content mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold;
-  }
-
-  .thank-you-info {
-    @apply bg-success/10 border-success/20 space-y-3 rounded-2xl border p-8;
-  }
-
-  .thank-you-info p {
-    @apply text-base-content;
-  }
-
-  .thank-you-actions {
-    @apply flex flex-col justify-center gap-4 sm:flex-row;
-  }
-
-  @keyframes checkmark-bounce {
-    0% {
-      transform: scale(0);
-      opacity: 0;
-    }
-    50% {
-      transform: scale(1.2);
-      opacity: 0.8;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
-
-  /* Mobile Responsive Improvements */
-  @media (max-width: 768px) {
-    .wizard-container {
-      @apply mx-2 rounded-xl;
-    }
-
-    .wizard-header {
-      @apply px-4;
-
-      h1 {
-        @apply text-2xl;
-      }
-    }
-
-    .progress-wrapper {
-      @apply mx-4 mb-8;
-    }
-
-    .step-content-wrapper {
-      @apply px-4;
-    }
-
-    .wizard-navigation {
-      @apply px-4;
-    }
-
-    .loading-content {
-      @apply p-8;
-    }
-
-    .thank-you-content {
-      @apply p-8;
-    }
-
-    .thank-you-title {
-      @apply text-3xl;
-    }
-
-    .thank-you-subtitle {
-      @apply text-lg;
-    }
-
-    /* Mobile Progress Bar Improvements */
-    .progress-mobile {
-      button {
-        @apply min-w-16;
-
-        div:last-child {
-          @apply text-xs leading-tight;
-        }
-      }
-    }
-  }
-
-  /* Extra small screens */
-  @media (max-width: 480px) {
-    .progress-mobile {
-      button {
-        @apply min-w-14;
-
-        div:first-child {
-          @apply h-7 w-7 text-xs;
-        }
-
-        div:last-child {
-          @apply text-xs leading-tight;
-        }
-      }
-    }
-
-    .project-types-grid,
-    .subtypes-grid {
-      @apply gap-4;
-    }
-
-    .features-grid {
-      @apply gap-3;
-    }
   }
 </style>

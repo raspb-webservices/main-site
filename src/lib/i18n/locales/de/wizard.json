@@ -475,7 +475,10 @@
       "back": "Zurück",
       "next": "Weiter",
       "downloadPDF": "PDF wird erstellt...",
-      "submitProject": "Projekt einreichen"
+      "submitProject": "Projekt einreichen",
+      "projectRequest": "Projekt unverbindlich anfragen",
+      "reset":"von vorne beginnen",
+      "register": "Registrieren, um den erweiterten Konfigurator zu nutzen"
     },
     "loading": {
       "title": "Projekt wird übermittelt...",
