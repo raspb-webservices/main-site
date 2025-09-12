@@ -343,7 +343,21 @@
         "formFields": "Definierte Formularfelder",
         "previewTitle": "Schriftart-Vorschau von {font}:",
         "fontPreview": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis minima officia eveniet fugiat ad dicta quia optio quod possimus sint enim doloremque, consectetur ut est quibusdam corporis obcaecati dolore dolores!",
-        "required": "Pflichtfeld"
+        "required": "Pflichtfeld",
+        "priceTiers": {
+          "tier1": {
+            "message": "Das ist überschaubar. Wir können ziemlich sicher den untersten Preis anbieten"
+          },
+          "tier2": {
+            "message": "Es wurden schon ein paar Features gewählt, aber von der Komplerxitöt ist das alles noch im Rahmen: mittlerer Preis"
+          },
+          "tier3": {
+            "message": "Das Vorhaben ist nicht ganz trivial. Es gibt einige gewünschte feature. Wir bewegun uns hier am oberen Ende"
+          },
+          "tier4": {
+            "message": "Das was Sie sich vorstellen, ist schon recht anspruchsvoll. Es wurden viele oder sehr Komplexe Features mit einbezogen. Hier werden wir sicherlich die vollen bereich ausschöpfen müssen. Ggf. liegen wir sogar dezent darüber."
+          }
+        }
       },
       "priceTiers": {
         "tier1": {

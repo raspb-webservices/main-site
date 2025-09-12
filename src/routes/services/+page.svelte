@@ -1,28 +1,29 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
-  import Stage from '$lib/components/ui/stage.svelte';
-  import Section from '$lib/components/ui/section.svelte';
   import { goto } from '$app/navigation';
   import { _ } from 'svelte-i18n';
-  import ServiceOnePageModal from '$lib/components/modals/ServiceOnePageModal.svelte';
-  import ServiceLandingPageModal from '$lib/components/modals/ServiceLandingPageModal.svelte';
-  import ServiceCorporateWebsitesModal from '$lib/components/modals/ServiceCorporateWebsitesModal.svelte';
-  import ServiceSimpleCmsModal from '$lib/components/modals/ServiceSimpleCmsModal.svelte';
-  import ServiceComplexCmsModal from '$lib/components/modals/ServiceComplexCmsModal.svelte';
-  import ServiceBlogCmsModal from '$lib/components/modals/ServiceBlogCmsModal.svelte';
-  import ServiceHeadlessCmsModal from '$lib/components/modals/ServiceHeadlessCmsModal.svelte';
-  import ServiceWebAppsModal from '$lib/components/modals/ServiceWebAppsModal.svelte';
-  import ServicePwaModal from '$lib/components/modals/ServicePwaModal.svelte';
-  import ServiceNativeAppsModal from '$lib/components/modals/ServiceNativeAppsModal.svelte';
-  import ServiceComplexAppsModal from '$lib/components/modals/ServiceComplexAppsModal.svelte';
-  import ServiceFreestyleComponents from '$lib/components/modals/ServiceFreestyleComponents.svelte';
-  import ServiceFreestyleDesign from '$lib/components/modals/ServiceFreestyleDesign.svelte';
-  import ServiceFreestyleExtensions from '$lib/components/modals/ServiceFreestyleExtensions.svelte';
-  import ServiceFreestyleSpecialApps from '$lib/components/modals/ServiceFreestyleSpecialApps.svelte';
-  import ServiceKIAgenten from '$lib/components/modals/ServiceKIAgenten.svelte';
-  import ServiceKIBeratung from '$lib/components/modals/ServiceKIBeratung.svelte';
-  import ServiceKIInfrastructure from '$lib/components/modals/ServiceKIInfrastructure.svelte';
-  import ServiceKIWorkflows from '$lib/components/modals/ServiceKIWorkflows.svelte';
+  import Stage from '$lib/components/ui/stage.svelte';
+  import Section from '$lib/components/ui/section.svelte';
+  import CTABox from '$lib/components/snippets/cta-box.svelte'
+  import OnePage from '$lib/components/modals/services/one-page.svelte';
+  import LandingPage from '$lib/components/modals/services/landing-page.svelte';
+  import CorporateWebsites from '$lib/components/modals/services/corporate-websites.svelte';
+  import SimpleCms from '$lib/components/modals/services/simple-cms.svelte';
+  import ComplexCms from '$lib/components/modals/services/complex-cms.svelte';
+  import BlogCms from '$lib/components/modals/services/blog-cms.svelte';
+  import HeadlessCms from '$lib/components/modals/services/headless-cms.svelte';
+  import WebApps from '$lib/components/modals/services/web-apps.svelte';
+  import Pwa from '$lib/components/modals/services/pwa.svelte';
+  import NativeApps from '$lib/components/modals/services/native-apps.svelte';
+  import ComplexApps from '$lib/components/modals/services/complex-apps.svelte';
+  import FreestyleComponents from '$lib/components/modals/services/freestyle-components.svelte';
+  import FreestyleDesign from '$lib/components/modals/services/freestyle-design.svelte';
+  import FreestyleExtensions from '$lib/components/modals/services/freestyle-extensions.svelte';
+  import FreestyleSpecialApps from '$lib/components/modals/services/freestyle-special-apps.svelte';
+  import KIAgenten from '$lib/components/modals/services/ki-agenten.svelte';
+  import KIBeratung from '$lib/components/modals/services/ki-beratung.svelte';
+  import KIInfrastructure from '$lib/components/modals/services/ki-infrastructure.svelte';
+  import KIWorkflows from '$lib/components/modals/services/ki-workflows.svelte';
 
   const handleHashChange = (event: HashChangeEvent) => {
     const newHash = new URL(event.newURL).hash.slice(1);
@@ -76,7 +77,7 @@
 </svelte:head>
 
 <Stage style={'basic-gradient'}>
-  <div class="inner-box reduced py-36">
+  <div class="inner-box reduced py-36 prose">
     <h1 class="massive animate-fade-in-up">{$_('servicesPage.hero.title')}</h1>
     <p class="teaser animate-fade-in-up">{$_('servicesPage.hero.subtitle')}</p>
     <button
@@ -92,7 +93,7 @@
   <div class="massive-spacer"></div>
 
   <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-14">
-    <div class="fade-in mr-8">
+    <div class="animate-fadeIn mr-8 prose">
       <h2>{$_('servicesPage.intro.titleFirst')} <span class="inner-text-special">{$_('servicesPage.intro.titleHighlight')}</span></h2>
       <p>
         {$_('servicesPage.intro.paragraph1')}
@@ -159,7 +160,7 @@
 <!-- Webseiten Section -->
 <Section noSpacing={true}>
   <div id="webseiten-section" class="service-section">
-    <div class="service-header">
+    <div class="service-header prose">
       <h1>{$_('servicesPage.webseitenSection.titleFirst')} <span class="inner-text-special">{$_('servicesPage.webseitenSection.titleHighlight')}</span></h1>
       <p class="teaser">
         {$_('servicesPage.webseitenSection.teaser')}
@@ -230,7 +231,7 @@
 <!-- CMS Section -->
 <Section noSpacing={true}>
   <div id="cms-section" class="service-section">
-    <div class="service-header">
+    <div class="service-header prose">
       <h1>{$_('servicesPage.cmsSection.titleFirst')} <span class="inner-text-special">{$_('servicesPage.cmsSection.titleHighlight')}</span></h1>
       <p class="teaser">
         {$_('servicesPage.cmsSection.teaser')}
@@ -240,9 +241,9 @@
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
       <!-- Einfache Inhaltsbearbeitung -->
       <div class="service-card large">
-        <div class="service-card-content">
+        <div class="service-card-content prose">
           <div class="service-card-header">
-            <h3>{$_('servicesPage.cmsSection.simpleCms.title')}</h3>
+            <h3 class="pt-2">{$_('servicesPage.cmsSection.simpleCms.title')}</h3>
             <div class="service-icon">{$_('servicesPage.cmsSection.simpleCms.icon')}</div>
           </div>
           <p>{$_('servicesPage.cmsSection.simpleCms.description')}</p>
@@ -259,9 +260,9 @@
 
       <!-- Komplexe CMS-Systeme -->
       <div class="service-card large">
-        <div class="service-card-content">
+        <div class="service-card-content prose">
           <div class="service-card-header">
-            <h3>{$_('servicesPage.cmsSection.complexCms.title')}</h3>
+            <h3 class="pt-2">{$_('servicesPage.cmsSection.complexCms.title')}</h3>
             <div class="service-icon">{$_('servicesPage.cmsSection.complexCms.icon')}</div>
           </div>
           <p>{$_('servicesPage.cmsSection.complexCms.description')}</p>
@@ -278,9 +279,9 @@
 
       <!-- Blog & Content-getriebene Websites -->
       <div class="service-card large">
-        <div class="service-card-content">
+        <div class="service-card-content prose">
           <div class="service-card-header">
-            <h3>{$_('servicesPage.cmsSection.blogCms.title')}</h3>
+            <h3 class="pt-2">{$_('servicesPage.cmsSection.blogCms.title')}</h3>
             <div class="service-icon">{$_('servicesPage.cmsSection.blogCms.icon')}</div>
           </div>
           <p>{$_('servicesPage.cmsSection.blogCms.description')}</p>
@@ -297,9 +298,9 @@
 
       <!-- Headless CMS -->
       <div class="service-card large">
-        <div class="service-card-content">
+        <div class="service-card-content prose">
           <div class="service-card-header">
-            <h3>{$_('servicesPage.cmsSection.headlessCms.title')}</h3>
+            <h3 class="pt-2">{$_('servicesPage.cmsSection.headlessCms.title')}</h3>
             <div class="service-icon">{$_('servicesPage.cmsSection.headlessCms.icon')}</div>
           </div>
           <p>{$_('servicesPage.cmsSection.headlessCms.description')}</p>
@@ -320,7 +321,7 @@
 <!-- Applikationen Section -->
 <Section noSpacing={true}>
   <div id="applications-section" class="service-section">
-    <div class="service-header">
+    <div class="service-header prose">
       <h1>
         {$_('servicesPage.applicationsSection.titleFirst')} <span class="inner-text-special">{$_('servicesPage.applicationsSection.titleHighlight')}</span>
       </h1>
@@ -412,7 +413,7 @@
 <!-- Individualentwicklung Section -->
 <Section noSpacing={true}>
   <div id="individual-development-section" class="service-section">
-    <div class="service-header">
+    <div class="service-header prose">
       <h1>
         {$_('servicesPage.individualDevelopmentSection.titleFirst')}<span class="inner-text-special"
           >{$_('servicesPage.individualDevelopmentSection.titleHighlight')}</span
@@ -482,7 +483,7 @@
 <!-- KI Services Section -->
 <Section noSpacing={true}>
   <div id="ki-services-section" class="service-section">
-    <div class="service-header">
+    <div class="service-header prose">
       <h1>{$_('servicesPage.kiServicesSection.titleFirst')} <span class="inner-text-special">{$_('servicesPage.kiServicesSection.titleHighlight')}</span></h1>
       <p class="teaser">{$_('servicesPage.kiServicesSection.teaser')}</p>
     </div>
@@ -568,79 +569,30 @@
 </Section>
 
 <!-- Call to Action Section -->
-<Section noSpacing={true}>
-  <div class="cta-section">
-    <div class="cta-content">
-      <div class="cta-content-inner">
-        <h1>{$_('servicesPage.ctaSection.titleFirst')} <span class="inner-text-special">{$_('servicesPage.ctaSection.titleHighlight')}</span>?</h1>
-        <p class="cta-text no-padding">
-          {$_('servicesPage.ctaSection.teaser')}
-        </p>
-
-        <div class="cta-benefits">
-          <div class="cta-benefit">
-            <div class="benefit-icon">{$_('servicesPage.ctaSection.benefits.benefit1.icon')}</div>
-            <div>
-              <h4>{$_('servicesPage.ctaSection.benefits.benefit1.title')}</h4>
-              <p class="no-padding">{$_('servicesPage.ctaSection.benefits.benefit1.description')}</p>
-            </div>
-          </div>
-          <div class="cta-benefit">
-            <div class="benefit-icon">{$_('servicesPage.ctaSection.benefits.benefit2.icon')}</div>
-            <div>
-              <h4>{$_('servicesPage.ctaSection.benefits.benefit2.title')}</h4>
-              <p class="no-padding">{$_('servicesPage.ctaSection.benefits.benefit2.description')}</p>
-            </div>
-          </div>
-          <div class="cta-benefit">
-            <div class="benefit-icon">{$_('servicesPage.ctaSection.benefits.benefit3.icon')}</div>
-            <div>
-              <h4>{$_('servicesPage.ctaSection.benefits.benefit3.title')}</h4>
-              <p class="no-padding">{$_('servicesPage.ctaSection.benefits.benefit3.description')}</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="cta-buttons">
-          <button
-            class="btn-basic"
-            onclick={() => {
-              goto('/get-started');
-            }}
-          >
-            {$_('servicesPage.ctaSection.button1')}
-          </button>
-          <button class="btn btn-outline btn-lg px-8 py-4" onclick={() => goto('/faq')}> {$_('servicesPage.ctaSection.button2')} </button>
-        </div>
-
-        <p class="cta-note no-padding">
-          {@html $_('servicesPage.ctaSection.note')}
-        </p>
-      </div>
-    </div>
-  </div>
+<Section>
+  <CTABox variant="{'service'}"></CTABox>
 </Section>
 
 <!-- DaisyUI Modals for detailed information -->
-<ServiceOnePageModal />
-<ServiceLandingPageModal />
-<ServiceCorporateWebsitesModal />
-<ServiceSimpleCmsModal />
-<ServiceComplexCmsModal />
-<ServiceBlogCmsModal />
-<ServiceHeadlessCmsModal />
-<ServiceWebAppsModal />
-<ServicePwaModal />
-<ServiceNativeAppsModal />
-<ServiceComplexAppsModal />
-<ServiceFreestyleComponents />
-<ServiceFreestyleDesign />
-<ServiceFreestyleExtensions />
-<ServiceFreestyleSpecialApps />
-<ServiceKIAgenten />
-<ServiceKIBeratung />
-<ServiceKIInfrastructure />
-<ServiceKIWorkflows />
+<OnePage />
+<LandingPage />
+<CorporateWebsites />
+<SimpleCms />
+<ComplexCms />
+<BlogCms />
+<HeadlessCms />
+<WebApps />
+<Pwa />
+<NativeApps />
+<ComplexApps />
+<FreestyleComponents />
+<FreestyleDesign />
+<FreestyleExtensions />
+<FreestyleSpecialApps />
+<KIAgenten />
+<KIBeratung />
+<KIInfrastructure />
+<KIWorkflows />
 
 <style lang="postcss">
   @reference '../../app.css';
@@ -660,7 +612,7 @@
       @apply grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-5;
 
       .category-card {
-        @apply bg-base-100 text-base-content rounded-2xl p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:cursor-pointer hover:shadow-lg;
+        @apply from-base-100 to-base-200 text-base-content flex cursor-pointer flex-col justify-between rounded-2xl border-0 bg-linear-to-tl p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg;
 
         .category-icon {
           @apply mb-4 text-4xl;
@@ -686,7 +638,7 @@
   }
 
   .service-card {
-    @apply bg-base-100 text-base-content flex flex-col rounded-2xl p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+    @apply from-base-100 to-base-200 text-base-content flex cursor-default flex-col justify-between rounded-2xl border-0 bg-linear-to-tl p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg;
 
     &.large {
       @apply min-h-[280px];
@@ -717,53 +669,6 @@
 
       .highlight {
         @apply bg-primary/10 text-primary rounded-full px-3 py-1 text-sm font-medium;
-      }
-    }
-  }
-
-  .cta-section {
-    @apply py-24;
-    .cta-content {
-      @apply bg-base-100 text-base-content flex w-full flex-col items-center justify-center rounded-3xl px-6 py-16 text-center;
-
-      .cta-content-inner {
-        @apply m-auto w-full max-w-4xl;
-      }
-
-      h1 {
-        @apply mb-6 text-4xl font-bold md:text-5xl;
-      }
-
-      .cta-text {
-        @apply text-base-content mb-14 text-lg leading-relaxed;
-      }
-
-      .cta-benefits {
-        @apply mb-10 grid grid-cols-1 gap-6 md:grid-cols-3;
-
-        .cta-benefit {
-          @apply flex items-start rounded-2xl bg-white px-4 py-6 text-left;
-
-          .benefit-icon {
-            @apply mt-1 mr-4 text-3xl;
-          }
-
-          h4 {
-            @apply mb-1 font-semibold;
-          }
-
-          p {
-            @apply text-base-content text-sm;
-          }
-        }
-      }
-
-      .cta-buttons {
-        @apply mb-6 flex flex-col items-center justify-center gap-4 sm:flex-row;
-      }
-
-      .cta-note {
-        @apply text-base-content bg-base-200 rounded-lg p-4 text-sm;
       }
     }
   }

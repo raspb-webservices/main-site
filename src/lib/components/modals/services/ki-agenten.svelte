@@ -40,7 +40,7 @@
 </dialog>
 
 <style lang="postcss">
-  @reference '../../../app.css';
+@reference '../../../../app.css';
   .modal-box {
     @apply max-w-2xl;
   }

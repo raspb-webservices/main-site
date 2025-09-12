@@ -4,7 +4,7 @@
   import { isAuthenticated, user } from '$store/sharedStates.svelte';
   import { goto } from '$app/navigation';
   import type { User } from '$interfaces/user.interface';
-  import ProfileEditModal from '$lib/components/modals/ProfileEditModal.svelte';
+  import ProfileEditModal from '$lib/components/modals/profile/edit.svelte';
   
   let isAuth = $derived(isAuthenticated.get());
   let currentUser = $derived(user.get()) as User;

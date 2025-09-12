@@ -1,6 +1,6 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n';
-  import auth from '../../../authService';
+  import auth from '../../../../authService';
   import { user } from '$store/sharedStates.svelte';
   import type { User } from '$interfaces/user.interface';
 
@@ -120,5 +120,5 @@
 </dialog>
 
 <style lang="postcss">
-  @reference '../../../app.css';
+  @reference '../../../../app.css';
 </style>

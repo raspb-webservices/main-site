@@ -1,6 +1,7 @@
 {
   "philosophyModal": {
     "header": {
+      "titleFirst": "Die",
       "titleHighlight": "raspb",
       "titleSecond": "Philosophie",
       "subtitle": "rapid - accurate - services - perfectly balanced"
@@ -45,6 +46,36 @@
         "perfectlyBalanced": "⚖️ perfectly balanced"
       },
       "closeButton": "Verstanden"
+    }
+  },
+  "timeAsFactorModal": {
+    "header": {
+      "title": "Zeit"
+    },
+    "content": {
+      "paragraph1": "Zeit ist in der digitalen Welt ein entscheidender Faktor. Während andere Agenturen Monate für die Umsetzung benötigen, liefern wir dank unserer einzigartigen raspb-Methode bereits nach wenigen Tagen erste Ergebnisse.",
+      "paragraph2": "Unser Geheimnis liegt in der perfekten Kombination aus bewährten Bausteinen, KI-gestützten Entwicklungsprozessen und der Expertise unseres Teams. Wir haben über Jahre hinweg ein Ökosystem aus wiederverwendbaren Komponenten entwickelt, das es uns ermöglicht, auch komplexe Projekte in Rekordzeit umzusetzen - ohne Kompromisse bei der Qualität.",
+      "paragraph3": "Agile Entwicklungsmethoden sorgen dafür, dass Sie bereits während der Entwicklung Feedback geben können und das Endergebnis genau Ihren Vorstellungen entspricht. So sparen wir nicht nur Zeit, sondern stellen auch sicher, dass das Projekt von Anfang an in die richtige Richtung läuft."
+    }
+  },
+  "costAsFactorModal": {
+    "header": {
+      "title": "Kosten"
+    },
+    "content": {
+      "paragraph1": "Schluss mit bösen Überraschungen! Bei raspb erhalten Sie von Anfang an transparente Festpreise ohne versteckte Kosten. Unser intelligenter Online-Konfigurator ermittelt bereits vor Projektbeginn einen verbindlichen Preis - basierend auf Ihren konkreten Anforderungen.",
+      "paragraph2": "Im Gegensatz zu vielen anderen Anbietern gibt es bei uns keine monatlichen Abogebühren oder Zwangsabnahmen. Sie zahlen einmal für die Entwicklung und erhalten Ihre fertige Lösung - komplett in Ihrem Besitz. Das erste Jahr Hosting und Wartung ist bereits inklusive, danach können Sie frei entscheiden, wie Sie mit Ihrem Projekt verfahren möchten.",
+      "paragraph3": "Dank unserer effizienten Entwicklungsmethoden und dem raspb-Ökosystem können wir Ihnen ein unschlagbares Preis-Leistungs-Verhältnis bieten. Qualität muss nicht teuer sein - bei uns bekommen Sie beides: Höchste Standards zu fairen Preisen."
+    }
+  },
+  "qualityAsFactorModal": {
+    "header": {
+      "title": "Qualität"
+    },
+    "content": {
+      "paragraph1": "Qualität ist bei raspb nicht verhandelbar. Wir setzen ausschließlich auf modernste Webtechnologien und bewährte Frameworks wie SvelteKit, TypeScript, TailwindCSS und Node.js. Jede Zeile Code wird von unseren Experten geschrieben und durchläuft strenge Qualitätskontrollen.",
+      "paragraph2": "Unsere eigenentwickelten Module und Komponenten sind über Jahre hinweg gewachsen und in unzähligen Projekten erprobt. Sie profitieren von dieser Erfahrung und erhalten Lösungen, die nicht nur heute funktionieren, sondern auch zukunftssicher sind. Performance, Sicherheit und Benutzerfreundlichkeit stehen dabei immer im Fokus.",
+      "paragraph3": "Durch kontinuierliche Code-Reviews, automatisierte Tests und den Einsatz modernster Entwicklungstools stellen wir sicher, dass Ihr Projekt den höchsten Qualitätsstandards entspricht. Das Ergebnis: Robuste, skalierbare und wartungsfreundliche Lösungen, die Ihnen langfristig Freude bereiten."
     }
   }
 }

@@ -13,7 +13,7 @@
 
     <div class="spacer"></div>
 
-    <form name="contact" method="POST" action="/than" netlify>
+    <form name="contact" method="POST" action="/thank-you" netlify>
       <input type="hidden" name="form-name" value="contact" />
 
       <div class="form-field-container">

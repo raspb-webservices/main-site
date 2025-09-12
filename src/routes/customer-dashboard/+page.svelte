@@ -7,6 +7,9 @@
   import type { Project } from '$interfaces/project.interface';
   import { projectStatus } from '$interfaces/project.interface';
   import type { User } from '$interfaces/user.interface';
+  import { formatDate, formatBudget, getStatusBadgeClass, getStatusLabel } from '$lib/helper/projectUtils';
+  import ProjectCard from '$lib/components/projects/ProjectCard.svelte';
+  import ProjectListItem from '$lib/components/projects/ProjectListItem.svelte';
 
   // Reaktive Variablen für Authentifizierung und Rollen
   let isAuth = $derived(isAuthenticated.get());
@@ -98,60 +101,6 @@
     }
   }
 
-  function formatDate(dateString: string) {
-    return new Date(dateString).toLocaleDateString('de-DE', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  }
-
-  function formatBudget(budget: string) {
-    return budget ? `${budget}€` : 'Nicht angegeben';
-  }
-
-  function getStatusBadgeClass(status: string) {
-    switch (status) {
-      case projectStatus.created:
-        return 'badge-neutral';
-      case projectStatus.introduced:
-        return 'badge-info';
-      case projectStatus.prototype:
-        return 'badge-warning';
-      case projectStatus.refinement:
-        return 'badge-secondary';
-      case projectStatus.ready:
-        return 'badge-accent';
-      case projectStatus.published:
-        return 'badge-success';
-      case projectStatus.paid:
-        return 'badge-primary';
-      default:
-        return 'badge-ghost';
-    }
-  }
-
-  function getStatusLabel(status: string) {
-    switch (status) {
-      case projectStatus.created:
-        return 'Erstellt';
-      case projectStatus.introduced:
-        return 'Vorgestellt';
-      case projectStatus.prototype:
-        return 'Prototyp';
-      case projectStatus.refinement:
-        return 'Verfeinerung';
-      case projectStatus.ready:
-        return 'Bereit';
-      case projectStatus.published:
-        return 'Veröffentlicht';
-      case projectStatus.paid:
-        return 'Bezahlt';
-      default:
-        return 'Unbekannt';
-    }
-  }
-
   function openProjectModal(project: Project & { id: string }) {
     selectedProject = project;
     modalDialog?.showModal();
@@ -230,46 +179,7 @@
           {#if viewMode === 'grid'}
             <div class="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {#each projects as project}
-                <div 
-                  class="card bg-base-200 cursor-pointer shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-                  onclick={() => openProjectModal(project)}
-                >
-                  <div class="card-body">
-                    <div class="mb-4 flex items-start justify-between">
-                      <h2 class="card-title text-lg">{project.name}</h2>
-                      <div class="flex flex-col gap-1">
-                        <div class="badge badge-primary badge-sm">{project.projectType || 'Unbekannt'}</div>
-                        {#if project.projectStatus}
-                          <div class="badge {getStatusBadgeClass(project.projectStatus)} badge-sm">
-                            {getStatusLabel(project.projectStatus)}
-                          </div>
-                        {/if}
-                      </div>
-                    </div>
-
-                    <p class="text-base-content/70 mb-4 line-clamp-3 text-sm">
-                      {project.description || 'Keine Beschreibung verfügbar'}
-                    </p>
-
-                    <div class="space-y-2">
-                      <div class="flex justify-between text-sm">
-                        <span class="text-base-content/60">Budget:</span>
-                        <span class="font-medium">{formatBudget(project.budget || '')}</span>
-                      </div>
-
-                      <div class="flex justify-between text-sm">
-                        <span class="text-base-content/60">Erstellt:</span>
-                        <span class="font-medium">
-                          {project.createdAt ? formatDate(project.createdAt) : 'Unbekannt'}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div class="card-actions mt-4 justify-end">
-                      <div class="text-base-content/50 text-xs italic">Klicken für Details →</div>
-                    </div>
-                  </div>
-                </div>
+                <ProjectCard {project} {openProjectModal} />
               {/each}
             </div>
           {:else}
@@ -286,21 +196,7 @@
                 </thead>
                 <tbody>
                   {#each projects as project}
-                    <tr class="cursor-pointer hover" onclick={() => openProjectModal(project)}>
-                      <td>
-                        <div class="font-medium">{project.name}</div>
-                      </td>
-                      <td>{project.projectType || 'Unbekannt'}</td>
-                      <td>
-                        {#if project.projectStatus}
-                          <div class="badge {getStatusBadgeClass(project.projectStatus)} badge-sm">
-                            {getStatusLabel(project.projectStatus)}
-                          </div>
-                        {/if}
-                      </td>
-                      <td>{formatBudget(project.budget || '')}</td>
-                      <td>{project.createdAt ? formatDate(project.createdAt) : 'Unbekannt'}</td>
-                    </tr>
+                    <ProjectListItem {project} {openProjectModal} />
                   {/each}
                 </tbody>
               </table>

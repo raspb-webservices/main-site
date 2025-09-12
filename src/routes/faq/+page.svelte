@@ -14,7 +14,7 @@
 </svelte:head>
 
 <Stage style={'basic-gradient'}>
-  <div class="inner-box reduced py-36">
+  <div class="inner-box reduced py-36 prose">
     <h1 class="massive animate-fade-in-up">{$_('faq.title')}</h1>
     <p class="teaser animate-fade-in-up">{$_('faq.teaser')}</p>
   </div>
@@ -66,6 +66,7 @@
     </div>
   </div>
 </div>
+<div class="big-spacer"></div>
 
 <style lang="postcss">
   @reference '../../app.css';

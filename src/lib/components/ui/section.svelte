@@ -5,19 +5,19 @@
 {#if type === 'default'}
   <section class="base-section" class:full={fullWidth} class:stretch={fullHeight}  class:noSpacing={noSpacing} style="--backgroundColor:{customColor}">
     <div class="inner-container">
-      {@render children()}
+      {@render children?.()}
     </div>
   </section>
 {:else if type === 'centerTeaser'}
   <section class="base-section center-teaser">
     <div class="inner-container">
-      {@render children()}
+      {@render children?.()}
     </div>
   </section>
 {:else if type === 'fullCenterTeaser'}
   <section class="base-section full-center-teaser">
     <div class="inner-container animate-fade-in-up">
-      {@render children()}
+      {@render children?.()}
     </div>
   </section>
 {/if}
@@ -44,6 +44,7 @@
     &.center-teaser {
       @apply from-secondary/30 via-primary/10 to-secondary/20 bg-gradient-to-br py-36;
     }
+    
     &.full-center-teaser {
       @apply from-secondary/30 via-primary/10 to-secondary/20 bg-gradient-to-br py-10;
       .inner-container {

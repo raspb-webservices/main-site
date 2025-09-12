@@ -1,4 +1,31 @@
 {
   "title": "Das ist der Titel",
-  "mehrErfahren": "mehr über mich erfahren"
+  "mehrErfahren": "mehr über mich erfahren",
+  "ctaBox": {
+    "titleFirst": "Lassen Sie uns",
+    "titleHighlight": "gemeinsam starten",
+    "description": "Bereit für Ihr nächstes digitales Projekt? Unser intelligenter Konfigurator hilft Ihnen dabei, Ihr Projekt zu spezifizieren und Sie erhalten sofort einen transparenten Festpreis.",
+    "benefits": {
+      "zeit": {
+        "title": "Sofortiger Preis",
+        "description": "Erhalten Sie binnen Minuten einen verbindlichen Festpreis"
+      },
+      "massgeschneidert": {
+        "title": "Maßgeschneidert",
+        "description": "Jede Lösung wird individuell auf Ihre Bedürfnisse zugeschnitten"
+      },
+      "contact": {
+        "title": "Persönlicher Kontakt",
+        "description": "Ein fester Ansprechpartner begleitet Sie durch das gesamte Projekt"
+      }
+    },
+    "buttonText": "Projekt jetzt konfigurieren",
+    "faqButtonText": "Häufige Fragen",
+    "note": "💡 <strong>Tipp:</strong> Der Konfigurator dauert nur 3-5 Minuten und Sie erhalten sofort Ihren persönlichen Projektpreis. Unverbindlich und kostenlos.",
+    "variant2": {
+      "titleFirst": "Bereit für Ihr",
+      "titleHighlight": "digitales Projekt",
+      "description": "Sie haben die perfekte Lösung für Ihr Vorhaben gefunden? Unser intelligenter Konfigurator hilft Ihnen dabei, Ihr Projekt zu spezifizieren und erhalten Sie sofort einen transparenten Festpreis."
+    }
+  }
 }

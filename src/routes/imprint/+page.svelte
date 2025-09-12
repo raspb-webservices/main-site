@@ -9,7 +9,7 @@
 </svelte:head>
 
   <Section>
-    <div class="imprint-content">
+    <div class="imprint-content prose">
       <h1>Impressum</h1>
 
       <h2>Angaben gemäß § 5 TMG</h2>
@@ -17,7 +17,7 @@
         <p class="no-padding"><strong>raspb Webservices UG (in Gründung)</strong></p>
         <p>Am Eselsborn 4a<br />55286 Sulzheim</p>
       </div>
-
+      <div class="spacer"></div>
       <h3>Vertreten durch:</h3>
       <p>Markus Härtig</p>
 
@@ -26,6 +26,8 @@
         <p class="no-padding"><strong>Telefon:</strong> 06732 - 9648113</p>
         <p><strong>E-Mail:</strong> <a href="mailto:contact@raspb.de">contact@raspb.de</a></p>
       </div>
+
+      <div class="spacer"></div>
 
       <h3>Registereintrag</h3>
       <p>Das Unternehmen befindet sich derzeit in Gründung.</p>

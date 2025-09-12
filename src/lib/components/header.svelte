@@ -36,7 +36,7 @@
 {#if isAuth}
   <div class="logged-in-header">
     <div class="inner-box flex items-center justify-between">
-      <p class="no-padding">Herzlich Willkommen, {currentUser.givenName} {currentUser.familyName}!</p>
+      <p>Herzlich Willkommen, {currentUser.givenName} {currentUser.familyName}!</p>
       <div class="ml-auto"></div>
       <button
         class="text-link-button white-link"

@@ -55,17 +55,38 @@
 
   <div class="inner-box reduced -mt-12 -mb-24">
     <div class="tab-tile-collection fade-in">
-      <button class="tab-tile tech" class:active={activeContent === 'tech'} onclick={() => {activeContent = 'tech'; scrollToSection('insights-content-container');}}>
-        <h3>Wir funktioniert raspb?</h3>
-        <p class="no-padding">Hier gibt es Einblicke in unsere Technolgisches Ökossystem.</p>
+      <button
+        class="tab-tile tech"
+        class:active={activeContent === 'tech'}
+        onclick={() => {
+          activeContent = 'tech';
+          scrollToSection('insights-content-container');
+        }}
+      >
+        <h3 class="add-padding">Wir funktioniert raspb?</h3>
+        <p>Hier gibt es Einblicke in unsere Technolgisches Ökossystem.</p>
       </button>
-      <button class="tab-tile project" class:active={activeContent === 'project'} onclick={() => {activeContent = 'project'; scrollToSection('insights-content-container'); }}>
-        <h3>Wie läuft ein Projekt bei raspb?</h3>
-        <p class="no-padding">Ein typisches Projekt vom Konfigurator zum Go-Live.</p>
+      <button
+        class="tab-tile project"
+        class:active={activeContent === 'project'}
+        onclick={() => {
+          activeContent = 'project';
+          scrollToSection('insights-content-container');
+        }}
+      >
+        <h3 class="add-padding">Wie läuft ein Projekt bei raspb?</h3>
+        <p>Ein typisches Projekt vom Konfigurator zum Go-Live.</p>
       </button>
-      <button class="tab-tile showcase" class:active={activeContent === 'showcase'} onclick={() => {activeContent = 'showcase'; scrollToSection('insights-content-container');}}>
-        <h3>Wie sehen die Ergebnisse aus?</h3>
-        <p class="no-padding">Finden Sie hier eine Auswahl von Referenzprojekten.</p>
+      <button
+        class="tab-tile showcase"
+        class:active={activeContent === 'showcase'}
+        onclick={() => {
+          activeContent = 'showcase';
+          scrollToSection('insights-content-container');
+        }}
+      >
+        <h3 class="add-padding">Wie sehen die Ergebnisse aus?</h3>
+        <p>Finden Sie hier eine Auswahl von Referenzprojekten.</p>
       </button>
     </div>
   </div>
@@ -74,10 +95,16 @@
 <div id="insights-content-container" class="mt-16">
   {#if activeContent === 'tech'}
     <Section noSpacing={true}>
-      <div class="inner-box fade-in pt-36 pb-16">
+      <div class="inner-box fade-in prose pt-36 pb-16">
         <h2>raspb - ein harmonisches System für Ihren Unternehmenserfolg</h2>
-        <p class="teaser">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id dignissimos veniam quam quae itaque, officiis blanditiis non, aspernatur adipisci ad porro magnam eum fugit aut labore laudantium optio nostrum. Doloribus!</p>
-        <p class="teaser">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id dignissimos veniam quam quae itaque, officiis blanditiis non, aspernatur adipisci ad porro magnam eum fugit aut labore laudantium optio nostrum. Doloribus!</p>
+        <p class="teaser">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Id dignissimos veniam quam quae itaque, officiis blanditiis non, aspernatur adipisci ad porro
+          magnam eum fugit aut labore laudantium optio nostrum. Doloribus!
+        </p>
+        <p class="teaser">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Id dignissimos veniam quam quae itaque, officiis blanditiis non, aspernatur adipisci ad porro
+          magnam eum fugit aut labore laudantium optio nostrum. Doloribus!
+        </p>
       </div>
     </Section>
 
@@ -86,62 +113,50 @@
     </Section>
 
     <Section noSpacing={true}>
-      <div class="inner-box animate-fade-in-up py-24">
+      <div class="inner-box animate-fade-in-up prose py-24">
         <h2>{$_('insights.webtechnologien.title')}</h2>
         <p class="teaser">
           {$_('insights.webtechnologien.subtitle')}
         </p>
-        <div class="bg-base-200 rounded-2xl p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl">
-          <h3 class="text-primary mb-4 text-2xl font-bold">{$_('insights.webtechnologien.absatz1headline')}</h3>
+        <div class="bg-base-200 prose rounded-2xl p-8 shadow-lg">
+          <h3 class="text-primary pt-1">{$_('insights.webtechnologien.absatz1headline')}</h3>
           <p class="leading-relaxed">
             {@html $_('insights.webtechnologien.absatz1')}
           </p>
-        </div>
-
-        <div class="bg-base-200 rounded-2xl p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl">
-          <h3 class="text-primary mb-4 text-2xl font-bold">{$_('insights.webtechnologien.absatz2headline')}</h3>
+          <h3 class="text-primary pt-6">{$_('insights.webtechnologien.absatz2headline')}</h3>
           <p class="leading-relaxed">
             {@html $_('insights.webtechnologien.absatz2')}
           </p>
-        </div>
-
-        <div class="bg-base-200 rounded-2xl p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl">
-          <h3 class="text-primary mb-4 text-2xl font-bold">{$_('insights.webtechnologien.absatz3headline')}</h3>
+          <h3 class="text-primary pt-6">{$_('insights.webtechnologien.absatz3headline')}</h3>
           <p class="mb-4 leading-relaxed">
             {@html $_('insights.webtechnologien.absatz3')}
           </p>
 
-          <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div class="bg-base-100 rounded-xl p-4">
-              <p class="no-padding">{@html $_('insights.webtechnologien.vorteile.sicherheit')}</p>
+          <div class="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div class="bg-base-100 rounded-xl px-4 py-2">
+              <p>{@html $_('insights.webtechnologien.vorteile.sicherheit')}</p>
             </div>
-            <div class="bg-base-100 rounded-xl p-4">
-              <p class="no-padding">{@html $_('insights.webtechnologien.vorteile.performance')}</p>
+            <div class="bg-base-100 rounded-xl px-4 py-2">
+              <p>{@html $_('insights.webtechnologien.vorteile.performance')}</p>
             </div>
-            <div class="bg-base-100 rounded-xl p-4">
-              <p class="no-padding">{@html $_('insights.webtechnologien.vorteile.skalierbarkeit')}</p>
+            <div class="bg-base-100 rounded-xl px-4 py-2">
+              <p>{@html $_('insights.webtechnologien.vorteile.skalierbarkeit')}</p>
             </div>
-            <div class="bg-base-100 rounded-xl p-4">
-              <p class="no-padding">{@html $_('insights.webtechnologien.vorteile.skalierbarkeit2')}</p>
+            <div class="bg-base-100 rounded-xl px-4 py-2">
+              <p>{@html $_('insights.webtechnologien.vorteile.skalierbarkeit2')}</p>
             </div>
-            <div class="bg-base-100 rounded-xl p-4">
-              <p class="no-padding">{@html $_('insights.webtechnologien.vorteile.entwicklerfreundlichkeit')}</p>
+            <div class="bg-base-100 rounded-xl px-4 py-2">
+              <p>{@html $_('insights.webtechnologien.vorteile.entwicklerfreundlichkeit')}</p>
             </div>
-            <div class="bg-base-100 rounded-xl p-4">
-              <p class="no-padding">{@html $_('insights.webtechnologien.vorteile.kosteneffizienz')}</p>
+            <div class="bg-base-100 rounded-xl px-4 py-2">
+              <p>{@html $_('insights.webtechnologien.vorteile.kosteneffizienz')}</p>
             </div>
           </div>
-        </div>
-
-        <div class="bg-base-200 rounded-2xl p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl">
-          <h3 class="text-primary mb-4 text-2xl font-bold">{$_('insights.webtechnologien.absatz4headline')}</h3>
+          <h3 class="text-primary pt-6">{$_('insights.webtechnologien.absatz4headline')}</h3>
           <p class="leading-relaxed">
             {@html $_('insights.webtechnologien.absatz4')}
           </p>
-        </div>
-
-        <div class="bg-base-200 rounded-2xl p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl">
-          <h3 class="text-primary mb-4 text-2xl font-bold">{$_('insights.webtechnologien.absatz5headline')}</h3>
+          <h3 class="text-primary pt-6">{$_('insights.webtechnologien.absatz5headline')}</h3>
           <p class="leading-relaxed">
             {@html $_('insights.webtechnologien.absatz5')}
           </p>
@@ -150,8 +165,8 @@
     </Section>
   {:else if activeContent === 'project'}
     <Section noSpacing={true}>
-      <div class="inner-box animate-fade-in-up pt-36 pb-24">
-        <h2 class="mb-4 text-4xl font-bold">
+      <div class="inner-box animate-fade-in-up pt-36 pb-24 prose">
+        <h2 class="text-4xl font-bold">
           {$_('insights.projectInsights.titleFirst')} <span class="inner-text-special">{$_('insights.projectInsights.titleHighlight')}</span>
           {$_('insights.projectInsights.titleSecond')}?
         </h2>
@@ -183,156 +198,13 @@
     </Section>
   {:else if activeContent === 'showcase'}
     <Section noSpacing={true}>
-      <div class="inner-box animate-fade-in-up pt-36 pb-24">
+      <div class="inner-box animate-fade-in-up pt-36 pb-24 prose">
         <h2>Digital Erfolge ein paar Beispiele</h2>
-      </div>  
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod optio saepe dolores, aliquam rerum sit omnis voluptates, quis suscipit itaque officia nam facere eos atque ab molestiae blanditiis est necessitatibus.</p>
+      </div>
     </Section>
   {/if}
 </div>
-
-{#if false}
-  <div class="content-area">
-    <!-- Header Section (similar to about-us) -->
-    <Section>
-      <div class="animate-fade-in-up text-center">
-        <h1 class="mb-6 text-4xl font-bold md:text-6xl">
-          {$_('insights.header.title')} <span class="inner-text-special">{$_('insights.header.titleHighlight')}</span>
-        </h1>
-        <p class="teaser animate-fade-in-up mx-auto max-w-4xl text-center text-lg">
-          {$_('insights.header.teaser')}
-        </p>
-      </div>
-    </Section>
-
-    <!-- Technology Showcase Section -->
-    <Section>
-      <TechLogoShowcase speed={0.15} />
-    </Section>
-
-    <!-- JAMstack Section with clearer structure -->
-    <Section>
-      <div class="animate-fade-in-up m-auto flex w-full max-w-4xl flex-col items-center justify-center text-center">
-        <h2 class="mb-4 text-4xl font-bold">
-          {$_('insights.webtechnologien.titleFirst')}
-          <span class="inner-text-special">{$_('insights.webtechnologien.titleHighlight')}</span>{#if $locale === 'de'}{$_(
-              'insights.webtechnologien.titleSecond'
-            )}{/if}
-        </h2>
-        <p class="animate-fade-in-up mx-auto max-w-3xl text-xl opacity-80">
-          {$_('insights.webtechnologien.subtitle')}
-        </p>
-
-        <div class="mt-8 space-y-8 text-left">
-          <div class="bg-base-200 rounded-2xl p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl">
-            <h3 class="text-primary mb-4 text-2xl font-bold">{$_('insights.webtechnologien.absatz1headline')}</h3>
-            <p class="leading-relaxed">
-              {@html $_('insights.webtechnologien.absatz1')}
-            </p>
-          </div>
-
-          <div class="bg-base-200 rounded-2xl p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl">
-            <h3 class="text-primary mb-4 text-2xl font-bold">{$_('insights.webtechnologien.absatz2headline')}</h3>
-            <p class="leading-relaxed">
-              {@html $_('insights.webtechnologien.absatz2')}
-            </p>
-          </div>
-
-          <div class="bg-base-200 rounded-2xl p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl">
-            <h3 class="text-primary mb-4 text-2xl font-bold">{$_('insights.webtechnologien.absatz3headline')}</h3>
-            <p class="mb-4 leading-relaxed">
-              {@html $_('insights.webtechnologien.absatz3')}
-            </p>
-
-            <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-              <div class="bg-base-100 rounded-xl p-4">
-                <p class="no-padding">{@html $_('insights.webtechnologien.vorteile.sicherheit')}</p>
-              </div>
-              <div class="bg-base-100 rounded-xl p-4">
-                <p class="no-padding">{@html $_('insights.webtechnologien.vorteile.performance')}</p>
-              </div>
-              <div class="bg-base-100 rounded-xl p-4">
-                <p class="no-padding">{@html $_('insights.webtechnologien.vorteile.skalierbarkeit')}</p>
-              </div>
-              <div class="bg-base-100 rounded-xl p-4">
-                <p class="no-padding">{@html $_('insights.webtechnologien.vorteile.skalierbarkeit2')}</p>
-              </div>
-              <div class="bg-base-100 rounded-xl p-4">
-                <p class="no-padding">{@html $_('insights.webtechnologien.vorteile.entwicklerfreundlichkeit')}</p>
-              </div>
-              <div class="bg-base-100 rounded-xl p-4">
-                <p class="no-padding">{@html $_('insights.webtechnologien.vorteile.kosteneffizienz')}</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="bg-base-200 rounded-2xl p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl">
-            <h3 class="text-primary mb-4 text-2xl font-bold">{$_('insights.webtechnologien.absatz4headline')}</h3>
-            <p class="leading-relaxed">
-              {@html $_('insights.webtechnologien.absatz4')}
-            </p>
-          </div>
-
-          <div class="bg-base-200 rounded-2xl p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl">
-            <h3 class="text-primary mb-4 text-2xl font-bold">{$_('insights.webtechnologien.absatz5headline')}</h3>
-            <p class="leading-relaxed">
-              {@html $_('insights.webtechnologien.absatz5')}
-            </p>
-          </div>
-        </div>
-      </div>
-    </Section>
-
-    <!-- Additional Insights Section -->
-    <Section>
-      <div class="animate-fade-in-up mx-auto max-w-4xl text-center">
-        <h2 class="mb-4 text-4xl font-bold">
-          {$_('insights.projectInsights.titleFirst')} <span class="inner-text-special">{$_('insights.projectInsights.titleHighlight')}</span>
-          {$_('insights.projectInsights.titleSecond')}?
-        </h2>
-        <p class="animate-fade-in-up">
-          {@html $_('insights.projectInsights.paragraph1')}
-        </p>
-        <p class="animate-fade-in-up">
-          {@html $_('insights.projectInsights.paragraph2')}
-        </p>
-        <p class="animate-fade-in-up">
-          {@html $_('insights.projectInsights.paragraph3')}
-        </p>
-        <p class="animate-fade-in-up">
-          {@html $_('insights.projectInsights.paragraph4')}
-        </p>
-        <p class="animate-fade-in-up">
-          {@html $_('insights.projectInsights.paragraph5')}
-        </p>
-        <p class="animate-fade-in-up">
-          {@html $_('insights.projectInsights.paragraph6')}
-        </p>
-        <p class="animate-fade-in-up">
-          {@html $_('insights.projectInsights.paragraph7')}
-        </p>
-        <p class="animate-fade-in-up">
-          {@html $_('insights.projectInsights.paragraph8')}
-        </p>
-      </div>
-    </Section>
-    <Section>
-      <div class="animate-fade-in-up mx-auto max-w-4xl text-center">
-        <h2 class="mb-4 text-4xl font-bold">
-          {$_('insights.kiSection.title')}
-        </h2>
-        <p class="animate-fade-in-up">
-          {@html $_('insights.kiSection.paragraph1')}
-        </p>
-        <p class="animate-fade-in-up">
-          {@html $_('insights.kiSection.paragraph2')}
-        </p>
-        <p class="animate-fade-in-up">
-          {@html $_('insights.kiSection.paragraph3')}
-        </p>
-      </div>
-    </Section>
-  </div>
-{/if}
 
 <style lang="postcss">
   @reference '../../app.css';
@@ -340,31 +212,34 @@
   .tab-tile-collection {
     @apply flex flex-wrap items-center justify-center gap-12 lg:flex-nowrap;
     .tab-tile {
-      @apply w-60 aspect-square flex flex-col items-center justify-center rounded-3xl bg-white text-black p-6 text-center drop-shadow-2xl;
+      @apply flex aspect-square w-60 flex-col items-center justify-center rounded-3xl bg-white p-6 text-center text-black drop-shadow-2xl;
       &:hover {
         @apply bg-base-100 cursor-pointer drop-shadow-lg;
       }
-      &.active, &.active:hover {
+      &.active,
+      &.active:hover {
         @apply bg-base-100 cursor-default drop-shadow-lg;
       }
 
       &.tech {
-        &:hover, &.active {
+        &:hover,
+        &.active {
           h3 {
             @apply text-lightBlue;
           }
         }
-
       }
       &.project {
-        &:hover, &.active {
+        &:hover,
+        &.active {
           h3 {
             @apply text-purple2;
           }
         }
       }
       &.showcase {
-        &:hover, &.active {
+        &:hover,
+        &.active {
           h3 {
             @apply text-pink;
           }

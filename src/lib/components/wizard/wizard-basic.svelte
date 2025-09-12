@@ -85,20 +85,21 @@
   function calculatePrice() {
     let basePrice = 0;
     let totalFeatureComplexity = 0;
+    let highesPossible;
+    let lowestPossible;
 
-    // Base price from project type
     const projectType = projectTypes.find((p) => p.id === config.projectType);
     if (projectType) {
       basePrice = (projectType.lowestPrice + projectType.highestPrice) / 2;
     }
 
-    // Subtype price (replaces base price)
     const subTypeData = subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType);
     if (subTypeData) {
       basePrice = subTypeData.lowestPrice;
+      lowestPossible = subTypeData.lowestPrice;
+      highesPossible = subTypeData.highestPrice;
     }
 
-    // Calculate total feature complexity
     config.features.forEach((featureName) => {
       const feature = availableFeatures.find((f) => f.name === featureName);
       if (feature && feature.category) {
@@ -106,10 +107,16 @@
       }
     });
 
-    // Adjust estimated price based on total feature complexity
-    // This is a simplified example, actual logic might be more complex
-    config.estimatedPrice = Math.round(basePrice + totalFeatureComplexity * 500); // Example: 500€ per complexity point
-
+    if (totalFeatureComplexity > 15) {
+      basePrice = highesPossible;
+    } else if (totalFeatureComplexity <= 2) {
+      basePrice = lowestPossible;
+    } else {
+      const range = highesPossible - lowestPossible;
+      let x = (1 / 15) * totalFeatureComplexity;
+      basePrice = lowestPossible + range * x;
+    }
+    config.estimatedPrice = basePrice;
     console.log('Estimated Price:', config.estimatedPrice);
     console.log('Total Feature Complexity:', totalFeatureComplexity);
   }
@@ -287,6 +294,24 @@
       validateContactForm();
     }
   });
+
+  function getTop() {
+    const subTypeData = subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType);
+    if (subTypeData) {
+      return subTypeData.highestPrice;
+    } else {
+      return 0;
+    }
+  }
+
+  function getLow() {
+    const subTypeData = subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType);
+    if (subTypeData) {
+      return subTypeData.lowestPrice;
+    } else {
+      return 0;
+    }
+  }
 </script>
 
 <div class="wizard-basic-container">
@@ -498,36 +523,18 @@
           <h3>{$_('wizard.steps.stepSummary.estimatedPrice')}</h3>
           {#key config.estimatedPrice}
             <div class="price-display">
-              {#if config.estimatedPrice <= 1000}
+              {#if config.estimatedPrice === getTop()}
+                <p class="price-message">{$_('wizard.steps.stepSummary.priceTiers.tier4.message')}</p>
+                <div class="price">mind. {Math.round(config.estimatedPrice)}€</div>
+              {:else if config.estimatedPrice == getLow()}
                 <p class="price-message">{$_('wizard.steps.stepSummary.priceTiers.tier1.message')}</p>
-                <div class="price-range">
-                  <span class="price-min">{Math.round(config.estimatedPrice * 0.8).toLocaleString()}€</span>
-                  <span class="price-separator">-</span>
-                  <span class="price-max">{Math.round(config.estimatedPrice * 1.0).toLocaleString()}€</span>
-                </div>
-              {:else if config.estimatedPrice > 1000 && config.estimatedPrice <= 5000}
-                <p class="price-message">{$_('wizard.steps.stepSummary.priceTiers.tier2.message')}</p>
-                <div class="price-range">
-                  <span class="price-min">{Math.round(config.estimatedPrice * 0.9).toLocaleString()}€</span>
-                  <span class="price-separator">-</span>
-                  <span class="price-max">{Math.round(config.estimatedPrice * 1.1).toLocaleString()}€</span>
-                </div>
-              {:else if config.estimatedPrice > 5000 && config.estimatedPrice <= 15000}
+                <div class="price">ca. {Math.round(config.estimatedPrice)}€</div>
+              {:else if config.estimatedPrice < getTop() && getTop() - config.estimatedPrice < 1000}
                 <p class="price-message">{$_('wizard.steps.stepSummary.priceTiers.tier3.message')}</p>
-                <div class="price-range">
-                  <span class="price-min">{Math.round(config.estimatedPrice * 1.0).toLocaleString()}€</span>
-                  <span class="price-separator">-</span>
-                  <span class="price-max">{Math.round(config.estimatedPrice * 1.2).toLocaleString()}€</span>
-                </div>
-              {:else}
-                <p class="price-message">
-                  {$_('wizard.steps.stepSummary.priceTiers.tier4.message', {
-                    values: { upperBound: Math.round(config.estimatedPrice * 1.2).toLocaleString() }
-                  })}
-                </p>
-                <div class="price-range">
-                  <span class="price-min">{$_('wizard.steps.stepSummary.disclaimer')}</span>
-                </div>
+                <div class="price">ca. {Math.round(config.estimatedPrice)}€</div>
+              {:else if config.estimatedPrice < getTop() && getTop() - config.estimatedPrice >= 1000}
+                <p class="price-message">{$_('wizard.steps.stepSummary.priceTiers.tier2.message')}</p>
+                <div class="price">ca. {Math.round(config.estimatedPrice)}€</div>
               {/if}
             </div>
           {/key}
@@ -578,140 +585,6 @@
     {/if}
   </div>
 </div>
-
-<!-- Contact Modal -->
-<dialog bind:this={contactModal} class="modal">
-  <div class="modal-box max-w-2xl">
-    <form method="dialog">
-      <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2" onclick={closeContactModal}>✕</button>
-    </form>
-
-    <h3 class="mb-6 text-lg font-bold">{$_('wizard.modals.contact.title')}</h3>
-
-    <div class="space-y-4">
-      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <div class="form-control w-full">
-          <label class="label" for="salutation">
-            <span class="label-text">{$_('wizard.modals.contact.salutation')}</span>
-          </label>
-          <select id="salutation" class="select select-bordered w-full" bind:value={customerData.salutation}>
-            <option value="">{$_('wizard.modals.contact.salutationPlaceholder')}</option>
-            <option value="Herr">{$_('wizard.modals.contact.mr')}</option>
-            <option value="Frau">{$_('wizard.modals.contact.ms')}</option>
-          </select>
-        </div>
-
-        <div class="form-control w-full">
-          <label class="label" for="givenName">
-            <span class="label-text">{$_('wizard.modals.contact.firstName')} *</span>
-          </label>
-          <input
-            type="text"
-            id="givenName"
-            class="input input-bordered w-full"
-            bind:value={customerData.givenName}
-            placeholder={$_('wizard.modals.contact.firstNamePlaceholder')}
-            required
-          />
-        </div>
-
-        <div class="form-control w-full">
-          <label class="label" for="familyName">
-            <span class="label-text">{$_('wizard.modals.contact.lastName')} *</span>
-          </label>
-          <input
-            type="text"
-            id="familyName"
-            class="input input-bordered w-full"
-            bind:value={customerData.familyName}
-            placeholder={$_('wizard.modals.contact.lastNamePlaceholder')}
-            required
-          />
-        </div>
-
-        <div class="form-control w-full">
-          <label class="label" for="email">
-            <span class="label-text">{$_('wizard.modals.contact.email')} *</span>
-          </label>
-          <input
-            type="email"
-            id="email"
-            class="input input-bordered w-full"
-            bind:value={customerData.email}
-            placeholder={$_('wizard.modals.contact.emailPlaceholder')}
-            required
-          />
-        </div>
-
-        <div class="form-control w-full">
-          <label class="label" for="company">
-            <span class="label-text">{$_('wizard.modals.contact.company')}</span>
-          </label>
-          <input
-            type="text"
-            id="company"
-            class="input input-bordered w-full"
-            bind:value={customerData.company}
-            placeholder={$_('wizard.modals.contact.companyPlaceholder')}
-          />
-        </div>
-
-        <div class="form-control w-full">
-          <label class="label" for="phone">
-            <span class="label-text">{$_('wizard.modals.contact.phone')}</span>
-          </label>
-          <input
-            type="tel"
-            id="phone"
-            class="input input-bordered w-full"
-            bind:value={customerData.phone}
-            placeholder={$_('wizard.modals.contact.phonePlaceholder')}
-          />
-        </div>
-      </div>
-
-      <div class="form-control w-full">
-        <label class="label" for="comment">
-          <span class="label-text">{$_('wizard.modals.contact.comment')}</span>
-        </label>
-        <textarea
-          id="comment"
-          class="textarea textarea-bordered w-full"
-          bind:value={contactComment}
-          placeholder={$_('wizard.modals.contact.commentPlaceholder')}
-          rows="4"
-        ></textarea>
-      </div>
-
-      <div class="alert alert-info">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
-        <div>
-          <div class="font-bold">{$_('wizard.modals.contact.privacy')}</div>
-          <div class="text-sm">{$_('wizard.modals.contact.privacyText')}</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal-action">
-      <button type="button" class="btn btn-outline" onclick={closeContactModal}>
-        {$_('wizard.modals.contact.cancel')}
-      </button>
-      <button type="button" class="btn btn-primary" onclick={submitProjectRequest} disabled={!isContactFormValid || isSubmitting}>
-        {#if isSubmitting}
-          <span class="loading loading-spinner loading-sm"></span>
-          {$_('wizard.modals.contact.sending')}
-        {:else}
-          {$_('wizard.modals.contact.send')}
-        {/if}
-      </button>
-    </div>
-  </div>
-  <form method="dialog" class="modal-backdrop">
-    <button>close</button>
-  </form>
-</dialog>
 
 <!-- Success Message -->
 {#if showSuccessMessage}
@@ -865,16 +738,11 @@
     .price-display {
       @apply text-center;
     }
-    .price-range {
-      @apply mb-2 flex items-center justify-center gap-2;
-      .price-min,
-      .price-max {
-        @apply text-success text-3xl font-bold;
-      }
-      .price-separator {
-        @apply text-base-content/50;
-      }
+
+    .price {
+      @apply text-success text-3xl font-bold;
     }
+
     .price-note {
       @apply text-base-content/70 text-sm;
     }

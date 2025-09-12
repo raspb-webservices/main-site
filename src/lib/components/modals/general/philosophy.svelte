@@ -1,16 +1,7 @@
 <script lang="ts">
-  import { addMessages, _ } from 'svelte-i18n';
-  import { onMount } from 'svelte';
-
-  onMount(async () => {
-    const modalMessagesDe = (await import('$lib/i18n/locales/de/modal-dialogues.json')).default;
-    const modalMessagesEn = (await import('$lib/i18n/locales/en/modal-dialogues.json')).default;
-    addMessages('de', modalMessagesDe);
-    addMessages('en', modalMessagesEn);
-  });
+  import { _ } from 'svelte-i18n';
 
   let modal: HTMLDialogElement;
-
   export function openModal() {
     modal?.showModal();
   }
@@ -73,20 +64,21 @@
   ];
 </script>
 
-<!-- Modal -->
+
 <dialog bind:this={modal} class="modal">
-  <div class="modal-box max-h-[90vh] max-w-5xl overflow-y-auto lg:w-11/12">
-    <!-- Header -->
+  <div class="modal-box large-modal">
+    
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-4 top-4" onclick={closeModal}>✕</button>
+    </form>
+
+    <div class="flex flex-col items-center justify-center gap-4 my-8">
+        <h2>{$_('philosophyModal.header.titleFirst')} <span class="inner-text-special">{$_('philosophyModal.header.titleHighlight')}</span> {$_('philosophyModal.header.titleSecond')}</h2>
+        <p class="teaser text-center">{$_('philosophyModal.header.subtitle')}</p>
+    </div>
+
+
     <div class="mb-8 text-center">
-      <form method="dialog">
-        <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2" onclick={closeModal}>✕</button>
-      </form>
-
-      <div class="my-2 lg:my-8">
-        <h2 class="no-padding"><span class="inner-text-special">{$_('philosophyModal.header.titleHighlight')}</span> {$_('philosophyModal.header.titleSecond')}</h2>
-        <p class="text-base-content/70 mt-3 text-xl">{$_('philosophyModal.header.subtitle')}</p>
-      </div>
-
       <!-- RASPB Letters Display -->
       <div class="mb-8 flex items-center justify-center gap-2">
         {#each philosophyItems as item}
@@ -110,13 +102,13 @@
       {#each philosophyItems as item, index}
         <div
           id="philosophy-{item.letter.toLowerCase()}"
-          class="card {item.bgColor} border-base-300 animate-fade-in-up border shadow-lg transition-all duration-300 hover:shadow-xl sm:m-4 lg:m-16"
-          style="animation-delay: {index * 0.1}s"
+          class="card {item.bgColor} border-base-300 animate-fade-in-up border shadow-lg transition-all duration-300 hover:shadow-xl sm:m-4 lg:my-16 lg:mx-20"
+          style="animation-delay: {index * 0.15}s"
         >
-          <div class="card-body">
+          <div class="card-body p-8 pb-10">
             <div class="flex flex-col items-end lg:items-center lg:flex-row">
               <!-- Icon and Letter -->
-              <div class="flex flex-shrink-0 flex-col items-center lg:mr-6">
+              <div class="flex flex-shrink-0 flex-col items-center lg:mr-7">
                 <div
                   class="h-20 w-20 rounded-full bg-gradient-to-br {item.gradient} flex items-center justify-center text-3xl font-bold text-white shadow-lg"
                 >
@@ -128,21 +120,22 @@
               <div class="flex-1">
                 <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
                   <div>
-                    <div class="flex items-center mb-2">
+                    <div class="flex items-center">
                       <div class="text-4xl">{item.icon}</div>
                       <div class="text-wrapper flex flex-col justify-center ml-4">
-                      <h3 class="no-padding {item.textColor} mb-2">{item.title}</h3>
-                      <p class="text-lg font-semibold opacity-80 no-padding">{item.subtitle}</p>
+                        <h3 class="{item.textColor}">{item.title}</h3>
+                        <div class="very-tiny-spacer"></div>
+                        <p>{item.subtitle}</p>
                       </div>
                     </div>
                   </div>
                   <div class="hidden lg:block">
-                    <div class="badge badge-lg {item.textColor} border-current bg-white/50">
+                    <div class="{item.textColor} border border-current bg-white/60 rounded-full w-8 h-8 flex justify-center items-center">
                       {item.letter}
                     </div>
                   </div>
                 </div>
-                <p class="text-base leading-relaxed {item.textColor}">
+                <p class="md:pr-10 {item.textColor}">
                   {item.description}
                 </p>
               </div>
@@ -154,7 +147,7 @@
 
     <!-- Footer -->
     <div class="border-base-300 mt-8 border-t pt-6 text-center">
-      <div class="from-primary/10 to-secondary/10 rounded-2xl bg-gradient-to-r p-6">
+      <div class="from-primary/10 to-secondary/10 rounded-2xl bg-gradient-to-r p-6 sm:mx-4 lg:mx-20">
         <h3 class="mb-3 text-xl font-bold">{$_('philosophyModal.footer.missionTitle')}</h3>
         <p class="text-base-content/80 mx-auto max-w-4xl leading-relaxed">
           {$_('philosophyModal.footer.missionDescription')}
@@ -193,10 +186,5 @@
 </dialog>
 
 <style lang="postcss">
-  @reference '../../../app.css';
-  @media (max-width: 768px) {
-    .modal-box {
-      max-height: 85vh;
-    }
-  }
+  @reference '../../../../app.css';
 </style>

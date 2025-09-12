@@ -144,7 +144,7 @@
     </div>
 
     <div class="final-row">
-      <p class="no-padding brand"><strong>raspb webservices</strong> &copy; {currentYear}</p>
+      <p class="brand"><strong>raspb webservices</strong> &copy; {currentYear}</p>
       <button class="btn btn-circle opacity-70" onclick={scrollToTop} title="Scroll to top" aria-label="Scroll to top">
         <svg class="text-iconic-blue/80 h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
@@ -230,10 +230,6 @@
       }
       .final-row {
         @apply border-base-300 mt-6 flex w-full items-center justify-between border-t-2 py-6 pl-4 pr-2;
-
-        .brand {
-          @apply from-purple via-pink to-violet inline-block bg-linear-135 bg-clip-text text-transparent;
-        }
       }
     }
   }

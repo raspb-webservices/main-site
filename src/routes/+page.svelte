@@ -1,47 +1,33 @@
 <script lang="ts">
-  import { user, isAuthenticated, popupOpen } from '$store/sharedStates.svelte';
-  import SLIDER from '$lib/components/ui/slider.svelte';
-  import Hero from '$lib/components/ui/hero.svelte';
-  import markdownit from 'markdown-it';
-  import Section from '$lib/components/ui/section.svelte';
-  import RaspbPhilosophyModal from '$lib/components/modals/raspb-philosophy-modal.svelte';
   import { goto } from '$app/navigation';
   import { _ } from 'svelte-i18n';
   import Stage from '$lib/components/ui/stage.svelte';
+  import Section from '$lib/components/ui/section.svelte';
+  import CTABox from '$lib/components/snippets/cta-box.svelte'
+  import PhilosophyModal from '$lib/components/modals/general/philosophy.svelte';
+  import TimeAsFactorModal from '$lib/components/modals/home/time-as-factor.svelte';
+  import CostAsFactorModal from '$lib/components/modals/home/cost-as-factor.svelte';
+  import QualityAsFactorModal from '$lib/components/modals/home/quality-as-factor.svelte';
 
-  let currentUser = $derived(user.get());
-  const md = markdownit();
-  let philosophyModal: RaspbPhilosophyModal;
-
-  function renderMarkdown(content: string) {
-    return md.render(content);
-  }
-
-  // Hero button action for testing
-  function handleHeroButton() {
-    console.log('Hero button clicked!');
-    goto('/insights');
-  }
+  let philosophyModal: PhilosophyModal;
+  let timeAsFactorModal: TimeAsFactorModal;
+  let costAsFactorModal: CostAsFactorModal;
+  let qualityAsFactorModal: QualityAsFactorModal;
 
   function openPhilosophyModal() {
     philosophyModal?.openModal();
   }
 
-  // Modal state for balance section
-  let zeitModal: HTMLDialogElement;
-  let kostenModal: HTMLDialogElement;
-  let qualitaetModal: HTMLDialogElement;
-
-  function openZeitModal() {
-    zeitModal?.showModal();
+  function openTimeAsFactorModal() {
+    timeAsFactorModal?.openModal();
   }
 
-  function openKostenModal() {
-    kostenModal?.showModal();
+  function openCostAsFactorModal() {
+    costAsFactorModal?.openModal();
   }
 
-  function openQualitaetModal() {
-    qualitaetModal?.showModal();
+  function openQualityAsFactorModal() {
+    qualityAsFactorModal?.openModal();
   }
 </script>
 
@@ -50,38 +36,36 @@
   <meta name="description" content={$_('homepage.meta.description')} />
 </svelte:head>
 
-
 <Stage style={'svg-gradient'}>
-  <div class="inner-box reduced py-36">
+  <div class="inner-box reduced prose py-36">
     <h1 class="massive animate-fade-in-up">{$_('homepage.hero.title')}</h1>
     <p class="teaser animate-fade-in-up">
-      {$_('homepage.hero.subtitleFirst')} <button class="text-link-button" onclick={openPhilosophyModal}>{$_('homepage.hero.subtitleSecond')}</button> {$_('homepage.hero.subtitleThird')}
+      {$_('homepage.hero.subtitleFirst')} <button class="text-link-button" onclick={openPhilosophyModal}>{$_('homepage.hero.subtitleSecond')}</button>
+      {$_('homepage.hero.subtitleThird')}
     </p>
     <button
       class="btn-basic animate-fade-in-from-side"
-        onclick={() => {
-          goto('/services');
-        }}>{$_('homepage.hero.buttonText')}</button
+      onclick={() => {
+        goto('/services');
+      }}>{$_('homepage.hero.buttonText')}</button
     >
   </div>
 </Stage>
 
 <div class="home-content-wrapper">
   <Section type={'centerTeaser'}>
-
     <div class="massive-spacer"></div>
-
     <div class="grid grid-cols-1 items-center gap-12 gap-y-10 lg:grid-cols-2 lg:gap-14 lg:gap-y-4">
-      <div class="animate-fade-in-from-side mr-8">
+      <div class="animate-fade-in-from-side prose mr-8">
         <h2>{$_('homepage.intro.titleFirst')} <span class="inner-text-special">{$_('homepage.intro.titleHighlight')}</span></h2>
         <p>
-          {@html $_('homepage.intro.paragraph1')}
+          {$_('homepage.intro.paragraph1')}
         </p>
         <p>
-          {@html $_('homepage.intro.paragraph2')}
+          {$_('homepage.intro.paragraph2')}
         </p>
         <p>
-          {@html $_('homepage.intro.paragraph3')}
+          {$_('homepage.intro.paragraph3')}
         </p>
       </div>
       <div>
@@ -90,8 +74,8 @@
         </div>
       </div>
       <div class="benefits col-span-full">
-        <p class="w-full">
-          {@html $_('homepage.intro.benefitsTitle')}
+        <p class="add-padding w-full">
+          {$_('homepage.intro.benefitsTitle')}
         </p>
         <div class="item">{$_('homepage.intro.benefits.konzept')}</div>
         <div class="item">{$_('homepage.intro.benefits.design')}</div>
@@ -108,41 +92,40 @@
   </Section>
 
   <Section>
-    <div class="flex flex-col items-center justify-center">
-      <div class="massive-spacer"></div>
-      <div class="intro m-auto max-w-5xl text-center">
+    <div class="inner-section-wrapper">
+      <div class="intro prose">
         <h1>{$_('homepage.services.titleFirst')} <span class="inner-text-special">{$_('homepage.services.titleHighlight')}</span></h1>
         <p class="teaser">
-          {@html $_('homepage.services.subtitle')}
+          {$_('homepage.services.subtitle')}
         </p>
       </div>
-      <div class="spacer"></div>
 
-      <!-- Services Grid with improved layout -->
       <div class="services-grid">
         <!-- Webseiten -->
         <div class="service-card">
           <div class="service-card-header">
             <div class="service-icon">🌐</div>
-            <h3 class="no-padding">{$_('homepage.services.webseiten.title')}</h3>
+            <h3 class="pt-2">{$_('homepage.services.webseiten.title')}</h3>
           </div>
-          <p class="no-padding">
-            {@html $_('homepage.services.webseiten.description')}
+          <p>
+            {$_('homepage.services.webseiten.description')}
           </p>
+          <div class="very-tiny-spacer"></div>
           <ul class="service-features">
-            <li>{@html $_('homepage.services.webseiten.features.responsive')}</li>
-            <li>{@html $_('homepage.services.webseiten.features.modern')}</li>
-            <li>{@html $_('homepage.services.webseiten.features.performant')}</li>
-            <li>{@html $_('homepage.services.webseiten.features.individuell')}</li>
-            <li>{@html $_('homepage.services.webseiten.features.eigentum')}</li>
+            <li>{$_('homepage.services.webseiten.features.responsive')}</li>
+            <li>{$_('homepage.services.webseiten.features.modern')}</li>
+            <li>{$_('homepage.services.webseiten.features.performant')}</li>
+            <li>{$_('homepage.services.webseiten.features.individuell')}</li>
+            <li>{$_('homepage.services.webseiten.features.eigentum')}</li>
             <li>
-              <span class="tooltip tooltip-accent tooltip-top"
-                ><span class="tooltip-content"
-                  ><p class="no-padding p-2 text-sm">
-                    {@html $_('homepage.services.webseiten.tooltip')}
-                  </p></span
-                >{@html $_('homepage.services.webseiten.features.keineFolgekosten')}</span
-              >
+              <div class="tooltip tooltip-top tooltip-neutral cursor-help">
+                <div class="tooltip-content">
+                  <div class="px-4 pt-2 pb-3 text-base">
+                    {$_('homepage.services.webseiten.tooltip')}
+                  </div>
+                </div>
+                {$_('homepage.services.webseiten.features.keineFolgekosten')}
+              </div>
             </li>
           </ul>
           <div class="service-card-actions push-right">
@@ -154,26 +137,28 @@
         <div class="service-card">
           <div class="service-card-header">
             <div class="service-icon">📝</div>
-            <h3 class="no-padding">{$_('homepage.services.cms.title')}</h3>
+            <h3 class="pt-2.5">{$_('homepage.services.cms.title')}</h3>
           </div>
-          <p class="no-padding">
-            {@html $_('homepage.services.cms.description')}
+          <p>
+            {$_('homepage.services.cms.description')}
           </p>
+          <div class="very-tiny-spacer"></div>
           <ul class="service-features">
-            <li>{@html $_('homepage.services.cms.features.kontrolle')}</li>
+            <li>{$_('homepage.services.cms.features.kontrolle')}</li>
             <li>
-              <span class="tooltip tooltip-secondary tooltip-left"
-                ><span class="tooltip-content"
-                  ><p class="no-padding p-2 text-sm">
-                    {@html $_('homepage.services.cms.features.datenstrukturenTooltip')}
-                  </p></span
-                >{@html $_('homepage.services.cms.features.datenstrukturen')}</span
-              >
+              <div class="tooltip tooltip-bottom tooltip-neutral cursor-help">
+                <div class="tooltip-content">
+                  <div class="px-4 pt-2 pb-3 text-base">
+                    {$_('homepage.services.cms.features.datenstrukturenTooltip')}
+                  </div>
+                </div>
+                {$_('homepage.services.cms.features.datenstrukturen')}
+              </div>
             </li>
-            <li>{@html $_('homepage.services.cms.features.sicher')}</li>
-            <li>{@html $_('homepage.services.cms.features.wartungsarm')}</li>
-            <li>{@html $_('homepage.services.cms.features.editierbar')}</li>
-            <li>{@html $_('homepage.services.cms.features.headless')}</li>
+            <li>{$_('homepage.services.cms.features.sicher')}</li>
+            <li>{$_('homepage.services.cms.features.wartungsarm')}</li>
+            <li>{$_('homepage.services.cms.features.editierbar')}</li>
+            <li>{$_('homepage.services.cms.features.headless')}</li>
           </ul>
           <div class="service-card-actions push-right">
             <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=cms')}>{$_('homepage.services.cms.buttonText')}</button>
@@ -184,20 +169,23 @@
         <div class="service-card">
           <div class="service-card-header">
             <div class="service-icon">📱</div>
-            <h3 class="no-padding">{$_('homepage.services.webanwendungen.title')}</h3>
+            <h3 class="pt-2">{$_('homepage.services.webanwendungen.title')}</h3>
           </div>
-          <p class="no-padding">
-            {@html $_('homepage.services.webanwendungen.description')}
+          <p>
+            {$_('homepage.services.webanwendungen.description')}
           </p>
+          <div class="very-tiny-spacer"></div>
           <ul class="service-features">
-            <li>{@html $_('homepage.services.webanwendungen.features.app')}</li>
-            <li>{@html $_('homepage.services.webanwendungen.features.pwa')}</li>
-            <li>{@html $_('homepage.services.webanwendungen.features.offline')}</li>
-            <li>{@html $_('homepage.services.webanwendungen.features.push')}</li>
-            <li>{@html $_('homepage.services.webanwendungen.features.appStores')}</li>
+            <li>{$_('homepage.services.webanwendungen.features.app')}</li>
+            <li>{$_('homepage.services.webanwendungen.features.pwa')}</li>
+            <li>{$_('homepage.services.webanwendungen.features.offline')}</li>
+            <li>{$_('homepage.services.webanwendungen.features.push')}</li>
+            <li>{$_('homepage.services.webanwendungen.features.appStores')}</li>
           </ul>
           <div class="service-card-actions push-right">
-            <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=webApplication')}>{$_('homepage.services.webanwendungen.buttonText')}</button>
+            <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=webApplication')}
+              >{$_('homepage.services.webanwendungen.buttonText')}</button
+            >
           </div>
         </div>
 
@@ -205,11 +193,12 @@
         <div class="service-card freestyle">
           <div class="service-card-header">
             <div class="service-icon">⚙️</div>
-            <h3 class="no-padding">{$_('homepage.services.freestyle.title')}</h3>
+            <h3 class="pt-2">{$_('homepage.services.freestyle.title')}</h3>
           </div>
-          <p class="no-padding">
-            {@html $_('homepage.services.freestyle.description')}
+          <p>
+            {$_('homepage.services.freestyle.description')}
           </p>
+          <div class="very-tiny-spacer"></div>
           <div class="service-examples">
             <span class="example-tag">{$_('homepage.services.freestyle.examples.event')}</span>
             <span class="example-tag">{$_('homepage.services.freestyle.examples.dashboard')}</span>
@@ -226,49 +215,51 @@
         <div class="service-card lg:col-span-2">
           <div class="service-card-header">
             <div class="service-icon">🤖</div>
-            <h3 class="no-padding">{$_('homepage.services.ki.title')}</h3>
+            <h3 class="pt-2">{$_('homepage.services.ki.title')}</h3>
           </div>
 
           <p>
-            {@html $_('homepage.services.ki.description')}
+            {$_('homepage.services.ki.description')}
           </p>
 
           <div class="service-list">
             <div class="service-item">
               <div class="service-icon">🧠</div>
               <div>
-                <h4 class="no-padding">{$_('homepage.services.ki.services.beratung.title')}</h4>
-                <div class="tiny-spacer"></div>
-                <p class="no-padding">{$_('homepage.services.ki.services.beratung.description')}</p>
+                <h4>{$_('homepage.services.ki.services.beratung.title')}</h4>
+                <div class="very-tiny-spacer"></div>
+                <p>{$_('homepage.services.ki.services.beratung.description')}</p>
               </div>
             </div>
             <div class="service-item">
               <div class="service-icon">🤖</div>
               <div>
-                <h4 class="no-padding">{$_('homepage.services.ki.services.agenten.title')}</h4>
-                <div class="tiny-spacer"></div>
-                <p class="no-padding">{$_('homepage.services.ki.services.agenten.description')}</p>
+                <h4>{$_('homepage.services.ki.services.agenten.title')}</h4>
+                <div class="very-tiny-spacer"></div>
+                <p>{$_('homepage.services.ki.services.agenten.description')}</p>
               </div>
             </div>
             <div class="service-item">
               <div class="service-icon">⚡</div>
               <div>
-                <h4 class="no-padding">{$_('homepage.services.ki.services.workflow.title')}</h4>
-                <div class="tiny-spacer"></div>
-                <p class="no-padding">{$_('homepage.services.ki.services.workflow.description')}</p>
+                <h4>{$_('homepage.services.ki.services.workflow.title')}</h4>
+                <div class="very-tiny-spacer"></div>
+                <p>{$_('homepage.services.ki.services.workflow.description')}</p>
               </div>
             </div>
             <div class="service-item">
               <div class="service-icon">🏗️</div>
               <div>
-                <h4 class="no-padding">{$_('homepage.services.ki.services.infrastructure.title')}</h4>
-                <div class="tiny-spacer"></div>
-                <p class="no-padding">{$_('homepage.services.ki.services.infrastructure.description')}</p>
+                <h4>{$_('homepage.services.ki.services.infrastructure.title')}</h4>
+                <div class="very-tiny-spacer"></div>
+                <p>{$_('homepage.services.ki.services.infrastructure.description')}</p>
               </div>
             </div>
           </div>
           <div class="service-card-actions push-right">
-            <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=artificialIntelligence')}>{$_('homepage.services.ki.buttonText')}</button>
+            <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=artificialIntelligence')}
+              >{$_('homepage.services.ki.buttonText')}</button
+            >
           </div>
         </div>
       </div>
@@ -276,27 +267,23 @@
   </Section>
 
   <Section>
-    <div class="balance-section">
-      <div class="massive-spacer"></div>
-      <div class="intro m-auto max-w-5xl text-center">
+    <div class="inner-section-wrapper">
+      <div class="intro prose">
         <h1>{$_('homepage.balance.titleFirst')} <span class="inner-text-special">{$_('homepage.balance.titleHighlight')}</span></h1>
         <p class="teaser">
-          {@html $_('homepage.balance.subtitleFirst')} <button
-            class="text-link-button"
-            onclick={openPhilosophyModal}>{$_('homepage.balance.subtitleSecond')}</button
-          > {@html $_('homepage.balance.subtitleThird')}
+          {$_('homepage.balance.subtitleFirst')} <button class="text-link-button" onclick={openPhilosophyModal}>{$_('homepage.balance.subtitleSecond')}</button>
+          {$_('homepage.balance.subtitleThird')}
         </p>
       </div>
-      <div class="spacer"></div>
 
       <div class="balance-grid">
-        <!-- Zeit -->
         <div class="balance-card">
           <div class="balance-icon">⚡</div>
-          <div class="balance-content">
+          <div class="balance-content prose">
             <h3>{$_('homepage.balance.zeit.title')}</h3>
             <p>
-              {@html $_('homepage.balance.zeit.description')} <button class="text-link-button inverted-underline" onclick={openZeitModal}>{$_('homepage.balance.zeit.buttonText')}</button>
+              {$_('homepage.balance.zeit.description')}
+              <button class="text-link-button inverted-underline" onclick={openTimeAsFactorModal}>{$_('homepage.balance.zeit.buttonText')}</button>
             </p>
             <div class="balance-features">
               <span class="feature-tag">{$_('homepage.balance.zeit.features.agile')}</span>
@@ -308,13 +295,13 @@
           </div>
         </div>
 
-        <!-- Kosten -->
         <div class="balance-card">
           <div class="balance-icon">💰</div>
-          <div class="balance-content">
+          <div class="balance-content prose">
             <h3>{$_('homepage.balance.kosten.title')}</h3>
             <p>
-              {@html $_('homepage.balance.kosten.description')} <button class="text-link-button inverted-underline" onclick={openKostenModal}>{$_('homepage.balance.kosten.buttonText')}</button>
+              {$_('homepage.balance.kosten.description')}
+              <button class="text-link-button inverted-underline" onclick={openCostAsFactorModal}>{$_('homepage.balance.kosten.buttonText')}</button>
             </p>
             <div class="balance-features">
               <span class="feature-tag">{$_('homepage.balance.kosten.features.festpreise')}</span>
@@ -326,13 +313,13 @@
           </div>
         </div>
 
-        <!-- Qualität -->
         <div class="balance-card">
           <div class="balance-icon">🏆</div>
-          <div class="balance-content">
+          <div class="balance-content prose">
             <h3>{$_('homepage.balance.qualitaet.title')}</h3>
             <p>
-              {@html $_('homepage.balance.qualitaet.description')} <button class="text-link-button inverted-underline" onclick={openQualitaetModal}>{$_('homepage.balance.qualitaet.buttonText')}</button>
+              {$_('homepage.balance.qualitaet.description')}
+              <button class="text-link-button inverted-underline" onclick={openQualityAsFactorModal}>{$_('homepage.balance.qualitaet.buttonText')}</button>
             </p>
             <div class="tech-stack">
               <img src="icons/tech-logos/node-js-logo.svg" alt="Node.js" class="tech-logo" />
@@ -350,78 +337,70 @@
   </Section>
 
   <Section>
-    <div class="features-section">
-      <div class="massive-spacer"></div>
-      <div class="intro m-auto max-w-5xl text-center">
+    <div class="inner-section-wrapper">
+      <div class="intro prose">
         <h1>{$_('homepage.features.titleFirst')} <span class="inner-text-special">{$_('homepage.features.titleHighlight')}</span></h1>
         <p class="teaser">{$_('homepage.features.subtitle')}</p>
       </div>
-      <div class="spacer"></div>
 
       <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🎯</div>
-          <div class="feature-content">
-            <h3>{$_('homepage.features.allesAusEinerHand.title')}</h3>
-            <p>{$_('homepage.features.allesAusEinerHand.description')}</p>
-            <ul class="feature-list">
-              <li>{$_('homepage.features.allesAusEinerHand.features.konzeption')}</li>
-              <li>{$_('homepage.features.allesAusEinerHand.features.design')}</li>
-              <li>{$_('homepage.features.allesAusEinerHand.features.entwicklung')}</li>
-              <li>{$_('homepage.features.allesAusEinerHand.features.hosting')}</li>
-            </ul>
+        <div class="feature-card prose">
+          <div class="feature-card-header">
+            <div class="feature-icon">🎯</div>
+            <h3 class="pt-2.5">{$_('homepage.features.allesAusEinerHand.title')}</h3>
           </div>
+          <p>{$_('homepage.features.allesAusEinerHand.description')}</p>
+          <div class="very-tiny-spacer"></div>
+          <ul class="feature-list">
+            <li>{$_('homepage.features.allesAusEinerHand.features.konzeption')}</li>
+            <li>{$_('homepage.features.allesAusEinerHand.features.design')}</li>
+            <li>{$_('homepage.features.allesAusEinerHand.features.entwicklung')}</li>
+            <li>{$_('homepage.features.allesAusEinerHand.features.hosting')}</li>
+          </ul>
         </div>
 
-        <div class="feature-card">
-          <div class="feature-icon">👤</div>
-          <div class="feature-content">
-            <h3>{$_('homepage.features.ansprechpartner.title')}</h3>
-            <p>{$_('homepage.features.ansprechpartner.description')}</p>
-            <div class="contact-info">
-              <div class="contact-avatar">
-              </div>
-              <div class="contact-details">
-                <strong>{$_('homepage.features.ansprechpartner.contact.title')}</strong>
-                <p>{$_('homepage.features.ansprechpartner.contact.description')}</p>
-              </div>
+        <div class="feature-card prose">
+          <div class="feature-card-header">
+            <div class="feature-icon">💎</div>
+            <h3 class="pt-2.5">{$_('homepage.features.preise.title')}</h3>
+          </div>
+          <p>{$_('homepage.features.preise.description')}</p>
+          <div class="very-tiny-spacer"></div>
+          <ul class="feature-list">
+            <li>{$_('homepage.features.preise.benefits.sofort')}</li>
+            <li>{$_('homepage.features.preise.benefits.keineVersteckten')}</li>
+            <li>{$_('homepage.features.preise.benefits.keineFolgegebuehren')}</li>
+          </ul>
+        </div>
+
+        <div class="feature-card prose">
+          <div class="feature-card-header">
+            <div class="feature-icon">👤</div>
+            <h3 class="pt-2.5">{$_('homepage.features.ansprechpartner.title')}</h3>
+          </div>
+          <p>{$_('homepage.features.ansprechpartner.description')}</p>
+          <div class="very-tiny-spacer"></div>
+          <div class="contact-info">
+            <div class="contact-avatar"></div>
+            <div class="contact-details">
+              <p><strong>{$_('homepage.features.ansprechpartner.contact.title')}</strong></p>
+              <p>{$_('homepage.features.ansprechpartner.contact.description')}</p>
             </div>
           </div>
         </div>
 
         <div class="feature-card">
-          <div class="feature-icon">💎</div>
-          <div class="feature-content">
-            <h3>{$_('homepage.features.preise.title')}</h3>
-            <p>{$_('homepage.features.preise.description')}</p>
-            <div class="price-benefits">
-              <div class="price-item">
-                <span class="price-check">✓</span>
-                <span>{$_('homepage.features.preise.benefits.sofort')}</span>
-              </div>
-              <div class="price-item">
-                <span class="price-check">✓</span>
-                <span>{$_('homepage.features.preise.benefits.keineVersteckten')}</span>
-              </div>
-              <div class="price-item">
-                <span class="price-check">✓</span>
-                <span>{$_('homepage.features.preise.benefits.keineFolgegebuehren')}</span>
-              </div>
-            </div>
+          <div class="feature-card-header">
+            <div class="feature-icon">🛠️</div>
+            <h3 class="pt-2.5">{$_('homepage.features.massgeschneidert.title')}</h3>
           </div>
-        </div>
+          <p>{$_('homepage.features.massgeschneidert.description')}</p>
 
-        <div class="feature-card">
-          <div class="feature-icon">🛠️</div>
-          <div class="feature-content">
-            <h3>{$_('homepage.features.massgeschneidert.title')}</h3>
-            <p>{$_('homepage.features.massgeschneidert.description')}</p>
-            <div class="solution-types">
-              <span class="solution-tag">{$_('homepage.features.massgeschneidert.types.individual')}</span>
-              <span class="solution-tag">{$_('homepage.features.massgeschneidert.types.flexibel')}</span>
-              <span class="solution-tag">{$_('homepage.features.massgeschneidert.types.skalierbar')}</span>
-              <span class="solution-tag">{$_('homepage.features.massgeschneidert.types.zukunftssicher')}</span>
-            </div>
+          <div class="solution-types mt-auto">
+            <span class="solution-tag">{$_('homepage.features.massgeschneidert.types.individual')}</span>
+            <span class="solution-tag">{$_('homepage.features.massgeschneidert.types.flexibel')}</span>
+            <span class="solution-tag">{$_('homepage.features.massgeschneidert.types.skalierbar')}</span>
+            <span class="solution-tag">{$_('homepage.features.massgeschneidert.types.zukunftssicher')}</span>
           </div>
         </div>
       </div>
@@ -429,164 +408,23 @@
   </Section>
 
   <Section>
-    <div class="cta-section">
-      <div class="massive-spacer"></div>
-      <div class="cta-content">
-        <h1>{$_('homepage.cta.titleFirst')} <span class="inner-text-special">{$_('homepage.cta.titleHighlight')}</span></h1>
-        <p class="cta-text">
-          {@html $_('homepage.cta.description')}
-        </p>
-
-        <div class="cta-benefits">
-          <div class="cta-benefit">
-            <div class="benefit-icon">⚡</div>
-            <div>
-              <h4>{$_('homepage.cta.benefits.zeit.title')}</h4>
-              <p>{$_('homepage.cta.benefits.zeit.description')}</p>
-            </div>
-          </div>
-          <div class="cta-benefit">
-            <div class="benefit-icon">🎯</div>
-            <div>
-              <h4>{$_('homepage.cta.benefits.massgeschneidert.title')}</h4>
-              <p>{$_('homepage.cta.benefits.massgeschneidert.description')}</p>
-            </div>
-          </div>
-          <div class="cta-benefit">
-            <div class="benefit-icon">🤝</div>
-            <div>
-              <h4>{$_('homepage.cta.benefits.contact.title')}</h4>
-              <p>{$_('homepage.cta.benefits.contact.description')}</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="cta-buttons">
-          <button
-            class="btn-basic cta-primary"
-            onclick={() => {
-              goto('/get-started');
-            }}
-          >
-            {$_('homepage.cta.buttonText')}
-          </button>
-          <button class="btn btn-outline btn-lg px-8 py-4" onclick={() => goto('/faq')}> {$_('homepage.cta.faqButtonText')} </button>
-        </div>
-
-        <p class="cta-note">
-          {@html $_('homepage.cta.note')}
-        </p>
-      </div>
-      <div class="massive-spacer"></div>
-    </div>
-  </Section>
+    <CTABox></CTABox>
+  </Section>      
+  <div class="massive-spacer"></div>
 </div>
 
-<!-- Philosophy Modal -->
-<RaspbPhilosophyModal bind:this={philosophyModal} />
-
-<!-- Balance Modals -->
-<!-- Zeit Modal -->
-<dialog bind:this={zeitModal} class="modal">
-  <div class="modal-box max-w-2xl">
-    <form method="dialog">
-      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-    </form>
-    
-    <div class="flex items-center gap-4 mb-6">
-      <div class="text-5xl">⚡</div>
-      <h2 class="text-2xl font-bold text-primary no-padding">{$_('homepage.balance.zeit.title')} - {$_('homepage.hero.titleHighlight')}</h2>
-    </div>
-    
-    <div class="prose max-w-none">
-      <p class="text-base leading-relaxed">
-        {$_('homepage.balance.zeit.modal.paragraph1')}
-      </p>
-      
-      <p class="text-base leading-relaxed">
-        {$_('homepage.balance.zeit.modal.paragraph2')}
-      </p>
-      
-      <p class="text-base leading-relaxed">
-        {$_('homepage.balance.zeit.modal.paragraph3')}
-      </p>
-    </div>
-  </div>
-  <form method="dialog" class="modal-backdrop">
-    <button>close</button>
-  </form>
-</dialog>
-
-<!-- Kosten Modal -->
-<dialog bind:this={kostenModal} class="modal">
-  <div class="modal-box max-w-2xl">
-    <form method="dialog">
-      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-    </form>
-    
-    <div class="flex items-center gap-4 mb-6">
-      <div class="text-5xl">💰</div>
-      <h2 class="text-2xl font-bold text-primary no-padding">{$_('homepage.balance.kosten.title')} - {$_('homepage.hero.titleHighlight')}</h2>
-    </div>
-    
-    <div class="prose max-w-none">
-      <p class="text-base leading-relaxed">
-        {$_('homepage.balance.kosten.modal.paragraph1')}
-      </p>
-      
-      <p class="text-base leading-relaxed">
-        {$_('homepage.balance.kosten.modal.paragraph2')}
-      </p>
-      
-      <p class="text-base leading-relaxed">
-        {$_('homepage.balance.kosten.modal.paragraph3')}
-      </p>
-    </div>
-  </div>
-  <form method="dialog" class="modal-backdrop">
-    <button>close</button>
-  </form>
-</dialog>
-
-<!-- Qualität Modal -->
-<dialog bind:this={qualitaetModal} class="modal">
-  <div class="modal-box max-w-2xl">
-    <form method="dialog">
-      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-    </form>
-    
-    <div class="flex items-center gap-4 mb-6">
-      <div class="text-5xl">🏆</div>
-      <h2 class="text-2xl font-bold text-primary no-padding">{$_('homepage.balance.qualitaet.title')} - {$_('homepage.hero.titleHighlight')}</h2>
-    </div>
-    
-    <div class="prose max-w-none">
-      <p class="text-base leading-relaxed">
-        {$_('homepage.balance.qualitaet.modal.paragraph1')}
-      </p>
-      
-      <p class="text-base leading-relaxed">
-        {$_('homepage.balance.qualitaet.modal.paragraph2')}
-      </p>
-      
-      <p class="text-base leading-relaxed">
-        {$_('homepage.balance.qualitaet.modal.paragraph3')}
-      </p>
-    </div>
-  </div>
-  <form method="dialog" class="modal-backdrop">
-    <button>close</button>
-  </form>
-</dialog>
+<PhilosophyModal bind:this={philosophyModal} />
+<TimeAsFactorModal bind:this={timeAsFactorModal} />
+<CostAsFactorModal bind:this={costAsFactorModal} />
+<QualityAsFactorModal bind:this={qualityAsFactorModal} />
 
 <style lang="postcss">
   @reference '../app.css';
-
   .home-content-wrapper {
     .benefits {
       @apply flex flex-wrap gap-2;
       .item {
-        @apply w-fit rounded-lg py-2 px-4 text-base-content text-sm bg-base-100;
+        @apply text-base-content bg-base-100 w-fit rounded-lg px-4 py-2 text-sm;
       }
     }
     .image-container {
@@ -596,13 +434,16 @@
         background-image: url('/images/visualization-2.png');
       }
     }
-
-    /* Services Grid Styles */
+    .inner-section-wrapper {
+      .intro {
+        @apply m-auto flex max-w-4xl flex-col items-center justify-center pb-8 text-center;
+      }
+    }
     .services-grid {
-      @apply grid grid-cols-1 gap-6 lg:grid-cols-2;
+      @apply grid grid-cols-1 gap-8 lg:grid-cols-2;
 
       .service-card {
-        @apply flex flex-col justify-between rounded-2xl bg-base-100 p-6 text-base-content shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+        @apply from-base-100 to-base-200 text-base-content flex cursor-default flex-col justify-between rounded-2xl border-0 bg-linear-to-tl p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg;
 
         .service-card-header {
           @apply mb-4 flex min-w-full flex-wrap items-center gap-4;
@@ -617,14 +458,14 @@
         }
 
         p {
-          @apply mb-4 text-base-content;
+          @apply text-base-content mb-4;
         }
 
         .service-features {
           @apply mb-6 space-y-2;
 
           li {
-            @apply flex items-start text-sm text-base-content;
+            @apply text-base-content flex items-start text-sm;
 
             &::before {
               @apply from-purple to-pink mt-1.5 mr-3 h-2 w-2 min-w-2 rounded-full bg-gradient-to-r;
@@ -648,7 +489,7 @@
             }
 
             p {
-              @apply text-sm text-base-content;
+              @apply text-base-content text-sm;
             }
           }
         }
@@ -657,7 +498,7 @@
           @apply mb-4 flex flex-wrap gap-2;
 
           .example-tag {
-            @apply rounded-full px-3 py-1 text-sm font-medium bg-primary/10 text-primary;
+            @apply bg-primary/10 text-primary rounded-full px-3 py-1 text-sm font-medium;
           }
         }
 
@@ -669,179 +510,113 @@
         }
       }
     }
+    .balance-grid {
+      @apply grid grid-cols-1 gap-8 lg:grid-cols-3;
 
-    /* Balance Section Styles */
-    .balance-section {
-      @apply flex flex-col items-center justify-center;
+      .balance-card {
+        @apply from-base-100 to-base-200 text-base-content flex cursor-default flex-col rounded-2xl border-0 bg-linear-to-tl p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg;
 
-      .balance-grid {
-        @apply grid grid-cols-1 gap-8 lg:grid-cols-3;
+        .balance-icon {
+          @apply mb-4 text-5xl;
+        }
 
-        .balance-card {
-          @apply rounded-2xl bg-base-100 p-6 text-center text-base-content;
-
-          .balance-icon {
-            @apply mb-4 text-5xl;
+        .balance-content {
+          h3 {
+            @apply mb-4 text-xl font-semibold;
           }
 
-          .balance-content {
-            h3 {
-              @apply mb-4 text-xl font-semibold;
+          p {
+            @apply text-base-content mb-4;
+          }
+
+          .balance-features {
+            @apply flex flex-wrap justify-center gap-2;
+
+            .feature-tag {
+              @apply bg-primary/10 text-primary rounded-full px-3 py-1 text-sm font-medium;
             }
+          }
 
-            p {
-              @apply mb-4 text-base-content;
-            }
+          .tech-stack {
+            @apply flex flex-wrap items-center justify-center gap-4;
 
-            .balance-features {
-              @apply flex flex-wrap justify-center gap-2;
-
-              .feature-tag {
-                @apply rounded-full px-3 py-1 text-sm font-medium bg-primary/10 text-primary;
+            .tech-logo {
+              @apply h-12 w-12 rounded-lg;
+              &.long {
+                @apply h-12 w-24;
               }
-            }
-
-            .tech-stack {
-              @apply flex flex-wrap items-center justify-center gap-4;
-
-              .tech-logo {
-                @apply h-12 w-12 rounded-lg;
-                &.long {
-                  @apply h-12 w-24;
-                }
-                &.smaller {
-                  @apply h-10;
-                }
+              &.smaller {
+                @apply h-10;
               }
             }
           }
         }
       }
     }
+    .features-grid {
+      @apply grid grid-cols-1 gap-8 lg:grid-cols-2;
 
-    /* Features Section Styles */
-    .features-section {
-      @apply flex flex-col items-center justify-center;
+      .feature-card {
+        @apply from-base-100 to-base-200 text-base-content flex cursor-default flex-col rounded-2xl border-0 bg-linear-to-tl p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg;
 
-      .features-grid {
-        @apply grid grid-cols-1 gap-8 lg:grid-cols-2;
-
-        .feature-card {
-          @apply rounded-2xl bg-base-100 p-6 text-base-content;
+        .feature-card-header {
+          @apply mb-4 flex min-w-full flex-wrap items-center gap-4;
 
           .feature-icon {
-            @apply mb-4 text-4xl;
+            @apply text-4xl;
           }
+          h3 {
+            @apply text-xl font-semibold;
+          }
+        }
 
-          .feature-content {
-            h3 {
-              @apply mb-3 text-xl font-semibold;
+        .feature-list {
+          @apply space-y-2;
+
+          li {
+            @apply text-base-content flex items-start text-sm;
+
+            &::before {
+              @apply from-purple to-pink mt-1.5 mr-3 h-2 w-2 min-w-2 rounded-full bg-gradient-to-r;
+              content: '';
             }
+          }
+        }
 
+        .contact-info {
+          @apply flex items-center gap-4;
+          .contact-avatar {
+            @apply h-10 w-10 rounded-full bg-white;
+          }
+          .contact-details {
             p {
-              @apply mb-4 text-base-content;
-            }
-
-            .feature-list {
-              @apply space-y-2;
-
-              li {
-                @apply flex items-center text-sm text-base-content;
-
-                &::before {
-                  @apply from-accent to-secondary mr-3 h-2 w-2 min-w-2 rounded-full bg-gradient-to-r;
-                  content: '';
-                }
-              }
-            }
-
-            .contact-info {
-              @apply flex items-center gap-4;
-
-              .contact-details {
-                strong {
-                  @apply block font-semibold;
-                }
-
-                p {
-                  @apply text-sm text-base-content;
-                }
-              }
-            }
-
-            .price-benefits {
-              @apply space-y-2;
-
-              .price-item {
-                @apply flex items-center gap-3;
-
-                .price-check {
-                  @apply text-success text-lg font-bold;
-                }
-
-                span:last-child {
-                  @apply text-sm text-base-content;
-                }
-              }
-            }
-
-            .solution-types {
-              @apply flex flex-wrap gap-2;
-
-              .solution-tag {
-                @apply rounded-full px-3 py-1 text-sm font-medium bg-primary/10 text-primary;
-              }
-            }
-          }
-        }
-      }
-    }
-
-    /* CTA Section Styles */
-    .cta-section {
-      @apply flex flex-col items-center justify-center rounded-3xl bg-base-100 text-center text-base-content;
-
-      .cta-content {
-        @apply max-w-4xl px-6;
-
-        h1 {
-          @apply mb-6 text-4xl font-bold md:text-5xl;
-        }
-
-        .cta-text {
-          @apply mb-8 text-lg leading-relaxed text-base-content;
-        }
-
-        .cta-benefits {
-          @apply mb-8 grid grid-cols-1 gap-6 md:grid-cols-3;
-
-          .cta-benefit {
-            @apply flex items-start text-left;
-
-            .benefit-icon {
-              @apply mt-1 mr-4 text-3xl;
-            }
-
-            h4 {
-              @apply mb-1 font-semibold;
-            }
-
-            p {
-              @apply text-sm text-base-content;
+              @apply text-sm;
             }
           }
         }
 
-        .cta-buttons {
-          @apply mb-6 flex flex-col items-center justify-center gap-4 sm:flex-row;
+        .price-benefits {
+          @apply space-y-2;
 
-          .cta-primary {
-            @apply px-8 py-4 text-lg;
+          .price-item {
+            @apply flex items-center gap-3;
+
+            .price-check {
+              @apply text-success text-lg font-bold;
+            }
+
+            span:last-child {
+              @apply text-base-content text-sm;
+            }
           }
         }
 
-        .cta-note {
-          @apply rounded-lg p-4 text-sm text-base-content bg-base-300;
+        .solution-types {
+          @apply flex flex-wrap gap-2;
+
+          .solution-tag {
+            @apply bg-primary/10 text-primary rounded-full px-3 py-1 text-sm font-medium;
+          }
         }
       }
     }

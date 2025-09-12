@@ -101,12 +101,12 @@
 
 <div class="content-area">
   <Section noSpacing={true}>
-    <div class="inner-box reduced pt-24 pb-12">
+    <div class="inner-box reduced pt-24 pb-12 prose">
       <h1 class="animate-fade-in mb-8 text-center text-4xl font-bold max-w-[850px]">
         Registrieren Sie hier Ihren eigenen 
         <span class="inner-text-special">raspb Account</span>
       </h1>
-      <p class="teaser animate-fade-in-up mx-auto max-w-4xl text-center text-lg">
+      <p class="teaser animate-fade-in-up boxed">
         Mit Ihrem persönlichen Konto, erhalten Sie Zugang zum umfangreichen Projektkonfigurator (Wizard) und Ihr Dashboard, um all Ihre Projektideen, Beauftragungen usw. übersichtlich verwalten zu können.</p>
     </div>
   </Section>
@@ -115,7 +115,7 @@
     <div class="md:inner-box pb-24">
       <div class="animate-fade-in-up bg-base-200 text-base-content mx-auto max-w-2xl rounded-3xl p-8">
         {#if isSuccess}
-          <div class="py-12 text-center">
+          <div class="py-12 text-center prose">
             <div class="mb-6">
               <svg
                 class="text-success mx-auto h-24 w-24 animate-pulse"

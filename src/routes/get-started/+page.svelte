@@ -118,7 +118,7 @@
     </button>
   </div>
 
-  <div class="wizard-section" id="wizard">
+  <div class="wizard-section prose" id="wizard">
     {#if selectedWizard === 'basic'}
       <WizardBasic />
     {:else if selectedWizard === 'advanced'}

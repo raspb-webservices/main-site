@@ -2,75 +2,14 @@
   import { page } from '$app/state';
   import { goto } from '$app/navigation';
   import Section from '$lib/components/ui/section.svelte';
-  import RaspbPhilosophyModal from '$lib/components/modals/raspb-philosophy-modal.svelte';
+  import RaspbPhilosophyModal from '$lib/components/modals/general/philosophy.svelte';
   import { _ } from 'svelte-i18n';
   import Stage from '$lib/components/ui/stage.svelte';
   import { onDestroy, onMount } from 'svelte';
+  import { teamMembers } from '$lib/configs/teamMembers';
 
   let selectedMember: any = null;
   let philosophyModal: RaspbPhilosophyModal;
-
-  const teamMembers = [
-    {
-      id: 'alex',
-      name: 'Alex',
-      role: 'Lead Developer & Architect',
-      avatar: '/images/alex.png',
-      skills: [
-        'Cloud Architecture & Infrastructure',
-        'Scalability & Performance Optimization',
-        'Security & Data Integrity',
-        'CI/CD & DevOps Automation',
-        'API Design & Integration'
-      ]
-    },
-    {
-      id: 'maya',
-      name: 'Maya',
-      role: 'UX/UI Design Specialist',
-      avatar: '/images/maya.png',
-      skills: [
-        'Usability Testing & User Research',
-        'Prototyping & Wireframing',
-        'Interaction Design (IxD)',
-        'Visual Design & UI Patterns',
-        'Design System Management'
-      ]
-    },
-    {
-      id: 'sam',
-      name: 'Sam',
-      role: 'Content Strategy & SEO Expert',
-      avatar: '/images/sam.png',
-      skills: [
-        'Keyword Research & Analysis',
-        'On-Page SEO & Technical SEO',
-        'Content Strategy',
-        'Link Building & Off-Page SEO',
-        'Performance Tracking & Reporting'
-      ]
-    },
-    {
-      id: 'rio',
-      name: 'Rio',
-      role: 'Quality Assurance & Testing Lead',
-      avatar: '/images/rio.png',
-      skills: ['Test Automation Strategy', 'Performance & Load Testing', 'Defect Management & Analysis', 'Integration', 'Test Environment & Data Management']
-    },
-    {
-      id: 'melinda',
-      name: 'Melinda',
-      role: 'Customer Service & Accounting',
-      avatar: '/images/melinda.png',
-      skills: [
-        'Accounting Software',
-        'Billing & Collections Management',
-        'Customer Support Management',
-        'Financial Reporting & Analysis',
-        'Dispute Resolution & Issue Tracking'
-      ]
-    }
-  ];
 
   const handleHashChange = (event: HashChangeEvent) => {
     const newHash = new URL(event.newURL).hash.slice(1);
@@ -122,14 +61,14 @@
 </svelte:head>
 
 <Stage style={'fancy-gradient'}>
-  <div class="inner-box reduced py-36">
+  <div class="inner-box reduced py-36 prose">
     <h1 class="massive animate-fade-in-up">{$_('ueberUns.header.title')}</h1>
     <p class="teaser animate-fade-in-up">{@html $_('ueberUns.header.subtitle')}</p>
   </div>
 </Stage>
 
 <Section noSpacing={true}>
-  <div id="raspb" class="inner-box animate-fade-in-up pt-30 pb-24">
+  <div id="raspb" class="inner-box animate-fade-in-up pt-30 pb-24 prose">
     <h2>Das ist <span class="inner-text-special">raspb</span> - Ihr innovaiver IT-Dienstleister</h2>
     <p class="teaser">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Id dignissimos veniam quam quae itaque, officiis blanditiis non, aspernatur adipisci ad porro
@@ -158,7 +97,7 @@
       </div>
       <div class="flex-1">
         <div class="badge badge-primary badge-lg mb-4 animate-bounce">{$_('ueberUns.markusSection.badge')}</div>
-        <h2 class="no-padding mb-6 text-5xl font-bold">{$_('ueberUns.markusSection.title')}</h2>
+        <h2 class="mb-6 text-5xl font-bold">{$_('ueberUns.markusSection.title')}</h2>
         <p class="mb-6 text-xl leading-relaxed">
           {$_('ueberUns.markusSection.paragraph1')}
         </p>
@@ -177,10 +116,10 @@
             <span class="badge badge-primary badge-lg transition-colors duration-200">{skill}</span>
           {/each}
         </div>
-        <p class="no-padding text-lg opacity-80">
+        <p class="add-padding text-lg opacity-80">
           {$_('ueberUns.markusSection.paragraph2')}
           {$_('ueberUns.markusSection.philosophyPrefix')}
-          <button type="button" class="link link-primary hover:link-hover font-semibold" onclick={() => philosophyModal.openModal()}>
+          <button type="button" class="link link-primary hover:link-hover" onclick={() => philosophyModal.openModal()}>
             {$_('ueberUns.markusSection.philosophyButton')}
           </button>.
         </p>
@@ -197,7 +136,7 @@
 
 <Section noSpacing={true}>
   <div id="ai-team" class="inner-box animate-fade-in-up pt-36">
-    <div class="m-auto mb-12 max-w-5xl text-center">
+    <div class="m-auto max-w-5xl text-center prose">
       <h2>{$_('ueberUns.aiTeamSection.titleFirst')} <span class="inner-text-special">{$_('ueberUns.aiTeamSection.titleHighlight')}</span></h2>
       <p class="teaser boxed no-padding">{$_('ueberUns.aiTeamSection.subtitle')}</p>
     </div>
@@ -209,7 +148,7 @@
     <div class="grid grid-cols-12 gap-6">
       {#each teamMembers as member, index}
         <div
-          class="card bg-base-200 animate-fade-in-up text-base-content col-span-12 h-full cursor-pointer shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl md:col-span-6 lg:col-span-4 {index ===
+          class="card from-base-100 to-base-200  bg-linear-to-tl flex cursor-default flex-col animate-fade-in-up text-base-content col-span-12 h-full shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg md:col-span-6 lg:col-span-4 {index ===
           3
             ? 'lg:col-start-3'
             : ''} "
@@ -226,9 +165,9 @@
           </figure>
           <div class="card-body flex flex-col items-center justify-between p-4 text-center">
             <div class="flex-grow">
-              <h3 class="card-title no-padding justify-center">{member.name}</h3>
-              <p class="opacity-70">{member.role}</p>
-              <p class="no-padding line-clamp-4 px-4 leading-relaxed">{$_(`ueberUns.teamMembers.${member.id}.description`)}</p>
+              <h3 class="card-title justify-center">{member.name}</h3>
+              <p class="opacity-70 add-padding">{member.role}</p>
+              <p class="line-clamp-4 px-4 leading-relaxed">{$_(`ueberUns.teamMembers.${member.id}.description`)}</p>
             </div>
             <div class="card-actions pt-2 pb-4">
               <button class="btn btn-simple btn-xs">{$_('ueberUns.aiTeamSection.memberCardButton')}</button>

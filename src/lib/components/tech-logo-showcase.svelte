@@ -103,7 +103,7 @@
   </div>
 
   <div class="mt-6 text-center">
-    <p class="text-base-content/60 text-sm no-padding">Fahren Sie mit der Maus darüber, um die Animation zu pausieren</p>
+    <p class="tiny-label">Fahren Sie mit der Maus darüber, um die Animation zu pausieren</p>
   </div>
 </div>
 
