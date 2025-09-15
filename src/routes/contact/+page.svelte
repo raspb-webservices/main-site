@@ -13,7 +13,7 @@
 
     <div class="spacer"></div>
 
-    <form name="contact" method="POST" action="services" data-netlify="true">
+    <form name="contact" method="POST" action="/imprint" data-netlify="true">
       <input type="hidden" name="form-name" value="contact" />
 
       <div class="form-field-container">
