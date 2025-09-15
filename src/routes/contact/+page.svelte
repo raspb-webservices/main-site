@@ -1,6 +1,6 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n';
-  const target = "../thank-you/"
+  const target = "/thank-you"
 </script>
 
 <section class="contact-content-wrapper">
