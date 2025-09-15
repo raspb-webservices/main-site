@@ -1,6 +1,6 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n';
-  const target = "/thank-you"
+  const target = "/thank-you/"
 </script>
 
 <section class="contact-content-wrapper">
@@ -46,7 +46,7 @@
       </div>
       <div class="form-field-container">
         <div class="form-field-section full-width checkbox-dialog">
-          <input id="dsgvo" name="dsgvo" type="checkbox" value="" class="is-checkbox accent-secondary" required />
+          <input id="dsgvo" name="dsgvo" type="checkbox" value="dsgvo-confirmed" class="is-checkbox accent-secondary" required />
           <label for="dsgvo">Ich stimme der Speicherung und Verarbeitung meiner Daten durch diese Website zu</label>
         </div>
       </div>
