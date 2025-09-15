@@ -1,21 +1,16 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n';
-  import { goto } from '$app/navigation';
-
   const target = "/thank-you"
 </script>
 
 <section class="contact-content-wrapper">
   <h1>{$_('contact.title')}</h1>
   <div class="px-20 pt-10">
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio hic voluptatem neque consequuntur porro, accusantium sit, doloribus perferendis, reiciendis
-      autem labore. Minus explicabo aperiam ratione sapiente voluptate aliquam cum est.
-    </p>
+    <p>{$_('contact.intro')}</p>
 
     <div class="spacer"></div>
 
-    <form name="contact" method="POST" action="{target}" data-netlify="true">
+    <form name="contact" method="POST" action="{target}" netlify>
       <input type="hidden" name="form-name" value="contact" />
       <div class="form-field-container">
         <div class="form-field-section">
@@ -56,10 +51,12 @@
         </div>
       </div>
       <div class="medium-spacer"></div>
-      <button type="submit" class="btn-basic" onclick="{()=>{ goto(target)}}">Abschicken</button>
+      <button type="submit" class="btn-basic">Abschicken</button>
     </form>
   </div>
+
   <div class="big-spacer"></div>
+
 </section>
 
 <style lang="postcss">
