@@ -1,6 +1,8 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n';
   import { goto } from '$app/navigation';
+
+  const target = "/thank-you"
 </script>
 
 <section class="contact-content-wrapper">
@@ -13,7 +15,7 @@
 
     <div class="spacer"></div>
 
-    <form name="contact" method="POST" action="/imprint" data-netlify="true">
+    <form name="contact" method="POST" action="{target}" data-netlify="true">
       <input type="hidden" name="form-name" value="contact" />
 
       <div class="form-field-container">
@@ -56,7 +58,7 @@
         </div>
       </div>
       <div class="medium-spacer"></div>
-      <button type="submit" class="btn-basic">Abschicken</button>
+      <button type="submit" class="btn-basic" onclick="{()=>{ goto(target)}}">Abschicken</button>
     </form>
   </div>
   <div class="big-spacer"></div>
