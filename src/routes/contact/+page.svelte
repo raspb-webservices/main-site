@@ -17,7 +17,6 @@
 
     <form name="contact" method="POST" action="{target}" data-netlify="true">
       <input type="hidden" name="form-name" value="contact" />
-
       <div class="form-field-container">
         <div class="form-field-section">
           <label for="first-name">Vorname</label>
@@ -50,7 +49,6 @@
           <textarea id="message" name="message" rows="4" placeholder="" required></textarea>
         </div>
       </div>
-
       <div class="form-field-container">
         <div class="form-field-section full-width checkbox-dialog">
           <input id="dsgvo" name="dsgvo" type="checkbox" value="" class="is-checkbox accent-secondary" required />
@@ -69,7 +67,7 @@
   section.contact-content-wrapper {
     @apply m-auto h-full w-full max-w-7xl px-4 py-12;
     form {
-      @apply w-full max-w-4xl pb-2;
+      @apply w-full max-w-4xl;
       .form-field-container {
         @apply mb-4 grid w-full gap-6 md:grid-cols-2;
         .form-field-section {
