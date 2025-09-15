@@ -71,7 +71,7 @@
     <div class="footer-nav-wrapper">
       <div class="pre-column"></div>
       <div class="service-column">
-        <h3>Services</h3>
+        <h3 class="pb-4">Services</h3>
         <div class="footer-nav-items">
           {#each footerNav[0].subItems as item}
             <button class="footer-nav-item" onclick={() => goto(item.path)}>
@@ -81,7 +81,7 @@
         </div>
       </div>
       <div class="insights-column">
-        <h3>Einblicke</h3>
+        <h3 class="pb-4">Einblicke</h3>
         <div class="footer-nav-items">
           {#each footerNav[1].subItems as item}
             <button class="footer-nav-item" onclick={() => goto(item.path)}>
@@ -91,7 +91,7 @@
         </div>
       </div>
       <div class="about-us-column">
-        <h3>Über uns</h3>
+        <h3 class="pb-4">Über uns</h3>
         <div class="footer-nav-items">
           {#each footerNav[2].subItems as item}
             <button class="footer-nav-item" onclick={() => goto(item.path)}>
@@ -101,7 +101,7 @@
         </div>
       </div>
       <div class="legal-column">
-        <h3>Rechtliches & Kontakt</h3>
+        <h3 class="pb-4">Rechtliches & Kontakt</h3>
         <div class="footer-nav-items">
           <button class="footer-nav-item" onclick={() => goto(footerNav[3].path)}>
             {footerNav[3].title}

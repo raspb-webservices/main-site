@@ -48,7 +48,7 @@
 </svelte:head>
 
 <Stage style={'fancy-gradient'}>
-  <div class="inner-box reduced py-36">
+  <div class="inner-box reduced py-36 prose">
     <h1 class="massive animate-fade-in-up">{$_('insights.header.title')}</h1>
     <p class="teaser animate-fade-in-up">{$_('insights.header.subtitle')}</p>
   </div>

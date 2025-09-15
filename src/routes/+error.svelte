@@ -25,21 +25,21 @@
 <Section type={'fullCenterTeaser'}>
   <div class="inner-content-wrapper prose">
     <h1 class="text-center">{errReason}</h1>
-    <h3 class="text-center">{errReasonSubtext}</h3>
+    <p class="teaser text-center">{errReasonSubtext}</p>
     <div class="spacer"></div>
     <div class="flex gap-6">
-          <button
-      class="btn-basic"
-      onclick={() => {
-        goto('/');
-      }}>Zurück zur Startseite</button
-    >
-        <button
-      class="btn-basic"
-      onclick={() => {
-        goto('/get-started');
-      }}>Projekt konfigurieren</button
-    >
+      <button
+        class="btn-basic"
+        onclick={() => {
+          goto('/');
+        }}>Zurück zur Startseite</button
+      >
+      <button
+        class="btn-basic"
+        onclick={() => {
+          goto('/get-started');
+        }}>Projekt konfigurieren</button
+      >
     </div>
   </div>
 </Section>
@@ -47,6 +47,6 @@
 <style lang="postcss">
   @reference '../app.css';
   .inner-content-wrapper {
-  @apply flex flex-col justify-center items-center; 
+    @apply flex flex-col items-center justify-center;
   }
 </style>
