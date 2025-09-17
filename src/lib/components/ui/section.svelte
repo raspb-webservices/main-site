@@ -48,7 +48,7 @@
     &.full-center-teaser {
       @apply from-secondary/30 via-primary/10 to-secondary/20 bg-gradient-to-br py-10;
       .inner-container {
-        @apply min-h-[calc(100vh-160px)] flex flex-col justify-center items-center;
+        @apply min-h-[calc(100vh-160px)] flex flex-col justify-center items-center text-center;
       }
     }
   }

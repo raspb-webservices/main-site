@@ -1,219 +1,19 @@
 <script lang="ts">
-  import { page } from '$app/state';
-  import { goto } from '$app/navigation';
-  import Section from '$lib/components/ui/section.svelte';
-  import { user, isAuthenticated, userroles } from '$store/sharedStates.svelte';
-  import { onMount } from 'svelte';
-  import type { Project } from '$interfaces/project.interface';
-  import { projectStatus } from '$interfaces/project.interface';
-  import type { User } from '$interfaces/user.interface';
   import { formatDate, formatBudget, getStatusBadgeClass, getStatusLabel } from '$lib/helper/projectUtils';
-  import ProjectCard from '$lib/components/projects/ProjectCard.svelte';
-  import ProjectListItem from '$lib/components/projects/ProjectListItem.svelte';
+  import { _ } from 'svelte-i18n';
+  
+  let { selectedProject } = $props();
+  let modal: HTMLDialogElement;
 
-  // Reaktive Variablen für Authentifizierung und Rollen
-  let isAuth = $derived(isAuthenticated.get());
-  let currentUser = $derived(user.get()) as User;
-  let currentUserRoles = $derived(userroles.get());
-  let hasCustomerAccess = $derived(isAuth && currentUserRoles.includes('customer'));
-
-  // Projekt-Daten
-  let projects: (Project & { id: string })[] = $state([]);
-  let loading = $state(false);
-  let error = $state('');
-  let hasLoaded = $state(false);
-  let selectedProject: (Project & { id: string }) | null = $state(null);
-  let modalDialog: HTMLDialogElement;
-  let viewMode = $state<'grid' | 'list'>('grid'); // Toggle between grid and list view
-
-  // Prüfe Zugriffsberechtigung beim Laden der Seite
-  onMount(async () => {
-    checkAccess();
-    hasLoaded = false; // Reset hasLoaded when component mounts
-    if (hasCustomerAccess) {
-      loadProjects();
-    }
-  });
-
-  // Prüfe Zugriff bei Änderungen der Authentifizierung oder Rollen
-  $effect(() => {
-    checkAccess();
-    // Only load projects if we have access and haven't loaded them yet
-    // @ts-ignore - currentUser type is not properly defined
-    if (hasCustomerAccess && !hasLoaded && projects.length === 0 && currentUser?.projectIds && currentUser.projectIds.length > 0) {
-      loadProjects();
-      hasLoaded = true;
-    }
-  });
-
-  function checkAccess() {
-    if (!isAuth) {
-      // Nutzer ist nicht eingeloggt - weiterleiten zur Startseite
-      goto('/');
-      return;
-    }
-
-    if (!currentUserRoles.includes('customer')) {
-      // Nutzer hat keine Kunden-Rechte - weiterleiten zur Startseite
-      goto('/');
-      return;
-    }
+  export function openModal() {
+    modal?.showModal();
   }
-
-  async function loadProjects() {
-    // @ts-ignore - currentUser type is not properly defined
-    if (!currentUser?.projectIds || currentUser.projectIds.length === 0) {
-      loading = false; // Set loading to false when there are no projects
-      hasLoaded = true; // Set hasLoaded to true when there are no projects
-      return;
-    }
-
-    loading = true;
-    error = '';
-
-    try {
-      // @ts-ignore - currentUser type is not properly defined
-      const projectPromises = currentUser.projectIds.map(async (projectId: string) => {
-        try {
-          const response = await fetch(`/api/project/get/${projectId}`);
-          const data = await response.json();
-          
-          if (response.ok && data.project) {
-            return { ...data.project, id: projectId };
-          } else {
-            console.error(`Error fetching project ${projectId}:`, data);
-            return null;
-          }
-        } catch (err) {
-          console.error(`Error fetching project ${projectId}:`, err);
-          return null;
-        }
-      });
-
-      const projectResults = await Promise.all(projectPromises);
-      projects = projectResults.filter((project): project is (Project & { id: string }) => project !== null);
-    } catch (err) {
-      error = 'Fehler beim Laden der Projekte';
-      console.error('Error loading projects:', err);
-    } finally {
-      loading = false;
-      hasLoaded = true; // Set hasLoaded to true when loading is complete
-    }
-  }
-
-  function openProjectModal(project: Project & { id: string }) {
-    selectedProject = project;
-    modalDialog?.showModal();
-  }
-
-  function closeModal() {
-    modalDialog?.close();
-    selectedProject = null;
+  export function closeModal() {
+    modal?.close();
   }
 </script>
 
-<svelte:head>
-  <title>raspb Webservices - Mein Kunden-Dashboard</title>
-  <meta name="description" content="Hier kann eine Beschreibung stehen..." />
-</svelte:head>
-
-<div class="content-area">
-  {#if hasCustomerAccess}
-    <!-- Dashboard-Inhalt für Kunden-Nutzer -->
-    <Section>
-      <h1>Mein Kunden-Dashboard</h1>
-      <p class="teaser no-padding">Hier sind Ihre Projekte aufgelistet</p>
-
-      <!-- View Toggle and Project List -->
-      <div class="mt-8">
-        {#if loading}
-          <div class="flex flex-col items-center justify-center py-12">
-            <span class="loading loading-spinner loading-lg text-primary"></span>
-            <p class="text-base-content/70 mt-4">Projekte werden geladen...</p>
-          </div>
-        {:else if error}
-          <div class="alert alert-error">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span>{error}</span>
-            <div>
-              <button class="btn btn-sm btn-outline" onclick={loadProjects}> Erneut versuchen </button>
-            </div>
-          </div>
-        {:else if projects.length === 0}
-          <div class="hero min-h-[300px]">
-            <div class="hero-content text-center">
-              <div class="max-w-md">
-                <h2 class="text-2xl font-bold">Noch keine Projekte</h2>
-                <p class="py-6">Es wurden noch keine Projekte für Sie erstellt.</p>
-              </div>
-            </div>
-          </div>
-        {:else}
-          <!-- View Toggle -->
-          <div class="mb-4 flex justify-end">
-            <div class="join">
-              <button 
-                class={"btn btn-sm join-item " + (viewMode === 'grid' ? 'btn-active' : '')}
-                onclick={() => viewMode = 'grid'}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                </svg>
-                Kacheln
-              </button>
-              <button 
-                class={"btn btn-sm join-item " + (viewMode === 'list' ? 'btn-active' : '')}
-                onclick={() => viewMode = 'list'}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-                </svg>
-                Liste
-              </button>
-            </div>
-          </div>
-
-          <!-- Project Display -->
-          {#if viewMode === 'grid'}
-            <div class="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {#each projects as project}
-                <ProjectCard {project} {openProjectModal} />
-              {/each}
-            </div>
-          {:else}
-            <div class="mt-6 overflow-x-auto">
-              <table class="table table-zebra">
-                <thead>
-                  <tr>
-                    <th>Projekt</th>
-                    <th>Typ</th>
-                    <th>Status</th>
-                    <th>Budget</th>
-                    <th>Erstellt</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {#each projects as project}
-                    <ProjectListItem {project} {openProjectModal} />
-                  {/each}
-                </tbody>
-              </table>
-            </div>
-          {/if}
-        {/if}
-      </div>
-    </Section>
-  {/if}
-</div>
-
-<style lang="postcss">
-  @reference '../../app.css';
-</style>
-
-<!-- DaisyUI Modal für Projektdetails -->
-<dialog bind:this={modalDialog} class="modal">
+<dialog bind:this={modal} class="modal">
   <div class="modal-box w-11/12 max-w-5xl">
     {#if selectedProject}
       <form method="dialog">
@@ -418,3 +218,7 @@
     <button onclick={closeModal}>close</button>
   </form>
 </dialog>
+
+<style lang="postcss">
+  @reference '../../../../app.css';
+</style>

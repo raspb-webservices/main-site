@@ -39,13 +39,6 @@
     }
   }
 
-  function closeModal(modalId: string) {
-    const modal = document.getElementById(modalId) as HTMLDialogElement;
-    if (modal) {
-      modal.close();
-    }
-  }
-
   function scrollToSection(sectionId: string) {
     const element = document.getElementById(sectionId);
     if (element) {

@@ -77,7 +77,6 @@
         <p class="teaser text-center">{$_('philosophyModal.header.subtitle')}</p>
     </div>
 
-
     <div class="mb-8 text-center">
       <!-- RASPB Letters Display -->
       <div class="mb-8 flex items-center justify-center gap-2">

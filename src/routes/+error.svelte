@@ -24,8 +24,8 @@
 
 <Section type={'fullCenterTeaser'}>
   <div class="inner-content-wrapper prose">
-    <h1 class="text-center">{errReason}</h1>
-    <p class="teaser text-center">{errReasonSubtext}</p>
+    <h1>{errReason}</h1>
+    <p class="teaser">{errReasonSubtext}</p>
     <div class="spacer"></div>
     <div class="flex gap-6">
       <button
@@ -47,6 +47,6 @@
 <style lang="postcss">
   @reference '../app.css';
   .inner-content-wrapper {
-    @apply flex flex-col items-center justify-center;
+    @apply flex flex-col items-center justify-center text-center;
   }
 </style>

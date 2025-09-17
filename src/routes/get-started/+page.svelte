@@ -3,7 +3,10 @@
   import { goto } from '$app/navigation';
   import { _ } from 'svelte-i18n';
   import WizardBasic from '$lib/components/wizard/wizard-basic.svelte';
+  import Wizard from '$lib/components/wizard/wizard.svelte';
+  import { isAuthenticated } from '$store/sharedStates.svelte';
 
+  let loggedin = $derived(isAuthenticated.get());
   interface PageData {
     projectType: string | null;
     subType: string | null;
@@ -122,6 +125,9 @@
     {#if selectedWizard === 'basic'}
       <WizardBasic />
     {:else if selectedWizard === 'advanced'}
+    {#if loggedin}
+      <Wizard />
+      {:else}
       <h2>Bitte registrieren Sie sich</h2>
       <p>
         Möchten Sie Ihr Projektvorhaben im Detail konfigurieren und konkreter machen? Um den erweiterten Wizard nutzen zu können und Ihr vorhaben abspeichern zu
@@ -137,6 +143,7 @@
           goto('/registration');
         }}>Zur Registrierung</button
       >
+      {/if}
     {/if}
   </div>
 </section>

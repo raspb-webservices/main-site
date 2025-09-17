@@ -594,23 +594,6 @@
             }
           }
         }
-
-        .price-benefits {
-          @apply space-y-2;
-
-          .price-item {
-            @apply flex items-center gap-3;
-
-            .price-check {
-              @apply text-success text-lg font-bold;
-            }
-
-            span:last-child {
-              @apply text-base-content text-sm;
-            }
-          }
-        }
-
         .solution-types {
           @apply flex flex-wrap gap-2;
 

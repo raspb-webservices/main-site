@@ -1,15 +1,47 @@
 <script lang="ts">
   import Section from '$lib/components/ui/section.svelte';
   import { _ } from 'svelte-i18n';
-  import { isAuthenticated, user } from '$store/sharedStates.svelte';
+  import { onMount } from 'svelte';
+  import { isAuthenticated, user, userroles } from '$store/sharedStates.svelte';
   import { goto } from '$app/navigation';
   import type { User } from '$interfaces/user.interface';
   import ProfileEditModal from '$lib/components/modals/profile/edit.svelte';
-  
+  import auth from '../../authService';
+  import Loader from '$lib/components/loader.svelte';
+
   let isAuth = $derived(isAuthenticated.get());
   let currentUser = $derived(user.get()) as User;
+  let currentUserRoles = $derived(userroles.get());
   let editModal: ProfileEditModal;
 
+  let showSection = $state('');
+  let loading = $state(false);
+
+  onMount(async () => {
+    loading = true;
+    checkAccess();
+  });
+
+  $effect(() => {
+    checkAccess();
+  });
+
+  function checkAccess() {
+    if (!isAuth) {
+      showSection = 'not-authorized';
+      loading = false;
+      return;
+    } else {
+      showSection = 'profile';
+      loading = false;
+      return;
+    }
+  }
+
+  async function login() {
+    const auth0Client = await auth.createClient();
+    await auth.loginWithPopup(auth0Client);
+  }
 </script>
 
 <svelte:head>
@@ -17,13 +49,12 @@
   <meta name="description" content="Profilseite für eingeloggte Nutzer" />
 </svelte:head>
 
-<Section>
-  <div class="text-center prose">
-    <h1><span class="inner-text-special">{$_('profile.title')}</span></h1>
-    <!-- <p>{JSON.stringify(currentUser)}</p> -->
-  </div>
+{#if isAuth}
+  <Section>
+    <div class="prose text-center">
+      <h1><span class="inner-text-special">{$_('profile.title')}</span></h1>
+    </div>
 
-  {#if isAuth}
     <div class="grid grid-cols-12 gap-8">
       <div class="col-span-3 flex flex-col items-center justify-center">
         <div class="avatar">
@@ -104,7 +135,12 @@
                 </div>
               {/if}
               <div class="col-span-6 flex justify-end">
-                <button class="btn btn-simple" onclick={() => {editModal.openModal()}}>Daten editieren</button>
+                <button
+                  class="btn btn-simple"
+                  onclick={() => {
+                    editModal.openModal();
+                  }}>Daten editieren</button
+                >
               </div>
             </div>
 
@@ -116,7 +152,7 @@
                 <button
                   class="btn btn-simple mr-3"
                   onclick={() => {
-                    goto('/customer-dashboard');
+                    goto('/dashboard');
                   }}>Zu den Projekten</button
                 >
                 <button
@@ -133,26 +169,38 @@
         </div>
       </div>
     </div>
-  {:else}
-    <div class="alert alert-warning shadow-lg">
-      <div class="flex items-center justify-start">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"
-          ><path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-          ></path></svg
+  </Section>
+{:else if showSection === 'not-authorized'}
+  <Section type={'fullCenterTeaser'}>
+    <div class="inner-content-wrapper prose">
+      <h1>Sie müssen angemeldet sein, um Ihr Profil einsehen zu können</h1>
+      <p class="teaser">Sie haben noch keinen Account? Hier können Sie sich registrieren...</p>
+      <div class="spacer"></div>
+      <div class="flex gap-6">
+        <button
+          class="btn-basic"
+          onclick={() => {
+            login();
+          }}>Anmelden</button
         >
-        <p class="no-padding pl-4">Sie müssen angemeldet sein, um Ihr Profil einsehen zu können.</p>
+        <button
+          class="btn-basic"
+          onclick={() => {
+            goto('/registration');
+          }}>Registrierung</button
+        >
       </div>
     </div>
-  {/if}
-</Section>
+  </Section>
+{/if}
+
 <ProfileEditModal bind:this={editModal} />
 
 <style lang="postcss">
   @reference '../../app.css';
+  .inner-content-wrapper {
+    @apply m-auto flex max-w-4xl flex-col items-center justify-center text-center;
+  }
   .main-data {
     @apply px-4 py-6;
   }

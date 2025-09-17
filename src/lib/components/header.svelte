@@ -3,7 +3,7 @@
   import auth from '../../authService';
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
-  import { locale, _ } from 'svelte-i18n';
+  import { _ } from 'svelte-i18n';
   import type { User } from '$interfaces/user.interface';
 
   let mobileNavOpen = $state(false);
@@ -18,10 +18,6 @@
     logginIn = true;
     const auth0Client = await auth.createClient();
     await auth.loginWithPopup(auth0Client);
-
-    if (currentUserRoles.includes('admin')) {
-      goto('/admin-dashboard');
-    }
     logginIn = false;
   }
 
@@ -33,7 +29,8 @@
   }
 </script>
 
-{#if isAuth}
+<header class:loggedin={isAuth}>
+  {#if isAuth}
   <div class="logged-in-header">
     <div class="inner-box flex items-center justify-between">
       <p>Herzlich Willkommen, {currentUser.givenName} {currentUser.familyName}!</p>
@@ -41,12 +38,8 @@
       <button
         class="text-link-button white-link"
         onclick={() => {
-          if (currentUserRoles.includes('customer')) {
-            goto('/customer-dashboard');
-          } else {
-            goto('/admin-dashboard');
-          }
-        }}>Zum Dashboard</button
+          goto('/dashboard');
+        }}>Dashboard</button
       >
             <div class="w-8 text-center text-white opacity-70">|</div>
       <button
@@ -60,12 +53,11 @@
         class="text-link-button white-link"
         onclick={() => {
           logout();
-        }}>Abmelden</button
+        }}>Logout</button
       >
     </div>
   </div>
 {/if}
-<header>
   <div class="inner-box">
     <button
       aria-label="raspb Logo"
@@ -231,6 +223,12 @@
   }
 
   header {
+    &.loggedin {
+      @apply h-28;
+      .inner-box {
+        @apply h-auto;
+      }
+    }
     @apply sticky top-0 z-20 h-20 w-full bg-white shadow-lg;
     .inner-box {
       @apply m-auto flex h-full w-full max-w-7xl items-center justify-between px-4;

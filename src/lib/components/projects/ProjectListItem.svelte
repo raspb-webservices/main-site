@@ -1,12 +1,16 @@
 <script lang="ts">
   import type { Project } from '$interfaces/project.interface';
-  import { formatDate, formatBudget, getStatusBadgeClass, getStatusLabel } from '$lib/helper/projectUtils';
+  import { formatDate, formatBudget, getStatusBadgeClass, getStatusLabel, getProjectTypeLabel } from '$lib/helper/projectUtils';
+  import { _ } from 'svelte-i18n';
+  let { project, openProjectModal } = $props();
 
-  export let project: Project & { id: string };
-  export let openProjectModal: (project: Project & { id: string }) => void;
+  function openThisProjectModal(project:Project) {
+    // Emit function call
+    openProjectModal(project)
+  }
 </script>
 
-<tr class="cursor-pointer hover" onclick={() => openProjectModal(project)}>
+<tr class="cursor-pointer hover" onclick={ () => openThisProjectModal(project)  }>
   <td>
     <div class="font-medium">{project.name}</div>
   </td>

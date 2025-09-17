@@ -1,20 +1,24 @@
 <script lang="ts">
   import type { Project } from '$interfaces/project.interface';
-  import { formatDate, formatBudget, getStatusBadgeClass, getStatusLabel } from '$lib/helper/projectUtils';
+  import { formatDate, formatBudget, getStatusBadgeClass, getStatusLabel, getProjectTypeLabel } from '$lib/helper/projectUtils';
+  import { _ } from 'svelte-i18n';
+  let { project, openProjectModal } = $props();
 
-  export let project: Project & { id: string };
-  export let openProjectModal: (project: Project & { id: string }) => void;
+  function openThisProjectModal(project:Project) {
+    // Emit function call
+    openProjectModal(project)
+  }
 </script>
 
-<div
+<button
   class="card bg-base-200 cursor-pointer shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-  onclick={() => openProjectModal(project)}
+  onclick={ () => openThisProjectModal(project) }
 >
   <div class="card-body">
     <div class="mb-4 flex items-start justify-between">
-      <h2 class="card-title text-lg">{project.name}</h2>
-      <div class="flex flex-col gap-1">
-        <div class="badge badge-primary badge-sm">{project.projectType || 'Unbekannt'}</div>
+      <h2 class="line-clamp-3">{project.name}</h2>
+      <div class="flex flex-row absolute top-[-7px] right-[25px] gap-1">
+        <div class="badge badge-primary badge-sm">{ $_(getProjectTypeLabel(project.projectType))}</div>
         {#if project.projectStatus}
           <div class="badge {getStatusBadgeClass(project.projectStatus)} badge-sm">
             {getStatusLabel(project.projectStatus)}
@@ -45,4 +49,12 @@
       <div class="text-base-content/50 text-xs italic">Klicken für Details →</div>
     </div>
   </div>
-</div>
+</button>
+
+<style lang="postcss">
+  @reference '../../../app.css';
+
+  .card-body {
+    @apply text-left;
+  }
+</style>

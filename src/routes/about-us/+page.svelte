@@ -1,12 +1,11 @@
 <script lang="ts">
-  import { page } from '$app/state';
+  import { onDestroy, onMount } from 'svelte';
   import { goto } from '$app/navigation';
+  import { _ } from 'svelte-i18n';
+  import { teamMembers } from '$lib/configs/teamMembers';
+  import Stage from '$lib/components/ui/stage.svelte';
   import Section from '$lib/components/ui/section.svelte';
   import RaspbPhilosophyModal from '$lib/components/modals/general/philosophy.svelte';
-  import { _ } from 'svelte-i18n';
-  import Stage from '$lib/components/ui/stage.svelte';
-  import { onDestroy, onMount } from 'svelte';
-  import { teamMembers } from '$lib/configs/teamMembers';
 
   let selectedMember: any = null;
   let philosophyModal: RaspbPhilosophyModal;
@@ -69,19 +68,10 @@
 
 <Section noSpacing={true}>
   <div id="raspb" class="inner-box animate-fade-in-up pt-30 pb-24 prose">
-    <h2>Das ist <span class="inner-text-special">raspb</span> - Ihr innovaiver IT-Dienstleister</h2>
-    <p class="teaser">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Id dignissimos veniam quam quae itaque, officiis blanditiis non, aspernatur adipisci ad porro
-      magnam eum fugit aut labore laudantium optio nostrum. Doloribus!
-    </p>
-    <p class="teaser">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Id dignissimos veniam quam quae itaque, officiis blanditiis non, aspernatur adipisci ad porro
-      magnam eum fugit aut labore laudantium optio nostrum. Doloribus!
-    </p>
-    <p class="teaser no-padding">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Id dignissimos veniam quam quae itaque, officiis blanditiis non, aspernatur adipisci ad porro
-      magnam eum fugit aut labore laudantium optio nostrum. Doloribus!
-    </p>
+    <h2>{$_('ueberUns.introSection.titleFirst')} <span class="inner-text-special">{$_('ueberUns.introSection.titleHighlight')}</span> {$_('ueberUns.introSection.titleSecond')}</h2>
+    <p class="teaser">{$_('ueberUns.introSection.teaser1')}</p>
+    <p class="teaser">{$_('ueberUns.introSection.teaser2')}</p>
+    <p class="teaser no-padding">{$_('ueberUns.introSection.teaser3')}</p>
   </div>
 </Section>
 
