@@ -5,6 +5,12 @@
   import WizardBasic from '$lib/components/wizard/wizard-basic.svelte';
   import Wizard from '$lib/components/wizard/wizard.svelte';
   import { isAuthenticated } from '$store/sharedStates.svelte';
+  import auth from '../../authService';
+
+  async function login() {
+    const auth0Client = await auth.createClient();
+    await auth.loginWithPopup(auth0Client);
+  }
 
   let loggedin = $derived(isAuthenticated.get());
   interface PageData {
@@ -13,7 +19,6 @@
   }
 
   const { data }: { data: PageData } = $props();
-
   let selectedWizard = $state<'basic' | 'advanced' | null>(null);
 
   function scrollToWizard(offset = 0) {
@@ -106,8 +111,8 @@
       onclick={() => selectWizard('basic')}
     >
       <div class="wizard-icon">✨</div>
-      <h2 class="mb-4 text-2xl font-bold">Basic-Konfigurator</h2>
-      <p class="text-lg">Schnell zu einer ungefähren Preisabschätzung. Der Basic-Konfigurator kann als erster Indikator dienen und ist in 1 Minute erledigt.</p>
+      <h2 class="mb-4 text-2xl font-bold">{$_('getStarted.wizardSelection.basicConfiguratorTitle')}</h2>
+      <p class="text-lg">{$_('getStarted.wizardSelection.basicConfiguratorDescription')}</p>
     </button>
 
     <button
@@ -116,8 +121,8 @@
       onclick={() => selectWizard('advanced')}
     >
       <div class="wizard-icon">⚙️</div>
-      <h2 class="mb-4 text-2xl font-bold">Erweiterter Konfigurator</h2>
-      <p class="text-lg">Erfassen Sie ihr gesamtes Projekt im Detail. Verwalten Sie das Ergebnis im persönlichen Dashboard.</p>
+      <h2 class="mb-4 text-2xl font-bold">{$_('getStarted.wizardSelection.advancedConfiguratorTitle')}</h2>
+      <p class="text-lg">{$_('getStarted.wizardSelection.advancedConfiguratorDescription')}</p>
     </button>
   </div>
 
@@ -125,24 +130,30 @@
     {#if selectedWizard === 'basic'}
       <WizardBasic />
     {:else if selectedWizard === 'advanced'}
-    {#if loggedin}
-      <Wizard />
+      {#if loggedin}
+        <Wizard />
       {:else}
-      <h2>Bitte registrieren Sie sich</h2>
-      <p>
-        Möchten Sie Ihr Projektvorhaben im Detail konfigurieren und konkreter machen? Um den erweiterten Wizard nutzen zu können und Ihr vorhaben abspeichern zu
-        können, erstellen Sie bitte einen Account.
-      </p>
-      <p>
-        Damit erhalten Sie den Zugriff auf Ihr persönliches Dashboard, in dem Sie mehrere Projekte verwalten können. Ihre E-Mail-Adresse ist für die
-        Registrierung ausreichend.
-      </p>
-      <button
-        class="btn-basic animate-fade-in-from-side"
-        onclick={() => {
-          goto('/registration');
-        }}>Zur Registrierung</button
-      >
+        <h2>{$_('getStarted.registrationPrompt.title')}</h2>
+        <p>
+          {$_('getStarted.registrationPrompt.description1')}
+        </p>
+        <p>
+          {$_('getStarted.registrationPrompt.description2')}
+        </p>
+    <div class="flex gap-6">
+        <button
+          class="btn-basic animate-fade-in-from-side"
+          onclick={() => {
+            goto('/registration');
+          }}>{$_('getStarted.registrationPrompt.registrationButton')}</button
+        >
+        <button
+          class="btn-basic animate-fade-in-from-side"
+          onclick={() => {
+            login();
+          }}>{$_('getStarted.registrationPrompt.loginButton')}</button
+        >
+    </div>
       {/if}
     {/if}
   </div>

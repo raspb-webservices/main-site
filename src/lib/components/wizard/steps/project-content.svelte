@@ -16,7 +16,7 @@
 
   <div class="space-y-6">
     {#each config.pages as page, i}
-      <div class="card bg-base-100 border-base-300 border">
+      <div class="card border-base-300 border bg-white">
         <div class="card-body">
           <div class="mb-4 flex items-center justify-between">
             <h4 class="card-title text-lg">{$_('wizard.steps.step5.content.pages.pageTitle')} {i + 1}</h4>
@@ -87,7 +87,7 @@
 
     <div class="space-y-4">
       {#each config.formFields as field, i}
-        <div class="card bg-base-100 border-base-300 border">
+        <div class="card border-base-300 border bg-white">
           <div class="card-body">
             <div class="mb-4 flex items-center justify-between">
               <h4 class="card-title text-lg">{$_('wizard.content.formFields.field')} {i + 1}</h4>
@@ -149,14 +149,14 @@
 <style lang="postcss">
   @reference '../../../../app.css';
   .step-header {
-    @apply border-t-base-content/40 mt-0 mb-14 border-t pt-0 text-center md:border-t-0; 
+    @apply border-t-base-content/40 mt-0 mb-14 border-t pt-0 text-center md:border-t-0;
 
     h1 {
       @apply text-base-content mb-4;
     }
 
     p.teaser {
-      @apply text-base-content/70 text-center max-w-4xl m-auto;
+      @apply text-base-content/70 m-auto max-w-4xl text-center;
     }
   }
   .content-section {
@@ -168,6 +168,20 @@
 
     p {
       @apply text-base-content/80 mb-6;
+    }
+  }
+
+  .textarea,
+  .input,
+  .select {
+    @apply border-base-300 text-base-content w-full bg-white;
+
+    &:focus {
+      @apply border-primary bg-primary/1;
+    }
+
+    &::placeholder {
+      @apply text-base-content/50;
     }
   }
 </style>

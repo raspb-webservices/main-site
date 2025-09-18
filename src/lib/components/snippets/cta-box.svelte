@@ -81,7 +81,7 @@
         @apply mb-8 grid grid-cols-1 gap-6 md:grid-cols-3;
 
         .cta-benefit {
-          @apply to-base-100 flex items-start rounded-lg bg-linear-to-tl from-white p-3 text-left;
+          @apply to-base-100 flex items-start rounded-lg bg-linear-to-tl from-base-50 p-3 text-left;
 
           .benefit-icon {
             @apply mt-1 mr-4 text-3xl;

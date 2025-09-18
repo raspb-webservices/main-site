@@ -1,7 +1,7 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n';
   import { availableFeatures, featureCategoryColors } from '$lib/configs/wizard-config';
-  let { config, customFeatures = null, calculatePrice } = $props();
+  let { config, customFeatures = null, calculatePrice, isExtendedConfigurator = false } = $props();
 </script>
 
 <div class="step-header">
@@ -27,7 +27,7 @@
   {/each}
 </div>
 
-{#if customFeatures}
+{#if customFeatures || isExtendedConfigurator}
   <div class="form-control mt-8 md:mx-10 lg:mx-20">
     <label class="label" for="customFeatures">
       <span class="label-text text-lg font-semibold">{$_('wizard.form.customFeatures')}</span>
@@ -74,25 +74,18 @@
 
   .features-grid {
     @apply mb-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3;
+
     .service-card {
-      @apply bg-base-100 border-base-300 border transition-all duration-300;
+      @apply border-base-300/80 border bg-white transition-all duration-300;
 
       &:hover {
-        @apply bg-base-200 border-base-300;
+        @apply bg-primary/1 border-base-300 shadow-md;
       }
 
       &.card-selected {
         @apply ring-primary ring-offset-base-100 ring-2 ring-offset-2;
         &:hover {
-          @apply bg-base-100 cursor-default;
-        }
-      }
-
-      .service-card-header {
-        @apply mb-4 flex items-center justify-between;
-
-        .service-icon {
-          @apply text-3xl;
+          @apply bg-primary/1 cursor-default;
         }
       }
 
@@ -107,6 +100,20 @@
           @apply text-base-content/80;
         }
       }
+    }
+  }
+
+  .textarea,
+  .input,
+  .select {
+    @apply border-base-300 text-base-content w-full bg-white;
+
+    &:focus {
+      @apply border-primary bg-primary/1;
+    }
+
+    &::placeholder {
+      @apply text-base-content/50;
     }
   }
 </style>

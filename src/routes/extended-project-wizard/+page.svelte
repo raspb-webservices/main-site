@@ -6,6 +6,7 @@
   import { goto } from '$app/navigation';
   import auth from '../../authService';
   import Loader from '$lib/components/loader.svelte';
+  import { _ } from 'svelte-i18n';
 
   let isAuth = $derived(isAuthenticated.get());
   let currentUserRoles = $derived(userroles.get());
@@ -43,8 +44,8 @@
 </script>
 
 <svelte:head>
-  <title>Extended Wizard</title>
-  <meta name="description" content="Extended Wizard" />
+  <title>{$_('extendedProjectWizard.meta.title')}</title>
+  <meta name="description" content={$_('extendedProjectWizard.meta.description')} />
 </svelte:head>
 
 {#if loading}
@@ -54,21 +55,21 @@
 {:else if showSection === 'not-authorized'}
   <Section type={'fullCenterTeaser'}>
     <div class="inner-content-wrapper prose">
-      <h1>Sie müssen angemeldet sein, um den erweiterten Projektkonfigurator nutzen zu können</h1>
-      <p class="teaser">Sie haben noch keinen Account? Hier können Sie sich registrieren...</p>
+      <h1>{$_('extendedProjectWizard.notAuthorized.title')}</h1>
+      <p class="teaser">{$_('extendedProjectWizard.notAuthorized.teaser')}</p>
       <div class="spacer"></div>
       <div class="flex gap-6">
         <button
           class="btn-basic"
           onclick={() => {
             login();
-          }}>Anmelden</button
+          }}>{$_('extendedProjectWizard.notAuthorized.loginButton')}</button
         >
         <button
           class="btn-basic"
           onclick={() => {
             goto('/registration');
-          }}>Registrierung</button
+          }}>{$_('extendedProjectWizard.notAuthorized.registrationButton')}</button
         >
       </div>
     </div>
@@ -76,11 +77,9 @@
 {:else if showSection === 'wizard'}
   <Section>
     <div class="prose">
-      <h1>Extended <span class="inner-text-special">Projekt</span>-Konfigurator</h1>
+      <h1>{$_('extendedProjectWizard.wizard.title')} <span class="inner-text-special">{$_('extendedProjectWizard.wizard.titleHighlight')}</span>{$_('extendedProjectWizard.wizard.titleSuffix')}</h1>
       <p class="teaser">
-        Die volle Projekt-Konfigurator Erfahrung erhalten Sie hier im extended Wizard. Wenn Sie das möchten, können Sie hier bereits alle Details des anstehenden
-        Projekts erfassen. Bestimmen Sie neben Features, Struktur und Design auch die Inhalte für jede Seite oder beschreiben Sonderwünsche. Die hier erfassten
-        Projekte können direkt beauftrag werden und Ergbenisse stehen in Rekortzeit zur Verfügung.
+        {$_('extendedProjectWizard.wizard.teaser')}
       </p>
       <div class="spacer"></div>
       <div class="wizard-section" id="wizard">

@@ -1,8 +1,35 @@
 {
   "footer": {
-    "imprint": "Impressum",
-    "privacyPolicy": "Datenschutz",
-    "contact": "Kontakt",
-    "scrollToTop": "Nach oben scrollen"
+    "title": "raspb webservices",
+    "nav": {
+      "services": {
+        "title": "Services",
+        "website": "Webseite",
+        "cms": "Content Management Systeme",
+        "webapp": "Web- & Business-Anwendungen",
+        "freestyle": "Freestyle Development",
+        "ki": "KI Services & Use Cases"
+      },
+      "insights": {
+        "title": "Einblicke",
+        "technology": "Technologie",
+        "project": "Projektablauf",
+        "references": "Referenzen"
+      },
+      "aboutUs": {
+        "title": "Über uns",
+        "thisIsRaspb": "Das ist raspb",
+        "kiTeam": "Unser KI Team"
+      },
+      "legal": {
+        "title": "Rechtliches & Kontakt",
+        "faq": "FAQ",
+        "contact": "Kontakt",
+        "registration": "Registrierung",
+        "imprint": "Impressum",
+        "privacy": "Datenschutz",
+        "terms": "AGB"
+      }
+    }
   }
 }

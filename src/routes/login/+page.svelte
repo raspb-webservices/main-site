@@ -11,27 +11,27 @@
 </script>
 
 <svelte:head>
-  <title>Login</title>
-  <meta name="description" content="Hier können Sie sich anmelden"/>
+  <title>{$_('login.meta.title')}</title>
+  <meta name="description" content={$_('login.meta.description')}/>
 </svelte:head>
 
 <Section type={'fullCenterTeaser'}>
   <div class="inner-content-wrapper prose">
-      <h1>Bitte melden Sie sich an</h1>
-      <p class="teaser">Wenn Sie Ihr eigenes Dahsboard aufrufen oder den erweiterten Konfigurator nutzen möchten, müssen Sie angemeldet sein.</p>
+      <h1>{$_('login.title')}</h1>
+      <p class="teaser">{$_('login.teaser')}</p>
       <div class="spacer"></div>
       <div class="flex gap-6">
         <button
           class="btn-basic"
           onclick={() => {
             login();
-          }}>Anmelden</button
+          }}>{$_('login.loginButton')}</button
         >
                 <button
           class="btn-basic"
           onclick={() => {
             goto('/registration');
-          }}>Registrieren</button
+          }}>{$_('login.registerButton')}</button
         >
     </div>
   </div>

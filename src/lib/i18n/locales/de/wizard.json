@@ -444,7 +444,7 @@
       "otherGoogleFonts": "Ich möchte eine andere Google Font nutzen",
       "customFont": "Oder eigene Schriftart definieren:",
       "customFontPlaceholder": "z.B. Helvetica Neue, Arial, Corporate Font Name...",
-      "fontPreviewTitle": "Schriftart-Vorschau von {font}:",
+      "fontPreviewTitle": "Vorschau von {font}:",
       "fontPreview": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis minima officia eveniet fugiat ad dicta quia optio quod!"
     },
     "content": {
@@ -543,6 +543,7 @@
         "estimatedPrice": "Geschätzter Preis:",
         "projectType": "Projekttyp:",
         "home": "Zur Startseite",
+        "dasjboard": "Zur Projektübersicht",
         "contact": "Kontakt aufnehmen"
       },
       "reset": {

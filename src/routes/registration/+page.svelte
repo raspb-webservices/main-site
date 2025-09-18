@@ -24,12 +24,12 @@
   // Validation
   function validateForm() {
     if (!email || !password || !confirmPassword) {
-      errorMessage = 'Bitte füllen Sie alle Pflichtfelder aus.';
+      errorMessage = 'registration.form.validation.requiredFields'
       return false;
     }
 
     if (password !== confirmPassword) {
-      errorMessage = 'Die Passwörter stimmen nicht überein.';
+      errorMessage = 'registration.form.validation.passwordMismatch';
       isPasswordMatch = false;
       return false;
     }
@@ -77,7 +77,7 @@
       confirmPassword = '';
     } catch (error) {
       console.error('Registration error:', error);
-      errorMessage = error.message || 'Bei der Registrierung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.';
+      errorMessage = error.message || 'registration.form.validation.registrationError';
     } finally {
       isLoading = false;
     }
@@ -94,8 +94,8 @@
 </script>
 
 <svelte:head>
-  <title>Registrierung</title>
-  <meta name="description" content="Hier können Sie sich registrieren"/>
+  <title>{$_('registration.meta.title')}</title>
+  <meta name="description" content="{$_('registration.meta.description')}"/>
 </svelte:head>
 
 
@@ -103,11 +103,10 @@
   <Section noSpacing={true}>
     <div class="inner-box reduced pt-24 pb-12 prose">
       <h1 class="animate-fade-in mb-8 text-center text-4xl font-bold max-w-[850px]">
-        Registrieren Sie hier Ihren eigenen 
-        <span class="inner-text-special">raspb Account</span>
+        {$_('registration.intro.titleFirst')}
+        <span class="inner-text-special">{$_('registration.intro.titleHighlight')}</span>
       </h1>
-      <p class="teaser animate-fade-in-up boxed">
-        Mit Ihrem persönlichen Konto, erhalten Sie Zugang zum umfangreichen Projektkonfigurator (Wizard) und Ihr Dashboard, um all Ihre Projektideen, Beauftragungen usw. übersichtlich verwalten zu können.</p>
+      <p class="teaser animate-fade-in-up boxed text-center">{$_('registration.intro.teaser')}</p>
     </div>
   </Section>
 
@@ -127,9 +126,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
               </svg>
             </div>
-            <h2 class="mb-4 text-2xl font-bold">Registrierung erfolgreich!</h2>
-            <p class="mb-6">Ihr Konto wurde erfolgreich erstellt. Sie erhalten in Kürze eine Bestätigungs-E-Mail.</p>
-            <button class="btn-basic mx-auto" onclick={() => (isSuccess = false)}> Zurück zum Formular </button>
+            <h2 class="mb-4 text-2xl font-bold">{$_('registration.success.title')}</h2>
+            <p class="mb-6">{$_('registration.success.message')}</p>
+            <button class="btn-basic mx-auto" onclick={() => (isSuccess = false)}> {$_('registration.success.backToForm')} </button>
           </div>
         {:else}
           <form
@@ -142,7 +141,7 @@
             {#if errorMessage}
               <div class="alert alert-error shadow-lg">
                 <div>
-                  <span>{errorMessage}</span>
+                  <span>{$_(errorMessage)}</span>
                 </div>
               </div>
             {/if}
@@ -150,29 +149,29 @@
             <div class="grid grid-cols-1 md:gap-6 md:grid-cols-2">
               <div class="form-control">
                 <label for="firstName" class="label">
-                  <span class="label-text">Vorname</span>
+                  <span class="label-text">{$_('registration.form.firstName.label')}</span>
                 </label>
-                <input type="text" id="firstName" class="input input-bordered w-full" bind:value={firstName} placeholder="Max" />
+                <input type="text" id="firstName" class="input input-bordered w-full" bind:value={firstName} placeholder="{$_('registration.form.firstName.placeholder')}" />
               </div>
 
               <div class="form-control">
                 <label for="lastName" class="label">
-                  <span class="label-text">Nachname</span>
+                  <span class="label-text">{$_('registration.form.lastName.label')}</span>
                 </label>
-                <input type="text" id="lastName" class="input input-bordered w-full" bind:value={lastName} placeholder="Mustermann" />
+                <input type="text" id="lastName" class="input input-bordered w-full" bind:value={lastName} placeholder="{$_('registration.form.lastName.placeholder')}" />
               </div>
             </div>
 
             <div class="form-control">
               <label for="email" class="label">
-                <span class="label-text">E-Mail-Adresse *</span>
+                <span class="label-text">{$_('registration.form.email.label')}</span>
               </label>
-              <input type="email" id="email" class="input input-bordered w-full" bind:value={email} placeholder="max.mustermann@beispiel.de" required />
+              <input type="email" id="email" class="input input-bordered w-full" bind:value={email} placeholder="{$_('registration.form.email.placeholder')}" required />
             </div>
 
             <div class="form-control">
               <label for="password" class="label">
-                <span class="label-text">Passwort *</span>
+                <span class="label-text">{$_('registration.form.password.label')}</span>
               </label>
               <div class="relative">
                 <input
@@ -180,7 +179,7 @@
                   id="password"
                   class="input input-bordered relative z-0 w-full pr-12"
                   bind:value={password}
-                  placeholder="••••••••"
+                  placeholder="{$_('registration.form.password.placeholder')}"
                   required
                   minlength="8"
                 />
@@ -188,7 +187,7 @@
                   type="button"
                   class="absolute inset-y-0 right-0 z-10 flex items-center pr-3"
                   onclick={() => (showPassword = !showPassword)}
-                  aria-label={showPassword ? 'Passwort verbergen' : 'Passwort anzeigen'}
+                  aria-label={showPassword ? $_('registration.form.password.hide') : $_('registration.form.password.show')}
                 >
                   {#if showPassword}
                     <svg xmlns="http://www.w3.org/2000/svg" class="text-base-content/50 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -212,12 +211,12 @@
                   {/if}
                 </button>
               </div>
-              <div class="label-text mt-1 text-sm opacity-70">Mindestens 8 Zeichen</div>
+              <div class="label-text mt-1 text-sm opacity-70">{$_('registration.form.password.minLength')}</div>
             </div>
 
             <div class="form-control">
               <label for="confirmPassword" class="label">
-                <span class="label-text">Passwort bestätigen *</span>
+                <span class="label-text">{$_('registration.form.confirmPassword.label')}</span>
               </label>
               <div class="relative">
                 <input
@@ -226,14 +225,14 @@
                   class={`input input-bordered relative z-0 w-full pr-12 ${!isPasswordMatch ? 'input-error' : ''}`}
                   bind:value={confirmPassword}
                   oninput={checkPasswordMatch}
-                  placeholder="••••••••"
+                  placeholder="{$_('registration.form.confirmPassword.placeholder')}"
                   required
                 />
                 <button
                   type="button"
                   class="absolute inset-y-0 right-0 z-10 flex items-center pr-3"
                   onclick={() => (showConfirmPassword = !showConfirmPassword)}
-                  aria-label={showConfirmPassword ? 'Passwort verbergen' : 'Passwort anzeigen'}
+                  aria-label={showConfirmPassword ? $_('registration.form.password.hide') : $_('registration.form.password.show')}
                 >
                   {#if showConfirmPassword}
                     <svg xmlns="http://www.w3.org/2000/svg" class="text-base-content/50 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -258,7 +257,7 @@
                 </button>
               </div>
               {#if !isPasswordMatch && confirmPassword}
-                <div class="label-text text-error mt-1 text-sm">Passwörter stimmen nicht überein</div>
+                <div class="label-text text-error mt-1 text-sm">{$_('registration.form.confirmPassword.mismatch')}</div>
               {/if}
             </div>
 
@@ -266,7 +265,7 @@
               <label class="cursor-pointer">
                 <input type="checkbox" class="checkbox checkbox-primary" required />
                 <span class="text-black/60 ml-1">
-                  Ich stimme den <a href="/privacy-notice" class="link link-primary">Datenschutzbestimmungen</a> zu *
+                  {$_('registration.form.privacy.prefix')}<a href="/privacy-notice" class="link link-primary">{$_('registration.form.privacy.link')}</a>{$_('registration.form.privacy.suffix')}
                 </span>
               </label>
             </div>
@@ -275,9 +274,9 @@
               <button type="submit" class="btn-basic w-full" disabled={isLoading}>
                 {#if isLoading}
                   <span class="loading loading-spinner loading-sm mr-2"></span>
-                  Registrierung läuft...
+                  {$_('registration.form.button.loading')}
                 {:else}
-                  Konto erstellen
+                  {$_('registration.form.button.createAccount')}
                 {/if}
               </button>
             </div>

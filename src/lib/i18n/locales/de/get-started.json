@@ -1,37 +1,50 @@
 {
-    "getStarted": {
+  "getStarted": {
     "meta": {
-      "title": "raspb Webservices - Projekt konfigurieren",
-      "description": "Konfigurieren Sie Ihr digitales Projekt in wenigen Minuten und erhalten Sie sofort eine transparente Kostenschätzung."
+      "title": "Starten Sie Ihr Projekt",
+      "description": "Beginnen Sie Ihr Projekt mit unserem Konfigurator."
     },
     "hero": {
-      "title": "Projekt",
-      "titleHighlight": "konfigurieren"
+      "title": "Starten Sie Ihr",
+      "titleHighlight": "Projekt"
     },
     "teaser": {
-      "description": "In nur wenigen Minuten zu Ihrem maßgeschneiderten Angebot - unser intelligenter Konfigurator führt Sie Schritt für Schritt durch alle wichtigen Entscheidungen."
+      "description": "Wählen Sie den passenden Konfigurator, um Ihr Projekt zu starten und eine erste Einschätzung zu erhalten."
     },
     "benefits": {
       "fast": {
-        "title": "Schnell & Effizient",
-        "description": "Keine langen Gespräche - definieren Sie Ihr Projekt in 5-10 Minuten"
+        "title": "Schnell",
+        "description": "Erhalten Sie in wenigen Minuten eine erste Einschätzung."
       },
       "transparent": {
-        "title": "Transparente Preise",
-        "description": "Erhalten Sie sofort eine realistische Kostenschätzung für Ihr Vorhaben"
+        "title": "Transparent",
+        "description": "Volle Kostenkontrolle und klare Leistungsübersicht."
       },
       "precise": {
-        "title": "Präzise Planung",
-        "description": "Alle Details werden erfasst - für ein perfekt auf Sie zugeschnittenes Ergebnis"
+        "title": "Präzise",
+        "description": "Detaillierte Konfiguration für genaue Ergebnisse."
       },
       "documentation": {
-        "title": "Komplette Dokumentation",
-        "description": "Am Ende erhalten Sie eine detaillierte Projektbeschreibung zum Download"
+        "title": "Dokumentiert",
+        "description": "Alle Schritte und Entscheidungen werden festgehalten."
       }
     },
     "cta": {
-      "title": "So funktioniert's:",
-      "description": "Wählen Sie Ihren Projekttyp, beschreiben Sie Ihre Anforderungen, definieren Sie gewünschte Features und Design - fertig! Sie erhalten sofort eine Kostenschätzung und können Ihre Konfiguration als PDF herunterladen."
+      "title": "Bereit?",
+      "description": "Wählen Sie jetzt Ihren Konfigurator und legen Sie los!"
+    },
+    "wizardSelection": {
+      "basicConfiguratorTitle": "Basic-Konfigurator",
+      "basicConfiguratorDescription": "Schnell zu einer ungefähren Preisabschätzung. Der Basic-Konfigurator kann als erster Indikator dienen und ist in 1 Minute erledigt.",
+      "advancedConfiguratorTitle": "Erweiterter Konfigurator",
+      "advancedConfiguratorDescription": "Erfassen Sie ihr gesamtes Projekt im Detail. Verwalten Sie das Ergebnis im persönlichen Dashboard."
+    },
+    "registrationPrompt": {
+      "title": "Bitte registrieren Sie sich",
+      "description1": "Möchten Sie Ihr Projektvorhaben im Detail konfigurieren und konkreter machen? Um den erweiterten Wizard nutzen zu können und Ihr vorhaben abspeichern zu können, erstellen Sie bitte einen Account.",
+      "description2": "Damit erhalten Sie den Zugriff auf Ihr persönliches Dashboard, in dem Sie mehrere Projekte verwalten können. Ihre E-Mail-Adresse ist für die Registrierung ausreichend.",
+      "registrationButton": "Zur Registrierung",
+      "loginButton": "Direkt anmelden"
     }
   }
 }

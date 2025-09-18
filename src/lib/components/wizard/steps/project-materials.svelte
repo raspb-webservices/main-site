@@ -20,7 +20,7 @@
       </label>
       <div class="join w-full">
         <input type="color" id="primaryColor" class="join-item h-12 w-16 border-0" bind:value={config.primaryColour} />
-        <input type="text" class="input input-bordered join-item flex-1" bind:value={config.primaryColour} />
+        <input type="text" class="input input-bordered join-item flex-1 h-12" bind:value={config.primaryColour} />
       </div>
     </div>
 
@@ -30,7 +30,7 @@
       </label>
       <div class="join w-full">
         <input type="color" id="secondaryColor" class="join-item h-12 w-16 border-0" bind:value={config.secondaryColour} />
-        <input type="text" class="input input-bordered join-item flex-1" bind:value={config.secondaryColour} />
+        <input type="text" class="input input-bordered join-item flex-1 h-12" bind:value={config.secondaryColour} />
       </div>
     </div>
 
@@ -40,7 +40,7 @@
       </label>
       <div class="join w-full">
         <input type="color" id="accentColor" class="join-item h-12 w-16 border-0" bind:value={config.accentColour} />
-        <input type="text" class="input input-bordered join-item flex-1" bind:value={config.accentColour} />
+        <input type="text" class="input input-bordered join-item flex-1 h-12" bind:value={config.accentColour} />
       </div>
     </div>
   </div>
@@ -80,7 +80,7 @@
 
   {#if config.desiredFont && config.desiredFont !== 'Other Google Fonts'}
     <div class="alert mt-4">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info h-6 w-6 shrink-0">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 30 30" class="stroke-info h-6 w-6 shrink-0">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
       </svg>
 
@@ -193,19 +193,19 @@
       }
     }
 
-    .textarea,
-    .input,
-    .select {
-      @apply bg-base-100 border-base-300 text-base-content w-full;
+  .textarea,
+  .input,
+  .select {
+    @apply border-base-300 text-base-content w-full bg-white;
 
-      &:focus {
-        @apply border-primary bg-base-100;
-      }
-
-      &::placeholder {
-        @apply text-base-content/50;
-      }
+    &:focus {
+      @apply border-primary bg-primary/1;
     }
+
+    &::placeholder {
+      @apply text-base-content/50;
+    }
+  }
   
   }
 </style>

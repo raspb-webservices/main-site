@@ -1,0 +1,20 @@
+{
+  "extendedProjectWizard": {
+    "meta": {
+      "title": "Erweiterter Konfigurator",
+      "description": "Erweiterter Konfigurator"
+    },
+    "notAuthorized": {
+      "title": "Sie müssen angemeldet sein, um den erweiterten Projektkonfigurator nutzen zu können",
+      "teaser": "Sie haben noch keinen Account? Hier können Sie sich registrieren...",
+      "loginButton": "Anmelden",
+      "registrationButton": "Registrierung"
+    },
+    "wizard": {
+      "title": "Extended",
+      "titleHighlight": "Projekt",
+      "titleSuffix": "-Konfigurator",
+      "teaser": "Die volle Projekt-Konfigurator Erfahrung erhalten Sie hier im extended Wizard. Wenn Sie das möchten, können Sie hier bereits alle Details des anstehenden Projekts erfassen. Bestimmen Sie neben Features, Struktur und Design auch die Inhalte für jede Seite oder beschreiben Sonderwünsche. Die hier erfassten Projekte können direkt beauftrag werden und Ergbenisse stehen in Rekortzeit zur Verfügung."
+    }
+  }
+}

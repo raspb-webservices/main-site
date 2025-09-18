@@ -18,6 +18,7 @@
   import ThankYou from './steps/thank-you.svelte';
   import ResetModal from '../modals/general/reset-modal.svelte';
   import ErrorModal from '../modals/general/error-modal.svelte';
+  import SubmittingModal from './steps/submitting.svelte';
 
   // Props for initial values from URL parameters
   interface Props {
@@ -197,24 +198,41 @@
 
   function calculatePrice() {
     let basePrice = 0;
+    let totalFeatureComplexity = 0;
+    let highesPossible;
+    let lowestPossible;
 
-    // Base price from project type
     const projectType = projectTypes.find((p) => p.id === config.projectType);
     if (projectType) {
       basePrice = (projectType.lowestPrice + projectType.highestPrice) / 2;
     }
 
-    // Subtype price (replaces base price)
     const subTypeData = subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType);
     if (subTypeData) {
-      basePrice = (subTypeData.lowestPrice + subTypeData.highestPrice) / 2;
+      basePrice = subTypeData.lowestPrice;
+      lowestPossible = subTypeData.lowestPrice;
+      highesPossible = subTypeData.highestPrice;
     }
 
-    const featureComplexitySum = 1;
+    config.features.forEach((featureName) => {
+      const feature = availableFeatures.find((f) => f.name === featureName);
+      if (feature && feature.category) {
+        totalFeatureComplexity += feature.complexityFactor || 0;
+      }
+    });
 
-    for (let i = 0; i < config.features.length; i++) {
-      const currentFeature = config.features[i];
+    if (totalFeatureComplexity > 15) {
+      basePrice = highesPossible;
+    } else if (totalFeatureComplexity <= 2) {
+      basePrice = lowestPossible;
+    } else {
+      const range = highesPossible - lowestPossible;
+      let x = (1 / 15) * totalFeatureComplexity;
+      basePrice = lowestPossible + range * x;
     }
+    config.estimatedPrice = basePrice;
+    console.log('Estimated Price:', config.estimatedPrice);
+    console.log('Total Feature Complexity:', totalFeatureComplexity);
   }
 
   async function handleFileUpload(event: Event) {
@@ -655,7 +673,7 @@
     {:else if (currentStep === 3 && config.projectType !== 'freestyle') || (currentStep === 2 && config.projectType === 'freestyle')}
       <ProjectDetails {config}></ProjectDetails>
     {:else if currentStep === 4 && (config.projectType === 'website' || config.projectType === 'cms' || config.projectType === 'webApplication')}
-      <ProjectFeatures {config} {customFeatures} {calculatePrice} ></ProjectFeatures>
+      <ProjectFeatures {config} {customFeatures} {calculatePrice} isExtendedConfigurator={true}></ProjectFeatures>
     {:else if currentStep === 5 && (config.projectType === 'website' || config.projectType === 'cms')}
       <ProjectContent {config} {addPage} {removePage} {removeFormField} {addFormField} {formFieldTypes}></ProjectContent>
     {:else if (currentStep === 6 && (config.projectType === 'website' || config.projectType === 'cms')) || (currentStep === 5 && config.projectType === 'webApplication')}
@@ -728,30 +746,7 @@
 
 <!-- Loading Overlay -->
 {#if isSubmitting}
-  <div class="loading-overlay">
-    <div class="loading-content">
-      <div class="loading-animation">
-        <div class="loading-spinner"></div>
-        <div class="loading-pulse"></div>
-      </div>
-      <h2 class="loading-title">{$_('wizard.loading.title')}</h2>
-      <p class="loading-text">{$_('wizard.loading.description')}</p>
-      <div class="loading-steps">
-        <div class="loading-step">
-          <span class="loading-step-icon">✓</span>
-          <span>{$_('wizard.loading.steps.preparing')}</span>
-        </div>
-        <div class="loading-step">
-          <span class="loading-step-icon">⏳</span>
-          <span>{$_('wizard.loading.steps.creating')}</span>
-        </div>
-        <div class="loading-step">
-          <span class="loading-step-icon">⏳</span>
-          <span>{$_('wizard.loading.steps.sending')}</span>
-        </div>
-      </div>
-    </div>
-  </div>
+  <SubmittingModal></SubmittingModal>
 {/if}
 
 <!-- Thank You Page -->

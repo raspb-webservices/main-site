@@ -1,5 +1,6 @@
 {
-  "thankYou": {
-    "title": "Danke..."
-  }
+  "thankYouHighlight": "Vielen Dank",
+  "thankYouMessageSecond": "für Ihre Nachricht",
+  "thankYouTeaser": "Wir haben Ihre Anfrage erhalten und werden uns in Kürze bei Ihnen zurückmelden...",
+  "backToHomepage": "Zurück zur Startseite"
 }

@@ -25,7 +25,7 @@
 <style lang="postcss">
   @reference '../../../app.css';
   section.base-section {
-    @apply w-full bg-white py-24;
+    @apply w-full bg-base-50 py-24;
 
     &.stretch {
       @apply min-h-[100vh];

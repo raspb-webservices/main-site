@@ -2,43 +2,30 @@
   import { page } from '$app/state';
   import { goto } from '$app/navigation';
   import Section from '$lib/components/ui/section.svelte';
-
-  let errReasonShort = $state();
-  let errReason = $state();
-  let errReasonSubtext = $state();
-
-  if (page.status === 404) {
-    errReasonShort = 'Seite nicht gefunden';
-    errReason = 'Ooops! Diese Seite gibt es leider nicht (mehr).';
-    errReasonSubtext = 'Aber keine Sorge, wir bringen dich an dein Ziel! Wo möchtest du hin?';
-  } else {
-    errReasonShort = 'Unbekannter Fehler';
-    errReason = 'Ein unerwarteter Fehler ist aufgetreten.';
-    errReasonSubtext = 'Bitte versuche es später erneut.';
-  }
+  import { _ } from 'svelte-i18n';
 </script>
 
 <svelte:head>
-  <title>{page.status} - {errReasonShort}</title>
+  <title>{page.status} - {page.status === 404 ? $_('errorPage.notFoundShort') : $_('errorPage.unknownErrorShort')}</title>
 </svelte:head>
 
 <Section type={'fullCenterTeaser'}>
   <div class="inner-content-wrapper prose">
-    <h1>{errReason}</h1>
-    <p class="teaser">{errReasonSubtext}</p>
+    <h1>{page.status === 404 ? $_('errorPage.notFound') : $_('errorPage.unknownError')}</h1>
+    <p class="teaser">{page.status === 404 ? $_('errorPage.notFoundSubtext') : $_('errorPage.unknownErrorSubtext')}</p>
     <div class="spacer"></div>
     <div class="flex gap-6">
       <button
-        class="btn-basic"
+        class="btn-basic text-base"
         onclick={() => {
           goto('/');
-        }}>Zurück zur Startseite</button
+        }}>{$_('errorPage.backToHomepage')}</button
       >
       <button
         class="btn-basic"
         onclick={() => {
           goto('/get-started');
-        }}>Projekt konfigurieren</button
+        }}>{$_('errorPage.configureProject')}</button
       >
     </div>
   </div>

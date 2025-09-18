@@ -1,0 +1,12 @@
+{
+  "errorPage": {
+    "notFoundShort": "Seite nicht gefunden",
+    "notFound": "Ooops! Diese Seite gibt es leider nicht (mehr).",
+    "notFoundSubtext": "Aber keine Sorge, wir bringen dich an dein Ziel! Wo möchtest du hin?",
+    "unknownErrorShort": "Unbekannter Fehler",
+    "unknownError": "Ein unerwarteter Fehler ist aufgetreten.",
+    "unknownErrorSubtext": "Bitte versuche es später erneut.",
+    "backToHomepage": "Zurück zur Startseite",
+    "configureProject": "Projekt konfigurieren"
+  }
+}

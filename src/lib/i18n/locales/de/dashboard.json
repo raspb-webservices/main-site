@@ -1,1 +1,31 @@
-{}
+{
+  "dashboard": {
+    "errorLoadingProjects": "Fehler beim Laden der Projekte",
+    "networkErrorLoadingProjects": "Netzwerkfehler beim Laden der Projekte",
+    "notAuthorized": {
+      "title": "Sie müssen angemeldet sein, um Ihr persönliches Dashboard aufrufen zu können",
+      "teaser": "Sie haben noch keinen Account? Hier können Sie sich registrieren...",
+      "loginButton": "Anmelden",
+      "registrationButton": "Registrierung"
+    },
+    "noProjects": {
+      "title": "Sie haben noch keine Projekte",
+      "teaser": "Starte Sie direkt mit dem erweiterten Projektkonfigurator",
+      "startButton": "Jetz loslegen"
+    },
+    "retryButton": "Erneut versuchen",
+    "myDashboardTitle": "Mein Dashboard",
+    "myDashboardTeaser": "Hier sind alle Ihre Projekte aufgelistet",
+    "viewMode": {
+      "grid": "Kacheln",
+      "list": "Liste"
+    },
+    "tableHeaders": {
+      "project": "Projekt",
+      "type": "Typ",
+      "status": "Status",
+      "budget": "Budget",
+      "created": "Erstellt"
+    }
+  }
+}

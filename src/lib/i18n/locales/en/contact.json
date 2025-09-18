@@ -1,5 +1,19 @@
 {
   "contact": {
-    "title": "Contact"
+    "title": "Contact",
+    "intro": "We look forward to your message!",
+    "form": {
+      "firstNameLabel": "First Name",
+      "firstNamePlaceholder": "Max",
+      "lastNameLabel": "Last Name",
+      "lastNamePlaceholder": "Mustermann",
+      "emailLabel": "Email Address",
+      "emailPlaceholder": "max.musterman@example.com",
+      "phoneLabel": "Phone Number",
+      "phonePlaceholder": "0123-456789",
+      "messageLabel": "Your Message to us",
+      "dsgvoLabel": "I agree to the storage and processing of my data by this website",
+      "submitButton": "Submit"
+    }
   }
 }

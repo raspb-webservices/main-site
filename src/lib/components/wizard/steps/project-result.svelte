@@ -5,8 +5,19 @@
 </script>
 
 <div class="step-header">
-  <h1><span class="inner-text-special">{$_('wizard.steps.stepSummary.titleHighlight')}</span></h1>
-  <p class="teaser">{$_('wizard.steps.stepSummary.teaser')}</p>
+  <h1>
+    {#if config.name}
+      {config.name} -
+    {/if}
+    <span class="inner-text-special">{$_('wizard.steps.stepSummary.titleHighlight')}</span>
+  </h1>
+  {#if config.description}
+    <p class="teaser">
+      {config.description.substring(0, 150)}{config.description.length > 150 ? '...' : ''}
+    </p>
+  {:else}
+    <p class="teaser">{$_('wizard.steps.stepSummary.teaser')}</p>
+  {/if}
 </div>
 
 <!-- Asset Preparation Progress -->

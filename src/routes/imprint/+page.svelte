@@ -1,90 +1,79 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import Section from '$lib/components/ui/section.svelte';
+  import { _ } from 'svelte-i18n';
 </script>
 
 <svelte:head>
-  <title>Impressum - raspb Webservices</title>
-  <meta name="description" content="Impressum der raspb Webservices UG (in Gründung)" />
+  <title>{$_('imprint.meta.title')}</title>
+  <meta name="description" content={$_('imprint.meta.description')} />
 </svelte:head>
 
   <Section>
     <div class="imprint-content prose">
-      <h1>Impressum</h1>
+      <h1>{$_('imprint.title')}</h1>
 
-      <h2>Angaben gemäß § 5 TMG</h2>
+      <h2>{$_('imprint.section5TMG')}</h2>
       <div class="contact-info">
-        <p class="no-padding"><strong>raspb Webservices UG (in Gründung)</strong></p>
-        <p>Am Eselsborn 4a<br />55286 Sulzheim</p>
+        <p class="no-padding"><strong>{$_('imprint.companyName')}</strong></p>
+        <p>{$_('imprint.address')}<br />{$_('imprint.zipCity')}</p>
       </div>
       <div class="spacer"></div>
-      <h3>Vertreten durch:</h3>
+      <h3>{$_('imprint.representedBy')}</h3>
       <p>Markus Härtig</p>
 
-      <h3>Kontakt</h3>
+      <h3>{$_('imprint.contact')}</h3>
       <div class="contact-details">
-        <p class="no-padding"><strong>Telefon:</strong> 06732 - 9648113</p>
-        <p><strong>E-Mail:</strong> <a href="mailto:contact@raspb.de">contact@raspb.de</a></p>
+        <p class="no-padding"><strong>{$_('imprint.phone')}</strong> 06732 - 9648113</p>
+        <p><strong>{$_('imprint.email')}</strong> <a href="mailto:contact@raspb.de">contact@raspb.de</a></p>
       </div>
 
       <div class="spacer"></div>
 
-      <h3>Registereintrag</h3>
-      <p>Das Unternehmen befindet sich derzeit in Gründung.</p>
+      <h3>{$_('imprint.registerEntry')}</h3>
+      <p>{$_('imprint.companyInFormation')}</p>
 
-      <h3>Umsatzsteuer-ID</h3>
+      <h3>{$_('imprint.vatId')}</h3>
       <p>
-        Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br />
-        Wird nach Gründung nachgetragen.
+        {$_('imprint.vatIdText')}<br />
+        {$_('imprint.vatIdPending')}
       </p>
 
-      <h3>EU-Streitschlichtung</h3>
+      <h3>{$_('imprint.euDisputeResolution')}</h3>
       <p>
-        Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+        {$_('imprint.euDisputeResolutionText')}
         <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a><br />
-        Unsere E-Mail-Adresse finden Sie oben im Impressum.
+        {$_('imprint.euDisputeResolutionEmail')}
       </p>
 
-      <h3>Verbraucherstreitbeilegung/Universalschlichtungsstelle</h3>
-      <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+      <h3>{$_('imprint.consumerDisputeResolution')}</h3>
+      <p>{$_('imprint.consumerDisputeResolutionText')}</p>
 
-      <h3>Haftung für Inhalte</h3>
+      <h3>{$_('imprint.liabilityForContent')}</h3>
       <p>
-        Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG
-        sind wir als Diensteanbieter jedoch nicht unter der Verpflichtung, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen
-        zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
-      </p>
-
-      <p>
-        Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche
-        Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen
-        werden wir diese Inhalte umgehend entfernen.
-      </p>
-
-      <h3>Haftung für Links</h3>
-      <p>
-        Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch
-        keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten
-        Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht
-        erkennbar.
+        {$_('imprint.liabilityForContentText1')}
       </p>
 
       <p>
-        Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei
-        Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.
+        {$_('imprint.liabilityForContentText2')}
       </p>
 
-      <h3>Urheberrecht</h3>
+      <h3>{$_('imprint.liabilityForLinks')}</h3>
       <p>
-        Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung,
-        Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw.
-        Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.
+        {$_('imprint.liabilityForLinksText1')}
       </p>
 
       <p>
-        Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter
-        als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei
-        Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.
+        {$_('imprint.liabilityForLinksText2')}
+      </p>
+
+      <h3>{$_('imprint.copyright')}</h3>
+      <p>
+        {$_('imprint.copyrightText1')}
+      </p>
+
+      <p>
+        {$_('imprint.copyrightText2')}
       </p>
 
       <div class="spacer"></div>
@@ -92,7 +81,7 @@
         class="btn-basic"
         onclick={() => {
           goto('/');
-        }}>Zurück zur Startseite</button
+        }}>{$_('imprint.backToHomepage')}</button
       >
     </div>
   </Section>

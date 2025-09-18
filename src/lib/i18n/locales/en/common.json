@@ -21,6 +21,20 @@
     },
     "buttonText": "Configure project now",
     "faqButtonText": "Frequently Asked Questions",
-    "note": "💡 <strong>Tip:</strong> The configurator takes only 3-5 minutes and you immediately receive your personal project price. Non-binding and free of charge."
+    "note": "💡 <strong>Tip:</strong> The configurator takes only 3-5 minutes and you immediately receive your personal project price. Non-binding and free of charge.",
+    "variant2": {
+      "titleFirst": "Ready for your",
+      "titleHighlight": "digital project",
+      "description": "You have found the perfect solution for your project? Our intelligent configurator helps you specify your project and you immediately receive a transparent fixed price."
+    }
+  },
+  "footer": {
+    "titleFirst": "SPECIAL",
+    "nav": {
+      "services": {
+        "title": "Services",
+        "website": "Website"
+      }
+    }
   }
 }

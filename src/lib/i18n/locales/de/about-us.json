@@ -17,9 +17,9 @@
       "titleFirst": "Das ist",
       "titleHighlight": "raspb",
       "titleSecond": "- Ihr innovaiver IT-Dienstleister",
-      "teaser1": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Id dignissimos veniam quam quae itaque, officiis blanditiis non, aspernatur adipisci ad porro magnam eum fugit aut labore laudantium optio nostrum. Doloribus!",
-      "teaser2": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Id dignissimos veniam quam quae itaque, officiis blanditiis non, aspernatur adipisci ad porro magnam eum fugit aut labore laudantium optio nostrum. Doloribus!",
-      "teaser3": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Id dignissimos veniam quam quae itaque, officiis blanditiis non, aspernatur adipisci ad porro magnam eum fugit aut labore laudantium optio nostrum. Doloribus!"
+      "teaser1": "Sie spüren es doch intuitiv - raspb ist anders. Wir sind unkonventionell, wir machen Dinge anders... Wir machen sie, weil sie Sinn machen, nicht weil es alle tun!<br />Die Nachfrage nach IT-Lösungen für kleinere und mittlere Unternehmen ist ungebrochen. Und auch Konzerne überlegen wo und wie die IT-Budgets verteilt  werden. Make or Buy? Selbst machen oder ausschreiben? Die Power von KI wird den Arbeitsmarkt und die IT im Besonderen durchrütteln und bringt viele Risiken, aber auch Chancen mit sich.",
+      "teaser2": "Sie müssen die Potenziale nicht alleine identifizierne und heben - holen Sie sich einen Experten an Ihre Seite. Denn nicht jedes KI-Versprechen stellt sich in der Praxis als das heraus, was man sich zu Beginn vorgestellt hat. Ich will damit sagen, dass man viele Vorhaben auch mit einem Prompt von einer freien KI erstellen lassen kann. Die Ergebnisse sind wirklich erstaunlich. Am Ende braucht es aber dennoch den Experten, der das Ergebnis bewerten, einordnen kann und jemand, der die KI-Modell so füttert, dass eine sicheres, schnelles, wartbares Ergebnis dabei herauskommt, welches Freude und nicht Frust auslöst. Auch gibt es unzähliche Low-Code- / No-Code-Plattformenen und Softwareanbieter da drauße - Webseitenbaukästen - die versprechen mit wenig Aufwand und Kosten Profiergebnisse zu generieren. Hier gibt es sicherlich auch genügend Anwendungsfälle, aber man darf dabei nicht vergessen, dass das auch nur Tools sind, die bedient werden müssen. Sie kosten Zeit, Mühe, eine Lernkurve und meist monatliche Gebühren. Die Ergebnisse stellen sich meist schnell als unzureichend heraus und man gibt Individualität und Flexibilität ab.Dunmmerweise ist die Alternative - das Vorhaben an eine Agentur oder Entwicklungs-Studio outzusourcen - meist sehr teuer, mit langen stressigen Projekten.",
+      "teaser3": "Genau hier steht raspb bereit. Bei der Projektrelaisierung unterstützt uns KI (Webseiten, CMS, Apps). Aber auch KI Use Cases in Ihrem Unternehmen können wir gemeinsam realisieren (KI-Agenten, Workflows, Automatisierungen, ...)<br /><br />raspb ist anders, raspb ist innovativ, vielseitig, modern, schnell, effizient, günstig, qualitativ hochwertig, immer für Sie da, persönlich, unkompliziert, flexibel, verlässlich und soo vieles mehr. Finden Sie es heraus."
     },
     "markusSection": {
       "badge": "Solopreneur & Gründer",
@@ -31,7 +31,16 @@
       "statExperienceValue": "knapp 20 Jahre",
       "paragraph2": "Mein Ansatz kombiniert bewährte Entwicklungspraktiken mit innovativen KI-Tools, um Projekte effizienter und qualitativ hochwertiger zu realisieren.",
       "philosophyPrefix": "Ganz nach der ",
-      "philosophyButton": "raspb Philosophie"
+      "philosophyButton": "raspb Philosophie",
+      "skills": {
+        "svelte": "Svelte und SvelteKit",
+        "typescript": "TypeScript",
+        "nodejs": "Node.js",
+        "tailwindcss": "TailwindCSS",
+        "graphql": "GraphQL",
+        "cloudArchitecture": "Cloud Architecture",
+        "kiEngineering": "KI Engineering"
+      }
     },
     "aiTeamSection": {
       "titleFirst": "Unser ganz besonderes",
@@ -54,11 +63,18 @@
         "description": "Wir arbeiten eng mit unseren Kunden zusammen, um ihre Vision optimal umzusetzen."
       }
     },
-    "memberModal": {
-      "about": "Über {name}",
-      "personality": "Persönlichkeit",
-      "experience": "Erfahrung & Expertise",
-      "coreCompetencies": "Kernkompetenzen"
+    "modals": {
+      "closeButton": "Schließen",
+      "aboutMe": {
+        "title": "Mit viel Praxiserfahrung, Leidenschaft und tollen Ideen der perfekte Partner für Ihr Vorhaben!",
+        "paragraph1": "Schon immer technisch interessiert, habe ich vor mehr als 20 Jahren meine Reise in die digitale Welte gestartet. Bereits parallel zu meinem Informatikstudium habe ich als Werkstudent in Technologieunternehmen gearbeitet und dort maßgeblich das Marketing unterstützt, den Unternehmensauftritt gepflegt und Newsletter erstellt. Die folgenden 10 Jahre war ich in unterschiedlichen Digitalagenturen tätig: mitunter ein Startup aufgebaut, für ein Konzern im SEO-Bereich aktiv, mit strategischer Beratung, Online-Marketing und Anwendungsentwicklung unterschiedlichste Unternehmen geholfen, Ihre Geschäftsziele zu erreichen...<br /><br />Zu Beginn meiner Karriere habe ich mein Studium (Wirtschaftsinformatik) berufsbegleitend zu Ende gebracht und konnte bereits in frühen Jahren unter Beweis stellen, dass ich auch in Zeiten enormer Belastung und Stress gut funktioniere. Ich habe in der Zeit unglaublich viel gelernt und die sehr viele, sehr unterschiedliche Geschäftsmodelle und Branchen kennenlernen dürfen.<br /><br />Auf der Suche nach neuen, anspruchsvollen Herausforderungen, hat sich meine Karriererichtung im Jahr 2018 eine Richtungsänderung erfahren und ich bin seither im Bereich Unternehmenssoftware (mit SAP) - im weitesten Sinne - umtriebig. Eine professionalisierung auf den Aufbau digitaler Arbeitsplätze für die Mitarbeiter größerer Unternehmen, aber auch Behörden, Stiftungen u.a. hat almälich stattgefunden.<br/><br/>Wir haben dutzende Portale aufgebaut und weiterentwickelt (vom Intranet über Liefernatenportale, bis zu speziellen Mitarbeiter-Plattformene).<br /><br/>Es wurden viele Systeme, Plattformen, Technologien, etc. (mit und ohne SAP) evaluiert. Ich habe also nicht nur einen tiefen, sondern auch einen sehr breiten Einblick in die IT Bedürfnisse von Unternehmen erhalten. In unserer schnelllebigen Zeit sind machen Dinge bereits überholt bevor sie sich im Einsatz wirklich bewehrt haben, es gibt aber auch viele Dinge, die stets gleich oder sehr ähnlich sind. Meine Erfahrungen aus diversen sehr unterschiedlochen IT-Projekten vbersetzen mich in die Lage, die meisten Ideen/Wünsche schnelle und sauber entwickln zu können. Dabei lässt meine Skillset und meine Know-How zu, die Projekte ganzheitlich anzugehen (ich übernehme Konzept/Beratung, Design, Prorammierung [frontend + backend] sowie die ganze Administration drum herum). Mein Profil ist Ihr Wetbewerbsvorteil. Lösungen aus einer Hand entwickelt zu bekommen reduziert Projektmanagementaufwände und stellt ein kohärentes Ergebnis sicher. Dass damit alles schnelle und günstiger wird, muss ich hier nicht mehr erwähnen."
+      },
+      "member": {
+        "about": "Über {name}",
+        "personality": "Persönlichkeit",
+        "experience": "Erfahrung & Expertise",
+        "coreCompetencies": "Kernkompetenzen"
+      }
     },
     "teamMembers": {
       "alex": {
@@ -86,7 +102,6 @@
         "experience": "Durch ihre jahrelange Erfahrung in der Kundenbetreuung und im Rechnungswesen beherrscht sie die komplexen Zusammenhänge beider Bereiche. Sie ist versiert im Umgang mit Buchhaltungssoftware, kennt sich mit Projektmanagement-Tools aus und hat ein tiefes Verständnis für Kundenbedürfnisse.",
         "personality": "Organisiert, empathisch und lösungsorientiert. Melinda behält auch in stressigen Situationen den Überblick und meistert jede Herausforderung mit einem Lächeln. Sie liebt es, durch strukturierte Prozesse einen Mehrwert für unser Team und unsere Kunden zu schaffen."
       }
-
     }
   }
 }

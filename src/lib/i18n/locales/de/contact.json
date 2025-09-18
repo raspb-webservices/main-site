@@ -1,6 +1,19 @@
 {
   "contact": {
     "title": "Kontakt",
-    "intro": "Sie möchten mit uns in Kontakt treten, ohne eine konkrete Projektanfrage zu stellen? Dann sind Sie hier an der richtigen Stelle. Das Kontaktformular erfasst alle allgemeinen Anfragen. Teilen Sie Ihr Anliegen mit uns - wir werden uns schnellstmöglich mit Ihnen in Verbindung setzen. Sollten Sie eine konkrete Projektvorstellung haben,  nutzen Sie bitte unseren Konfigurator."
+    "intro": "Wir freuen uns auf Ihre Nachricht!",
+    "form": {
+      "firstNameLabel": "Vorname",
+      "firstNamePlaceholder": "Max",
+      "lastNameLabel": "Nachname",
+      "lastNamePlaceholder": "Mustermann",
+      "emailLabel": "E-Mail-Adresse",
+      "emailPlaceholder": "max.musterman@beispiel.de",
+      "phoneLabel": "Telefonnummer",
+      "phonePlaceholder": "0123-456789",
+      "messageLabel": "Ihre Nachricht an uns",
+      "dsgvoLabel": "Ich stimme der Speicherung und Verarbeitung meiner Daten durch diese Website zu",
+      "submitButton": "Abschicken"
+    }
   }
 }

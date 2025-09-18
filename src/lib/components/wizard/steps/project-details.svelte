@@ -171,10 +171,10 @@
     .textarea,
     .input,
     .select {
-      @apply bg-base-100 border-base-300 text-base-content w-full;
+      @apply bg-white border-base-300 text-base-content w-full;
 
       &:focus {
-        @apply border-primary bg-base-100;
+        @apply border-primary bg-primary/1;
       }
 
       &::placeholder {

@@ -27,5 +27,14 @@
       "titleHighlight": "digitales Projekt",
       "description": "Sie haben die perfekte Lösung für Ihr Vorhaben gefunden? Unser intelligenter Konfigurator hilft Ihnen dabei, Ihr Projekt zu spezifizieren und erhalten Sie sofort einen transparenten Festpreis."
     }
+  },
+  "footer": {
+    "titleFirst":  "SPECIAL",
+    "nav": {
+      "services": {
+        "title": "Services",
+        "website": "Webseite"
+      }
+    }
   }
 }

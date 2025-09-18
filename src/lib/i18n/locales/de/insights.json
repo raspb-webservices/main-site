@@ -1,8 +1,8 @@
 {
   "insights": {
     "meta": {
-      "title": "raspb Webservices - Einblicke",
-      "description": "Hier kann eine Beschreibung stehen..."
+      "title": "Einblicke - raspb Webservices",
+      "description": "Einblicke in unsere Technologien, Projekte und Ergebnisse."
     },
     "header": {
       "title": "Einblicke in unsere Arbeit",
@@ -30,9 +30,9 @@
         "entwicklerfreundlichkeit": "<strong>Entwicklerfreundlichkeit:</strong> Moderne Tools und Workflows + dynamische Community",
         "kosteneffizienz": "<strong>Kosteneffizienz:</strong> Reduzierte Entwicklungs-, Hosting- und Wartungskosten"
       },
-      "absatz4headline":"Technologie-Agnostik",
+      "absatz4headline": "Technologie-Agnostik",
       "absatz4": "Unser Jamstack-Setup besteht aus modernen und innvoativen Tools und Technologien, die sich bewährt haben und perfekt aufeinander abgestimmt sind. Dabei bildet eine <strong>node.js</strong> Frontend-Applikation meist die Grundlage. Angereichert mit Frameworks wie <strong>Svelte/SvelteKit</strong>, <strong>TailwindCSS</strong> oder <strong>DaisyUI</strong> und weiteren npm Paketen, schaffen wir ein Frontend mit unendlichen Möglichkeiten.<br/><br/>Bei all dem bewegen wir uns aber nicht in einem starren Konstrukt, sondern können flexibel auf Integrationswünsche oder andere Technolgiefragen reagieren. Fast alles ist möglich... Des weiteren setzen wir auf <strong>TypeScript</strong> zur typsicheren Programmierung und <strong>Netlify</strong> für Deployment und Hosting. Diese Kombination - unterstützt von <strong>KI-Tools</strong> - ermöglicht es uns, robuste und wartbare Webanwendungen zu entwickeln, die sowohl für Entwickler als auch für Endnutzer optimiert sind. ",
-      "absatz5headline":"Headless CMS Integration",
+      "absatz5headline": "Headless CMS Integration",
       "absatz5": "Die <strong>Headless CMS-Integration</strong> über GraphQL APIs ermöglicht es unseren Kunden, Inhalte einfach zu verwalten, während die technische Komplexität im Hintergrund verborgen bleibt. So können Sie sich auf Ihr Geschäft konzentrieren, während wir für eine technisch einwandfreie und zukunftssichere Lösung sorgen."
     },
     "projectInsights": {
@@ -53,6 +53,31 @@
       "paragraph1": "Künstliche Intelligenz ist eine beeindruckendes Werkzeug, was die Erledigung von bestimmten Aufghaben um das 10-fache beschleunigen kann. Es versetzt uns in die Lage, unsere maßgeschneiderten IT-Projekte dermaßen effizient anbieten zu können (Projektlaufzeit, Kosten, etc.). Ganz ohne Menschen geht es aber nicht: Kreativität, Erfahrungen, tiefes Verständnis für menschliche Bedürfnisse, Emotionen,... All das lässt sich nicht ersetzen! Darüber hinaus braucht es erfahrene Personen, die den KI-Modellen die richtigen Anweisungen (Prompts) geben und deren Output kontrolliert. Denn manchmal liefern KIs Dinge, nach denen nicht gefragt wurde (halluzinieren) oder liefern Ergebnisse mit gravierenden Fehlern ab. Auch wenn viele Modelle mittlerweile mit nur einem Prompt ganze Anwnendungen erstellen können, ist für ein wirklich perfektes Ergebnis ein menschlicher Experte nötig.",
       "paragraph2": "Neben dem Prompt- und Context-Engineering (Wie kann ich eine KI bestmöglich füttern, damit genau das dabei rauskommt, was ich will?) gibt es viele weitere Use-Cases, bei denen sich die Nutzuing von KI - in der ein oder anderen Form - aufdrängt: Chatbots, KI-Agent, KI-Workflows, KI enhanced Automations, Content-Craetion, Personal Assistant, etc.",
       "paragraph3": "Wir haben n8n als Automatisierungplattform für uns entdeckt. Damit lassen sich Szenarien aus allen Bereichen der KI, einfach und effizient umsetzen. Wir bieten neben individuellen KI-Beratungsleistungen auch die Entwicklung spezieller Agenten und Workflows an, welche Ihnen dabei helfen Ihre Unternehmensziele zu erreichen und Kosten zu sparen. Bei unseren KI-Projekten (und teilweise auch bei unserwen Individualentwicklungen), lässt sich der standardisierte Projektablauf nicht zu 100% anwenden. Üblicherweise sind die Projektzeiten hier etwas länger und eine engere Abstimmung ist Voraussetzung. Und dennoch bietet der einztigartige raspb Ansatz auch hier eine einizigartige Effizienz. Ergebnisse der KI Projekte sind deutlich früher verfügbar, als bei anderen Anbieter."
+    },
+    "tabs": {
+      "tech": {
+        "title": "Wir funktioniert raspb?",
+        "description": "Hier gibt es Einblicke in unsere Technolgisches Ökossystem."
+      },
+      "project": {
+        "title": "Wie läuft ein Projekt bei raspb?",
+        "description": "Ein typisches Projekt vom Konfigurator zum Go-Live."
+      },
+      "showcase": {
+        "title": "Wie sehen die Ergebnisse aus?",
+        "description": "Finden Sie hier eine Auswahl von Referenzprojekten."
+      }
+    },
+    "techInsights": {
+      "title": "raspb - ein harmonisches System für Ihren Unternehmenserfolg",
+      "titleFirst": "raspb -",
+      "titleHightlight": "ein harmonisches System",
+      "titleSecond": "für Ihren Unternehmenserfolg",
+      "teaser": "raspb ist mehr, als nur ein IT-Dienstleister. raspb ist ein innovatives System - ein aufeinander abgestimmtes Zusammenspiel von Tools, Methoden, Technologien, ... die aus IT-Projekten Erfolge machen (on time, on budget in bester Qualität). Man kann sagen, dass die raspb-Plattform quasi ein eigenes kleines, aber vielfältiges Ökosystem geworden ist.<br/><br />Durch den gekonnten Einsatz modernster (Web-)Technologien, und  das Entwickeln in einer kontrollierbaren Umgebung - KI 'enhanced', gilt die Zusammenarbeit mit uns bereits als Erfolgsgarant."
+    },
+    "showcase": {
+      "title": "Digital Erfolge ein paar Beispiele",
+      "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod optio saepe dolores, aliquam rerum sit omnis voluptates, quis suscipit itaque officia nam facere eos atque ab molestiae blanditiis est necessitatibus."
     }
   }
 }

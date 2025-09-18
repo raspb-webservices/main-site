@@ -1,14 +1,21 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
-  import { goto } from '$app/navigation';
   import { _ } from 'svelte-i18n';
   import { teamMembers } from '$lib/configs/teamMembers';
   import Stage from '$lib/components/ui/stage.svelte';
   import Section from '$lib/components/ui/section.svelte';
   import RaspbPhilosophyModal from '$lib/components/modals/general/philosophy.svelte';
+  import AboutMeModal from '$lib/components/modals/about-us/about-me-modal.svelte';
+  import MemberModal from '$lib/components/modals/about-us/member-modal.svelte';
+  import type { Member } from '$interfaces/user.interface';
 
-  let selectedMember: any = null;
+  let currentTheme = $state('light');
+  let selectedMember: Member | null = $state(null);
+
+  let memberModal: MemberModal;
+  let aboutMeModal: AboutMeModal;
   let philosophyModal: RaspbPhilosophyModal;
+  const myskills = ['svelte', 'typescript', 'nodejs', 'tailwindcss', 'graphql', 'cloudArchitecture', 'kiEngineering']
 
   const handleHashChange = (event: HashChangeEvent) => {
     const newHash = new URL(event.newURL).hash.slice(1);
@@ -17,16 +24,9 @@
     }, 250);
   };
 
-  function openModal(member: any) {
+  function openMemberModal(member: Member) {
     selectedMember = member;
-    const modal = document.getElementById('member_modal') as HTMLDialogElement;
-    modal?.showModal();
-  }
-
-  function closeModal() {
-    selectedMember = null;
-    const modal = document.getElementById('member_modal') as HTMLDialogElement;
-    modal?.close();
+    memberModal.openModal();
   }
 
   function scrollToSection(sectionId: string) {
@@ -41,6 +41,9 @@
 
   onMount(() => {
     const { hash } = document.location;
+    const root = document.documentElement;
+    currentTheme = root.getAttribute("data-theme");
+
     const scrollTo = hash && document.getElementById(hash.slice(1));
     if (scrollTo)
       scrollTo.scrollIntoView({
@@ -69,9 +72,9 @@
 <Section noSpacing={true}>
   <div id="raspb" class="inner-box animate-fade-in-up pt-30 pb-24 prose">
     <h2>{$_('ueberUns.introSection.titleFirst')} <span class="inner-text-special">{$_('ueberUns.introSection.titleHighlight')}</span> {$_('ueberUns.introSection.titleSecond')}</h2>
-    <p class="teaser">{$_('ueberUns.introSection.teaser1')}</p>
-    <p class="teaser">{$_('ueberUns.introSection.teaser2')}</p>
-    <p class="teaser no-padding">{$_('ueberUns.introSection.teaser3')}</p>
+    <p>{@html $_('ueberUns.introSection.teaser1')}</p>
+    <p>{@html $_('ueberUns.introSection.teaser2')}</p>
+    <p class="no-padding">{@html $_('ueberUns.introSection.teaser3')}</p>
   </div>
 </Section>
 
@@ -92,18 +95,18 @@
           {$_('ueberUns.markusSection.paragraph1')}
         </p>
         <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-          <div class="stat bg-base-300 rounded-xl shadow-lg">
+          <div class="stat bg-base-300 rounded-xl {currentTheme === 'light' ? 'shadow-lg' : ''}">
             <div class="stat-title">{$_('ueberUns.markusSection.statSpecializationTitle')}</div>
-            <div class="stat-value text-iconic-blue text-lg">{$_('ueberUns.markusSection.statSpecializationValue')}</div>
+            <div class="stat-value text-base-content-50 text-lg">{$_('ueberUns.markusSection.statSpecializationValue')}</div>
           </div>
-          <div class="stat bg-base-300 rounded-xl shadow-lg">
+          <div class="stat bg-base-300 rounded-xl {currentTheme === 'light' ? 'shadow-lg' : ''}">
             <div class="stat-title">{$_('ueberUns.markusSection.statExperienceTitle')}</div>
-            <div class="stat-value text-iconic-blue text-lg">{$_('ueberUns.markusSection.statExperienceValue')}</div>
+            <div class="stat-value text-base-content-50 text-lg">{$_('ueberUns.markusSection.statExperienceValue')}</div>
           </div>
         </div>
         <div class="mb-6 flex flex-wrap gap-2">
-          {#each ['Svelte', 'TypeScript', 'Node.js', 'TailwindCSS', 'GraphQL', 'Cloud Architecture', 'KI Engineering'] as skill}
-            <span class="badge badge-primary badge-lg transition-colors duration-200">{skill}</span>
+          {#each myskills as myskill}
+            <span class="badge badge-primary badge-lg transition-colors duration-200">{$_(`ueberUns.markusSection.skills.${myskill}`)}</span>
           {/each}
         </div>
         <p class="add-padding text-lg opacity-80">
@@ -115,9 +118,7 @@
         </p>
         <button
           class="btn-basic-header animate-fade-in-from-side mt-4 mb-2"
-          onclick={() => {
-            goto('/services');
-          }}>{$_('mehrErfahren')}</button
+          onclick={() => { aboutMeModal.openModal() }}>{$_('mehrErfahren')}</button
         >
       </div>
     </div>
@@ -138,15 +139,8 @@
     <div class="grid grid-cols-12 gap-6">
       {#each teamMembers as member, index}
         <div
-          class="card from-base-100 to-base-200  bg-linear-to-tl flex cursor-default flex-col animate-fade-in-up text-base-content col-span-12 h-full shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg md:col-span-6 lg:col-span-4 {index ===
-          3
-            ? 'lg:col-start-3'
-            : ''} "
+          class="card from-base-100 to-base-200  bg-linear-to-tl flex cursor-default flex-col animate-fade-in-up text-base-content col-span-12 h-full shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg md:col-span-6 lg:col-span-4 {index === 3 ? 'lg:col-start-3' : ''} "
           style="animation-delay: {index * 0.1}s"
-          onclick={() => openModal(member)}
-          onkeydown={(e) => e.key === 'Enter' && openModal(member)}
-          role="button"
-          tabindex="0"
         >
           <figure class="px-6 pt-6">
             <div>
@@ -160,7 +154,7 @@
               <p class="line-clamp-4 px-4 leading-relaxed">{$_(`ueberUns.teamMembers.${member.id}.description`)}</p>
             </div>
             <div class="card-actions pt-2 pb-4">
-              <button class="btn btn-simple btn-xs">{$_('ueberUns.aiTeamSection.memberCardButton')}</button>
+              <button class="btn btn-simple btn-xs" onclick="{() => {openMemberModal(member)}}">{$_('ueberUns.aiTeamSection.memberCardButton')}</button>
             </div>
           </div>
         </div>
@@ -169,57 +163,13 @@
   </div>
 </Section>
 
-<!-- Modal for Team Member Details -->
-<dialog id="member_modal" class="modal">
-  <div class="modal-box w-11/12 max-w-2xl">
-    {#if selectedMember}
-      <form method="dialog">
-        <button class="btn btn-sm btn-circle btn-ghost absolute top-3 right-3" onclick={closeModal}>✕</button>
-      </form>
-
-      <div class="mt-10 mb-6 flex flex-col items-center text-center">
-        <div class="mb-4">
-          <img class="h-36 w-auto" src={selectedMember.avatar} alt={selectedMember.name} />
-        </div>
-        <h3 class="no-padding">{selectedMember.name}</h3>
-        <p class="opacity-70">{selectedMember.role}</p>
-      </div>
-
-      <div class="space-y-6">
-        <div>
-          <h4 class="no-padding mb-2">{$_('ueberUns.memberModal.about', { values: { name: selectedMember.name } })}</h4>
-          <p class="leading-relaxed">{$_(`ueberUns.teamMembers.${selectedMember.id}.description`)}</p>
-        </div>
-
-        <div>
-          <h4 class="no-padding mb-2">{$_('ueberUns.memberModal.personality')}</h4>
-          <p class="leading-relaxed">{$_(`ueberUns.teamMembers.${selectedMember.id}.personality`)}</p>
-        </div>
-
-        <div>
-          <h4 class="no-padding mb-2">{$_('ueberUns.memberModal.experience')}</h4>
-          <p class="leading-relaxed">{$_(`ueberUns.teamMembers.${selectedMember.id}.experience`)}</p>
-        </div>
-
-        <div class="pb-4">
-          <h4>{$_('ueberUns.memberModal.coreCompetencies')}</h4>
-          <div class="flex flex-wrap gap-2">
-            {#each selectedMember.skills as skill}
-              <span class="badge badge-primary badge-lg">{skill}</span>
-            {/each}
-          </div>
-        </div>
-      </div>
-    {/if}
-  </div>
-  <form method="dialog" class="modal-backdrop">
-    <button onclick={closeModal}>close</button>
-  </form>
-</dialog>
-
-<!-- RASPB Philosophy Modal -->
+<MemberModal bind:this={memberModal} {selectedMember} />
 <RaspbPhilosophyModal bind:this={philosophyModal} />
+<AboutMeModal bind:this={aboutMeModal} />
 
 <style lang="postcss">
   @reference '../../app.css';
+  .stat {
+    border-inline-end: none !important;
+  }
 </style>

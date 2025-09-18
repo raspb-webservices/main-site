@@ -46,7 +46,7 @@
 <dialog id="modal-profile-edit" bind:this={modal} class="modal">
   <div class="modal-box">
     <form onsubmit={handleSubmit}>
-      <button type="button" class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2" onclick={closeModal}>✕</button>
+      <button type="button" class="btn btn-sm btn-circle btn-ghost absolute top-4 right-4" onclick={closeModal}>✕</button>
       <h3 class="mb-4 text-lg font-bold">{$_('profile.editTitle')}</h3>
 
       <div class="form-edit-container space-y-4">

@@ -1,7 +1,4 @@
 <script lang="ts">
-  import { page } from '$app/state';
-  import { goto } from '$app/navigation';
-  import Section from '$lib/components/ui/section.svelte';
   import { _ } from 'svelte-i18n';
   import Stage from '$lib/components/ui/stage.svelte';
 

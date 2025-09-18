@@ -63,8 +63,8 @@
           scrollToSection('insights-content-container');
         }}
       >
-        <h3 class="add-padding">Wir funktioniert raspb?</h3>
-        <p>Hier gibt es Einblicke in unsere Technolgisches Ökossystem.</p>
+        <h3 class="add-padding">{$_('insights.tabs.tech.title')}</h3>
+        <p>{$_('insights.tabs.tech.description')}</p>
       </button>
       <button
         class="tab-tile project"
@@ -74,8 +74,8 @@
           scrollToSection('insights-content-container');
         }}
       >
-        <h3 class="add-padding">Wie läuft ein Projekt bei raspb?</h3>
-        <p>Ein typisches Projekt vom Konfigurator zum Go-Live.</p>
+        <h3 class="add-padding">{$_('insights.tabs.project.title')}</h3>
+        <p>{$_('insights.tabs.project.description')}</p>
       </button>
       <button
         class="tab-tile showcase"
@@ -85,8 +85,8 @@
           scrollToSection('insights-content-container');
         }}
       >
-        <h3 class="add-padding">Wie sehen die Ergebnisse aus?</h3>
-        <p>Finden Sie hier eine Auswahl von Referenzprojekten.</p>
+        <h3 class="add-padding">{$_('insights.tabs.showcase.title')}</h3>
+        <p>{$_('insights.tabs.showcase.description')}</p>
       </button>
     </div>
   </div>
@@ -96,14 +96,9 @@
   {#if activeContent === 'tech'}
     <Section noSpacing={true}>
       <div class="inner-box fade-in prose pt-36 pb-16">
-        <h2>raspb - ein harmonisches System für Ihren Unternehmenserfolg</h2>
+        <h2>{$_('insights.techInsights.titleFirst')} <span class="inner-text-special">{$_('insights.techInsights.titleHightlight')}</span> {$_('insights.techInsights.titleSecond')}</h2>
         <p class="teaser">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Id dignissimos veniam quam quae itaque, officiis blanditiis non, aspernatur adipisci ad porro
-          magnam eum fugit aut labore laudantium optio nostrum. Doloribus!
-        </p>
-        <p class="teaser">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Id dignissimos veniam quam quae itaque, officiis blanditiis non, aspernatur adipisci ad porro
-          magnam eum fugit aut labore laudantium optio nostrum. Doloribus!
+          {@html $_('insights.techInsights.teaser')}
         </p>
       </div>
     </Section>
@@ -199,8 +194,8 @@
   {:else if activeContent === 'showcase'}
     <Section noSpacing={true}>
       <div class="inner-box animate-fade-in-up pt-36 pb-24 prose">
-        <h2>Digital Erfolge ein paar Beispiele</h2>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod optio saepe dolores, aliquam rerum sit omnis voluptates, quis suscipit itaque officia nam facere eos atque ab molestiae blanditiis est necessitatibus.</p>
+        <h2>{$_('insights.showcase.title')}</h2>
+        <p>{$_('insights.showcase.description')}</p>
       </div>
     </Section>
   {/if}
@@ -214,11 +209,11 @@
     .tab-tile {
       @apply flex aspect-square w-60 flex-col items-center justify-center rounded-3xl bg-white p-6 text-center text-black drop-shadow-2xl;
       &:hover {
-        @apply bg-base-100 cursor-pointer drop-shadow-lg;
+        @apply bg-neutral-100 cursor-pointer drop-shadow-lg;
       }
       &.active,
       &.active:hover {
-        @apply bg-base-100 cursor-default drop-shadow-lg;
+        @apply bg-neutral-50 cursor-default drop-shadow-lg;
       }
 
       &.tech {

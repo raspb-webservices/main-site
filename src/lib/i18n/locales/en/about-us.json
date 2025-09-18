@@ -5,7 +5,8 @@
       "description": "Get to know the raspb Webservices team - Markus as a solopreneur and our innovative AI team for modern web development."
     },
     "header": {
-      "title": "About",
+      "title": "About us",
+      "titleFirst": "About",
       "titleHighlight": "Us",
       "teaser1": "At raspb Webservices, we combine human creativity with the power of artificial intelligence. As a modern web development studio, we create innovative digital solutions that bring your vision to life.",
       "teaser2": "And who exactly is raspb now? - Actually, it's just me and my AI Crew 😉"
@@ -20,7 +21,16 @@
       "statExperienceValue": "almost 20 years",
       "paragraph2": "My approach combines proven development practices with innovative AI tools to realize projects more efficiently and with higher quality.",
       "philosophyPrefix": "Leveraging the",
-      "philosophyButton": "raspb Philosophy"
+      "philosophyButton": "raspb Philosophy",
+      "skills": {
+        "svelte": "Svelte & SvelteKit",
+        "typescript": "TypeScript",
+        "nodejs": "Node.js",
+        "tailwindcss":"TailwindCSS",
+        "graphql":"GraphQL", 
+        "cloudArchitecture":"Cloud Architecture",
+        "kiEngineering": "KI Engineering"
+      }
     },
     "aiTeamSection": {
       "titleFirst": "This is our exceptionel",

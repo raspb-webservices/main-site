@@ -14,7 +14,7 @@
 <dialog bind:this={modal} class="modal">
   <div class="modal-box">
     <form method="dialog">
-      <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2">✕</button>
+      <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2" onclick={closeModal}>✕</button>
     </form>
 
     <h3 class="mb-4 text-lg font-bold">{$_('wizard.modals.reset.title')}</h3>
@@ -26,7 +26,7 @@
     </div>
   </div>
   <form method="dialog" class="modal-backdrop">
-    <button>close</button>
+    <button onclick={closeModal}>close</button>
   </form>
 </dialog>
 

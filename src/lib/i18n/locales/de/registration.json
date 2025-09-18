@@ -1,0 +1,59 @@
+{
+  "registration": {
+    "meta": {
+      "title": "raspb Webservices - Registrierung",
+      "description": "Registrieren Sie hier Ihren persönlichen raspb Account"
+    },
+    "intro": {
+      "title": "Registrieren Sie hier Ihren eigenen raspb Account",
+      "titleFirst": "Registrieren Sie hier Ihren eigenen",
+      "titleHighlight": " raspb Account",
+      "teaser": " Mit Ihrem persönlichen Konto, erhalten Sie Zugang zum umfangreichen Projektkonfigurator (Wizard) und Ihr Dashboard, um all Ihre Projektideen, Beauftragungen usw. übersichtlich verwalten zu können."
+    },
+    "form": {
+      "validation": {
+        "requiredFields": "Bitte füllen Sie alle Pflichtfelder aus.",
+        "passwordMismatch": "Die Passwörter stimmen nicht überein.",
+        "registrationError": "Bei der Registrierung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+      },
+      "firstName": {
+        "label": "Vorname",
+        "placeholder": "Max"
+      },
+      "lastName": {
+        "label": "Nachname",
+        "placeholder": "Mustermann"
+      },
+      "email": {
+        "label": "E-Mail-Adresse *",
+        "placeholder": "max.mustermann@beispiel.de"
+      },
+      "password": {
+        "label": "Passwort *",
+        "placeholder": "••••••••",
+        "hide": "Passwort verbergen",
+        "show": "Passwort anzeigen",
+        "minLength": "Mindestens 8 Zeichen"
+      },
+      "confirmPassword": {
+        "label": "Passwort bestätigen *",
+        "placeholder": "••••••••",
+        "mismatch": "Passwörter stimmen nicht überein"
+      },
+      "privacy": {
+        "prefix": "Ich stimme den ",
+        "link": "Datenschutzbestimmungen",
+        "suffix": " zu *"
+      },
+      "button": {
+        "loading": "Registrierung läuft...",
+        "createAccount": "Konto erstellen"
+      }
+    },
+    "success": {
+      "title": "Registrierung erfolgreich!",
+      "message": "Ihr Konto wurde erfolgreich erstellt. Sie erhalten in Kürze eine Bestätigungs-E-Mail.",
+      "backToForm": "Zurück zum Formular"
+    }
+  }
+}

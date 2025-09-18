@@ -6,8 +6,8 @@
 
 <Section type={'fullCenterTeaser'}>
     <div class="inner-content-wrapper prose">
-    <h1 class="text-center">Vielen <span class="inner-text-special">Dank</span> für Ihre Nachricht</h1>
-    <p class="teaser text-center">Wir haben Ihre Anfrage erhalten und werden uns in Kürze bei Ihnen zurückmelden...</p>
+    <h1 class="text-center"><span class="inner-text-special">{$_('thankYouHighlight')}</span> {$_('thankYouMessageSecond')}</h1>
+    <p class="teaser text-center">{$_('thankYouTeaser')}</p>
 
     <div class="spacer"></div>
     <div class="flex w-full justify-center">
@@ -15,7 +15,7 @@
         class="btn-basic"
         onclick={() => {
           goto('/');
-        }}>Zurück zur Startseite</button
+        }}>{$_('backToHomepage')}</button
       >
     </div>
     </div>

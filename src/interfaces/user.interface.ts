@@ -18,3 +18,11 @@ export interface User {
   picture?: string;
   role?: string
 }
+
+export interface Member {
+  id: string,
+  name: string,
+  role: string,
+  avatar: string,
+  skills: string[]
+}

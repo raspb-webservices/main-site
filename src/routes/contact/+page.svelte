@@ -14,32 +14,32 @@
       <input type="hidden" name="form-name" value="contact" />
       <div class="form-field-container">
         <div class="form-field-section">
-          <label for="first-name">Vorname</label>
-          <input type="text" id="first-name" name="first-name" placeholder="Max" required />
+          <label for="first-name">{$_('contact.form.firstNameLabel')}</label>
+          <input type="text" id="first-name" name="first-name" placeholder="{$_('contact.form.firstNamePlaceholder')}" required />
         </div>
         <div class="form-field-section">
-          <label for="last-name">Nachname</label>
-          <input type="text" id="last-name" name="last-name" placeholder="Mustermann" required />
+          <label for="last-name">{$_('contact.form.lastNameLabel')}</label>
+          <input type="text" id="last-name" name="last-name" placeholder="{$_('contact.form.lastNamePlaceholder')}" required />
         </div>
       </div>
 
       <div class="form-field-container">
         <div class="form-field-section full-width">
-          <label for="email">E-Mail-Adresse</label>
-          <input type="email" id="email" name="email" placeholder="max.musterman@beispiel.de" required />
+          <label for="email">{$_('contact.form.emailLabel')}</label>
+          <input type="email" id="email" name="email" placeholder="{$_('contact.form.emailPlaceholder')}" required />
         </div>
       </div>
 
       <div class="form-field-container">
         <div class="form-field-section full-width">
-          <label for="phone">Telefonnummer</label>
-          <input type="tel" id="phone" name="phone" placeholder="0123-456789" />
+          <label for="phone">{$_('contact.form.phoneLabel')}</label>
+          <input type="tel" id="phone" name="phone" placeholder="{$_('contact.form.phonePlaceholder')}" />
         </div>
       </div>
 
       <div class="form-field-container">
         <div class="form-field-section full-width">
-          <label for="message">Ihre Nachricht an uns</label>
+          <label for="message">{$_('contact.form.messageLabel')}</label>
           <span class="additional-information"></span>
           <textarea id="message" name="message" rows="4" placeholder="" required></textarea>
         </div>
@@ -47,11 +47,11 @@
       <div class="form-field-container">
         <div class="form-field-section full-width checkbox-dialog">
           <input id="dsgvo" name="dsgvo" type="checkbox" value="dsgvo-confirmed" class="is-checkbox accent-secondary" required />
-          <label for="dsgvo">Ich stimme der Speicherung und Verarbeitung meiner Daten durch diese Website zu</label>
+          <label for="dsgvo">{$_('contact.form.dsgvoLabel')}</label>
         </div>
       </div>
       <div class="medium-spacer"></div>
-      <button type="submit" class="btn-basic">Abschicken</button>
+      <button type="submit" class="btn-basic">{$_('contact.form.submitButton')}</button>
     </form>
   </div>
 

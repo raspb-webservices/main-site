@@ -1,1 +1,31 @@
-{}
+{
+  "dashboard": {
+    "errorLoadingProjects": "Error loading projects",
+    "networkErrorLoadingProjects": "Network error loading projects",
+    "notAuthorized": {
+      "title": "You must be logged in to access your personal dashboard",
+      "teaser": "Don't have an account yet? You can register here...",
+      "loginButton": "Login",
+      "registrationButton": "Registration"
+    },
+    "noProjects": {
+      "title": "You don't have any projects yet",
+      "teaser": "Start directly with the extended project configurator",
+      "startButton": "Get started now"
+    },
+    "retryButton": "Try again",
+    "myDashboardTitle": "My Dashboard",
+    "myDashboardTeaser": "Here are all your projects listed",
+    "viewMode": {
+      "grid": "Tiles",
+      "list": "List"
+    },
+    "tableHeaders": {
+      "project": "Project",
+      "type": "Type",
+      "status": "Status",
+      "budget": "Budget",
+      "created": "Created"
+    }
+  }
+}

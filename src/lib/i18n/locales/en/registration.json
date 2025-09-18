@@ -1,0 +1,59 @@
+{
+  "registration": {
+    "meta": {
+      "title": "raspb Webservices - Registration",
+      "description": "Register your personal raspb account here"
+    },
+    "intro": {
+      "title": "Register your own raspb account here",
+      "titleFirst": "Register your own",
+      "titleHighlight": " raspb account",
+      "teaser": " With your personal account, you get access to the extensive project configurator (Wizard) and your dashboard to clearly manage all your project ideas, commissions, etc."
+    },
+    "form": {
+      "validation": {
+        "requiredFields": "Please fill in all required fields.",
+        "passwordMismatch": "Passwords do not match.",
+        "registrationError": "An error occurred during registration. Please try again."
+      },
+      "firstName": {
+        "label": "First Name",
+        "placeholder": "Max"
+      },
+      "lastName": {
+        "label": "Last Name",
+        "placeholder": "Mustermann"
+      },
+      "email": {
+        "label": "Email Address *",
+        "placeholder": "max.mustermann@example.com"
+      },
+      "password": {
+        "label": "Password *",
+        "placeholder": "••••••••",
+        "hide": "Hide password",
+        "show": "Show password",
+        "minLength": "At least 8 characters"
+      },
+      "confirmPassword": {
+        "label": "Confirm Password *",
+        "placeholder": "••••••••",
+        "mismatch": "Passwords do not match"
+      },
+      "privacy": {
+        "prefix": "I agree to the ",
+        "link": "Privacy Policy",
+        "suffix": " *"
+      },
+      "button": {
+        "loading": "Registration in progress...",
+        "createAccount": "Create Account"
+      }
+    },
+    "success": {
+      "title": "Registration successful!",
+      "message": "Your account has been successfully created. You will receive a confirmation email shortly.",
+      "backToForm": "Back to form"
+    }
+  }
+}

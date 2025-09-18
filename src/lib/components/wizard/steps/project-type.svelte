@@ -54,18 +54,17 @@
   }
   .project-types-grid {
     @apply grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3;
-
     .service-card {
-      @apply bg-base-100 border-base-300 border transition-all duration-300;
+      @apply bg-white border-base-300/80 border transition-all duration-300;
 
       &:hover {
-        @apply bg-base-200 border-base-300;
+        @apply bg-primary/1 border-base-300 shadow-md;
       }
 
       &.card-selected {
         @apply ring-primary ring-offset-base-100 ring-2 ring-offset-2;
         &:hover {
-          @apply bg-base-100 cursor-default;
+          @apply bg-primary/1 cursor-default;
         }
       }
 

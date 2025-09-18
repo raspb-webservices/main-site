@@ -1,0 +1,12 @@
+{
+  "login": {
+    "meta": {
+      "title": "Login",
+      "description": "Hier können Sie sich anmelden"
+    },
+    "title": "Bitte melden Sie sich an",
+    "teaser": "Wenn Sie Ihr eigenes Dahsboard aufrufen oder den erweiterten Konfigurator nutzen möchten, müssen Sie angemeldet sein.",
+    "loginButton": "Anmelden",
+    "registerButton": "Registrieren"
+  }
+}
