@@ -12,6 +12,7 @@
   import favicon16 from '$lib/assets/favicon-16x16.png';
   import webmanifest from '$lib/assets/site.webmanifest';
   import '../app.css';
+  import Chatbot from '$lib/components/chatbot.svelte';
 
   let { children } = $props();
   let showInitialLoader = $state(true);
@@ -41,6 +42,7 @@
     <main>
       {@render children?.()}
     </main>
+    <Chatbot/>
     <FOOTER />
   {/if}
   <CookieConsentComponent></CookieConsentComponent>
