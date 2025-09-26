@@ -1,4 +1,4 @@
-import { client } from '$lib/helper/graphql-client';
+import { client } from '$lib/services/graphql-client';
 import { gql } from 'graphql-request';
 import { json } from '@sveltejs/kit';
 

@@ -6,7 +6,7 @@
   import { projectTypes, subTypes, availableFeatures, googleFonts, formFieldTypes, featureCategoryColors, getStepConfig } from '$lib/configs/wizard-config';
   import { goto } from '$app/navigation';
   import { addMessages, _ } from 'svelte-i18n';
-  import auth from '../../../authService';
+  import auth from '../../services/auth-service';
   import { user } from '$store/sharedStates.svelte';
   import ProjectContent from './steps/project-content.svelte';
   import ProjectType from './steps/project-type.svelte';

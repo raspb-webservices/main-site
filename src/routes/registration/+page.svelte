@@ -1,6 +1,6 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n';
-  import auth from '../../authService';
+  import auth from '../../lib/services/auth-service';
   import Section from '$lib/components/ui/section.svelte';
   import Loader from '$lib/components/loader.svelte';
 

@@ -6,11 +6,11 @@ import type { Customer } from '$interfaces/customer.interface';
 export const POST: RequestHandler = async ({ request }) => {
   try {
     const customerData: Customer = await request.json();
-    const customerId = customerData.id;
+    const customerEmail = customerData.email;
     
     const mutation = gql`
-      mutation PublishCustomer($id: ID!) {
-        publishCustomer(where: { id: $id }) {
+      mutation PublishCustomer($email: String!) {
+        publishCustomer(where: { email: $email }) {
           address
           auth0Id
           city
@@ -32,7 +32,7 @@ export const POST: RequestHandler = async ({ request }) => {
       }
     `;
 
-    const variables = { id: customerId };
+    const variables = { email: customerEmail };
     const response = (await client.request(mutation, variables)) as { publishCustomer: Customer };
 
     return new Response(

@@ -4,8 +4,8 @@ import { gql } from 'graphql-request';
 export const GET = async () => {
   try {
     const query = gql`
-      query getSubType {
-        __type(name: "SubType") {
+      query getProjectStatus {
+        __type(name: "ProjectStatus") {
           enumValues {
             name
           }

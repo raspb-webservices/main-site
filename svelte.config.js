@@ -9,6 +9,8 @@ const config = {
     alias: {
       $store: './src/store',
       $helper: './src/lib/helper',
+      $configs: './src/lib/configs',
+      $services: './src/lib/services',
       $interfaces: './src/interfaces'
     }
   },

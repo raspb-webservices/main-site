@@ -4,7 +4,7 @@
   import Section from '$lib/components/ui/section.svelte';
   import Wizard from '$lib/components/wizard/wizard.svelte';
   import { goto } from '$app/navigation';
-  import auth from '../../authService';
+  import auth from '../../lib/services/auth-service';
   import Loader from '$lib/components/loader.svelte';
   import { _ } from 'svelte-i18n';
 

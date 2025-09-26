@@ -1,33 +1,17 @@
-import { client } from '$lib/helper/graphql-client';
+import { client } from '$lib/services/graphql-client';
 import { gql } from 'graphql-request';
-import type { RequestHandler } from './$types';
-
-interface UpdateCustomerData {
-  id: string;
-  familyName?: string;
-  givenName?: string;
-  salutation?: string;
-  email?: string;
-  phone?: string;
-  company?: string;
-  address?: string;
-  postCode?: string;
-  city?: string;
-  country?: string;
-}
+import type { Customer } from '$interfaces/customer.interface';
+import type { RequestHandler } from '@sveltejs/kit';
 
 export const PATCH: RequestHandler = async ({ request, url }) => {
   try {
-    const requestData: UpdateCustomerData = await request.json();
+    const customerData: Customer = await request.json();
 
-    // Kunden-ID aus dem Request-Body oder URL-Parameter extrahieren
-    const customerId = requestData.id || url.searchParams.get('id');
-
-    if (!customerId) {
+    if (!customerData.email) {
       return new Response(
         JSON.stringify({
           success: false,
-          error: 'Customer ID is required'
+          error: 'Customer Email is required'
         }),
         {
           status: 400,
@@ -40,49 +24,18 @@ export const PATCH: RequestHandler = async ({ request, url }) => {
 
     // Dynamisch nur die vorhandenen Felder für die Mutation vorbereiten
     const updateFields: string[] = [];
-    const variables: Record<string, any> = { id: customerId };
+    const variables: Record<string, any> = { email: customerData.email };
 
-    // Alle möglichen Felder prüfen und nur die vorhandenen hinzufügen
-    if (requestData.familyName !== undefined) {
-      updateFields.push('familyName: $familyName');
-      variables.familyName = requestData.familyName;
-    }
-    if (requestData.givenName !== undefined) {
-      updateFields.push('givenName: $givenName');
-      variables.givenName = requestData.givenName;
-    }
-    if (requestData.salutation !== undefined) {
-      updateFields.push('salutation: $salutation');
-      variables.salutation = requestData.salutation;
-    }
-    if (requestData.email !== undefined) {
-      updateFields.push('email: $email');
-      variables.email = requestData.email;
-    }
-    if (requestData.phone !== undefined) {
-      updateFields.push('phone: $phone');
-      variables.phone = requestData.phone;
-    }
-    if (requestData.company !== undefined) {
-      updateFields.push('company: $company');
-      variables.company = requestData.company;
-    }
-    if (requestData.address !== undefined) {
-      updateFields.push('address: $address');
-      variables.address = requestData.address;
-    }
-    if (requestData.postCode !== undefined) {
-      updateFields.push('postCode: $postCode');
-      variables.postCode = requestData.postCode;
-    }
-    if (requestData.city !== undefined) {
-      updateFields.push('city: $city');
-      variables.city = requestData.city;
-    }
-    if (requestData.country !== undefined) {
-      updateFields.push('country: $country');
-      variables.country = requestData.country;
-    }
+    if (customerData.address !== undefined) variables.address = customerData.address;
+    if (customerData.auth0Id !== undefined) variables.auth0Id = customerData.auth0Id;
+    if (customerData.city !== undefined) variables.city = customerData.city;
+    if (customerData.company !== undefined) variables.company = customerData.company;
+    if (customerData.country !== undefined) variables.country = customerData.country;
+    if (customerData.familyName !== undefined) variables.familyName = customerData.familyName;
+    if (customerData.givenName !== undefined) variables.givenName = customerData.givenName;
+    if (customerData.phone !== undefined) variables.phone = customerData.phone;
+    if (customerData.postCode !== undefined)  variables.postCode = customerData.postCode;
+    if (customerData.postCode !== undefined) variables.postCode = customerData.postCode;
 
     // Prüfen, ob mindestens ein Feld zum Update vorhanden ist
     if (updateFields.length === 0) {
@@ -102,43 +55,43 @@ export const PATCH: RequestHandler = async ({ request, url }) => {
 
     // Dynamische GraphQL-Mutation basierend auf den vorhandenen Feldern erstellen
     const variableDefinitions = Object.keys(variables)
-      .filter((key) => key !== 'id')
+      .filter((key) => key !== 'email')
       .map((key) => `$${key}: String`)
       .join('\n        ');
 
     const mutation = gql`
       mutation UpdateCustomer(
-        $id: ID!
+        $email: String!
         ${variableDefinitions}
       ) {
         updateCustomer(
-          where: { id: $id }
+          where: { email: $email }
           data: {
             ${updateFields.join('\n            ')}
           }
         ) {
-          id
-          familyName
-          givenName
-          salutation
-          email
-          phone
-          company
           address
-          postCode
+          auth0Id
           city
+          company
           country
           createdAt
-          updatedAt
-        }
+          email
+          familyName
+          givenName
+          id
+          phone
+          postCode
+          projects {
+            id
+            name
+          }
+          salutation
       }
     `;
 
-    console.log('UPDATE CUSTOMER VARIABLES:', variables);
-    console.log('UPDATE FIELDS:', updateFields);
-
     // GraphQL Request an Hygraph senden
-    const response = (await client.request(mutation, variables)) as { updateCustomer: any };
+    const response = (await client.request(mutation, variables)) as { updateCustomer: Customer };
 
     return new Response(
       JSON.stringify({

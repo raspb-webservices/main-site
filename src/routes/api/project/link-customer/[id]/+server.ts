@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit';
-import type { RequestHandler } from './$types';
+import type { RequestHandler } from '@sveltejs/kit';
 
 const GRAPHQL_ENDPOINT = 'https://api-eu-west-2.hygraph.com/v2/cm20c164y00dh07ut82c04dgs/master';
 const GRAPHQL_TOKEN =

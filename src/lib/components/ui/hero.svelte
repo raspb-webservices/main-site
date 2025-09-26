@@ -1,12 +1,5 @@
 <script lang="ts">
-  export let headline: string = '';
-  export let subheadline: string = '';
-  export let image: string = '';
-  export let imageAlt: string = '';
-  export let variant: 'default' | 'centered' | 'split' = 'default';
-  export let showButton: boolean = false;
-  export let buttonText: string = 'Learn More';
-  export let buttonAction: (() => void) | undefined = undefined;
+  let { headline = "", subheadline = "", image = "", imageAlt = "", variant = 'default', showButton = false, buttonText = "learn more", buttonAction } = $props();
 </script>
 
 <div class="hero-container" class:centered={variant === 'centered'} class:split={variant === 'split'}>

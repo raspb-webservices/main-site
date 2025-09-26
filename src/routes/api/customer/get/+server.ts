@@ -1,4 +1,4 @@
-import { client } from '$lib/helper/graphql-client';
+import { client } from '$lib/services/graphql-client';
 import { gql } from 'graphql-request';
 
 export const GET = async () => {
@@ -6,7 +6,6 @@ export const GET = async () => {
     const query = gql`
       query getCustomers {
         customers(stage: PUBLISHED) {
-          id
           address
           auth0Id
           city
@@ -16,13 +15,14 @@ export const GET = async () => {
           email
           familyName
           givenName
+          id
           phone
           postCode
-          salutation
           projects {
             id
             name
           }
+          salutation
         }
       }
     `;

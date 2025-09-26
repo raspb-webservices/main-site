@@ -11,7 +11,7 @@
   import Loader from '$lib/components/loader.svelte';
   import { goto } from '$app/navigation';
   import { _ } from 'svelte-i18n';
-  import auth from '../../authService';
+  import auth from '../../lib/services/auth-service';
 
   let isAuth = $derived(isAuthenticated.get());
   let currentUser = $derived(user.get()) as User;

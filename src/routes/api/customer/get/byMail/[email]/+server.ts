@@ -2,11 +2,11 @@ import { client } from '$lib/services/graphql-client';
 import { gql } from 'graphql-request';
 
 export const GET = async (req) => {
-  const id = req.params.id;
+  const email = req.params.email;
   try {
     const query = gql`
-      query getCustomerById($id: ID!) {
-        customer(where: { id: $id }, stage: PUBLISHED) {
+      query getCustomerById($email: String!) {
+        customer(where: { email: $email }) {
           address
           auth0Id
           city
@@ -28,7 +28,7 @@ export const GET = async (req) => {
       }
     `;
 
-    const variables = { id };
+    const variables = { email };
     const response = await client.request(query, variables);
     return new Response(JSON.stringify(response));
   } catch (error) {

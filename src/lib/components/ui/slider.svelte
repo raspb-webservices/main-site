@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { register } from 'swiper/element/bundle';
+  
   register();
 
   let mySwiper;

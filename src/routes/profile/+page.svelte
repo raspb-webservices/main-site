@@ -6,7 +6,7 @@
   import { goto } from '$app/navigation';
   import type { User } from '$interfaces/user.interface';
   import ProfileEditModal from '$lib/components/modals/profile/edit.svelte';
-  import auth from '../../authService';
+  import auth from '../../lib/services/auth-service';
 
   let isAuth = $derived(isAuthenticated.get());
   let currentUser = $derived(user.get()) as User;

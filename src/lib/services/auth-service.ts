@@ -1,7 +1,7 @@
 import { createAuth0Client } from '@auth0/auth0-spa-js';
 import { user, isAuthenticated, popupOpen, userroles } from '$store/sharedStates.svelte';
-import authConfig from './auth_config';
-import API from './lib/helper/auth0Api';
+import authConfig from '../configs/auth-config';
+import API from '$services/auth0-api';
 
 async function createClient() {
   return await createAuth0Client({
@@ -141,39 +141,7 @@ const auth = {
   checkAuthState,
   createAuth0User,
   getAuth0UserByEmail,
-  updateMetadata,
-  loginWithApi
+  updateMetadata
 };
 
 export default auth;
-
-async function loginWithApi(email: string, password: string): Promise<any> {
-  try {
-    const data = await AuthAPI.login(email, password);
-
-    // Assuming successful login, you might want to store tokens and user info
-    // For now, let's just set isAuthenticated and user
-    // Use the access_token to get user info
-    const userInfoResponse = await fetch(`https://${authConfig.domain}/userinfo`, {
-      headers: {
-        Authorization: `Bearer ${data.access_token}`
-      }
-    });
-
-    if (!userInfoResponse.ok) {
-      throw new Error('Failed to fetch user info');
-    }
-
-    const currentUser = await userInfoResponse.json();
-    const currentUserRole = await getRoles(currentUser.sub);
-
-    userroles.set(currentUserRole);
-    user.set(currentUser);
-    isAuthenticated.set(true);
-
-    return data;
-  } catch (error) {
-    console.error('Error during API login:', error);
-    throw error;
-  }
-}

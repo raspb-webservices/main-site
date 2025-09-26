@@ -1,16 +1,43 @@
 import { client } from '$lib/services/graphql-client';
 import { gql } from 'graphql-request';
-import type { RequestHandler } from '@sveltejs/kit';
 import type { Customer } from '$interfaces/customer.interface';
+import type { RequestHandler } from '@sveltejs/kit';
 
-export const POST: RequestHandler = async ({ request }) => {
+export const PATCH: RequestHandler = async ({ request, url }) => {
   try {
     const customerData: Customer = await request.json();
-    const customerId = customerData.id;
-    
+
+    if (!customerData.id) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: 'Customer Email is required'
+        }),
+        {
+          status: 400,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+    }
+
+    const variables = {
+      id: customerData.id,
+      projectsIds: customerData.projectIds?.length ? customerData.projectIds : null,
+    };
+
     const mutation = gql`
-      mutation PublishCustomer($id: ID!) {
-        publishCustomer(where: { id: $id }) {
+      mutation UpdateCustomer(
+        $id: ID!
+        $projectIds: [AssetWhereUniqueInput!]
+      ) {
+        updateCustomer(
+          where: { id: $id }
+          data: {
+            projects: { connect: $projectIds }
+          }
+        ) {
           address
           auth0Id
           city
@@ -28,29 +55,28 @@ export const POST: RequestHandler = async ({ request }) => {
             name
           }
           salutation
-        }
       }
     `;
 
-    const variables = { id: customerId };
-    const response = (await client.request(mutation, variables)) as { publishCustomer: Customer };
+    // GraphQL Request an Hygraph senden
+    const response = (await client.request(mutation, variables)) as { updateCustomer: Customer };
 
     return new Response(
       JSON.stringify({
         success: true,
-        data: response.publishCustomer
+        data: response.updateCustomer
       }),
       {
-        status: 201,
+        status: 200,
         headers: {
           'Content-Type': 'application/json'
         }
       }
     );
-
   } catch (error) {
-    console.error('Error creating customer:', error);
+    console.error('Error updating customer:', error);
 
+    // Spezifische Fehlerbehandlung für GraphQL-Fehler
     let errorMessage = 'Unknown error occurred';
     let statusCode = 500;
 
@@ -64,6 +90,9 @@ export const POST: RequestHandler = async ({ request }) => {
       } else if (error.message.includes('validation') || error.message.includes('required')) {
         statusCode = 400;
         errorMessage = 'Validation error: ' + error.message;
+      } else if (error.message.includes('not found') || error.message.includes('does not exist')) {
+        statusCode = 404;
+        errorMessage = 'Customer not found';
       }
     }
 
