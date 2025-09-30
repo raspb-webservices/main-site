@@ -1,158 +1,93 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount } from 'svelte';
+  import '@n8n/chat/style.css';
+  import { createChat } from '@n8n/chat';
 
-  interface Message {
-    id: number;
-    sender: "user" | "bot";
-    text: string;
-  }
+  let isOpen = $state(false);
 
-  let messages: Message[] = [];
-  let input: string = "";
-  let loading = false;
-  let isOpen = false; // State to control chat window visibility
-
-  const webhookUrl =
-    "https://n8n.raspb.eu/webhook/4a5f6f4f-1ef8-4be3-bd70-1bfe0297b182/chat";
-
-  async function sendMessage() {
-    if (!input.trim()) return;
-
-    const userMessage: Message = {
-      id: Date.now(),
-      sender: "user",
-      text: input,
-    };
-    messages = [...messages, userMessage];
-
-    const currentInput = input;
-    input = "";
-    loading = true;
-
-    try {
-      const res = await fetch(webhookUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: currentInput }),
-      });
-
-      const data = await res.json();
-
-      const botMessage: Message = {
-        id: Date.now() + 1,
-        sender: "bot",
-        text: data?.reply ?? JSON.stringify(data) ?? "Fehler: Keine Antwort erhalten", // Display full data if 'reply' is missing
-      };
-      messages = [...messages, botMessage];
-    } catch (err) {
-      messages = [
-        ...messages,
-        {
-          id: Date.now() + 2,
-          sender: "bot",
-          text: "❌ Fehler beim Senden.",
+  onMount(() => {
+    createChat({
+      webhookUrl: 'https://n8n.raspb.eu/webhook/4a5f6f4f-1ef8-4be3-bd70-1bfe0297b182/chat',
+      i18n: {
+        en: {
+          title: 'Hi!! HOW ARE you?',
+          subtitle: "Start to chat...",
+          footer: '',
+          getStarted: 'New Conversation',
+          inputPlaceholder: 'Type your question..',
+          closeButtonTooltip: 'Close Chat'
         },
-      ];
-    } finally {
-      loading = false;
-    }
-  }
-
-  function handleKey(e: KeyboardEvent) {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      sendMessage();
-    }
-  }
+        de: {
+          title: 'Hallo, wie gehts?',
+          subtitle: "Begionne zu chatten",
+          footer: '',
+          getStarted: 'New Conversation',
+          inputPlaceholder: 'Type your question..',
+          closeButtonTooltip: 'Chat schließen'
+        }
+      }
+    });
+  });
 </script>
 
-<div class="fixed bottom-4 right-4 z-50">
-  <!-- Chatbot Button -->
-  <button
-    class="btn btn-primary btn-circle shadow-lg"
-    on:click={() => (isOpen = !isOpen)}
-  >
-    {#if isOpen}
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        stroke="currentColor"
-        class="w-6 h-6"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M6 18L18 6M6 6l12 12"
-        />
-      </svg>
-    {:else}
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        stroke="currentColor"
-        class="w-6 h-6"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.75 9.75 0 01-3.105-.555L3 20.25l1.394-4.645A11.25 11.22 0 002.25 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"
-        />
-      </svg>
-    {/if}
-  </button>
-
-  <!-- Chat window -->
-  {#if isOpen}
-    <div
-      class="absolute bottom-20 right-0 flex flex-col w-80 h-[400px] bg-base-200 rounded-2xl shadow-xl overflow-hidden"
-    >
-      <div class="flex-1 p-4 overflow-y-auto space-y-2">
-        {#each messages as msg (msg.id)}
-          <div
-            class="chat"
-            class:chat-start={msg.sender === "bot"}
-            class:chat-end={msg.sender === "user"}
-          >
-            <div
-              class="chat-bubble"
-              class:bg-primary={msg.sender === "user"}
-              class:bg-secondary={msg.sender === "bot"}
-            >
-              {msg.text}
-            </div>
-          </div>
-        {/each}
-
-        {#if loading}
-          <div class="chat chat-start">
-            <div class="chat-bubble bg-secondary animate-pulse">
-              …
-            </div>
-          </div>
-        {/if}
-      </div>
-
-      <!-- Input -->
-      <form
-        class="p-3 bg-base-300 flex gap-2"
-      >
-        <textarea
-          bind:value={input}
-          rows="1"
-          placeholder="Nachricht eingeben..."
-          class="textarea textarea-bordered flex-1 resize-none"
-          on:keydown={handleKey}
-        ></textarea> <!-- Fixed self-closing tag -->
-        <button type="button" on:click={sendMessage}>Senden</button>
-      </form>
-    </div>
-  {/if}
-</div>
+<div id="n8n-chat"></div>
 
 <style lang="postcss">
   @reference '../../app.css';
+
+  :root {
+	--chat--color-primary: var(--color-primary);
+	--chat--color-primary-shade-50: #db4061;
+	--chat--color-primary-shade-100: #cf3c5c;
+	--chat--color-secondary: var(--color-secondary);
+	--chat--color-secondary-shade-50: #1ca08a;
+	--chat--color-white: #ffffff;
+	--chat--color-light: #f2f4f8;
+	--chat--color-light-shade-50: #e6e9f1;
+	--chat--color-light-shade-100: #c2c5cc;
+	--chat--color-medium: #d2d4d9;
+	--chat--color-dark: #101330;
+	--chat--color-disabled: #777980;
+	--chat--color-typing: #404040;
+
+	--chat--spacing: 1rem;
+	--chat--border-radius: 0.25rem;
+	--chat--transition-duration: 0.15s;
+
+	--chat--window--width: 450px;
+	--chat--window--height: 650px;
+
+	--chat--header-height: auto;
+	--chat--header--padding: var(--chat--spacing);
+	--chat--header--background: var(--chat--color-primary-shade-50);
+	--chat--header--color: var(--chat--color-light);
+	--chat--header--border-top: none;
+	--chat--header--border-bottom: none;
+	--chat--header--border-bottom: none;
+	--chat--header--border-bottom: none;
+	--chat--heading--font-size: 2em;
+	--chat--header--color: var(--chat--color-light);
+	--chat--subtitle--font-size: inherit;
+	--chat--subtitle--line-height: 1.8;
+
+	--chat--textarea--height: 50px;
+
+	--chat--message--font-size: 1rem;
+	--chat--message--padding: var(--chat--spacing);
+	--chat--message--border-radius: var(--chat--border-radius);
+	--chat--message-line-height: 1.8;
+	--chat--message--bot--background: var(--chat--color-white);
+	--chat--message--bot--color: var(--chat--color-dark);
+	--chat--message--bot--border: none;
+	--chat--message--user--background: var(--chat--color-secondary);
+	--chat--message--user--color: var(--chat--color-white);
+	--chat--message--user--border: none;
+	--chat--message--pre--background: rgba(0, 0, 0, 0.05);
+
+	--chat--toggle--background: var(--chat--color-primary);
+	--chat--toggle--hover--background: var(--chat--color-primary-shade-50);
+	--chat--toggle--active--background: var(--chat--color-primary-shade-100);
+	--chat--toggle--color: var(--chat--color-white);
+	--chat--toggle--size: 64px;
+}
 </style>

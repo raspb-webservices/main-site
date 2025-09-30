@@ -51,6 +51,7 @@
   "dependencies": {
     "@auth0/auth0-spa-js": "^2.2.0",
     "@hygraph/management-sdk": "^1.4.0",
+    "@n8n/chat": "^0.58.0",
     "@sparticuz/chromium": "^138.0.2",
     "@types/puppeteer": "^5.4.7",
     "dotenv": "^17.0.0",
