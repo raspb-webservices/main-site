@@ -1,4 +1,4 @@
-import Api from '$services/server/auth0-api';
+import Api from '$lib/server/auth0-api';
 
 export const GET = async (req) => {
   const id = req.params.id;

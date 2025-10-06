@@ -1,4 +1,4 @@
-import { client } from '$services/server/graphql-client';
+import { client } from '$lib/server/graphql-client';
 import { gql } from 'graphql-request';
 
 export const GET = async (req) => {
