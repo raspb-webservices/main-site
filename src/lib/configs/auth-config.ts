@@ -1,7 +1,7 @@
 import { PUBLIC_VITE_AUTH0_DOMAIN } from "$env/static/public";
 import { PUBLIC_VITE_AUTH0_AUDIENCE } from "$env/static/public";
 import { PUBLIC_VITE_AUTH0_CALLBACK_URL } from "$env/static/public";
-import { VITE_AUTH0_CLIENT_ID } from "$env/static/private";
+import { PUBLIC_VITE_AUTH0_CLIENT_ID } from "$env/static/public";
 
 interface AuthConfig {
   domain: string;
@@ -12,7 +12,7 @@ interface AuthConfig {
 
 const authConfig: AuthConfig = {
   domain: PUBLIC_VITE_AUTH0_DOMAIN || '',
-  clientId: VITE_AUTH0_CLIENT_ID || '',
+  clientId: PUBLIC_VITE_AUTH0_CLIENT_ID || '',
   callbackUrl: PUBLIC_VITE_AUTH0_CALLBACK_URL || '',
   audience: PUBLIC_VITE_AUTH0_AUDIENCE || ''
 };
