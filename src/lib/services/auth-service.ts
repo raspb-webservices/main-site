@@ -1,7 +1,7 @@
 import { createAuth0Client } from '@auth0/auth0-spa-js';
 import { user, isAuthenticated, popupOpen, userroles } from '$store/sharedStates.svelte';
 import authConfig from '../configs/auth-config';
-import API from '$lib/server/auth0-api';
+import API from '$lib/server/auth0-helper';
 
 async function createClient() {
   return await createAuth0Client({
@@ -36,7 +36,7 @@ async function loginWithPopup(client: any, options?: any) {
 
     userroles.set(currentUserRole);
     user.set(currentUser);
-    isAuthenticated.set(true); 
+    isAuthenticated.set(true);
   } catch (e) {
     console.error(e);
   } finally {
@@ -65,7 +65,7 @@ async function checkAuthState(client: any) {
     if (isAuth) {
       const currentUser = await client.getUser();
       user.set(currentUser);
-      isAuthenticated.set(true); 
+      isAuthenticated.set(true);
     } else {
       isAuthenticated.set(false);
     }
@@ -77,7 +77,8 @@ async function checkAuthState(client: any) {
 
 async function createAuth0User(userData: { email: string; password: string; givenName: string; familyName: string; user_metadata: Object }): Promise<any> {
   try {
-    const response = await API.post('users', {
+    const fetchString = '/api/auth/post/' + 'users';
+    const requestData = {
       email: userData.email,
       password: userData.password,
       given_name: userData.givenName,
@@ -85,6 +86,10 @@ async function createAuth0User(userData: { email: string; password: string; give
       connection: 'Username-Password-Authentication',
       verify_email: true,
       user_metadata: userData.user_metadata
+    };
+    const response = await fetch(fetchString, {
+      method: 'POST',
+      body: JSON.stringify(requestData)
     });
     return response;
   } catch (error) {
@@ -95,8 +100,13 @@ async function createAuth0User(userData: { email: string; password: string; give
 
 async function assignRole(userId: string, rolesToAssign: string[]): Promise<any> {
   try {
-    const response = await API.post('users/' + userId + '/roles', {
+    const fetchString = '/api/auth/post/userRole/' + userId;
+    const requestData = {
       roles: rolesToAssign
+    };
+    const response = await fetch(fetchString, {
+      method: 'POST',
+      body: JSON.stringify(requestData)
     });
     return response;
   } catch (error) {
@@ -108,8 +118,13 @@ async function assignRole(userId: string, rolesToAssign: string[]): Promise<any>
 async function updateMetadata(userId: string, metadata: Object): Promise<any> {
   if (userId) {
     try {
-      const response = await API.patch('users/' + userId, {
+      const fetchString = '/api/auth/patch/users/' + userId;
+      const requestData = {
         user_metadata: metadata
+      };
+      const response = await fetch(fetchString, {
+        method: 'PATCH',
+        body: JSON.stringify(requestData)
       });
       return response;
     } catch (error) {
@@ -123,7 +138,8 @@ async function updateMetadata(userId: string, metadata: Object): Promise<any> {
 
 async function getAuth0UserByEmail(email: string): Promise<any> {
   try {
-    const response = await API.get(`users-by-email?email=${encodeURIComponent(email)}`, {});
+    const fetchString = '/api/auth/get/' + `users-by-email?email=${encodeURIComponent(email)}`;
+    const response = await fetch(fetchString);
     return response;
   } catch (error) {
     console.error('Error fetching Auth0 user by email:', error);

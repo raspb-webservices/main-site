@@ -1,7 +1,8 @@
 import { client } from '$lib/server/graphql-client';
 import { gql } from 'graphql-request';
+import type { RequestHandler } from '@sveltejs/kit';
 
-export const GET = async () => {
+export const GET: RequestHandler = async () => {
   try {
     const query = gql`
       mutation createAsset {

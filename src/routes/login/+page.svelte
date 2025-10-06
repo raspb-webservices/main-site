@@ -2,7 +2,7 @@
   import { _ } from 'svelte-i18n';
   import Section from '$lib/components/ui/section.svelte';
   import { goto } from '$app/navigation';
-  import auth from '$lib/server/auth-service';
+  import auth from '$services/auth-service';
 
   async function login() {
     const auth0Client = await auth.createClient();

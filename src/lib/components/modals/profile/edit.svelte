@@ -1,6 +1,6 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n';
-  import auth from '$lib/server/auth-service';
+  import auth from '$services/auth-service';
   import { user } from '$store/sharedStates.svelte';
   import type { User } from '$interfaces/user.interface';
 

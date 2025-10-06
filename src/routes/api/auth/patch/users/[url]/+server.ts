@@ -1,10 +1,10 @@
 import API from '$lib/server/auth0-helper';
 import type { RequestHandler } from '@sveltejs/kit';
 
-export const GET: RequestHandler = async (req) => {
-  const id = req.params.id;
+export const PATCH: RequestHandler = async ({ params, request }) => {
+  const urlPart = params.url;
   try {
-    const response = await API.get('users/' + id + '/roles', req);
+    const response = await API.patch('users/' + urlPart, request);
     return new Response(JSON.stringify(response));
   } catch (error) {
     return new Response(JSON.stringify(error));

@@ -1,7 +1,8 @@
 import { client } from '$lib/server/graphql-client';
+import type { RequestHandler } from '@sveltejs/kit';
 import { gql } from 'graphql-request';
 
-export const GET = async (req) => {
+export const GET: RequestHandler = async (req) => {
   const page = req.params.page;
   try {
     const query = gql`
