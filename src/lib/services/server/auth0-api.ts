@@ -1,4 +1,8 @@
 import axios from 'axios';
+import { PUBLIC_VITE_AUTH0_AUDIENCE } from "$env/static/public";
+import { PUBLIC_VITE_AUTH0_CLIENT_ID } from "$env/static/public";
+import { PUBLIC_VITE_AUTH0_TOKEN_URL } from '$env/static/public';
+import { VITE_AUTH0_CLIENT_SECRET } from "$env/static/private";
 
 const axiosAPI = axios.create({
   baseURL: 'https://dev-lztna60en7yhpzaq.us.auth0.com/api/v2/'
@@ -6,13 +10,13 @@ const axiosAPI = axios.create({
 
 async function getToken() {
   try {
-    const response = await fetch('https://dev-lztna60en7yhpzaq.us.auth0.com/oauth/token', {
+    const response = await fetch(PUBLIC_VITE_AUTH0_TOKEN_URL, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({
-        client_id: 'zXz4XyH3QgMnGRP4x6KKkf20YiHGjcAw',
-        client_secret: 'wJU_opDyjhAB7wDK52dFh_S1J3Li-uX7IjpUg1ccaZ3v94nLRTdjlmZI67ypAbyE',
-        audience: 'https://dev-lztna60en7yhpzaq.us.auth0.com/api/v2/',
+        client_id: PUBLIC_VITE_AUTH0_CLIENT_ID,
+        client_secret: VITE_AUTH0_CLIENT_SECRET ,
+        audience: PUBLIC_VITE_AUTH0_AUDIENCE ,
         grant_type: 'client_credentials'
       })
     });
