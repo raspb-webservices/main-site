@@ -1,3 +1,8 @@
+import { PUBLIC_VITE_AUTH0_DOMAIN } from "$env/static/public";
+import { PUBLIC_VITE_AUTH0_AUDIENCE } from "$env/static/public";
+import { PUBLIC_VITE_AUTH0_CALLBACK_URL } from "$env/static/public";
+import { VITE_AUTH0_CLIENT_ID } from "$env/static/private";
+
 interface AuthConfig {
   domain: string;
   clientId: string;
@@ -6,16 +11,15 @@ interface AuthConfig {
 }
 
 const authConfig: AuthConfig = {
-  domain: import.meta.env.VITE_AUTH0_DOMAIN || '',
-  clientId: import.meta.env.VITE_AUTH0_CLIENT_ID || '',
-  callbackUrl: import.meta.env.VITE_AUTH0_CALLBACK_URL || '',
-  audience: import.meta.env.VITE_AUTH0_AUDIENCE || ''
+  domain: PUBLIC_VITE_AUTH0_DOMAIN || '',
+  clientId: VITE_AUTH0_CLIENT_ID || '',
+  callbackUrl: PUBLIC_VITE_AUTH0_CALLBACK_URL || '',
+  audience: PUBLIC_VITE_AUTH0_AUDIENCE || ''
 };
 
 // Validierung hinzufügen
 if (!authConfig.domain || !authConfig.clientId) {
-  console.log("ENV ", import.meta.env)
-  console.error('Auth0 Konfiguration fehlt! Bitte Environment Variables setzen.');
+  console.error('Auth0 Konfiguration fehlt! Bitte Environment Variables richtig setzen.');
 }
 
 export default authConfig;

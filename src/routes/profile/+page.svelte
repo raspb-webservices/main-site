@@ -54,7 +54,8 @@
       <h1><span class="inner-text-special">{$_('profile.title')}</span></h1>
     </div>
 
-    <div class="grid grid-cols-12 gap-8">
+    <div class="grid grid-cols-12 gap-8 relative">
+      <div class="absolute -top-7 right-5 bg-primary px-2 py-0.5 rounded-tl-md rounded-tr-md text-white">{currentUserRoles}</div>
       <div class="col-span-3 flex flex-col items-center justify-center">
         <div class="avatar">
           <div class="mask mask-squircle w-full">

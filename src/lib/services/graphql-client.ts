@@ -1,9 +1,9 @@
 import { GraphQLClient } from 'graphql-request';
-const GRAPHQL_ENDPOINT = import.meta.env.GRAPHQL_ENDPOINT;
-const GRAPHQL_TOKEN = 'Bearer ' +  import.meta.env.GRAPHQL_TOKEN;
+import { PUBLIC_GRAPHQL_ENDPOINT } from '$env/static/public';
+import { GRAPHQL_TOKEN } from '$env/static/private';
 
-export const client = new GraphQLClient(GRAPHQL_ENDPOINT, {
+export const client = new GraphQLClient(PUBLIC_GRAPHQL_ENDPOINT, {
   headers: {
-    authorization: GRAPHQL_TOKEN
+    authorization: 'Bearer ' + GRAPHQL_TOKEN
   }
 });
