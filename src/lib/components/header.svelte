@@ -1,6 +1,6 @@
 <script lang="ts">
   import { user, isAuthenticated, userroles } from '$store/sharedStates.svelte';
-  import auth from '$services/auth-service';
+  import auth from '$lib/server/auth-service';
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
   import { _ } from 'svelte-i18n';

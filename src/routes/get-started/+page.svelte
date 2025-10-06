@@ -5,7 +5,7 @@
   import WizardBasic from '$lib/components/wizard/wizard-basic.svelte';
   import Wizard from '$lib/components/wizard/wizard.svelte';
   import { isAuthenticated } from '$store/sharedStates.svelte';
-  import auth from '../../lib/services/auth-service';
+  import auth from '$lib/server/auth-service';
 
   async function login() {
     const auth0Client = await auth.createClient();
