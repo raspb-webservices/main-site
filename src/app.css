@@ -346,7 +346,8 @@ textarea:not([rows]) {
     @apply flex h-dvh w-full items-center justify-center;
   }
   main {
-    @apply min-h-[calc(100vh-464px)] bg-base-50;
+    /* @apply min-h-[calc(100vh-464px)] bg-base-50; */
+    @apply bg-base-50;
 
     .inner-box {
       @apply h-full w-full max-w-7xl px-10 mx-auto;
