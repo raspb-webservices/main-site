@@ -75,7 +75,7 @@
 <footer>
   <div class="inner-box">
     <div class="top-row">
-      <img src="/images/logo.png" alt="raspb Logo" class="h-20 w-auto" />
+      <div class="footer-logo"></div>
       <div class="line"></div>
       <div class="social-media-links">
         <button class="social-media-icon x" onclick={() => {gotoExternal('https://www.x.com')}} aria-label="X"></button>
@@ -174,6 +174,10 @@
 
       .top-row {
         @apply flex w-full items-center justify-between py-10;
+        .footer-logo  {
+          @apply h-[70px] aspect-video bg-contain bg-center bg-no-repeat;
+          background-image: url("https://eu-west-2.graphassets.com/cm20c16cp01zc07mf1rjrctt8/resize=height:70/cmgf9da2l13cu07l6u1xt7e82");
+        }
         .line {
           @apply bg-base-content-100 mx-2 h-0.5 w-full grow;
         }
