@@ -33,10 +33,10 @@
 <svelte:head>
   <link rel="manifest" href="/site.webmanifest" />
   <meta name="theme-color" content="#f33199" />
-  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/icon/favicon.svg" />
-  <link rel="shortcut icon" href="/icon/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" href="/icons/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
+  <link rel="shortcut icon" href="/icons/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-title" content="raspb" />
 </svelte:head>
 
