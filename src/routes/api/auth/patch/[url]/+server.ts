@@ -1,4 +1,4 @@
-import API from '$lib/server/auth0-helper';
+import API from '$lib/server/auth0-helper.server';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const PATCH: RequestHandler = async ({ params, request }) => {

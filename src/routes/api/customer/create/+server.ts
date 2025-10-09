@@ -1,4 +1,4 @@
-import { client } from '$lib/server/graphql-client';
+import { client } from '$lib/server/graphql-client.server';
 import { gql } from 'graphql-request';
 import type { RequestHandler } from '@sveltejs/kit';
 import type { Customer } from '$interfaces/customer.interface';
