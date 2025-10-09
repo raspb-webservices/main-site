@@ -6,11 +6,6 @@
   import HEADER from '$lib/components/header.svelte';
   import FOOTER from '$lib/components/footer.svelte';
   import CookieConsentComponent from '$lib/components/cookieconsent.svelte';
-  import favicon from '$lib/assets/favicon.ico';
-  import faviconSvg from '$lib/assets/favicon.svg';
-  import appleTouch from '$lib/assets/apple-touch-icon.png';
-  import favicon96 from '$lib/assets/favicon-96x96.png';
-  import webmanifest from '$lib/assets/site.webmanifest';
   import '../app.css';
   import Chatbot from '$lib/components/chatbot.svelte';
 
@@ -36,12 +31,13 @@
 </script>
 
 <svelte:head>
-  <link rel="icon" type="image/png" href={favicon96} sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href={faviconSvg} />
-  <link rel="shortcut icon" href={favicon} />
-  <link rel="apple-touch-icon" sizes="180x180" href={appleTouch} />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#f33199" />
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/icon/favicon.svg" />
+  <link rel="shortcut icon" href="/icon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-title" content="raspb" />
-  <link rel="manifest" href={webmanifest} />
 </svelte:head>
 
 <div class="wrapper">
