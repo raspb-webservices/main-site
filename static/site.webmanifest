@@ -16,6 +16,19 @@
       "purpose": "any"
     }
   ],
+    "screenshots": [
+    {
+      "src": "/screenshots/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/screenshots/screenshot-mobile.png",
+      "sizes": "720x1280",
+      "type": "image/png"
+    }
+  ],
   "theme_color": "#f33199",
   "background_color": "#ffffff",
   "display": "standalone"
