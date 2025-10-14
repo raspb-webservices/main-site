@@ -1,13 +1,18 @@
 <script lang="ts">
   import TEASER from '$lib/components/ui/teaser.svelte';
   import { goto } from '$app/navigation';
-  import Slider from '$lib/components/ui/slider.svelte';
+  import Slider from '$lib/components/ui/box-slider.svelte';
+  import FullWidthSlider from '$lib/components/ui/full-width-slider.svelte';
+  import HeroSlider from '$lib/components/ui/hero-slider.svelte';
+  import CarouselSlider from '$lib/components/ui/carousel-slider.svelte';
 </script>
 
-<TEASER customImageURL={'https://picsum.photos/id/46/1920/1080'} headline={'Hier kommt eine tolle Headline'} subheadline={'Und eine super SubHeadline'}
-></TEASER>
+<!-- <TEASER customImageURL={'https://picsum.photos/id/46/1920/1080'} headline={'Hier kommt eine tolle Headline'} subheadline={'Und eine super SubHeadline'}
+></TEASER> -->
 
-<section class="test-content-wrapper fade-in">
+<FullWidthSlider />
+
+<section class="test-content-wrapper fade-in mt-80">
   <h1>Test</h1>
   <div class="pt-10 lg:px-20">
     <p>
@@ -21,7 +26,18 @@
 
     <div class="big-spacer"></div>
 
-    <Slider></Slider>
+    <Slider />
+
+    <div class="big-spacer"></div>
+
+    <HeroSlider />
+
+    <div class="big-spacer"></div>
+    <div class="big-spacer"></div>
+    <div class="big-spacer"></div>
+
+    <CarouselSlider />
+
     <div class="big-spacer"></div>
 
     <button
