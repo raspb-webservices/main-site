@@ -51,9 +51,7 @@
       {@render children?.()}
     </main>
     <!-- <Chatbot /> -->
-    <!-- <elevenlabs-convai agent-id="agent_6201k7sa8fxafb7r2g21x6c1xnr1"></elevenlabs-convai><script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script> -->
-    
-    <div id="elevenlabs-audionative-widget" data-height="90" data-width="100%" data-frameborder="no" data-scrolling="no" data-publicuserid="decdfd880a01909cf6a5150606344652389012cf2f457f4d128805aa3618afbe" data-playerurl="https://elevenlabs.io/player/index.html" >Loading the <a href="https://elevenlabs.io/text-to-speech" target="_blank" rel="noopener">Elevenlabs Text to Speech</a> AudioNative Player...</div><script src="https://elevenlabs.io/player/audioNativeHelper.js" type="text/javascript"></script>
+    <elevenlabs-convai agent-id="agent_6201k7sa8fxafb7r2g21x6c1xnr1"></elevenlabs-convai><script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
     <FOOTER />
   {/if}
   <CookieConsentComponent></CookieConsentComponent>
