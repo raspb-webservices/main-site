@@ -8,6 +8,7 @@
   import TimeAsFactorModal from '$lib/components/modals/home/time-as-factor.svelte';
   import CostAsFactorModal from '$lib/components/modals/home/cost-as-factor.svelte';
   import QualityAsFactorModal from '$lib/components/modals/home/quality-as-factor.svelte';
+  import SectionCanva from '$lib/components/ui/section-canva.svelte';
 
   let philosophyModal: PhilosophyModal;
   let timeAsFactorModal: TimeAsFactorModal;
