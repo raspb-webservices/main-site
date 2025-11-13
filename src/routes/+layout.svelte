@@ -8,6 +8,7 @@
   import CookieConsentComponent from '$lib/components/cookieconsent.svelte';
   import '../app.css';
   import Chatbot from '$lib/components/chatbot.svelte';
+  import LottieLoader from '$lib/components/lottie-loader.svelte';
 
   let { children } = $props();
   let showInitialLoader = $state(true);
@@ -43,6 +44,7 @@
 <div class="wrapper">
   {#if $isLoading || navigating.to || showInitialLoader}
     <div class="global-loading">
+      <!-- <LottieLoader></LottieLoader> -->
       <Loader size={'large'}></Loader>
     </div>
   {:else}

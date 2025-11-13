@@ -8,7 +8,7 @@
   import TimeAsFactorModal from '$lib/components/modals/home/time-as-factor.svelte';
   import CostAsFactorModal from '$lib/components/modals/home/cost-as-factor.svelte';
   import QualityAsFactorModal from '$lib/components/modals/home/quality-as-factor.svelte';
-  import SectionCanva from '$lib/components/ui/section-canva.svelte';
+  import LottieLoader from '$lib/components/lottie-loader.svelte';
 
   let philosophyModal: PhilosophyModal;
   let timeAsFactorModal: TimeAsFactorModal;
@@ -54,6 +54,7 @@
 </Stage>
 
 <div class="home-content-wrapper">
+  <!-- <LottieLoader></LottieLoader> -->
   <Section type={'centerTeaser'}>
     <div class="massive-spacer"></div>
     <div class="grid grid-cols-1 items-center gap-12 gap-y-10 lg:grid-cols-2 lg:gap-14 lg:gap-y-4">
