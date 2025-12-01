@@ -13,6 +13,17 @@
       "subtitleThird": "- super affordable",
       "buttonText": "learn more"
     },
+    "thisIsUs": {
+      "title": "Get to learn raspb",
+      "titleFirst": "Get to learn ",
+      "titleHighlight": "raspb",
+      "titleSecond": "",
+      "subtitle": "We are not the typical AI agency, nor a classical web develeopment studio. We are the booster for small and medium businesses IT.",
+      "paragraph1": "The combination of a proven technology stack, AI-powered workflows and almost 20 years of project experience creates a unique ecosystem that makes your IT projects succeed: tailor-made solutions that are personal, fast and cost-efficient. Whether it’s a simple corporate website, a sophisticated CMS solution, custom business applications or the implementation of innovative AI use cases – we deliver in every discipline, and you get everything you need from a single, hassle-free source.",
+      "paragraph2": "Instead of agency overhead, long coordination loops and hidden costs, you get clear fixed prices, a transparent implementation process and a single point of contact who is responsible for everything from architecture to hosting. That’s how IT becomes lean, affordable and future-proof again.",
+      "paragraph3": "You share your idea, we take care of the rest: incredibly fast, significantly more affordable than the competition and at a quality level that will exceed your expectations.",
+      "paragraph4": "We unlock opportunities that were previously reserved for large enterprises with big budgets. Give us a try. It’s time for IT to be fun again – inspiring, frustration-free and focused on delivering real value."
+    },
     "intro": {
       "titleFirst": "For SMEs, for associations, for foundations, ...",
       "titleHighlight": "for everyone",
@@ -29,12 +40,13 @@
         "hosting": "Hosting / Administration",
         "domain": "Domain / DNS configuration",
         "projektdurchfuehrung": "Project implementation",
-        "monitoring": "Monitoring"
+        "monitoring": "Monitoring",
+        "coaching": "Coaching / Training"
       }
     },
     "services": {
       "titleFirst": "Our",
-      "titleHighlight": "Services",
+      "titleHighlight": "Service portfolio",
       "subtitle": "From the first idea to the final implementation - we accompany you with modern technology and years of expertise to your digital success.",
       "webseiten": {
         "title": "Websites",

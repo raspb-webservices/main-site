@@ -69,7 +69,7 @@
     effect: 'coverflow',
     coverflowEffect: {
       rotate: 0,
-      stretch: -120,
+      stretch: -60,
       depth: 240,
       modifier: 1.08,
       slideShadows: false
@@ -173,7 +173,7 @@
     left: 50%;
     transform: translateX(-50%);
     /* Slide-Höhe ~ 74% => Bildunterkante = 74%; Card Mitte = Bildunterkante */
-    bottom: calc(26% - (var(--card-h) / 2));
+    bottom: calc(11% - (var(--card-h) / 2));
     z-index: 30;
     --card-h: 240px;
     min-height: var(--card-h);

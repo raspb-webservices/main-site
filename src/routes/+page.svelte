@@ -1,14 +1,15 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { _ } from 'svelte-i18n';
+  import { _, locale } from 'svelte-i18n';
   import Stage from '$lib/components/ui/stage.svelte';
   import Section from '$lib/components/ui/section.svelte';
-  import CTABox from '$lib/components/snippets/cta-box.svelte'
+  import CTABox from '$lib/components/snippets/cta-box.svelte';
   import PhilosophyModal from '$lib/components/modals/general/philosophy.svelte';
   import TimeAsFactorModal from '$lib/components/modals/home/time-as-factor.svelte';
   import CostAsFactorModal from '$lib/components/modals/home/cost-as-factor.svelte';
   import QualityAsFactorModal from '$lib/components/modals/home/quality-as-factor.svelte';
   import LottieLoader from '$lib/components/lottie-loader.svelte';
+  import { DotLottieSvelte } from '@lottiefiles/dotlottie-svelte';
 
   let philosophyModal: PhilosophyModal;
   let timeAsFactorModal: TimeAsFactorModal;
@@ -54,8 +55,63 @@
 </Stage>
 
 <div class="home-content-wrapper">
-  <!-- <LottieLoader></LottieLoader> -->
-  <Section type={'centerTeaser'}>
+  <Section>
+    <div class="inner-section-wrapper">
+      <div class="intro prose pt-10 md:pt-0">
+        <h1>{$_('homepage.thisIsUs.titleFirst')} <span class="inner-text-special">{$_('homepage.thisIsUs.titleHighlight')}</span>{#if $locale !== 'en'}$_('homepage.thisIsUs.titleSecond'){/if}</h1>
+        <p class="teaser">
+          {$_('homepage.thisIsUs.subtitle')}
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-x-10 gap-y-8">
+      <div class="animate-fade-in-from-side prose col-span-full md:col-span-7 order-2 md:order-1">
+        <p>
+          {$_('homepage.thisIsUs.paragraph1')}
+        </p>
+        <p>
+          {$_('homepage.thisIsUs.paragraph2')}
+        </p>
+      </div>
+      <div class="col-span-full md:col-span-5 items-center lg:items-top order-1 md:order-2">
+        <div class="lottie-container">
+          <DotLottieSvelte src="/lotties/robot-supports.lottie" loop autoplay />
+        </div>
+      </div>
+      <div class="col-span-full md:col-span-5 order-3">
+        <div class="lottie-container">
+          <DotLottieSvelte src="/lotties/business-launch.lottie" loop autoplay />
+        </div>
+      </div>
+      <div class="animate-fade-in-from-side prose col-span-full md:col-span-7 order-4">
+        <p>
+          {$_('homepage.thisIsUs.paragraph3')}
+        </p>
+        <p>
+          {$_('homepage.thisIsUs.paragraph4')}
+        </p>
+        <p>
+          {$_('homepage.intro.benefitsTitle')}
+        </p>
+      </div>
+
+      <div class="benefits col-span-full order-5">
+        <div class="item">{$_('homepage.intro.benefits.konzept')}</div>
+        <div class="item">{$_('homepage.intro.benefits.design')}</div>
+        <div class="item">{$_('homepage.intro.benefits.uiux')}</div>
+        <div class="item">{$_('homepage.intro.benefits.programmierung')}</div>
+        <div class="item">{$_('homepage.intro.benefits.datenmodellierung')}</div>
+        <div class="item">{$_('homepage.intro.benefits.hosting')}</div>
+        <div class="item">{$_('homepage.intro.benefits.domain')}</div>
+        <div class="item">{$_('homepage.intro.benefits.projektdurchfuehrung')}</div>
+        <div class="item">{$_('homepage.intro.benefits.coaching')}</div>
+        <div class="item">{$_('homepage.intro.benefits.monitoring')}</div>
+      </div>
+    </div>
+  </Section>
+
+  <!-- <Section type={'centerTeaser'}>
     <div class="massive-spacer"></div>
     <div class="grid grid-cols-1 items-center gap-12 gap-y-10 lg:grid-cols-2 lg:gap-14 lg:gap-y-4">
       <div class="animate-fade-in-from-side prose mr-8">
@@ -91,10 +147,13 @@
       </div>
     </div>
     <div class="massive-spacer"></div>
-  </Section>
+  </Section> -->
 
-  <Section>
-    <div class="inner-section-wrapper">
+
+
+  <Stage style={'basic-gradient'}>
+    <div class="inner-container py-24 px-4 max-w-7xl m-auto">
+      <div class="inner-section-wrapper">
       <div class="intro prose">
         <h1>{$_('homepage.services.titleFirst')} <span class="inner-text-special">{$_('homepage.services.titleHighlight')}</span></h1>
         <p class="teaser">
@@ -266,7 +325,10 @@
         </div>
       </div>
     </div>
-  </Section>
+</div>
+
+  </Stage>
+
 
   <Section>
     <div class="inner-section-wrapper">
@@ -410,24 +472,8 @@
   </Section>
 
   <Section>
-    <div class="raspb-card">
-  <div class="raspb-card-icon">
-    <!-- Beispiel-SVG: Austauschbar durch andere Piktogramme -->
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-      <circle cx="12" cy="12" r="10" fill="#D16BA5"/>
-      <path d="M12 7v5l3 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </div>
-  <div class="raspb-card-content">
-    <h3>Digitale Lösungen</h3>
-    <p>Individuell entwickelt, effizient umgesetzt, zukunftssicher gestaltet.</p>
-  </div>
-</div>
-  </Section>
-
-  <Section>
     <CTABox></CTABox>
-  </Section>      
+  </Section>
   <div class="massive-spacer"></div>
 </div>
 
@@ -439,10 +485,19 @@
 <style lang="postcss">
   @reference '../app.css';
   .home-content-wrapper {
+    .lottie-container {
+      @apply w-full h-full;
+      :global(dotlottie-player),
+      :global(canvas) {
+        @apply w-full h-full max-w-full max-h-full;
+        object-fit: contain;
+      }
+    }
+    
     .benefits {
-      @apply flex flex-wrap gap-2;
+      @apply flex flex-wrap justify-center items-center gap-2;
       .item {
-        @apply text-base-content bg-base-100 w-fit rounded-lg px-4 py-2 text-sm;
+        @apply text-base-content bg-primary/8 w-fit rounded-lg px-4 py-2 text-sm;
       }
     }
     .image-container {
@@ -622,53 +677,4 @@
       }
     }
   }
-
-
-  .raspb-card {
-  display: flex;
-  align-items: center;
-  background: linear-gradient(135deg, #D16BA5 0%, #86A8E7 100%);
-  border-radius: 1.2em;
-  box-shadow: 0 4px 24px rgba(70, 43, 87, 0.10);
-  padding: 2em;
-  gap: 1.6em;
-  transition: transform 0.15s;
-  color: #fff;
-  max-width: 420px;
-  margin: 1.5em auto;
-}
-
-.raspb-card:hover {
-  transform: translateY(-2px) scale(1.015);
-  box-shadow: 0 6px 30px rgba(70, 43, 87, 0.13);
-}
-
-.raspb-card-icon {
-  flex-shrink: 0;
-  background: linear-gradient(135deg, #5F4B8B 30%, #fff0 100%);
-  padding: 0.8em;
-  border-radius: 50%;
-  box-shadow: 0 2px 8px rgba(209, 107, 165, 0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.raspb-card-content h3 {
-  margin: 0 0 0.25em 0;
-  font-size: 1.3em;
-  font-weight: bold;
-  letter-spacing: 0.01em;
-  color: #fff;
-}
-
-.raspb-card-content p {
-  margin: 0;
-  font-size: 1em;
-  color: rgba(255,255,255,0.93);
-  letter-spacing: 0.01em;
-}
-
-
-
 </style>

@@ -229,7 +229,7 @@
         @apply h-auto;
       }
     }
-    @apply sticky top-0 z-20 h-20 w-full bg-base-50/80 backdrop-blur-lg shadow-lg;
+    @apply sticky top-0 z-20 h-20 w-full bg-base-50/75 backdrop-blur-lg shadow-lg;
     .inner-box {
       @apply m-auto flex h-full w-full max-w-7xl items-center justify-between px-4;
 

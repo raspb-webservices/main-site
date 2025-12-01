@@ -128,11 +128,6 @@
                       </div>
                     </div>
                   </div>
-                  <div class="hidden lg:block">
-                    <div class="{item.textColor} border border-current bg-white/60 rounded-full w-8 h-8 flex justify-center items-center">
-                      {item.letter}
-                    </div>
-                  </div>
                 </div>
                 <p class="md:pr-10 {item.textColor}">
                   {item.description}

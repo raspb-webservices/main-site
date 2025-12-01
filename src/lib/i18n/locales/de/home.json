@@ -13,13 +13,24 @@
       "subtitleThird": " -  günstiger als Sie denken",
       "buttonText": "mehr erfahren"
     },
+    "thisIsUs": {
+      "title": "Lernen Sie raspb kennen",
+      "titleFirst": "Lernen Sie",
+      "titleHighlight": "raspb",
+      "titleSecond": "kennen",
+      "subtitle": "Wir sind keine typische KI-Agentur und kein klassisches Web-Entwicklungsstudio. Wir sind der Booster für die Unternehmens-IT kleiner und mittelständischer Betriebe.",
+      "paragraph1": "Die Kombination aus einem erprobten Technologie-Stack, KI-gestützten Workflows und knapp 20 Jahren Projekterfahrung bildet ein einzigartiges Ökosystem, das Ihre IT-Projekte zum Erfolg führt: maßgeschneiderte Lösungen – persönlich, schnell und kosteneffizient. Ob einfacher Unternehmensauftritt, anspruchsvolle CMS-Lösung, individuelle Business-Anwendungen oder die Umsetzung innovativer KI-Use-Cases: Wir überzeugen in jeder Disziplin, und Sie erhalten alles stressfrei und unkompliziert aus einer Hand.",
+      "paragraph2": "Statt Agentur-Overhead, langer Abstimmungsschleifen und versteckter Kosten erhalten Sie bei uns klare Festpreise, eine transparente Umsetzung und einen Ansprechpartner, der von der Architektur bis zum Hosting alles aus einer Hand verantwortet. So wird IT wieder schlank, bezahlbar und zukunftssicher.",
+      "paragraph3": "Sie formulieren Ihre Idee – wir kümmern uns um den Rest: rasend schnell, deutlich günstiger als die Konkurrenz und auf einem Qualitätsniveau, das Ihre Erwartungen übertreffen wird.",
+      "paragraph4": "Wir erschließen Möglichkeiten, die bisher nur Konzernen mit großen Budgets vorbehalten waren. Probieren Sie uns aus. Es wird Zeit, dass IT wieder Spaß macht, begeistert und frustfrei echte Mehrwerte schafft."
+    },
     "intro": {
       "titleFirst": "Für KMUs, für Vereine, für Stiftungen, ...",
       "titleHighlight": "für alle",
       "paragraph1": "Jeder, der im Internet sichtbar sein will, braucht eine Webseite. Diese ist so individuell wie Sie selbst und Wünsche und Anforderungen variieren. Egal ob einfache Webvisitenkarte, umfangreicher Unternehmensauftritt oder mächtige Content Management Plattform. Bei raspb finden Sie die perfekte Lösung für Ihre Vorhaben.",
       "paragraph2": "Darüber hinaus entwickeln wir für Sie auf Wunsch auch komplexe Webanwendungen (PWA) oder unterstützen Sie bei individuellen Herausforderungen in Ihrem Unternehmen (Freestyle Development, spezielle KI-Use-Cases).",
       "paragraph3": "Dank unseres einzigartigen Ansatzes, können wir die gängigsten IT-Services unglaublich schnell und kosteneffizient anbieten. Dabei erhalten Sie alles aus einer Hand, perfekt aufeinander abgestimmt: Kohärente Ergebnisse, weniger Reibungspunkte, weniger Fehlerpotenziale, weniger Projektstress.",
-      "benefitsTitle": "Sie müssen sich um nichts kümmern (außer Ihre Idee so detailliert wie möglich zu beschreiben). Wir liefern ab - in jeder Disziplin:",
+      "benefitsTitle": "Schenken Sie uns Ihr Vertrauen und wir liefern ab - in jeder Disziplin:",
       "benefits": {
         "konzept": "Konzept",
         "design": "Design",
@@ -29,12 +40,13 @@
         "hosting": "Hosting / Administration",
         "domain": "Domain- / DNS-Konfiguration",
         "projektdurchfuehrung": "Projektdurchführung",
-        "monitoring": "Monitoring"
+        "monitoring": "Monitoring",
+        "coaching": "Coaching / Training"
       }
     },
     "services": {
-      "titleFirst": "Unsere",
-      "titleHighlight": "Services",
+      "titleFirst": "Unser",
+      "titleHighlight": "Leistungsportfolio",
       "subtitle": "Von der ersten Idee bis zur finalen Umsetzung - wir begleiten Sie mit modernster Technologie und jahrelanger Expertise zu Ihrem digitalen Erfolg.",
       "webseiten": {
         "title": "Webseiten",
