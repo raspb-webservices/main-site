@@ -58,7 +58,7 @@
   <Section>
     <div class="inner-section-wrapper">
       <div class="intro prose pt-10 md:pt-0">
-        <h1>{$_('homepage.thisIsUs.titleFirst')} <span class="inner-text-special">{$_('homepage.thisIsUs.titleHighlight')}</span>{#if $locale !== 'en'}$_('homepage.thisIsUs.titleSecond'){/if}</h1>
+        <h1>{$_('homepage.thisIsUs.titleFirst')} <span class="inner-text-special">{$_('homepage.thisIsUs.titleHighlight')}</span> {#if $locale !== 'en'}{$_('homepage.thisIsUs.titleSecond')}{/if}</h1>
         <p class="teaser">
           {$_('homepage.thisIsUs.subtitle')}
         </p>
