@@ -344,6 +344,11 @@ textarea:not([rows]) {
 .wrapper {
   .global-loading {
     @apply flex h-dvh w-full items-center justify-center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: white;
+    z-index: 9999;
   }
   main {
     /* @apply min-h-[calc(100vh-464px)] bg-base-50; */

@@ -16,7 +16,7 @@
   onMount(() => {
     setTimeout(() => {
       showInitialLoader = false;
-    }, 333);
+    }, 750);
 
     // Register Service Worker
     if ('serviceWorker' in navigator) {
@@ -44,8 +44,7 @@
 <div class="wrapper">
   {#if $isLoading || navigating.to || showInitialLoader}
     <div class="global-loading">
-      <!-- <LottieLoader></LottieLoader> -->
-      <Loader size={'large'}></Loader>
+      <LottieLoader />
     </div>
   {:else}
     <HEADER />

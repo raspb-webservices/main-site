@@ -410,6 +410,22 @@
   </Section>
 
   <Section>
+    <div class="raspb-card">
+  <div class="raspb-card-icon">
+    <!-- Beispiel-SVG: Austauschbar durch andere Piktogramme -->
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="10" fill="#D16BA5"/>
+      <path d="M12 7v5l3 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <div class="raspb-card-content">
+    <h3>Digitale Lösungen</h3>
+    <p>Individuell entwickelt, effizient umgesetzt, zukunftssicher gestaltet.</p>
+  </div>
+</div>
+  </Section>
+
+  <Section>
     <CTABox></CTABox>
   </Section>      
   <div class="massive-spacer"></div>
@@ -606,4 +622,53 @@
       }
     }
   }
+
+
+  .raspb-card {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #D16BA5 0%, #86A8E7 100%);
+  border-radius: 1.2em;
+  box-shadow: 0 4px 24px rgba(70, 43, 87, 0.10);
+  padding: 2em;
+  gap: 1.6em;
+  transition: transform 0.15s;
+  color: #fff;
+  max-width: 420px;
+  margin: 1.5em auto;
+}
+
+.raspb-card:hover {
+  transform: translateY(-2px) scale(1.015);
+  box-shadow: 0 6px 30px rgba(70, 43, 87, 0.13);
+}
+
+.raspb-card-icon {
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #5F4B8B 30%, #fff0 100%);
+  padding: 0.8em;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(209, 107, 165, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.raspb-card-content h3 {
+  margin: 0 0 0.25em 0;
+  font-size: 1.3em;
+  font-weight: bold;
+  letter-spacing: 0.01em;
+  color: #fff;
+}
+
+.raspb-card-content p {
+  margin: 0;
+  font-size: 1em;
+  color: rgba(255,255,255,0.93);
+  letter-spacing: 0.01em;
+}
+
+
+
 </style>

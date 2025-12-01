@@ -15,7 +15,7 @@
   }
 
   function toggleLocale() {
-    const newLocale = $locale === 'de' ? 'en' : 'de';
+    const newLocale = $locale === 'de' || $locale === 'de-DE' ? 'en' : 'de';
     locale.set(newLocale);
   }
 
@@ -133,11 +133,11 @@
     <div class="controls-area">
         <button
           class="locale-toggle-btn"
-          class:german={$locale === 'de'}
+          class:german={$locale === 'de' || $locale === 'de-DE'}
           class:english={$locale === 'en'}
           onclick={toggleLocale}
-          aria-label="Switch language"
-          title={$locale === 'de' ? $_('menu.switchLanguageToEnglish') : $_('menu.switchLanguageToGerman')}
+          aria-label={$locale === 'de' || $locale === 'de-DE' ? $_('menu.switchLanguageToEnglish') : $_('menu.switchLanguageToGerman')}
+          title={$locale === 'de' || $locale === 'de-DE' ? $_('menu.switchLanguageToEnglish') : $_('menu.switchLanguageToGerman')}
         ></button>
         <label class="swap swap-rotate ml-4 hover:scale-105">
           <input type="checkbox" class="theme-controller" bind:checked={darkActive} value="dark" onchange="{updateDataAttribute}" />
