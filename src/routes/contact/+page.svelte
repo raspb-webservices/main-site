@@ -96,7 +96,7 @@
             @apply border-mediumGrey text-darkGrey focus:border-secondary focus:ring-secondary mt-1 block w-full border bg-white p-3 text-sm;
           }
           input.is-checkbox {
-            @apply focus:ring-primary mt-0 h-6 w-6 p-0 focus:ring-1;
+            @apply focus:ring-secondary mt-0 h-6 w-6 p-0 focus:ring-1;
           }
 
           .additional-information {
