@@ -178,6 +178,7 @@
 *:focus-within,
 *:active {
   outline: none;
+  image-rendering: crisp-edges;
 }
 
 html,

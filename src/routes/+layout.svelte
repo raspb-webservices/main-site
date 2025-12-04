@@ -10,7 +10,7 @@
 
   let { children } = $props();
 
-  const simpleRoutes = new Set(['/contact', '/thank-you', '/en/contact', '/en/thank-you', , '/de/kontakt', '/de/danke']);
+  const simpleRoutes = new Set(['/contact', '/thank-you']);
   const isSimpleLayout = $derived(simpleRoutes.has(page.url.pathname));
   let showInitialLoader = $state(true);
 
