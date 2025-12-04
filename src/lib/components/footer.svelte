@@ -179,12 +179,12 @@
           background-image: url("https://eu-west-2.graphassets.com/cm20c16cp01zc07mf1rjrctt8/resize=height:70/cmgf9da2l13cu07l6u1xt7e82");
         }
         .line {
-          @apply bg-base-content-100 mx-2 h-0.5 w-full grow;
+          @apply bg-base-content-100 mx-2 h-0.5 w-full grow hidden xs:flex;
         }
         .social-media-links {
           @apply ml-2 flex items-center justify-center;
           .social-media-icon {
-            @apply mx-1 h-9 w-9 opacity-80 bg-base-content-50 mask-no-repeat mask-center mask-contain;
+            @apply mx-0.5 h-7 w-7 xs:mx-1 xs:h-9 xs:w-9 opacity-80 bg-base-content-50 mask-no-repeat mask-center mask-contain;
             &:last-child {
               @apply mr-0;
             }

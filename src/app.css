@@ -131,6 +131,9 @@
   --font-circular: 'Circular', sans-serif;
   --spacing-fhd: 120rem;
   --spacing-wqhd: 160rem;
+  --breakpoint-xs: 26rem;  
+  --breakpoint-fhd: 120rem;
+  --breakpoint-wqhd: 160rem;
   --color-white: var(--white);
   --color-black: var(--black);
   --color-base-50: oklch(100% 0 0);

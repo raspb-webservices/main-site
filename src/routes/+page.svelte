@@ -65,7 +65,7 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-12 gap-x-10 gap-y-8">
+    <div class="grid grid-cols-12 md:gap-x-10 gap-y-8">
       <div class="animate-fade-in-from-side prose col-span-full md:col-span-7 order-2 md:order-1">
         <p>
           {$_('homepage.thisIsUs.paragraph1')}
