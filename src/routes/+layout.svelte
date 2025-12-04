@@ -1,16 +1,17 @@
 <script>
   import { isLoading } from 'svelte-i18n';
-  import { navigating } from '$app/state';
+  import { page, navigating } from '$app/state';
   import { onMount } from 'svelte';
-  import Loader from '$lib/components/loader.svelte';
   import HEADER from '$lib/components/header.svelte';
   import FOOTER from '$lib/components/footer.svelte';
   import CookieConsentComponent from '$lib/components/cookieconsent.svelte';
   import '../app.css';
-  import Chatbot from '$lib/components/chatbot.svelte';
   import LottieLoader from '$lib/components/lottie-loader.svelte';
 
   let { children } = $props();
+
+  const simpleRoutes = new Set(['/contact', '/thank-you', '/en/contact', '/en/thank-you', , '/de/kontakt', '/de/danke']);
+  const isSimpleLayout = $derived(simpleRoutes.has(page.url.pathname));
   let showInitialLoader = $state(true);
 
   onMount(() => {
@@ -18,9 +19,9 @@
       showInitialLoader = false;
     }, 750);
 
-    // Register Service Worker
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js')
+      navigator.serviceWorker
+        .register('/service-worker.js')
         .then((registration) => {
           console.log('Service Worker registered successfully:', registration.scope);
         })
@@ -42,7 +43,13 @@
 </svelte:head>
 
 <div class="wrapper">
-  {#if $isLoading || navigating.to || showInitialLoader}
+  {#if isSimpleLayout}
+    <HEADER />
+    <main>
+      {@render children?.()}
+    </main>
+    <FOOTER />
+  {:else if $isLoading || navigating.to || showInitialLoader}
     <div class="global-loading">
       <LottieLoader />
     </div>
@@ -52,7 +59,12 @@
       {@render children?.()}
     </main>
     <FOOTER />
-    <elevenlabs-convai agent-id="agent_6201k7sa8fxafb7r2g21x6c1xnr1"></elevenlabs-convai><script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+    <elevenlabs-convai agent-id="agent_6201k7sa8fxafb7r2g21x6c1xnr1"></elevenlabs-convai>
+    <script
+      src="https://unpkg.com/@elevenlabs/convai-widget-embed"
+      async
+      type="text/javascript"
+    ></script>
   {/if}
-  <CookieConsentComponent></CookieConsentComponent>
+  <CookieConsentComponent />
 </div>
