@@ -1,12 +1,11 @@
 import { client } from '$lib/server/graphql-client.server';
 import { gql } from 'graphql-request';
 import type { RequestHandler } from '@sveltejs/kit';
-import type { Project, ProjectResponse, projectStatus } from '$interfaces/project.interface';
+import type { Project, ProjectResponse } from '$interfaces/project.interface';
 
 export const POST: RequestHandler = async ({ request }) => {
   try {
     const projectData: Project = await request.json();
-
     const mutation = gql`
       mutation CreateProject(
         $name: String

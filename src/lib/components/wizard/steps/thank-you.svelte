@@ -43,7 +43,7 @@
     <div class="thank-you-actions">
       <button
         onclick={() => {
-          goto('/dasjboard');
+          goto('/dashboard');
         }}
         class="btn btn-simple btn-lg"
       >

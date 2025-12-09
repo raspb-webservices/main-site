@@ -1,4 +1,4 @@
-import { createAuth0Client } from '@auth0/auth0-spa-js';
+import { createAuth0Client, type Auth0Client } from '@auth0/auth0-spa-js';
 import { user, isAuthenticated, popupOpen, userroles } from '$store/sharedStates.svelte';
 import authConfig from '../configs/auth-config';
 
@@ -16,7 +16,7 @@ async function getRoles(userid: string): Promise<string[]> {
 
     const userRoles = [];
     if (userRoleObjects && userRoleObjects.length) {
-      userRoleObjects.forEach((element: any) => {
+      userRoleObjects.forEach((element: unknown) => {
         userRoles.push(element.name);
       });
     }
@@ -25,7 +25,7 @@ async function getRoles(userid: string): Promise<string[]> {
   throw new Error('Could not fetch user roles from /api/userRoles/user[sub]!');
 }
 
-async function loginWithPopup(client: any, options?: any) {
+async function loginWithPopup(client: Auth0Client, options?: unknown) {
   popupOpen.set(true);
 
   try {
@@ -43,7 +43,7 @@ async function loginWithPopup(client: any, options?: any) {
   }
 }
 
-function logout(client: any) {
+function logout(client: Auth0Client) {
   isAuthenticated.set(false);
   user.set({ email: '' });
   return client.logout({
@@ -54,11 +54,11 @@ function logout(client: any) {
   });
 }
 
-async function getIdTokenClaims(client: any) {
+async function getIdTokenClaims(client: Auth0Client) {
   return await client.getIdTokenClaims();
 }
 
-async function checkAuthState(client: any) {
+async function checkAuthState(client: Auth0Client) {
   try {
     const isAuth = await client.isAuthenticated();
     if (isAuth) {
@@ -74,7 +74,7 @@ async function checkAuthState(client: any) {
   }
 }
 
-async function createAuth0User(userData: { email: string; password: string; givenName: string; familyName: string; user_metadata: Object }): Promise<any> {
+async function createAuth0User(userData: { email: string; password: string; givenName: string; familyName: string; user_metadata:object }): Promise<unknown> {
   try {
     const fetchString = '/api/auth/post/' + 'users';
     const requestData = {
@@ -86,8 +86,12 @@ async function createAuth0User(userData: { email: string; password: string; give
       verify_email: true,
       user_metadata: userData.user_metadata
     };
+
     const response = await fetch(fetchString, {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(requestData)
     });
     return response;
@@ -97,7 +101,7 @@ async function createAuth0User(userData: { email: string; password: string; give
   }
 }
 
-async function assignRole(userId: string, rolesToAssign: string[]): Promise<any> {
+async function assignRole(userId: string, rolesToAssign: string[]): Promise<unknown> {
   try {
     const fetchString = '/api/auth/post/userRole/' + userId;
     const requestData = {
@@ -105,16 +109,19 @@ async function assignRole(userId: string, rolesToAssign: string[]): Promise<any>
     };
     const response = await fetch(fetchString, {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(requestData)
     });
     return response;
   } catch (error) {
-    console.error('Error creating Auth0 user:', error);
+    console.error('Error assigning role:', error);
     throw error;
   }
 }
 
-async function updateMetadata(userId: string, metadata: Object): Promise<any> {
+async function updateMetadata(userId: string, metadata: object): Promise<unknown> {
   if (userId) {
     try {
       const fetchString = '/api/auth/patch/users/' + userId;
@@ -123,11 +130,14 @@ async function updateMetadata(userId: string, metadata: Object): Promise<any> {
       };
       const response = await fetch(fetchString, {
         method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify(requestData)
       });
       return response;
     } catch (error) {
-      console.error('Error creating Auth0 user:', error);
+      console.error('Error updating metadata:', error);
       throw error;
     }
   } else {
@@ -135,7 +145,7 @@ async function updateMetadata(userId: string, metadata: Object): Promise<any> {
   }
 }
 
-async function getAuth0UserByEmail(email: string): Promise<any> {
+async function getAuth0UserByEmail(email: string): Promise<unknown> {
   try {
     const fetchString = '/api/auth/get/' + `users-by-email?email=${encodeURIComponent(email)}`;
     const response = await fetch(fetchString);

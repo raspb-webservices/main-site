@@ -7,7 +7,6 @@ export const POST: RequestHandler = async ({ request }) => {
   try {
     const customerData: Customer = await request.json();
     const customerEmail = customerData.email;
-    
     const mutation = gql`
       mutation PublishCustomer($email: String!) {
         publishCustomer(where: { email: $email }) {

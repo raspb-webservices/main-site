@@ -60,8 +60,8 @@
         }
       };
 
-      const auth0Response = await auth.createAuth0User(userData);
-      const userId = auth0Response.user_id;
+      const auth0Response: any = await auth.createAuth0User(userData);
+      const userId = auth0Response['user_id'];
 
       // Assign role to the new user
       await auth.assignRole(userId, ['rol_eqqXJZxCRsW8zLRt']);

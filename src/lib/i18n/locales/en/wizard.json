@@ -540,6 +540,7 @@
         "estimatedPrice": "Estimated price:",
         "projectType": "Project type:",
         "home": "Go to homepage",
+        "dashboard": "Back to project overview",
         "contact": "Contact us"
       },
       "reset": {

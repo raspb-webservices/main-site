@@ -134,7 +134,7 @@
                   <p class="no-padding"><strong>{currentUser.phone}</strong></p>
                 </div>
               {/if}
-              <div class="col-span-6 flex justify-end">
+              <div class="col-span-full flex justify-end">
                 <button
                   class="btn btn-simple"
                   onclick={() => {

@@ -6,7 +6,6 @@ import type { Customer } from '$interfaces/customer.interface';
 export const POST: RequestHandler = async ({ request }) => {
   try {
     const customerData: Customer = await request.json();
-
     const mutation = gql`
       mutation CreateCustomer(
         $address: String

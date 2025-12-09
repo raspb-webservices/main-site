@@ -2,7 +2,7 @@ export interface User {
   sub?: string;
   name?: string;
   nickname?: string;
-  email: string;
+  email?: string;
   familyName?: string;
   givenName?: string;
   city?: string;

@@ -32,7 +32,7 @@ async function getToken() {
   }
 }
 
-const apiRequest = async (method, url, request) => {
+const apiRequest = async (method: string, url: string, request: unknown) => {
   const token = await getToken();
   const headers = {
     authorization: `Bearer ${token}`
@@ -52,11 +52,11 @@ const apiRequest = async (method, url, request) => {
     });
 };
 
-const get = (url, request) => apiRequest('get', url, request);
-const deleteRequest = (url, request) => apiRequest('delete', url, request);
-const post = (url, request) => apiRequest('post', url, request);
-const put = (url, request) => apiRequest('put', url, request);
-const patch = (url, request) => apiRequest('patch', url, request);
+const get = (url: string, request: unknown) => apiRequest('get', url, request);
+const deleteRequest = (url: string, request: unknown) => apiRequest('delete', url, request);
+const post = (url: string, request: unknown) => apiRequest('post', url, request);
+const put = (url: string, request: unknown) => apiRequest('put', url, request);
+const patch = (url: string, request: unknown) => apiRequest('patch', url, request);
 
 const API = {
   get,
