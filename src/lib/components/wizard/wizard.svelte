@@ -463,9 +463,9 @@
         // Show thank you page immediately while publishing happens in background
         showThankYouPage();
 
-        // Wait 2 seconds to ensure everything is properly saved before publishing
+        // Wait 3.5 seconds to ensure everything is properly saved before publishing
         console.log($_('wizard.modals.error.waiting'));
-        await new Promise((resolve) => setTimeout(resolve, 3000));
+        await new Promise((resolve) => setTimeout(resolve, 3500));
 
         // Publish the project
         try {
