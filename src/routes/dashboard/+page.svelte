@@ -8,10 +8,10 @@
   import ProjectEditModal from '$lib/components/modals/dashboard/project-edit-modal.svelte';
   import type { Project } from '$interfaces/project.interface';
   import type { User } from '$interfaces/user.interface';
-  import Loader from '$lib/components/loader.svelte';
   import { goto } from '$app/navigation';
   import { _ } from 'svelte-i18n';
   import auth from '$services/auth-service';
+  import LottieLoader from '$lib/components/lottie-loader.svelte';
 
   let isAuth = $derived(isAuthenticated.get());
   let currentUser = $derived(user.get()) as User;
@@ -128,7 +128,7 @@
 
 {#if loading}
   <div class="global-loading">
-    <Loader size={'large'}></Loader>
+    <LottieLoader />
   </div>
 {:else if showSection === 'not-authorized'}
   <Section type={'fullCenterTeaser'}>

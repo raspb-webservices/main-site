@@ -1,7 +1,7 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n';
   import { goto } from '$app/navigation';
-  import { projectTypes } from '$lib/configs/wizard-config';
+  import { projectTypes } from '$configs/wizard-config';
   let { config } = $props();
 </script>
 

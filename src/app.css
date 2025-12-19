@@ -1,4 +1,4 @@
-@import url('./fonts/font-collection.css');
+@import "./font-collection.css";
 @import 'tailwindcss';
 
 :root {
