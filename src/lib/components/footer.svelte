@@ -206,7 +206,7 @@
         @apply flex w-full items-center justify-between py-10;
         .footer-logo {
           @apply aspect-video h-[70px] bg-contain bg-center bg-no-repeat;
-          background-image: url('/images/logo.png');
+          background-image: url('/images/logo.webp');
         }
         .line {
           @apply bg-base-content-100 xs:flex mx-2 hidden h-0.5 w-full grow;
