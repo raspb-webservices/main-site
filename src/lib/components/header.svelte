@@ -235,7 +235,7 @@
 
       .logo {
         @apply aspect-video h-[70px] cursor-pointer bg-contain bg-center bg-no-repeat;
-        background-image: url("https://eu-west-2.graphassets.com/cm20c16cp01zc07mf1rjrctt8/resize=height:70/cmgf9da2l13cu07l6u1xt7e82");
+        background-image: url("/images/logo.png");
       }
       nav.navigation {
         @apply hidden w-fit items-center justify-center md:flex;
