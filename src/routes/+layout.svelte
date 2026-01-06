@@ -63,8 +63,6 @@
       {@render children?.()}
     </main>
     <FOOTER />
-    <elevenlabs-convai agent-id="agent_6201k7sa8fxafb7r2g21x6c1xnr1"></elevenlabs-convai>
-    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
   {/if}
   <CookieConsentComponent />
 </div>
