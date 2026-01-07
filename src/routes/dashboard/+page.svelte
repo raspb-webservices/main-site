@@ -121,7 +121,7 @@
     }
   }
 
-  async  {
+  async function login() {
     const popup: Window = openAuth0Popup(450, 650);
     try {
       if (!popup) throw new Error('Popup konnte nicht geöffnet werden (Popup-Blocker?).');
