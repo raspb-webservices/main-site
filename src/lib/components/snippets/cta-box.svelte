@@ -23,21 +23,21 @@
       <div class="cta-benefit">
         <div class="benefit-icon">⚡</div>
         <div>
-          <h4>{$_('ctaBox.benefits.zeit.title')}</h4>
+          <h2>{$_('ctaBox.benefits.zeit.title')}</h2>
           <p>{$_('ctaBox.benefits.zeit.description')}</p>
         </div>
       </div>
       <div class="cta-benefit">
         <div class="benefit-icon">🎯</div>
         <div>
-          <h4>{$_('ctaBox.benefits.massgeschneidert.title')}</h4>
+          <h2>{$_('ctaBox.benefits.massgeschneidert.title')}</h2>
           <p>{$_('ctaBox.benefits.massgeschneidert.description')}</p>
         </div>
       </div>
       <div class="cta-benefit">
         <div class="benefit-icon">🤝</div>
         <div>
-          <h4>{$_('ctaBox.benefits.contact.title')}</h4>
+          <h2>{$_('ctaBox.benefits.contact.title')}</h2>
           <p>{$_('ctaBox.benefits.contact.description')}</p>
         </div>
       </div>
@@ -87,8 +87,8 @@
             @apply mt-1 mr-4 text-3xl;
           }
 
-          h4 {
-            @apply mb-1 font-semibold;
+          h2 {
+            @apply text-lg mb-1 font-semibold;
           }
 
           p {
