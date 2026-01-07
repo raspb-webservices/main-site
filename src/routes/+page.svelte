@@ -594,7 +594,7 @@
 
         .balance-content {
           h2 {
-            @apply mb-4 text-2xl font-semibold;
+            @apply mb-5 mt-3 p-0 text-2xl font-semibold;
           }
 
           p {
