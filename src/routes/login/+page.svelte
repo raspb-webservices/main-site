@@ -5,8 +5,19 @@
   import auth from '$services/auth-service';
 
   async function login() {
-    const auth0Client = await auth.createClient();
-    await auth.loginWithPopup(auth0Client);
+    const popup: Window = openAuth0Popup(450, 650);
+    try {
+      if (!popup) throw new Error('Popup konnte nicht geöffnet werden (Popup-Blocker?).');
+      const auth0Client = await auth.createClient();
+      await auth.loginWithPopup(auth0Client, { authorizationParams: {} }, popup);
+    } catch (e) {
+      console.error('Error occurred: ', e);
+    }
+  }
+
+
+  function openAuth0Popup(arg0: number, arg1: number): Window {
+    throw new Error('Function not implemented.');
   }
 </script>
 

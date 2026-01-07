@@ -6,10 +6,17 @@
   import Wizard from '$lib/components/wizard/wizard.svelte';
   import { isAuthenticated } from '$store/sharedStates.svelte';
   import auth from '$services/auth-service';
+  import { openAuth0Popup } from '$helper/loginOpener';
 
   async function login() {
-    const auth0Client = await auth.createClient();
-    await auth.loginWithPopup(auth0Client);
+    const popup: Window = openAuth0Popup(450, 650);
+    try {
+      if (!popup) throw new Error('Popup konnte nicht geöffnet werden (Popup-Blocker?).');
+      const auth0Client = await auth.createClient();
+      await auth.loginWithPopup(auth0Client, { authorizationParams: {} }, popup);
+    } catch (e) {
+      console.error('Error occurred: ', e);
+    }
   }
 
   let loggedin = $derived(isAuthenticated.get());
@@ -140,20 +147,20 @@
         <p>
           {$_('getStarted.registrationPrompt.description2')}
         </p>
-    <div class="flex gap-6">
-        <button
-          class="btn-basic animate-fade-in-from-side"
-          onclick={() => {
-            goto('/registration');
-          }}>{$_('getStarted.registrationPrompt.registrationButton')}</button
-        >
-        <button
-          class="btn-basic animate-fade-in-from-side"
-          onclick={() => {
-            login();
-          }}>{$_('getStarted.registrationPrompt.loginButton')}</button
-        >
-    </div>
+        <div class="flex gap-6">
+          <button
+            class="btn-basic animate-fade-in-from-side"
+            onclick={() => {
+              goto('/registration');
+            }}>{$_('getStarted.registrationPrompt.registrationButton')}</button
+          >
+          <button
+            class="btn-basic animate-fade-in-from-side"
+            onclick={() => {
+              login();
+            }}>{$_('getStarted.registrationPrompt.loginButton')}</button
+          >
+        </div>
       {/if}
     {/if}
   </div>

@@ -2,6 +2,7 @@
   import { _ } from 'svelte-i18n';
 
   let modal: HTMLDialogElement;
+  
   export function openModal() {
     modal?.showModal();
   }

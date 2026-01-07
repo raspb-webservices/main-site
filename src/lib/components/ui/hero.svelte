@@ -1,8 +1,18 @@
 <script lang="ts">
-  let { headline = "", subheadline = "", image = "", imageAlt = "", variant = 'default', showButton = false, buttonText = "learn more", buttonAction } = $props();
+  let {
+    headline = '',
+    subheadline = '',
+    image = '',
+    imageAlt = '',
+    variant = 'default',
+    position = 'default',
+    showButton = false,
+    buttonText = 'learn more',
+    buttonAction
+  } = $props();
 </script>
 
-<div class="hero-container" class:centered={variant === 'centered'} class:split={variant === 'split'}>
+<div class="hero-container" class:centered={variant === 'centered'} class:split={variant === 'split'} class:pushDown={position === 'bottom'} class:pushUp={position === 'top'}>
   <div class="hero-content">
     <div class="text-content" class:animate-fade-in-up={variant === 'centered'} class:animate-fade-in-from-side={variant === 'split'}>
       {#if headline}
@@ -10,7 +20,7 @@
       {/if}
 
       {#if subheadline}
-        <h3 class="hero-subheadline">{subheadline}</h3>
+        <h2 class="hero-subheadline">{subheadline}</h2>
       {/if}
 
       {#if showButton && buttonText}
@@ -37,18 +47,22 @@
 <style lang="postcss">
   @reference '../../../app.css';
   .hero-container {
-    @apply relative min-h-[60vh] w-full overflow-hidden;
+    @apply relative min-h-[50vh] w-full overflow-hidden flex;
+
+    &.centered {
+      @apply flex items-center justify-center text-center;
+    }
+
+    &.pushDown {
+      @apply items-end ;
+    }
+
+    &.pushUp {
+      @apply items-start;
+    }
   }
 
-  .hero-container.centered {
-    @apply flex items-center justify-center text-center;
-    min-height: 70vh;
-  }
-
-  .hero-container.split {
-    @apply min-h-[80vh];
-  }
-
+  .hero-container
   .hero-content {
     @apply relative z-10 w-full;
   }
@@ -65,7 +79,6 @@
 
   .hero-container:not(.split):not(.centered) .hero-content {
     @apply flex flex-col justify-center px-4 py-20;
-    @apply min-h-[60vh];
   }
 
   .text-content {
@@ -74,6 +87,10 @@
 
   .split .text-content {
     @apply mr-8;
+  }
+
+  .centered .text-content {
+    @apply flex flex-col items-center justify-center;
   }
 
   .hero-headline {

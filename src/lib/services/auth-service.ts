@@ -25,11 +25,11 @@ async function getRoles(userid: string): Promise<string[]> {
   throw new Error('Could not fetch user roles from /api/userRoles/user[sub]!');
 }
 
-async function loginWithPopup(client: Auth0Client, options?: unknown) {
+async function loginWithPopup(client: Auth0Client, options?: unknown, popup?: Window ) {
   popupOpen.set(true);
 
   try {
-    await client.loginWithPopup(options);
+    await client.loginWithPopup(options, { popup });
     const currentUser = await client.getUser();
     const currentUserRole = await getRoles(currentUser.sub);
 

@@ -438,6 +438,12 @@ textarea:not([rows]) {
     @apply from-pink/80 to-violet/80 cursor-pointer shadow-none;
   }
 }
+.btn-inverted-outline {
+  @apply bg-transparent border-1 border-white text-nowrap text-white transition-all rounded-md px-8 py-5 text-lg leading-none;
+  &:hover {
+    @apply bg-white/20 cursor-pointer;
+  }
+}
 .btn-outline-basic {
   @apply from-purple to-pink w-fit rounded-lg border-0 bg-linear-to-r;
   .button-inner {

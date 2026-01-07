@@ -1,11 +1,11 @@
 {
   "getStarted": {
     "meta": {
-      "title": "Start dein Projekt",
-      "description": "Beginn dein Projekt mit unserem Konfigurator."
+      "title": "Starte dein Projekt",
+      "description": "Beginne dein Projekt mit unserem Konfigurator."
     },
     "hero": {
-      "title": "Start dein",
+      "title": "Starte dein",
       "titleHighlight": "Projekt"
     },
     "teaser": {

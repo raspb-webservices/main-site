@@ -138,7 +138,7 @@
   }
   /* Action Buttons */
   .action-buttons {
-    @apply flex justify-center gap-4;
+    @apply flex justify-center gap-4 flex-wrap;
   }
   /* Success Toast */
   .success-toast {

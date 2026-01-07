@@ -7,6 +7,7 @@
   import type { User } from '$interfaces/user.interface';
   import ProfileEditModal from '$lib/components/modals/profile/edit.svelte';
   import auth from '$services/auth-service';
+  import { openAuth0Popup } from '$helper/loginOpener';
 
   let isAuth = $derived(isAuthenticated.get());
   let currentUser = $derived(user.get()) as User;
@@ -38,8 +39,14 @@
   }
 
   async function login() {
-    const auth0Client = await auth.createClient();
-    await auth.loginWithPopup(auth0Client);
+    const popup: Window = openAuth0Popup(450, 650);
+    try {
+      if (!popup) throw new Error('Popup konnte nicht geöffnet werden (Popup-Blocker?).');
+      const auth0Client = await auth.createClient();
+      await auth.loginWithPopup(auth0Client, { authorizationParams: {} }, popup);
+    } catch (e) {
+      console.error('Error occurred: ', e);
+    }
   }
 </script>
 

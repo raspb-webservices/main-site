@@ -7,6 +7,7 @@
   import auth from '$services/auth-service';
   import Loader from '$lib/components/loader.svelte';
   import { _ } from 'svelte-i18n';
+  import { openAuth0Popup } from '$helper/loginOpener';
 
   let isAuth = $derived(isAuthenticated.get());
   let currentUserRoles = $derived(userroles.get());
@@ -38,8 +39,14 @@
   }
 
   async function login() {
-    const auth0Client = await auth.createClient();
-    await auth.loginWithPopup(auth0Client);
+    const popup: Window = openAuth0Popup(450, 650);
+    try {
+      if (!popup) throw new Error('Popup konnte nicht geöffnet werden (Popup-Blocker?).');
+      const auth0Client = await auth.createClient();
+      await auth.loginWithPopup(auth0Client, { authorizationParams: {} }, popup);
+    } catch (e) {
+      console.error('Error occurred: ', e);
+    }
   }
 </script>
 

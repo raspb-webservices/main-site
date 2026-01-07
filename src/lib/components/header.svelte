@@ -5,20 +5,25 @@
   import { page } from '$app/state';
   import { _ } from 'svelte-i18n';
   import type { User } from '$interfaces/user.interface';
+  import { openAuth0Popup } from '$helper/loginOpener';
 
   let mobileNavOpen = $state(false);
   let logginIn = $state(false);
   let logginOut = $state(false);
-
   let isAuth = $derived(isAuthenticated.get());
   let currentUser = $derived(user.get()) as User;
   let currentUserRoles = $derived(userroles.get());
 
   async function login() {
     logginIn = true;
-    const auth0Client = await auth.createClient();
-    await auth.loginWithPopup(auth0Client);
-    logginIn = false;
+    const popup: Window = openAuth0Popup(450, 650);
+    try {
+      if (!popup) throw new Error('Popup konnte nicht geöffnet werden (Popup-Blocker?).');
+      const auth0Client = await auth.createClient();
+      await auth.loginWithPopup(auth0Client, { authorizationParams: {} }, popup);
+    } finally {
+      logginIn = false;
+    }
   }
 
   async function logout() {
@@ -31,33 +36,33 @@
 
 <header class:loggedin={isAuth}>
   {#if isAuth}
-  <div class="logged-in-header">
-    <div class="inner-box flex items-center justify-between">
-      <p>Herzlich Willkommen, {currentUser.givenName} {currentUser.familyName}!</p>
-      <div class="ml-auto"></div>
-      <button
-        class="text-link-button white-link"
-        onclick={() => {
-          goto('/dashboard');
-        }}>Dashboard</button
-      >
-            <div class="w-8 text-center text-white opacity-70">|</div>
-      <button
-        class="text-link-button white-link"
-        onclick={() => {
-          goto('/profile');
-        }}>Profil</button
-      >
-      <div class="w-8 text-center text-white opacity-70">|</div>
-      <button
-        class="text-link-button white-link"
-        onclick={() => {
-          logout();
-        }}>Logout</button
-      >
+    <div class="logged-in-header">
+      <div class="inner-box flex items-center justify-between">
+        <p>Herzlich Willkommen, {currentUser.givenName} {currentUser.familyName}!</p>
+        <div class="ml-auto"></div>
+        <button
+          class="text-link-button white-link"
+          onclick={() => {
+            goto('/dashboard');
+          }}>Dashboard</button
+        >
+        <div class="w-8 text-center text-white opacity-70">|</div>
+        <button
+          class="text-link-button white-link"
+          onclick={() => {
+            goto('/profile');
+          }}>Profil</button
+        >
+        <div class="w-8 text-center text-white opacity-70">|</div>
+        <button
+          class="text-link-button white-link"
+          onclick={() => {
+            logout();
+          }}>Logout</button
+        >
+      </div>
     </div>
-  </div>
-{/if}
+  {/if}
   <div class="inner-box">
     <button
       aria-label="raspb Logo"
@@ -229,13 +234,13 @@
         @apply h-auto;
       }
     }
-    @apply sticky top-0 z-20 h-20 w-full bg-base-50/75 backdrop-blur-lg shadow-lg;
+    @apply bg-base-50/75 sticky top-0 z-20 h-20 w-full shadow-lg backdrop-blur-lg;
     .inner-box {
       @apply m-auto flex h-full w-full max-w-7xl items-center justify-between px-4;
 
       .logo {
         @apply aspect-video h-[70px] cursor-pointer bg-contain bg-center bg-no-repeat;
-        background-image: url("/images/logo.webp");
+        background-image: url('/images/logo.webp');
       }
       nav.navigation {
         @apply hidden w-fit items-center justify-center md:flex;

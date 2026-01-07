@@ -5,16 +5,18 @@
   import Section from '$lib/components/ui/section.svelte';
   import CTABox from '$lib/components/snippets/cta-box.svelte';
   import PhilosophyModal from '$lib/components/modals/general/philosophy.svelte';
+  import GetAppointmentModal from '$lib/components/modals/general/get-appointment.svelte';
   import TimeAsFactorModal from '$lib/components/modals/home/time-as-factor.svelte';
   import CostAsFactorModal from '$lib/components/modals/home/cost-as-factor.svelte';
   import QualityAsFactorModal from '$lib/components/modals/home/quality-as-factor.svelte';
-  import LottieLoader from '$lib/components/lottie-loader.svelte';
   import { DotLottieSvelte } from '@lottiefiles/dotlottie-svelte';
+
 
   let philosophyModal: PhilosophyModal;
   let timeAsFactorModal: TimeAsFactorModal;
   let costAsFactorModal: CostAsFactorModal;
   let qualityAsFactorModal: QualityAsFactorModal;
+  let getAppointmentModal: GetAppointmentModal;
 
   function openPhilosophyModal() {
     philosophyModal?.openModal();
@@ -31,6 +33,10 @@
   function openQualityAsFactorModal() {
     qualityAsFactorModal?.openModal();
   }
+
+  function openGetAppointmentModal() {
+    getAppointmentModal?.openModal();
+  }
 </script>
 
 <svelte:head>
@@ -45,12 +51,15 @@
       {$_('homepage.hero.subtitleFirst')} <button class="text-link-button" onclick={openPhilosophyModal}>{$_('homepage.hero.subtitleSecond')}</button>
       {$_('homepage.hero.subtitleThird')}
     </p>
-    <button
-      class="btn-basic animate-fade-in-from-side"
-      onclick={() => {
-        goto('/services');
-      }}>{$_('homepage.hero.buttonText')}</button
-    >
+    <div class="flex-wo flex flex-wrap gap-4">
+      <button
+        class="btn-basic animate-fade-in-from-side"
+        onclick={() => {
+          goto('/get-started');
+        }}>{$_('homepage.hero.buttonText')}</button
+      >
+      <button class="btn-inverted-outline animate-fade-in-from-side" onclick={openGetAppointmentModal}>{$_('homepage.hero.buttonText2')}</button>
+    </div>
   </div>
 </Stage>
 
@@ -58,15 +67,18 @@
   <Section>
     <div class="inner-section-wrapper">
       <div class="intro prose pt-10 md:pt-0">
-        <h1>{$_('homepage.thisIsUs.titleFirst')} <span class="inner-text-special">{$_('homepage.thisIsUs.titleHighlight')}</span> {#if $locale !== 'en'}{$_('homepage.thisIsUs.titleSecond')}{/if}</h1>
+        <h1>
+          {$_('homepage.thisIsUs.titleFirst')} <span class="inner-text-special">{$_('homepage.thisIsUs.titleHighlight')}</span>
+          {#if $locale !== 'en'}{$_('homepage.thisIsUs.titleSecond')}{/if}
+        </h1>
         <p class="teaser">
           {$_('homepage.thisIsUs.subtitle')}
         </p>
       </div>
     </div>
 
-    <div class="grid grid-cols-12 md:gap-x-10 gap-y-8">
-      <div class="animate-fade-in-from-side prose col-span-full md:col-span-7 order-2 md:order-1">
+    <div class="grid grid-cols-12 gap-y-8 md:gap-x-10">
+      <div class="animate-fade-in-from-side prose order-2 col-span-full md:order-1 md:col-span-7">
         <p>
           {$_('homepage.thisIsUs.paragraph1')}
         </p>
@@ -74,17 +86,17 @@
           {$_('homepage.thisIsUs.paragraph2')}
         </p>
       </div>
-      <div class="col-span-full md:col-span-5 items-center lg:items-top order-1 md:order-2">
+      <div class="lg:items-top order-1 col-span-full items-center md:order-2 md:col-span-5">
         <div class="lottie-container">
           <DotLottieSvelte src="/lotties/robot-supports.lottie" loop autoplay />
         </div>
       </div>
-      <div class="col-span-full md:col-span-5 order-3">
+      <div class="order-3 col-span-full md:col-span-5">
         <div class="lottie-container">
           <DotLottieSvelte src="/lotties/business-launch.lottie" loop autoplay />
         </div>
       </div>
-      <div class="animate-fade-in-from-side prose col-span-full md:col-span-7 order-4">
+      <div class="animate-fade-in-from-side prose order-4 col-span-full md:col-span-7">
         <p>
           {$_('homepage.thisIsUs.paragraph3')}
         </p>
@@ -96,7 +108,7 @@
         </p>
       </div>
 
-      <div class="benefits col-span-full order-5">
+      <div class="benefits order-5 col-span-full">
         <div class="item">{$_('homepage.intro.benefits.konzept')}</div>
         <div class="item">{$_('homepage.intro.benefits.design')}</div>
         <div class="item">{$_('homepage.intro.benefits.uiux')}</div>
@@ -111,223 +123,182 @@
     </div>
   </Section>
 
-  <!-- <Section type={'centerTeaser'}>
-    <div class="massive-spacer"></div>
-    <div class="grid grid-cols-1 items-center gap-12 gap-y-10 lg:grid-cols-2 lg:gap-14 lg:gap-y-4">
-      <div class="animate-fade-in-from-side prose mr-8">
-        <h2>{$_('homepage.intro.titleFirst')} <span class="inner-text-special">{$_('homepage.intro.titleHighlight')}</span></h2>
-        <p>
-          {$_('homepage.intro.paragraph1')}
-        </p>
-        <p>
-          {$_('homepage.intro.paragraph2')}
-        </p>
-        <p>
-          {$_('homepage.intro.paragraph3')}
-        </p>
-      </div>
-      <div>
-        <div class="image-container">
-          <div class="solution-image"></div>
-        </div>
-      </div>
-      <div class="benefits col-span-full">
-        <p class="add-padding w-full">
-          {$_('homepage.intro.benefitsTitle')}
-        </p>
-        <div class="item">{$_('homepage.intro.benefits.konzept')}</div>
-        <div class="item">{$_('homepage.intro.benefits.design')}</div>
-        <div class="item">{$_('homepage.intro.benefits.uiux')}</div>
-        <div class="item">{$_('homepage.intro.benefits.programmierung')}</div>
-        <div class="item">{$_('homepage.intro.benefits.datenmodellierung')}</div>
-        <div class="item">{$_('homepage.intro.benefits.hosting')}</div>
-        <div class="item">{$_('homepage.intro.benefits.domain')}</div>
-        <div class="item">{$_('homepage.intro.benefits.projektdurchfuehrung')}</div>
-        <div class="item">{$_('homepage.intro.benefits.monitoring')}</div>
-      </div>
-    </div>
-    <div class="massive-spacer"></div>
-  </Section> -->
-
-
   <Stage style={'basic-gradient'}>
-    <div class="inner-container py-24 px-4 max-w-7xl m-auto">
+    <div class="inner-container m-auto max-w-7xl px-4 py-24">
       <div class="inner-section-wrapper">
-      <div class="intro prose">
-        <h1>{$_('homepage.services.titleFirst')} <span class="inner-text-special">{$_('homepage.services.titleHighlight')}</span></h1>
-        <p class="teaser">
-          {$_('homepage.services.subtitle')}
-        </p>
-      </div>
-
-      <div class="services-grid">
-        <!-- Webseiten -->
-        <div class="service-card">
-          <div class="service-card-header">
-            <div class="service-icon">🌐</div>
-            <h2 class="pt-2">{$_('homepage.services.webseiten.title')}</h2>
-          </div>
-          <p>
-            {$_('homepage.services.webseiten.description')}
+        <div class="intro prose">
+          <h1>{$_('homepage.services.titleFirst')} <span class="inner-text-special">{$_('homepage.services.titleHighlight')}</span></h1>
+          <p class="teaser">
+            {$_('homepage.services.subtitle')}
           </p>
-          <div class="very-tiny-spacer"></div>
-          <ul class="service-features">
-            <li>{$_('homepage.services.webseiten.features.responsive')}</li>
-            <li>{$_('homepage.services.webseiten.features.modern')}</li>
-            <li>{$_('homepage.services.webseiten.features.performant')}</li>
-            <li>{$_('homepage.services.webseiten.features.individuell')}</li>
-            <li>{$_('homepage.services.webseiten.features.eigentum')}</li>
-            <li>
-              <div class="tooltip tooltip-top tooltip-neutral cursor-help">
-                <div class="tooltip-content">
-                  <div class="px-4 pt-2 pb-3 text-base">
-                    {$_('homepage.services.webseiten.tooltip')}
-                  </div>
-                </div>
-                {$_('homepage.services.webseiten.features.keineFolgekosten')}
-              </div>
-            </li>
-          </ul>
-          <div class="service-card-actions push-right">
-            <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=website')}>{$_('homepage.services.webseiten.buttonText')}</button>
-          </div>
         </div>
 
-        <!-- Custom CMS -->
-        <div class="service-card">
-          <div class="service-card-header">
-            <div class="service-icon">📝</div>
-            <h2 class="pt-2.5">{$_('homepage.services.cms.title')}</h2>
-          </div>
-          <p>
-            {$_('homepage.services.cms.description')}
-          </p>
-          <div class="very-tiny-spacer"></div>
-          <ul class="service-features">
-            <li>{$_('homepage.services.cms.features.kontrolle')}</li>
-            <li>
-              <div class="tooltip tooltip-bottom tooltip-neutral cursor-help">
-                <div class="tooltip-content">
-                  <div class="px-4 pt-2 pb-3 text-base">
-                    {$_('homepage.services.cms.features.datenstrukturenTooltip')}
-                  </div>
-                </div>
-                {$_('homepage.services.cms.features.datenstrukturen')}
-              </div>
-            </li>
-            <li>{$_('homepage.services.cms.features.sicher')}</li>
-            <li>{$_('homepage.services.cms.features.wartungsarm')}</li>
-            <li>{$_('homepage.services.cms.features.editierbar')}</li>
-            <li>{$_('homepage.services.cms.features.headless')}</li>
-          </ul>
-          <div class="service-card-actions push-right">
-            <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=cms')}>{$_('homepage.services.cms.buttonText')}</button>
-          </div>
-        </div>
-
-        <!-- Webanwendungen -->
-        <div class="service-card">
-          <div class="service-card-header">
-            <div class="service-icon">📱</div>
-            <h2 class="pt-2">{$_('homepage.services.webanwendungen.title')}</h2>
-          </div>
-          <p>
-            {$_('homepage.services.webanwendungen.description')}
-          </p>
-          <div class="very-tiny-spacer"></div>
-          <ul class="service-features">
-            <li>{$_('homepage.services.webanwendungen.features.app')}</li>
-            <li>{$_('homepage.services.webanwendungen.features.pwa')}</li>
-            <li>{$_('homepage.services.webanwendungen.features.offline')}</li>
-            <li>{$_('homepage.services.webanwendungen.features.push')}</li>
-            <li>{$_('homepage.services.webanwendungen.features.appStores')}</li>
-          </ul>
-          <div class="service-card-actions push-right">
-            <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=webApplication')}
-              >{$_('homepage.services.webanwendungen.buttonText')}</button
-            >
-          </div>
-        </div>
-
-        <!-- Freestyle -->
-        <div class="service-card freestyle">
-          <div class="service-card-header">
-            <div class="service-icon">⚙️</div>
-            <h2 class="pt-2">{$_('homepage.services.freestyle.title')}</h2>
-          </div>
-          <p>
-            {$_('homepage.services.freestyle.description')}
-          </p>
-          <div class="very-tiny-spacer"></div>
-          <div class="service-examples">
-            <span class="example-tag">{$_('homepage.services.freestyle.examples.event')}</span>
-            <span class="example-tag">{$_('homepage.services.freestyle.examples.dashboard')}</span>
-            <span class="example-tag">{$_('homepage.services.freestyle.examples.api')}</span>
-            <span class="example-tag">{$_('homepage.services.freestyle.examples.module')}</span>
-            <span class="example-tag">{$_('homepage.services.freestyle.examples.ui')}</span>
-          </div>
-          <div class="service-card-actions push-right">
-            <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=freestyle')}>{$_('homepage.services.freestyle.buttonText')}</button>
-          </div>
-        </div>
-
-        <!-- KI Services - spans full width -->
-        <div class="service-card lg:col-span-2">
-          <div class="service-card-header">
-            <div class="service-icon">🤖</div>
-            <h2 class="pt-2">{$_('homepage.services.ki.title')}</h2>
-          </div>
-
-          <p>
-            {$_('homepage.services.ki.description')}
-          </p>
-
-          <div class="service-list">
-            <div class="service-item">
-              <div class="service-icon">🧠</div>
-              <div>
-                <h3>{$_('homepage.services.ki.services.beratung.title')}</h3>
-                <div class="very-tiny-spacer"></div>
-                <p>{$_('homepage.services.ki.services.beratung.description')}</p>
-              </div>
+        <div class="services-grid">
+          <!-- Webseiten -->
+          <div class="service-card">
+            <div class="service-card-header">
+              <div class="service-icon">🌐</div>
+              <h2 class="pt-2">{$_('homepage.services.webseiten.title')}</h2>
             </div>
-            <div class="service-item">
+            <p>
+              {$_('homepage.services.webseiten.description')}
+            </p>
+            <div class="very-tiny-spacer"></div>
+            <ul class="service-features">
+              <li>{$_('homepage.services.webseiten.features.responsive')}</li>
+              <li>{$_('homepage.services.webseiten.features.modern')}</li>
+              <li>{$_('homepage.services.webseiten.features.performant')}</li>
+              <li>{$_('homepage.services.webseiten.features.individuell')}</li>
+              <li>{$_('homepage.services.webseiten.features.eigentum')}</li>
+              <li>
+                <div class="tooltip tooltip-top tooltip-neutral cursor-help">
+                  <div class="tooltip-content">
+                    <div class="px-4 pt-2 pb-3 text-base">
+                      {$_('homepage.services.webseiten.tooltip')}
+                    </div>
+                  </div>
+                  {$_('homepage.services.webseiten.features.keineFolgekosten')}
+                </div>
+              </li>
+            </ul>
+            <div class="service-card-actions push-right">
+              <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=website')}>{$_('homepage.services.webseiten.buttonText')}</button>
+            </div>
+          </div>
+
+          <!-- Custom CMS -->
+          <div class="service-card">
+            <div class="service-card-header">
+              <div class="service-icon">📝</div>
+              <h2 class="pt-2.5">{$_('homepage.services.cms.title')}</h2>
+            </div>
+            <p>
+              {$_('homepage.services.cms.description')}
+            </p>
+            <div class="very-tiny-spacer"></div>
+            <ul class="service-features">
+              <li>{$_('homepage.services.cms.features.kontrolle')}</li>
+              <li>
+                <div class="tooltip tooltip-bottom tooltip-neutral cursor-help">
+                  <div class="tooltip-content">
+                    <div class="px-4 pt-2 pb-3 text-base">
+                      {$_('homepage.services.cms.features.datenstrukturenTooltip')}
+                    </div>
+                  </div>
+                  {$_('homepage.services.cms.features.datenstrukturen')}
+                </div>
+              </li>
+              <li>{$_('homepage.services.cms.features.sicher')}</li>
+              <li>{$_('homepage.services.cms.features.wartungsarm')}</li>
+              <li>{$_('homepage.services.cms.features.editierbar')}</li>
+              <li>{$_('homepage.services.cms.features.headless')}</li>
+            </ul>
+            <div class="service-card-actions push-right">
+              <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=cms')}>{$_('homepage.services.cms.buttonText')}</button>
+            </div>
+          </div>
+
+          <!-- Webanwendungen -->
+          <div class="service-card">
+            <div class="service-card-header">
+              <div class="service-icon">📱</div>
+              <h2 class="pt-2">{$_('homepage.services.webanwendungen.title')}</h2>
+            </div>
+            <p>
+              {$_('homepage.services.webanwendungen.description')}
+            </p>
+            <div class="very-tiny-spacer"></div>
+            <ul class="service-features">
+              <li>{$_('homepage.services.webanwendungen.features.app')}</li>
+              <li>{$_('homepage.services.webanwendungen.features.pwa')}</li>
+              <li>{$_('homepage.services.webanwendungen.features.offline')}</li>
+              <li>{$_('homepage.services.webanwendungen.features.push')}</li>
+              <li>{$_('homepage.services.webanwendungen.features.appStores')}</li>
+            </ul>
+            <div class="service-card-actions push-right">
+              <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=webApplication')}
+                >{$_('homepage.services.webanwendungen.buttonText')}</button
+              >
+            </div>
+          </div>
+
+          <!-- Freestyle -->
+          <div class="service-card freestyle">
+            <div class="service-card-header">
+              <div class="service-icon">⚙️</div>
+              <h2 class="pt-2">{$_('homepage.services.freestyle.title')}</h2>
+            </div>
+            <p>
+              {$_('homepage.services.freestyle.description')}
+            </p>
+            <div class="very-tiny-spacer"></div>
+            <div class="service-examples">
+              <span class="example-tag">{$_('homepage.services.freestyle.examples.event')}</span>
+              <span class="example-tag">{$_('homepage.services.freestyle.examples.dashboard')}</span>
+              <span class="example-tag">{$_('homepage.services.freestyle.examples.api')}</span>
+              <span class="example-tag">{$_('homepage.services.freestyle.examples.module')}</span>
+              <span class="example-tag">{$_('homepage.services.freestyle.examples.ui')}</span>
+            </div>
+            <div class="service-card-actions push-right">
+              <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=freestyle')}>{$_('homepage.services.freestyle.buttonText')}</button>
+            </div>
+          </div>
+
+          <!-- KI Services - spans full width -->
+          <div class="service-card lg:col-span-2">
+            <div class="service-card-header">
               <div class="service-icon">🤖</div>
-              <div>
-                <h3>{$_('homepage.services.ki.services.agenten.title')}</h3>
-                <div class="very-tiny-spacer"></div>
-                <p>{$_('homepage.services.ki.services.agenten.description')}</p>
+              <h2 class="pt-2">{$_('homepage.services.ki.title')}</h2>
+            </div>
+
+            <p>
+              {$_('homepage.services.ki.description')}
+            </p>
+
+            <div class="service-list">
+              <div class="service-item">
+                <div class="service-icon">🧠</div>
+                <div>
+                  <h3>{$_('homepage.services.ki.services.beratung.title')}</h3>
+                  <div class="very-tiny-spacer"></div>
+                  <p>{$_('homepage.services.ki.services.beratung.description')}</p>
+                </div>
+              </div>
+              <div class="service-item">
+                <div class="service-icon">🤖</div>
+                <div>
+                  <h3>{$_('homepage.services.ki.services.agenten.title')}</h3>
+                  <div class="very-tiny-spacer"></div>
+                  <p>{$_('homepage.services.ki.services.agenten.description')}</p>
+                </div>
+              </div>
+              <div class="service-item">
+                <div class="service-icon">⚡</div>
+                <div>
+                  <h3>{$_('homepage.services.ki.services.workflow.title')}</h3>
+                  <div class="very-tiny-spacer"></div>
+                  <p>{$_('homepage.services.ki.services.workflow.description')}</p>
+                </div>
+              </div>
+              <div class="service-item">
+                <div class="service-icon">🏗️</div>
+                <div>
+                  <h3>{$_('homepage.services.ki.services.infrastructure.title')}</h3>
+                  <div class="very-tiny-spacer"></div>
+                  <p>{$_('homepage.services.ki.services.infrastructure.description')}</p>
+                </div>
               </div>
             </div>
-            <div class="service-item">
-              <div class="service-icon">⚡</div>
-              <div>
-                <h3>{$_('homepage.services.ki.services.workflow.title')}</h3>
-                <div class="very-tiny-spacer"></div>
-                <p>{$_('homepage.services.ki.services.workflow.description')}</p>
-              </div>
+            <div class="service-card-actions push-right">
+              <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=artificialIntelligence')}
+                >{$_('homepage.services.ki.buttonText')}</button
+              >
             </div>
-            <div class="service-item">
-              <div class="service-icon">🏗️</div>
-              <div>
-                <h3>{$_('homepage.services.ki.services.infrastructure.title')}</h3>
-                <div class="very-tiny-spacer"></div>
-                <p>{$_('homepage.services.ki.services.infrastructure.description')}</p>
-              </div>
-            </div>
-          </div>
-          <div class="service-card-actions push-right">
-            <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=artificialIntelligence')}
-              >{$_('homepage.services.ki.buttonText')}</button
-            >
           </div>
         </div>
       </div>
     </div>
-</div>
-
   </Stage>
-
 
   <Section>
     <div class="inner-section-wrapper">
@@ -480,32 +451,27 @@
 <TimeAsFactorModal bind:this={timeAsFactorModal} />
 <CostAsFactorModal bind:this={costAsFactorModal} />
 <QualityAsFactorModal bind:this={qualityAsFactorModal} />
+<GetAppointmentModal bind:this={getAppointmentModal} />
 
 <style lang="postcss">
   @reference '../app.css';
   .home-content-wrapper {
     .lottie-container {
-      @apply w-full h-full;
+      @apply h-full w-full;
       :global(dotlottie-player),
       :global(canvas) {
-        @apply w-full h-full max-w-full max-h-full;
+        @apply h-full max-h-full w-full max-w-full;
         object-fit: contain;
       }
     }
-    
+
     .benefits {
-      @apply flex flex-wrap justify-center items-center gap-2;
+      @apply flex flex-wrap items-center justify-center gap-2;
       .item {
         @apply text-base-content bg-primary/8 w-fit rounded-lg px-4 py-2 text-sm;
       }
     }
-    .image-container {
-      @apply relative aspect-[5/3] w-full overflow-hidden rounded-2xl shadow-2xl;
-      .solution-image {
-        @apply h-full w-full bg-cover bg-center bg-no-repeat;
-        background-image: url('/images/visualization-2.png');
-      }
-    }
+
     .inner-section-wrapper {
       .intro {
         @apply m-auto flex max-w-4xl flex-col items-center justify-center pb-8 text-center;
@@ -556,7 +522,7 @@
               @apply text-2xl;
             }
 
-            h4 {
+            h3 {
               @apply font-semibold;
             }
 
@@ -594,7 +560,7 @@
 
         .balance-content {
           h2 {
-            @apply mb-5 mt-3 p-0 text-2xl font-semibold;
+            @apply mt-3 mb-5 p-0 text-2xl font-semibold;
           }
 
           p {

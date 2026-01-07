@@ -12,6 +12,7 @@
   import { _ } from 'svelte-i18n';
   import auth from '$services/auth-service';
   import LottieLoader from '$lib/components/lottie-loader.svelte';
+  import { openAuth0Popup } from '$helper/loginOpener';
 
   let isAuth = $derived(isAuthenticated.get());
   let currentUser = $derived(user.get()) as User;
@@ -120,9 +121,15 @@
     }
   }
 
-  async function login() {
-    const auth0Client = await auth.createClient();
-    await auth.loginWithPopup(auth0Client);
+  async  {
+    const popup: Window = openAuth0Popup(450, 650);
+    try {
+      if (!popup) throw new Error('Popup konnte nicht geöffnet werden (Popup-Blocker?).');
+      const auth0Client = await auth.createClient();
+      await auth.loginWithPopup(auth0Client, { authorizationParams: {} }, popup);
+    } catch (e) {
+      console.error('Error occurred: ', e);
+    }
   }
 </script>
 

@@ -159,7 +159,7 @@
   }
 
   .carousel-slider-container {
-    @apply relative aspect-video w-full bg-amber-100;
+    @apply relative aspect-video w-full;
 
 
 
