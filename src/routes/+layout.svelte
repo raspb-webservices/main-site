@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { isLoading } from 'svelte-i18n';
   import { page, navigating } from '$app/state';
   import { onMount } from 'svelte';
@@ -35,6 +35,10 @@
 <svelte:head>
   <link rel="manifest" href="/site.webmanifest" />
   <meta name="theme-color" content="#f33199" />
+  <link rel="preload" href="/lotties/loading.lottie" as="fetch" crossorigin="anonymous" />
+  <link rel="preload" href="/icons/flags/germany-flag.svg" as="image" type="image/svg+xml" />
+  <link rel="preload" href="/icons/flags/uk-flag.svg" as="image" type="image/svg+xml" />
+  <link rel="preload" href="/images/home-gradient.svg" as="image" type="image/svg+xml" />
   <link rel="preload" href="/fonts/circular/CircularStd-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
   <link rel="preload" href="/fonts/circular/CircularStd-Book.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
   <link rel="preload" href="/fonts/circular/CircularStd-Light.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
