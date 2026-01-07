@@ -2,10 +2,10 @@
   "login": {
     "meta": {
       "title": "Login",
-      "description": "Hier können Sie sich anmelden"
+      "description": "Hier kannst du dich anmelden"
     },
-    "title": "Bitte melden Sie sich an",
-    "teaser": "Wenn Sie Ihr eigenes Dahsboard aufrufen oder den erweiterten Konfigurator nutzen möchten, müssen Sie angemeldet sein.",
+    "title": "Bitte meld dich an",
+    "teaser": "Wenn du dein eigenes Dashboard aufrufen oder den erweiterten Konfigurator nutzen möchtest, musst du angemeldet sein.",
     "loginButton": "Anmelden",
     "registerButton": "Registrieren"
   }

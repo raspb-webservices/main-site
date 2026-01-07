@@ -150,7 +150,6 @@
   </Section> -->
 
 
-
   <Stage style={'basic-gradient'}>
     <div class="inner-container py-24 px-4 max-w-7xl m-auto">
       <div class="inner-section-wrapper">
@@ -166,7 +165,7 @@
         <div class="service-card">
           <div class="service-card-header">
             <div class="service-icon">🌐</div>
-            <h3 class="pt-2">{$_('homepage.services.webseiten.title')}</h3>
+            <h2 class="pt-2">{$_('homepage.services.webseiten.title')}</h2>
           </div>
           <p>
             {$_('homepage.services.webseiten.description')}
@@ -198,7 +197,7 @@
         <div class="service-card">
           <div class="service-card-header">
             <div class="service-icon">📝</div>
-            <h3 class="pt-2.5">{$_('homepage.services.cms.title')}</h3>
+            <h2 class="pt-2.5">{$_('homepage.services.cms.title')}</h2>
           </div>
           <p>
             {$_('homepage.services.cms.description')}
@@ -230,7 +229,7 @@
         <div class="service-card">
           <div class="service-card-header">
             <div class="service-icon">📱</div>
-            <h3 class="pt-2">{$_('homepage.services.webanwendungen.title')}</h3>
+            <h2 class="pt-2">{$_('homepage.services.webanwendungen.title')}</h2>
           </div>
           <p>
             {$_('homepage.services.webanwendungen.description')}
@@ -254,7 +253,7 @@
         <div class="service-card freestyle">
           <div class="service-card-header">
             <div class="service-icon">⚙️</div>
-            <h3 class="pt-2">{$_('homepage.services.freestyle.title')}</h3>
+            <h2 class="pt-2">{$_('homepage.services.freestyle.title')}</h2>
           </div>
           <p>
             {$_('homepage.services.freestyle.description')}
@@ -276,7 +275,7 @@
         <div class="service-card lg:col-span-2">
           <div class="service-card-header">
             <div class="service-icon">🤖</div>
-            <h3 class="pt-2">{$_('homepage.services.ki.title')}</h3>
+            <h2 class="pt-2">{$_('homepage.services.ki.title')}</h2>
           </div>
 
           <p>
@@ -287,7 +286,7 @@
             <div class="service-item">
               <div class="service-icon">🧠</div>
               <div>
-                <h4>{$_('homepage.services.ki.services.beratung.title')}</h4>
+                <h3>{$_('homepage.services.ki.services.beratung.title')}</h3>
                 <div class="very-tiny-spacer"></div>
                 <p>{$_('homepage.services.ki.services.beratung.description')}</p>
               </div>
@@ -295,7 +294,7 @@
             <div class="service-item">
               <div class="service-icon">🤖</div>
               <div>
-                <h4>{$_('homepage.services.ki.services.agenten.title')}</h4>
+                <h3>{$_('homepage.services.ki.services.agenten.title')}</h3>
                 <div class="very-tiny-spacer"></div>
                 <p>{$_('homepage.services.ki.services.agenten.description')}</p>
               </div>
@@ -303,7 +302,7 @@
             <div class="service-item">
               <div class="service-icon">⚡</div>
               <div>
-                <h4>{$_('homepage.services.ki.services.workflow.title')}</h4>
+                <h3>{$_('homepage.services.ki.services.workflow.title')}</h3>
                 <div class="very-tiny-spacer"></div>
                 <p>{$_('homepage.services.ki.services.workflow.description')}</p>
               </div>
@@ -311,7 +310,7 @@
             <div class="service-item">
               <div class="service-icon">🏗️</div>
               <div>
-                <h4>{$_('homepage.services.ki.services.infrastructure.title')}</h4>
+                <h3>{$_('homepage.services.ki.services.infrastructure.title')}</h3>
                 <div class="very-tiny-spacer"></div>
                 <p>{$_('homepage.services.ki.services.infrastructure.description')}</p>
               </div>
@@ -344,7 +343,7 @@
         <div class="balance-card">
           <div class="balance-icon">⚡</div>
           <div class="balance-content prose">
-            <h3>{$_('homepage.balance.zeit.title')}</h3>
+            <h2>{$_('homepage.balance.zeit.title')}</h2>
             <p>
               {$_('homepage.balance.zeit.description')}
               <button class="text-link-button inverted-underline" onclick={openTimeAsFactorModal}>{$_('homepage.balance.zeit.buttonText')}</button>
@@ -362,7 +361,7 @@
         <div class="balance-card">
           <div class="balance-icon">💰</div>
           <div class="balance-content prose">
-            <h3>{$_('homepage.balance.kosten.title')}</h3>
+            <h2>{$_('homepage.balance.kosten.title')}</h2>
             <p>
               {$_('homepage.balance.kosten.description')}
               <button class="text-link-button inverted-underline" onclick={openCostAsFactorModal}>{$_('homepage.balance.kosten.buttonText')}</button>
@@ -380,7 +379,7 @@
         <div class="balance-card">
           <div class="balance-icon">🏆</div>
           <div class="balance-content prose">
-            <h3>{$_('homepage.balance.qualitaet.title')}</h3>
+            <h2>{$_('homepage.balance.qualitaet.title')}</h2>
             <p>
               {$_('homepage.balance.qualitaet.description')}
               <button class="text-link-button inverted-underline" onclick={openQualityAsFactorModal}>{$_('homepage.balance.qualitaet.buttonText')}</button>
@@ -411,7 +410,7 @@
         <div class="feature-card prose">
           <div class="feature-card-header">
             <div class="feature-icon">🎯</div>
-            <h3 class="pt-2.5">{$_('homepage.features.allesAusEinerHand.title')}</h3>
+            <h2 class="pt-2.5">{$_('homepage.features.allesAusEinerHand.title')}</h2>
           </div>
           <p>{$_('homepage.features.allesAusEinerHand.description')}</p>
           <div class="very-tiny-spacer"></div>
@@ -426,7 +425,7 @@
         <div class="feature-card prose">
           <div class="feature-card-header">
             <div class="feature-icon">💎</div>
-            <h3 class="pt-2.5">{$_('homepage.features.preise.title')}</h3>
+            <h2 class="pt-2.5">{$_('homepage.features.preise.title')}</h2>
           </div>
           <p>{$_('homepage.features.preise.description')}</p>
           <div class="very-tiny-spacer"></div>
@@ -440,7 +439,7 @@
         <div class="feature-card prose">
           <div class="feature-card-header">
             <div class="feature-icon">👤</div>
-            <h3 class="pt-2.5">{$_('homepage.features.ansprechpartner.title')}</h3>
+            <h2 class="pt-2.5">{$_('homepage.features.ansprechpartner.title')}</h2>
           </div>
           <p>{$_('homepage.features.ansprechpartner.description')}</p>
           <div class="very-tiny-spacer"></div>
@@ -456,7 +455,7 @@
         <div class="feature-card">
           <div class="feature-card-header">
             <div class="feature-icon">🛠️</div>
-            <h3 class="pt-2.5">{$_('homepage.features.massgeschneidert.title')}</h3>
+            <h2 class="pt-2.5">{$_('homepage.features.massgeschneidert.title')}</h2>
           </div>
           <p>{$_('homepage.features.massgeschneidert.description')}</p>
 
@@ -525,7 +524,7 @@
             @apply text-4xl;
           }
 
-          h3 {
+          h2 {
             @apply text-xl font-semibold;
           }
         }

@@ -1,20 +1,20 @@
 {
   "getStarted": {
     "meta": {
-      "title": "Starten Sie Ihr Projekt",
-      "description": "Beginnen Sie Ihr Projekt mit unserem Konfigurator."
+      "title": "Start dein Projekt",
+      "description": "Beginn dein Projekt mit unserem Konfigurator."
     },
     "hero": {
-      "title": "Starten Sie Ihr",
+      "title": "Start dein",
       "titleHighlight": "Projekt"
     },
     "teaser": {
-      "description": "Wählen Sie den passenden Konfigurator, um Ihr Projekt zu starten und eine erste Einschätzung zu erhalten."
+      "description": "Wähl den passenden Konfigurator, um dein Projekt zu starten und eine erste Einschätzung zu erhalten."
     },
     "benefits": {
       "fast": {
         "title": "Schnell",
-        "description": "Erhalten Sie in wenigen Minuten eine erste Einschätzung."
+        "description": "Erhalt in wenigen Minuten eine erste Einschätzung."
       },
       "transparent": {
         "title": "Transparent",
@@ -31,18 +31,18 @@
     },
     "cta": {
       "title": "Bereit?",
-      "description": "Wählen Sie jetzt Ihren Konfigurator und legen Sie los!"
+      "description": "Wähl jetzt deinen Konfigurator und leg los!"
     },
     "wizardSelection": {
       "basicConfiguratorTitle": "Basic-Konfigurator",
       "basicConfiguratorDescription": "Schnell zu einer ungefähren Preisabschätzung. Der Basic-Konfigurator kann als erster Indikator dienen und ist in 1 Minute erledigt.",
       "advancedConfiguratorTitle": "Erweiterter Konfigurator",
-      "advancedConfiguratorDescription": "Erfassen Sie ihr gesamtes Projekt im Detail. Verwalten Sie das Ergebnis im persönlichen Dashboard."
+      "advancedConfiguratorDescription": "Erfass dein gesamtes Projekt im Detail. Verwalt das Ergebnis im persönlichen Dashboard."
     },
     "registrationPrompt": {
-      "title": "Bitte registrieren Sie sich",
-      "description1": "Möchten Sie Ihr Projektvorhaben im Detail konfigurieren und konkreter machen? Um den erweiterten Wizard nutzen zu können und Ihr vorhaben abspeichern zu können, erstellen Sie bitte einen Account.",
-      "description2": "Damit erhalten Sie den Zugriff auf Ihr persönliches Dashboard, in dem Sie mehrere Projekte verwalten können. Ihre E-Mail-Adresse ist für die Registrierung ausreichend.",
+      "title": "Bitte registrier dich",
+      "description1": "Willst du dein Projektvorhaben im Detail konfigurieren und konkreter machen? Um den erweiterten Wizard nutzen zu können und dein Vorhaben abspeichern zu können, erstell bitte einen Account.",
+      "description2": "Damit erhältst du den Zugriff auf dein persönliches Dashboard, in dem du mehrere Projekte verwalten kannst. Deine E-Mail-Adresse ist für die Registrierung ausreichend.",
       "registrationButton": "Zur Registrierung",
       "loginButton": "Direkt anmelden"
     }
