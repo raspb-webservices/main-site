@@ -593,8 +593,8 @@
         }
 
         .balance-content {
-          h3 {
-            @apply mb-4 text-xl font-semibold;
+          h2 {
+            @apply mb-4 text-2xl font-semibold;
           }
 
           p {
@@ -637,7 +637,7 @@
           .feature-icon {
             @apply text-4xl;
           }
-          h3 {
+          h2 {
             @apply text-xl font-semibold;
           }
         }

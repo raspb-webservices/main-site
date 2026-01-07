@@ -9,10 +9,7 @@
   import LottieLoader from '$lib/components/lottie-loader.svelte';
 
   let { children } = $props();
-
-  const simpleRoutes = new Set(['/contact', '/thank-you']);
-  const isSimpleLayout = $derived(simpleRoutes.has(page.url.pathname));
-  let showInitialLoader = $state(true);
+  let showInitialLoader = $state(false);
 
   onMount(() => {
     setTimeout(() => {
@@ -43,6 +40,7 @@
   <link rel="preload" href="/fonts/circular/CircularStd-Book.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
   <link rel="preload" href="/fonts/circular/CircularStd-Light.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
   <link rel="preload" href="/fonts/circular/CircularStd-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="anonymous">
   <link rel="icon" type="image/png" href="/icons/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
   <link rel="shortcut icon" href="/icons/favicon.ico" />
@@ -51,22 +49,22 @@
 </svelte:head>
 
 <div class="wrapper">
-  {#if isSimpleLayout}
-    <HEADER />
-    <main>
-      {@render children?.()}
-    </main>
-    <FOOTER />
-  {:else if $isLoading || navigating.to || showInitialLoader}
+
+  {#if $isLoading || navigating.to || showInitialLoader}
+
     <div class="global-loading">
       <LottieLoader />
     </div>
+
   {:else}
+
     <HEADER />
     <main>
       {@render children?.()}
     </main>
     <FOOTER />
+
   {/if}
+
   <CookieConsentComponent />
 </div>
