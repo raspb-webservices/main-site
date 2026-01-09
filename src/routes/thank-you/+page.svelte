@@ -1,13 +1,13 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { _ } from 'svelte-i18n';
+  import Section from '$lib/components/ui/section.svelte';
+  import { m } from '$lib/paraglide/messages';
 </script>
 
-<section class="thank-you-content-wrapper">
-  <div class="px-20 pt-10 flex flex-col justify-center items-center">
-    <h1>{$_('thankYou.title')}</h1>
-    <h1 class="text-center">Vielen Dank für Ihre Nachricht</h1>
-    <p>Wir haben Ihre Anfrage erhalten und werden uns in Kürze bei Ihnen zurückmelden...</p>
+<Section type={'fullCenterTeaser'}>
+    <div class="inner-content-wrapper prose">
+    <h1 class="text-center"><span class="inner-text-special">{m['thankYouHighlight']()}</span> {m['thankYouMessageSecond']()}</h1>
+    <p class="teaser text-center">{m['thankYouTeaser']()}</p>
 
     <div class="spacer"></div>
     <div class="flex w-full justify-center">
@@ -15,16 +15,15 @@
         class="btn-basic"
         onclick={() => {
           goto('/');
-        }}>Zurück zur Startseite</button
+        }}>{m['backToHomepage']()}</button
       >
     </div>
-  </div>
-  <div class="big-spacer"></div>
-</section>
+    </div>
+</Section>
 
 <style lang="postcss">
   @reference '../../app.css';
-  section.thank-you-content-wrapper {
-    @apply m-auto h-full w-full max-w-7xl px-4 py-12;
+  .inner-content-wrapper {
+    @apply flex flex-col items-center justify-center;
   }
 </style>

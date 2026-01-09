@@ -1,13 +1,13 @@
-import { client } from '$lib/helper/graphql-client';
+import { client } from '$lib/server/graphql-client.server';
+import type { RequestHandler } from '@sveltejs/kit';
 import { gql } from 'graphql-request';
 
-export const GET = async (req) => {
+export const GET: RequestHandler = async (req) => {
   const id = req.params.id;
   try {
     const query = gql`
       query getCustomerById($id: ID!) {
         customer(where: { id: $id }, stage: PUBLISHED) {
-          id
           address
           auth0Id
           city
@@ -17,13 +17,14 @@ export const GET = async (req) => {
           email
           familyName
           givenName
+          id
           phone
           postCode
-          salutation
           projects {
             id
             name
           }
+          salutation
         }
       }
     `;

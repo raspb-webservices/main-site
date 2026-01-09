@@ -1,65 +1,62 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n';
-  import { goto } from '$app/navigation';
+  import { m } from '$lib/paraglide/messages';
+  const target = "/thank-you"
 </script>
 
 <section class="contact-content-wrapper">
-  <h1>{$_('contact.title')}</h1>
+  <h1>{m['contact.title']()}</h1>
   <div class="px-20 pt-10">
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio hic voluptatem neque consequuntur porro, accusantium sit, doloribus perferendis, reiciendis
-      autem labore. Minus explicabo aperiam ratione sapiente voluptate aliquam cum est.
-    </p>
+    <p>{m['contact.intro']()}</p>
 
     <div class="spacer"></div>
 
-    <form name="contact" method="POST" action="/than" netlify>
+    <form name="contact" method="POST" action="{target}" netlify>
       <input type="hidden" name="form-name" value="contact" />
-
       <div class="form-field-container">
         <div class="form-field-section">
-          <label for="first-name">Vorname</label>
-          <input type="text" id="first-name" name="first-name" placeholder="Max" required />
+          <label for="first-name">{m['contact.form.firstNameLabel']()}</label>
+          <input type="text" id="first-name" name="first-name" placeholder="{m['contact.form.firstNamePlaceholder']()}" required />
         </div>
         <div class="form-field-section">
-          <label for="last-name">Nachname</label>
-          <input type="text" id="last-name" name="last-name" placeholder="Mustermann" required />
+          <label for="last-name">{m['contact.form.lastNameLabel']()}</label>
+          <input type="text" id="last-name" name="last-name" placeholder="{m['contact.form.lastNamePlaceholder']()}" required />
         </div>
       </div>
 
       <div class="form-field-container">
         <div class="form-field-section full-width">
-          <label for="email">E-Mail-Adresse</label>
-          <input type="email" id="email" name="email" placeholder="max.musterman@beispiel.de" required />
+          <label for="email">{m['contact.form.emailLabel']()}</label>
+          <input type="email" id="email" name="email" placeholder="{m['contact.form.emailPlaceholder']()}" required />
         </div>
       </div>
 
       <div class="form-field-container">
         <div class="form-field-section full-width">
-          <label for="phone">Telefonnummer</label>
-          <input type="tel" id="phone" name="phone" placeholder="0123-456789" />
+          <label for="phone">{m['contact.form.phoneLabel']()}</label>
+          <input type="tel" id="phone" name="phone" placeholder="{m['contact.form.phonePlaceholder']()}" />
         </div>
       </div>
 
       <div class="form-field-container">
         <div class="form-field-section full-width">
-          <label for="message">Ihre Nachricht an uns</label>
+          <label for="message">{m['contact.form.messageLabel']()}</label>
           <span class="additional-information"></span>
           <textarea id="message" name="message" rows="4" placeholder="" required></textarea>
         </div>
       </div>
-
       <div class="form-field-container">
         <div class="form-field-section full-width checkbox-dialog">
-          <input id="dsgvo" name="dsgvo" type="checkbox" value="" class="is-checkbox accent-secondary" required />
-          <label for="dsgvo">Ich stimme der Speicherung und Verarbeitung meiner Daten durch diese Website zu</label>
+          <input id="dsgvo" name="dsgvo" type="checkbox" value="dsgvo-confirmed" class="is-checkbox accent-secondary" required />
+          <label for="dsgvo">{m['contact.form.dsgvoLabel']()}</label>
         </div>
       </div>
       <div class="medium-spacer"></div>
-      <button type="submit" class="btn-basic">Abschicken</button>
+      <button type="submit" class="btn-basic">{m['contact.form.submitButton']()}</button>
     </form>
   </div>
+
   <div class="big-spacer"></div>
+
 </section>
 
 <style lang="postcss">
@@ -67,7 +64,7 @@
   section.contact-content-wrapper {
     @apply m-auto h-full w-full max-w-7xl px-4 py-12;
     form {
-      @apply w-full max-w-4xl pb-2;
+      @apply w-full max-w-4xl;
       .form-field-container {
         @apply mb-4 grid w-full gap-6 md:grid-cols-2;
         .form-field-section {
@@ -99,7 +96,7 @@
             @apply border-mediumGrey text-darkGrey focus:border-secondary focus:ring-secondary mt-1 block w-full border bg-white p-3 text-sm;
           }
           input.is-checkbox {
-            @apply focus:ring-primary mt-0 h-6 w-6 p-0 focus:ring-1;
+            @apply focus:ring-secondary mt-0 h-6 w-6 p-0 focus:ring-1;
           }
 
           .additional-information {

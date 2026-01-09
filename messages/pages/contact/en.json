@@ -1,0 +1,16 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "contact.title": "Contact",
+  "contact.intro": "We look forward to your message!",
+  "contact.form.firstNameLabel": "First Name",
+  "contact.form.firstNamePlaceholder": "Max",
+  "contact.form.lastNameLabel": "Last Name",
+  "contact.form.lastNamePlaceholder": "Mustermann",
+  "contact.form.emailLabel": "Email Address",
+  "contact.form.emailPlaceholder": "max.mustermann@example.com",
+  "contact.form.phoneLabel": "Phone Number",
+  "contact.form.phonePlaceholder": "0123-456789",
+  "contact.form.messageLabel": "Your message to us",
+  "contact.form.dsgvoLabel": "I agree to the storage and processing of my data by this website",
+  "contact.form.submitButton": "Submit"
+}

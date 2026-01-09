@@ -109,13 +109,29 @@ export enum subType {
 }
 
 export enum projectStatus {
-  created = 'created',
-  introduced = 'introduced',
-  prototype = 'prototype',
-  refinement = 'refinement',
-  ready = 'ready',
-  published = 'published',
-  paid = 'paid'
+  created,
+  introduced,
+  prototype,
+  refinement,
+  ready,
+  published,
+  paid
+}
+
+export enum domainStatus {
+  available,
+  registered,
+  transferred,
+  configured,
+  unavailable,
+  unknown
+}
+
+export enum salutationOptions {
+  mr,
+  mrs,
+  company,
+  other
 }
 
 export enum features {

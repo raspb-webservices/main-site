@@ -1,11 +1,12 @@
-import { client } from '$lib/helper/graphql-client';
+import { client } from '$lib/server/graphql-client.server';
+import type { RequestHandler } from '@sveltejs/kit';
 import { gql } from 'graphql-request';
 
-export const GET = async (req) => {
+export const GET: RequestHandler = async (req) => {
   const id = req.params.id;
   try {
     const query = gql`
-      mutation publishAsset($id: ID) {
+      mutation publishAsset($id: ID!) {
         publishAsset(where: { id: $id }, to: PUBLISHED) {
           id
         }

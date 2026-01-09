@@ -1,12 +1,12 @@
-import { client } from '$lib/helper/graphql-client';
+import { client } from '$lib/server/graphql-client.server';
+import type { RequestHandler } from '@sveltejs/kit';
 import { gql } from 'graphql-request';
 
-export const GET = async () => {
+export const GET: RequestHandler = async () => {
   try {
     const query = gql`
       query getCustomers {
         customers(stage: PUBLISHED) {
-          id
           address
           auth0Id
           city
@@ -16,13 +16,14 @@ export const GET = async () => {
           email
           familyName
           givenName
+          id
           phone
           postCode
-          salutation
           projects {
             id
             name
           }
+          salutation
         }
       }
     `;

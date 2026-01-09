@@ -1,22 +1,20 @@
 export interface Customer {
-  id: string;
   address?: string;
   auth0Id?: string;
   city?: string;
   company?: string;
   country?: string;
-  createdAt?: string;
+  createdAt?: String;
   email?: string;
-  familyName?: string;
+  familyName: string;
   givenName?: string;
+  id?: String;
   phone?: string;
   postCode?: string;
-  salutation?: string;
-  password?: string;
-  passwordConfirm?: string;
-  user_metadata: Object;
+  projectIds?: string[];
   projects?: {
-    id: string;
-    name?: string;
+    id: String;
+    name: String;
   };
+  salutation?: string;
 }

@@ -1,265 +1,176 @@
 <script lang="ts">
-  import { page } from '$app/state';
-  import { goto } from '$app/navigation';
-  import Section from '$lib/components/section.svelte';
-  import RaspbPhilosophyModal from '$lib/components/raspb-philosophy-modal.svelte';
-  import { _ } from 'svelte-i18n';
+  import { onMount } from 'svelte';
+  import { teamMembers } from '$lib/configs/teamMembers';
+  import Stage from '$lib/components/ui/stage.svelte';
+  import Section from '$lib/components/ui/section.svelte';
+  import RaspbPhilosophyModal from '$lib/components/modals/general/philosophy.svelte';
+  import AboutMeModal from '$lib/components/modals/about-us/about-me-modal.svelte';
+  import MemberModal from '$lib/components/modals/about-us/member-modal.svelte';
+  import type { Member } from '$interfaces/user.interface';
+  import { m } from '$lib/paraglide/messages';
+  import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 
-  let selectedMember: any = null;
+  let currentTheme = $state('light');
+  let selectedMember: Member | null = $state(null);
+
+  let memberModal: MemberModal;
+  let aboutMeModal: AboutMeModal;
   let philosophyModal: RaspbPhilosophyModal;
+  const myskills = ['svelte', 'typescript', 'nodejs', 'tailwindcss', 'graphql', 'cloudArchitecture', 'kiEngineering']
 
-  const teamMembers = [
-    {
-      id: 'alex',
-      name: 'Alex',
-      role: 'Lead Developer & AI Architect',
-      avatar:
-        'https://api.dicebear.com/7.x/avataaars/svg?seed=AlexHappy&backgroundColor=b6e3f4&mouth=smile&eyes=happy&eyebrows=default&accessories=prescription02&clothingGraphic=bear',
-      skills: ['Full-Stack Development', 'AI Integration', 'System Architecture', 'DevOps'],
-      description:
-        'Alex ist unser technischer Visionär und führt die Entwicklung komplexer Webanwendungen. Mit jahrelanger Erfahrung in modernen Frameworks und KI-Integration bringt Alex innovative Lösungen für jede Herausforderung.',
-      experience:
-        'Über 8 Jahre Erfahrung in der Softwareentwicklung, spezialisiert auf Svelte, React und Node.js. Experte für KI-gestützte Entwicklungstools und Cloud-Architekturen.',
-      personality:
-        'Analytisch, innovativ und immer auf der Suche nach der elegantesten Lösung. Alex liebt es, komplexe Probleme in einfache, benutzerfreundliche Lösungen zu verwandeln.'
-    },
-    {
-      id: 'maya',
-      name: 'Maya',
-      role: 'UX/UI Design Specialist',
-      avatar:
-        'https://api.dicebear.com/7.x/avataaars/svg?seed=MayaJoyful&backgroundColor=fde68a&mouth=twinkle&eyes=wink&eyebrows=raisedExcited&accessories=wayfarers&clothingGraphic=pizza',
-      skills: ['User Experience Design', 'Interface Design', 'Prototyping', 'Design Systems'],
-      description:
-        'Maya verwandelt Ideen in intuitive und ästhetisch ansprechende Benutzererfahrungen. Sie versteht es, komplexe Anforderungen in klare, benutzerfreundliche Designs zu übersetzen.',
-      experience: 'Spezialistin für moderne Design-Tools wie Figma und Adobe Creative Suite. Experte für responsive Design und Accessibility-Standards.',
-      personality: 'Kreativ, empathisch und detailorientiert. Maya hat ein Auge für Ästhetik und versteht die Bedürfnisse der Nutzer intuitiv.'
-    },
-    {
-      id: 'sam',
-      name: 'Sam',
-      role: 'Content Strategy & SEO Expert',
-      avatar:
-        'https://api.dicebear.com/7.x/avataaars/svg?seed=SamCheerful&backgroundColor=c084fc&mouth=eating&eyes=surprised&eyebrows=raisedExcitedNatural&accessories=sunglasses&clothingGraphic=skull',
-      skills: ['Content Strategy', 'SEO Optimization', 'Analytics', 'Digital Marketing'],
-      description:
-        'Sam sorgt dafür, dass Ihre Inhalte nicht nur gefunden, sondern auch geliebt werden. Mit datengetriebenen Strategien optimiert Sam die Online-Präsenz für maximale Reichweite.',
-      experience:
-        'Experte für moderne SEO-Techniken, Google Analytics und Content-Management-Systeme. Spezialist für technisches SEO und Performance-Optimierung.',
-      personality:
-        'Strategisch denkend, datenorientiert und kommunikativ. Sam versteht es, komplexe Metriken in verständliche Handlungsempfehlungen zu übersetzen.'
-    },
-    {
-      id: 'rio',
-      name: 'Rio',
-      role: 'Quality Assurance & Testing Lead',
-      avatar:
-        'https://api.dicebear.com/7.x/avataaars/svg?seed=RioRadiant&backgroundColor=86efac&mouth=smile&eyes=hearts&eyebrows=default&accessories=round&clothingGraphic=diamond',
-      skills: ['Automated Testing', 'Quality Assurance', 'Performance Testing', 'Bug Detection'],
-      description:
-        'Rio stellt sicher, dass jede Zeile Code perfekt funktioniert. Mit systematischen Tests und automatisierten Prüfverfahren garantiert Rio höchste Qualitätsstandards.',
-      experience: 'Spezialist für Test-Frameworks wie Playwright, Jest und Cypress. Experte für CI/CD-Pipelines und automatisierte Qualitätssicherung.',
-      personality: 'Präzise, geduldig und lösungsorientiert. Rio hat ein Talent dafür, auch die kleinsten Fehler aufzuspüren und zu beheben.'
-    }
-  ];
+  const handleHashChange = (event: HashChangeEvent) => {
+    const newHash = new URL(event.newURL).hash.slice(1);
+    setTimeout(() => {
+      scrollToSection(newHash);
+    }, 250);
+  };
 
-  function openModal(member: any) {
+  function openMemberModal(member: Member) {
     selectedMember = member;
-    const modal = document.getElementById('member_modal') as HTMLDialogElement;
-    modal?.showModal();
+    memberModal.openModal();
   }
 
-  function closeModal() {
-    selectedMember = null;
-    const modal = document.getElementById('member_modal') as HTMLDialogElement;
-    modal?.close();
+  function scrollToSection(sectionId: string) {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
   }
+
+  onMount(() => {
+    const { hash } = document.location;
+    const root = document.documentElement;
+    currentTheme = root.getAttribute("data-theme");
+
+    const scrollTo = hash && document.getElementById(hash.slice(1));
+    if (scrollTo)
+      scrollTo.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    window.addEventListener('hashchange', handleHashChange);
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  });
 </script>
 
 <svelte:head>
-  <title>{$_('ueberUns.meta.title')}</title>
-  <meta
-    name="description"
-    content={$_('ueberUns.meta.description')}
-  />
+  <title>{m['aboutUs.meta.title']()}</title>
+  <meta name="description" content={m['aboutUs.meta.description']()} />
 </svelte:head>
 
-<div class="content-area">
-  <Section>
-    <h1 class="animate-fade-in mb-8 text-center text-4xl font-bold">{$_('ueberUns.header.title')} <span class="inner-text-special">{$_('ueberUns.header.titleHighlight')}</span></h1>
-    <p class="teaser animate-fade-in-up mx-auto max-w-4xl text-center text-lg">
-      {$_('ueberUns.header.teaser1')}
-    </p>
-    <p class="teaser no-padding animate-fade-in-up mx-auto max-w-4xl text-center text-lg">
-      {$_('ueberUns.header.teaser2')}
-    </p>
-  </Section>
+<Stage style={'fancy-gradient'}>
+  <div class="inner-box reduced py-36 prose">
+    <h1 class="massive animate-fade-in-up">{m['aboutUs.header.title']()}</h1>
+    <p class="teaser animate-fade-in-up">{@html m['aboutUs.header.subtitle']()}</p>
+  </div>
+</Stage>
 
-  <!-- Markus Section -->
-  <Section>
-    <div class="hero bg-base-200 animate-fade-in-up rounded-3xl text-base-content">
-      <div class="hero-content flex-col gap-12 lg:flex-row-reverse">
-        <div class="flex-shrink-0">
-          <img
-            src="/images/markus.png"
-            alt="Markus - Gründer von raspb Webservices"
-            class="h-96 w-64 rounded-2xl object-cover shadow-2xl transition-transform duration-300 hover:scale-105"
-          />
-        </div>
-        <div class="flex-1">
-          <div class="badge badge-primary badge-lg mb-4 animate-bounce">{$_('ueberUns.markusSection.badge')}</div>
-          <h2 class="mb-6 text-5xl font-bold">{$_('ueberUns.markusSection.title')}</h2>
-          <p class="mb-6 text-xl leading-relaxed">
-            {$_('ueberUns.markusSection.paragraph1')}
-          </p>
-          <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div class="stat bg-base-300 rounded-xl shadow-lg">
-              <div class="stat-title">{$_('ueberUns.markusSection.statSpecializationTitle')}</div>
-              <div class="stat-value text-primary text-lg">{$_('ueberUns.markusSection.statSpecializationValue')}</div>
-            </div>
-            <div class="stat bg-base-300 rounded-xl shadow-lg">
-              <div class="stat-title">{$_('ueberUns.markusSection.statExperienceTitle')}</div>
-              <div class="stat-value text-primary text-lg">{$_('ueberUns.markusSection.statExperienceValue')}</div>
-            </div>
+<Section noSpacing={true}>
+  <div id="raspb" class="inner-box animate-fade-in-up pt-30 pb-24 prose">
+    <h2>{m['aboutUs.introSection.titleFirst']()} <span class="inner-text-special">{m['aboutUs.introSection.titleHighlight']()}</span> {m['aboutUs.introSection.titleSecond']()}</h2>
+    <p>{@html m['aboutUs.introSection.teaser1']()}</p>
+    <p>{@html m['aboutUs.introSection.teaser2']()}</p>
+    <p class="no-padding">{@html m['aboutUs.introSection.teaser3']()}</p>
+  </div>
+</Section>
+
+<Section noSpacing={true}>
+  <div class="hero bg-base-200 animate-fade-in-up text-base-content rounded-4xl">
+    <div class="hero-content flex-col gap-12 p-10 pr-8 lg:flex-row-reverse">
+      <div class="shrink-0">
+        <img
+          src="/images/markus.jpg"
+          alt="Markus - Gründer von raspb Webservices"
+          class="h-104 w-72 rounded-2xl object-cover shadow-2xl transition-transform duration-300 hover:scale-105"
+        />
+      </div>
+      <div class="flex-1">
+        <div class="badge badge-primary badge-lg mb-4 animate-bounce">{m['aboutUs.markusSection.badge']()}</div>
+        <h2 class="mb-6 text-5xl font-bold">{m['aboutUs.markusSection.title']()}</h2>
+        <p class="mb-6 text-xl leading-relaxed">
+          {m['aboutUs.markusSection.paragraph1']()}
+        </p>
+        <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div class="stat bg-base-300 rounded-xl {currentTheme === 'light' ? 'shadow-lg' : ''}">
+            <div class="stat-title">{m['aboutUs.markusSection.statSpecializationTitle']()}</div>
+            <div class="stat-value text-base-content-50 text-lg">{m['aboutUs.markusSection.statSpecializationValue']()}</div>
           </div>
-          <div class="mb-6 flex flex-wrap gap-2">
-            {#each ['Svelte', 'TypeScript', 'Node.js', 'TailwindCSS', 'GraphQL', 'Cloud Architecture', 'KI Engineering'] as skill}
-              <span class="badge badge-outline badge-lg hover:badge-primary transition-colors duration-200">{skill}</span>
-            {/each}
+          <div class="stat bg-base-300 rounded-xl {currentTheme === 'light' ? 'shadow-lg' : ''}">
+            <div class="stat-title">{m['aboutUs.markusSection.statExperienceTitle']()}</div>
+            <div class="stat-value text-base-content-50 text-lg">{m['aboutUs.markusSection.statExperienceValue']()}</div>
           </div>
-          <p class="text-lg opacity-80">
-            {$_('ueberUns.markusSection.paragraph2')}
-            {$_('ueberUns.markusSection.philosophyPrefix')}
-            <button type="button" class="link link-primary hover:link-hover font-semibold" on:click={() => philosophyModal.openModal()}>
-              {$_('ueberUns.markusSection.philosophyButton')}
-            </button>.
-          </p>
         </div>
+        <div class="mb-6 flex flex-wrap gap-2">
+          {#each myskills as myskill}
+            <span class="badge badge-primary badge-lg transition-colors duration-200">{m[`aboutUs.markusSection.skills.${myskill}`]()}</span>
+          {/each}
+        </div>
+        <p class="add-padding text-lg opacity-80">
+          {m['aboutUs.markusSection.paragraph2']()}
+          {m['aboutUs.markusSection.philosophyPrefix']()}
+          <button type="button" class="link link-primary hover:link-hover" onclick={() => philosophyModal.openModal()}>
+            {m['aboutUs.markusSection.philosophyButton']()}
+          </button>.
+        </p>
+        <button
+          class="btn-basic-header animate-fade-in-from-side mt-4 mb-2"
+          onclick={() => { aboutMeModal.openModal() }}>{m['mehrErfahren']()}</button
+        >
       </div>
     </div>
-  </Section>
+  </div>
+</Section>
 
-  <!-- AI Team Section -->
-  <Section>
-    <div class="mb-12 text-center">
-      <h2 class="animate-fade-in mb-4 text-4xl font-bold">{$_('ueberUns.aiTeamSection.title')}</h2>
-      <p class="animate-fade-in-up mx-auto max-w-3xl text-xl opacity-80">
-        {$_('ueberUns.aiTeamSection.subtitle')}
-      </p>
+<Section noSpacing={true}>
+  <div id="ai-team" class="inner-box animate-fade-in-up pt-36">
+    <div class="m-auto max-w-5xl text-center prose">
+      <h2>{m['aboutUs.aiTeamSection.titleFirst']()} <span class="inner-text-special">{m['aboutUs.aiTeamSection.titleHighlight']()}</span></h2>
+      <p class="teaser boxed no-padding">{m['aboutUs.aiTeamSection.subtitle']()}</p>
     </div>
+  </div>
+</Section>
 
-    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+<Section noSpacing={true}>
+  <div class="inner-box animate-fade-in-up pt-4 pb-24">
+    <div class="grid grid-cols-12 gap-6">
       {#each teamMembers as member, index}
         <div
-          class="card bg-base-200 animate-fade-in-up h-full cursor-pointer shadow-xl text-base-content transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+          class="card from-base-100 to-base-200  bg-linear-to-tl flex cursor-default flex-col animate-fade-in-up text-base-content col-span-12 h-full shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg md:col-span-6 lg:col-span-4 {index === 3 ? 'lg:col-start-3' : ''} "
           style="animation-delay: {index * 0.1}s"
-          on:click={() => openModal(member)}
-          on:keydown={(e) => e.key === 'Enter' && openModal(member)}
-          role="button"
-          tabindex="0"
         >
           <figure class="px-6 pt-6">
-            <div class="avatar">
-              <div class="ring-primary ring-offset-base-100 w-20 rounded-full ring ring-offset-2">
-                <img src={member.avatar} alt={member.name} />
-              </div>
+            <div>
+              <img class="h-24 w-auto" src={member.avatar} alt={member.name} />
             </div>
           </figure>
           <div class="card-body flex flex-col items-center justify-between p-4 text-center">
-            <div class="flex-grow">
-              <h3 class="card-title mb-2 justify-center text-xl">{member.name}</h3>
-              <p class="mb-3 text-xs font-medium opacity-70">{member.role}</p>
-              <p class="mb-4 line-clamp-4 text-xs leading-relaxed">{$_(`ueberUns.teamMembers.${member.id}.description`)}</p>
+            <div class="grow">
+              <h3 class="card-title justify-center">{member.name}</h3>
+              <p class="opacity-70 add-padding">{member.role}</p>
+              <p class="line-clamp-4 px-4 leading-relaxed">{m[`aboutUs.teamMembers.${member.id}.description`]()}</p>
             </div>
-            <div class="card-actions">
-              <button class="btn btn-simple btn-xs">{$_('ueberUns.aiTeamSection.memberCardButton')}</button>
+            <div class="card-actions pt-2 pb-4">
+              <button class="btn btn-simple btn-xs" onclick="{() => {openMemberModal(member)}}">{m['aboutUs.aiTeamSection.memberCardButton']()}</button>
             </div>
           </div>
         </div>
       {/each}
     </div>
-  </Section>
-
-  <!-- Team Philosophy Section -->
-  <Section>
-    <div class="animate-fade-in-up rounded-3xl bg-base-200 p-8 text-base-content">
-      <div class="text-center">
-        <h2 class="mb-6 text-3xl font-bold">{$_('ueberUns.teamPhilosophySection.title')}</h2>
-        <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
-          <div class="text-center">
-            <div class="mb-4 text-4xl">⚡</div>
-            <h3 class="mb-2 text-xl font-semibold">{$_('ueberUns.teamPhilosophySection.innovation.title')}</h3>
-            <p class="opacity-80">{$_('ueberUns.teamPhilosophySection.innovation.description')}</p>
-          </div>
-          <div class="text-center">
-            <div class="mb-4 text-4xl">🎯</div>
-            <h3 class="mb-2 text-xl font-semibold">{$_('ueberUns.teamPhilosophySection.precision.title')}</h3>
-            <p class="opacity-80">{$_('ueberUns.teamPhilosophySection.precision.description')}</p>
-          </div>
-          <div class="text-center">
-            <div class="mb-4 text-4xl">🤝</div>
-            <h3 class="mb-2 text-xl font-semibold">{$_('ueberUns.teamPhilosophySection.partnership.title')}</h3>
-            <p class="opacity-80">{$_('ueberUns.teamPhilosophySection.partnership.description')}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </Section>
-</div>
-
-<!-- Modal for Team Member Details -->
-<dialog id="member_modal" class="modal">
-  <div class="modal-box w-11/12 max-w-2xl">
-    {#if selectedMember}
-      <form method="dialog">
-        <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2" on:click={closeModal}>✕</button>
-      </form>
-
-      <div class="mb-6 flex flex-col items-center text-center">
-        <div class="avatar mb-4">
-          <div class="ring-primary ring-offset-base-100 w-32 rounded-full ring ring-offset-4">
-            <img src={selectedMember.avatar} alt={selectedMember.name} />
-          </div>
-        </div>
-        <h3 class="text-3xl font-bold">{selectedMember.name}</h3>
-        <p class="text-primary text-lg font-semibold">{selectedMember.role}</p>
-      </div>
-
-      <div class="space-y-6">
-        <div>
-          <h4 class="mb-2 text-xl font-semibold">{$_('ueberUns.memberModal.about', { values: { name: selectedMember.name } })}</h4>
-          <p class="leading-relaxed">{$_(`ueberUns.teamMembers.${selectedMember.id}.description`)}</p>
-        </div>
-
-        <div>
-          <h4 class="mb-2 text-xl font-semibold">{$_('ueberUns.memberModal.personality')}</h4>
-          <p class="leading-relaxed">{$_(`ueberUns.teamMembers.${selectedMember.id}.personality`)}</p>
-        </div>
-
-        <div>
-          <h4 class="mb-2 text-xl font-semibold">{$_('ueberUns.memberModal.experience')}</h4>
-          <p class="leading-relaxed">{$_(`ueberUns.teamMembers.${selectedMember.id}.experience`)}</p>
-        </div>
-
-        <div>
-          <h4 class="mb-3 text-xl font-semibold">{$_('ueberUns.memberModal.coreCompetencies')}</h4>
-          <div class="flex flex-wrap gap-2">
-            {#each selectedMember.skills as skill}
-              <span class="badge badge-primary badge-lg">{skill}</span>
-            {/each}
-          </div>
-        </div>
-      </div>
-    {/if}
   </div>
-  <form method="dialog" class="modal-backdrop">
-    <button on:click={closeModal}>close</button>
-  </form>
-</dialog>
+</Section>
 
-<!-- RASPB Philosophy Modal -->
+<MemberModal bind:this={memberModal} {selectedMember} />
 <RaspbPhilosophyModal bind:this={philosophyModal} />
+<AboutMeModal bind:this={aboutMeModal} />
 
 <style lang="postcss">
   @reference '../../app.css';
+  .stat {
+    border-inline-end: none !important;
+  }
 </style>

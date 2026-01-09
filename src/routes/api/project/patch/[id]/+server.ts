@@ -1,6 +1,6 @@
-import { client } from '$lib/helper/graphql-client';
+import { client } from '$lib/server/graphql-client.server';
 import { gql } from 'graphql-request';
-import type { RequestHandler } from './$types';
+import type { RequestHandler } from '@sveltejs/kit';
 import type { Project, ProjectResponse } from '$interfaces/project.interface';
 
 export const PATCH: RequestHandler = async ({ request }) => {
