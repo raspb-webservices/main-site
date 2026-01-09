@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { isLoading } from 'svelte-i18n';
-  import { page, navigating } from '$app/state';
+  import { navigating } from '$app/state';
   import { onMount } from 'svelte';
   import HEADER from '$lib/components/header.svelte';
   import FOOTER from '$lib/components/footer.svelte';
@@ -50,7 +49,7 @@
 
 <div class="wrapper">
 
-  {#if $isLoading || navigating.to || showInitialLoader}
+  {#if navigating.to || showInitialLoader}
 
     <div class="global-loading">
       <LottieLoader />

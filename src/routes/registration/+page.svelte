@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
   import auth from '$services/auth-service';
   import Section from '$lib/components/ui/section.svelte';
   import Loader from '$lib/components/loader.svelte';
@@ -94,8 +94,8 @@
 </script>
 
 <svelte:head>
-  <title>{$_('registration.meta.title')}</title>
-  <meta name="description" content="{$_('registration.meta.description')}"/>
+  <title>{m['registration.meta.title']()}</title>
+  <meta name="description" content="{m['registration.meta.description']()}"/>
 </svelte:head>
 
 
@@ -103,10 +103,10 @@
   <Section noSpacing={true}>
     <div class="inner-box reduced pt-24 pb-12 prose">
       <h1 class="animate-fade-in mb-8 text-center text-4xl font-bold max-w-[850px]">
-        {$_('registration.intro.titleFirst')}
-        <span class="inner-text-special">{$_('registration.intro.titleHighlight')}</span>
+        {m['registration.intro.titleFirst']()}
+        <span class="inner-text-special">{m['registration.intro.titleHighlight']()}</span>
       </h1>
-      <p class="teaser animate-fade-in-up boxed text-center">{$_('registration.intro.teaser')}</p>
+      <p class="teaser animate-fade-in-up boxed text-center">{m['registration.intro.teaser']()}</p>
     </div>
   </Section>
 
@@ -126,9 +126,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
               </svg>
             </div>
-            <h2 class="mb-4 text-2xl font-bold">{$_('registration.success.title')}</h2>
-            <p class="mb-6">{$_('registration.success.message')}</p>
-            <button class="btn-basic mx-auto" onclick={() => (isSuccess = false)}> {$_('registration.success.backToForm')} </button>
+            <h2 class="mb-4 text-2xl font-bold">{m['registration.success.title']()}</h2>
+            <p class="mb-6">{m['registration.success.message']()}</p>
+            <button class="btn-basic mx-auto" onclick={() => (isSuccess = false)}> {m['registration.success.backToForm']()} </button>
           </div>
         {:else}
           <form
@@ -141,7 +141,7 @@
             {#if errorMessage}
               <div class="alert alert-error shadow-lg">
                 <div>
-                  <span>{$_(errorMessage)}</span>
+                  <span>{errorMessage}</span>
                 </div>
               </div>
             {/if}
@@ -149,29 +149,29 @@
             <div class="grid grid-cols-1 md:gap-6 md:grid-cols-2">
               <div class="form-control">
                 <label for="firstName" class="label">
-                  <span class="label-text">{$_('registration.form.firstName.label')}</span>
+                  <span class="label-text">{m['registration.form.firstName.label']()}</span>
                 </label>
-                <input type="text" id="firstName" class="input input-bordered w-full" bind:value={firstName} placeholder="{$_('registration.form.firstName.placeholder')}" />
+                <input type="text" id="firstName" class="input input-bordered w-full" bind:value={firstName} placeholder="{m['registration.form.firstName.placeholder']()}" />
               </div>
 
               <div class="form-control">
                 <label for="lastName" class="label">
-                  <span class="label-text">{$_('registration.form.lastName.label')}</span>
+                  <span class="label-text">{m['registration.form.lastName.label']()}</span>
                 </label>
-                <input type="text" id="lastName" class="input input-bordered w-full" bind:value={lastName} placeholder="{$_('registration.form.lastName.placeholder')}" />
+                <input type="text" id="lastName" class="input input-bordered w-full" bind:value={lastName} placeholder="{m['registration.form.lastName.placeholder']()}" />
               </div>
             </div>
 
             <div class="form-control">
               <label for="email" class="label">
-                <span class="label-text">{$_('registration.form.email.label')}</span>
+                <span class="label-text">{m['registration.form.email.label']()}</span>
               </label>
-              <input type="email" id="email" class="input input-bordered w-full" bind:value={email} placeholder="{$_('registration.form.email.placeholder')}" required />
+              <input type="email" id="email" class="input input-bordered w-full" bind:value={email} placeholder="{m['registration.form.email.placeholder']()}" required />
             </div>
 
             <div class="form-control">
               <label for="password" class="label">
-                <span class="label-text">{$_('registration.form.password.label')}</span>
+                <span class="label-text">{m['registration.form.password.label']()}</span>
               </label>
               <div class="relative">
                 <input
@@ -179,7 +179,7 @@
                   id="password"
                   class="input input-bordered relative z-0 w-full pr-12"
                   bind:value={password}
-                  placeholder="{$_('registration.form.password.placeholder')}"
+                  placeholder="{m['registration.form.password.placeholder']()}"
                   required
                   minlength="8"
                 />
@@ -187,7 +187,7 @@
                   type="button"
                   class="absolute inset-y-0 right-0 z-10 flex items-center pr-3"
                   onclick={() => (showPassword = !showPassword)}
-                  aria-label={showPassword ? $_('registration.form.password.hide') : $_('registration.form.password.show')}
+                  aria-label={showPassword ? m['registration.form.password.hide']() : m['registration.form.password.show']()}
                 >
                   {#if showPassword}
                     <svg xmlns="http://www.w3.org/2000/svg" class="text-base-content/50 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -211,12 +211,12 @@
                   {/if}
                 </button>
               </div>
-              <div class="label-text mt-1 text-sm opacity-70">{$_('registration.form.password.minLength')}</div>
+              <div class="label-text mt-1 text-sm opacity-70">{m['registration.form.password.minLength']()}</div>
             </div>
 
             <div class="form-control">
               <label for="confirmPassword" class="label">
-                <span class="label-text">{$_('registration.form.confirmPassword.label')}</span>
+                <span class="label-text">{m['registration.form.confirmPassword.label']()}</span>
               </label>
               <div class="relative">
                 <input
@@ -225,14 +225,14 @@
                   class={`input input-bordered relative z-0 w-full pr-12 ${!isPasswordMatch ? 'input-error' : ''}`}
                   bind:value={confirmPassword}
                   oninput={checkPasswordMatch}
-                  placeholder="{$_('registration.form.confirmPassword.placeholder')}"
+                  placeholder="{m['registration.form.confirmPassword.placeholder']()}"
                   required
                 />
                 <button
                   type="button"
                   class="absolute inset-y-0 right-0 z-10 flex items-center pr-3"
                   onclick={() => (showConfirmPassword = !showConfirmPassword)}
-                  aria-label={showConfirmPassword ? $_('registration.form.password.hide') : $_('registration.form.password.show')}
+                  aria-label={showConfirmPassword ? m['registration.form.password.hide']() : m['registration.form.password.show']()}
                 >
                   {#if showConfirmPassword}
                     <svg xmlns="http://www.w3.org/2000/svg" class="text-base-content/50 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -257,7 +257,7 @@
                 </button>
               </div>
               {#if !isPasswordMatch && confirmPassword}
-                <div class="label-text text-error mt-1 text-sm">{$_('registration.form.confirmPassword.mismatch')}</div>
+                <div class="label-text text-error mt-1 text-sm">{m['registration.form.confirmPassword.mismatch']()}</div>
               {/if}
             </div>
 
@@ -265,7 +265,7 @@
               <label class="cursor-pointer">
                 <input type="checkbox" class="checkbox checkbox-primary" required />
                 <span class="text-black/60 ml-1">
-                  {$_('registration.form.privacy.prefix')}<a href="/privacy-notice" class="link link-primary">{$_('registration.form.privacy.link')}</a>{$_('registration.form.privacy.suffix')}
+                  {m['registration.form.privacy.prefix']()}<a href="/privacy-notice" class="link link-primary">{m['registration.form.privacy.link']()}</a>{m['registration.form.privacy.suffix']()}
                 </span>
               </label>
             </div>
@@ -274,9 +274,9 @@
               <button type="submit" class="btn-basic w-full" disabled={isLoading}>
                 {#if isLoading}
                   <span class="loading loading-spinner loading-sm mr-2"></span>
-                  {$_('registration.form.button.loading')}
+                  {m['registration.form.button.loading']()}
                 {:else}
-                  {$_('registration.form.button.createAccount')}
+                  {m['registration.form.button.createAccount']()}
                 {/if}
               </button>
             </div>

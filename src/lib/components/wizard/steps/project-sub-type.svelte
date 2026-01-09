@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
   import { subTypes, projectTypes } from '$lib/configs/wizard-config';
 
   export let config: any; // TODO: Use proper type for config
@@ -8,10 +8,10 @@
 
 <div class="step-header">
   <h1>
-    {$_('wizard.steps.step2.titleFirst')} <span class="inner-text-special">{$_('wizard.config.projectTypes.' + config.projectType + '.title')}</span>
-    {$_('wizard.steps.step2.titleSecond')}
+    {m['wizard.steps.step2.titleFirst']()} <span class="inner-text-special">{m['wizard.config.projectTypes.' + config.projectType + '.title']()}</span>
+    {m['wizard.steps.step2.titleSecond']()}
   </h1>
-  <p class="teaser">{$_('wizard.steps.step2.teaser')}</p>
+  <p class="teaser">{m['wizard.steps.step2.teaser']()}</p>
 </div>
 
 <div class="subtypes-grid">
@@ -31,8 +31,8 @@
       aria-label="Select subtype: {subtype.title}"
     >
       <div class="card-body">
-        <h3 class="card-title">{$_(subtype.title)}</h3>
-        <p class="no-padding">{$_(subtype.description)}</p>
+        <h3 class="card-title">{m[subtype.title]()}</h3>
+        <p class="no-padding">{m[subtype.description]()}</p>
         <div class="card-actions justify-end">
           <div class="badge badge-success">ab {subtype.lowestPrice}€</div>
         </div>
@@ -67,14 +67,6 @@
         @apply ring-primary ring-offset-base-100 ring-2 ring-offset-2;
         &:hover {
           @apply bg-primary/1 cursor-default;
-        }
-      }
-
-      .service-card-header {
-        @apply mb-4 flex items-center justify-between;
-
-        .service-icon {
-          @apply text-3xl;
         }
       }
 

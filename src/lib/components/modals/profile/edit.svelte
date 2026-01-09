@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
   import auth from '$services/auth-service';
   import { user } from '$store/sharedStates.svelte';
   import type { User } from '$interfaces/user.interface';
@@ -47,74 +47,74 @@
   <div class="modal-box">
     <form onsubmit={handleSubmit}>
       <button type="button" class="btn btn-sm btn-circle btn-ghost absolute top-4 right-4" onclick={closeModal}>✕</button>
-      <h3 class="mb-4 text-lg font-bold">{$_('profile.editTitle')}</h3>
+      <h3 class="mb-4 text-lg font-bold">{m['profile.editTitle']()}</h3>
 
       <div class="form-edit-container space-y-4">
         <div class="form-control">
           <label for="salutation" class="label">
-            <span class="label-text">{$_('profile.salutation')}</span>
+            <span class="label-text">{m['profile.salutation']()}</span>
           </label>
           <select id="salutation" class="select select-bordered w-full" bind:value={currentUser.salutation}>
-            <option value="">{$_('profile.salutationPlaceholder')}</option>
-            <option value="Herr">{$_('profile.salutationOptions.mr')}</option>
-            <option value="Frau">{$_('profile.salutationOptions.mrs')}</option>
-            <option value="Divers">{$_('profile.salutationOptions.diverse')}</option>
+            <option value="">{m['profile.salutationPlaceholder']()}</option>
+            <option value="Herr">{m['profile.salutationOptions.mr']()}</option>
+            <option value="Frau">{m['profile.salutationOptions.mrs']()}</option>
+            <option value="Divers">{m['profile.salutationOptions.diverse']()}</option>
           </select>
         </div>
         <div class="form-control">
           <label for="givenName" class="label">
-            <span class="label-text">{$_('profile.givenName')}</span>
+            <span class="label-text">{m['profile.givenName']()}</span>
           </label>
           <input type="text" id="givenName" class="input input-bordered w-full" bind:value={currentUser.givenName} />
         </div>
         <div class="form-control">
           <label for="familyName" class="label">
-            <span class="label-text">{$_('profile.familyName')}</span>
+            <span class="label-text">{m['profile.familyName']()}</span>
           </label>
           <input type="text" id="familyName" class="input input-bordered w-full" bind:value={currentUser.familyName} />
         </div>
         <div class="form-control">
           <label for="company" class="label">
-            <span class="label-text">{$_('profile.company')}</span>
+            <span class="label-text">{m['profile.company']()}</span>
           </label>
           <input type="text" id="company" class="input input-bordered w-full" bind:value={currentUser.company} />
         </div>
         <div class="form-control">
           <label for="phone" class="label">
-            <span class="label-text">{$_('profile.phone')}</span>
+            <span class="label-text">{m['profile.phone']()}</span>
           </label>
           <input type="text" id="phone" class="input input-bordered w-full" bind:value={currentUser.phone} />
         </div>
         <div class="form-control">
           <label for="address" class="label">
-            <span class="label-text">{$_('profile.address')}</span>
+            <span class="label-text">{m['profile.address']()}</span>
           </label>
           <input type="text" id="address" class="input input-bordered w-full" bind:value={currentUser.companyAddress} />
         </div>
         <div class="form-control">
           <label for="postCode" class="label">
-            <span class="label-text">{$_('profile.postCode')}</span>
+            <span class="label-text">{m['profile.postCode']()}</span>
           </label>
           <input type="text" id="postCode" class="input input-bordered w-full" bind:value={currentUser.postCode} />
         </div>
         <div class="form-control">
           <label for="city" class="label">
-            <span class="label-text">{$_('profile.city')}</span>
+            <span class="label-text">{m['profile.city']()}</span>
           </label>
           <input type="text" id="city" class="input input-bordered w-full" bind:value={currentUser.city} />
         </div>
 
         <div class="form-control">
           <label for="country" class="label">
-            <span class="label-text">{$_('profile.country')}</span>
+            <span class="label-text">{m['profile.country']()}</span>
           </label>
           <input type="text" id="country" class="input input-bordered w-full" bind:value={currentUser.country} />
         </div>
       </div>
 
       <div class="modal-action">
-        <button type="button" class="btn btn-outline" onclick={closeModal}>{$_('profile.cancelButton')}</button>
-        <button type="submit" class="btn btn-primary">{$_('profile.saveButton')}</button>
+        <button type="button" class="btn btn-outline" onclick={closeModal}>{m['profile.cancelButton']()}</button>
+        <button type="submit" class="btn btn-primary">{m['profile.saveButton']()}</button>
       </div>
     </form>
   </div>

@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { onDestroy, onMount } from 'svelte';
-  import { _ } from 'svelte-i18n';
+  import { onMount } from 'svelte';
   import { teamMembers } from '$lib/configs/teamMembers';
   import Stage from '$lib/components/ui/stage.svelte';
   import Section from '$lib/components/ui/section.svelte';
@@ -8,6 +7,8 @@
   import AboutMeModal from '$lib/components/modals/about-us/about-me-modal.svelte';
   import MemberModal from '$lib/components/modals/about-us/member-modal.svelte';
   import type { Member } from '$interfaces/user.interface';
+  import { m } from '$lib/paraglide/messages';
+  import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 
   let currentTheme = $state('light');
   let selectedMember: Member | null = $state(null);
@@ -50,75 +51,75 @@
         behavior: 'smooth',
         block: 'start'
       });
-  });
-
-  onDestroy(() => {
-    window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('hashchange', handleHashChange);
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
   });
 </script>
 
 <svelte:head>
-  <title>{$_('ueberUns.meta.title')}</title>
-  <meta name="description" content={$_('ueberUns.meta.description')} />
+  <title>{m['aboutUs.meta.title']()}</title>
+  <meta name="description" content={m['aboutUs.meta.description']()} />
 </svelte:head>
 
 <Stage style={'fancy-gradient'}>
   <div class="inner-box reduced py-36 prose">
-    <h1 class="massive animate-fade-in-up">{$_('ueberUns.header.title')}</h1>
-    <p class="teaser animate-fade-in-up">{@html $_('ueberUns.header.subtitle')}</p>
+    <h1 class="massive animate-fade-in-up">{m['aboutUs.header.title']()}</h1>
+    <p class="teaser animate-fade-in-up">{@html m['aboutUs.header.subtitle']()}</p>
   </div>
 </Stage>
 
 <Section noSpacing={true}>
   <div id="raspb" class="inner-box animate-fade-in-up pt-30 pb-24 prose">
-    <h2>{$_('ueberUns.introSection.titleFirst')} <span class="inner-text-special">{$_('ueberUns.introSection.titleHighlight')}</span> {$_('ueberUns.introSection.titleSecond')}</h2>
-    <p>{@html $_('ueberUns.introSection.teaser1')}</p>
-    <p>{@html $_('ueberUns.introSection.teaser2')}</p>
-    <p class="no-padding">{@html $_('ueberUns.introSection.teaser3')}</p>
+    <h2>{m['aboutUs.introSection.titleFirst']()} <span class="inner-text-special">{m['aboutUs.introSection.titleHighlight']()}</span> {m['aboutUs.introSection.titleSecond']()}</h2>
+    <p>{@html m['aboutUs.introSection.teaser1']()}</p>
+    <p>{@html m['aboutUs.introSection.teaser2']()}</p>
+    <p class="no-padding">{@html m['aboutUs.introSection.teaser3']()}</p>
   </div>
 </Section>
 
 <Section noSpacing={true}>
   <div class="hero bg-base-200 animate-fade-in-up text-base-content rounded-4xl">
     <div class="hero-content flex-col gap-12 p-10 pr-8 lg:flex-row-reverse">
-      <div class="flex-shrink-0">
+      <div class="shrink-0">
         <img
           src="/images/markus.jpg"
           alt="Markus - Gründer von raspb Webservices"
-          class="h-[416px] w-72 rounded-2xl object-cover shadow-2xl transition-transform duration-300 hover:scale-105"
+          class="h-104 w-72 rounded-2xl object-cover shadow-2xl transition-transform duration-300 hover:scale-105"
         />
       </div>
       <div class="flex-1">
-        <div class="badge badge-primary badge-lg mb-4 animate-bounce">{$_('ueberUns.markusSection.badge')}</div>
-        <h2 class="mb-6 text-5xl font-bold">{$_('ueberUns.markusSection.title')}</h2>
+        <div class="badge badge-primary badge-lg mb-4 animate-bounce">{m['aboutUs.markusSection.badge']()}</div>
+        <h2 class="mb-6 text-5xl font-bold">{m['aboutUs.markusSection.title']()}</h2>
         <p class="mb-6 text-xl leading-relaxed">
-          {$_('ueberUns.markusSection.paragraph1')}
+          {m['aboutUs.markusSection.paragraph1']()}
         </p>
         <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
           <div class="stat bg-base-300 rounded-xl {currentTheme === 'light' ? 'shadow-lg' : ''}">
-            <div class="stat-title">{$_('ueberUns.markusSection.statSpecializationTitle')}</div>
-            <div class="stat-value text-base-content-50 text-lg">{$_('ueberUns.markusSection.statSpecializationValue')}</div>
+            <div class="stat-title">{m['aboutUs.markusSection.statSpecializationTitle']()}</div>
+            <div class="stat-value text-base-content-50 text-lg">{m['aboutUs.markusSection.statSpecializationValue']()}</div>
           </div>
           <div class="stat bg-base-300 rounded-xl {currentTheme === 'light' ? 'shadow-lg' : ''}">
-            <div class="stat-title">{$_('ueberUns.markusSection.statExperienceTitle')}</div>
-            <div class="stat-value text-base-content-50 text-lg">{$_('ueberUns.markusSection.statExperienceValue')}</div>
+            <div class="stat-title">{m['aboutUs.markusSection.statExperienceTitle']()}</div>
+            <div class="stat-value text-base-content-50 text-lg">{m['aboutUs.markusSection.statExperienceValue']()}</div>
           </div>
         </div>
         <div class="mb-6 flex flex-wrap gap-2">
           {#each myskills as myskill}
-            <span class="badge badge-primary badge-lg transition-colors duration-200">{$_(`ueberUns.markusSection.skills.${myskill}`)}</span>
+            <span class="badge badge-primary badge-lg transition-colors duration-200">{m[`aboutUs.markusSection.skills.${myskill}`]()}</span>
           {/each}
         </div>
         <p class="add-padding text-lg opacity-80">
-          {$_('ueberUns.markusSection.paragraph2')}
-          {$_('ueberUns.markusSection.philosophyPrefix')}
+          {m['aboutUs.markusSection.paragraph2']()}
+          {m['aboutUs.markusSection.philosophyPrefix']()}
           <button type="button" class="link link-primary hover:link-hover" onclick={() => philosophyModal.openModal()}>
-            {$_('ueberUns.markusSection.philosophyButton')}
+            {m['aboutUs.markusSection.philosophyButton']()}
           </button>.
         </p>
         <button
           class="btn-basic-header animate-fade-in-from-side mt-4 mb-2"
-          onclick={() => { aboutMeModal.openModal() }}>{$_('mehrErfahren')}</button
+          onclick={() => { aboutMeModal.openModal() }}>{m['mehrErfahren']()}</button
         >
       </div>
     </div>
@@ -128,8 +129,8 @@
 <Section noSpacing={true}>
   <div id="ai-team" class="inner-box animate-fade-in-up pt-36">
     <div class="m-auto max-w-5xl text-center prose">
-      <h2>{$_('ueberUns.aiTeamSection.titleFirst')} <span class="inner-text-special">{$_('ueberUns.aiTeamSection.titleHighlight')}</span></h2>
-      <p class="teaser boxed no-padding">{$_('ueberUns.aiTeamSection.subtitle')}</p>
+      <h2>{m['aboutUs.aiTeamSection.titleFirst']()} <span class="inner-text-special">{m['aboutUs.aiTeamSection.titleHighlight']()}</span></h2>
+      <p class="teaser boxed no-padding">{m['aboutUs.aiTeamSection.subtitle']()}</p>
     </div>
   </div>
 </Section>
@@ -148,13 +149,13 @@
             </div>
           </figure>
           <div class="card-body flex flex-col items-center justify-between p-4 text-center">
-            <div class="flex-grow">
+            <div class="grow">
               <h3 class="card-title justify-center">{member.name}</h3>
               <p class="opacity-70 add-padding">{member.role}</p>
-              <p class="line-clamp-4 px-4 leading-relaxed">{$_(`ueberUns.teamMembers.${member.id}.description`)}</p>
+              <p class="line-clamp-4 px-4 leading-relaxed">{m[`aboutUs.teamMembers.${member.id}.description`]()}</p>
             </div>
             <div class="card-actions pt-2 pb-4">
-              <button class="btn btn-simple btn-xs" onclick="{() => {openMemberModal(member)}}">{$_('ueberUns.aiTeamSection.memberCardButton')}</button>
+              <button class="btn btn-simple btn-xs" onclick="{() => {openMemberModal(member)}}">{m['aboutUs.aiTeamSection.memberCardButton']()}</button>
             </div>
           </div>
         </div>

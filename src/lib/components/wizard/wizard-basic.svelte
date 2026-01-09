@@ -3,13 +3,13 @@
   import type { WizardConfig, Project } from '$interfaces/project.interface';
   import { projectTypes, subTypes, availableFeatures, getStepConfig, featureCategoryColors } from '$lib/configs/wizard-config';
   import { goto } from '$app/navigation';
-  import { addMessages, _ } from 'svelte-i18n';
   import type { User } from '$interfaces/user.interface';
   import ResetModal from '../modals/general/reset-modal.svelte';
   import ProjectType from './steps/project-type.svelte';
   import ProjectSubType from './steps/project-sub-type.svelte';
   import ProjectFeatures from './steps/project-features.svelte';
   import ProjectSummary from './steps/project-summary.svelte';
+  import { m } from '$lib/paraglide/messages';
 
   // State
   let currentStep = $state(1);
@@ -195,11 +195,6 @@
   let resetModal: ResetModal;
 
   onMount(async () => {
-    const wizardMessagesDe = (await import('$lib/i18n/locales/de/wizard.json')).default;
-    const wizardMessagesEn = (await import('$lib/i18n/locales/en/wizard.json')).default;
-    addMessages('de', wizardMessagesDe as any);
-    addMessages('en', wizardMessagesEn as any);
-
     calculatePrice();
   });
 
@@ -258,7 +253,7 @@
             </div>
             <!-- Step Title -->
             <div class="text-base-content mt-2 max-w-20 text-center text-xs font-medium">
-              {$_(step.title)}
+              {m[step.title]()}
             </div>
           </button>
         {/each}
@@ -286,7 +281,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
           </svg>
-          {$_('wizard.navigation.back')}
+          {m['wizard.navigation.back']()}
         </button>
       {:else}
         <div></div>
@@ -295,11 +290,11 @@
       {#if currentStep < maxSteps}
         <button
           type="button"
-          class="btn-basic flex-grow md:flex-grow-0"
+          class="btn-basic grow md:grow-0"
           onclick={nextStep}
           disabled={(currentStep === 1 && !config.projectType) || (currentStep === 2 && !config.subType)}
         >
-          {$_('wizard.navigation.next')}
+          {m['wizard.navigation.next']()}
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
           </svg>
@@ -317,8 +312,8 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
       <div>
-        <div class="font-bold">{$_('wizard.modals.thankYou.title')}</div>
-        <div class="text-sm">{$_('wizard.modals.thankYou.subtitle')}</div>
+        <div class="font-bold">{m['wizard.modals.thankYou.title']()}</div>
+        <div class="text-sm">{m['wizard.modals.thankYou.subtitle']()}</div>
       </div>
       <button type="button" class="btn btn-sm btn-circle btn-ghost" onclick={() => (showSuccessMessage = false)}>✕</button>
     </div>
@@ -336,14 +331,6 @@
     @apply bg-base-100 border-base-300 rounded-2xl border shadow-lg;
   }
 
-  /* Header */
-  .wizard-basic-header {
-    @apply border-base-300 flex items-center justify-between border-b px-6 py-4;
-    h1 {
-      @apply text-base-content m-0 p-0;
-    }
-  }
-
   /* Progress Bar */
   .progress-wrapper {
     @apply mx-6 my-12;
@@ -358,16 +345,6 @@
   /* Step Content */
   .step-content-wrapper {
     @apply mb-8 min-h-96 px-6;
-  }
-
-  .step-header {
-    @apply border-t-base-content/40 mt-8 mb-12 border-t pt-10 text-center md:border-t-0 md:pt-0;
-    h1 {
-      @apply text-base-content mb-4;
-    }
-    p.teaser {
-      @apply text-base-content/70;
-    }
   }
 
   /* Navigation */

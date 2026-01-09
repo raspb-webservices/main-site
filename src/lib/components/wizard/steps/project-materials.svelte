@@ -1,22 +1,22 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
   import { googleFonts } from '$lib/configs/wizard-config';
   let { config, uploadedFiles, handleFileUpload, removeFile, isUploading, uploadProgress } = $props();
 </script>
 
 <div class="step-header">
-  <h1>{$_('wizard.steps.step6.titleFirst')} <span class="inner-text-special">{$_('wizard.steps.step6.titleHighlight')}</span></h1>
-  <p class="teaser">{$_('wizard.steps.step6.teaser')}</p>
+  <h1>{m['wizard.steps.step6.titleFirst']()} <span class="inner-text-special">{m['wizard.steps.step6.titleHighlight']()}</span></h1>
+  <p class="teaser">{m['wizard.steps.step6.teaser']()}</p>
 </div>
 
 <!-- Color Selection -->
 <div class="content-section">
-  <h2>{$_('wizard.design.colorScheme')}</h2>
-  <p>{$_('wizard.design.colorSchemeDescription')}</p>
+  <h2>{m['wizard.design.colorScheme']()}</h2>
+  <p>{m['wizard.design.colorSchemeDescription']()}</p>
   <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
     <div class="form-control w-full">
       <label class="label" for="primaryColor">
-        <span class="label-text font-semibold">{$_('wizard.design.primaryColor')}</span>
+        <span class="label-text font-semibold">{m['wizard.design.primaryColor']()}</span>
       </label>
       <div class="join w-full">
         <input type="color" id="primaryColor" class="join-item h-12 w-16 border-0" bind:value={config.primaryColour} />
@@ -26,7 +26,7 @@
 
     <div class="form-control w-full">
       <label class="label" for="secondaryColor">
-        <span class="label-text font-semibold">{$_('wizard.design.secondaryColor')}</span>
+        <span class="label-text font-semibold">{m['wizard.design.secondaryColor']()}</span>
       </label>
       <div class="join w-full">
         <input type="color" id="secondaryColor" class="join-item h-12 w-16 border-0" bind:value={config.secondaryColour} />
@@ -36,7 +36,7 @@
 
     <div class="form-control w-full">
       <label class="label" for="accentColor">
-        <span class="label-text font-semibold">{$_('wizard.design.accentColor')}</span>
+        <span class="label-text font-semibold">{m['wizard.design.accentColor']()}</span>
       </label>
       <div class="join w-full">
         <input type="color" id="accentColor" class="join-item h-12 w-16 border-0" bind:value={config.accentColour} />
@@ -48,32 +48,32 @@
 
 <!-- Font Selection -->
 <div class="content-section">
-  <h2>{$_('wizard.design.font')}</h2>
-  <p>{$_('wizard.design.fontDescription')}</p>
+  <h2>{m['wizard.design.font']()}</h2>
+  <p>{m['wizard.design.fontDescription']()}</p>
 
   <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
     <div class="form-control w-full">
       <label class="label" for="googleFonts">
-        <span class="label-text font-semibold">{$_('wizard.design.googleFonts')}</span>
+        <span class="label-text font-semibold">{m['wizard.design.googleFonts']()}</span>
       </label>
       <select id="googleFonts" class="select select-bordered w-full" bind:value={config.desiredFont}>
         {#each googleFonts as font}
           <option value={font}>{font}</option>
         {/each}
-        <option value="Other Google Fonts">{$_('wizard.design.otherGoogleFonts')}</option>
+        <option value="Other Google Fonts">{m['wizard.design.otherGoogleFonts']()}</option>
       </select>
     </div>
 
     <div class="form-control w-full">
       <label class="label" for="customFont">
-        <span class="label-text font-semibold">{$_('wizard.design.customFont')}</span>
+        <span class="label-text font-semibold">{m['wizard.design.customFont']()}</span>
       </label>
       <input
         type="text"
         id="customFont"
         class="input input-bordered w-full"
         bind:value={config.customFont}
-        placeholder={$_('wizard.design.customFontPlaceholder')}
+        placeholder={m['wizard.design.customFontPlaceholder']()}
       />
     </div>
   </div>
@@ -85,9 +85,9 @@
       </svg>
 
       <div>
-        <div class="pt-3 font-bold">{$_('wizard.design.fontPreviewTitle', { values: { font: config.desiredFont } })}</div>
+        <div class="pt-3 font-bold">{m['wizard.design.fontPreviewTitle']({ font: config.desiredFont })}</div>
         <div class="my-2 text-2xl" style="font-family: {config.desiredFont}">
-          {$_('wizard.design.fontPreview')}
+          {m['wizard.design.fontPreview']()}
         </div>
       </div>
     </div>
@@ -96,8 +96,8 @@
 
 <!-- File Upload -->
 <div class="content-section">
-  <h2>{$_('wizard.steps.stepMaterials.files.title')}</h2>
-  <p>{$_('wizard.steps.stepMaterials.files.description')}</p>
+  <h2>{m['wizard.steps.stepMaterials.files.title']()}</h2>
+  <p>{m['wizard.steps.stepMaterials.files.description']()}</p>
 
   <div class="form-control w-full">
     <input
@@ -109,13 +109,13 @@
       onchange={handleFileUpload}
     />
     <div class="label">
-      <span class="label-text-alt">{$_('wizard.steps.stepMaterials.files.formats')}</span>
+      <span class="label-text-alt">{m['wizard.steps.stepMaterials.files.formats']()}</span>
     </div>
   </div>
 
   {#if uploadedFiles.length > 0}
     <div class="mt-6">
-      <h3>{$_('wizard.steps.stepMaterials.files.uploaded')}</h3>
+      <h3>{m['wizard.steps.stepMaterials.files.uploaded']()}</h3>
       <div class="space-y-2">
         {#each uploadedFiles as file, i}
           <div class="alert">
@@ -128,7 +128,7 @@
               ></path>
             </svg>
             <span>{file.name} ({Math.round(file.size / 1024)}KB)</span>
-            <button type="button" class="btn btn-sm btn-error" onclick={() => removeFile(i)} aria-label={$_('wizard.steps.stepMaterials.files.removeFile')}>
+            <button type="button" class="btn btn-sm btn-error" onclick={() => removeFile(i)} aria-label={m['wizard.steps.stepMaterials.files.removeFile']()}>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
@@ -146,7 +146,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
         </svg>
         <div>
-          <div class="font-bold">{$_('wizard.steps.stepMaterials.files.uploadRunning')}</div>
+          <div class="font-bold">{m['wizard.steps.stepMaterials.files.uploadRunning']()}</div>
           <div class="text-sm">{uploadProgress}</div>
         </div>
         <span class="loading loading-ring loading-md"></span>
@@ -193,7 +193,6 @@
       }
     }
 
-  .textarea,
   .input,
   .select {
     @apply border-base-300 text-base-content w-full bg-white;

@@ -1,13 +1,13 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import Section from '$lib/components/ui/section.svelte';
-  import { _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
 </script>
 
 <Section type={'fullCenterTeaser'}>
     <div class="inner-content-wrapper prose">
-    <h1 class="text-center"><span class="inner-text-special">{$_('thankYouHighlight')}</span> {$_('thankYouMessageSecond')}</h1>
-    <p class="teaser text-center">{$_('thankYouTeaser')}</p>
+    <h1 class="text-center"><span class="inner-text-special">{m['thankYouHighlight']()}</span> {m['thankYouMessageSecond']()}</h1>
+    <p class="teaser text-center">{m['thankYouTeaser']()}</p>
 
     <div class="spacer"></div>
     <div class="flex w-full justify-center">
@@ -15,7 +15,7 @@
         class="btn-basic"
         onclick={() => {
           goto('/');
-        }}>{$_('backToHomepage')}</button
+        }}>{m['backToHomepage']()}</button
       >
     </div>
     </div>

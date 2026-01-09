@@ -1,6 +1,7 @@
 <script lang="ts">
   import Section from '$lib/components/ui/section.svelte';
-  import { locale } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
+  import { getLocale, localizeHref, setLocale } from '$lib/paraglide/runtime';
 
   // Sample-Konfiguration für PDF-Test - SaaS Immobilienverwaltung
   const sampleConfig = {
@@ -196,7 +197,7 @@
           uploadedFiles: sampleUploadedFiles,
           customFeatures: sampleCustomFeatures,
           filename: `RASPB_Projekt_${sampleConfig.name.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`,
-          submittedLocale: $locale
+          submittedLocale: getLocale()
         })
       });
 

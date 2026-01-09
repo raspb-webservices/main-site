@@ -15,7 +15,7 @@
   font-display: swap;
   src:
     url('/fonts/circular/CircularStd-Book.woff2') format('woff2'),
-    url('/fonts/lcircularato/CircularStd-Book.woff') format('woff'),
+    url('/fonts/circular/CircularStd-Book.woff') format('woff'),
     url('/fonts/circular/CircularStd-Book.ttf') format('truetype');
 }
 @font-face {
@@ -25,7 +25,7 @@
   font-display: swap;
   src:
     url('/fonts/circular/CircularStd-Medium.woff2') format('woff2'),
-    url('/fonts/lcircularato/CircularStd-Medium.woff') format('woff'),
+    url('/fonts/circular/CircularStd-Medium.woff') format('woff'),
     url('/fonts/circular/CircularStd-Medium.ttf') format('truetype');
 }
 @font-face {

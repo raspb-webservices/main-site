@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
   import { goto } from '$app/navigation';
 
   let { variant = 'default' } = $props();
@@ -8,14 +8,14 @@
 <div class="cta-section">
   <div class="cta-content">
     {#if variant === 'default' }
-          <h1>{$_('ctaBox.titleFirst')} <span class="inner-text-special">{$_('ctaBox.titleHighlight')}</span></h1>
+          <h1>{m['ctaBox.titleFirst']()} <span class="inner-text-special">{m['ctaBox.titleHighlight']()}</span></h1>
     <p class="cta-text">
-      {$_('ctaBox.description')}
+      {m['ctaBox.description']()}
     </p>
     {:else}
-        <h1>{$_('ctaBox.variant2.titleFirst')} <span class="inner-text-special">{$_('ctaBox.variant2.titleHighlight')}</span></h1>
+        <h1>{m['ctaBox.variant2.titleFirst']()} <span class="inner-text-special">{m['ctaBox.variant2.titleHighlight']()}</span></h1>
     <p class="cta-text">
-      {$_('ctaBox.variant2.description')}
+      {m['ctaBox.variant2.description']()}
     </p>
     {/if}
 
@@ -23,22 +23,22 @@
       <div class="cta-benefit">
         <div class="benefit-icon">⚡</div>
         <div>
-          <h2>{$_('ctaBox.benefits.zeit.title')}</h2>
-          <p>{$_('ctaBox.benefits.zeit.description')}</p>
+          <h2>{m['ctaBox.benefits.zeit.title']()}</h2>
+          <p>{m['ctaBox.benefits.zeit.description']()}</p>
         </div>
       </div>
       <div class="cta-benefit">
         <div class="benefit-icon">🎯</div>
         <div>
-          <h2>{$_('ctaBox.benefits.massgeschneidert.title')}</h2>
-          <p>{$_('ctaBox.benefits.massgeschneidert.description')}</p>
+          <h2>{m['ctaBox.benefits.massgeschneidert.title']()}</h2>
+          <p>{m['ctaBox.benefits.massgeschneidert.description']()}</p>
         </div>
       </div>
       <div class="cta-benefit">
         <div class="benefit-icon">🤝</div>
         <div>
-          <h2>{$_('ctaBox.benefits.contact.title')}</h2>
-          <p>{$_('ctaBox.benefits.contact.description')}</p>
+          <h2>{m['ctaBox.benefits.contact.title']()}</h2>
+          <p>{m['ctaBox.benefits.contact.description']()}</p>
         </div>
       </div>
     </div>
@@ -50,13 +50,13 @@
           goto('/get-started');
         }}
       >
-        {$_('ctaBox.buttonText')}
+        {m['ctaBox.buttonText']()}
       </button>
-      <button class="btn btn-outline btn-lg px-8 py-4" onclick={() => goto('/faq')}> {$_('ctaBox.faqButtonText')} </button>
+      <button class="btn btn-outline btn-lg px-8 py-4" onclick={() => goto('/faq')}> {m['ctaBox.faqButtonText']()} </button>
     </div>
 
     <p class="cta-note">
-      {@html $_('ctaBox.note')}
+      {@html m['ctaBox.note']()}
     </p>
   </div>
 </div>

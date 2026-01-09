@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
   const target = "/thank-you"
 </script>
 
 <section class="contact-content-wrapper">
-  <h1>{$_('contact.title')}</h1>
+  <h1>{m['contact.title']()}</h1>
   <div class="px-20 pt-10">
-    <p>{$_('contact.intro')}</p>
+    <p>{m['contact.intro']()}</p>
 
     <div class="spacer"></div>
 
@@ -14,32 +14,32 @@
       <input type="hidden" name="form-name" value="contact" />
       <div class="form-field-container">
         <div class="form-field-section">
-          <label for="first-name">{$_('contact.form.firstNameLabel')}</label>
-          <input type="text" id="first-name" name="first-name" placeholder="{$_('contact.form.firstNamePlaceholder')}" required />
+          <label for="first-name">{m['contact.form.firstNameLabel']()}</label>
+          <input type="text" id="first-name" name="first-name" placeholder="{m['contact.form.firstNamePlaceholder']()}" required />
         </div>
         <div class="form-field-section">
-          <label for="last-name">{$_('contact.form.lastNameLabel')}</label>
-          <input type="text" id="last-name" name="last-name" placeholder="{$_('contact.form.lastNamePlaceholder')}" required />
+          <label for="last-name">{m['contact.form.lastNameLabel']()}</label>
+          <input type="text" id="last-name" name="last-name" placeholder="{m['contact.form.lastNamePlaceholder']()}" required />
         </div>
       </div>
 
       <div class="form-field-container">
         <div class="form-field-section full-width">
-          <label for="email">{$_('contact.form.emailLabel')}</label>
-          <input type="email" id="email" name="email" placeholder="{$_('contact.form.emailPlaceholder')}" required />
+          <label for="email">{m['contact.form.emailLabel']()}</label>
+          <input type="email" id="email" name="email" placeholder="{m['contact.form.emailPlaceholder']()}" required />
         </div>
       </div>
 
       <div class="form-field-container">
         <div class="form-field-section full-width">
-          <label for="phone">{$_('contact.form.phoneLabel')}</label>
-          <input type="tel" id="phone" name="phone" placeholder="{$_('contact.form.phonePlaceholder')}" />
+          <label for="phone">{m['contact.form.phoneLabel']()}</label>
+          <input type="tel" id="phone" name="phone" placeholder="{m['contact.form.phonePlaceholder']()}" />
         </div>
       </div>
 
       <div class="form-field-container">
         <div class="form-field-section full-width">
-          <label for="message">{$_('contact.form.messageLabel')}</label>
+          <label for="message">{m['contact.form.messageLabel']()}</label>
           <span class="additional-information"></span>
           <textarea id="message" name="message" rows="4" placeholder="" required></textarea>
         </div>
@@ -47,11 +47,11 @@
       <div class="form-field-container">
         <div class="form-field-section full-width checkbox-dialog">
           <input id="dsgvo" name="dsgvo" type="checkbox" value="dsgvo-confirmed" class="is-checkbox accent-secondary" required />
-          <label for="dsgvo">{$_('contact.form.dsgvoLabel')}</label>
+          <label for="dsgvo">{m['contact.form.dsgvoLabel']()}</label>
         </div>
       </div>
       <div class="medium-spacer"></div>
-      <button type="submit" class="btn-basic">{$_('contact.form.submitButton')}</button>
+      <button type="submit" class="btn-basic">{m['contact.form.submitButton']()}</button>
     </form>
   </div>
 

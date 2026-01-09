@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
   let { selectedMember } = $props();
   let modal: HTMLDialogElement;
 
@@ -27,23 +27,23 @@
 
     <div class="space-y-6">
       <div>
-        <h4 class="no-padding mb-2">{$_('ueberUns.modals.member.about', { values: { name: selectedMember?.name } })}</h4>
-        <p class="leading-relaxed">{$_(`ueberUns.teamMembers.${selectedMember?.id}.description`)}</p>
+        <h4 class="no-padding mb-2">{m['aboutUs.modals.member.about']({ name: selectedMember?.name })}</h4>
+        <p class="leading-relaxed">{m[`aboutUs.teamMembers.${selectedMember?.id || 'alex'}.description`]()}</p>
       </div>
 
       <div>
-        <h4 class="no-padding mb-2">{$_('ueberUns.modals.member.personality')}</h4>
-        <p class="leading-relaxed">{$_(`ueberUns.teamMembers.${selectedMember?.id}.personality`)}</p>
+        <h4 class="no-padding mb-2">{m['aboutUs.modals.member.personality']()}</h4>
+        <p class="leading-relaxed">{m[`aboutUs.teamMembers.${selectedMember?.id || 'alex'}.personality`]()}</p>
       </div>
 
       <div>
-        <h4 class="no-padding mb-2">{$_('ueberUns.modals.member.experience')}</h4>
-        <p class="leading-relaxed">{$_(`ueberUns.teamMembers.${selectedMember?.id}.experience`)}</p>
+        <h4 class="no-padding mb-2">{m['aboutUs.modals.member.experience']()}</h4>
+        <p class="leading-relaxed">{m[`aboutUs.teamMembers.${selectedMember?.id || 'alex'}.experience`]()}</p>
       </div>
 
       <div class="pt-2 pb-8">
         {#if selectedMember?.skills && selectedMember?.skills.length > 0}
-          <h4>{$_('ueberUns.modals.member.coreCompetencies')}</h4>
+          <h4>{m['aboutUs.modals.member.coreCompetencies']()}</h4>
           <div class="flex flex-wrap gap-2 mt-3">
             {#each selectedMember?.skills as skill}
               <span class="badge badge-primary badge-lg">{skill}</span>
@@ -54,7 +54,7 @@
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">{$_('ueberUns.modals.closeButton')}</button>
+        <button class="btn">{m['aboutUs.modals.closeButton']()}</button>
       </form>
     </div>
   </div>

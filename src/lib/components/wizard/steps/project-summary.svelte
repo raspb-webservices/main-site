@@ -1,31 +1,29 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
   import { projectTypes, subTypes, availableFeatures } from '$lib/configs/wizard-config';
   import { goto } from '$app/navigation';
   let { config, featureCategoryColors, getTop, getLow, openContact, openResetModal } = $props();
 </script>
 
 <div class="step-header">
-  <h1><span class="inner-text-special">{$_('wizard.steps.stepSummary.titleHighlight')}</span></h1>
-  <p class="teaser">{$_('wizard.steps.stepSummary.teaser')}</p>
+  <h1><span class="inner-text-special">{m['wizard.steps.stepSummary.titleHighlight']()}</span></h1>
+  <p class="teaser">{m['wizard.steps.stepSummary.teaser']()}</p>
 </div>
 
 <div class="summary-grid">
   <div class="summary-card">
-    <h3>{$_('wizard.steps.stepSummary.projectType')}</h3>
-    <p class="summary-value">{$_(projectTypes.find((p) => p.id === config.projectType)?.title)}</p>
-    <p class="summary-subvalue">{$_(subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType)?.title)}</p>
+    <h3>{m['wizard.steps.stepSummary.projectType']()}</h3>
+    <p class="summary-value">{m[projectTypes?.find((p) => p.id === config.projectType)?.title]()}</p>
+    <p class="summary-subvalue">{m[subTypes?.find((s) => s.id === config.subType && s.parentId === config.projectType)?.title]()}</p>
   </div>
 
   {#if config.features.length > 1}
     <div class="summary-card">
-      <h3>{$_('wizard.steps.stepSummary.selectedFeatures')}</h3>
+      <h3>{m['wizard.steps.stepSummary.selectedFeatures']()}</h3>
       <div class="flex flex-wrap gap-2">
         {#each config.features.filter((f) => f !== 'cookieConsent') as featureId}
-          <div
-            class="badge {featureCategoryColors[availableFeatures.find((f) => f.name === featureId)?.category || 'wizard.config.categories.funktionalitaet']}"
-          >
-            {$_(availableFeatures.find((f) => f.name === featureId)?.title)}
+          <div class="badge {featureCategoryColors[availableFeatures.find((f) => f.name === featureId)?.category] || 'badge-info'}">
+            {m[availableFeatures?.find((f) => f.name === featureId)?.title]()}
           </div>
         {/each}
       </div>
@@ -33,20 +31,20 @@
   {/if}
 
   <div class="price-card">
-    <h3>{$_('wizard.steps.stepSummary.estimatedPrice')}</h3>
+    <h3>{m['wizard.steps.stepSummary.estimatedPrice']()}</h3>
     {#key config.estimatedPrice}
       <div class="price-display">
         {#if config.estimatedPrice === getTop()}
-          <p class="price-message">{$_('wizard.steps.stepSummary.priceTiers.tier4.message')}</p>
+          <p class="price-message">{m['wizard.steps.stepSummary.priceTiers.tier4.message']()}</p>
           <div class="price">mind. {Math.round(config.estimatedPrice)}€</div>
         {:else if config.estimatedPrice == getLow()}
-          <p class="price-message">{$_('wizard.steps.stepSummary.priceTiers.tier1.message')}</p>
+          <p class="price-message">{m['wizard.steps.stepSummary.priceTiers.tier1.message']()}</p>
           <div class="price">ca. {Math.round(config.estimatedPrice)}€</div>
         {:else if config.estimatedPrice < getTop() && getTop() - config.estimatedPrice < 1000}
-          <p class="price-message">{$_('wizard.steps.stepSummary.priceTiers.tier3.message')}</p>
+          <p class="price-message">{m['wizard.steps.stepSummary.priceTiers.tier3.message']()}</p>
           <div class="price">ca. {Math.round(config.estimatedPrice)}€</div>
         {:else if config.estimatedPrice < getTop() && getTop() - config.estimatedPrice >= 1000}
-          <p class="price-message">{$_('wizard.steps.stepSummary.priceTiers.tier2.message')}</p>
+          <p class="price-message">{m['wizard.steps.stepSummary.priceTiers.tier2.message']()}</p>
           <div class="price">ca. {Math.round(config.estimatedPrice)}€</div>
         {/if}
       </div>
@@ -64,7 +62,7 @@
         d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
       />
     </svg>
-    {$_('wizard.navigation.projectRequest')}
+    {m['wizard.navigation.projectRequest']()}
   </button>
   <button
     type="button"
@@ -73,11 +71,11 @@
       goto('/registration');
     }}
   >
-    {$_('wizard.navigation.register')}
+    {m['wizard.navigation.register']()}
   </button>
 
   <button type="button" class="btn btn-simple btn-lg" onclick={openResetModal}>
-    {$_('wizard.navigation.reset')}
+    {m['wizard.navigation.reset']()}
   </button>
 </div>
 
@@ -130,15 +128,11 @@
       .price {
         @apply text-success text-3xl font-bold;
       }
-
-      .price-note {
-        @apply text-base-content/70 text-sm;
-      }
     }
   }
   /* Action Buttons */
   .action-buttons {
-    @apply flex justify-center gap-4 flex-wrap;
+    @apply flex flex-wrap justify-center gap-4;
   }
   /* Success Toast */
   .success-toast {

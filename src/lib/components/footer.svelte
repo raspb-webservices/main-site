@@ -1,7 +1,8 @@
 <script lang="ts">
   import { page } from '$app/state';
   import { goto } from '$app/navigation';
-  import { locale, _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
+  import { getLocale, localizeHref, setLocale } from '$lib/paraglide/runtime';
   import { onMount } from 'svelte';
 
   const currentYear = new Date().getFullYear();
@@ -15,8 +16,8 @@
   }
 
   function toggleLocale() {
-    const newLocale = $locale === 'de' || $locale === 'de-DE' ? 'en' : 'de';
-    locale.set(newLocale);
+    const newLocale = getLocale() === 'de' ? 'en' : 'de';
+    setLocale(newLocale);
   }
 
   function gotoExternal(target: string) {
@@ -119,41 +120,41 @@
     <div class="footer-nav-wrapper">
       <div class="pre-column"></div>
       <div class="service-column">
-        <h3 class="pb-4">{$_('footer.nav.services.title')}</h3>
+        <h3 class="pb-4">{m['footer.nav.services.title']()}</h3>
         <div class="footer-nav-items">
           {#each footerNav[0].subItems as item}
-            <button class="footer-nav-item" onclick={() => goto(item.path)}>
-              {$_(item.name)}
+            <button class="footer-nav-item" onclick={() => goto(localizeHref(item.path))}>
+              {m[item.name]()}
             </button>
           {/each}
         </div>
       </div>
       <div class="insights-column">
-        <h3 class="pb-4">{$_('footer.nav.insights.title')}</h3>
+        <h3 class="pb-4">{m['footer.nav.insights.title']()}</h3>
         <div class="footer-nav-items">
           {#each footerNav[1].subItems as item}
-            <button class="footer-nav-item" onclick={() => goto(item.path)}>
-              {$_(item.name)}
+            <button class="footer-nav-item" onclick={() => goto(localizeHref(item.path))}>
+              {m[item.name]()}
             </button>
           {/each}
         </div>
       </div>
       <div class="about-us-column">
-        <h3 class="pb-4">{$_('footer.nav.aboutUs.title')}</h3>
+        <h3 class="pb-4">{m['footer.nav.aboutUs.title']()}</h3>
         <div class="footer-nav-items">
           {#each footerNav[2].subItems as item}
-            <button class="footer-nav-item" onclick={() => goto(item.path)}>
-              {$_(item.name)}
+            <button class="footer-nav-item" onclick={() => goto(localizeHref(item.path))}>
+              {m[item.name]()}
             </button>
           {/each}
         </div>
       </div>
       <div class="legal-column">
-        <h3 class="pb-4">{$_('footer.nav.legal.title')}</h3>
+        <h3 class="pb-4">{m['footer.nav.legal.title']()}</h3>
         <div class="footer-nav-items">
           {#each footerNav[3].subItems as item}
-            <button class="footer-nav-item" onclick={() => goto(item.path)}>
-              {$_(item.name)}
+            <button class="footer-nav-item" onclick={() => goto(localizeHref(item.path))}>
+              {m[item.name]()}
             </button>
           {/each}
         </div>
@@ -163,11 +164,11 @@
     <div class="controls-area">
       <button
         class="locale-toggle-btn"
-        class:german={$locale === 'de' || $locale === 'de-DE'}
-        class:english={$locale === 'en'}
+        class:german={getLocale() === 'de'}
+        class:english={getLocale() === 'en'}
         onclick={toggleLocale}
-        aria-label={$locale === 'de' || $locale === 'de-DE' ? $_('menu.switchLanguageToEnglish') : $_('menu.switchLanguageToGerman')}
-        title={$locale === 'de' || $locale === 'de-DE' ? $_('menu.switchLanguageToEnglish') : $_('menu.switchLanguageToGerman')}
+        aria-label={getLocale() === 'de' ? m['menu.switchLanguageToEnglish']() : m['menu.switchLanguageToGerman']()}
+        title={getLocale() === 'de' ? m['menu.switchLanguageToEnglish']() : m['menu.switchLanguageToGerman']()}
       ></button>
 
       <label class="swap swap-rotate ml-4 hover:scale-105" for="dark-theme-checkbox">

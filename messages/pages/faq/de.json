@@ -1,0 +1,23 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "faq.meta.title": "raspb Webservices - FAQ",
+  "faq.meta.description": "Häufig gestellte Fragen zu unseren Webentwicklungs-, CMS-, KI-Services und dem Projektprozess. Erfahren du mehr über unsere Vorgehensweise, Technologien und Preise.",
+  "faq.title": "Häufig gestellte Fragen",
+  "faq.teaser": "Hier findest du Antworten auf die häufigsten Fragen zu unseren Services, dem Projektablauf und technischen Details. Falls du weitere Fragen hast, kontaktiere uns gerne direkt.",
+  "faq.questions.q1.title": "Wie schnell könnt ihr ein Projekt umsetzen?",
+  "faq.questions.q1.content": "Dank unserer einzigartigen raspb-Methode liefern wir bereits nach wenigen Tagen erste Ergebnisse. Unser Geheimnis liegt in der perfekten Kombination aus bewährten Bausteinen, KI-gestützten Entwicklungsprozessen und der Expertise unseres Teams. Agile Entwicklungsmethoden sorgen dafür, dass du bereits während der Entwicklung Feedback geben können.",
+  "faq.questions.q2.title": "Welche Technologien verwendet ihr?",
+  "faq.questions.q2.content": "Wir setzen auf moderne Webtechnologien wie SvelteKit, TypeScript, TailwindCSS und Node.js. Unser JAMstack-Setup basiert auf Vorab-Generierung von Inhalten, was zu blitzschnellen Ladezeiten führt. Für CMS-Lösungen integrieren wir Headless-Systeme über GraphQL APIs, und für Webanwendungen nutzen wir Progressive Web App Technologie.",
+  "faq.questions.q3.title": "Wie funktioniert euer Preismodell?",
+  "faq.questions.q3.content": "Wir bieten transparente Festpreise ohne versteckte Kosten. Unser intelligenter Online-Konfigurator ermittelt bereits vor Projektbeginn einen verbindlichen Preis - basierend auf deinen konkreten Anforderungen. Im Gegensatz zu vielen anderen Anbietern gibt es bei uns keine monatlichen Abogebühren. Du zahlst einmal für die Entwicklung und erhältst deine fertige Lösung - komplett in deinem Besitz.",
+  "faq.questions.q4.title": "Was ist bei euch anders als bei anderen Webagenturen?",
+  "faq.questions.q4.content": "Unsere Alleinstellungsmerkmale sind: 1) Alles aus einer Hand - von Beratung bis Wartung, 2) Persönlicher Ansprechpartner für dein gesamtes Projekt, 3) Transparente Festpreise ohne böse Überraschungen, 4) Maßgeschneiderte Lösungen statt 08/15-Produkten, und 5) Schnelle Umsetzung durch unser KI-unterstütztes Ökosystem. Wir kombinieren menschliche Kreativität mit der Kraft künstlicher Intelligenz.",
+  "faq.questions.q5.title": "Bekomme ich den Quellcode meiner Website?",
+  "faq.questions.q5.content": "Ja, du erhältst die vollständige Code-Übergabe und besitzt damit deine Website komplett. Es handelt sich nicht um ein geschlossenes System. Das Hosting und die Wartung des ersten Jahres sind bereits im Preis enthalten. Danach entscheidest du selbst, wie du mit deinem Projekt verfahren möchtest.",
+  "faq.questions.q6.title": "Bietet ihr auch KI-Services an?",
+  "faq.questions.q6.content": "Ja, wir bieten umfassende KI-Services an: 1) KI-Beratung & Strategie inkl. Prompt Engineering und ROI-Analyse, 2) KI-Agenten Entwicklung für individuelle Chatbots und Content-Generierung, 3) Workflow-Optimierung durch Automatisierung und Predictive Analytics, und 4) AI as Infrastructure für skalierbare KI-Lösungen ohne eigene Infrastruktur.",
+  "faq.questions.q7.title": "Wie sieht der typische Projektablauf aus?",
+  "faq.questions.q7.content": "1) Projektanfrage über unseren Konfigurator oder direkten Kontakt, 2) Erstbesprechung zur genaueren Anforderungsanalyse, 3) Erstellung eines individuellen Angebot mit Festpreis, 4) Projektstart mit agiler Entwicklung und regelmäßigen Feedback-Meilensteinen, 5) Abschluss und Übergabe inkl. Schulung, 6) Optionale Wartung und Weiterentwicklung. Der gesamte Prozess ist transparent und du hast jederzeit Einfluss auf die Richtung.",
+  "faq.questions.q8.title": "Welche Arten von Websites erstellt ihr?",
+  "faq.questions.q8.content": "Wir entwickeln verschiedene Arten von Websites: 1) One-Pager Websites für schnelle Präsenz, 2) Landing Pages für Marketingkampagnen mit hoher Conversion, 3) Umfassende Corporate Websites mit mehreren Seiten, 4) Blog- und Content-Plattformen, sowie 5) Individuelle Webanwendungen und PWAs. Jede Lösung wird maßgeschneidert auf deine Bedürfnisse zugeschnitten."
+}

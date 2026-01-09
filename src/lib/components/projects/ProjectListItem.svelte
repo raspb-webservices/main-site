@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Project } from '$interfaces/project.interface';
   import { formatDate, formatBudget, getStatusBadgeClass, getStatusLabel, getProjectTypeLabel } from '$lib/helper/projectUtils';
-  import { _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
   let { project, openProjectModal } = $props();
 
   function openThisProjectModal(project:Project) {

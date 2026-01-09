@@ -1,6 +1,6 @@
 <script lang="ts">
   import { formatDate, formatBudget, getStatusBadgeClass, getStatusLabel } from '$lib/helper/projectUtils';
-  import { _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
   
   let { selectedProject } = $props();
   let modal: HTMLDialogElement;

@@ -6,7 +6,7 @@
   import { goto } from '$app/navigation';
   import auth from '$services/auth-service';
   import Loader from '$lib/components/loader.svelte';
-  import { _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
   import { openAuth0Popup } from '$helper/loginOpener';
 
   let isAuth = $derived(isAuthenticated.get());
@@ -51,8 +51,8 @@
 </script>
 
 <svelte:head>
-  <title>{$_('extendedProjectWizard.meta.title')}</title>
-  <meta name="description" content={$_('extendedProjectWizard.meta.description')} />
+  <title>{m['extendedProjectWizard.meta.title']()}</title>
+  <meta name="description" content={m['extendedProjectWizard.meta.description']()} />
 </svelte:head>
 
 {#if loading}
@@ -62,21 +62,21 @@
 {:else if showSection === 'not-authorized'}
   <Section type={'fullCenterTeaser'}>
     <div class="inner-content-wrapper prose">
-      <h1>{$_('extendedProjectWizard.notAuthorized.title')}</h1>
-      <p class="teaser">{$_('extendedProjectWizard.notAuthorized.teaser')}</p>
+      <h1>{m['extendedProjectWizard.notAuthorized.title']()}</h1>
+      <p class="teaser">{m['extendedProjectWizard.notAuthorized.teaser']()}</p>
       <div class="spacer"></div>
       <div class="flex gap-6">
         <button
           class="btn-basic"
           onclick={() => {
             login();
-          }}>{$_('extendedProjectWizard.notAuthorized.loginButton')}</button
+          }}>{m['extendedProjectWizard.notAuthorized.loginButton']()}</button
         >
         <button
           class="btn-basic"
           onclick={() => {
             goto('/registration');
-          }}>{$_('extendedProjectWizard.notAuthorized.registrationButton')}</button
+          }}>{m['extendedProjectWizard.notAuthorized.registrationButton']()}</button
         >
       </div>
     </div>
@@ -84,9 +84,9 @@
 {:else if showSection === 'wizard'}
   <Section>
     <div class="prose">
-      <h1>{$_('extendedProjectWizard.wizard.title')} <span class="inner-text-special">{$_('extendedProjectWizard.wizard.titleHighlight')}</span>{$_('extendedProjectWizard.wizard.titleSuffix')}</h1>
+      <h1>{m['extendedProjectWizard.wizard.title']()} <span class="inner-text-special">{m['extendedProjectWizard.wizard.titleHighlight']()}</span>{m['extendedProjectWizard.wizard.titleSuffix']()}</h1>
       <p class="teaser">
-        {$_('extendedProjectWizard.wizard.teaser')}
+        {m['extendedProjectWizard.wizard.teaser']()}
       </p>
       <div class="spacer"></div>
       <div class="wizard-section" id="wizard">

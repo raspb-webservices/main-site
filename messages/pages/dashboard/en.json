@@ -1,0 +1,22 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "dashboard.errorLoadingProjects": "Error loading projects",
+  "dashboard.networkErrorLoadingProjects": "Network error loading projects",
+  "dashboard.notAuthorized.title": "You must be logged in to access your personal dashboard",
+  "dashboard.notAuthorized.teaser": "Don't have an account yet? You can register here...",
+  "dashboard.notAuthorized.loginButton": "Login",
+  "dashboard.notAuthorized.registrationButton": "Registration",
+  "dashboard.noProjects.title": "You don't have any projects yet",
+  "dashboard.noProjects.teaser": "Start directly with the extended project configurator",
+  "dashboard.noProjects.startButton": "Get started now",
+  "dashboard.retryButton": "Try again",
+  "dashboard.myDashboardTitle": "My Dashboard",
+  "dashboard.myDashboardTeaser": "Here are all your projects listed",
+  "dashboard.viewMode.grid": "Tiles",
+  "dashboard.viewMode.list": "List",
+  "dashboard.tableHeaders.project": "Project",
+  "dashboard.tableHeaders.type": "Type",
+  "dashboard.tableHeaders.status": "Status",
+  "dashboard.tableHeaders.budget": "Budget",
+  "dashboard.tableHeaders.created": "Created"
+}

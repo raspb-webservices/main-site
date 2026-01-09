@@ -1,0 +1,29 @@
+{
+  "$schema": "https://inlang.com/schema/project-settings",
+  "baseLocale": "de",
+  "locales": ["de", "en"],
+  "modules": [
+    "https://cdn.jsdelivr.net/npm/@inlang/plugin-message-format@4/dist/index.js",
+    "https://cdn.jsdelivr.net/npm/@inlang/plugin-m-function-matcher@2/dist/index.js"
+  ],
+  "plugin.inlang.messageFormat": {
+    "pathPattern": [
+      "./messages/common/{locale}.json",
+      "./messages/modals/{locale}.json",
+      "./messages/pages/homepage/{locale}.json",
+      "./messages/pages/services/{locale}.json",
+      "./messages/pages/insights/{locale}.json",
+      "./messages/pages/contact/{locale}.json",
+      "./messages/pages/about-us/{locale}.json",
+      "./messages/pages/faq/{locale}.json",
+      "./messages/pages/dashboard/{locale}.json",
+      "./messages/pages/imprint/{locale}.json",
+      "./messages/pages/terms-and-conditions/{locale}.json",
+      "./messages/pages/privacy-notice/{locale}.json",
+      "./messages/pages/thank-you/{locale}.json",
+      "./messages/pages/registration/{locale}.json",
+      "./messages/pages/profile/{locale}.json",
+      "./messages/pages/project-wizard/{locale}.json"
+    ]
+  }
+}

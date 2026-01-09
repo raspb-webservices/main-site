@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
   import Section from '$lib/components/ui/section.svelte';
   import { goto } from '$app/navigation';
   import auth from '$services/auth-service';
@@ -22,27 +22,27 @@
 </script>
 
 <svelte:head>
-  <title>{$_('login.meta.title')}</title>
-  <meta name="description" content={$_('login.meta.description')}/>
+  <title>{m['login.meta.title']()}</title>
+  <meta name="description" content={m['login.meta.description']()}/>
 </svelte:head>
 
 <Section type={'fullCenterTeaser'}>
   <div class="inner-content-wrapper prose">
-      <h1>{$_('login.title')}</h1>
-      <p class="teaser">{$_('login.teaser')}</p>
+      <h1>{m['login.title']()}</h1>
+      <p class="teaser">{m['login.teaser']()}</p>
       <div class="spacer"></div>
       <div class="flex gap-6">
         <button
           class="btn-basic"
           onclick={() => {
             login();
-          }}>{$_('login.loginButton')}</button
+          }}>{m['login.loginButton']()}</button
         >
                 <button
           class="btn-basic"
           onclick={() => {
             goto('/registration');
-          }}>{$_('login.registerButton')}</button
+          }}>{m['login.registerButton']()}</button
         >
     </div>
   </div>

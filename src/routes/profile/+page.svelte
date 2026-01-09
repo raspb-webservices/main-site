@@ -1,6 +1,6 @@
 <script lang="ts">
   import Section from '$lib/components/ui/section.svelte';
-  import { _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
   import { onMount } from 'svelte';
   import { isAuthenticated, user, userroles } from '$store/sharedStates.svelte';
   import { goto } from '$app/navigation';
@@ -51,14 +51,14 @@
 </script>
 
 <svelte:head>
-  <title>{$_('profile.meta.title')}</title>
-  <meta name="description" content={$_('profile.meta.description')} />
+  <title>{m['profile.meta.title']()}</title>
+  <meta name="description" content={m['profile.meta.description']()} />
 </svelte:head>
 
 {#if isAuth}
   <Section>
     <div class="prose text-center">
-      <h1><span class="inner-text-special">{$_('profile.title')}</span></h1>
+      <h1><span class="inner-text-special">{m['profile.title']()}</span></h1>
     </div>
 
     <div class="grid grid-cols-12 gap-8 relative">
@@ -86,58 +86,58 @@
             <div class="grid grid-cols-12 gap-x-8 gap-y-4">
               <!-- Email first -->
               <div class="col-span-7">
-                <p class="tiny-label">{$_('profile.emailLogin')}</p>
+                <p class="tiny-label">{m['profile.emailLogin']()}</p>
                 <p class="no-padding"><strong>{currentUser.email}</strong></p>
               </div>
               <div class="col-span-5">
-                <p class="tiny-label">{$_('profile.id')}</p>
+                <p class="tiny-label">{m['profile.id']()}</p>
                 <p class="no-padding"><strong>{currentUser.sub}</strong></p>
               </div>
               {#if currentUser.salutation}
                 <div class="col-span-3">
-                  <p class="tiny-label">{$_('profile.salutation')}</p>
+                  <p class="tiny-label">{m['profile.salutation']()}</p>
                   <p class="no-padding"><strong>{currentUser.salutation}</strong></p>
                 </div>
               {/if}
               {#if currentUser.givenName}
                 <div class="col-span-4">
-                  <p class="tiny-label">{$_('profile.firstName')}</p>
+                  <p class="tiny-label">{m['profile.firstName']()}</p>
                   <p class="no-padding"><strong>{currentUser.givenName}</strong></p>
                 </div>
               {/if}
               {#if currentUser.familyName}
                 <div class="col-span-5">
-                  <p class="tiny-label">{$_('profile.lastName')}</p>
+                  <p class="tiny-label">{m['profile.lastName']()}</p>
                   <p class="no-padding"><strong>{currentUser.familyName}</strong></p>
                 </div>
               {/if}
               {#if currentUser.companyAddress}
                 <div class="col-span-full">
-                  <p class="tiny-label">{$_('profile.address')}</p>
+                  <p class="tiny-label">{m['profile.address']()}</p>
                   <p class="no-padding"><strong>{currentUser.companyAddress}</strong></p>
                 </div>
               {/if}
               {#if currentUser.postCode}
                 <div class="col-span-3">
-                  <p class="tiny-label">{$_('profile.zipCode')}</p>
+                  <p class="tiny-label">{m['profile.zipCode']()}</p>
                   <p class="no-padding"><strong>{currentUser.postCode}</strong></p>
                 </div>
               {/if}
               {#if currentUser.city}
                 <div class="col-span-9">
-                  <p class="tiny-label">{$_('profile.city')}</p>
+                  <p class="tiny-label">{m['profile.city']()}</p>
                   <p class="no-padding"><strong>{currentUser.city}</strong></p>
                 </div>
               {/if}
               {#if currentUser.country}
                 <div class="col-span-full">
-                  <p class="tiny-label">{$_('profile.country')}</p>
+                  <p class="tiny-label">{m['profile.country']()}</p>
                   <p class="no-padding"><strong>{currentUser.country}</strong></p>
                 </div>
               {/if}
               {#if currentUser.phone}
                 <div class="col-span-6">
-                  <p class="tiny-label">{$_('profile.phone')}</p>
+                  <p class="tiny-label">{m['profile.phone']()}</p>
                   <p class="no-padding"><strong>{currentUser.phone}</strong></p>
                 </div>
               {/if}
@@ -146,7 +146,7 @@
                   class="btn btn-simple"
                   onclick={() => {
                     editModal.openModal();
-                  }}>{$_('profile.editData')}</button
+                  }}>{m['profile.editData']()}</button
                 >
               </div>
             </div>
@@ -154,13 +154,13 @@
             <!-- Projects at the bottom -->
             <div class="divider"></div>
             <div class="col-span-full flex items-center justify-between">
-              <h3 class="no-padding">{$_('profile.activeProjects')} <span class="inner-text-special">{currentUser.projectIds ? currentUser.projectIds.length : 0}</span></h3>
+              <h3 class="no-padding">{m['profile.activeProjects']()} <span class="inner-text-special">{currentUser.projectIds ? currentUser.projectIds.length : 0}</span></h3>
               <div>
                 <button
                   class="btn btn-simple mr-3"
                   onclick={() => {
                     goto('/dashboard');
-                  }}>{$_('profile.toProjects')}</button
+                  }}>{m['profile.toProjects']()}</button
                 >
                 <button
                   class="btn btn-simple"
@@ -168,7 +168,7 @@
                     goto('/extended-project-wizard');
                   }}
                 >
-                  {$_('profile.startNewProject')}</button
+                  {m['profile.startNewProject']()}</button
                 >
               </div>
             </div>
@@ -180,21 +180,21 @@
 {:else if showSection === 'not-authorized'}
   <Section type={'fullCenterTeaser'}>
     <div class="inner-content-wrapper prose">
-      <h1> {$_('profile.notAuthorized.title')}</h1>
-      <p class="teaser">{$_('profile.notAuthorized.teaser')}</p>
+      <h1> {m['profile.notAuthorized.title']()}</h1>
+      <p class="teaser">{m['profile.notAuthorized.teaser']()}</p>
       <div class="spacer"></div>
       <div class="flex gap-6">
         <button
           class="btn-basic"
           onclick={() => {
             login();
-          }}> {$_('profile.notAuthorized.loginButton')}</button
+          }}> {m['profile.notAuthorized.loginButton']()}</button
         >
         <button
           class="btn-basic"
           onclick={() => {
             goto('/registration');
-          }}> {$_('profile.notAuthorized.registrationButton')}</button
+          }}> {m['profile.notAuthorized.registrationButton']()}</button
         >
       </div>
     </div>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
 
   let modal: HTMLDialogElement;
   
@@ -23,41 +23,41 @@
 
   $: philosophyItems = [
     {
-      letter: $_('philosophyModal.items.rapid.letter'),
-      title: $_('philosophyModal.items.rapid.title'),
-      subtitle: $_('philosophyModal.items.rapid.subtitle'),
-      description: $_('philosophyModal.items.rapid.description'),
-      icon: $_('philosophyModal.items.rapid.icon'),
+      letter: m['philosophyModal.items.rapid.letter'](),
+      title: m['philosophyModal.items.rapid.title'](),
+      subtitle: m['philosophyModal.items.rapid.subtitle'](),
+      description: m['philosophyModal.items.rapid.description'](),
+      icon: m['philosophyModal.items.rapid.icon'](),
       gradient: 'from-yellow-400 to-orange-500',
       bgColor: 'bg-yellow-50',
       textColor: 'text-yellow-800'
     },
     {
-      letter: $_('philosophyModal.items.accurate.letter'),
-      title: $_('philosophyModal.items.accurate.title'),
-      subtitle: $_('philosophyModal.items.accurate.subtitle'),
-      description: $_('philosophyModal.items.accurate.description'),
-      icon: $_('philosophyModal.items.accurate.icon'),
+      letter: m['philosophyModal.items.accurate.letter'](),
+      title: m['philosophyModal.items.accurate.title'](),
+      subtitle: m['philosophyModal.items.accurate.subtitle'](),
+      description: m['philosophyModal.items.accurate.description'](),
+      icon: m['philosophyModal.items.accurate.icon'](),
       gradient: 'from-blue-400 to-indigo-500',
       bgColor: 'bg-blue-50',
       textColor: 'text-blue-800'
     },
     {
-      letter: $_('philosophyModal.items.services.letter'),
-      title: $_('philosophyModal.items.services.title'),
-      subtitle: $_('philosophyModal.items.services.subtitle'),
-      description: $_('philosophyModal.items.services.description'),
-      icon: $_('philosophyModal.items.services.icon'),
+      letter: m['philosophyModal.items.services.letter'](),
+      title: m['philosophyModal.items.services.title'](),
+      subtitle: m['philosophyModal.items.services.subtitle'](),
+      description: m['philosophyModal.items.services.description'](),
+      icon: m['philosophyModal.items.services.icon'](),
       gradient: 'from-green-400 to-emerald-500',
       bgColor: 'bg-green-50',
       textColor: 'text-green-800'
     },
     {
-      letter: $_('philosophyModal.items.perfectlyBalanced.letter'),
-      title: $_('philosophyModal.items.perfectlyBalanced.title'),
-      subtitle: $_('philosophyModal.items.perfectlyBalanced.subtitle'),
-      description: $_('philosophyModal.items.perfectlyBalanced.description'),
-      icon: $_('philosophyModal.items.perfectlyBalanced.icon'),
+      letter: m['philosophyModal.items.perfectlyBalanced.letter'](),
+      title: m['philosophyModal.items.perfectlyBalanced.title'](),
+      subtitle: m['philosophyModal.items.perfectlyBalanced.subtitle'](),
+      description: m['philosophyModal.items.perfectlyBalanced.description'](),
+      icon: m['philosophyModal.items.perfectlyBalanced.icon'](),
       gradient: 'from-teal-400 to-cyan-500',
       bgColor: 'bg-teal-50',
       textColor: 'text-teal-800'
@@ -74,8 +74,8 @@
     </form>
 
     <div class="flex flex-col items-center justify-center gap-4 my-8">
-        <h2>{$_('philosophyModal.header.titleFirst')} <span class="inner-text-special">{$_('philosophyModal.header.titleHighlight')}</span> {$_('philosophyModal.header.titleSecond')}</h2>
-        <p class="teaser text-center">{$_('philosophyModal.header.subtitle')}</p>
+        <h2>{m['philosophyModal.header.titleFirst']()} <span class="inner-text-special">{m['philosophyModal.header.titleHighlight']()}</span> {m['philosophyModal.header.titleSecond']()}</h2>
+        <p class="teaser text-center">{m['philosophyModal.header.subtitle']()}</p>
     </div>
 
     <div class="mb-8 text-center">
@@ -143,16 +143,16 @@
     <!-- Footer -->
     <div class="border-base-300 mt-8 border-t pt-6 text-center">
       <div class="from-primary/10 to-secondary/10 rounded-2xl bg-gradient-to-r p-6 sm:mx-4 lg:mx-20">
-        <h3 class="mb-3 text-xl font-bold">{$_('philosophyModal.footer.missionTitle')}</h3>
+        <h3 class="mb-3 text-xl font-bold">{m['philosophyModal.footer.missionTitle']()}</h3>
         <p class="text-base-content/80 mx-auto max-w-4xl leading-relaxed">
-          {$_('philosophyModal.footer.missionDescription')}
+          {m['philosophyModal.footer.missionDescription']()}
         </p>
         <div class="mt-4 flex justify-center">
           <div class="flex flex-wrap items-center justify-center gap-2 text-sm opacity-70">
-            <span class="mx-2">{$_('philosophyModal.footer.principles.rapid')}</span>
-            <span class="mx-2">{$_('philosophyModal.footer.principles.accurate')}</span>
-            <span class="mx-2">{$_('philosophyModal.footer.principles.services')}</span>
-            <span class="mx-2">{$_('philosophyModal.footer.principles.perfectlyBalanced')}</span>
+            <span class="mx-2">{m['philosophyModal.footer.principles.rapid']()}</span>
+            <span class="mx-2">{m['philosophyModal.footer.principles.accurate']()}</span>
+            <span class="mx-2">{m['philosophyModal.footer.principles.services']()}</span>
+            <span class="mx-2">{m['philosophyModal.footer.principles.perfectlyBalanced']()}</span>
           </div>
         </div>
       </div>
@@ -169,7 +169,7 @@
             d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
           />
         </svg>
-        {$_('philosophyModal.footer.closeButton')}
+        {m['philosophyModal.footer.closeButton']()}
       </button>
     </div>
   </div>

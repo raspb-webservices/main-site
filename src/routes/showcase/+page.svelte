@@ -1,7 +1,7 @@
 <script lang="ts">
   import Section from '$lib/components/ui/section.svelte';
   import Stage from '$lib/components/ui/stage.svelte';
-  import { _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
 </script>
 
 <Stage style={'svg-gradient'}>

@@ -1,10 +1,13 @@
 import type { Handle } from '@sveltejs/kit'
-import { locale } from 'svelte-i18n'
+import { paraglideMiddleware } from '$lib/paraglide/server';
 
-export const handle: Handle = async ({ event, resolve }) => {
-	const lang = event.request.headers.get('accept-language')?.split(',')[0]
-	if (lang) {
-		locale.set(lang)
-	}
-	return resolve(event)
-}
+const handleParaglide: Handle = ({ event, resolve }) =>
+  paraglideMiddleware(event.request, ({ request, locale }) => {
+    event.request = request;
+
+    return resolve(event, {
+      transformPageChunk: ({ html }) => html.replace('%paraglide.lang%', locale)
+    });
+  });
+
+export const handle: Handle = handleParaglide;

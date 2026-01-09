@@ -92,11 +92,6 @@
     .box-swiper-button-prev,
     .box-swiper-button-next {
       @apply bg-primary/20 hover:bg-primary/10 text-primary h-10 w-10 cursor-pointer rounded-xl p-2;
-
-      &:disabled,
-      &[disabled] {
-        @apply hover:bg-primary/20 cursor-default opacity-30;
-      }
     }
   }
 </style>

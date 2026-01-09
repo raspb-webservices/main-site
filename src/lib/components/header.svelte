@@ -3,9 +3,10 @@
   import auth from '$services/auth-service';
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
-  import { _ } from 'svelte-i18n';
   import type { User } from '$interfaces/user.interface';
   import { openAuth0Popup } from '$helper/loginOpener';
+  import { m } from '$lib/paraglide/messages';
+  import { getLocale, localizeHref, setLocale } from '$lib/paraglide/runtime';
 
   let mobileNavOpen = $state(false);
   let logginIn = $state(false);
@@ -75,31 +76,31 @@
     <nav class="navigation">
       <button
         class="nav-item"
-        class:active={page.url.pathname === '/services'}
+        class:active={page.url.pathname == localizeHref('services')}
         onclick={() => {
-          goto('/services');
-        }}>{$_('menu.services')}</button
+          goto(localizeHref('services'));
+        }}>{m['menu.services']()}</button
       >
       <button
         class="nav-item"
-        class:active={page.url.pathname === '/insights'}
+        class:active={page.url.pathname == localizeHref('insights')}
         onclick={() => {
-          goto('/insights');
-        }}>{$_('menu.insights')}</button
+          goto(localizeHref('insights'));
+        }}>{m['menu.insights']()}</button
       >
       <button
         class="nav-item"
-        class:active={page.url.pathname === '/about-us'}
+        class:active={page.url.pathname == localizeHref('about-us')}
         onclick={() => {
-          goto('/about-us');
-        }}>{$_('menu.aboutUs')}</button
+          goto(localizeHref('about-us'));
+        }}>{m['menu.aboutUs']()}</button
       >
       <button
         class="nav-item"
-        class:active={page.url.pathname === '/faq'}
+        class:active={page.url.pathname == localizeHref('faq')}
         onclick={() => {
-          goto('/faq');
-        }}>{$_('menu.faq')}</button
+          goto(localizeHref('faq'));
+        }}>{m['menu.faq']()}</button
       >
     </nav>
 
@@ -111,15 +112,15 @@
             login();
           }}
           ><div class="button-inner">
-            {#if logginIn || logginOut}<span class="loading loading-ring loading-sm"></span>{:else}<span>{$_('menu.login')}</span>{/if}
+            {#if logginIn || logginOut}<span class="loading loading-ring loading-sm"></span>{:else}<span>{m['menu.login']()}</span>{/if}
           </div></button
         >
       {/if}
       <button
         class="btn-basic-header"
         onclick={() => {
-          goto('/get-started');
-        }}><span class="halfXl:block hidden">{$_('menu.configureProject')}</span><span class="halfXl:hidden">{$_('menu.start')}</span></button
+          goto(localizeHref('get-started'));
+        }}><span class="halfXl:block hidden">{m['menu.configureProject']()}</span><span class="halfXl:hidden">{m['menu.start']()}</span></button
       >
     </div>
 
@@ -156,54 +157,50 @@
                   class="btn-basic mx-0 mt-1.5 mb-4 w-full"
                   onclick={() => {
                     mobileNavOpen = false;
-                    goto('/get-started');
-                  }}>{$_('menu.configureProject')}</button
+                    goto(localizeHref('get-started'));
+                  }}>{m['menu.configureProject']()}</button
                 >
                 <button
                   class="nav-item"
-                  class:active={page.url.pathname === '/services'}
-                  onclick={() => {
-                    mobileNavOpen = false;
-                    goto('/services');
-                  }}>{$_('menu.services')}</button
+        class:active={page.url.pathname == localizeHref('services')}
+        onclick={() => {
+          goto(localizeHref('services'));
+        }}>{m['menu.services']()}</button
                 >
                 <button
                   class="nav-item"
-                  class:active={page.url.pathname === '/insights'}
-                  onclick={() => {
-                    mobileNavOpen = false;
-                    goto('/insights');
-                  }}>{$_('menu.insights')}</button
-                >
-                <button
-                  class="nav-item"
-                  class:active={page.url.pathname === '/about-us'}
-                  onclick={() => {
-                    mobileNavOpen = false;
-                    goto('/about-us');
-                  }}>{$_('menu.aboutUs')}</button
-                >
-                <button
-                  class="nav-item"
-                  class:active={page.url.pathname === '/faq'}
-                  onclick={() => {
-                    mobileNavOpen = false;
-                    goto('/faq');
-                  }}>{$_('menu.faq')}</button
-                >
+        class:active={page.url.pathname == localizeHref('insights')}
+        onclick={() => {
+          goto(localizeHref('insights'));
+        }}>{m['menu.insights']()}</button
+      >
+      <button
+        class="nav-item"
+        class:active={page.url.pathname == localizeHref('about-us')}
+        onclick={() => {
+          goto(localizeHref('about-us'));
+        }}>{m['menu.aboutUs']()}</button
+      >
+      <button
+        class="nav-item"
+        class:active={page.url.pathname == localizeHref('faq')}
+        onclick={() => {
+          goto(localizeHref('faq'));
+        }}>{m['menu.faq']()}</button
+      >
                 {#if !isAuth}
                   <button
                     class="nav-item"
                     onclick={() => {
                       login();
-                    }}>{$_('menu.login')}</button
+                    }}>{m['menu.login']()}</button
                   >
                 {:else}
                   <button
                     class="nav-item"
                     onclick={() => {
                       logout();
-                    }}>{$_('menu.logout')}</button
+                    }}>{m['menu.logout']()}</button
                   >
                 {/if}
               </div>

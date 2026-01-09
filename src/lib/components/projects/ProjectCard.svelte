@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Project } from '$interfaces/project.interface';
   import { formatDate, formatBudget, getStatusBadgeClass, getStatusLabel, getProjectTypeLabel } from '$lib/helper/projectUtils';
-  import { _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
   let { project, openProjectModal } = $props();
 
   function openThisProjectModal(project:Project) {
@@ -18,7 +18,7 @@
     <div class="mb-4 flex items-start justify-between">
       <h2 class="line-clamp-3">{project.name}</h2>
       <div class="flex flex-row absolute top-[-7px] right-[25px] gap-1">
-        <div class="badge badge-primary badge-sm">{ $_(getProjectTypeLabel(project.projectType))}</div>
+        <div class="badge badge-primary badge-sm">{ getProjectTypeLabel(project.projectType)}</div>
         {#if project.projectStatus}
           <div class="badge {getStatusBadgeClass(project.projectStatus)} badge-sm">
             {getStatusLabel(project.projectStatus)}

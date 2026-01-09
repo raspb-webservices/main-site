@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
   import { projectTypes } from '$lib/configs/wizard-config';
   let { config, selectProjectType } = $props();
 </script>
 
 <div class="step-header">
-  <h1>{$_('wizard.steps.step1.titleFirst')} <span class="inner-text-special">{$_('wizard.steps.step1.titleHighlight')}</span></h1>
-  <p class="teaser">{$_('wizard.steps.step1.teaser')}</p>
+  <h1>{m['wizard.steps.step1.titleFirst']()} <span class="inner-text-special">{m['wizard.steps.step1.titleHighlight']()}</span></h1>
+  <p class="teaser">{m['wizard.steps.step1.teaser']()}</p>
 </div>
 
 <div class="project-types-grid">
@@ -27,10 +27,10 @@
     >
       <div class="card-body">
         <div class="service-card-header">
-          <h3 class="card-title no-padding">{$_(type.title)}</h3>
+          <h3 class="card-title no-padding">{m[type.title]()}</h3>
           <div class="service-icon">{type.icon}</div>
         </div>
-        <p class="no-padding">{$_(type.description)}</p>
+        <p class="no-padding">{m[type.description]()}</p>
         <div class="card-actions justify-end">
           <div class="badge badge-primary">{type.lowestPrice.toLocaleString()}€ - {type.highestPrice.toLocaleString()}€</div>
         </div>

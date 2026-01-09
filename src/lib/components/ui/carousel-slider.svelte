@@ -174,10 +174,6 @@
       .carousel-card-content {
         @apply flex h-full w-full max-w-10/12 m-auto flex-col items-center justify-center text-center;
 
-        .text-slide {
-          @apply aspect-video w-full;
-        }
-
         .carousel-subtext {
           @apply p-4 pb-6 leading-snug;
         }

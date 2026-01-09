@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
   
   let { projects, selectedProject, editingProject, setupForm } = $props();
   let setupSaving = $state(false);

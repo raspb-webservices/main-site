@@ -1,24 +1,24 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import Section from '$lib/components/ui/section.svelte';
-  import { _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
 </script>
 
 <svelte:head>
-  <title>{$_('terms.meta.title')}</title>
-  <meta name="description" content={$_('terms.meta.description')} />
+  <title>{m['terms.meta.title']()}</title>
+  <meta name="description" content={m['terms.meta.description']()} />
 </svelte:head>
 
 <Section>
   <div class="terms-and-conditions-content prose">
-    <h1>{$_('terms.title')}</h1>
+    <h1>{m['terms.title']()}</h1>
 
     <div class="spacer"></div>
     <button
       class="btn-basic"
       onclick={() => {
         goto('/');
-      }}>{$_('terms.backToHomepage')}</button
+      }}>{m['terms.backToHomepage']()}</button
     >
   </div>
 </Section>

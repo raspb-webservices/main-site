@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
 </script>
 
 <div class="loading-overlay">
@@ -8,20 +8,20 @@
         <div class="loading-spinner"></div>
         <div class="loading-pulse"></div>
       </div>
-      <h2 class="loading-title">{$_('wizard.loading.title')}</h2>
-      <p class="loading-text">{$_('wizard.loading.description')}</p>
+      <h2 class="loading-title">{m['wizard.loading.title']()}</h2>
+      <p class="loading-text">{m['wizard.loading.description']()}</p>
       <div class="loading-steps">
         <div class="loading-step">
           <span class="loading-step-icon">✓</span>
-          <span>{$_('wizard.loading.steps.preparing')}</span>
+          <span>{m['wizard.loading.steps.preparing']()}</span>
         </div>
         <div class="loading-step">
           <span class="loading-step-icon">⏳</span>
-          <span>{$_('wizard.loading.steps.creating')}</span>
+          <span>{m['wizard.loading.steps.creating']()}</span>
         </div>
         <div class="loading-step">
           <span class="loading-step-icon">⏳</span>
-          <span>{$_('wizard.loading.steps.sending')}</span>
+          <span>{m['wizard.loading.steps.sending']()}</span>
         </div>
       </div>
     </div>

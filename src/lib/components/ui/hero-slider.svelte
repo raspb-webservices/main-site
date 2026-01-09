@@ -232,9 +232,6 @@
     .hero-cta {
       @apply text-sm px-5 py-2.5;
     }
-    .hero-pagination {
-      @apply bottom-2;
-    }
   }
   /* Size the swiper wrapper area to let slides peek around */
   :global(.hero-swiper .swiper-wrapper) {

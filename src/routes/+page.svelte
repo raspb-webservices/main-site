@@ -1,6 +1,5 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { _, locale } from 'svelte-i18n';
   import Stage from '$lib/components/ui/stage.svelte';
   import Section from '$lib/components/ui/section.svelte';
   import CTABox from '$lib/components/snippets/cta-box.svelte';
@@ -10,8 +9,9 @@
   import CostAsFactorModal from '$lib/components/modals/home/cost-as-factor.svelte';
   import QualityAsFactorModal from '$lib/components/modals/home/quality-as-factor.svelte';
   import { DotLottieSvelte } from '@lottiefiles/dotlottie-svelte';
-
-
+  import { m } from '$lib/paraglide/messages';
+  import { getLocale, localizeHref } from '$lib/paraglide/runtime';
+  
   let philosophyModal: PhilosophyModal;
   let timeAsFactorModal: TimeAsFactorModal;
   let costAsFactorModal: CostAsFactorModal;
@@ -40,25 +40,25 @@
 </script>
 
 <svelte:head>
-  <title>{$_('homepage.meta.title')}</title>
-  <meta name="description" content={$_('homepage.meta.description')} />
+  <title>{m['homepage.meta.title']()}</title>
+  <meta name="description" content={m['homepage.meta.description']()} />
 </svelte:head>
 
 <Stage style={'svg-gradient'}>
   <div class="inner-box reduced prose py-36">
-    <h1 class="massive animate-fade-in-up">{$_('homepage.hero.title')}</h1>
+    <h1 class="massive animate-fade-in-up">{m['homepage.hero.title']()}</h1>
     <p class="teaser animate-fade-in-up">
-      {$_('homepage.hero.subtitleFirst')} <button class="text-link-button" onclick={openPhilosophyModal}>{$_('homepage.hero.subtitleSecond')}</button>
-      {$_('homepage.hero.subtitleThird')}
+      {m['homepage.hero.subtitleFirst']()} <button class="text-link-button" onclick={openPhilosophyModal}>{m['homepage.hero.subtitleSecond']()}</button>
+      {m['homepage.hero.subtitleThird']()}
     </p>
     <div class="flex-wo flex flex-wrap gap-4">
       <button
         class="btn-basic animate-fade-in-from-side"
         onclick={() => {
-          goto('/get-started');
-        }}>{$_('homepage.hero.buttonText')}</button
+          goto(localizeHref('get-started'));
+        }}>{m['homepage.hero.buttonText']()}</button
       >
-      <button class="btn-inverted-outline animate-fade-in-from-side" onclick={openGetAppointmentModal}>{$_('homepage.hero.buttonText2')}</button>
+      <button class="btn-inverted-outline animate-fade-in-from-side" onclick={openGetAppointmentModal}>{m['homepage.hero.buttonText2']()}</button>
     </div>
   </div>
 </Stage>
@@ -68,11 +68,11 @@
     <div class="inner-section-wrapper">
       <div class="intro prose pt-10 md:pt-0">
         <h1>
-          {$_('homepage.thisIsUs.titleFirst')} <span class="inner-text-special">{$_('homepage.thisIsUs.titleHighlight')}</span>
-          {#if $locale !== 'en'}{$_('homepage.thisIsUs.titleSecond')}{/if}
+          {m['homepage.thisIsUs.titleFirst']()} <span class="inner-text-special">{m['homepage.thisIsUs.titleHighlight']()}</span>
+          {#if getLocale() !== 'en'}{m['homepage.thisIsUs.titleSecond']()}{/if}
         </h1>
         <p class="teaser">
-          {$_('homepage.thisIsUs.subtitle')}
+          {m['homepage.thisIsUs.subtitle']()}
         </p>
       </div>
     </div>
@@ -80,10 +80,10 @@
     <div class="grid grid-cols-12 gap-y-8 md:gap-x-10">
       <div class="animate-fade-in-from-side prose order-2 col-span-full md:order-1 md:col-span-7">
         <p>
-          {$_('homepage.thisIsUs.paragraph1')}
+          {m['homepage.thisIsUs.paragraph1']()}
         </p>
         <p>
-          {$_('homepage.thisIsUs.paragraph2')}
+          {m['homepage.thisIsUs.paragraph2']()}
         </p>
       </div>
       <div class="lg:items-top order-1 col-span-full items-center md:order-2 md:col-span-5">
@@ -98,27 +98,27 @@
       </div>
       <div class="animate-fade-in-from-side prose order-4 col-span-full md:col-span-7">
         <p>
-          {$_('homepage.thisIsUs.paragraph3')}
+          {m['homepage.thisIsUs.paragraph3']()}
         </p>
         <p>
-          {$_('homepage.thisIsUs.paragraph4')}
+          {m['homepage.thisIsUs.paragraph4']()}
         </p>
         <p>
-          {$_('homepage.intro.benefitsTitle')}
+          {m['homepage.intro.benefitsTitle']()}
         </p>
       </div>
 
       <div class="benefits order-5 col-span-full">
-        <div class="item">{$_('homepage.intro.benefits.konzept')}</div>
-        <div class="item">{$_('homepage.intro.benefits.design')}</div>
-        <div class="item">{$_('homepage.intro.benefits.uiux')}</div>
-        <div class="item">{$_('homepage.intro.benefits.programmierung')}</div>
-        <div class="item">{$_('homepage.intro.benefits.datenmodellierung')}</div>
-        <div class="item">{$_('homepage.intro.benefits.hosting')}</div>
-        <div class="item">{$_('homepage.intro.benefits.domain')}</div>
-        <div class="item">{$_('homepage.intro.benefits.projektdurchfuehrung')}</div>
-        <div class="item">{$_('homepage.intro.benefits.coaching')}</div>
-        <div class="item">{$_('homepage.intro.benefits.monitoring')}</div>
+        <div class="item">{m['homepage.intro.benefits.konzept']()}</div>
+        <div class="item">{m['homepage.intro.benefits.design']()}</div>
+        <div class="item">{m['homepage.intro.benefits.uiux']()}</div>
+        <div class="item">{m['homepage.intro.benefits.programmierung']()}</div>
+        <div class="item">{m['homepage.intro.benefits.datenmodellierung']()}</div>
+        <div class="item">{m['homepage.intro.benefits.hosting']()}</div>
+        <div class="item">{m['homepage.intro.benefits.domain']()}</div>
+        <div class="item">{m['homepage.intro.benefits.projektdurchfuehrung']()}</div>
+        <div class="item">{m['homepage.intro.benefits.coaching']()}</div>
+        <div class="item">{m['homepage.intro.benefits.monitoring']()}</div>
       </div>
     </div>
   </Section>
@@ -127,9 +127,9 @@
     <div class="inner-container m-auto max-w-7xl px-4 py-24">
       <div class="inner-section-wrapper">
         <div class="intro prose">
-          <h1>{$_('homepage.services.titleFirst')} <span class="inner-text-special">{$_('homepage.services.titleHighlight')}</span></h1>
+          <h1>{m['homepage.services.titleFirst']()} <span class="inner-text-special">{m['homepage.services.titleHighlight']()}</span></h1>
           <p class="teaser">
-            {$_('homepage.services.subtitle')}
+            {m['homepage.services.subtitle']()}
           </p>
         </div>
 
@@ -138,31 +138,31 @@
           <div class="service-card">
             <div class="service-card-header">
               <div class="service-icon">🌐</div>
-              <h2 class="pt-2">{$_('homepage.services.webseiten.title')}</h2>
+              <h2 class="pt-2">{m['homepage.services.webseiten.title']()}</h2>
             </div>
             <p>
-              {$_('homepage.services.webseiten.description')}
+              {m['homepage.services.webseiten.description']()}
             </p>
             <div class="very-tiny-spacer"></div>
             <ul class="service-features">
-              <li>{$_('homepage.services.webseiten.features.responsive')}</li>
-              <li>{$_('homepage.services.webseiten.features.modern')}</li>
-              <li>{$_('homepage.services.webseiten.features.performant')}</li>
-              <li>{$_('homepage.services.webseiten.features.individuell')}</li>
-              <li>{$_('homepage.services.webseiten.features.eigentum')}</li>
+              <li>{m['homepage.services.webseiten.features.responsive']()}</li>
+              <li>{m['homepage.services.webseiten.features.modern']()}</li>
+              <li>{m['homepage.services.webseiten.features.performant']()}</li>
+              <li>{m['homepage.services.webseiten.features.individuell']()}</li>
+              <li>{m['homepage.services.webseiten.features.eigentum']()}</li>
               <li>
                 <div class="tooltip tooltip-top tooltip-neutral cursor-help">
                   <div class="tooltip-content">
                     <div class="px-4 pt-2 pb-3 text-base">
-                      {$_('homepage.services.webseiten.tooltip')}
+                      {m['homepage.services.webseiten.tooltip']()}
                     </div>
                   </div>
-                  {$_('homepage.services.webseiten.features.keineFolgekosten')}
+                  {m['homepage.services.webseiten.features.keineFolgekosten']()}
                 </div>
               </li>
             </ul>
             <div class="service-card-actions push-right">
-              <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=website')}>{$_('homepage.services.webseiten.buttonText')}</button>
+              <button class="btn btn-simple" onclick={() => goto(localizeHref('get-started?projectType=website'))}>{m['homepage.services.webseiten.buttonText']()}</button>
             </div>
           </div>
 
@@ -170,31 +170,31 @@
           <div class="service-card">
             <div class="service-card-header">
               <div class="service-icon">📝</div>
-              <h2 class="pt-2.5">{$_('homepage.services.cms.title')}</h2>
+              <h2 class="pt-2.5">{m['homepage.services.cms.title']()}</h2>
             </div>
             <p>
-              {$_('homepage.services.cms.description')}
+              {m['homepage.services.cms.description']()}
             </p>
             <div class="very-tiny-spacer"></div>
             <ul class="service-features">
-              <li>{$_('homepage.services.cms.features.kontrolle')}</li>
+              <li>{m['homepage.services.cms.features.kontrolle']()}</li>
               <li>
                 <div class="tooltip tooltip-bottom tooltip-neutral cursor-help">
                   <div class="tooltip-content">
                     <div class="px-4 pt-2 pb-3 text-base">
-                      {$_('homepage.services.cms.features.datenstrukturenTooltip')}
+                      {m['homepage.services.cms.features.datenstrukturenTooltip']()}
                     </div>
                   </div>
-                  {$_('homepage.services.cms.features.datenstrukturen')}
+                  {m['homepage.services.cms.features.datenstrukturen']()}
                 </div>
               </li>
-              <li>{$_('homepage.services.cms.features.sicher')}</li>
-              <li>{$_('homepage.services.cms.features.wartungsarm')}</li>
-              <li>{$_('homepage.services.cms.features.editierbar')}</li>
-              <li>{$_('homepage.services.cms.features.headless')}</li>
+              <li>{m['homepage.services.cms.features.sicher']()}</li>
+              <li>{m['homepage.services.cms.features.wartungsarm']()}</li>
+              <li>{m['homepage.services.cms.features.editierbar']()}</li>
+              <li>{m['homepage.services.cms.features.headless']()}</li>
             </ul>
             <div class="service-card-actions push-right">
-              <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=cms')}>{$_('homepage.services.cms.buttonText')}</button>
+              <button class="btn btn-simple" onclick={() => goto(localizeHref('get-started?projectType=cms'))}>{m['homepage.services.cms.buttonText']()}</button>
             </div>
           </div>
 
@@ -202,22 +202,22 @@
           <div class="service-card">
             <div class="service-card-header">
               <div class="service-icon">📱</div>
-              <h2 class="pt-2">{$_('homepage.services.webanwendungen.title')}</h2>
+              <h2 class="pt-2">{m['homepage.services.webanwendungen.title']()}</h2>
             </div>
             <p>
-              {$_('homepage.services.webanwendungen.description')}
+              {m['homepage.services.webanwendungen.description']()}
             </p>
             <div class="very-tiny-spacer"></div>
             <ul class="service-features">
-              <li>{$_('homepage.services.webanwendungen.features.app')}</li>
-              <li>{$_('homepage.services.webanwendungen.features.pwa')}</li>
-              <li>{$_('homepage.services.webanwendungen.features.offline')}</li>
-              <li>{$_('homepage.services.webanwendungen.features.push')}</li>
-              <li>{$_('homepage.services.webanwendungen.features.appStores')}</li>
+              <li>{m['homepage.services.webanwendungen.features.app']()}</li>
+              <li>{m['homepage.services.webanwendungen.features.pwa']()}</li>
+              <li>{m['homepage.services.webanwendungen.features.offline']()}</li>
+              <li>{m['homepage.services.webanwendungen.features.push']()}</li>
+              <li>{m['homepage.services.webanwendungen.features.appStores']()}</li>
             </ul>
             <div class="service-card-actions push-right">
-              <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=webApplication')}
-                >{$_('homepage.services.webanwendungen.buttonText')}</button
+              <button class="btn btn-simple" onclick={() => goto(localizeHref('/get-started?projectType=webApplication'))}
+                >{m['homepage.services.webanwendungen.buttonText']()}</button
               >
             </div>
           </div>
@@ -226,21 +226,21 @@
           <div class="service-card freestyle">
             <div class="service-card-header">
               <div class="service-icon">⚙️</div>
-              <h2 class="pt-2">{$_('homepage.services.freestyle.title')}</h2>
+              <h2 class="pt-2">{m['homepage.services.freestyle.title']()}</h2>
             </div>
             <p>
-              {$_('homepage.services.freestyle.description')}
+              {m['homepage.services.freestyle.description']()}
             </p>
             <div class="very-tiny-spacer"></div>
             <div class="service-examples">
-              <span class="example-tag">{$_('homepage.services.freestyle.examples.event')}</span>
-              <span class="example-tag">{$_('homepage.services.freestyle.examples.dashboard')}</span>
-              <span class="example-tag">{$_('homepage.services.freestyle.examples.api')}</span>
-              <span class="example-tag">{$_('homepage.services.freestyle.examples.module')}</span>
-              <span class="example-tag">{$_('homepage.services.freestyle.examples.ui')}</span>
+              <span class="example-tag">{m['homepage.services.freestyle.examples.event']()}</span>
+              <span class="example-tag">{m['homepage.services.freestyle.examples.dashboard']()}</span>
+              <span class="example-tag">{m['homepage.services.freestyle.examples.api']()}</span>
+              <span class="example-tag">{m['homepage.services.freestyle.examples.module']()}</span>
+              <span class="example-tag">{m['homepage.services.freestyle.examples.ui']()}</span>
             </div>
             <div class="service-card-actions push-right">
-              <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=freestyle')}>{$_('homepage.services.freestyle.buttonText')}</button>
+              <button class="btn btn-simple" onclick={() => goto(localizeHref('/get-started?projectType=freestyle'))}>{m['homepage.services.freestyle.buttonText']()}</button>
             </div>
           </div>
 
@@ -248,50 +248,50 @@
           <div class="service-card lg:col-span-2">
             <div class="service-card-header">
               <div class="service-icon">🤖</div>
-              <h2 class="pt-2">{$_('homepage.services.ki.title')}</h2>
+              <h2 class="pt-2">{m['homepage.services.ki.title']()}</h2>
             </div>
 
             <p>
-              {$_('homepage.services.ki.description')}
+              {m['homepage.services.ki.description']()}
             </p>
 
             <div class="service-list">
               <div class="service-item">
                 <div class="service-icon">🧠</div>
                 <div>
-                  <h3>{$_('homepage.services.ki.services.beratung.title')}</h3>
+                  <h3>{m['homepage.services.ki.services.beratung.title']()}</h3>
                   <div class="very-tiny-spacer"></div>
-                  <p>{$_('homepage.services.ki.services.beratung.description')}</p>
+                  <p>{m['homepage.services.ki.services.beratung.description']()}</p>
                 </div>
               </div>
               <div class="service-item">
                 <div class="service-icon">🤖</div>
                 <div>
-                  <h3>{$_('homepage.services.ki.services.agenten.title')}</h3>
+                  <h3>{m['homepage.services.ki.services.agenten.title']()}</h3>
                   <div class="very-tiny-spacer"></div>
-                  <p>{$_('homepage.services.ki.services.agenten.description')}</p>
+                  <p>{m['homepage.services.ki.services.agenten.description']()}</p>
                 </div>
               </div>
               <div class="service-item">
                 <div class="service-icon">⚡</div>
                 <div>
-                  <h3>{$_('homepage.services.ki.services.workflow.title')}</h3>
+                  <h3>{m['homepage.services.ki.services.workflow.title']()}</h3>
                   <div class="very-tiny-spacer"></div>
-                  <p>{$_('homepage.services.ki.services.workflow.description')}</p>
+                  <p>{m['homepage.services.ki.services.workflow.description']()}</p>
                 </div>
               </div>
               <div class="service-item">
                 <div class="service-icon">🏗️</div>
                 <div>
-                  <h3>{$_('homepage.services.ki.services.infrastructure.title')}</h3>
+                  <h3>{m['homepage.services.ki.services.infrastructure.title']()}</h3>
                   <div class="very-tiny-spacer"></div>
-                  <p>{$_('homepage.services.ki.services.infrastructure.description')}</p>
+                  <p>{m['homepage.services.ki.services.infrastructure.description']()}</p>
                 </div>
               </div>
             </div>
             <div class="service-card-actions push-right">
-              <button class="btn btn-simple" onclick={() => goto('/get-started?projectType=artificialIntelligence')}
-                >{$_('homepage.services.ki.buttonText')}</button
+              <button class="btn btn-simple" onclick={() => goto(localizeHref('/get-started?projectType=artificialIntelligence'))}
+                >{m['homepage.services.ki.buttonText']()}</button
               >
             </div>
           </div>
@@ -303,10 +303,10 @@
   <Section>
     <div class="inner-section-wrapper">
       <div class="intro prose">
-        <h1>{$_('homepage.balance.titleFirst')} <span class="inner-text-special">{$_('homepage.balance.titleHighlight')}</span></h1>
+        <h1>{m['homepage.balance.titleFirst']()} <span class="inner-text-special">{m['homepage.balance.titleHighlight']()}</span></h1>
         <p class="teaser">
-          {$_('homepage.balance.subtitleFirst')} <button class="text-link-button" onclick={openPhilosophyModal}>{$_('homepage.balance.subtitleSecond')}</button>
-          {$_('homepage.balance.subtitleThird')}
+          {m['homepage.balance.subtitleFirst']()} <button class="text-link-button" onclick={openPhilosophyModal}>{m['homepage.balance.subtitleSecond']()}</button>
+          {m['homepage.balance.subtitleThird']()}
         </p>
       </div>
 
@@ -314,17 +314,17 @@
         <div class="balance-card">
           <div class="balance-icon">⚡</div>
           <div class="balance-content prose">
-            <h2>{$_('homepage.balance.zeit.title')}</h2>
+            <h2>{m['homepage.balance.zeit.title']()}</h2>
             <p>
-              {$_('homepage.balance.zeit.description')}
-              <button class="text-link-button inverted-underline" onclick={openTimeAsFactorModal}>{$_('homepage.balance.zeit.buttonText')}</button>
+              {m['homepage.balance.zeit.description']()}
+              <button class="text-link-button inverted-underline" onclick={openTimeAsFactorModal}>{m['homepage.balance.zeit.buttonText']()}</button>
             </p>
             <div class="balance-features">
-              <span class="feature-tag">{$_('homepage.balance.zeit.features.agile')}</span>
-              <span class="feature-tag">{$_('homepage.balance.zeit.features.ki')}</span>
-              <span class="feature-tag">{$_('homepage.balance.zeit.features.bausteine')}</span>
-              <span class="feature-tag">{$_('homepage.balance.zeit.features.experten')}</span>
-              <span class="feature-tag">{$_('homepage.balance.zeit.features.oekosystem')}</span>
+              <span class="feature-tag">{m['homepage.balance.zeit.features.agile']()}</span>
+              <span class="feature-tag">{m['homepage.balance.zeit.features.ki']()}</span>
+              <span class="feature-tag">{m['homepage.balance.zeit.features.bausteine']()}</span>
+              <span class="feature-tag">{m['homepage.balance.zeit.features.experten']()}</span>
+              <span class="feature-tag">{m['homepage.balance.zeit.features.oekosystem']()}</span>
             </div>
           </div>
         </div>
@@ -332,17 +332,17 @@
         <div class="balance-card">
           <div class="balance-icon">💰</div>
           <div class="balance-content prose">
-            <h2>{$_('homepage.balance.kosten.title')}</h2>
+            <h2>{m['homepage.balance.kosten.title']()}</h2>
             <p>
-              {$_('homepage.balance.kosten.description')}
-              <button class="text-link-button inverted-underline" onclick={openCostAsFactorModal}>{$_('homepage.balance.kosten.buttonText')}</button>
+              {m['homepage.balance.kosten.description']()}
+              <button class="text-link-button inverted-underline" onclick={openCostAsFactorModal}>{m['homepage.balance.kosten.buttonText']()}</button>
             </p>
             <div class="balance-features">
-              <span class="feature-tag">{$_('homepage.balance.kosten.features.festpreise')}</span>
-              <span class="feature-tag">{$_('homepage.balance.kosten.features.keineFolgekosten')}</span>
-              <span class="feature-tag">{$_('homepage.balance.kosten.features.transparenz')}</span>
-              <span class="feature-tag">{$_('homepage.balance.kosten.features.fair')}</span>
-              <span class="feature-tag">{$_('homepage.balance.kosten.features.konfigurator')}</span>
+              <span class="feature-tag">{m['homepage.balance.kosten.features.festpreise']()}</span>
+              <span class="feature-tag">{m['homepage.balance.kosten.features.keineFolgekosten']()}</span>
+              <span class="feature-tag">{m['homepage.balance.kosten.features.transparenz']()}</span>
+              <span class="feature-tag">{m['homepage.balance.kosten.features.fair']()}</span>
+              <span class="feature-tag">{m['homepage.balance.kosten.features.konfigurator']()}</span>
             </div>
           </div>
         </div>
@@ -350,10 +350,10 @@
         <div class="balance-card">
           <div class="balance-icon">🏆</div>
           <div class="balance-content prose">
-            <h2>{$_('homepage.balance.qualitaet.title')}</h2>
+            <h2>{m['homepage.balance.qualitaet.title']()}</h2>
             <p>
-              {$_('homepage.balance.qualitaet.description')}
-              <button class="text-link-button inverted-underline" onclick={openQualityAsFactorModal}>{$_('homepage.balance.qualitaet.buttonText')}</button>
+              {m['homepage.balance.qualitaet.description']()}
+              <button class="text-link-button inverted-underline" onclick={openQualityAsFactorModal}>{m['homepage.balance.qualitaet.buttonText']()}</button>
             </p>
             <div class="tech-stack">
               <img src="icons/tech-logos/node-js-logo.svg" alt="Node.js" class="tech-logo" />
@@ -373,52 +373,52 @@
   <Section>
     <div class="inner-section-wrapper">
       <div class="intro prose">
-        <h1>{$_('homepage.features.titleFirst')} <span class="inner-text-special">{$_('homepage.features.titleHighlight')}</span></h1>
-        <p class="teaser">{$_('homepage.features.subtitle')}</p>
+        <h1>{m['homepage.features.titleFirst']()} <span class="inner-text-special">{m['homepage.features.titleHighlight']()}</span></h1>
+        <p class="teaser">{m['homepage.features.subtitle']()}</p>
       </div>
 
       <div class="features-grid">
         <div class="feature-card prose">
           <div class="feature-card-header">
             <div class="feature-icon">🎯</div>
-            <h2 class="pt-2.5">{$_('homepage.features.allesAusEinerHand.title')}</h2>
+            <h2 class="pt-2.5">{m['homepage.features.allesAusEinerHand.title']()}</h2>
           </div>
-          <p>{$_('homepage.features.allesAusEinerHand.description')}</p>
+          <p>{m['homepage.features.allesAusEinerHand.description']()}</p>
           <div class="very-tiny-spacer"></div>
           <ul class="feature-list">
-            <li>{$_('homepage.features.allesAusEinerHand.features.konzeption')}</li>
-            <li>{$_('homepage.features.allesAusEinerHand.features.design')}</li>
-            <li>{$_('homepage.features.allesAusEinerHand.features.entwicklung')}</li>
-            <li>{$_('homepage.features.allesAusEinerHand.features.hosting')}</li>
+            <li>{m['homepage.features.allesAusEinerHand.features.konzeption']()}</li>
+            <li>{m['homepage.features.allesAusEinerHand.features.design']()}</li>
+            <li>{m['homepage.features.allesAusEinerHand.features.entwicklung']()}</li>
+            <li>{m['homepage.features.allesAusEinerHand.features.hosting']()}</li>
           </ul>
         </div>
 
         <div class="feature-card prose">
           <div class="feature-card-header">
             <div class="feature-icon">💎</div>
-            <h2 class="pt-2.5">{$_('homepage.features.preise.title')}</h2>
+            <h2 class="pt-2.5">{m['homepage.features.preise.title']()}</h2>
           </div>
-          <p>{$_('homepage.features.preise.description')}</p>
+          <p>{m['homepage.features.preise.description']()}</p>
           <div class="very-tiny-spacer"></div>
           <ul class="feature-list">
-            <li>{$_('homepage.features.preise.benefits.sofort')}</li>
-            <li>{$_('homepage.features.preise.benefits.keineVersteckten')}</li>
-            <li>{$_('homepage.features.preise.benefits.keineFolgegebuehren')}</li>
+            <li>{m['homepage.features.preise.benefits.sofort']()}</li>
+            <li>{m['homepage.features.preise.benefits.keineVersteckten']()}</li>
+            <li>{m['homepage.features.preise.benefits.keineFolgegebuehren']()}</li>
           </ul>
         </div>
 
         <div class="feature-card prose">
           <div class="feature-card-header">
             <div class="feature-icon">👤</div>
-            <h2 class="pt-2.5">{$_('homepage.features.ansprechpartner.title')}</h2>
+            <h2 class="pt-2.5">{m['homepage.features.ansprechpartner.title']()}</h2>
           </div>
-          <p>{$_('homepage.features.ansprechpartner.description')}</p>
+          <p>{m['homepage.features.ansprechpartner.description']()}</p>
           <div class="very-tiny-spacer"></div>
           <div class="contact-info">
             <div class="contact-avatar"></div>
             <div class="contact-details">
-              <p><strong>{$_('homepage.features.ansprechpartner.contact.title')}</strong></p>
-              <p>{$_('homepage.features.ansprechpartner.contact.description')}</p>
+              <p><strong>{m['homepage.features.ansprechpartner.contact.title']()}</strong></p>
+              <p>{m['homepage.features.ansprechpartner.contact.description']()}</p>
             </div>
           </div>
         </div>
@@ -426,15 +426,15 @@
         <div class="feature-card">
           <div class="feature-card-header">
             <div class="feature-icon">🛠️</div>
-            <h2 class="pt-2.5">{$_('homepage.features.massgeschneidert.title')}</h2>
+            <h2 class="pt-2.5">{m['homepage.features.massgeschneidert.title']()}</h2>
           </div>
-          <p>{$_('homepage.features.massgeschneidert.description')}</p>
+          <p>{m['homepage.features.massgeschneidert.description']()}</p>
 
           <div class="solution-types mt-auto">
-            <span class="solution-tag">{$_('homepage.features.massgeschneidert.types.individual')}</span>
-            <span class="solution-tag">{$_('homepage.features.massgeschneidert.types.flexibel')}</span>
-            <span class="solution-tag">{$_('homepage.features.massgeschneidert.types.skalierbar')}</span>
-            <span class="solution-tag">{$_('homepage.features.massgeschneidert.types.zukunftssicher')}</span>
+            <span class="solution-tag">{m['homepage.features.massgeschneidert.types.individual']()}</span>
+            <span class="solution-tag">{m['homepage.features.massgeschneidert.types.flexibel']()}</span>
+            <span class="solution-tag">{m['homepage.features.massgeschneidert.types.skalierbar']()}</span>
+            <span class="solution-tag">{m['homepage.features.massgeschneidert.types.zukunftssicher']()}</span>
           </div>
         </div>
       </div>

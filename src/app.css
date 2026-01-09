@@ -228,9 +228,6 @@ h6 {
   > a {
     @apply no-underline;
   }
-  > span.inner-text {
-    @apply font-light;
-  }
   > span.inner-text-special {
     @apply from-purple via-pink to-violet inline-block bg-linear-135 bg-clip-text text-transparent;
   }
@@ -370,9 +367,6 @@ textarea:not([rows]) {
 .very-tiny-spacer {
   @apply m-0 h-1 w-full p-0;
 }
-.tiny-spacer {
-  @apply m-0 h-2 w-full p-0;
-}
 .medium-spacer {
   @apply m-0 h-4 w-full p-0;
 }
@@ -385,10 +379,6 @@ textarea:not([rows]) {
 .massive-spacer {
   @apply m-0 h-20 w-full p-0;
 }
-.just-a-line {
-  @apply bg-mediumGrey m-0 h-px w-full p-0;
-}
-
 /* Special Button Style */
 .btn-basic {
   @apply from-purple via-pink to-violet flex items-center justify-center rounded-md border-0 bg-linear-to-r bg-size-[200%_auto] px-12 py-5 text-lg leading-none font-bold text-nowrap text-white shadow-md transition-all duration-500;
@@ -403,10 +393,6 @@ textarea:not([rows]) {
   svg {
     @apply mx-1;
   }
-  &.block-button {
-    @apply h-[50px] px-4 py-0;
-  }
-
   &:hover {
     @apply cursor-pointer bg-right shadow-none;
   }
@@ -424,10 +410,6 @@ textarea:not([rows]) {
   svg {
     @apply mx-1;
   }
-  &.block-button {
-    @apply h-[50px] px-4 py-0;
-  }
-
   &:hover {
     @apply cursor-pointer bg-right shadow-none;
   }
@@ -465,29 +447,6 @@ textarea:not([rows]) {
     @apply cursor-pointer opacity-60;
   }
 }
-.nav-button-link {
-  @apply text-base-content relative mr-2.5 ml-2.5 min-h-6 px-2 text-lg opacity-75;
-  &::after {
-    @apply bg-base-content absolute -bottom-1 left-0 block h-0.5 w-full origin-left scale-x-0 transition-transform duration-500;
-    content: '';
-  }
-  &:hover {
-    @apply cursor-pointer opacity-100;
-    &::after {
-      @apply scale-x-100;
-    }
-  }
-
-  &.active {
-    @apply opacity-100;
-    &::after {
-      @apply scale-x-100;
-    }
-    &:hover {
-      @apply cursor-default;
-    }
-  }
-}
 .badge-primary {
   @apply from-pink to-violet border-0 bg-linear-to-r text-nowrap text-white;
 }
@@ -496,9 +455,6 @@ textarea:not([rows]) {
 .modal-box {
   &.small-modal {
     @apply max-w-2xl max-h-[92vh];
-  }
-  &.medium-modal {
-    @apply max-w-4xl max-h-[96vh];
   }
   &.large-modal {
     @apply max-w-6xl max-h-[96vh];

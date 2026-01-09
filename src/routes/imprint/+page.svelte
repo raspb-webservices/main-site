@@ -1,79 +1,79 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import Section from '$lib/components/ui/section.svelte';
-  import { _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
 </script>
 
 <svelte:head>
-  <title>{$_('imprint.meta.title')}</title>
-  <meta name="description" content={$_('imprint.meta.description')} />
+  <title>{m['imprint.meta.title']()}</title>
+  <meta name="description" content={m['imprint.meta.description']()} />
 </svelte:head>
 
   <Section>
     <div class="imprint-content prose">
-      <h1>{$_('imprint.title')}</h1>
+      <h1>{m['imprint.title']()}</h1>
 
-      <h2>{$_('imprint.section5TMG')}</h2>
+      <h2>{m['imprint.section5TMG']()}</h2>
       <div class="contact-info">
-        <p class="no-padding"><strong>{$_('imprint.companyName')}</strong></p>
-        <p>{$_('imprint.address')}<br />{$_('imprint.zipCity')}</p>
+        <p class="no-padding"><strong>{m['imprint.companyName']()}</strong></p>
+        <p>{m['imprint.address']()}<br />{m['imprint.zipCity']()}</p>
       </div>
       <div class="spacer"></div>
-      <h3>{$_('imprint.representedBy')}</h3>
+      <h3>{m['imprint.representedBy']()}</h3>
       <p>Markus Härtig</p>
 
-      <h3>{$_('imprint.contact')}</h3>
+      <h3>{m['imprint.contact']()}</h3>
       <div class="contact-details">
-        <p class="no-padding"><strong>{$_('imprint.phone')}</strong> 06732 - 9648113</p>
-        <p><strong>{$_('imprint.email')}</strong> <a href="mailto:contact@raspb.de">contact@raspb.de</a></p>
+        <p class="no-padding"><strong>{m['imprint.phone']()}</strong> 06732 - 9648113</p>
+        <p><strong>{m['imprint.email']()}</strong> <a href="mailto:contact@raspb.de">contact@raspb.de</a></p>
       </div>
 
       <div class="spacer"></div>
 
-      <h3>{$_('imprint.registerEntry')}</h3>
-      <p>{$_('imprint.companyInFormation')}</p>
+      <h3>{m['imprint.registerEntry']()}</h3>
+      <p>{m['imprint.companyInFormation']()}</p>
 
-      <h3>{$_('imprint.vatId')}</h3>
+      <h3>{m['imprint.vatId']()}</h3>
       <p>
-        {$_('imprint.vatIdText')}<br />
-        {$_('imprint.vatIdPending')}
+        {m['imprint.vatIdText']()}<br />
+        {m['imprint.vatIdPending']()}
       </p>
 
-      <h3>{$_('imprint.euDisputeResolution')}</h3>
+      <h3>{m['imprint.euDisputeResolution']()}</h3>
       <p>
-        {$_('imprint.euDisputeResolutionText')}
+        {m['imprint.euDisputeResolutionText']()}
         <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a><br />
-        {$_('imprint.euDisputeResolutionEmail')}
+        {m['imprint.euDisputeResolutionEmail']()}
       </p>
 
-      <h3>{$_('imprint.consumerDisputeResolution')}</h3>
-      <p>{$_('imprint.consumerDisputeResolutionText')}</p>
+      <h3>{m['imprint.consumerDisputeResolution']()}</h3>
+      <p>{m['imprint.consumerDisputeResolutionText']()}</p>
 
-      <h3>{$_('imprint.liabilityForContent')}</h3>
+      <h3>{m['imprint.liabilityForContent']()}</h3>
       <p>
-        {$_('imprint.liabilityForContentText1')}
-      </p>
-
-      <p>
-        {$_('imprint.liabilityForContentText2')}
-      </p>
-
-      <h3>{$_('imprint.liabilityForLinks')}</h3>
-      <p>
-        {$_('imprint.liabilityForLinksText1')}
+        {m['imprint.liabilityForContentText1']()}
       </p>
 
       <p>
-        {$_('imprint.liabilityForLinksText2')}
+        {m['imprint.liabilityForContentText2']()}
       </p>
 
-      <h3>{$_('imprint.copyright')}</h3>
+      <h3>{m['imprint.liabilityForLinks']()}</h3>
       <p>
-        {$_('imprint.copyrightText1')}
+        {m['imprint.liabilityForLinksText1']()}
       </p>
 
       <p>
-        {$_('imprint.copyrightText2')}
+        {m['imprint.liabilityForLinksText2']()}
+      </p>
+
+      <h3>{m['imprint.copyright']()}</h3>
+      <p>
+        {m['imprint.copyrightText1']()}
+      </p>
+
+      <p>
+        {m['imprint.copyrightText2']()}
       </p>
 
       <div class="spacer"></div>
@@ -81,7 +81,7 @@
         class="btn-basic"
         onclick={() => {
           goto('/');
-        }}>{$_('imprint.backToHomepage')}</button
+        }}>{m['imprint.backToHomepage']()}</button
       >
     </div>
   </Section>

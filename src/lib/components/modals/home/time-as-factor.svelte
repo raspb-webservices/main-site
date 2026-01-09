@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
 
   let modal: HTMLDialogElement;
   export function openModal() {
@@ -20,20 +20,20 @@
 
     <div class="flex items-center gap-3 mb-6">
       <div class="text-5xl leading-tight">⚡</div>
-      <h2 class="pt-4">{$_('timeAsFactorModal.header.title')}</h2>
+      <h2 class="pt-4">{m['timeAsFactorModal.header.title']()}</h2>
     </div>
 
     <div class="prose md:px-4">
       <p>
-        {$_('timeAsFactorModal.content.paragraph1')}
+        {m['timeAsFactorModal.content.paragraph1']()}
       </p>
 
       <p>
-        {$_('timeAsFactorModal.content.paragraph2')}
+        {m['timeAsFactorModal.content.paragraph2']()}
       </p>
 
       <p>
-        {$_('timeAsFactorModal.content.paragraph3')}
+        {m['timeAsFactorModal.content.paragraph3']()}
       </p>
     </div>
   </div>

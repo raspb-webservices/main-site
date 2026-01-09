@@ -2,7 +2,7 @@
   import { projectStatus, salutationOptions, domainStatus, features } from '$interfaces/project.interface';
   import { projectTypes, subTypes } from '$lib/configs/wizard-config';
   import { formatDate, formatBudget, getStatusBadgeClass, getStatusLabel, getFeatureLabel, ToArray, getProjectTypeLabel, getSubProjectTypeLabel } from '$lib/helper/projectUtils';
-  import { _ } from 'svelte-i18n';
+  import { m } from '$lib/paraglide/messages';
 
   let { selectedProject } = $props();
 
@@ -351,7 +351,7 @@
                 <select bind:value={editForm.projectType} id="projectType" name="projectType" class="select select-bordered select-sm">
                   <option value="">Bitte wählen</option>
                   {#each projectTypes as type}
-                    <option value={type.id}>{$_(type.title)}</option>
+                    <option value={type.id}>{m[type.title]()}</option>
                   {/each}
                 </select>
               </div>
@@ -363,7 +363,7 @@
                 <select bind:value={editForm.subType} id="subType" name="subType" class="select select-bordered select-sm">
                   <option value="">Bitte wählen</option>
                   {#each subTypes as type}
-                    <option value={type.id}>{$_(type.title)}</option>
+                    <option value={type.id}>{m[type.title]()}</option>
                   {/each}
                 </select>
               </div>
@@ -416,11 +416,11 @@
             <div class="space-y-3">
               <div class="flex justify-between">
                 <span class="text-base-content/60">Projekttyp:</span>
-                <span class="font-medium">{$_(getProjectTypeLabel(selectedProject?.projectType))}</span>
+                <span class="font-medium">{getProjectTypeLabel(selectedProject?.projectType)}</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-base-content/60">Untertyp:</span>
-                <span class="font-medium">{ $_(getSubProjectTypeLabel(selectedProject?.subType)) }</span>
+                <span class="font-medium">{ getSubProjectTypeLabel(selectedProject?.subType) }</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-base-content/60">Projektstatus:</span>

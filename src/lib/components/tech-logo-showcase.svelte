@@ -73,7 +73,23 @@
     <p class="text-base-content/70">Moderne Tools für außergewöhnliche Ergebnisse</p>
   </div>
 
-  <div class="relative w-full overflow-hidden py-4" on:mouseenter={handleMouseEnter} on:mouseleave={handleMouseLeave}>
+  <div
+    class="relative w-full overflow-hidden py-4"
+    role="button"
+    aria-label="Pause or resume the logo animation"
+    aria-pressed={isHovered}
+    tabindex="0"
+    on:mouseenter={handleMouseEnter}
+    on:mouseleave={handleMouseLeave}
+    on:focus={handleMouseEnter}
+    on:blur={handleMouseLeave}
+    on:keydown={(event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        isHovered = !isHovered;
+      }
+    }}
+  >
     <div class="flex whitespace-nowrap" bind:this={container}>
       {#each techLogos as logo, i}
         <div class="mx-8 inline-flex items-center justify-center">
