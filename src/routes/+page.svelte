@@ -4,7 +4,6 @@
   import Section from '$lib/components/ui/section.svelte';
   import CTABox from '$lib/components/snippets/cta-box.svelte';
   import PhilosophyModal from '$lib/components/modals/general/philosophy.svelte';
-  import GetAppointmentModal from '$lib/components/modals/general/get-appointment.svelte';
   import TimeAsFactorModal from '$lib/components/modals/home/time-as-factor.svelte';
   import CostAsFactorModal from '$lib/components/modals/home/cost-as-factor.svelte';
   import QualityAsFactorModal from '$lib/components/modals/home/quality-as-factor.svelte';
@@ -16,7 +15,6 @@
   let timeAsFactorModal: TimeAsFactorModal;
   let costAsFactorModal: CostAsFactorModal;
   let qualityAsFactorModal: QualityAsFactorModal;
-  let getAppointmentModal: GetAppointmentModal;
 
   function openPhilosophyModal() {
     philosophyModal?.openModal();
@@ -32,10 +30,6 @@
 
   function openQualityAsFactorModal() {
     qualityAsFactorModal?.openModal();
-  }
-
-  function openGetAppointmentModal() {
-    getAppointmentModal?.openModal();
   }
 </script>
 
@@ -58,7 +52,7 @@
           goto(localizeHref('get-started'));
         }}>{m['homepage.hero.buttonText']()}</button
       >
-      <button class="btn-inverted-outline animate-fade-in-from-side" onclick={openGetAppointmentModal}>{m['homepage.hero.buttonText2']()}</button>
+      <button class="btn-inverted-outline animate-fade-in-from-side" onclick={()=>{goto(localizeHref('make-an-appointment'))}}>{m['homepage.hero.buttonText2']()}</button>
     </div>
   </div>
 </Stage>
@@ -451,7 +445,6 @@
 <TimeAsFactorModal bind:this={timeAsFactorModal} />
 <CostAsFactorModal bind:this={costAsFactorModal} />
 <QualityAsFactorModal bind:this={qualityAsFactorModal} />
-<GetAppointmentModal bind:this={getAppointmentModal} />
 
 <style lang="postcss">
   @reference '../app.css';
@@ -506,7 +499,7 @@
             @apply text-base-content flex items-start text-sm;
 
             &::before {
-              @apply from-purple to-pink mt-1.5 mr-3 h-2 w-2 min-w-2 rounded-full bg-gradient-to-r;
+              @apply from-purple to-pink mt-1.5 mr-3 h-2 w-2 min-w-2 rounded-full bg-linear-to-r;
               content: '';
             }
           }
@@ -615,7 +608,7 @@
             @apply text-base-content flex items-start text-sm;
 
             &::before {
-              @apply from-purple to-pink mt-1.5 mr-3 h-2 w-2 min-w-2 rounded-full bg-gradient-to-r;
+              @apply from-purple to-pink mt-1.5 mr-3 h-2 w-2 min-w-2 rounded-full bg-linear-to-r;
               content: '';
             }
           }

@@ -26,9 +26,10 @@
   @reference '../../../app.css';
   section.base-section {
     @apply w-full bg-base-50 py-24;
+    background-color: var(--backgroundColor);
 
     &.stretch {
-      @apply min-h-[100vh];
+      @apply min-h-screen;
     }
 
     &.noSpacing  {
@@ -42,11 +43,11 @@
     }
     
     &.center-teaser {
-      @apply from-secondary/30 via-primary/10 to-secondary/20 bg-gradient-to-br py-36;
+      @apply from-secondary/30 via-primary/10 to-secondary/20 bg-linear-to-br py-36;
     }
     
     &.full-center-teaser {
-      @apply from-secondary/30 via-primary/10 to-secondary/20 bg-gradient-to-br py-10;
+      @apply from-secondary/30 via-primary/10 to-secondary/20 bg-linear-to-br py-10;
       .inner-container {
         @apply min-h-[calc(100vh-160px)] flex flex-col justify-center items-center text-center;
       }

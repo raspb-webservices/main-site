@@ -850,6 +850,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@photo-sphere-viewer/core@npm:^5.14.0":
+  version: 5.14.0
+  resolution: "@photo-sphere-viewer/core@npm:5.14.0"
+  dependencies:
+    three: "npm:^0.179.0"
+  checksum: 10c0/7263a8086e57c4b9847e3f416bbb42688ea3d7e2e37e819e8c17f42cb4098afdd95571bdbd116edaa0e15145b69a39386ca63fb60ad79777158851c1713429a4
+  languageName: node
+  linkType: hard
+
+"@photo-sphere-viewer/virtual-tour-plugin@npm:^5.14.0":
+  version: 5.14.0
+  resolution: "@photo-sphere-viewer/virtual-tour-plugin@npm:5.14.0"
+  peerDependencies:
+    "@photo-sphere-viewer/core": 5.14.0
+  checksum: 10c0/71abcd7aabc1d5b3de435346b77f8521d5a1ec57ecf4bd37a643f072a435dad49062c576538cd66971d91964d6a71a05e5ea2a8b01fa698f6553727b2b1cdbd9
+  languageName: node
+  linkType: hard
+
 "@polka/url@npm:^1.0.0-next.24":
   version: 1.0.0-next.29
   resolution: "@polka/url@npm:1.0.0-next.29"
@@ -3404,6 +3422,8 @@ __metadata:
     "@hygraph/management-sdk": "npm:^1.5.2"
     "@inlang/paraglide-js": "npm:^2.7.2"
     "@lottiefiles/dotlottie-svelte": "npm:^0.8.12"
+    "@photo-sphere-viewer/core": "npm:^5.14.0"
+    "@photo-sphere-viewer/virtual-tour-plugin": "npm:^5.14.0"
     "@sveltejs/adapter-netlify": "npm:^5.2.4"
     "@sveltejs/kit": "npm:^2.49.3"
     "@sveltejs/vite-plugin-svelte": "npm:^6.2.3"
@@ -3428,6 +3448,7 @@ __metadata:
     graphql-request: "npm:^7.4.0"
     mapbox-gl: "npm:^3.17.0"
     markdown-it: "npm:^14.1.0"
+    photo-sphere-viewer: "npm:^4.8.1"
     postcss: "npm:^8.5.6"
     prettier: "npm:^3.7.4"
     prettier-plugin-svelte: "npm:^3.4.1"
@@ -3876,6 +3897,16 @@ __metadata:
   bin:
     pbf: bin/pbf
   checksum: 10c0/1a95cc3bdc61ee01d4728f4a57a9f1233732d183a8568818b714a747fd8b957d99b63e1c67f0f72dc5623657c42f88a1a7e44e1fbcd06e2fe2ef9a85a964832e
+  languageName: node
+  linkType: hard
+
+"photo-sphere-viewer@npm:^4.8.1":
+  version: 4.8.1
+  resolution: "photo-sphere-viewer@npm:4.8.1"
+  dependencies:
+    three: "npm:^0.147.0"
+    uevent: "npm:^2.1.1"
+  checksum: 10c0/e486185f3dfb0695b9fcf3c74ffc8ef959305b8d0e54f25f2db561290215d640b67e5f50724ab488ae947a4d03710944094f34afad992dff9faa258c1a8e06c1
   languageName: node
   linkType: hard
 
@@ -4577,6 +4608,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"three@npm:^0.147.0":
+  version: 0.147.0
+  resolution: "three@npm:0.147.0"
+  checksum: 10c0/292dabf63b66d17ffd7c1088093a8c1b79cf36a5f50e04a9d211ce6763fc47c8d635ec4e69af5188943b220b30360752c2846aff9e940c5483b588fe43470f08
+  languageName: node
+  linkType: hard
+
+"three@npm:^0.179.0":
+  version: 0.179.1
+  resolution: "three@npm:0.179.1"
+  checksum: 10c0/563ba6d6a79b761b0a19b35141999edeec534cfef07e4ed2d480e2b7c30c290cb27bff0f43d81eaf60849af25b19a7950607db3ccf4aaa90a68d1394a2563f73
+  languageName: node
+  linkType: hard
+
 "tinyglobby@npm:^0.2.12, tinyglobby@npm:^0.2.15":
   version: 0.2.15
   resolution: "tinyglobby@npm:0.2.15"
@@ -4679,6 +4724,13 @@ __metadata:
   version: 2.1.0
   resolution: "uc.micro@npm:2.1.0"
   checksum: 10c0/8862eddb412dda76f15db8ad1c640ccc2f47cdf8252a4a30be908d535602c8d33f9855dfcccb8b8837855c1ce1eaa563f7fa7ebe3c98fd0794351aab9b9c55fa
+  languageName: node
+  linkType: hard
+
+"uevent@npm:^2.1.1":
+  version: 2.2.0
+  resolution: "uevent@npm:2.2.0"
+  checksum: 10c0/384f3127a2d6d491b6deb5a7332e316de48d60498434d272c191e7ecfedfdff708cf764101bd1adc266251cf4dde6253cb24d8267e24ff845e2f5d4bd239b4a9
   languageName: node
   linkType: hard
 

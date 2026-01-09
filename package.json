@@ -53,9 +53,12 @@
     "@auth0/auth0-spa-js": "^2.11.1",
     "@hygraph/management-sdk": "^1.5.2",
     "@lottiefiles/dotlottie-svelte": "^0.8.12",
+    "@photo-sphere-viewer/core": "^5.14.0",
+    "@photo-sphere-viewer/virtual-tour-plugin": "^5.14.0",
     "dotenv": "^17.2.3",
     "mapbox-gl": "^3.17.0",
     "markdown-it": "^14.1.0",
+    "photo-sphere-viewer": "^4.8.1",
     "swiper": "^12.0.3",
     "vanilla-cookieconsent": "^3.1.0"
   },

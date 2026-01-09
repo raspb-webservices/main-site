@@ -23,7 +23,8 @@
       "./messages/pages/thank-you/{locale}.json",
       "./messages/pages/registration/{locale}.json",
       "./messages/pages/profile/{locale}.json",
-      "./messages/pages/project-wizard/{locale}.json"
+      "./messages/pages/project-wizard/{locale}.json",
+      "./messages/pages/make-an-appointment/{locale}.json"
     ]
   }
 }

@@ -97,6 +97,20 @@ export default defineConfig({
             ['de', '/de/projektkonfigurator/:id'],
             ['en', '/en/project-wizard/:id']
           ]
+        },
+        {
+          pattern: '/make-an-appointment',
+          localized: [
+            ['de', '/de/einen-termin-vereinbaren'],
+            ['en', '/en/make-an-appointment']
+          ]
+        },
+        {
+          pattern: '/make-an-appointment/:id',
+          localized: [
+            ['de', '/de/einen-termin-vereinbaren/:id'],
+            ['en', '/en/make-an-appointment/:id']
+          ]
         }
       ]
     })

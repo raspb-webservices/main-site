@@ -1,8 +1,5 @@
 <script lang="ts">
-  import { m } from '$lib/paraglide/messages';
-
   let modal: HTMLDialogElement;
-  
   export function openModal() {
     modal?.showModal();
   }
