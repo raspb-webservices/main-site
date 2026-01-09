@@ -3,6 +3,13 @@ import tailwindcss from '@tailwindcss/vite';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 
+const emptySourceMap = JSON.stringify({
+  version: 3,
+  sources: [],
+  names: [],
+  mappings: ''
+});
+
 export default defineConfig({
   plugins: [
     tailwindcss({
@@ -12,6 +19,10 @@ export default defineConfig({
     paraglideVitePlugin({
       project: './project.inlang',
       outdir: './src/lib/paraglide',
+      additionalFiles: {
+        'strategy.js.map': emptySourceMap,
+        'middleware.js.map': emptySourceMap
+      },
       strategy: ['url', 'cookie', 'preferredLanguage', 'baseLocale'],
       urlPatterns: [
         {
