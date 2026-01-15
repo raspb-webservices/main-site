@@ -5,202 +5,202 @@
 </script>
 
 <svelte:head>
-  <title>{m['privacyNotice.meta.title']()}</title>
-  <meta name="description" content={m['privacyNotice.meta.description']()} />
+  <title>{m['privacyNotice_meta_title']()}</title>
+  <meta name="description" content={m['privacyNotice_meta_description']()} />
 </svelte:head>
 
 <div class="content-area privacy-notice">
   <Section>
     <div class="inner-content-wrapper prose">
-      <h1>{m['privacyNotice.title']()}</h1>
+      <h1>{m['privacyNotice_title']()}</h1>
 
-      <h2>{m['privacyNotice.section1.title']()}</h2>
+      <h2>{m['privacyNotice_section1_title']()}</h2>
 
-      <h3>{m['privacyNotice.generalNotice.title']()}</h3>
-      <p>{m['privacyNotice.generalNotice.text']()}</p>
+      <h3>{m['privacyNotice_generalNotice_title']()}</h3>
+      <p>{m['privacyNotice_generalNotice_text']()}</p>
 
-      <h3>{m['privacyNotice.section1.dataCollection.title']()}</h3>
-      <h4>{m['privacyNotice.section1.dataCollection.responsibleTitle']()}</h4>
+      <h3>{m['privacyNotice_section1_dataCollection_title']()}</h3>
+      <h4>{m['privacyNotice_section1_dataCollection_responsibleTitle']()}</h4>
       <p>
-        {m['privacyNotice.section1.dataCollection.responsibleText']()}
+        {m['privacyNotice_section1_dataCollection_responsibleText']()}
       </p>
 
-      <h4>{m['privacyNotice.section1.dataCollection.howCollectedTitle']()}</h4>
+      <h4>{m['privacyNotice_section1_dataCollection_howCollectedTitle']()}</h4>
       <p>
-        {m['privacyNotice.section1.dataCollection.howCollectedText1']()}
+        {m['privacyNotice_section1_dataCollection_howCollectedText1']()}
       </p>
       <p>
-        {m['privacyNotice.section1.dataCollection.howCollectedText2']()}
-      </p>
-
-      <h4>{m['privacyNotice.section1.dataCollection.purposeTitle']()}</h4>
-      <p>
-        {m['privacyNotice.section1.dataCollection.purposeText']()}
+        {m['privacyNotice_section1_dataCollection_howCollectedText2']()}
       </p>
 
-      <h4>{m['privacyNotice.section1.dataCollection.rightsTitle']()}</h4>
+      <h4>{m['privacyNotice_section1_dataCollection_purposeTitle']()}</h4>
       <p>
-        {m['privacyNotice.section1.dataCollection.rightsText']()}
+        {m['privacyNotice_section1_dataCollection_purposeText']()}
       </p>
 
-      <h2>{m['privacyNotice.section2.title']()}</h2>
-      <h3>{m['privacyNotice.section2.netlify.title']()}</h3>
+      <h4>{m['privacyNotice_section1_dataCollection_rightsTitle']()}</h4>
       <p>
-        {m['privacyNotice.section2.netlify.text1']()}
+        {m['privacyNotice_section1_dataCollection_rightsText']()}
+      </p>
+
+      <h2>{m['privacyNotice_section2_title']()}</h2>
+      <h3>{m['privacyNotice_section2_netlify_title']()}</h3>
+      <p>
+        {m['privacyNotice_section2_netlify_text1']()}
       </p>
       <p>
-        {m['privacyNotice.section2.netlify.text2']()}
+        {m['privacyNotice_section2_netlify_text2']()}
         <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener noreferrer">https://www.netlify.com/privacy/</a>.
       </p>
       <p>
-        {m['privacyNotice.section2.netlify.text3']()}
+        {m['privacyNotice_section2_netlify_text3']()}
       </p>
 
-      <h2>{m['privacyNotice.section3.title']()}</h2>
+      <h2>{m['privacyNotice_section3_title']()}</h2>
 
-      <h3>{m['privacyNotice.section3.dataProtection.title']()}</h3>
+      <h3>{m['privacyNotice_section3_dataProtection_title']()}</h3>
       <p>
-        {m['privacyNotice.section3.dataProtection.text1']()}
+        {m['privacyNotice_section3_dataProtection_text1']()}
       </p>
       <p>
-        {m['privacyNotice.section3.dataProtection.text2']()}
+        {m['privacyNotice_section3_dataProtection_text2']()}
       </p>
 
-      <h3>{m['privacyNotice.section3.responsibleBody.title']()}</h3>
-      <p>{m['privacyNotice.section3.responsibleBody.text1']()}</p>
+      <h3>{m['privacyNotice_section3_responsibleBody_title']()}</h3>
+      <p>{m['privacyNotice_section3_responsibleBody_text1']()}</p>
       <div class="contact-info prose">
         <p>
-          <strong>{m['privacyNotice.section3.responsibleBody.companyName']()}</strong><br />
-          {m['privacyNotice.section3.responsibleBody.name']()}<br />
-          {m['privacyNotice.section3.responsibleBody.address']()}<br />
-          {m['privacyNotice.section3.responsibleBody.zipCity']()}
+          <strong>{m['privacyNotice_section3_responsibleBody_companyName']()}</strong><br />
+          {m['privacyNotice_section3_responsibleBody_name']()}<br />
+          {m['privacyNotice_section3_responsibleBody_address']()}<br />
+          {m['privacyNotice_section3_responsibleBody_zipCity']()}
         </p>
         <p>
-          <strong>{m['privacyNotice.section3.responsibleBody.phone']()}</strong> 06732 - 9648113<br />
-          <strong>{m['privacyNotice.section3.responsibleBody.email']()}</strong> <a href="mailto:contact@raspb.de">contact@raspb.de</a>
+          <strong>{m['privacyNotice_section3_responsibleBody_phone']()}</strong> 06732 - 9648113<br />
+          <strong>{m['privacyNotice_section3_responsibleBody_email']()}</strong> <a href="mailto:contact@raspb.de">contact@raspb.de</a>
         </p>
       </div>
       <p>
-        {m['privacyNotice.section3.responsibleBody.text2']()}
+        {m['privacyNotice_section3_responsibleBody_text2']()}
       </p>
 
-      <h3>{m['privacyNotice.section3.storageDuration.title']()}</h3>
+      <h3>{m['privacyNotice_section3_storageDuration_title']()}</h3>
       <p>
-        {m['privacyNotice.section3.storageDuration.text']()}
+        {m['privacyNotice_section3_storageDuration_text']()}
       </p>
 
-      <h3>{m['privacyNotice.section3.withdrawalOfConsent.title']()}</h3>
+      <h3>{m['privacyNotice_section3_withdrawalOfConsent_title']()}</h3>
       <p>
-        {m['privacyNotice.section3.withdrawalOfConsent.text']()}
+        {m['privacyNotice_section3_withdrawalOfConsent_text']()}
       </p>
 
-      <h3>{m['privacyNotice.section3.rightToComplain.title']()}</h3>
+      <h3>{m['privacyNotice_section3_rightToComplain_title']()}</h3>
       <p>
-        {m['privacyNotice.section3.rightToComplain.text']()}
+        {m['privacyNotice_section3_rightToComplain_text']()}
       </p>
 
-      <h3>{m['privacyNotice.section3.rightToDataPortability.title']()}</h3>
+      <h3>{m['privacyNotice_section3_rightToDataPortability_title']()}</h3>
       <p>
-        {m['privacyNotice.section3.rightToDataPortability.text']()}
+        {m['privacyNotice_section3_rightToDataPortability_text']()}
       </p>
 
-      <h2>{m['privacyNotice.section4.title']()}</h2>
+      <h2>{m['privacyNotice_section4_title']()}</h2>
 
-      <h3>{m['privacyNotice.section4.cookies.title']()}</h3>
+      <h3>{m['privacyNotice_section4_cookies_title']()}</h3>
       <p>
-        {m['privacyNotice.section4.cookies.text1']()}
-      </p>
-
-      <p>
-        {m['privacyNotice.section4.cookies.text2']()}
+        {m['privacyNotice_section4_cookies_text1']()}
       </p>
 
       <p>
-        {m['privacyNotice.section4.cookies.text3']()}
+        {m['privacyNotice_section4_cookies_text2']()}
       </p>
 
       <p>
-        {m['privacyNotice.section4.cookies.text4']()}
+        {m['privacyNotice_section4_cookies_text3']()}
       </p>
 
-      <h3>{m['privacyNotice.section4.serverLogFiles.title']()}</h3>
       <p>
-        {m['privacyNotice.section4.serverLogFiles.text1']()}
+        {m['privacyNotice_section4_cookies_text4']()}
+      </p>
+
+      <h3>{m['privacyNotice_section4_serverLogFiles_title']()}</h3>
+      <p>
+        {m['privacyNotice_section4_serverLogFiles_text1']()}
       </p>
       <ul>
-        <li>{m['privacyNotice.section4.serverLogFiles.list.item1']()}</li>
-        <li>{m['privacyNotice.section4.serverLogFiles.list.item2']()}</li>
-        <li>{m['privacyNotice.section4.serverLogFiles.list.item3']()}</li>
-        <li>{m['privacyNotice.section4.serverLogFiles.list.item4']()}</li>
-        <li>{m['privacyNotice.section4.serverLogFiles.list.item5']()}</li>
-        <li>{m['privacyNotice.section4.serverLogFiles.list.item6']()}</li>
+        <li>{m['privacyNotice_section4_serverLogFiles_list_item1']()}</li>
+        <li>{m['privacyNotice_section4_serverLogFiles_list_item2']()}</li>
+        <li>{m['privacyNotice_section4_serverLogFiles_list_item3']()}</li>
+        <li>{m['privacyNotice_section4_serverLogFiles_list_item4']()}</li>
+        <li>{m['privacyNotice_section4_serverLogFiles_list_item5']()}</li>
+        <li>{m['privacyNotice_section4_serverLogFiles_list_item6']()}</li>
       </ul>
-      <p>{m['privacyNotice.section4.serverLogFiles.text2']()}</p>
+      <p>{m['privacyNotice_section4_serverLogFiles_text2']()}</p>
       <p>
-        {m['privacyNotice.section4.serverLogFiles.text3']()}
+        {m['privacyNotice_section4_serverLogFiles_text3']()}
       </p>
 
-      <h3>{m['privacyNotice.section4.contactForm.title']()}</h3>
+      <h3>{m['privacyNotice_section4_contactForm_title']()}</h3>
       <p>
-        {m['privacyNotice.section4.contactForm.text1']()}
+        {m['privacyNotice_section4_contactForm_text1']()}
       </p>
       <p>
-        {m['privacyNotice.section4.contactForm.text2']()}
+        {m['privacyNotice_section4_contactForm_text2']()}
       </p>
       <p>
-        {m['privacyNotice.section4.contactForm.text3']()}
+        {m['privacyNotice_section4_contactForm_text3']()}
       </p>
 
-      <h2>{m['privacyNotice.section5.title']()}</h2>
+      <h2>{m['privacyNotice_section5_title']()}</h2>
 
-      <h3>{m['privacyNotice.section5.auth0.title']()}</h3>
+      <h3>{m['privacyNotice_section5_auth0_title']()}</h3>
       <p>
-        {m['privacyNotice.section5.auth0.text1']()}
+        {m['privacyNotice_section5_auth0_text1']()}
       </p>
       <p>
-        {m['privacyNotice.section5.auth0.text2']()}
+        {m['privacyNotice_section5_auth0_text2']()}
       </p>
       <p>
-        {m['privacyNotice.section5.auth0.text3']()}
+        {m['privacyNotice_section5_auth0_text3']()}
       </p>
       <p>
-        {m['privacyNotice.section5.auth0.text4']()}
+        {m['privacyNotice_section5_auth0_text4']()}
         <a href="https://auth0.com/privacy" target="_blank" rel="noopener noreferrer">https://auth0.com/privacy</a>.
       </p>
 
-      <h3>{m['privacyNotice.section5.hygraph.title']()}</h3>
+      <h3>{m['privacyNotice_section5_hygraph_title']()}</h3>
       <p>
-        {m['privacyNotice.section5.hygraph.text1']()}
+        {m['privacyNotice_section5_hygraph_text1']()}
       </p>
       <p>
-        {m['privacyNotice.section5.hygraph.text2']()}
+        {m['privacyNotice_section5_hygraph_text2']()}
       </p>
       <p>
-        {m['privacyNotice.section5.hygraph.text3']()}
+        {m['privacyNotice_section5_hygraph_text3']()}
       </p>
       <p>
-        {m['privacyNotice.section5.hygraph.text4']()}
+        {m['privacyNotice_section5_hygraph_text4']()}
         <a href="https://hygraph.com/privacy" target="_blank" rel="noopener noreferrer">https://hygraph.com/privacy</a>.
       </p>
 
-      <h2>{m['privacyNotice.section6.title']()}</h2>
-      <p>{m['privacyNotice.section6.intro']()}</p>
+      <h2>{m['privacyNotice_section6_title']()}</h2>
+      <p>{m['privacyNotice_section6_intro']()}</p>
       <ul>
-        <li><strong>{m['privacyNotice.section6.rights.rightToInformation']()}</strong></li>
-        <li><strong>{m['privacyNotice.section6.rights.rightToCorrection']()}</strong></li>
-        <li><strong>{m['privacyNotice.section6.rights.rightToDeletion']()}</strong></li>
-        <li><strong>{m['privacyNotice.section6.rights.rightToRestriction']()}</strong></li>
-        <li><strong>{m['privacyNotice.section6.rights.rightToDataPortability']()}</strong></li>
-        <li><strong>{m['privacyNotice.section6.rights.rightToObject']()}</strong></li>
+        <li><strong>{m['privacyNotice_section6_rights_rightToInformation']()}</strong></li>
+        <li><strong>{m['privacyNotice_section6_rights_rightToCorrection']()}</strong></li>
+        <li><strong>{m['privacyNotice_section6_rights_rightToDeletion']()}</strong></li>
+        <li><strong>{m['privacyNotice_section6_rights_rightToRestriction']()}</strong></li>
+        <li><strong>{m['privacyNotice_section6_rights_rightToDataPortability']()}</strong></li>
+        <li><strong>{m['privacyNotice_section6_rights_rightToObject']()}</strong></li>
       </ul>
-      <p>{m['privacyNotice.section6.contact']()} <a href="mailto:contact@raspb.de">contact@raspb.de</a></p>
+      <p>{m['privacyNotice_section6_contact']()} <a href="mailto:contact@raspb.de">contact@raspb.de</a></p>
 
-      <h2>{m['privacyNotice.section7.title']()}</h2>
+      <h2>{m['privacyNotice_section7_title']()}</h2>
       <p>
-        {m['privacyNotice.section7.text']()}
+        {m['privacyNotice_section7_text']()}
       </p>
 
-      <p><strong>{m['privacyNotice.section7.status']()}</strong> {m['privacyNotice.section7.date']()}</p>
+      <p><strong>{m['privacyNotice_section7_status']()}</strong> {m['privacyNotice_section7_date']()}</p>
 
       <div class="spacer"></div>
 
@@ -208,7 +208,7 @@
         class="btn-basic"
         onclick={() => {
           goto('/');
-        }}>{m['privacyNotice.backToHomepage']()}</button
+        }}>{m['privacyNotice_backToHomepage']()}</button
       >
     </div>
   </Section>

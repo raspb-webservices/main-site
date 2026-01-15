@@ -67,7 +67,7 @@
   @reference '../../../app.css';
 
   .swiper-image {
-    @apply bg-primary/5 block aspect-video w-full bg-cover bg-center bg-no-repeat rounded-3xl shadow-lg;
+    @apply bg-primary/5 block aspect-video w-full rounded-3xl bg-cover bg-center bg-no-repeat shadow-lg;
     background-image: var(--image-url);
   }
 

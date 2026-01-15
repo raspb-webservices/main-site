@@ -81,7 +81,6 @@ export interface ProjectResponse extends Omit<Project, 'pages' | 'formFields' | 
   setup?: string;
 }
 
-
 export enum projectCetegory {
   website,
   app,

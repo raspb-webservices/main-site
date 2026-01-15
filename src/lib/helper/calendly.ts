@@ -1,12 +1,7 @@
 import { browser } from '$app/environment';
 
 export type CalendlyGlobal = {
-  initInlineWidget: (opts: {
-    url: string;
-    parentElement: Element | null;
-    prefill?: Record<string, unknown>;
-    utm?: Record<string, string>;
-  }) => void;
+  initInlineWidget: (opts: { url: string; parentElement: Element | null; prefill?: Record<string, unknown>; utm?: Record<string, string> }) => void;
   initPopupWidget: (opts: { url: string }) => void;
 };
 

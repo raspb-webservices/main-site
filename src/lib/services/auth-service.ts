@@ -25,7 +25,7 @@ async function getRoles(userid: string): Promise<string[]> {
   throw new Error('Could not fetch user roles from /api/userRoles/user[sub]!');
 }
 
-async function loginWithPopup(client: Auth0Client, options?: unknown, popup?: Window ) {
+async function loginWithPopup(client: Auth0Client, options?: unknown, popup?: Window) {
   popupOpen.set(true);
 
   try {
@@ -74,7 +74,7 @@ async function checkAuthState(client: Auth0Client) {
   }
 }
 
-async function createAuth0User(userData: { email: string; password: string; givenName: string; familyName: string; user_metadata:object }): Promise<unknown> {
+async function createAuth0User(userData: { email: string; password: string; givenName: string; familyName: string; user_metadata: object }): Promise<unknown> {
   try {
     const fetchString = '/api/auth/post/' + 'users';
     const requestData = {

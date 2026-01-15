@@ -1,44 +1,45 @@
 <script lang="ts">
   import { m } from '$lib/paraglide/messages';
   import { goto } from '$app/navigation';
+  import { localizeHref } from '$lib/paraglide/runtime';
 
   let { variant = 'default' } = $props();
 </script>
 
 <div class="cta-section">
   <div class="cta-content">
-    {#if variant === 'default' }
-          <h1>{m['ctaBox.titleFirst']()} <span class="inner-text-special">{m['ctaBox.titleHighlight']()}</span></h1>
-    <p class="cta-text">
-      {m['ctaBox.description']()}
-    </p>
+    {#if variant === 'default'}
+      <h1>{m['ctaBox_titleFirst']()} <span class="inner-text-special">{m['ctaBox_titleHighlight']()}</span></h1>
+      <p class="cta-text">
+        {m['ctaBox_description']()}
+      </p>
     {:else}
-        <h1>{m['ctaBox.variant2.titleFirst']()} <span class="inner-text-special">{m['ctaBox.variant2.titleHighlight']()}</span></h1>
-    <p class="cta-text">
-      {m['ctaBox.variant2.description']()}
-    </p>
+      <h1>{m['ctaBox_variant2_titleFirst']()} <span class="inner-text-special">{m['ctaBox_variant2_titleHighlight']()}</span></h1>
+      <p class="cta-text">
+        {m['ctaBox_variant2_description']()}
+      </p>
     {/if}
 
     <div class="cta-benefits">
       <div class="cta-benefit">
         <div class="benefit-icon">⚡</div>
         <div>
-          <h2>{m['ctaBox.benefits.zeit.title']()}</h2>
-          <p>{m['ctaBox.benefits.zeit.description']()}</p>
+          <h2>{m['ctaBox_benefits_zeit_title']()}</h2>
+          <p>{m['ctaBox_benefits_zeit_description']()}</p>
         </div>
       </div>
       <div class="cta-benefit">
         <div class="benefit-icon">🎯</div>
         <div>
-          <h2>{m['ctaBox.benefits.massgeschneidert.title']()}</h2>
-          <p>{m['ctaBox.benefits.massgeschneidert.description']()}</p>
+          <h2>{m['ctaBox_benefits_massgeschneidert_title']()}</h2>
+          <p>{m['ctaBox_benefits_massgeschneidert_description']()}</p>
         </div>
       </div>
       <div class="cta-benefit">
         <div class="benefit-icon">🤝</div>
         <div>
-          <h2>{m['ctaBox.benefits.contact.title']()}</h2>
-          <p>{m['ctaBox.benefits.contact.description']()}</p>
+          <h2>{m['ctaBox_benefits_contact_title']()}</h2>
+          <p>{m['ctaBox_benefits_contact_description']()}</p>
         </div>
       </div>
     </div>
@@ -47,16 +48,16 @@
       <button
         class="btn-basic cta-primary"
         onclick={() => {
-          goto('/get-started');
+          goto(localizeHref('/wizard'));
         }}
       >
-        {m['ctaBox.buttonText']()}
+        {m['ctaBox_buttonText']()}
       </button>
-      <button class="btn btn-outline btn-lg px-8 py-4" onclick={() => goto('/faq')}> {m['ctaBox.faqButtonText']()} </button>
+      <button class="btn btn-outline btn-lg px-8 py-4" onclick={() => goto(localizeHref('/faq'))}> {m['ctaBox_faqButtonText']()} </button>
     </div>
 
     <p class="cta-note">
-      {@html m['ctaBox.note']()}
+      {@html m['ctaBox_note']()}
     </p>
   </div>
 </div>
@@ -81,14 +82,14 @@
         @apply mb-8 grid grid-cols-1 gap-6 md:grid-cols-3;
 
         .cta-benefit {
-          @apply to-base-100 flex items-start rounded-lg bg-linear-to-tl from-base-50 p-3 text-left;
+          @apply to-base-100 from-base-50 flex items-start rounded-lg bg-linear-to-tl p-3 text-left;
 
           .benefit-icon {
             @apply mt-1 mr-4 text-3xl;
           }
 
           h2 {
-            @apply text-lg mb-1 font-semibold;
+            @apply mb-1 text-lg font-semibold;
           }
 
           p {

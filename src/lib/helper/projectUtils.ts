@@ -1,5 +1,17 @@
-import { features, projectStatus, subType } from '$interfaces/project.interface';
-import { projectCategories, projectTypesWebApp, projectTypesAiFreestyle, projectSubTypesWebsite, projectSubTypesApp, projectSubTypesAi, availableFeatures, type ProjectCategory, type ProjectType, type Feature } from '$lib/configs/wizard-config';
+import { features, projectStatus } from '$interfaces/project.interface';
+import {
+  projectCategories,
+  projectTypesWebApp,
+  projectTypesAiFreestyle,
+  projectSubTypesWebsite,
+  projectSubTypesApp,
+  projectSubTypesAi,
+  projectSubTypesFreestyle,
+  availableFeatures,
+  type ProjectCategory,
+  type ProjectType,
+  type Feature
+} from '$lib/configs/wizard-config';
 
 const StringIsNumber = (value) => isNaN(Number(value)) === false;
 export function ToArray(enumme) {
@@ -138,17 +150,28 @@ export function getFeatureLabel(feature: string) {
   }
 }
 
+export function getProjectCategoryLabel(projectType: string) {
+  const projectCategoryArray = ToArray(projectCategories);
+  const result: ProjectType[] = projectCategoryArray.filter((obj) => {
+    return obj.id === projectType;
+  });
+  return result[0]?.title;
+}
+
 export function getProjectTypeLabel(projectType: string) {
-  const projectTypeArray = ToArray(projectTypes);
+  const projectTypeArray = [];
+  projectTypeArray.concat(ToArray(projectTypesWebApp), ToArray(projectTypesAiFreestyle));
+
   const result: ProjectType[] = projectTypeArray.filter((obj) => {
     return obj.id === projectType;
   });
   return result[0]?.title;
 }
 
-export function getSubProjectTypeLabel(subProjectType: string) {
-  const subProjectTypeArray = ToArray(subTypes);
-  const result: SubType[] = subProjectTypeArray.filter((obj) => {
+export function getProjectSubTypeLabel(subProjectType: string) {
+  const subProjectTypeArray = [];
+  subProjectTypeArray.concat(ToArray(projectSubTypesWebsite), ToArray(projectSubTypesApp), ToArray(projectSubTypesAi), ToArray(projectSubTypesFreestyle));
+  const result: ProjectType[] = subProjectTypeArray.filter((obj) => {
     return obj.id === subProjectType;
   });
   return result[0]?.title;

@@ -46,7 +46,6 @@ export const POST: RequestHandler = async ({ request }) => {
         }
       }
     );
-
   } catch (error) {
     console.error('Error creating customer:', error);
 

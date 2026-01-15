@@ -27,24 +27,24 @@
 
     <div class="space-y-6">
       <div>
-        <h4 class="no-padding mb-2">{m['aboutUs.modals.member.about']({ name: selectedMember?.name })}</h4>
-        <p class="leading-relaxed">{m[`aboutUs.teamMembers.${selectedMember?.id || 'alex'}.description`]()}</p>
+        <h4 class="no-padding mb-2">{m['aboutUs_modals_member_about']({ name: selectedMember?.name })}</h4>
+        <p class="leading-relaxed">{m[`aboutUs_teamMembers_${selectedMember?.id || 'alex'}_description`]()}</p>
       </div>
 
       <div>
-        <h4 class="no-padding mb-2">{m['aboutUs.modals.member.personality']()}</h4>
-        <p class="leading-relaxed">{m[`aboutUs.teamMembers.${selectedMember?.id || 'alex'}.personality`]()}</p>
+        <h4 class="no-padding mb-2">{m['aboutUs_modals_member_personality']()}</h4>
+        <p class="leading-relaxed">{m[`aboutUs_teamMembers_${selectedMember?.id || 'alex'}_personality`]()}</p>
       </div>
 
       <div>
-        <h4 class="no-padding mb-2">{m['aboutUs.modals.member.experience']()}</h4>
-        <p class="leading-relaxed">{m[`aboutUs.teamMembers.${selectedMember?.id || 'alex'}.experience`]()}</p>
+        <h4 class="no-padding mb-2">{m['aboutUs_modals_member_experience']()}</h4>
+        <p class="leading-relaxed">{m[`aboutUs_teamMembers_${selectedMember?.id || 'alex'}_experience`]()}</p>
       </div>
 
       <div class="pt-2 pb-8">
         {#if selectedMember?.skills && selectedMember?.skills.length > 0}
-          <h4>{m['aboutUs.modals.member.coreCompetencies']()}</h4>
-          <div class="flex flex-wrap gap-2 mt-3">
+          <h4>{m['aboutUs_modals_member_coreCompetencies']()}</h4>
+          <div class="mt-3 flex flex-wrap gap-2">
             {#each selectedMember?.skills as skill}
               <span class="badge badge-primary badge-lg">{skill}</span>
             {/each}
@@ -54,7 +54,7 @@
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">{m['aboutUs.modals.closeButton']()}</button>
+        <button class="btn">{m['aboutUs_modals_closeButton']()}</button>
       </form>
     </div>
   </div>

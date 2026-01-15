@@ -16,8 +16,7 @@
     {
       image: '/images/slider/slide1.jpg',
       title: 'Experience Adventure Like Never Before',
-      text:
-        'Discover breathtaking landscapes and create unforgettable memories with our premium outdoor experiences.',
+      text: 'Discover breathtaking landscapes and create unforgettable memories with our premium outdoor experiences.',
       cta: 'Get Started'
     },
     {
@@ -35,15 +34,13 @@
     {
       image: '/images/slider/slide4.jpg',
       title: 'Create Lasting Memories',
-      text:
-        'Every moment becomes a story worth telling when you embrace the adventure that calls to you.',
+      text: 'Every moment becomes a story worth telling when you embrace the adventure that calls to you.',
       cta: 'Start Journey'
     },
     {
       image: '/images/slider/slide5.jpg',
       title: 'Where Dreams Take Flight',
-      text:
-        'Soar beyond your comfort zone and discover what lies beyond the horizon of possibility.',
+      text: 'Soar beyond your comfort zone and discover what lies beyond the horizon of possibility.',
       cta: 'Take Flight'
     }
   ];
@@ -112,7 +109,7 @@
   <!-- Overlay content card with arrows inside -->
   <div class="hero-card">
     <button class="hero-swiper-button-prev hero-card-nav" type="button" aria-label="previous">
-      <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none">
+      <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none">
         <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6" />
       </svg>
     </button>
@@ -126,7 +123,7 @@
     </div>
 
     <button class="hero-swiper-button-next hero-card-nav" type="button" aria-label="next">
-      <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none">
+      <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none">
         <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6" />
       </svg>
     </button>
@@ -139,31 +136,31 @@
   @reference '../../../app.css';
 
   .hero-slider-container {
-    @apply relative w-full aspect-video overflow-visible;
+    @apply relative aspect-video w-full overflow-visible;
   }
 
   .hero-swiper {
-    @apply w-full h-full overflow-visible;
+    @apply h-full w-full overflow-visible;
   }
 
   .hero-slide {
-    @apply relative h-[70%] md:h-[72%] lg:h-[74%] bg-cover bg-center bg-no-repeat rounded-xl shadow-xl overflow-hidden transition-transform duration-500 ease-out w-full;
+    @apply relative h-[70%] w-full overflow-hidden rounded-xl bg-cover bg-center bg-no-repeat shadow-xl transition-transform duration-500 ease-out md:h-[72%] lg:h-[74%];
     background-image: var(--bg-image);
   }
 
   .hero-headline {
-    @apply text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-neutral-900 mb-3 md:mb-4 leading-tight;
+    @apply mb-3 text-xl leading-tight font-bold text-neutral-900 md:mb-4 md:text-2xl lg:text-3xl xl:text-4xl;
     font-family: var(--font-circular);
   }
 
   .hero-subtext {
-    @apply text-sm md:text-base lg:text-lg text-neutral-700 mb-5 md:mb-6 leading-relaxed max-w-2xl;
+    @apply mb-5 max-w-2xl text-sm leading-relaxed text-neutral-700 md:mb-6 md:text-base lg:text-lg;
     font-family: var(--font-circular);
     font-weight: 300;
   }
 
   .hero-cta {
-    @apply text-base md:text-lg px-6 py-3 md:px-8 md:py-4;
+    @apply px-6 py-3 text-base md:px-8 md:py-4 md:text-lg;
   }
 
   /* Overlay content card (front-most) */
@@ -177,15 +174,15 @@
     z-index: 30;
     --card-h: 240px;
     min-height: var(--card-h);
-    @apply w-[90%] md:w-[80%] lg:w-[70%] bg-white/90 backdrop-blur-md shadow-2xl rounded-2xl flex items-center justify-between gap-4 md:gap-6 px-6 md:px-8 lg:px-12 py-6 md:py-7; 
+    @apply flex w-[90%] items-center justify-between gap-4 rounded-2xl bg-white/90 px-6 py-6 shadow-2xl backdrop-blur-md md:w-[80%] md:gap-6 md:px-8 md:py-7 lg:w-[70%] lg:px-12;
   }
 
   .hero-card-content {
-    @apply flex-1 text-center md:px-6 flex flex-col items-center justify-center gap-3;
+    @apply flex flex-1 flex-col items-center justify-center gap-3 text-center md:px-6;
   }
 
   .hero-card-nav {
-    @apply shrink-0 bg-white text-neutral-800 hover:text-neutral-900 hover:bg-neutral-50 rounded-full shadow-md p-2 md:p-3 transition-colors duration-200;
+    @apply shrink-0 rounded-full bg-white p-2 text-neutral-800 shadow-md transition-colors duration-200 hover:bg-neutral-50 hover:text-neutral-900 md:p-3;
   }
 
   /* pagination styles removed */
@@ -201,7 +198,9 @@
     align-items: center;
     justify-content: center;
   }
-  :global(.hero-swiper .swiper-slide) { z-index: 0; }
+  :global(.hero-swiper .swiper-slide) {
+    z-index: 0;
+  }
   :global(.hero-swiper .swiper-slide-prev),
   :global(.hero-swiper .swiper-slide-next) {
     transform: scale(0.94);
@@ -220,17 +219,19 @@
 
   /* Responsive adjustments */
   @media (max-width: 768px) {
-    .hero-card { --card-h: 200px; }
+    .hero-card {
+      --card-h: 200px;
+    }
     .hero-headline {
-      @apply text-lg md:text-xl mb-2;
+      @apply mb-2 text-lg md:text-xl;
     }
 
     .hero-subtext {
-      @apply text-sm md:text-base mb-4;
+      @apply mb-4 text-sm md:text-base;
     }
 
     .hero-cta {
-      @apply text-sm px-5 py-2.5;
+      @apply px-5 py-2.5 text-sm;
     }
   }
   /* Size the swiper wrapper area to let slides peek around */

@@ -3,7 +3,7 @@
 </script>
 
 {#if type === 'default'}
-  <section class="base-section" class:full={fullWidth} class:stretch={fullHeight}  class:noSpacing={noSpacing} style="--backgroundColor:{customColor}">
+  <section class="base-section" class:full={fullWidth} class:stretch={fullHeight} class:noSpacing style="--backgroundColor:{customColor}">
     <div class="inner-container">
       {@render children?.()}
     </div>
@@ -25,14 +25,14 @@
 <style lang="postcss">
   @reference '../../../app.css';
   section.base-section {
-    @apply w-full bg-base-50 py-24;
+    @apply bg-base-50 w-full py-24;
     background-color: var(--backgroundColor);
 
     &.stretch {
       @apply min-h-screen;
     }
 
-    &.noSpacing  {
+    &.noSpacing {
       @apply py-0;
     }
 
@@ -41,15 +41,15 @@
         @apply m-auto h-full w-full max-w-7xl px-4;
       }
     }
-    
+
     &.center-teaser {
       @apply from-secondary/30 via-primary/10 to-secondary/20 bg-linear-to-br py-36;
     }
-    
+
     &.full-center-teaser {
       @apply from-secondary/30 via-primary/10 to-secondary/20 bg-linear-to-br py-10;
       .inner-container {
-        @apply min-h-[calc(100vh-160px)] flex flex-col justify-center items-center text-center;
+        @apply flex min-h-[calc(100vh-160px)] flex-col items-center justify-center text-center;
       }
     }
   }

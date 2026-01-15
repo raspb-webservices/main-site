@@ -4,13 +4,13 @@
   import { m } from '$lib/paraglide/messages';
   let { project, openProjectModal } = $props();
 
-  function openThisProjectModal(project:Project) {
+  function openThisProjectModal(project: Project) {
     // Emit function call
-    openProjectModal(project)
+    openProjectModal(project);
   }
 </script>
 
-<tr class="cursor-pointer hover" onclick={ () => openThisProjectModal(project)  }>
+<tr class="hover cursor-pointer" onclick={() => openThisProjectModal(project)}>
   <td>
     <div class="font-medium">{project.name}</div>
   </td>

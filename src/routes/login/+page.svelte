@@ -3,6 +3,7 @@
   import Section from '$lib/components/ui/section.svelte';
   import { goto } from '$app/navigation';
   import auth from '$services/auth-service';
+  import { localizeHref } from '$lib/paraglide/runtime';
 
   async function login() {
     const popup: Window = openAuth0Popup(450, 650);
@@ -15,42 +16,41 @@
     }
   }
 
-
   function openAuth0Popup(arg0: number, arg1: number): Window {
     throw new Error('Function not implemented.');
   }
 </script>
 
 <svelte:head>
-  <title>{m['login.meta.title']()}</title>
-  <meta name="description" content={m['login.meta.description']()}/>
+  <title>{m['login_meta_title']()}</title>
+  <meta name="description" content={m['login_meta_description']()} />
 </svelte:head>
 
 <Section type={'fullCenterTeaser'}>
   <div class="inner-content-wrapper prose">
-      <h1>{m['login.title']()}</h1>
-      <p class="teaser">{m['login.teaser']()}</p>
-      <div class="spacer"></div>
-      <div class="flex gap-6">
-        <button
-          class="btn-basic"
-          onclick={() => {
-            login();
-          }}>{m['login.loginButton']()}</button
-        >
-                <button
-          class="btn-basic"
-          onclick={() => {
-            goto('/registration');
-          }}>{m['login.registerButton']()}</button
-        >
+    <h1>{m['login_title']()}</h1>
+    <p class="teaser">{m['login_teaser']()}</p>
+    <div class="spacer"></div>
+    <div class="flex gap-6">
+      <button
+        class="btn-basic"
+        onclick={() => {
+          login();
+        }}>{m['login_loginButton']()}</button
+      >
+      <button
+        class="btn-basic"
+        onclick={() => {
+          goto(localizeHref('/registration'));
+        }}>{m['login_registerButton']()}</button
+      >
     </div>
   </div>
 </Section>
 
 <style lang="postcss">
   @reference '../../app.css';
-    .inner-content-wrapper {
+  .inner-content-wrapper {
     @apply m-auto flex max-w-4xl flex-col items-center justify-center text-center;
   }
 </style>

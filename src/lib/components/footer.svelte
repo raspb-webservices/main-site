@@ -40,34 +40,34 @@
   const footerNav = [
     {
       subItems: [
-        { name: 'footer.nav.services.website', path: '/services#webseiten-section' },
-        { name: 'footer.nav.services.cms', path: '/services#cms-section' },
-        { name: 'footer.nav.services.webapp', path: '/services#applications-section' },
-        { name: 'footer.nav.services.freestyle', path: '/services#individual-development-section' },
-        { name: 'footer.nav.services.ki', path: '/services#ki-services-section' }
+        { name: 'footer_nav_services_website', path: '/services#webseiten-section' },
+        { name: 'footer_nav_services_cms', path: '/services#cms-section' },
+        { name: 'footer_nav_services_webapp', path: '/services#applications-section' },
+        { name: 'footer_nav_services_freestyle', path: '/services#individual-development-section' },
+        { name: 'footer_nav_services_ki', path: '/services#ki-services-section' }
       ]
     },
     {
       subItems: [
-        { name: 'footer.nav.insights.technology', path: '/insights#tech' },
-        { name: 'footer.nav.insights.project', path: '/insights#project' },
-        { name: 'footer.nav.insights.references', path: '/insights#showcase' }
+        { name: 'footer_nav_insights_technology', path: '/insights#tech' },
+        { name: 'footer_nav_insights_project', path: '/insights#project' },
+        { name: 'footer_nav_insights_references', path: '/insights#showcase' }
       ]
     },
     {
       subItems: [
-        { name: 'footer.nav.aboutUs.thisIsRaspb', path: '/about-us#raspb' },
-        { name: 'footer.nav.aboutUs.kiTeam', path: '/about-us#ai-team' }
+        { name: 'footer_nav_aboutUs_thisIsRaspb', path: '/about-us#raspb' },
+        { name: 'footer_nav_aboutUs_kiTeam', path: '/about-us#ai-team' }
       ]
     },
     {
       subItems: [
-        { name: 'footer.nav.legal.faq', path: '/faq' },
-        { name: 'footer.nav.legal.contact', path: '/contact' },
-        { name: 'footer.nav.legal.registration', path: '/registration' },
-        { name: 'footer.nav.legal.imprint', path: '/imprint' },
-        { name: 'footer.nav.legal.privacy', path: '/privacy' },
-        { name: 'footer.nav.legal.terms', path: '/terms' }
+        { name: 'footer_nav_legal_faq', path: '/faq' },
+        { name: 'footer_nav_legal_contact', path: '/contact' },
+        { name: 'footer_nav_legal_registration', path: '/registration' },
+        { name: 'footer_nav_legal_imprint', path: '/imprint' },
+        { name: 'footer_nav_legal_privacy', path: '/privacy' },
+        { name: 'footer_nav_legal_terms', path: '/terms' }
       ]
     }
   ];
@@ -120,7 +120,7 @@
     <div class="footer-nav-wrapper">
       <div class="pre-column"></div>
       <div class="service-column">
-        <h3 class="pb-4">{m['footer.nav.services.title']()}</h3>
+        <h3 class="pb-4">{m['footer_nav_services_title']()}</h3>
         <div class="footer-nav-items">
           {#each footerNav[0].subItems as item}
             <button class="footer-nav-item" onclick={() => goto(localizeHref(item.path))}>
@@ -130,7 +130,7 @@
         </div>
       </div>
       <div class="insights-column">
-        <h3 class="pb-4">{m['footer.nav.insights.title']()}</h3>
+        <h3 class="pb-4">{m['footer_nav_insights_title']()}</h3>
         <div class="footer-nav-items">
           {#each footerNav[1].subItems as item}
             <button class="footer-nav-item" onclick={() => goto(localizeHref(item.path))}>
@@ -140,7 +140,7 @@
         </div>
       </div>
       <div class="about-us-column">
-        <h3 class="pb-4">{m['footer.nav.aboutUs.title']()}</h3>
+        <h3 class="pb-4">{m['footer_nav_aboutUs_title']()}</h3>
         <div class="footer-nav-items">
           {#each footerNav[2].subItems as item}
             <button class="footer-nav-item" onclick={() => goto(localizeHref(item.path))}>
@@ -150,7 +150,7 @@
         </div>
       </div>
       <div class="legal-column">
-        <h3 class="pb-4">{m['footer.nav.legal.title']()}</h3>
+        <h3 class="pb-4">{m['footer_nav_legal_title']()}</h3>
         <div class="footer-nav-items">
           {#each footerNav[3].subItems as item}
             <button class="footer-nav-item" onclick={() => goto(localizeHref(item.path))}>
@@ -167,8 +167,8 @@
         class:german={getLocale() === 'de'}
         class:english={getLocale() === 'en'}
         onclick={toggleLocale}
-        aria-label={getLocale() === 'de' ? m['menu.switchLanguageToEnglish']() : m['menu.switchLanguageToGerman']()}
-        title={getLocale() === 'de' ? m['menu.switchLanguageToEnglish']() : m['menu.switchLanguageToGerman']()}
+        aria-label={getLocale() === 'de' ? m['menu_switchLanguageToEnglish']() : m['menu_switchLanguageToGerman']()}
+        title={getLocale() === 'de' ? m['menu_switchLanguageToEnglish']() : m['menu_switchLanguageToGerman']()}
       ></button>
 
       <label class="swap swap-rotate ml-4 hover:scale-105" for="dark-theme-checkbox">

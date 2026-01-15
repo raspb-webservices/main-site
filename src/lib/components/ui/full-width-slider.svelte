@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { register } from 'swiper/element/bundle';
-  
+
   register();
 
   let mySwiper;
@@ -22,7 +22,7 @@
     },
     autoplay: {
       delay: 5000,
-      disableOnInteraction: false,
+      disableOnInteraction: false
     },
     loop: true,
     effect: 'fade',
@@ -42,7 +42,6 @@
 
 <div class="hero-slider-container">
   <swiper-container bind:this={mySwiper} init="false" class="hero-swiper">
-    
     <!-- Slide 1 -->
     <swiper-slide>
       <div class="hero-slide" style="--bg-image: url('/images/slider/slide1.jpg')">
@@ -112,19 +111,18 @@
         </div>
       </div>
     </swiper-slide>
-
   </swiper-container>
 
   <!-- Custom Navigation -->
   <div class="hero-navigation">
     <button class="full-width-swiper-button-prev hero-nav-btn" type="button" aria-label="previous">
-      <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none">
-        <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6"/>
+      <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none">
+        <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6" />
       </svg>
     </button>
     <button class="full-width-swiper-button-next hero-nav-btn" type="button" aria-label="next">
-      <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none">
-        <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/>
+      <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none">
+        <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6" />
       </svg>
     </button>
   </div>
@@ -137,24 +135,24 @@
   @reference '../../../app.css';
 
   .hero-slider-container {
-    @apply relative w-full h-screen overflow-hidden;
+    @apply relative h-screen w-full overflow-hidden;
   }
 
   .hero-swiper {
-    @apply w-full h-full;
+    @apply h-full w-full;
   }
 
   .hero-slide {
-    @apply relative w-full h-full bg-cover bg-center bg-no-repeat flex items-center justify-center;
+    @apply relative flex h-full w-full items-center justify-center bg-cover bg-center bg-no-repeat;
     background-image: var(--bg-image);
   }
 
   .hero-overlay {
-    @apply absolute inset-0 bg-black/40 z-10;
+    @apply absolute inset-0 z-10 bg-black/40;
   }
 
   .hero-content {
-    @apply relative z-20 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20;
+    @apply relative z-20 mx-auto w-full max-w-7xl px-6 md:px-12 lg:px-20;
   }
 
   .hero-text {
@@ -162,61 +160,61 @@
   }
 
   .hero-headline {
-    @apply text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight;
+    @apply mb-6 text-4xl leading-tight font-bold text-white md:text-5xl lg:text-7xl;
     font-family: var(--font-circular);
   }
 
   .hero-subtext {
-    @apply text-lg md:text-xl lg:text-2xl text-white/90 mb-8 leading-relaxed max-w-2xl;
+    @apply mb-8 max-w-2xl text-lg leading-relaxed text-white/90 md:text-xl lg:text-2xl;
     font-family: var(--font-circular);
     font-weight: 300;
   }
 
   .hero-cta {
-    @apply text-lg md:text-xl px-8 py-4 md:px-12 md:py-5;
+    @apply px-8 py-4 text-lg md:px-12 md:py-5 md:text-xl;
   }
 
   .hero-navigation {
-    @apply absolute top-1/2 -translate-y-1/2 z-30 w-full flex justify-between px-6 md:px-12 lg:px-20 pointer-events-none;
+    @apply pointer-events-none absolute top-1/2 z-30 flex w-full -translate-y-1/2 justify-between px-6 md:px-12 lg:px-20;
   }
 
   .hero-nav-btn {
-    @apply bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white rounded-full p-3 md:p-4 transition-all duration-300 pointer-events-auto;
-    
+    @apply pointer-events-auto rounded-full bg-white/20 p-3 text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/30 md:p-4;
+
     &:hover {
       @apply scale-110 shadow-lg;
     }
 
     &:disabled {
-      @apply opacity-50 cursor-not-allowed;
+      @apply cursor-not-allowed opacity-50;
     }
   }
 
   .hero-pagination {
-    @apply absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-3;
+    @apply absolute bottom-8 left-1/2 z-30 flex -translate-x-1/2 gap-3;
   }
 
   /* Custom pagination styling */
   :global(.hero-pagination .swiper-pagination-bullet) {
-    @apply w-12 h-1 bg-white/50 rounded-full transition-all duration-300 cursor-pointer;
+    @apply h-1 w-12 cursor-pointer rounded-full bg-white/50 transition-all duration-300;
   }
 
   :global(.hero-pagination .swiper-pagination-bullet-active) {
-    @apply bg-white scale-y-150;
+    @apply scale-y-150 bg-white;
   }
 
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .hero-headline {
-      @apply text-3xl md:text-4xl mb-4;
+      @apply mb-4 text-3xl md:text-4xl;
     }
 
     .hero-subtext {
-      @apply text-base md:text-lg mb-6;
+      @apply mb-6 text-base md:text-lg;
     }
 
     .hero-cta {
-      @apply text-base px-6 py-3;
+      @apply px-6 py-3 text-base;
     }
 
     .hero-navigation {
@@ -232,8 +230,7 @@
     }
   }
 
-
   :global(.hero-swiper .swiper-slide) {
-    @apply w-full h-full;
+    @apply h-full w-full;
   }
 </style>

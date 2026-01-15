@@ -1,13 +1,30 @@
 <script lang="ts">
   import { projectStatus, salutationOptions, domainStatus, features } from '$interfaces/project.interface';
-  import { projectCategories, projectTypesWebApp, projectTypesAiFreestyle, projectSubTypesWebsite, projectSubTypesApp, projectSubTypesAi, availableFeatures } from '$lib/configs/wizard-config';
-  import { formatDate, formatBudget, getStatusBadgeClass, getStatusLabel, getFeatureLabel, ToArray, getProjectTypeLabel, getSubProjectTypeLabel } from '$lib/helper/projectUtils';
+  import {
+    projectCategories,
+    projectTypesWebApp,
+    projectTypesAiFreestyle,
+    projectSubTypesWebsite,
+    projectSubTypesApp,
+    projectSubTypesAi,
+    availableFeatures
+  } from '$lib/configs/wizard-config';
+  import {
+    formatDate,
+    formatBudget,
+    getStatusBadgeClass,
+    getStatusLabel,
+    getFeatureLabel,
+    ToArray,
+    getProjectTypeLabel,
+    getProjectSubTypeLabel
+  } from '$lib/helper/projectUtils';
   import { m } from '$lib/paraglide/messages';
 
   let { selectedProject } = $props();
 
   let modal: HTMLDialogElement;
-  
+
   let editingSection: string | null = $state(null);
   let editError = $state('');
   let editSuccess = $state('');
@@ -174,7 +191,7 @@
       if (response.ok) {
         selectedProject.owner = customerForm;
         customerSuccess = 'Kundendaten erfolgreich gespeichert!';
-        
+
         // Nach 2 Sekunden den Bearbeitungsmodus verlassen
         setTimeout(() => {
           editingCustomer = false;
@@ -194,7 +211,7 @@
   function toggleFeature(feature: string) {
     const index = editForm?.features?.indexOf(feature);
     if (index > -1) {
-      editForm.features = editForm.features.filter(f => f !== feature);
+      editForm.features = editForm.features.filter((f) => f !== feature);
     } else {
       editForm.features = [...editForm.features, feature];
     }
@@ -202,7 +219,7 @@
 
   function editSetupService(service: string) {
     if (!selectedProject) return;
-    
+
     editingSetupService = service;
     serviceError = '';
     serviceSuccess = '';
@@ -266,7 +283,7 @@
       if (response.ok) {
         selectedProject = { ...selectedProject, setup: updatedSetup };
         serviceSuccess = 'Service Setup erfolgreich gespeichert!';
-        
+
         // Nach 2 Sekunden den Bearbeitungsmodus verlassen
         setTimeout(() => {
           editingSetupService = null;
@@ -395,7 +412,7 @@
                 </label>
                 <select bind:value={editForm.projectStatus} id="projectStatus" name="projectStatus" class="select select-bordered select-sm">
                   <option value="">Bitte wählen</option>
-                  {#each  ToArray(projectStatus) as status}
+                  {#each ToArray(projectStatus) as status}
                     <option value={status as string}>{getStatusLabel(status as string)}</option>
                   {/each}
                 </select>
@@ -405,7 +422,13 @@
                 <label class="label" for="description">
                   <span class="label-text">Beschreibung</span>
                 </label>
-                <textarea bind:value={editForm.description} id="description" name="description" class="textarea textarea-bordered textarea-sm h-20" placeholder="Projektbeschreibung"></textarea>
+                <textarea
+                  bind:value={editForm.description}
+                  id="description"
+                  name="description"
+                  class="textarea textarea-bordered textarea-sm h-20"
+                  placeholder="Projektbeschreibung"
+                ></textarea>
               </div>
 
               <div class="form-control">
@@ -413,7 +436,8 @@
                   <span class="label-text">Projektdetails</span>
                 </label>
                 <textarea
-                  id="projectDetails" name="projectDetails"
+                  id="projectDetails"
+                  name="projectDetails"
                   bind:value={editForm.projectDetails}
                   class="textarea textarea-bordered textarea-sm h-20"
                   placeholder="Detaillierte Projektbeschreibung"
@@ -441,7 +465,7 @@
               </div>
               <div class="flex justify-between">
                 <span class="text-base-content/60">Untertyp:</span>
-                <span class="font-medium">{ getSubProjectTypeLabel(selectedProject?.subType) }</span>
+                <span class="font-medium">{getProjectSubTypeLabel(selectedProject?.subType)}</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-base-content/60">Projektstatus:</span>
@@ -716,7 +740,14 @@
                 <label class="label" for="desiredDomain">
                   <span class="label-text">Domain</span>
                 </label>
-                <input type="text" bind:value={editForm.desiredDomain} id="desiredDomain" name="desiredDomain" class="input input-bordered input-sm" placeholder="example.com" />
+                <input
+                  type="text"
+                  bind:value={editForm.desiredDomain}
+                  id="desiredDomain"
+                  name="desiredDomain"
+                  class="input input-bordered input-sm"
+                  placeholder="example.com"
+                />
               </div>
 
               <div class="form-control">
@@ -735,14 +766,25 @@
                 <label class="label" for="goals">
                   <span class="label-text">Ziele</span>
                 </label>
-                <textarea bind:value={editForm.goals} id="goals" name="goals" class="textarea textarea-bordered textarea-sm h-20" placeholder="Projektziele beschreiben"></textarea>
+                <textarea
+                  bind:value={editForm.goals}
+                  id="goals"
+                  name="goals"
+                  class="textarea textarea-bordered textarea-sm h-20"
+                  placeholder="Projektziele beschreiben"
+                ></textarea>
               </div>
 
               <div class="form-control">
                 <label class="label" for="targetAudience">
                   <span class="label-text">Zielgruppe</span>
                 </label>
-                <textarea bind:value={editForm.targetAudience} id="targetAudience" name="targetAudience" class="textarea textarea-bordered textarea-sm h-20" placeholder="Zielgruppe beschreiben"
+                <textarea
+                  bind:value={editForm.targetAudience}
+                  id="targetAudience"
+                  name="targetAudience"
+                  class="textarea textarea-bordered textarea-sm h-20"
+                  placeholder="Zielgruppe beschreiben"
                 ></textarea>
               </div>
 
@@ -750,7 +792,14 @@
                 <label class="label" for="timeline">
                   <span class="label-text">Timeline</span>
                 </label>
-                <input type="text" bind:value={editForm.timeline} id="timeline" name="timeline" class="input input-bordered input-sm" placeholder="z.B. 3 Monate" />
+                <input
+                  type="text"
+                  bind:value={editForm.timeline}
+                  id="timeline"
+                  name="timeline"
+                  class="input input-bordered input-sm"
+                  placeholder="z.B. 3 Monate"
+                />
               </div>
 
               <div class="flex justify-end gap-2">
@@ -849,7 +898,14 @@
                 <label class="label" for="estimatedPrice">
                   <span class="label-text">Geschätzter Preis</span>
                 </label>
-                <input type="number" bind:value={editForm.estimatedPrice} id="estimatedPrice" name="estimatedPrice" class="input input-bordered input-sm" placeholder="0" />
+                <input
+                  type="number"
+                  bind:value={editForm.estimatedPrice}
+                  id="estimatedPrice"
+                  name="estimatedPrice"
+                  class="input input-bordered input-sm"
+                  placeholder="0"
+                />
               </div>
 
               <div class="flex justify-end gap-2">
@@ -902,8 +958,6 @@
             {/if}
           </div>
 
-
-
           {#if editingSection === 'features'}
             <!-- Bearbeitungsmodus -->
             <div class="space-y-4">
@@ -936,7 +990,8 @@
                   {#each ToArray(features) as feature}
                     <label class="label cursor-pointer justify-start">
                       <input
-                        id="feature-{feature}" name="feature-{feature}"
+                        id="feature-{feature}"
+                        name="feature-{feature}"
                         type="checkbox"
                         class="checkbox checkbox-sm checkbox-primary mr-2"
                         checked={editForm?.features?.includes(feature)}
@@ -952,7 +1007,14 @@
                 <label class="label" for="customFeature">
                   <span class="label-text">Custom Feature</span>
                 </label>
-                <input type="text" bind:value={editForm.customFeature} id="customFeature" name="customFeature" class="input input-bordered input-sm" placeholder="Individuelles Feature" />
+                <input
+                  type="text"
+                  bind:value={editForm.customFeature}
+                  id="customFeature"
+                  name="customFeature"
+                  class="input input-bordered input-sm"
+                  placeholder="Individuelles Feature"
+                />
               </div>
 
               <div class="flex justify-end gap-2">
@@ -1038,8 +1100,21 @@
                   <span class="label-text">Primärfarbe</span>
                 </label>
                 <div class="flex items-center gap-2">
-                  <input type="color" id="primaryColour" name="primaryColour" bind:value={editForm.primaryColour} class="border-base-300 h-8 w-12 rounded border" />
-                  <input type="text" id="primaryColourText" name="primaryColourText" bind:value={editForm.primaryColour} class="input input-bordered input-sm flex-1" placeholder="#000000" />
+                  <input
+                    type="color"
+                    id="primaryColour"
+                    name="primaryColour"
+                    bind:value={editForm.primaryColour}
+                    class="border-base-300 h-8 w-12 rounded border"
+                  />
+                  <input
+                    type="text"
+                    id="primaryColourText"
+                    name="primaryColourText"
+                    bind:value={editForm.primaryColour}
+                    class="input input-bordered input-sm flex-1"
+                    placeholder="#000000"
+                  />
                 </div>
               </div>
 
@@ -1048,8 +1123,21 @@
                   <span class="label-text">Sekundärfarbe</span>
                 </label>
                 <div class="flex items-center gap-2">
-                  <input type="color" id="secondaryColour" name="secondaryColour" bind:value={editForm.secondaryColour} class="border-base-300 h-8 w-12 rounded border" />
-                  <input type="text" id="secondaryColourText" name="secondaryColourText" bind:value={editForm.secondaryColour} class="input input-bordered input-sm flex-1" placeholder="#000000" />
+                  <input
+                    type="color"
+                    id="secondaryColour"
+                    name="secondaryColour"
+                    bind:value={editForm.secondaryColour}
+                    class="border-base-300 h-8 w-12 rounded border"
+                  />
+                  <input
+                    type="text"
+                    id="secondaryColourText"
+                    name="secondaryColourText"
+                    bind:value={editForm.secondaryColour}
+                    class="input input-bordered input-sm flex-1"
+                    placeholder="#000000"
+                  />
                 </div>
               </div>
 
@@ -1058,8 +1146,21 @@
                   <span class="label-text">Akzentfarbe</span>
                 </label>
                 <div class="flex items-center gap-2">
-                  <input type="color" id="accentColour" name="accentColour" bind:value={editForm.accentColour} class="border-base-300 h-8 w-12 rounded border" />
-                  <input type="text" id="accentColourText" name="accentColourText" bind:value={editForm.accentColour} class="input input-bordered input-sm flex-1" placeholder="#000000" />
+                  <input
+                    type="color"
+                    id="accentColour"
+                    name="accentColour"
+                    bind:value={editForm.accentColour}
+                    class="border-base-300 h-8 w-12 rounded border"
+                  />
+                  <input
+                    type="text"
+                    id="accentColourText"
+                    name="accentColourText"
+                    bind:value={editForm.accentColour}
+                    class="input input-bordered input-sm flex-1"
+                    placeholder="#000000"
+                  />
                 </div>
               </div>
 
@@ -1067,7 +1168,14 @@
                 <label class="label" for="desiredFont">
                   <span class="label-text">Schriftart</span>
                 </label>
-                <input type="text" bind:value={editForm.desiredFont} id="desiredFont" name="desiredFont" class="input input-bordered input-sm" placeholder="z.B. Arial, Helvetica" />
+                <input
+                  type="text"
+                  bind:value={editForm.desiredFont}
+                  id="desiredFont"
+                  name="desiredFont"
+                  class="input input-bordered input-sm"
+                  placeholder="z.B. Arial, Helvetica"
+                />
               </div>
 
               <div class="flex justify-end gap-2">
@@ -1211,28 +1319,53 @@
                     <label class="label" for="githubUsername">
                       <span class="label-text text-xs">Username</span>
                     </label>
-                    <input type="text" bind:value={serviceForm.username}  id="githubUsername" name="githubUsername"  class="input input-bordered input-xs" placeholder="GitHub Username" />
+                    <input
+                      type="text"
+                      bind:value={serviceForm.username}
+                      id="githubUsername"
+                      name="githubUsername"
+                      class="input input-bordered input-xs"
+                      placeholder="GitHub Username"
+                    />
                   </div>
 
                   <div class="form-control">
                     <label class="label" for="githubPassword">
                       <span class="label-text text-xs">Passwort</span>
                     </label>
-                    <input type="password" bind:value={serviceForm.password}  id="githubPassword" name="githubPassword"  class="input input-bordered input-xs" placeholder="GitHub Passwort" />
+                    <input
+                      type="password"
+                      bind:value={serviceForm.password}
+                      id="githubPassword"
+                      name="githubPassword"
+                      class="input input-bordered input-xs"
+                      placeholder="GitHub Passwort"
+                    />
                   </div>
 
                   <div class="form-control">
                     <label class="label" for="githubAuthTokens">
                       <span class="label-text text-xs">Auth Tokens (JSON)</span>
                     </label>
-                    <textarea bind:value={serviceForm.authTokens} id="githubAuthTokens" name="githubAuthTokens"  class="textarea textarea-bordered textarea-xs h-16 font-mono text-xs" placeholder="Token"
+                    <textarea
+                      bind:value={serviceForm.authTokens}
+                      id="githubAuthTokens"
+                      name="githubAuthTokens"
+                      class="textarea textarea-bordered textarea-xs h-16 font-mono text-xs"
+                      placeholder="Token"
                     ></textarea>
                   </div>
 
                   <div class="form-control">
                     <label class="label cursor-pointer">
                       <span class="label-text text-xs">Konfiguriert</span>
-                      <input type="checkbox"  id="githubIsConfigured" name="githubIsConfigured" bind:checked={serviceForm.isConfigured} class="checkbox checkbox-xs checkbox-primary" />
+                      <input
+                        type="checkbox"
+                        id="githubIsConfigured"
+                        name="githubIsConfigured"
+                        bind:checked={serviceForm.isConfigured}
+                        class="checkbox checkbox-xs checkbox-primary"
+                      />
                     </label>
                   </div>
 
@@ -1326,28 +1459,53 @@
                     <label class="label" for="netlifyUsername">
                       <span class="label-text text-xs">Username</span>
                     </label>
-                    <input type="text" bind:value={serviceForm.username} id="netlifyUsername" name="netlifyUsername" class="input input-bordered input-xs" placeholder="Netlify Username" />
+                    <input
+                      type="text"
+                      bind:value={serviceForm.username}
+                      id="netlifyUsername"
+                      name="netlifyUsername"
+                      class="input input-bordered input-xs"
+                      placeholder="Netlify Username"
+                    />
                   </div>
 
                   <div class="form-control">
                     <label class="label" for="netlifyPassword">
                       <span class="label-text text-xs">Passwort</span>
                     </label>
-                    <input type="password" bind:value={serviceForm.password} id="netlifyPassword" name="netlifyPassword" class="input input-bordered input-xs" placeholder="Netlify Passwort" />
+                    <input
+                      type="password"
+                      bind:value={serviceForm.password}
+                      id="netlifyPassword"
+                      name="netlifyPassword"
+                      class="input input-bordered input-xs"
+                      placeholder="Netlify Passwort"
+                    />
                   </div>
 
                   <div class="form-control">
                     <label class="label" for="netlifyAuthTokens">
                       <span class="label-text text-xs">Auth Tokens (JSON)</span>
                     </label>
-                    <textarea bind:value={serviceForm.authTokens} id="netlifyAuthTokens" name="netlifyAuthTokens" class="textarea textarea-bordered textarea-xs h-16 font-mono text-xs" placeholder="Token"
+                    <textarea
+                      bind:value={serviceForm.authTokens}
+                      id="netlifyAuthTokens"
+                      name="netlifyAuthTokens"
+                      class="textarea textarea-bordered textarea-xs h-16 font-mono text-xs"
+                      placeholder="Token"
                     ></textarea>
                   </div>
 
                   <div class="form-control">
                     <label class="label cursor-pointer">
                       <span class="label-text text-xs">Konfiguriert</span>
-                      <input type="checkbox" bind:checked={serviceForm.isConfigured} id="netlifyIsConfigured" name="netlifyIsConfigured" class="checkbox checkbox-xs checkbox-primary" />
+                      <input
+                        type="checkbox"
+                        bind:checked={serviceForm.isConfigured}
+                        id="netlifyIsConfigured"
+                        name="netlifyIsConfigured"
+                        class="checkbox checkbox-xs checkbox-primary"
+                      />
                     </label>
                   </div>
 
@@ -1441,28 +1599,53 @@
                     <label class="label" for="hygraphUsername">
                       <span class="label-text text-xs">Username</span>
                     </label>
-                    <input type="text" bind:value={serviceForm.username} id="hygraphUsername" name="netlifyUsername" class="input input-bordered input-xs" placeholder="Hygraph Username" />
+                    <input
+                      type="text"
+                      bind:value={serviceForm.username}
+                      id="hygraphUsername"
+                      name="netlifyUsername"
+                      class="input input-bordered input-xs"
+                      placeholder="Hygraph Username"
+                    />
                   </div>
 
                   <div class="form-control">
                     <label class="label" for="hygraphPassword">
                       <span class="label-text text-xs">Passwort</span>
                     </label>
-                    <input type="password" bind:value={serviceForm.password} id="hygraphPassword" name="hygraphPassword" class="input input-bordered input-xs" placeholder="Hygraph Passwort" />
+                    <input
+                      type="password"
+                      bind:value={serviceForm.password}
+                      id="hygraphPassword"
+                      name="hygraphPassword"
+                      class="input input-bordered input-xs"
+                      placeholder="Hygraph Passwort"
+                    />
                   </div>
 
                   <div class="form-control">
                     <label class="label" for="hygraphAuthTokens">
                       <span class="label-text text-xs">Auth Tokens (JSON)</span>
                     </label>
-                    <textarea bind:value={serviceForm.authTokens} id="hygraphAuthTokens" name="hygraphAuthTokens" class="textarea textarea-bordered textarea-xs h-16 font-mono text-xs" placeholder="Token"
+                    <textarea
+                      bind:value={serviceForm.authTokens}
+                      id="hygraphAuthTokens"
+                      name="hygraphAuthTokens"
+                      class="textarea textarea-bordered textarea-xs h-16 font-mono text-xs"
+                      placeholder="Token"
                     ></textarea>
                   </div>
 
                   <div class="form-control">
                     <label class="label cursor-pointer">
                       <span class="label-text text-xs">Konfiguriert</span>
-                      <input type="checkbox" id="hygraphIsConfigured" name="hygraphIsConfigured" bind:checked={serviceForm.isConfigured} class="checkbox checkbox-xs checkbox-primary" />
+                      <input
+                        type="checkbox"
+                        id="hygraphIsConfigured"
+                        name="hygraphIsConfigured"
+                        bind:checked={serviceForm.isConfigured}
+                        class="checkbox checkbox-xs checkbox-primary"
+                      />
                     </label>
                   </div>
 
@@ -1556,28 +1739,53 @@
                     <label class="label" for="auth0Username">
                       <span class="label-text text-xs">Username</span>
                     </label>
-                    <input type="text" bind:value={serviceForm.username} id="auth0Username" name="auth0Username" class="input input-bordered input-xs" placeholder="Auth0 Username" />
+                    <input
+                      type="text"
+                      bind:value={serviceForm.username}
+                      id="auth0Username"
+                      name="auth0Username"
+                      class="input input-bordered input-xs"
+                      placeholder="Auth0 Username"
+                    />
                   </div>
 
                   <div class="form-control">
                     <label class="label" for="auth0Password">
                       <span class="label-text text-xs">Passwort</span>
                     </label>
-                    <input type="password" bind:value={serviceForm.password} id="auth0Password" name="auth0Password"class="input input-bordered input-xs" placeholder="Auth0 Passwort" />
+                    <input
+                      type="password"
+                      bind:value={serviceForm.password}
+                      id="auth0Password"
+                      name="auth0Password"
+                      class="input input-bordered input-xs"
+                      placeholder="Auth0 Passwort"
+                    />
                   </div>
 
                   <div class="form-control">
                     <label class="label" for="auth0AuthTokens">
                       <span class="label-text text-xs">Auth Tokens (JSON)</span>
                     </label>
-                    <textarea bind:value={serviceForm.authTokens} id="auth0AuthTokens" name="auth0AuthTokens"class="textarea textarea-bordered textarea-xs h-16 font-mono text-xs" placeholder="Token"
+                    <textarea
+                      bind:value={serviceForm.authTokens}
+                      id="auth0AuthTokens"
+                      name="auth0AuthTokens"
+                      class="textarea textarea-bordered textarea-xs h-16 font-mono text-xs"
+                      placeholder="Token"
                     ></textarea>
                   </div>
 
                   <div class="form-control">
                     <label class="label cursor-pointer">
                       <span class="label-text text-xs">Konfiguriert</span>
-                      <input type="checkbox" bind:checked={serviceForm.isConfigured} id="auth0Username" name="auth0Username" class="checkbox checkbox-xs checkbox-primary" />
+                      <input
+                        type="checkbox"
+                        bind:checked={serviceForm.isConfigured}
+                        id="auth0Username"
+                        name="auth0Username"
+                        class="checkbox checkbox-xs checkbox-primary"
+                      />
                     </label>
                   </div>
 

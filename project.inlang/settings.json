@@ -18,13 +18,13 @@
       "./messages/pages/faq/{locale}.json",
       "./messages/pages/dashboard/{locale}.json",
       "./messages/pages/imprint/{locale}.json",
-      "./messages/pages/terms-and-conditions/{locale}.json",
-      "./messages/pages/privacy-notice/{locale}.json",
+      "./messages/pages/terms/{locale}.json",
+      "./messages/pages/privacy/{locale}.json",
       "./messages/pages/thank-you/{locale}.json",
       "./messages/pages/registration/{locale}.json",
       "./messages/pages/profile/{locale}.json",
-      "./messages/pages/project-wizard/{locale}.json",
-      "./messages/pages/make-an-appointment/{locale}.json"
+      "./messages/pages/wizard/{locale}.json",
+      "./messages/pages/appointment/{locale}.json"
     ]
   }
 }

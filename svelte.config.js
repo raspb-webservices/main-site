@@ -11,15 +11,15 @@ const config = {
       $configs: './src/lib/configs',
       $services: './src/lib/services',
       $interfaces: './src/interfaces',
-      $styles: './src/lib/styles',
+      $styles: './src/lib/styles'
     },
     serviceWorker: {
       register: false
     }
   },
   prerender: {
-      entries: ['*'],
-      crawl: true
+    entries: ['*'],
+    crawl: true
   },
   inlineStyleThreshold: 1024,
   vite: {

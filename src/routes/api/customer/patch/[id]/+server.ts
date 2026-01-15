@@ -35,7 +35,7 @@ export const PATCH: RequestHandler = async ({ request, url }) => {
     if (customerData.familyName !== undefined) variables.familyName = customerData.familyName;
     if (customerData.givenName !== undefined) variables.givenName = customerData.givenName;
     if (customerData.phone !== undefined) variables.phone = customerData.phone;
-    if (customerData.postCode !== undefined)  variables.postCode = customerData.postCode;
+    if (customerData.postCode !== undefined) variables.postCode = customerData.postCode;
     if (customerData.postCode !== undefined) variables.postCode = customerData.postCode;
 
     // Prüfen, ob mindestens ein Feld zum Update vorhanden ist

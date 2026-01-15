@@ -14,10 +14,7 @@
   onMount(async () => {
     if (!browser) return;
 
-    const [{ Viewer }, { VirtualTourPlugin }] = await Promise.all([
-      import('@photo-sphere-viewer/core'),
-      import('@photo-sphere-viewer/virtual-tour-plugin'),
-    ]);
+    const [{ Viewer }, { VirtualTourPlugin }] = await Promise.all([import('@photo-sphere-viewer/core'), import('@photo-sphere-viewer/virtual-tour-plugin')]);
 
     viewer = new Viewer({
       container,
@@ -25,9 +22,9 @@
       plugins: [
         VirtualTourPlugin.withConfig({
           nodes,
-          startNodeId: startNodeId ?? nodes?.[0]?.id,
-        }),
-      ],
+          startNodeId: startNodeId ?? nodes?.[0]?.id
+        })
+      ]
     });
   });
 
@@ -42,6 +39,6 @@
 <style lang="postcss">
   @reference '../../app.css';
   .psv-container {
-    @apply w-full h-[calc(100vh-200px)] overflow-hidden rounded-2xl;
+    @apply h-[calc(100vh-200px)] w-full overflow-hidden rounded-2xl;
   }
 </style>

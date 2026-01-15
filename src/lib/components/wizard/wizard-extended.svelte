@@ -3,7 +3,18 @@
   import type { WizardConfig, Project } from '$interfaces/project.interface';
   import type { User } from '$interfaces/user.interface';
   import { uploadAsset, publishAsset, createAsset, uploadMultipleAssetsWithDelay, publishMultipleAssets } from '$helper/uploadAsset';
-  import { projectTypesWebApp, projectCategories, availableFeatures, getStepConfig, featureCategoryColors, projectTypesAiFreestyle, projectSubTypesAi, projectSubTypesApp, projectSubTypesWebsite, formFieldTypes } from '$lib/configs/wizard-config';
+  import {
+    projectTypesWebApp,
+    projectCategories,
+    availableFeatures,
+    getStepConfig,
+    featureCategoryColors,
+    projectTypesAiFreestyle,
+    projectSubTypesAi,
+    projectSubTypesApp,
+    projectSubTypesWebsite,
+    formFieldTypes
+  } from '$lib/configs/wizard-config';
   import { goto } from '$app/navigation';
   import { m } from '$lib/paraglide/messages';
   import { getLocale, localizeHref, setLocale } from '$lib/paraglide/runtime';
@@ -21,8 +32,8 @@
 
   import ProjectCategory from './steps/project-category.svelte';
   import ProjectTypeWebApp from './steps/project-type-web-app.svelte';
-  import ProjectSubTypesWebsite from './steps/project-sub-type-website.svelte'
-  import ProjectSubTypesApp from './steps/project-sub-type-apps.svelte'
+  import ProjectSubTypesWebsite from './steps/project-sub-type-website.svelte';
+  import ProjectSubTypesApp from './steps/project-sub-type-apps.svelte';
   import ProjectTypeAiFreestyle from './steps/project-type-ai-freestyle.svelte';
 
   // Props for initial values from URL parameters
@@ -235,27 +246,27 @@
     if (uploadedFiles.length === 0 || uploadedAssetIds.length > 0) return;
 
     isPreparingAssets = true;
-    assetPreparationProgress = m['wizard.steps.stepSummary.preparingAssets.title']();
+    assetPreparationProgress = m['wizard_steps_stepSummary_preparingAssets_title']();
 
     try {
       const preparedAssetIds = await uploadMultipleAssetsWithDelay(
         uploadedFiles,
         3000, // 3 second delay between uploads to avoid rate limiting
         (message, current, total, assetId) => {
-          assetPreparationProgress = m['wizard.steps.stepSummary.preparingAssets.progress']({message:message, current:current, total:total});
+          assetPreparationProgress = m['wizard_steps_stepSummary_preparingAssets_progress']({ message: message, current: current, total: total });
         }
       );
 
       uploadedAssetIds = preparedAssetIds;
 
       if (preparedAssetIds.length > 0) {
-        assetPreparationProgress = m['wizard.steps.stepSummary.preparingAssets.progress']();
+        assetPreparationProgress = m['wizard_steps_stepSummary_preparingAssets_progress']();
       } else {
-        assetPreparationProgress = m['wizard.steps.stepSummary.preparingAssets.noAssets']();
+        assetPreparationProgress = m['wizard_steps_stepSummary_preparingAssets_noAssets']();
       }
     } catch (error) {
-      console.error(m['wizard.steps.stepSummary.preparingAssets.error'](), error);
-      assetPreparationProgress = m['wizard.steps.stepSummary.preparingAssets.error']();
+      console.error(m['wizard_steps_stepSummary_preparingAssets_error'](), error);
+      assetPreparationProgress = m['wizard_steps_stepSummary_preparingAssets_error']();
     } finally {
       isPreparingAssets = false;
     }
@@ -266,23 +277,23 @@
     if (uploadedFiles.length === 0) return [];
 
     isUploading = true;
-    uploadProgress = m['wizard.steps.stepMaterials.files.upload']();
+    uploadProgress = m['wizard_steps_stepMaterials_files_upload']();
 
     try {
       const uploadedAssetIds = await uploadMultipleAssetsWithDelay(uploadedFiles, 2000, (message, current, total) => {
-        uploadProgress = m['wizard.steps.step6.files.uploading.progress']();
+        uploadProgress = m['wizard_steps_step6_files_uploading_progress']();
       });
 
       if (uploadedAssetIds.length > 0) {
-        uploadProgress = m['wizard.steps.step6.files.uploading.progress']();
+        uploadProgress = m['wizard_steps_step6_files_uploading_progress']();
       } else {
-        uploadProgress = m['wizard.steps.step6.files.uploading.noFiles']();
+        uploadProgress = m['wizard_steps_step6_files_uploading_noFiles']();
       }
 
       return uploadedAssetIds;
     } catch (error) {
-      console.error(m['wizard.steps.step6.files.uploading.error'](), error);
-      uploadProgress = m['wizard.steps.step6.files.uploading.error']();
+      console.error(m['wizard_steps_step6_files_uploading_error'](), error);
+      uploadProgress = m['wizard_steps_step6_files_uploading_error']();
       return [];
     } finally {
       isUploading = false;
@@ -306,12 +317,18 @@
             type: file.type
           })),
           customFeatures,
-          filename: (config.name || m['wizard.steps.stepSummary.titleHighlight']()) + "_" + m['wizard.steps.stepMaterials.files.title']() + '_' + (new Date().toISOString().split('T')[0]) + ".pdf"
+          filename:
+            (config.name || m['wizard_steps_stepSummary_titleHighlight']()) +
+            '_' +
+            m['wizard_steps_stepMaterials_files_title']() +
+            '_' +
+            new Date().toISOString().split('T')[0] +
+            '.pdf'
         })
       });
 
       if (!response.ok) {
-        throw new Error(m['wizard.steps.stepSummary.pdfGeneration.error']());
+        throw new Error(m['wizard_steps_stepSummary_pdfGeneration_error']());
       }
 
       // Download the PDF
@@ -319,14 +336,20 @@
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = (config.name || m['wizard.steps.stepSummary.titleHighlight']()) + "_" + m['wizard.steps.stepMaterials.files.title']() + '_' + (new Date().toISOString().split('T')[0]) + ".pdf";
+      a.download =
+        (config.name || m['wizard_steps_stepSummary_titleHighlight']()) +
+        '_' +
+        m['wizard_steps_stepMaterials_files_title']() +
+        '_' +
+        new Date().toISOString().split('T')[0] +
+        '.pdf';
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
     } catch (error) {
-      console.error(m['wizard.steps.stepSummary.pdfGeneration.error'](), error);
-      alert(m['wizard.steps.stepSummary.pdfGeneration.error']());
+      console.error(m['wizard_steps_stepSummary_pdfGeneration_error'](), error);
+      alert(m['wizard_steps_stepSummary_pdfGeneration_error']());
     } finally {
       isGeneratingPDF = false;
     }
@@ -362,21 +385,21 @@
       // Prepare asset IDs (use pre-uploaded or fallback to upload now)
       let finalAssetIds: string[] = [];
       if (uploadedAssetIds.length > 0) {
-        console.log(m['wizard.modals.error.usingPreUploaded'](), uploadedAssetIds);
+        console.log(m['wizard_modals_error_usingPreUploaded'](), uploadedAssetIds);
         finalAssetIds = uploadedAssetIds;
       } else if (uploadedFiles.length > 0) {
         // Fallback: If no pre-uploaded assets, upload them now
-        console.log(m['wizard.modals.error.noPreUploaded']());
+        console.log(m['wizard_modals_error_noPreUploaded']());
         finalAssetIds = await uploadAllFiles();
 
         if (finalAssetIds.length === 0 && uploadedFiles.length > 0) {
-          errorDetails.push(m['wizard.modals.error.fileUploadError']());
-          throw new Error(m['wizard.modals.error.fileUploadFailed']());
+          errorDetails.push(m['wizard_modals_error_fileUploadError']());
+          throw new Error(m['wizard_modals_error_fileUploadFailed']());
         }
       }
 
       // Create project
-      console.log(m['wizard.modals.error.creatingProject'](), finalAssetIds);
+      console.log(m['wizard_modals_error_creatingProject'](), finalAssetIds);
 
       const projectData: Project = {
         name: config.name,
@@ -416,7 +439,7 @@
       if (result.success && result.data?.id) {
         const projectId = result.data.id;
 
-        console.log(m['wizard.modals.error.projectCreated'](), projectId);
+        console.log(m['wizard_modals_error_projectCreated'](), projectId);
 
         // Update Auth0 metadata with projectId
         if (currentUser) {
@@ -439,64 +462,64 @@
         showThankYouPage();
 
         // Wait 3.5 seconds to ensure everything is properly saved before publishing
-        console.log(m['wizard.modals.error.waiting']());
+        console.log(m['wizard_modals_error_waiting']());
         await new Promise((resolve) => setTimeout(resolve, 3500));
 
         // Publish the project
         try {
-          console.log(m['wizard.modals.error.publishingProject'](), projectId);
+          console.log(m['wizard_modals_error_publishingProject'](), projectId);
           const publishProjectResponse = await fetch(`/api/project/publish/${projectId}`, {
             method: 'POST'
           });
           const publishProjectResult = await publishProjectResponse.json();
 
           if (publishProjectResponse.ok && publishProjectResult.success) {
-            console.log(m['wizard.modals.error.projectPublished'](), publishProjectResult);
+            console.log(m['wizard_modals_error_projectPublished'](), publishProjectResult);
           } else {
-            console.warn(m['wizard.modals.error.projectPublishingFailed'](), publishProjectResult);
+            console.warn(m['wizard_modals_error_projectPublishingFailed'](), publishProjectResult);
             // Don't fail the entire process if publishing fails
           }
         } catch (publishProjectError) {
-          console.warn(m['wizard.modals.error.projectPublishingError'](), publishProjectError);
+          console.warn(m['wizard_modals_error_projectPublishingError'](), publishProjectError);
           // Don't fail the entire process if publishing fails
         }
 
         // Publish all assets that are part of the project
         if (finalAssetIds.length > 0) {
-          console.log(m['wizard.modals.error.publishingAssets'](), finalAssetIds);
+          console.log(m['wizard_modals_error_publishingAssets'](), finalAssetIds);
 
           try {
             const publishedAssetIds = await publishMultipleAssets(finalAssetIds, (message, current, total) => {
-              console.log(`${m['wizard.modals.error.assetPublishingProgress']()}: ${message} (${current}/${total})`);
+              console.log(`${m['wizard_modals_error_assetPublishingProgress']()}: ${message} (${current}/${total})`);
             });
 
             if (publishedAssetIds.length > 0) {
-              console.log(m['wizard.modals.error.assetsPublished'](), publishedAssetIds);
+              console.log(m['wizard_modals_error_assetsPublished'](), publishedAssetIds);
             } else {
-              console.warn(m['wizard.modals.error.noAssetsPublished']());
+              console.warn(m['wizard_modals_error_noAssetsPublished']());
             }
           } catch (assetPublishError) {
-            console.warn(m['wizard.modals.error.assetPublishingError'](), assetPublishError);
+            console.warn(m['wizard_modals_error_assetPublishingError'](), assetPublishError);
             // Don't fail the entire process if asset publishing fails
           }
         }
 
-        console.log(m['wizard.modals.error.submissionCompleted']());
+        console.log(m['wizard_modals_error_submissionCompleted']());
       } else {
         // Collect detailed error information
-        errorDetails.push(`${m['wizard.modals.error.apiError']()} : ${result.error || m['wizard.modals.error.unknownError']()}`);
+        errorDetails.push(`${m['wizard_modals_error_apiError']()} : ${result.error || m['wizard_modals_error_unknownError']()}`);
         if (result.details) {
           errorDetails.push(...result.details);
         }
-        throw new Error(m['wizard.modals.error.apiRequestFailed']());
+        throw new Error(m['wizard_modals_error_apiRequestFailed']());
       }
     } catch (error) {
-      console.error(m['wizard.modals.error.submissionError'](), error);
+      console.error(m['wizard_modals_error_submissionError'](), error);
 
       // Add network error if no other errors were collected
       if (errorDetails.length === 0) {
-        errorDetails.push(m['wizard.modals.error.networkError']());
-        errorDetails.push(m['wizard.modals.error.checkConnection']());
+        errorDetails.push(m['wizard_modals_error_networkError']());
+        errorDetails.push(m['wizard_modals_error_checkConnection']());
       }
 
       // Show error modal
@@ -515,12 +538,20 @@
       shouldAdvance = true;
 
       // Check if initialProjectType is valid
-      if (initialProjectType && (projectTypesWebApp.some((pt) => pt.id === initialProjectType) || projectTypesAiFreestyle.some((pt) => pt.id === initialProjectType))) {
+      if (
+        initialProjectType &&
+        (projectTypesWebApp.some((pt) => pt.id === initialProjectType) || projectTypesAiFreestyle.some((pt) => pt.id === initialProjectType))
+      ) {
         config.projectType = initialProjectType;
         shouldAdvance = true;
 
         // Check if initialSubType is valid for the selected project type
-        if (initialSubType && (projectSubTypesAi.some((st) => st.id === initialSubType) || projectSubTypesApp.some((st) => st.id === initialSubType) || projectSubTypesWebsite.some((st) => st.id === initialSubType))) {
+        if (
+          initialSubType &&
+          (projectSubTypesAi.some((st) => st.id === initialSubType) ||
+            projectSubTypesApp.some((st) => st.id === initialSubType) ||
+            projectSubTypesWebsite.some((st) => st.id === initialSubType))
+        ) {
           config.subType = initialSubType;
           // If both projectType and subType are valid, skip to step 3
           currentStep = 4;
@@ -550,7 +581,7 @@
   <!-- Header with Reset Button -->
   {#if !disableHeader}
     <div class="wizard-header">
-      <h1 id="projekt-konfigurator">{m['wizard.header.titleFirst']()} <span class="inner-text-special">{m['wizard.header.titleHighlight']()}</span></h1>
+      <h1 id="projekt-konfigurator">{m['wizard_header_titleFirst']()} <span class="inner-text-special">{m['wizard_header_titleHighlight']()}</span></h1>
       <button type="button" class="btn btn-outline btn-sm" onclick={openResetModal}>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path
@@ -560,7 +591,7 @@
             d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
           />
         </svg>
-        {m['wizard.header.resetButton']()}
+        {m['wizard_header_resetButton']()}
       </button>
     </div>
   {/if}
@@ -666,7 +697,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
-        {m['wizard.navigation.back']()}
+        {m['wizard_navigation_back']()}
       </button>
     {:else}
       <div></div>
@@ -679,7 +710,7 @@
         onclick={nextStep}
         disabled={(currentStep === 1 && !config.projectType) || (currentStep === 2 && !config.subType && config.projectType !== 'freestyle')}
       >
-        {m['wizard.navigation.next']()}
+        {m['wizard_navigation_next']()}
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
@@ -689,7 +720,7 @@
         <button type="button" class="btn-basic flex-grow md:flex-grow-0" onclick={generatePDF} disabled={isGeneratingPDF}>
           {#if isGeneratingPDF}
             <span class="loading loading-ring loading-sm"></span>
-            {m['wizard.navigation.downloadPDF']()}
+            {m['wizard_navigation_downloadPDF']()}
           {:else}
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
@@ -699,7 +730,7 @@
                 d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
               />
             </svg>
-            {m['wizard.navigation.downloadPDF']()}
+            {m['wizard_navigation_downloadPDF']()}
           {/if}
         </button>
         <button type="button" class="btn-basic flex-grow md:flex-grow-0" onclick={submitToAPI}>
@@ -711,7 +742,7 @@
               d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
             />
           </svg>
-          {m['wizard.navigation.submitProject']()}
+          {m['wizard_navigation_submitProject']()}
         </button>
       </div>
     {/if}

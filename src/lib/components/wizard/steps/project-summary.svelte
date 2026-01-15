@@ -11,22 +11,26 @@
     featureCategoryColors
   } from '$lib/configs/wizard-config';
   import { goto } from '$app/navigation';
+  import { localizeHref } from '$lib/paraglide/runtime';
   let { config, openContactModal, openResetModal } = $props();
 </script>
 
 <div class="step-header">
-  <h1>{m['wizard.stepSummary.titleFirst']()} <span class="inner-text-special">{m['wizard.stepSummary.titleHighlight']()}</span> {m['wizard.stepSummary.titleSecond']()} </h1>
-  <p class="teaser">{m['wizard.stepSummary.teaser']()}</p>
+  <h1>
+    {m['wizard_stepSummary_titleFirst']()} <span class="inner-text-special">{m['wizard_stepSummary_titleHighlight']()}</span>
+    {m['wizard_stepSummary_titleSecond']()}
+  </h1>
+  <p class="teaser">{m['wizard_stepSummary_teaser']()}</p>
 </div>
 
 <div class="summary-grid">
   <div class="summary-card">
-    <h3>{m['wizard.stepSummary.projectCategory']()}</h3>
+    <h3>{m['wizard_stepSummary_projectCategory']()}</h3>
     <p class="summary-value">{m[projectCategories?.find((p) => p.id === config.projectCategory)?.title]()}</p>
   </div>
 
   <div class="summary-card">
-    <h3>{m['wizard.stepSummary.projectType']()}</h3>
+    <h3>{m['wizard_stepSummary_projectType']()}</h3>
     {#if config.projectCategory === 'websites-and-apps'}
       <p class="summary-value">{m[projectTypesWebApp?.find((p) => p.id === config.projectType)?.title]()}</p>
       {#if config.projectType === 'website'}
@@ -44,7 +48,7 @@
 
   {#if config.features.length > 1}
     <div class="summary-card">
-      <h3>{m['wizard.steps.stepSummary.selectedFeatures']()}</h3>
+      <h3>{m['wizard_steps_stepSummary_selectedFeatures']()}</h3>
       <div class="flex flex-wrap gap-2">
         {#each config.features.filter((f) => f !== 'cookieConsent') as featureId}
           <div class="badge {featureCategoryColors[availableFeatures.find((f) => f.id === featureId)?.category] || 'badge-info'}">
@@ -56,10 +60,10 @@
   {/if}
 
   <div class="price-card">
-    <h3>{m['wizard.steps.stepSummary.estimatedPrice']()}</h3>
+    <h3>{m['wizard_steps_stepSummary_estimatedPrice']()}</h3>
     {#key config.estimatedPrice}
       <div class="price-display">
-        <p class="price-message">{m['wizard.steps.stepSummary.priceTiers.tier2.message']()}</p>
+        <p class="price-message">{m['wizard_steps_stepSummary_priceTiers_tier2_message']()}</p>
         <div class="price">ca. {Math.round(config.estimatedPrice)}€</div>
       </div>
     {/key}
@@ -76,20 +80,20 @@
         d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
       />
     </svg>
-    {m['wizard.navigation.projectRequest']()}
+    {m['wizard_navigation_projectRequest']()}
   </button>
   <button
     type="button"
     class="btn btn-simple btn-lg"
     onclick={() => {
-      goto('/registration');
+      goto(localizeHref('/registration'));
     }}
   >
-    {m['wizard.navigation.register']()}
+    {m['wizard_navigation_register']()}
   </button>
 
   <button type="button" class="btn btn-simple btn-lg" onclick={openResetModal}>
-    {m['wizard.navigation.reset']()}
+    {m['wizard_navigation_reset']()}
   </button>
 </div>
 

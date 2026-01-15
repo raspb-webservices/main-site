@@ -4,47 +4,47 @@
 
 <dialog id="modal-simple-cms" class="modal">
   <div class="modal-box">
-    <h3 class="mb-4 text-lg font-bold">{m['servicesPage.modals.simpleCms.title']()}</h3>
+    <h3 class="mb-4 text-lg font-bold">{m['servicesPage_modals_simpleCms_title']()}</h3>
     <div class="space-y-4">
-      <p><strong>{m['servicesPage.modals.simpleCms.perfectFor']()}</strong> {m['servicesPage.modals.simpleCms.perfectForDescription']()}</p>
+      <p><strong>{m['servicesPage_modals_simpleCms_perfectFor']()}</strong> {m['servicesPage_modals_simpleCms_perfectForDescription']()}</p>
 
       <div>
-        <h4 class="mb-2 font-semibold">{m['servicesPage.modals.simpleCms.userFriendlyFeaturesTitle']()}</h4>
+        <h4 class="mb-2 font-semibold">{m['servicesPage_modals_simpleCms_userFriendlyFeaturesTitle']()}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>{m['servicesPage.modals.simpleCms.userFriendlyFeatures.u1']()}</li>
-          <li>{m['servicesPage.modals.simpleCms.userFriendlyFeatures.u2']()}</li>
-          <li>{m['servicesPage.modals.simpleCms.userFriendlyFeatures.u3']()}</li>
-          <li>{m['servicesPage.modals.simpleCms.userFriendlyFeatures.u4']()}</li>
-          <li>{m['servicesPage.modals.simpleCms.userFriendlyFeatures.u5']()}</li>
-          <li>{m['servicesPage.modals.simpleCms.userFriendlyFeatures.u6']()}</li>
+          <li>{m['servicesPage_modals_simpleCms_userFriendlyFeatures_u1']()}</li>
+          <li>{m['servicesPage_modals_simpleCms_userFriendlyFeatures_u2']()}</li>
+          <li>{m['servicesPage_modals_simpleCms_userFriendlyFeatures_u3']()}</li>
+          <li>{m['servicesPage_modals_simpleCms_userFriendlyFeatures_u4']()}</li>
+          <li>{m['servicesPage_modals_simpleCms_userFriendlyFeatures_u5']()}</li>
+          <li>{m['servicesPage_modals_simpleCms_userFriendlyFeatures_u6']()}</li>
         </ul>
       </div>
 
       <div>
-        <h4 class="mb-2 font-semibold">{m['servicesPage.modals.simpleCms.technicalDetailsTitle']()}</h4>
+        <h4 class="mb-2 font-semibold">{m['servicesPage_modals_simpleCms_technicalDetailsTitle']()}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>{m['servicesPage.modals.simpleCms.technicalDetails.t1']()}</li>
-          <li>{m['servicesPage.modals.simpleCms.technicalDetails.t2']()}</li>
-          <li>{m['servicesPage.modals.simpleCms.technicalDetails.t3']()}</li>
-          <li>{m['servicesPage.modals.simpleCms.technicalDetails.t4']()}</li>
+          <li>{m['servicesPage_modals_simpleCms_technicalDetails_t1']()}</li>
+          <li>{m['servicesPage_modals_simpleCms_technicalDetails_t2']()}</li>
+          <li>{m['servicesPage_modals_simpleCms_technicalDetails_t3']()}</li>
+          <li>{m['servicesPage_modals_simpleCms_technicalDetails_t4']()}</li>
         </ul>
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>{m['servicesPage.modals.simpleCms.setupTime']()}</strong> {m['servicesPage.modals.simpleCms.setupTimeValue']()}</p>
-        <p class="text-sm"><strong>{m['servicesPage.modals.simpleCms.training']()}</strong> {m['servicesPage.modals.simpleCms.trainingValue']()}</p>
+        <p class="text-sm"><strong>{m['servicesPage_modals_simpleCms_setupTime']()}</strong> {m['servicesPage_modals_simpleCms_setupTimeValue']()}</p>
+        <p class="text-sm"><strong>{m['servicesPage_modals_simpleCms_training']()}</strong> {m['servicesPage_modals_simpleCms_trainingValue']()}</p>
       </div>
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">{m['servicesPage.modals.simpleCms.closeButton']()}</button>
+        <button class="btn">{m['servicesPage_modals_simpleCms_closeButton']()}</button>
       </form>
     </div>
   </div>
 </dialog>
 
 <style lang="postcss">
-@reference '../../../../app.css';
+  @reference '../../../../app.css';
   .modal-box {
     @apply max-w-2xl;
   }

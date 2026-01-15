@@ -6,14 +6,14 @@
 </script>
 
 <svelte:head>
-  <title>{m['faq.meta.title']()}</title>
-  <meta name="description" content={m['faq.meta.description']()} />
+  <title>{m['faq_meta_title']()}</title>
+  <meta name="description" content={m['faq_meta_description']()} />
 </svelte:head>
 
 <Stage style={'basic-gradient'}>
-  <div class="inner-box reduced py-36 prose">
-    <h1 class="massive animate-fade-in-up">{m['faq.title']()}</h1>
-    <p class="teaser animate-fade-in-up">{m['faq.teaser']()}</p>
+  <div class="inner-box reduced prose py-36">
+    <h1 class="massive animate-fade-in-up">{m['faq_title']()}</h1>
+    <p class="teaser animate-fade-in-up">{m['faq_teaser']()}</p>
   </div>
 </Stage>
 
@@ -22,43 +22,43 @@
     <div class="my-accordion join join-vertical">
       <div class="collapse-arrow join-item border-base-300 accordion-item collapse border" class:active={myFaqSelection == 'q1'}>
         <input type="radio" value="q1" name="faq" bind:group={myFaqSelection} />
-        <div class="collapse-title">{m['faq.questions.q1.title']()}</div>
-        <div class="collapse-content">{m['faq.questions.q1.content']()}</div>
+        <div class="collapse-title">{m['faq_questions_q1_title']()}</div>
+        <div class="collapse-content">{m['faq_questions_q1_content']()}</div>
       </div>
       <div class="collapse-arrow join-item border-base-300 accordion-item collapse border" class:active={myFaqSelection == 'q2'}>
         <input type="radio" value="q2" name="faq" bind:group={myFaqSelection} />
-        <div class="collapse-title">{m['faq.questions.q2.title']()}</div>
-        <div class="collapse-content">{m['faq.questions.q2.content']()}</div>
+        <div class="collapse-title">{m['faq_questions_q2_title']()}</div>
+        <div class="collapse-content">{m['faq_questions_q2_content']()}</div>
       </div>
       <div class="collapse-arrow join-item border-base-300 accordion-item collapse border" class:active={myFaqSelection == 'q3'}>
         <input type="radio" value="q3" name="faq" bind:group={myFaqSelection} />
-        <div class="collapse-title">{m['faq.questions.q3.title']()}</div>
-        <div class="collapse-content">{m['faq.questions.q3.content']()}</div>
+        <div class="collapse-title">{m['faq_questions_q3_title']()}</div>
+        <div class="collapse-content">{m['faq_questions_q3_content']()}</div>
       </div>
       <div class="collapse-arrow join-item border-base-300 accordion-item collapse border" class:active={myFaqSelection == 'q4'}>
         <input type="radio" value="q4" name="faq" bind:group={myFaqSelection} />
-        <div class="collapse-title">{m['faq.questions.q4.title']()}</div>
-        <div class="collapse-content">{m['faq.questions.q4.content']()}</div>
+        <div class="collapse-title">{m['faq_questions_q4_title']()}</div>
+        <div class="collapse-content">{m['faq_questions_q4_content']()}</div>
       </div>
       <div class="collapse-arrow join-item border-base-300 accordion-item collapse border" class:active={myFaqSelection == 'q5'}>
         <input type="radio" value="q5" name="faq" bind:group={myFaqSelection} />
-        <div class="collapse-title">{m['faq.questions.q5.title']()}</div>
-        <div class="collapse-content">{m['faq.questions.q5.content']()}</div>
+        <div class="collapse-title">{m['faq_questions_q5_title']()}</div>
+        <div class="collapse-content">{m['faq_questions_q5_content']()}</div>
       </div>
       <div class="collapse-arrow join-item border-base-300 accordion-item collapse border" class:active={myFaqSelection == 'q6'}>
         <input type="radio" value="q6" name="faq" bind:group={myFaqSelection} />
-        <div class="collapse-title">{m['faq.questions.q6.title']()}</div>
-        <div class="collapse-content">{m['faq.questions.q6.content']()}</div>
+        <div class="collapse-title">{m['faq_questions_q6_title']()}</div>
+        <div class="collapse-content">{m['faq_questions_q6_content']()}</div>
       </div>
       <div class="collapse-arrow join-item border-base-300 accordion-item collapse border" class:active={myFaqSelection == 'q7'}>
         <input type="radio" value="q7" name="faq" bind:group={myFaqSelection} />
-        <div class="collapse-title">{m['faq.questions.q7.title']()}</div>
-        <div class="collapse-content">{m['faq.questions.q7.content']()}</div>
+        <div class="collapse-title">{m['faq_questions_q7_title']()}</div>
+        <div class="collapse-content">{m['faq_questions_q7_content']()}</div>
       </div>
       <div class="collapse-arrow join-item border-base-300 accordion-item collapse border" class:active={myFaqSelection == 'q8'}>
         <input type="radio" value="q8" name="faq" bind:group={myFaqSelection} />
-        <div class="collapse-title">{m['faq.questions.q8.title']()}</div>
-        <div class="collapse-content">{m['faq.questions.q8.content']()}</div>
+        <div class="collapse-title">{m['faq_questions_q8_title']()}</div>
+        <div class="collapse-content">{m['faq_questions_q8_content']()}</div>
       </div>
     </div>
   </div>

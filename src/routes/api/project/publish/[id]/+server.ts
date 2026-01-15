@@ -18,10 +18,10 @@ export const GET: RequestHandler = async (req) => {
     const variables = { id };
     const response = (await client.request(query, variables)) as any;
 
-    console.log("PUBLISH response ::: ", response)
+    console.log('PUBLISH response ::: ', response);
 
     return new Response(JSON.stringify(response));
   } catch (error) {
     return new Response(JSON.stringify(error));
   }
-}
+};

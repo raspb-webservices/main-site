@@ -5,8 +5,11 @@
 </script>
 
 <div class="step-header">
-  <h1>{m['wizard.stepCategory.titleFirst']()} <span class="inner-text-special">{m['wizard.stepCategory.titleHighlight']()}</span> {m['wizard.stepCategory.titleSecond']()}</h1>
-  <p class="teaser">{m['wizard.stepCategory.teaser']()}</p>
+  <h1>
+    {m['wizard_stepCategory_titleFirst']()} <span class="inner-text-special">{m['wizard_stepCategory_titleHighlight']()}</span>
+    {m['wizard_stepCategory_titleSecond']()}
+  </h1>
+  <p class="teaser">{m['wizard_stepCategory_teaser']()}</p>
 </div>
 
 <div class="project-categories">
@@ -46,13 +49,13 @@
     }
 
     p.teaser {
-      @apply text-base-content/70 max-w-5xl m-auto;
+      @apply text-base-content/70 m-auto max-w-5xl;
     }
   }
   .project-categories {
-    @apply flex flex-row gap-10 items-center justify-center flex-wrap md:flex-nowrap;
+    @apply flex flex-row flex-wrap items-center justify-center gap-10 md:flex-nowrap;
     .service-card {
-      @apply bg-white border-base-300/80 border transition-all duration-300 max-w-md;
+      @apply border-base-300/80 max-w-md border bg-white transition-all duration-300;
 
       &:hover {
         @apply bg-primary/1 border-base-300 shadow-md;

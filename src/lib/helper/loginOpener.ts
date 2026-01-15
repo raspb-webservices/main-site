@@ -13,12 +13,12 @@ export function openAuth0Popup(width = 450, height = 650) {
     `height=${height}`,
     `left=${left}`,
     `top=${top}`,
-    "resizable=yes",
-    "toolbar=no",
-    "menubar=no",
-    "location=no",
-    "status=no"
-  ].join(",");
+    'resizable=yes',
+    'toolbar=no',
+    'menubar=no',
+    'location=no',
+    'status=no'
+  ].join(',');
 
-  return window.open("about:blank", "auth0:popup", features);
+  return window.open('about:blank', 'auth0:popup', features);
 }

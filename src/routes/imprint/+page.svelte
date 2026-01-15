@@ -5,87 +5,86 @@
 </script>
 
 <svelte:head>
-  <title>{m['imprint.meta.title']()}</title>
-  <meta name="description" content={m['imprint.meta.description']()} />
+  <title>{m['imprint_meta_title']()}</title>
+  <meta name="description" content={m['imprint_meta_description']()} />
 </svelte:head>
 
-  <Section>
-    <div class="imprint-content prose">
-      <h1>{m['imprint.title']()}</h1>
+<Section>
+  <div class="imprint-content prose">
+    <h1>{m['imprint_title']()}</h1>
 
-      <h2>{m['imprint.section5TMG']()}</h2>
-      <div class="contact-info">
-        <p class="no-padding"><strong>{m['imprint.companyName']()}</strong></p>
-        <p>{m['imprint.address']()}<br />{m['imprint.zipCity']()}</p>
-      </div>
-      <div class="spacer"></div>
-      <h3>{m['imprint.representedBy']()}</h3>
-      <p>Markus Härtig</p>
-
-      <h3>{m['imprint.contact']()}</h3>
-      <div class="contact-details">
-        <p class="no-padding"><strong>{m['imprint.phone']()}</strong> 06732 - 9648113</p>
-        <p><strong>{m['imprint.email']()}</strong> <a href="mailto:contact@raspb.de">contact@raspb.de</a></p>
-      </div>
-
-      <div class="spacer"></div>
-
-      <h3>{m['imprint.registerEntry']()}</h3>
-      <p>{m['imprint.companyInFormation']()}</p>
-
-      <h3>{m['imprint.vatId']()}</h3>
-      <p>
-        {m['imprint.vatIdText']()}<br />
-        {m['imprint.vatIdPending']()}
-      </p>
-
-      <h3>{m['imprint.euDisputeResolution']()}</h3>
-      <p>
-        {m['imprint.euDisputeResolutionText']()}
-        <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a><br />
-        {m['imprint.euDisputeResolutionEmail']()}
-      </p>
-
-      <h3>{m['imprint.consumerDisputeResolution']()}</h3>
-      <p>{m['imprint.consumerDisputeResolutionText']()}</p>
-
-      <h3>{m['imprint.liabilityForContent']()}</h3>
-      <p>
-        {m['imprint.liabilityForContentText1']()}
-      </p>
-
-      <p>
-        {m['imprint.liabilityForContentText2']()}
-      </p>
-
-      <h3>{m['imprint.liabilityForLinks']()}</h3>
-      <p>
-        {m['imprint.liabilityForLinksText1']()}
-      </p>
-
-      <p>
-        {m['imprint.liabilityForLinksText2']()}
-      </p>
-
-      <h3>{m['imprint.copyright']()}</h3>
-      <p>
-        {m['imprint.copyrightText1']()}
-      </p>
-
-      <p>
-        {m['imprint.copyrightText2']()}
-      </p>
-
-      <div class="spacer"></div>
-      <button
-        class="btn-basic"
-        onclick={() => {
-          goto('/');
-        }}>{m['imprint.backToHomepage']()}</button
-      >
+    <h2>{m['imprint_section5TMG']()}</h2>
+    <div class="contact-info">
+      <p class="no-padding"><strong>{m['imprint_companyName']()}</strong></p>
+      <p>{m['imprint_address']()}<br />{m['imprint_zipCity']()}</p>
     </div>
-  </Section>
+    <div class="spacer"></div>
+    <h3>{m['imprint_representedBy']()}</h3>
+    <p>Markus Härtig</p>
 
+    <h3>{m['imprint_contact']()}</h3>
+    <div class="contact-details">
+      <p class="no-padding"><strong>{m['imprint_phone']()}</strong> 06732 - 9648113</p>
+      <p><strong>{m['imprint_email']()}</strong> <a href="mailto:contact@raspb.de">contact@raspb.de</a></p>
+    </div>
+
+    <div class="spacer"></div>
+
+    <h3>{m['imprint_registerEntry']()}</h3>
+    <p>{m['imprint_companyInFormation']()}</p>
+
+    <h3>{m['imprint_vatId']()}</h3>
+    <p>
+      {m['imprint_vatIdText']()}<br />
+      {m['imprint_vatIdPending']()}
+    </p>
+
+    <h3>{m['imprint_euDisputeResolution']()}</h3>
+    <p>
+      {m['imprint_euDisputeResolutionText']()}
+      <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a><br />
+      {m['imprint_euDisputeResolutionEmail']()}
+    </p>
+
+    <h3>{m['imprint_consumerDisputeResolution']()}</h3>
+    <p>{m['imprint_consumerDisputeResolutionText']()}</p>
+
+    <h3>{m['imprint_liabilityForContent']()}</h3>
+    <p>
+      {m['imprint_liabilityForContentText1']()}
+    </p>
+
+    <p>
+      {m['imprint_liabilityForContentText2']()}
+    </p>
+
+    <h3>{m['imprint_liabilityForLinks']()}</h3>
+    <p>
+      {m['imprint_liabilityForLinksText1']()}
+    </p>
+
+    <p>
+      {m['imprint_liabilityForLinksText2']()}
+    </p>
+
+    <h3>{m['imprint_copyright']()}</h3>
+    <p>
+      {m['imprint_copyrightText1']()}
+    </p>
+
+    <p>
+      {m['imprint_copyrightText2']()}
+    </p>
+
+    <div class="spacer"></div>
+    <button
+      class="btn-basic"
+      onclick={() => {
+        goto('/');
+      }}>{m['imprint_backToHomepage']()}</button
+    >
+  </div>
+</Section>
 
 <style lang="postcss">
   @reference '../../app.css';

@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { PUBLIC_VITE_AUTH0_AUDIENCE } from "$env/static/public";
-import { PUBLIC_VITE_AUTH0_CLIENT_ID } from "$env/static/public";
+import { PUBLIC_VITE_AUTH0_AUDIENCE } from '$env/static/public';
+import { PUBLIC_VITE_AUTH0_CLIENT_ID } from '$env/static/public';
 import { PUBLIC_VITE_AUTH0_TOKEN_URL } from '$env/static/public';
-import { env  } from "$env/dynamic/private";
+import { env } from '$env/dynamic/private';
 
 const axiosAPI = axios.create({
-  baseURL: PUBLIC_VITE_AUTH0_AUDIENCE 
+  baseURL: PUBLIC_VITE_AUTH0_AUDIENCE
 });
 
 async function getToken() {
@@ -15,8 +15,8 @@ async function getToken() {
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({
         client_id: PUBLIC_VITE_AUTH0_CLIENT_ID,
-        client_secret: env.VITE_AUTH0_CLIENT_SECRET ,
-        audience: PUBLIC_VITE_AUTH0_AUDIENCE ,
+        client_secret: env.VITE_AUTH0_CLIENT_SECRET,
+        audience: PUBLIC_VITE_AUTH0_AUDIENCE,
         grant_type: 'client_credentials'
       })
     });

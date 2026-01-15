@@ -36,35 +36,95 @@
 <FullWidthSlider></FullWidthSlider>
 
 <Section>
-  <Hero headline={"Default with image"} subheadline={"This is a Subheadline"} image ={"/images/slider/slide1.jpg"} position={"top"} imageAlt={"This is an image"} variant={"default "} showButton={true} buttonText = {"this is the CTA text... "} buttonAction={{}}></Hero>
+  <Hero
+    headline={'Default with image'}
+    subheadline={'This is a Subheadline'}
+    image={'/images/slider/slide1.jpg'}
+    position={'top'}
+    imageAlt={'This is an image'}
+    variant={'default '}
+    showButton={true}
+    buttonText={'this is the CTA text... '}
+    buttonAction={{}}
+  ></Hero>
 </Section>
 
 <Section>
-  <Hero headline={"Default without image"} subheadline={"This is a Subheadline"} variant={"default"} position={"bottom"} showButton={true} buttonText = {"this is the CTA text... "} buttonAction={{}}></Hero>
+  <Hero
+    headline={'Default without image'}
+    subheadline={'This is a Subheadline'}
+    variant={'default'}
+    position={'bottom'}
+    showButton={true}
+    buttonText={'this is the CTA text... '}
+    buttonAction={{}}
+  ></Hero>
 </Section>
 
 <Section>
-  <Hero headline={"Centered with image"} subheadline={"This is a Subheadline"} image ={"/images/slider/slide2.jpg"} imageAlt={"This is an image"} variant={"centered"} showButton={true} buttonText = {"this is the CTA text...  "} buttonAction={{}}></Hero>
+  <Hero
+    headline={'Centered with image'}
+    subheadline={'This is a Subheadline'}
+    image={'/images/slider/slide2.jpg'}
+    imageAlt={'This is an image'}
+    variant={'centered'}
+    showButton={true}
+    buttonText={'this is the CTA text...  '}
+    buttonAction={{}}
+  ></Hero>
 </Section>
 
 <Section>
-  <Hero headline={"Centered without image"} subheadline={"This is a Subheadline"} variant={"centered"} showButton={true} buttonText = {"this is the CTA text...  "} buttonAction={{}}></Hero>
+  <Hero
+    headline={'Centered without image'}
+    subheadline={'This is a Subheadline'}
+    variant={'centered'}
+    showButton={true}
+    buttonText={'this is the CTA text...  '}
+    buttonAction={{}}
+  ></Hero>
 </Section>
 
 <Section>
-  <Hero headline={"Split with image"} subheadline={"This is a Subheadline"}  image ={"/images/slider/slide3.jpg"} imageAlt={"This is an image"} variant={"split"} showButton={true} buttonText = {"this is the CTA text...  "} buttonAction={{}}></Hero>
+  <Hero
+    headline={'Split with image'}
+    subheadline={'This is a Subheadline'}
+    image={'/images/slider/slide3.jpg'}
+    imageAlt={'This is an image'}
+    variant={'split'}
+    showButton={true}
+    buttonText={'this is the CTA text...  '}
+    buttonAction={{}}
+  ></Hero>
 </Section>
 
 <Section>
-  <Hero headline={"Split without image"} subheadline={"This is a Subheadline"} variant={"split"} showButton={true} buttonText = {"this is the CTA text...  "} buttonAction={{}}></Hero>
+  <Hero
+    headline={'Split without image'}
+    subheadline={'This is a Subheadline'}
+    variant={'split'}
+    showButton={true}
+    buttonText={'this is the CTA text...  '}
+    buttonAction={{}}
+  ></Hero>
 </Section>
 
 <Section fullWidth={true}>
-  <Hero headline={"FullWidth Hero"} subheadline={"This is a Subheadline"} image ={"/images/slider/slide1.jpg"} position={"bottom"} imageAlt={"This is an image"} variant={"default "} showButton={true} buttonText = {"this is the CTA text... "} buttonAction={{}}></Hero>
+  <Hero
+    headline={'FullWidth Hero'}
+    subheadline={'This is a Subheadline'}
+    image={'/images/slider/slide1.jpg'}
+    position={'bottom'}
+    imageAlt={'This is an image'}
+    variant={'default '}
+    showButton={true}
+    buttonText={'this is the CTA text... '}
+    buttonAction={{}}
+  ></Hero>
 </Section>
 
-
-<TEASER customImageURL={'https://picsum.photos/id/46/1920/1080'} headline={'Hier kommt eine tolle Headline'} subheadline={'Und eine super SubHeadline'}></TEASER>
+<TEASER customImageURL={'https://picsum.photos/id/46/1920/1080'} headline={'Hier kommt eine tolle Headline'} subheadline={'Und eine super SubHeadline'}
+></TEASER>
 
 <Section>
   <button
@@ -74,7 +134,6 @@
     }}>Zurück zur Startseite</button
   >
   <div class="spacer"></div>
-
 </Section>
 
 <style lang="postcss">

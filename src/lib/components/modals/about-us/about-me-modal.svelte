@@ -25,12 +25,12 @@
     </div>
 
     <div class="prose py-4">
-      <h2>{m['aboutUs.modals.aboutMe.title']()}</h2>
-      <p>{@html m['aboutUs.modals.aboutMe.paragraph1']()}</p>
+      <h2>{m['aboutUs_modals_aboutMe_title']()}</h2>
+      <p>{@html m['aboutUs_modals_aboutMe_paragraph1']()}</p>
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">{m['aboutUs.modals.closeButton']()}</button>
+        <button class="btn">{m['aboutUs_modals_closeButton']()}</button>
       </form>
     </div>
   </div>

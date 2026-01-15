@@ -3,7 +3,6 @@ import { client } from '$lib/server/graphql-client.server';
 import { gql } from 'graphql-request';
 import type { RequestHandler } from '@sveltejs/kit';
 
-
 export const POST: RequestHandler = async ({ params, request }) => {
   try {
     const projectId = params.id;
@@ -36,14 +35,7 @@ export const POST: RequestHandler = async ({ params, request }) => {
     // Projekt mit Customer verknüpfen
     const linkCustomerMutation = gql`
       mutation LinkCustomerToProject($projectId: ID!, $customerId: ID!) {
-        updateProject(
-          where: { id: $projectId }
-          data: { 
-            owner: { 
-              connect: { id: $customerId } 
-            } 
-          }
-        ) {
+        updateProject(where: { id: $projectId }, data: { owner: { connect: { id: $customerId } } }) {
           id
           name
           owner {
@@ -56,7 +48,7 @@ export const POST: RequestHandler = async ({ params, request }) => {
       }
     `;
 
-    const variables = { projectId: projectId, customerId: customerId }
+    const variables = { projectId: projectId, customerId: customerId };
     const result = (await client.request(linkCustomerMutation, variables)) as any;
 
     if (result.updateProject) {

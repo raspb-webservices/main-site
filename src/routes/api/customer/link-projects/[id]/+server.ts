@@ -24,7 +24,7 @@ export const PATCH: RequestHandler = async ({ request, url }) => {
 
     const variables = {
       id: customerData.id,
-      projectsIds: customerData.projectIds?.length ? customerData.projectIds : null,
+      projectsIds: customerData.projectIds?.length ? customerData.projectIds : null
     };
 
     const mutation = gql`

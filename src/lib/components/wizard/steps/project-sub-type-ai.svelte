@@ -5,8 +5,12 @@
 </script>
 
 <div class="step-header">
-  <h1>{m['wizard.stepSubType.titleFirst']()} <span class="inner-text-special">{m['wizard.stepSubType.titleHighlight']()}</span>{m['wizard.stepSubType.titleSecond']()}</h1>
-  <p class="teaser">{m['wizard.stepSubType.teaser']({project:m['wizard.type.'+config.projectType+'.title']?.() ?? config.projectType})}</p>
+  <h1>
+    {m['wizard_stepSubType_titleFirst']()} <span class="inner-text-special">{m['wizard_stepSubType_titleHighlight']()}</span>{m[
+      'wizard_stepSubType_titleSecond'
+    ]()}
+  </h1>
+  <p class="teaser">{m['wizard_stepSubType_teaser']({ project: m['wizard.type.' + config.projectType + '.title']?.() ?? config.projectType })}</p>
 </div>
 
 <div class="subtypes-grid">
@@ -52,9 +56,9 @@
     }
   }
   .subtypes-grid {
-    @apply flex flex-row gap-10 items-center justify-center flex-wrap;
+    @apply flex flex-row flex-wrap items-center justify-center gap-10;
     .service-card {
-      @apply bg-white border-base-300/80 border transition-all duration-300 max-w-md md:max-w-lg;
+      @apply border-base-300/80 max-w-md border bg-white transition-all duration-300 md:max-w-lg;
       &:hover {
         @apply bg-primary/1 border-base-300 shadow-md;
       }

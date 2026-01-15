@@ -10,10 +10,14 @@
     subType: 'customApp',
     description:
       'Eine umfassende SaaS-Plattform für die digitale Immobilienverwaltung mit KI-gestützten Analysen, automatisierten Workflows, Mieter-Portal, Eigentümer-Dashboard und integriertem Facility Management. Die Lösung revolutioniert die traditionelle Hausverwaltung durch Digitalisierung und Automatisierung.',
-    projectDetails: 'Multi-Tenant SaaS-Anwendung mit Rollen-basiertem Zugriff, API-First Architektur, Real-time Notifications, Mobile Apps, IoT-Integration für Smart Building Features, Machine Learning für Predictive Maintenance und automatisierte Buchhaltung',
-    targetAudience: 'Hausverwaltungsunternehmen, Immobilieneigentümer, Property Manager, Facility Manager, Mieter und Gewerbetreibende - primär B2B mit B2C Komponenten',
-    goals: 'Digitalisierung der Immobilienverwaltung, Effizienzsteigerung um 40%, Kostensenkung durch Automatisierung, Verbesserung der Mieter-Zufriedenheit, Skalierung auf 10.000+ verwaltete Einheiten',
-    inspiration: 'Moderne SaaS-Dashboards wie Notion, Linear und Figma kombiniert mit Immobilien-spezifischen Lösungen wie Buildium, AppFolio und deutschen Marktführern wie DOMUS und ista',
+    projectDetails:
+      'Multi-Tenant SaaS-Anwendung mit Rollen-basiertem Zugriff, API-First Architektur, Real-time Notifications, Mobile Apps, IoT-Integration für Smart Building Features, Machine Learning für Predictive Maintenance und automatisierte Buchhaltung',
+    targetAudience:
+      'Hausverwaltungsunternehmen, Immobilieneigentümer, Property Manager, Facility Manager, Mieter und Gewerbetreibende - primär B2B mit B2C Komponenten',
+    goals:
+      'Digitalisierung der Immobilienverwaltung, Effizienzsteigerung um 40%, Kostensenkung durch Automatisierung, Verbesserung der Mieter-Zufriedenheit, Skalierung auf 10.000+ verwaltete Einheiten',
+    inspiration:
+      'Moderne SaaS-Dashboards wie Notion, Linear und Figma kombiniert mit Immobilien-spezifischen Lösungen wie Buildium, AppFolio und deutschen Marktführern wie DOMUS und ista',
     desiredDomain: 'proptech360.de',
     domainStatus: 'Verfügbar, Registrierung erforderlich',
     projectStatus: 'prototype',
@@ -52,7 +56,8 @@
       'mapsIntegration',
       'socialMedieIntegration'
     ],
-    customFeature: 'KI-basierte Mietpreis-Optimierung, IoT-Sensoren für Predictive Maintenance, Blockchain-basierte Mietverträge, AR-Besichtigungen, Automatische Nebenkostenabrechnung mit OCR, Chatbot für Mieteranfragen, Mobile App mit Push-Notifications, API-Integration zu Banken und Versicherungen, Machine Learning für Leerstandsprognosen',
+    customFeature:
+      'KI-basierte Mietpreis-Optimierung, IoT-Sensoren für Predictive Maintenance, Blockchain-basierte Mietverträge, AR-Besichtigungen, Automatische Nebenkostenabrechnung mit OCR, Chatbot für Mieteranfragen, Mobile App mit Push-Notifications, API-Integration zu Banken und Versicherungen, Machine Learning für Leerstandsprognosen',
     pages: [
       {
         name: 'Landing Page',
@@ -201,7 +206,7 @@
         })
       });
 
-      console.log("PDF res ", response)
+      console.log('PDF res ', response);
 
       if (response.ok) {
         // PDF erfolgreich generiert - Download starten
@@ -216,7 +221,7 @@
         document.body.removeChild(a);
       } else {
         const errorData = await response.json();
-        console.log("errorData ", errorData);
+        console.log('errorData ', errorData);
         error = errorData.error || 'PDF-Generierung fehlgeschlagen';
       }
     } catch (err) {

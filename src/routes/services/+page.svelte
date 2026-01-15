@@ -4,7 +4,7 @@
   import { m } from '$lib/paraglide/messages';
   import Stage from '$lib/components/ui/stage.svelte';
   import Section from '$lib/components/ui/section.svelte';
-  import CTABox from '$lib/components/snippets/cta-box.svelte'
+  import CTABox from '$lib/components/snippets/cta-box.svelte';
   import OnePage from '$lib/components/modals/services/one-page.svelte';
   import LandingPage from '$lib/components/modals/services/landing-page.svelte';
   import CorporateWebsites from '$lib/components/modals/services/corporate-websites.svelte';
@@ -24,6 +24,7 @@
   import KIBeratung from '$lib/components/modals/services/ki-beratung.svelte';
   import KIInfrastructure from '$lib/components/modals/services/ki-infrastructure.svelte';
   import KIWorkflows from '$lib/components/modals/services/ki-workflows.svelte';
+  import { localizeHref } from '$lib/paraglide/runtime';
 
   const handleHashChange = (event: HashChangeEvent) => {
     const newHash = new URL(event.newURL).hash.slice(1);
@@ -65,19 +66,19 @@
 </script>
 
 <svelte:head>
-  <title>{m['servicesPage.meta.title']()}</title>
-  <meta name="description" content={m['servicesPage.meta.description']()} />
+  <title>{m['servicesPage_meta_title']()}</title>
+  <meta name="description" content={m['servicesPage_meta_description']()} />
 </svelte:head>
 
 <Stage style={'basic-gradient'}>
-  <div class="inner-box reduced py-36 prose">
-    <h1 class="massive animate-fade-in-up">{m['servicesPage.hero.title']()}</h1>
-    <p class="teaser animate-fade-in-up">{m['servicesPage.hero.subtitle']()}</p>
+  <div class="inner-box reduced prose py-36">
+    <h1 class="massive animate-fade-in-up">{m['servicesPage_hero_title']()}</h1>
+    <p class="teaser animate-fade-in-up">{m['servicesPage_hero_subtitle']()}</p>
     <button
       class="btn-basic animate-fade-in-from-side"
       onclick={() => {
-        goto('/get-started');
-      }}>{m['servicesPage.hero.buttonText']()}</button
+        goto(localizeHref('/wizard'));
+      }}>{m['servicesPage_hero_buttonText']()}</button
     >
   </div>
 </Stage>
@@ -86,21 +87,21 @@
   <div class="massive-spacer"></div>
 
   <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-14">
-    <div class="animate-fadeIn mr-8 prose">
-      <h2>{m['servicesPage.intro.titleFirst']()} <span class="inner-text-special">{m['servicesPage.intro.titleHighlight']()}</span></h2>
+    <div class="animate-fadeIn prose mr-8">
+      <h2>{m['servicesPage_intro_titleFirst']()} <span class="inner-text-special">{m['servicesPage_intro_titleHighlight']()}</span></h2>
       <p>
-        {m['servicesPage.intro.paragraph1']()}
+        {m['servicesPage_intro_paragraph1']()}
       </p>
       <p>
-        {m['servicesPage.intro.paragraph2']()}
+        {m['servicesPage_intro_paragraph2']()}
       </p>
       <div class="benefits">
-        <div class="item">{m['servicesPage.intro.benefits.benefit1']()}</div>
-        <div class="item">{m['servicesPage.intro.benefits.benefit2']()}</div>
-        <div class="item">{m['servicesPage.intro.benefits.benefit3']()}</div>
-        <div class="item">{m['servicesPage.intro.benefits.benefit4']()}</div>
-        <div class="item">{m['servicesPage.intro.benefits.benefit5']()}</div>
-        <div class="item">{m['servicesPage.intro.benefits.benefit6']()}</div>
+        <div class="item">{m['servicesPage_intro_benefits_benefit1']()}</div>
+        <div class="item">{m['servicesPage_intro_benefits_benefit2']()}</div>
+        <div class="item">{m['servicesPage_intro_benefits_benefit3']()}</div>
+        <div class="item">{m['servicesPage_intro_benefits_benefit4']()}</div>
+        <div class="item">{m['servicesPage_intro_benefits_benefit5']()}</div>
+        <div class="item">{m['servicesPage_intro_benefits_benefit6']()}</div>
       </div>
     </div>
     <div>
@@ -117,33 +118,33 @@
   <div class="service-overview-highlight">
     <div class="highlight-content">
       <h2 class="mb-8 text-center">
-        {m['servicesPage.categories.titleFirst']()} <span class="inner-text-special">{m['servicesPage.categories.titleHighlight']()}</span>
+        {m['servicesPage_categories_titleFirst']()} <span class="inner-text-special">{m['servicesPage_categories_titleHighlight']()}</span>
       </h2>
       <div class="service-categories-grid">
         <button class="category-card" onclick={() => scrollToSection('webseiten-section')}>
           <div class="category-icon">🌐</div>
-          <h3>{m['servicesPage.categories.webseiten.title']()}</h3>
-          <p class="no-padding">{m['servicesPage.categories.webseiten.description']()}</p>
+          <h3>{m['servicesPage_categories_webseiten_title']()}</h3>
+          <p class="no-padding">{m['servicesPage_categories_webseiten_description']()}</p>
         </button>
         <button class="category-card" onclick={() => scrollToSection('cms-section')}>
           <div class="category-icon">📝</div>
-          <h3>{m['servicesPage.categories.contentManagement.title']()}</h3>
-          <p class="no-padding">{m['servicesPage.categories.contentManagement.description']()}</p>
+          <h3>{m['servicesPage_categories_contentManagement_title']()}</h3>
+          <p class="no-padding">{m['servicesPage_categories_contentManagement_description']()}</p>
         </button>
         <button class="category-card" onclick={() => scrollToSection('applications-section')}>
           <div class="category-icon">📱</div>
-          <h3>{m['servicesPage.categories.applications.title']()}</h3>
-          <p class="no-padding">{m['servicesPage.categories.applications.description']()}</p>
+          <h3>{m['servicesPage_categories_applications_title']()}</h3>
+          <p class="no-padding">{m['servicesPage_categories_applications_description']()}</p>
         </button>
         <button class="category-card" onclick={() => scrollToSection('individual-development-section')}>
           <div class="category-icon">⚙️</div>
-          <h3>{m['servicesPage.categories.freestyle.title']()}</h3>
-          <p class="no-padding">{m['servicesPage.categories.freestyle.description']()}</p>
+          <h3>{m['servicesPage_categories_freestyle_title']()}</h3>
+          <p class="no-padding">{m['servicesPage_categories_freestyle_description']()}</p>
         </button>
         <button class="category-card" onclick={() => scrollToSection('ki-services-section')}>
           <div class="category-icon">🤖</div>
-          <h3>{m['servicesPage.categories.aiServices.title']()}</h3>
-          <p class="no-padding">{m['servicesPage.categories.aiServices.description']()}</p>
+          <h3>{m['servicesPage_categories_aiServices_title']()}</h3>
+          <p class="no-padding">{m['servicesPage_categories_aiServices_description']()}</p>
         </button>
       </div>
     </div>
@@ -154,9 +155,9 @@
 <Section noSpacing={true}>
   <div id="webseiten-section" class="service-section">
     <div class="service-header prose">
-      <h1>{m['servicesPage.webseitenSection.titleFirst']()} <span class="inner-text-special">{m['servicesPage.webseitenSection.titleHighlight']()}</span></h1>
+      <h1>{m['servicesPage_webseitenSection_titleFirst']()} <span class="inner-text-special">{m['servicesPage_webseitenSection_titleHighlight']()}</span></h1>
       <p class="teaser">
-        {m['servicesPage.webseitenSection.teaser']()}
+        {m['servicesPage_webseitenSection_teaser']()}
       </p>
     </div>
 
@@ -165,17 +166,17 @@
       <div class="service-card">
         <div class="service-card-content">
           <div class="service-card-header">
-            <h3>{m['servicesPage.webseitenSection.onePage.title']()}</h3>
-            <div class="service-icon">{m['servicesPage.webseitenSection.onePage.icon']()}</div>
+            <h3>{m['servicesPage_webseitenSection_onePage_title']()}</h3>
+            <div class="service-icon">{m['servicesPage_webseitenSection_onePage_icon']()}</div>
           </div>
-          <p>{m['servicesPage.webseitenSection.onePage.description']()}</p>
+          <p>{m['servicesPage_webseitenSection_onePage_description']()}</p>
           <div class="service-highlights">
-            <span class="highlight">{m['servicesPage.webseitenSection.onePage.highlights.h1']()}</span>
-            <span class="highlight">{m['servicesPage.webseitenSection.onePage.highlights.h2']()}</span>
-            <span class="highlight">{m['servicesPage.webseitenSection.onePage.highlights.h3']()}</span>
+            <span class="highlight">{m['servicesPage_webseitenSection_onePage_highlights_h1']()}</span>
+            <span class="highlight">{m['servicesPage_webseitenSection_onePage_highlights_h2']()}</span>
+            <span class="highlight">{m['servicesPage_webseitenSection_onePage_highlights_h3']()}</span>
           </div>
           <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-onepage')}>
-            <div class="button-inner">{m['servicesPage.webseitenSection.onePage.buttonText']()}</div>
+            <div class="button-inner">{m['servicesPage_webseitenSection_onePage_buttonText']()}</div>
           </button>
         </div>
       </div>
@@ -184,17 +185,17 @@
       <div class="service-card">
         <div class="service-card-content">
           <div class="service-card-header">
-            <h3>{m['servicesPage.webseitenSection.landingPages.title']()}</h3>
-            <div class="service-icon">{m['servicesPage.webseitenSection.landingPages.icon']()}</div>
+            <h3>{m['servicesPage_webseitenSection_landingPages_title']()}</h3>
+            <div class="service-icon">{m['servicesPage_webseitenSection_landingPages_icon']()}</div>
           </div>
-          <p>{m['servicesPage.webseitenSection.landingPages.description']()}</p>
+          <p>{m['servicesPage_webseitenSection_landingPages_description']()}</p>
           <div class="service-highlights">
-            <span class="highlight">{m['servicesPage.webseitenSection.landingPages.highlights.h1']()}</span>
-            <span class="highlight">{m['servicesPage.webseitenSection.landingPages.highlights.h2']()}</span>
-            <span class="highlight">{m['servicesPage.webseitenSection.landingPages.highlights.h3']()}</span>
+            <span class="highlight">{m['servicesPage_webseitenSection_landingPages_highlights_h1']()}</span>
+            <span class="highlight">{m['servicesPage_webseitenSection_landingPages_highlights_h2']()}</span>
+            <span class="highlight">{m['servicesPage_webseitenSection_landingPages_highlights_h3']()}</span>
           </div>
           <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-landing')}>
-            <div class="button-inner">{m['servicesPage.webseitenSection.landingPages.buttonText']()}</div>
+            <div class="button-inner">{m['servicesPage_webseitenSection_landingPages_buttonText']()}</div>
           </button>
         </div>
       </div>
@@ -203,17 +204,17 @@
       <div class="service-card">
         <div class="service-card-content">
           <div class="service-card-header">
-            <h3>{m['servicesPage.webseitenSection.corporateWebsites.title']()}</h3>
-            <div class="service-icon">{m['servicesPage.webseitenSection.corporateWebsites.icon']()}</div>
+            <h3>{m['servicesPage_webseitenSection_corporateWebsites_title']()}</h3>
+            <div class="service-icon">{m['servicesPage_webseitenSection_corporateWebsites_icon']()}</div>
           </div>
-          <p>{m['servicesPage.webseitenSection.corporateWebsites.description']()}</p>
+          <p>{m['servicesPage_webseitenSection_corporateWebsites_description']()}</p>
           <div class="service-highlights">
-            <span class="highlight">{m['servicesPage.webseitenSection.corporateWebsites.highlights.h1']()}</span>
-            <span class="highlight">{m['servicesPage.webseitenSection.corporateWebsites.highlights.h2']()}</span>
-            <span class="highlight">{m['servicesPage.webseitenSection.corporateWebsites.highlights.h3']()}</span>
+            <span class="highlight">{m['servicesPage_webseitenSection_corporateWebsites_highlights_h1']()}</span>
+            <span class="highlight">{m['servicesPage_webseitenSection_corporateWebsites_highlights_h2']()}</span>
+            <span class="highlight">{m['servicesPage_webseitenSection_corporateWebsites_highlights_h3']()}</span>
           </div>
           <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-corporate')}>
-            <div class="button-inner">{m['servicesPage.webseitenSection.corporateWebsites.buttonText']()}</div>
+            <div class="button-inner">{m['servicesPage_webseitenSection_corporateWebsites_buttonText']()}</div>
           </button>
         </div>
       </div>
@@ -225,9 +226,9 @@
 <Section noSpacing={true}>
   <div id="cms-section" class="service-section">
     <div class="service-header prose">
-      <h1>{m['servicesPage.cmsSection.titleFirst']()} <span class="inner-text-special">{m['servicesPage.cmsSection.titleHighlight']()}</span></h1>
+      <h1>{m['servicesPage_cmsSection_titleFirst']()} <span class="inner-text-special">{m['servicesPage_cmsSection_titleHighlight']()}</span></h1>
       <p class="teaser">
-        {m['servicesPage.cmsSection.teaser']()}
+        {m['servicesPage_cmsSection_teaser']()}
       </p>
     </div>
 
@@ -236,17 +237,17 @@
       <div class="service-card large">
         <div class="service-card-content prose">
           <div class="service-card-header">
-            <h3 class="pt-2">{m['servicesPage.cmsSection.simpleCms.title']()}</h3>
-            <div class="service-icon">{m['servicesPage.cmsSection.simpleCms.icon']()}</div>
+            <h3 class="pt-2">{m['servicesPage_cmsSection_simpleCms_title']()}</h3>
+            <div class="service-icon">{m['servicesPage_cmsSection_simpleCms_icon']()}</div>
           </div>
-          <p>{m['servicesPage.cmsSection.simpleCms.description']()}</p>
+          <p>{m['servicesPage_cmsSection_simpleCms_description']()}</p>
           <div class="service-highlights">
-            <span class="highlight">{m['servicesPage.cmsSection.simpleCms.highlights.h1']()}</span>
-            <span class="highlight">{m['servicesPage.cmsSection.simpleCms.highlights.h2']()}</span>
-            <span class="highlight">{m['servicesPage.cmsSection.simpleCms.highlights.h3']()}</span>
+            <span class="highlight">{m['servicesPage_cmsSection_simpleCms_highlights_h1']()}</span>
+            <span class="highlight">{m['servicesPage_cmsSection_simpleCms_highlights_h2']()}</span>
+            <span class="highlight">{m['servicesPage_cmsSection_simpleCms_highlights_h3']()}</span>
           </div>
           <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-simple-cms')}>
-            <div class="button-inner">{m['servicesPage.cmsSection.simpleCms.buttonText']()}</div>
+            <div class="button-inner">{m['servicesPage_cmsSection_simpleCms_buttonText']()}</div>
           </button>
         </div>
       </div>
@@ -255,17 +256,17 @@
       <div class="service-card large">
         <div class="service-card-content prose">
           <div class="service-card-header">
-            <h3 class="pt-2">{m['servicesPage.cmsSection.complexCms.title']()}</h3>
-            <div class="service-icon">{m['servicesPage.cmsSection.complexCms.icon']()}</div>
+            <h3 class="pt-2">{m['servicesPage_cmsSection_complexCms_title']()}</h3>
+            <div class="service-icon">{m['servicesPage_cmsSection_complexCms_icon']()}</div>
           </div>
-          <p>{m['servicesPage.cmsSection.complexCms.description']()}</p>
+          <p>{m['servicesPage_cmsSection_complexCms_description']()}</p>
           <div class="service-highlights">
-            <span class="highlight">{m['servicesPage.cmsSection.complexCms.highlights.h1']()}</span>
-            <span class="highlight">{m['servicesPage.cmsSection.complexCms.highlights.h2']()}</span>
-            <span class="highlight">{m['servicesPage.cmsSection.complexCms.highlights.h3']()}</span>
+            <span class="highlight">{m['servicesPage_cmsSection_complexCms_highlights_h1']()}</span>
+            <span class="highlight">{m['servicesPage_cmsSection_complexCms_highlights_h2']()}</span>
+            <span class="highlight">{m['servicesPage_cmsSection_complexCms_highlights_h3']()}</span>
           </div>
           <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-complex-cms')}>
-            <div class="button-inner">{m['servicesPage.cmsSection.complexCms.buttonText']()}</div>
+            <div class="button-inner">{m['servicesPage_cmsSection_complexCms_buttonText']()}</div>
           </button>
         </div>
       </div>
@@ -274,17 +275,17 @@
       <div class="service-card large">
         <div class="service-card-content prose">
           <div class="service-card-header">
-            <h3 class="pt-2">{m['servicesPage.cmsSection.blogCms.title']()}</h3>
-            <div class="service-icon">{m['servicesPage.cmsSection.blogCms.icon']()}</div>
+            <h3 class="pt-2">{m['servicesPage_cmsSection_blogCms_title']()}</h3>
+            <div class="service-icon">{m['servicesPage_cmsSection_blogCms_icon']()}</div>
           </div>
-          <p>{m['servicesPage.cmsSection.blogCms.description']()}</p>
+          <p>{m['servicesPage_cmsSection_blogCms_description']()}</p>
           <div class="service-highlights">
-            <span class="highlight">{m['servicesPage.cmsSection.blogCms.highlights.h1']()}</span>
-            <span class="highlight">{m['servicesPage.cmsSection.blogCms.highlights.h2']()}</span>
-            <span class="highlight">{m['servicesPage.cmsSection.blogCms.highlights.h3']()}</span>
+            <span class="highlight">{m['servicesPage_cmsSection_blogCms_highlights_h1']()}</span>
+            <span class="highlight">{m['servicesPage_cmsSection_blogCms_highlights_h2']()}</span>
+            <span class="highlight">{m['servicesPage_cmsSection_blogCms_highlights_h3']()}</span>
           </div>
           <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-blog-cms')}>
-            <div class="button-inner">{m['servicesPage.cmsSection.blogCms.buttonText']()}</div>
+            <div class="button-inner">{m['servicesPage_cmsSection_blogCms_buttonText']()}</div>
           </button>
         </div>
       </div>
@@ -293,17 +294,17 @@
       <div class="service-card large">
         <div class="service-card-content prose">
           <div class="service-card-header">
-            <h3 class="pt-2">{m['servicesPage.cmsSection.headlessCms.title']()}</h3>
-            <div class="service-icon">{m['servicesPage.cmsSection.headlessCms.icon']()}</div>
+            <h3 class="pt-2">{m['servicesPage_cmsSection_headlessCms_title']()}</h3>
+            <div class="service-icon">{m['servicesPage_cmsSection_headlessCms_icon']()}</div>
           </div>
-          <p>{m['servicesPage.cmsSection.headlessCms.description']()}</p>
+          <p>{m['servicesPage_cmsSection_headlessCms_description']()}</p>
           <div class="service-highlights">
-            <span class="highlight">{m['servicesPage.cmsSection.headlessCms.highlights.h1']()}</span>
-            <span class="highlight">{m['servicesPage.cmsSection.headlessCms.highlights.h2']()}</span>
-            <span class="highlight">{m['servicesPage.cmsSection.headlessCms.highlights.h3']()}</span>
+            <span class="highlight">{m['servicesPage_cmsSection_headlessCms_highlights_h1']()}</span>
+            <span class="highlight">{m['servicesPage_cmsSection_headlessCms_highlights_h2']()}</span>
+            <span class="highlight">{m['servicesPage_cmsSection_headlessCms_highlights_h3']()}</span>
           </div>
           <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-headless-cms')}>
-            <div class="button-inner">{m['servicesPage.cmsSection.headlessCms.buttonText']()}</div>
+            <div class="button-inner">{m['servicesPage_cmsSection_headlessCms_buttonText']()}</div>
           </button>
         </div>
       </div>
@@ -316,10 +317,10 @@
   <div id="applications-section" class="service-section">
     <div class="service-header prose">
       <h1>
-        {m['servicesPage.applicationsSection.titleFirst']()} <span class="inner-text-special">{m['servicesPage.applicationsSection.titleHighlight']()}</span>
+        {m['servicesPage_applicationsSection_titleFirst']()} <span class="inner-text-special">{m['servicesPage_applicationsSection_titleHighlight']()}</span>
       </h1>
       <p class="teaser">
-        {m['servicesPage.applicationsSection.teaser']()}
+        {m['servicesPage_applicationsSection_teaser']()}
       </p>
     </div>
 
@@ -328,17 +329,17 @@
       <div class="service-card large">
         <div class="service-card-content">
           <div class="service-card-header">
-            <h3>{m['servicesPage.applicationsSection.webApps.title']()}</h3>
-            <div class="service-icon">{m['servicesPage.applicationsSection.webApps.icon']()}</div>
+            <h3>{m['servicesPage_applicationsSection_webApps_title']()}</h3>
+            <div class="service-icon">{m['servicesPage_applicationsSection_webApps_icon']()}</div>
           </div>
-          <p>{m['servicesPage.applicationsSection.webApps.description']()}</p>
+          <p>{m['servicesPage_applicationsSection_webApps_description']()}</p>
           <div class="service-highlights">
-            <span class="highlight">{m['servicesPage.applicationsSection.webApps.highlights.h1']()}</span>
-            <span class="highlight">{m['servicesPage.applicationsSection.webApps.highlights.h2']()}</span>
-            <span class="highlight">{m['servicesPage.applicationsSection.webApps.highlights.h3']()}</span>
+            <span class="highlight">{m['servicesPage_applicationsSection_webApps_highlights_h1']()}</span>
+            <span class="highlight">{m['servicesPage_applicationsSection_webApps_highlights_h2']()}</span>
+            <span class="highlight">{m['servicesPage_applicationsSection_webApps_highlights_h3']()}</span>
           </div>
           <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-web-apps')}>
-            <div class="button-inner">{m['servicesPage.applicationsSection.webApps.buttonText']()}</div>
+            <div class="button-inner">{m['servicesPage_applicationsSection_webApps_buttonText']()}</div>
           </button>
         </div>
       </div>
@@ -347,17 +348,17 @@
       <div class="service-card large">
         <div class="service-card-content">
           <div class="service-card-header">
-            <h3>{m['servicesPage.applicationsSection.pwa.title']()}</h3>
-            <div class="service-icon">{m['servicesPage.applicationsSection.pwa.icon']()}</div>
+            <h3>{m['servicesPage_applicationsSection_pwa_title']()}</h3>
+            <div class="service-icon">{m['servicesPage_applicationsSection_pwa_icon']()}</div>
           </div>
-          <p>{m['servicesPage.applicationsSection.pwa.description']()}</p>
+          <p>{m['servicesPage_applicationsSection_pwa_description']()}</p>
           <div class="service-highlights">
-            <span class="highlight">{m['servicesPage.applicationsSection.pwa.highlights.h1']()}</span>
-            <span class="highlight">{m['servicesPage.applicationsSection.pwa.highlights.h2']()}</span>
-            <span class="highlight">{m['servicesPage.applicationsSection.pwa.highlights.h3']()}</span>
+            <span class="highlight">{m['servicesPage_applicationsSection_pwa_highlights_h1']()}</span>
+            <span class="highlight">{m['servicesPage_applicationsSection_pwa_highlights_h2']()}</span>
+            <span class="highlight">{m['servicesPage_applicationsSection_pwa_highlights_h3']()}</span>
           </div>
           <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-pwa')}>
-            <div class="button-inner">{m['servicesPage.applicationsSection.pwa.buttonText']()}</div>
+            <div class="button-inner">{m['servicesPage_applicationsSection_pwa_buttonText']()}</div>
           </button>
         </div>
       </div>
@@ -366,17 +367,17 @@
       <div class="service-card large">
         <div class="service-card-content">
           <div class="service-card-header">
-            <h3>{m['servicesPage.applicationsSection.nativeApps.title']()}</h3>
-            <div class="service-icon">{m['servicesPage.applicationsSection.nativeApps.icon']()}</div>
+            <h3>{m['servicesPage_applicationsSection_nativeApps_title']()}</h3>
+            <div class="service-icon">{m['servicesPage_applicationsSection_nativeApps_icon']()}</div>
           </div>
-          <p>{m['servicesPage.applicationsSection.nativeApps.description']()}</p>
+          <p>{m['servicesPage_applicationsSection_nativeApps_description']()}</p>
           <div class="service-highlights">
-            <span class="highlight">{m['servicesPage.applicationsSection.nativeApps.highlights.h1']()}</span>
-            <span class="highlight">{m['servicesPage.applicationsSection.nativeApps.highlights.h2']()}</span>
-            <span class="highlight">{m['servicesPage.applicationsSection.nativeApps.highlights.h3']()}</span>
+            <span class="highlight">{m['servicesPage_applicationsSection_nativeApps_highlights_h1']()}</span>
+            <span class="highlight">{m['servicesPage_applicationsSection_nativeApps_highlights_h2']()}</span>
+            <span class="highlight">{m['servicesPage_applicationsSection_nativeApps_highlights_h3']()}</span>
           </div>
           <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-native-apps')}>
-            <div class="button-inner">{m['servicesPage.applicationsSection.nativeApps.buttonText']()}</div>
+            <div class="button-inner">{m['servicesPage_applicationsSection_nativeApps_buttonText']()}</div>
           </button>
         </div>
       </div>
@@ -385,17 +386,17 @@
       <div class="service-card large">
         <div class="service-card-content">
           <div class="service-card-header">
-            <h3>{m['servicesPage.applicationsSection.complexApps.title']()}</h3>
-            <div class="service-icon">{m['servicesPage.applicationsSection.complexApps.icon']()}</div>
+            <h3>{m['servicesPage_applicationsSection_complexApps_title']()}</h3>
+            <div class="service-icon">{m['servicesPage_applicationsSection_complexApps_icon']()}</div>
           </div>
-          <p>{m['servicesPage.applicationsSection.complexApps.description']()}</p>
+          <p>{m['servicesPage_applicationsSection_complexApps_description']()}</p>
           <div class="service-highlights">
-            <span class="highlight">{m['servicesPage.applicationsSection.complexApps.highlights.h1']()}</span>
-            <span class="highlight">{m['servicesPage.applicationsSection.complexApps.highlights.h2']()}</span>
-            <span class="highlight">{m['servicesPage.applicationsSection.complexApps.highlights.h3']()}</span>
+            <span class="highlight">{m['servicesPage_applicationsSection_complexApps_highlights_h1']()}</span>
+            <span class="highlight">{m['servicesPage_applicationsSection_complexApps_highlights_h2']()}</span>
+            <span class="highlight">{m['servicesPage_applicationsSection_complexApps_highlights_h3']()}</span>
           </div>
           <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-complex-apps')}>
-            <div class="button-inner">{m['servicesPage.applicationsSection.complexApps.buttonText']()}</div>
+            <div class="button-inner">{m['servicesPage_applicationsSection_complexApps_buttonText']()}</div>
           </button>
         </div>
       </div>
@@ -408,12 +409,12 @@
   <div id="individual-development-section" class="service-section">
     <div class="service-header prose">
       <h1>
-        {m['servicesPage.individualDevelopmentSection.titleFirst']()}<span class="inner-text-special"
-          >{m['servicesPage.individualDevelopmentSection.titleHighlight']()}</span
+        {m['servicesPage_individualDevelopmentSection_titleFirst']()}<span class="inner-text-special"
+          >{m['servicesPage_individualDevelopmentSection_titleHighlight']()}</span
         >
       </h1>
       <p class="teaser">
-        {m['servicesPage.individualDevelopmentSection.teaser']()}
+        {m['servicesPage_individualDevelopmentSection_teaser']()}
       </p>
     </div>
 
@@ -421,12 +422,12 @@
       <div class="service-card">
         <div class="service-card-content">
           <div class="service-card-header">
-            <h3>{m['servicesPage.individualDevelopmentSection.components.title']()}</h3>
-            <div class="service-icon">{m['servicesPage.individualDevelopmentSection.components.icon']()}</div>
+            <h3>{m['servicesPage_individualDevelopmentSection_components_title']()}</h3>
+            <div class="service-icon">{m['servicesPage_individualDevelopmentSection_components_icon']()}</div>
           </div>
-          <p>{m['servicesPage.individualDevelopmentSection.components.description']()}</p>
+          <p>{m['servicesPage_individualDevelopmentSection_components_description']()}</p>
           <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-components')}>
-            <div class="button-inner">{m['servicesPage.individualDevelopmentSection.components.buttonText']()}</div>
+            <div class="button-inner">{m['servicesPage_individualDevelopmentSection_components_buttonText']()}</div>
           </button>
         </div>
       </div>
@@ -434,12 +435,12 @@
       <div class="service-card">
         <div class="service-card-content">
           <div class="service-card-header">
-            <h3>{m['servicesPage.individualDevelopmentSection.extensions.title']()}</h3>
-            <div class="service-icon">{m['servicesPage.individualDevelopmentSection.extensions.icon']()}</div>
+            <h3>{m['servicesPage_individualDevelopmentSection_extensions_title']()}</h3>
+            <div class="service-icon">{m['servicesPage_individualDevelopmentSection_extensions_icon']()}</div>
           </div>
-          <p>{m['servicesPage.individualDevelopmentSection.extensions.description']()}</p>
+          <p>{m['servicesPage_individualDevelopmentSection_extensions_description']()}</p>
           <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-extensions')}>
-            <div class="button-inner">{m['servicesPage.individualDevelopmentSection.extensions.buttonText']()}</div>
+            <div class="button-inner">{m['servicesPage_individualDevelopmentSection_extensions_buttonText']()}</div>
           </button>
         </div>
       </div>
@@ -447,12 +448,12 @@
       <div class="service-card">
         <div class="service-card-content">
           <div class="service-card-header">
-            <h3>{m['servicesPage.individualDevelopmentSection.specialApps.title']()}</h3>
-            <div class="service-icon">{m['servicesPage.individualDevelopmentSection.specialApps.icon']()}</div>
+            <h3>{m['servicesPage_individualDevelopmentSection_specialApps_title']()}</h3>
+            <div class="service-icon">{m['servicesPage_individualDevelopmentSection_specialApps_icon']()}</div>
           </div>
-          <p>{m['servicesPage.individualDevelopmentSection.specialApps.description']()}</p>
+          <p>{m['servicesPage_individualDevelopmentSection_specialApps_description']()}</p>
           <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-special-apps')}>
-            <div class="button-inner">{m['servicesPage.individualDevelopmentSection.specialApps.buttonText']()}</div>
+            <div class="button-inner">{m['servicesPage_individualDevelopmentSection_specialApps_buttonText']()}</div>
           </button>
         </div>
       </div>
@@ -460,12 +461,12 @@
       <div class="service-card">
         <div class="service-card-content">
           <div class="service-card-header">
-            <h3>{m['servicesPage.individualDevelopmentSection.design.title']()}</h3>
-            <div class="service-icon">{m['servicesPage.individualDevelopmentSection.design.icon']()}</div>
+            <h3>{m['servicesPage_individualDevelopmentSection_design_title']()}</h3>
+            <div class="service-icon">{m['servicesPage_individualDevelopmentSection_design_icon']()}</div>
           </div>
-          <p>{m['servicesPage.individualDevelopmentSection.design.description']()}</p>
+          <p>{m['servicesPage_individualDevelopmentSection_design_description']()}</p>
           <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-design')}>
-            <div class="button-inner">{m['servicesPage.individualDevelopmentSection.design.buttonText']()}</div>
+            <div class="button-inner">{m['servicesPage_individualDevelopmentSection_design_buttonText']()}</div>
           </button>
         </div>
       </div>
@@ -477,8 +478,8 @@
 <Section noSpacing={true}>
   <div id="ki-services-section" class="service-section">
     <div class="service-header prose">
-      <h1>{m['servicesPage.kiServicesSection.titleFirst']()} <span class="inner-text-special">{m['servicesPage.kiServicesSection.titleHighlight']()}</span></h1>
-      <p class="teaser">{m['servicesPage.kiServicesSection.teaser']()}</p>
+      <h1>{m['servicesPage_kiServicesSection_titleFirst']()} <span class="inner-text-special">{m['servicesPage_kiServicesSection_titleHighlight']()}</span></h1>
+      <p class="teaser">{m['servicesPage_kiServicesSection_teaser']()}</p>
     </div>
 
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
@@ -486,17 +487,17 @@
       <div class="service-card large">
         <div class="service-card-content">
           <div class="service-card-header">
-            <h3>{m['servicesPage.kiServicesSection.consulting.title']()}</h3>
-            <div class="service-icon">{m['servicesPage.kiServicesSection.consulting.icon']()}</div>
+            <h3>{m['servicesPage_kiServicesSection_consulting_title']()}</h3>
+            <div class="service-icon">{m['servicesPage_kiServicesSection_consulting_icon']()}</div>
           </div>
-          <p>{m['servicesPage.kiServicesSection.consulting.description']()}</p>
+          <p>{m['servicesPage_kiServicesSection_consulting_description']()}</p>
           <div class="service-highlights">
-            <span class="highlight">{m['servicesPage.kiServicesSection.consulting.highlights.h1']()}</span>
-            <span class="highlight">{m['servicesPage.kiServicesSection.consulting.highlights.h2']()}</span>
-            <span class="highlight">{m['servicesPage.kiServicesSection.consulting.highlights.h3']()}</span>
+            <span class="highlight">{m['servicesPage_kiServicesSection_consulting_highlights_h1']()}</span>
+            <span class="highlight">{m['servicesPage_kiServicesSection_consulting_highlights_h2']()}</span>
+            <span class="highlight">{m['servicesPage_kiServicesSection_consulting_highlights_h3']()}</span>
           </div>
           <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-ki-beratung')}>
-            <div class="button-inner">{m['servicesPage.kiServicesSection.consulting.buttonText']()}</div>
+            <div class="button-inner">{m['servicesPage_kiServicesSection_consulting_buttonText']()}</div>
           </button>
         </div>
       </div>
@@ -505,17 +506,17 @@
       <div class="service-card large">
         <div class="service-card-content">
           <div class="service-card-header">
-            <h3>{m['servicesPage.kiServicesSection.agentDevelopment.title']()}</h3>
-            <div class="service-icon">{m['servicesPage.kiServicesSection.agentDevelopment.icon']()}</div>
+            <h3>{m['servicesPage_kiServicesSection_agentDevelopment_title']()}</h3>
+            <div class="service-icon">{m['servicesPage_kiServicesSection_agentDevelopment_icon']()}</div>
           </div>
-          <p>{m['servicesPage.kiServicesSection.agentDevelopment.description']()}</p>
+          <p>{m['servicesPage_kiServicesSection_agentDevelopment_description']()}</p>
           <div class="service-highlights">
-            <span class="highlight">{m['servicesPage.kiServicesSection.agentDevelopment.highlights.h1']()}</span>
-            <span class="highlight">{m['servicesPage.kiServicesSection.agentDevelopment.highlights.h2']()}</span>
-            <span class="highlight">{m['servicesPage.kiServicesSection.agentDevelopment.highlights.h3']()}</span>
+            <span class="highlight">{m['servicesPage_kiServicesSection_agentDevelopment_highlights_h1']()}</span>
+            <span class="highlight">{m['servicesPage_kiServicesSection_agentDevelopment_highlights_h2']()}</span>
+            <span class="highlight">{m['servicesPage_kiServicesSection_agentDevelopment_highlights_h3']()}</span>
           </div>
           <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-ki-agenten')}>
-            <div class="button-inner">{m['servicesPage.kiServicesSection.agentDevelopment.buttonText']()}</div>
+            <div class="button-inner">{m['servicesPage_kiServicesSection_agentDevelopment_buttonText']()}</div>
           </button>
         </div>
       </div>
@@ -524,17 +525,17 @@
       <div class="service-card large">
         <div class="service-card-content">
           <div class="service-card-header">
-            <h3>{m['servicesPage.kiServicesSection.workflowOptimization.title']()}</h3>
-            <div class="service-icon">{m['servicesPage.kiServicesSection.workflowOptimization.icon']()}</div>
+            <h3>{m['servicesPage_kiServicesSection_workflowOptimization_title']()}</h3>
+            <div class="service-icon">{m['servicesPage_kiServicesSection_workflowOptimization_icon']()}</div>
           </div>
-          <p>{m['servicesPage.kiServicesSection.workflowOptimization.description']()}</p>
+          <p>{m['servicesPage_kiServicesSection_workflowOptimization_description']()}</p>
           <div class="service-highlights">
-            <span class="highlight">{m['servicesPage.kiServicesSection.workflowOptimization.highlights.h1']()}</span>
-            <span class="highlight">{m['servicesPage.kiServicesSection.workflowOptimization.highlights.h2']()}</span>
-            <span class="highlight">{m['servicesPage.kiServicesSection.workflowOptimization.highlights.h3']()}</span>
+            <span class="highlight">{m['servicesPage_kiServicesSection_workflowOptimization_highlights_h1']()}</span>
+            <span class="highlight">{m['servicesPage_kiServicesSection_workflowOptimization_highlights_h2']()}</span>
+            <span class="highlight">{m['servicesPage_kiServicesSection_workflowOptimization_highlights_h3']()}</span>
           </div>
           <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-workflow')}>
-            <div class="button-inner">{m['servicesPage.kiServicesSection.workflowOptimization.buttonText']()}</div>
+            <div class="button-inner">{m['servicesPage_kiServicesSection_workflowOptimization_buttonText']()}</div>
           </button>
         </div>
       </div>
@@ -543,17 +544,17 @@
       <div class="service-card large">
         <div class="service-card-content">
           <div class="service-card-header">
-            <h3>{m['servicesPage.kiServicesSection.aiAsInfrastructure.title']()}</h3>
-            <div class="service-icon">{m['servicesPage.kiServicesSection.aiAsInfrastructure.icon']()}</div>
+            <h3>{m['servicesPage_kiServicesSection_aiAsInfrastructure_title']()}</h3>
+            <div class="service-icon">{m['servicesPage_kiServicesSection_aiAsInfrastructure_icon']()}</div>
           </div>
-          <p>{m['servicesPage.kiServicesSection.aiAsInfrastructure.description']()}</p>
+          <p>{m['servicesPage_kiServicesSection_aiAsInfrastructure_description']()}</p>
           <div class="service-highlights">
-            <span class="highlight">{m['servicesPage.kiServicesSection.aiAsInfrastructure.highlights.h1']()}</span>
-            <span class="highlight">{m['servicesPage.kiServicesSection.aiAsInfrastructure.highlights.h2']()}</span>
-            <span class="highlight">{m['servicesPage.kiServicesSection.aiAsInfrastructure.highlights.h3']()}</span>
+            <span class="highlight">{m['servicesPage_kiServicesSection_aiAsInfrastructure_highlights_h1']()}</span>
+            <span class="highlight">{m['servicesPage_kiServicesSection_aiAsInfrastructure_highlights_h2']()}</span>
+            <span class="highlight">{m['servicesPage_kiServicesSection_aiAsInfrastructure_highlights_h3']()}</span>
           </div>
           <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-ai-infrastructure')}>
-            <div class="button-inner">{m['servicesPage.kiServicesSection.aiAsInfrastructure.buttonText']()}</div>
+            <div class="button-inner">{m['servicesPage_kiServicesSection_aiAsInfrastructure_buttonText']()}</div>
           </button>
         </div>
       </div>
@@ -563,7 +564,7 @@
 
 <!-- Call to Action Section -->
 <Section>
-  <CTABox variant="{'service'}"></CTABox>
+  <CTABox variant={'service'}></CTABox>
 </Section>
 
 <!-- DaisyUI Modals for detailed information -->

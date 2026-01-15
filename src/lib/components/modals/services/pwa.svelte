@@ -4,48 +4,48 @@
 
 <dialog id="modal-pwa" class="modal">
   <div class="modal-box">
-    <h3 class="mb-4 text-lg font-bold">{m['servicesPage.modals.pwa.title']()}</h3>
+    <h3 class="mb-4 text-lg font-bold">{m['servicesPage_modals_pwa_title']()}</h3>
     <div class="space-y-4">
-      <p><strong>{m['servicesPage.modals.pwa.perfectFor']()}</strong> {m['servicesPage.modals.pwa.perfectForDescription']()}</p>
+      <p><strong>{m['servicesPage_modals_pwa_perfectFor']()}</strong> {m['servicesPage_modals_pwa_perfectForDescription']()}</p>
 
       <div>
-        <h4 class="mb-2 font-semibold">{m['servicesPage.modals.pwa.appLikeFeaturesTitle']()}</h4>
+        <h4 class="mb-2 font-semibold">{m['servicesPage_modals_pwa_appLikeFeaturesTitle']()}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>{m['servicesPage.modals.pwa.appLikeFeatures.a1']()}</li>
-          <li>{m['servicesPage.modals.pwa.appLikeFeatures.a2']()}</li>
-          <li>{m['servicesPage.modals.pwa.appLikeFeatures.a3']()}</li>
-          <li>{m['servicesPage.modals.pwa.appLikeFeatures.a4']()}</li>
-          <li>{m['servicesPage.modals.pwa.appLikeFeatures.a5']()}</li>
-          <li>{m['servicesPage.modals.pwa.appLikeFeatures.a6']()}</li>
+          <li>{m['servicesPage_modals_pwa_appLikeFeatures_a1']()}</li>
+          <li>{m['servicesPage_modals_pwa_appLikeFeatures_a2']()}</li>
+          <li>{m['servicesPage_modals_pwa_appLikeFeatures_a3']()}</li>
+          <li>{m['servicesPage_modals_pwa_appLikeFeatures_a4']()}</li>
+          <li>{m['servicesPage_modals_pwa_appLikeFeatures_a5']()}</li>
+          <li>{m['servicesPage_modals_pwa_appLikeFeatures_a6']()}</li>
         </ul>
       </div>
 
       <div>
-        <h4 class="mb-2 font-semibold">{m['servicesPage.modals.pwa.technicalFeaturesTitle']()}</h4>
+        <h4 class="mb-2 font-semibold">{m['servicesPage_modals_pwa_technicalFeaturesTitle']()}</h4>
         <ul class="list-inside list-disc space-y-1">
-          <li>{m['servicesPage.modals.pwa.technicalFeatures.t1']()}</li>
-          <li>{m['servicesPage.modals.pwa.technicalFeatures.t2']()}</li>
-          <li>{m['servicesPage.modals.pwa.technicalFeatures.t3']()}</li>
-          <li>{m['servicesPage.modals.pwa.technicalFeatures.t4']()}</li>
-          <li>{m['servicesPage.modals.pwa.technicalFeatures.t5']()}</li>
+          <li>{m['servicesPage_modals_pwa_technicalFeatures_t1']()}</li>
+          <li>{m['servicesPage_modals_pwa_technicalFeatures_t2']()}</li>
+          <li>{m['servicesPage_modals_pwa_technicalFeatures_t3']()}</li>
+          <li>{m['servicesPage_modals_pwa_technicalFeatures_t4']()}</li>
+          <li>{m['servicesPage_modals_pwa_technicalFeatures_t5']()}</li>
         </ul>
       </div>
 
       <div class="bg-base-200 rounded-lg p-4">
-        <p class="text-sm"><strong>{m['servicesPage.modals.pwa.projectDuration']()}</strong> {m['servicesPage.modals.pwa.projectDurationValue']()}</p>
-        <p class="text-sm"><strong>{m['servicesPage.modals.pwa.advantage']()}</strong> {m['servicesPage.modals.pwa.advantageValue']()}</p>
+        <p class="text-sm"><strong>{m['servicesPage_modals_pwa_projectDuration']()}</strong> {m['servicesPage_modals_pwa_projectDurationValue']()}</p>
+        <p class="text-sm"><strong>{m['servicesPage_modals_pwa_advantage']()}</strong> {m['servicesPage_modals_pwa_advantageValue']()}</p>
       </div>
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">{m['servicesPage.modals.pwa.closeButton']()}</button>
+        <button class="btn">{m['servicesPage_modals_pwa_closeButton']()}</button>
       </form>
     </div>
   </div>
 </dialog>
 
 <style lang="postcss">
-@reference '../../../../app.css';
+  @reference '../../../../app.css';
   .modal-box {
     @apply max-w-2xl;
   }

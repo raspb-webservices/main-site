@@ -6,10 +6,10 @@
 
 <div class="step-header">
   <h1>
-    {m['wizard.stepType.titleFirst']()} <span class="inner-text-special">{m['wizard.stepType.titleHighlight']()}</span>
-    {m['wizard.stepType.titleSecond']()}
+    {m['wizard_stepType_titleFirst']()} <span class="inner-text-special">{m['wizard_stepType_titleHighlight']()}</span>
+    {m['wizard_stepType_titleSecond']()}
   </h1>
-  <p class="teaser">{m['wizard.stepType.teaser']()}</p>
+  <p class="teaser">{m['wizard_stepType_teaser']()}</p>
 </div>
 
 <div class="project-types">
@@ -56,9 +56,9 @@
     }
   }
   .project-types {
-    @apply flex flex-row gap-10 items-center justify-center flex-wrap md:flex-nowrap;
+    @apply flex flex-row flex-wrap items-center justify-center gap-10 md:flex-nowrap;
     .service-card {
-      @apply bg-white border-base-300/80 border transition-all duration-300 max-w-md;
+      @apply border-base-300/80 max-w-md border bg-white transition-all duration-300;
 
       &:hover {
         @apply bg-primary/1 border-base-300 shadow-md;

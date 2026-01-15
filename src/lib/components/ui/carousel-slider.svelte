@@ -161,8 +161,6 @@
   .carousel-slider-container {
     @apply relative aspect-video w-full;
 
-
-
     .carousel-slide {
       @apply aspect-video w-full rounded-3xl bg-cover bg-center bg-no-repeat shadow-lg;
       background-image: var(--bg-image);
@@ -172,7 +170,7 @@
       @apply absolute right-1/2 bottom-0 z-10 flex h-72 w-8/12 translate-x-1/2 items-center justify-center rounded-2xl bg-white/90 px-10 py-4 shadow-2xl backdrop-blur-md;
 
       .carousel-card-content {
-        @apply flex h-full w-full max-w-10/12 m-auto flex-col items-center justify-center text-center;
+        @apply m-auto flex h-full w-full max-w-10/12 flex-col items-center justify-center text-center;
 
         .carousel-subtext {
           @apply p-4 pb-6 leading-snug;

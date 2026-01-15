@@ -1,23 +1,17 @@
 <script lang="ts">
   import { m } from '$lib/paraglide/messages';
-
   import type { WizardConfig } from '$interfaces/project.interface';
-
   import ResetModal from '../modals/general/reset-modal.svelte';
-  import ContactModal from '../modals/general/contact-modal.svelte';  
-
+  import ContactModal from '../modals/general/contact-modal.svelte';
   import ProjectCategory from './steps/project-category.svelte';
   import ProjectTypeWebApp from './steps/project-type-web-app.svelte';
   import ProjectTypeAiFreestyle from './steps/project-type-ai-freestyle.svelte';
-
   import ProjectSubTypeWebsite from './steps/project-sub-type-website.svelte';
   import ProjectSubTypeApp from './steps/project-sub-type-apps.svelte';
   import ProjectSubTypeAi from './steps/project-sub-type-ai.svelte';
   import ProjectSubTypeFreestyle from './steps/project-sub-type-freestyle.svelte';
-
   import ProjectFeatures from './steps/project-features.svelte';
   import ProjectBasicDetails from './steps/project-basic-details.svelte';
-
   import ProjectSummary from './steps/project-summary.svelte';
 
   let config: WizardConfig = $state({
@@ -48,21 +42,19 @@
     relatedFiles: [],
     uploadedFiles: []
   });
-
+  const basicSteps = [
+    { id: 1, title: 'wizard_stepCategory_title', required: true },
+    { id: 2, title: 'wizard_stepType_title', required: true },
+    { id: 3, title: 'wizard_stepSubType_title', required: true },
+    { id: 4, title: 'wizard_stepBasicDetails_title', required: true },
+    { id: 5, title: 'wizard_stepFeatures_title', required: true },
+    { id: 6, title: 'wizard_stepSummary_title', required: false }
+  ];
+  const maxSteps = basicSteps.length;
   let currentStep = $state(1);
   let showSuccessMessage = $state(false);
   let resetModal: ResetModal;
   let contactModal: ContactModal;
-
-  const basicSteps = [
-    { id: 1, title: 'wizard.stepCategory.title', required: true },
-    { id: 2, title: 'wizard.stepType.title', required: true },
-    { id: 3, title: 'wizard.stepSubType.title', required: true },
-    { id: 4, title: 'wizard.stepBasicDetails.title', required: true },
-    { id: 5, title: 'wizard.stepFeatures.title', required: true },
-    { id: 6, title: 'wizard.stepSummary.title', required: false },
-  ];
-  const maxSteps = basicSteps.length;
 
   // Functions
   function selectProjectCategory(category: string) {
@@ -275,13 +267,13 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
             </svg>
-            {m['wizard.navigation.back']()}
+            {m['wizard_navigation_back']()}
           </button>
         {/if}
 
         {#if currentStep < maxSteps}
-          <button type="button" class="btn-basic grow md:grow-0 max-w-md m-auto md:ml-auto md:mr-0" onclick={nextStep}>
-            {m['wizard.navigation.next']()}
+          <button type="button" class="btn-basic m-auto max-w-md grow md:mr-0 md:ml-auto md:grow-0" onclick={nextStep}>
+            {m['wizard_navigation_next']()}
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
@@ -300,8 +292,8 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
       <div>
-        <div class="font-bold">{m['wizard.modals.thankYou.title']()}</div>
-        <div class="text-sm">{m['wizard.modals.thankYou.subtitle']()}</div>
+        <div class="font-bold">{m['wizard_modals_thankYou_title']()}</div>
+        <div class="text-sm">{m['wizard_modals_thankYou_subtitle']()}</div>
       </div>
       <button type="button" class="btn btn-sm btn-circle btn-ghost" onclick={() => (showSuccessMessage = false)}>✕</button>
     </div>
@@ -329,7 +321,7 @@
 
     .wizard-steps {
       button {
-        @apply cursor-pointer hover:opacity-75 col-span-full md:col-span-1;
+        @apply col-span-full cursor-pointer hover:opacity-75 md:col-span-1;
 
         &.active {
           @apply text-primary font-bold;

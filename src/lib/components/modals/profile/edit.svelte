@@ -47,74 +47,74 @@
   <div class="modal-box">
     <form onsubmit={handleSubmit}>
       <button type="button" class="btn btn-sm btn-circle btn-ghost absolute top-4 right-4" onclick={closeModal}>✕</button>
-      <h3 class="mb-4 text-lg font-bold">{m['profile.editTitle']()}</h3>
+      <h3 class="mb-4 text-lg font-bold">{m['profile_editTitle']()}</h3>
 
       <div class="form-edit-container space-y-4">
         <div class="form-control">
           <label for="salutation" class="label">
-            <span class="label-text">{m['profile.salutation']()}</span>
+            <span class="label-text">{m['profile_salutation']()}</span>
           </label>
           <select id="salutation" class="select select-bordered w-full" bind:value={currentUser.salutation}>
-            <option value="">{m['profile.salutationPlaceholder']()}</option>
-            <option value="Herr">{m['profile.salutationOptions.mr']()}</option>
-            <option value="Frau">{m['profile.salutationOptions.mrs']()}</option>
-            <option value="Divers">{m['profile.salutationOptions.diverse']()}</option>
+            <option value="">{m['profile_salutationPlaceholder']()}</option>
+            <option value="Herr">{m['profile_salutationOptions_mr']()}</option>
+            <option value="Frau">{m['profile_salutationOptions_mrs']()}</option>
+            <option value="Divers">{m['profile_salutationOptions_diverse']()}</option>
           </select>
         </div>
         <div class="form-control">
           <label for="givenName" class="label">
-            <span class="label-text">{m['profile.givenName']()}</span>
+            <span class="label-text">{m['profile_givenName']()}</span>
           </label>
           <input type="text" id="givenName" class="input input-bordered w-full" bind:value={currentUser.givenName} />
         </div>
         <div class="form-control">
           <label for="familyName" class="label">
-            <span class="label-text">{m['profile.familyName']()}</span>
+            <span class="label-text">{m['profile_familyName']()}</span>
           </label>
           <input type="text" id="familyName" class="input input-bordered w-full" bind:value={currentUser.familyName} />
         </div>
         <div class="form-control">
           <label for="company" class="label">
-            <span class="label-text">{m['profile.company']()}</span>
+            <span class="label-text">{m['profile_company']()}</span>
           </label>
           <input type="text" id="company" class="input input-bordered w-full" bind:value={currentUser.company} />
         </div>
         <div class="form-control">
           <label for="phone" class="label">
-            <span class="label-text">{m['profile.phone']()}</span>
+            <span class="label-text">{m['profile_phone']()}</span>
           </label>
           <input type="text" id="phone" class="input input-bordered w-full" bind:value={currentUser.phone} />
         </div>
         <div class="form-control">
           <label for="address" class="label">
-            <span class="label-text">{m['profile.address']()}</span>
+            <span class="label-text">{m['profile_address']()}</span>
           </label>
           <input type="text" id="address" class="input input-bordered w-full" bind:value={currentUser.companyAddress} />
         </div>
         <div class="form-control">
           <label for="postCode" class="label">
-            <span class="label-text">{m['profile.postCode']()}</span>
+            <span class="label-text">{m['profile_postCode']()}</span>
           </label>
           <input type="text" id="postCode" class="input input-bordered w-full" bind:value={currentUser.postCode} />
         </div>
         <div class="form-control">
           <label for="city" class="label">
-            <span class="label-text">{m['profile.city']()}</span>
+            <span class="label-text">{m['profile_city']()}</span>
           </label>
           <input type="text" id="city" class="input input-bordered w-full" bind:value={currentUser.city} />
         </div>
 
         <div class="form-control">
           <label for="country" class="label">
-            <span class="label-text">{m['profile.country']()}</span>
+            <span class="label-text">{m['profile_country']()}</span>
           </label>
           <input type="text" id="country" class="input input-bordered w-full" bind:value={currentUser.country} />
         </div>
       </div>
 
       <div class="modal-action">
-        <button type="button" class="btn btn-outline" onclick={closeModal}>{m['profile.cancelButton']()}</button>
-        <button type="submit" class="btn btn-primary">{m['profile.saveButton']()}</button>
+        <button type="button" class="btn btn-outline" onclick={closeModal}>{m['profile_cancelButton']()}</button>
+        <button type="submit" class="btn btn-primary">{m['profile_saveButton']()}</button>
       </div>
     </form>
   </div>

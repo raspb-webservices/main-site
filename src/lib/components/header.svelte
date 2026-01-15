@@ -44,14 +44,14 @@
         <button
           class="text-link-button white-link"
           onclick={() => {
-            goto('/dashboard');
+            goto(localizeHref('/dashboard'));
           }}>Dashboard</button
         >
         <div class="w-8 text-center text-white opacity-70">|</div>
         <button
           class="text-link-button white-link"
           onclick={() => {
-            goto('/profile');
+            goto(localizeHref('/profile'));
           }}>Profil</button
         >
         <div class="w-8 text-center text-white opacity-70">|</div>
@@ -79,28 +79,28 @@
         class:active={page.url.pathname == localizeHref('/services')}
         onclick={() => {
           goto(localizeHref('/services'));
-        }}>{m['menu.services']()}</button
+        }}>{m['menu_services']()}</button
       >
       <button
         class="nav-item"
         class:active={page.url.pathname == localizeHref('/insights')}
         onclick={() => {
           goto(localizeHref('/insights'));
-        }}>{m['menu.insights']()}</button
+        }}>{m['menu_insights']()}</button
       >
       <button
         class="nav-item"
         class:active={page.url.pathname == localizeHref('/about-us')}
         onclick={() => {
           goto(localizeHref('/about-us'));
-        }}>{m['menu.aboutUs']()}</button
+        }}>{m['menu_aboutUs']()}</button
       >
       <button
         class="nav-item"
         class:active={page.url.pathname == localizeHref('/faq')}
         onclick={() => {
           goto(localizeHref('/faq'));
-        }}>{m['menu.faq']()}</button
+        }}>{m['menu_faq']()}</button
       >
     </nav>
 
@@ -112,7 +112,7 @@
             login();
           }}
           ><div class="button-inner">
-            {#if logginIn || logginOut}<span class="loading loading-ring loading-sm"></span>{:else}<span>{m['menu.login']()}</span>{/if}
+            {#if logginIn || logginOut}<span class="loading loading-ring loading-sm"></span>{:else}<span>{m['menu_login']()}</span>{/if}
           </div></button
         >
       {/if}
@@ -120,7 +120,7 @@
         class="btn-basic-header"
         onclick={() => {
           goto(localizeHref('/wizard'));
-        }}><span class="halfXl:block hidden">{m['menu.configureProject']()}</span><span class="halfXl:hidden">{m['menu.start']()}</span></button
+        }}><span class="halfXl:block hidden">{m['menu_configureProject']()}</span><span class="halfXl:hidden">{m['menu_start']()}</span></button
       >
     </div>
 
@@ -158,49 +158,49 @@
                   onclick={() => {
                     mobileNavOpen = false;
                     goto(localizeHref('/wizard'));
-                  }}>{m['menu.configureProject']()}</button
+                  }}>{m['menu_configureProject']()}</button
                 >
                 <button
                   class="nav-item"
-        class:active={page.url.pathname == localizeHref('services')}
-        onclick={() => {
-          goto(localizeHref('services'));
-        }}>{m['menu.services']()}</button
+                  class:active={page.url.pathname == localizeHref('services')}
+                  onclick={() => {
+                    goto(localizeHref('services'));
+                  }}>{m['menu_services']()}</button
                 >
                 <button
                   class="nav-item"
-        class:active={page.url.pathname == localizeHref('insights')}
-        onclick={() => {
-          goto(localizeHref('insights'));
-        }}>{m['menu.insights']()}</button
-      >
-      <button
-        class="nav-item"
-        class:active={page.url.pathname == localizeHref('about-us')}
-        onclick={() => {
-          goto(localizeHref('about-us'));
-        }}>{m['menu.aboutUs']()}</button
-      >
-      <button
-        class="nav-item"
-        class:active={page.url.pathname == localizeHref('faq')}
-        onclick={() => {
-          goto(localizeHref('faq'));
-        }}>{m['menu.faq']()}</button
-      >
+                  class:active={page.url.pathname == localizeHref('insights')}
+                  onclick={() => {
+                    goto(localizeHref('insights'));
+                  }}>{m['menu_insights']()}</button
+                >
+                <button
+                  class="nav-item"
+                  class:active={page.url.pathname == localizeHref('about-us')}
+                  onclick={() => {
+                    goto(localizeHref('about-us'));
+                  }}>{m['menu_aboutUs']()}</button
+                >
+                <button
+                  class="nav-item"
+                  class:active={page.url.pathname == localizeHref('faq')}
+                  onclick={() => {
+                    goto(localizeHref('faq'));
+                  }}>{m['menu_faq']()}</button
+                >
                 {#if !isAuth}
                   <button
                     class="nav-item"
                     onclick={() => {
                       login();
-                    }}>{m['menu.login']()}</button
+                    }}>{m['menu_login']()}</button
                   >
                 {:else}
                   <button
                     class="nav-item"
                     onclick={() => {
                       logout();
-                    }}>{m['menu.logout']()}</button
+                    }}>{m['menu_logout']()}</button
                   >
                 {/if}
               </div>

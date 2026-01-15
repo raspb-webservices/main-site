@@ -6,10 +6,10 @@
 
 <div class="step-header">
   <h1>
-    {m['wizard.stepFeatures.titleFirst']()} <span class="inner-text-special">{m['wizard.stepFeatures.titleHighlight']()}</span>
-    {m['wizard.stepFeatures.titleSecond']()}
+    {m['wizard_stepFeatures_titleFirst']()} <span class="inner-text-special">{m['wizard_stepFeatures_titleHighlight']()}</span>
+    {m['wizard_stepFeatures_titleSecond']()}
   </h1>
-  <p class="teaser">{m['wizard.stepFeatures.teaser']()}</p>
+  <p class="teaser">{m['wizard_stepFeatures_teaser']()}</p>
 </div>
 
 <div class="features-grid">
@@ -34,13 +34,13 @@
 
 <div class="form-control mt-8 md:mx-10 lg:mx-20">
   <label class="label" for="customFeatures">
-    <span class="label-text text-lg font-semibold">{m['wizard.form.customFeatures']()}</span>
+    <span class="label-text text-lg font-semibold">{m['wizard_form_customFeatures']()}</span>
   </label>
   <textarea
     id="customFeatures"
     class="textarea textarea-bordered textarea-lg w-full"
     bind:value={customFeatures}
-    placeholder={m['wizard.form.customFeaturesPlaceholder']()}
+    placeholder={m['wizard_form_customFeaturesPlaceholder']()}
     rows="4"
   ></textarea>
 </div>

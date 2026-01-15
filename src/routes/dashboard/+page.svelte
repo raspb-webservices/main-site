@@ -13,6 +13,7 @@
   import auth from '$services/auth-service';
   import LottieLoader from '$lib/components/lottie-loader.svelte';
   import { openAuth0Popup } from '$helper/loginOpener';
+  import { localizeHref } from '$lib/paraglide/runtime';
 
   let isAuth = $derived(isAuthenticated.get());
   let currentUser = $derived(user.get()) as User;
@@ -68,11 +69,11 @@
         if (response.ok) {
           projects = data.projects || [];
         } else {
-          error = m['dashboard.errorLoadingProjects']();
+          error = m['dashboard_errorLoadingProjects']();
         }
         if (projects.length === 0) showSection = 'no-projects';
       } catch (err) {
-        error = m['dashboard.networkErrorLoadingProjects']();
+        error = m['dashboard_networkErrorLoadingProjects']();
         console.error('Error loading projects:', err);
       } finally {
         loading = false;
@@ -92,19 +93,19 @@
             if (response.ok && data.project) {
               return data.project;
             } else {
-              error = m['dashboard.errorLoadingProjects']();
+              error = m['dashboard_errorLoadingProjects']();
               console.error(`Error fetching project ${projectId}:`, data);
               return null;
             }
           } catch (err) {
-            error = m['dashboard.networkErrorLoadingProjects']();
+            error = m['dashboard_networkErrorLoadingProjects']();
             console.error(`Error fetching project ${projectId}:`, err);
             return null;
           }
         });
         projects = await Promise.all(projectPromises);
       } catch (err) {
-        error = m['dashboard.errorLoadingProjects']();
+        error = m['dashboard_errorLoadingProjects']();
         console.error('Error loading projects:', err);
       } finally {
         loading = false;
@@ -140,8 +141,8 @@
 {:else if showSection === 'not-authorized'}
   <Section type={'fullCenterTeaser'}>
     <div class="inner-content-wrapper prose">
-      <h1>{m['dashboard.notAuthorized.title']()}</h1>
-      <p class="teaser">{m['dashboard.notAuthorized.teaser']()}</p>
+      <h1>{m['dashboard_notAuthorized_title']()}</h1>
+      <p class="teaser">{m['dashboard_notAuthorized_teaser']()}</p>
       <div class="spacer"></div>
       <div class="flex gap-6">
         <button
@@ -150,15 +151,15 @@
             login();
           }}
         >
-          {m['dashboard.notAuthorized.loginButton']()}</button
+          {m['dashboard_notAuthorized_loginButton']()}</button
         >
         <button
           class="btn-basic"
           onclick={() => {
-            goto('/registration');
+            goto(localizeHref('/registration'));
           }}
         >
-          {m['dashboard.notAuthorized.registrationButton']()}</button
+          {m['dashboard_notAuthorized_registrationButton']()}</button
         >
       </div>
     </div>
@@ -166,15 +167,15 @@
 {:else if showSection === 'no-projects'}
   <Section type={'fullCenterTeaser'}>
     <div class="inner-content-wrapper prose">
-      <h1>{m['dashboard.noProjects.title']()}</h1>
-      <p class="teaser">{m['dashboard.noProjects.teaser']()}</p>
+      <h1>{m['dashboard_noProjects_title']()}</h1>
+      <p class="teaser">{m['dashboard_noProjects_teaser']()}</p>
       <div class="spacer"></div>
       <div class="flex">
         <button
           class="btn-basic"
           onclick={() => {
-            goto('/extended-project-wizard');
-          }}>{m['dashboard.noProjects.startButton']()}</button
+            goto(localizeHref('/wizard/extended'));
+          }}>{m['dashboard_noProjects_startButton']()}</button
         >
       </div>
     </div>
@@ -187,14 +188,14 @@
       </svg>
       <span>{error}</span>
       <div>
-        <button class="btn btn-sm btn-outline" onclick={loadProjects}> {m['dashboard.retryButton']()} </button>
+        <button class="btn btn-sm btn-outline" onclick={loadProjects}> {m['dashboard_retryButton']()} </button>
       </div>
     </div>
   </div>
 {:else}
   <Section>
-    <h1>{m['dashboard.myDashboardTitle']()}</h1>
-    <p class="teaser no-padding">{m['dashboard.myDashboardTeaser']()}</p>
+    <h1>{m['dashboard_myDashboardTitle']()}</h1>
+    <p class="teaser no-padding">{m['dashboard_myDashboardTeaser']()}</p>
 
     <div class="mb-4 flex justify-end">
       <div class="join">
@@ -207,13 +208,13 @@
               d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
             />
           </svg>
-          {m['dashboard.viewMode.grid']()}
+          {m['dashboard_viewMode_grid']()}
         </button>
         <button class={'btn btn-sm join-item ' + (viewMode === 'list' ? 'btn-active' : '')} onclick={() => (viewMode = 'list')}>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
           </svg>
-          {m['dashboard.viewMode.list']()}
+          {m['dashboard_viewMode_list']()}
         </button>
       </div>
     </div>
@@ -229,11 +230,11 @@
         <table class="table-zebra table">
           <thead>
             <tr>
-              <th>{m['dashboard.tableHeaders.project']()}</th>
-              <th>{m['dashboard.tableHeaders.type']()}</th>
-              <th>{m['dashboard.tableHeaders.status']()}</th>
-              <th>{m['dashboard.tableHeaders.budget']()}</th>
-              <th>{m['dashboard.tableHeaders.created']()}</th>
+              <th>{m['dashboard_tableHeaders_project']()}</th>
+              <th>{m['dashboard_tableHeaders_type']()}</th>
+              <th>{m['dashboard_tableHeaders_status']()}</th>
+              <th>{m['dashboard_tableHeaders_budget']()}</th>
+              <th>{m['dashboard_tableHeaders_created']()}</th>
             </tr>
           </thead>
           <tbody>

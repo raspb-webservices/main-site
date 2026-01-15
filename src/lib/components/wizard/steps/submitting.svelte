@@ -3,30 +3,29 @@
 </script>
 
 <div class="loading-overlay">
-    <div class="loading-content">
-      <div class="loading-animation">
-        <div class="loading-spinner"></div>
-        <div class="loading-pulse"></div>
+  <div class="loading-content">
+    <div class="loading-animation">
+      <div class="loading-spinner"></div>
+      <div class="loading-pulse"></div>
+    </div>
+    <h2 class="loading-title">{m['wizard_loading_title']()}</h2>
+    <p class="loading-text">{m['wizard_loading_description']()}</p>
+    <div class="loading-steps">
+      <div class="loading-step">
+        <span class="loading-step-icon">✓</span>
+        <span>{m['wizard_loading_steps_preparing']()}</span>
       </div>
-      <h2 class="loading-title">{m['wizard.loading.title']()}</h2>
-      <p class="loading-text">{m['wizard.loading.description']()}</p>
-      <div class="loading-steps">
-        <div class="loading-step">
-          <span class="loading-step-icon">✓</span>
-          <span>{m['wizard.loading.steps.preparing']()}</span>
-        </div>
-        <div class="loading-step">
-          <span class="loading-step-icon">⏳</span>
-          <span>{m['wizard.loading.steps.creating']()}</span>
-        </div>
-        <div class="loading-step">
-          <span class="loading-step-icon">⏳</span>
-          <span>{m['wizard.loading.steps.sending']()}</span>
-        </div>
+      <div class="loading-step">
+        <span class="loading-step-icon">⏳</span>
+        <span>{m['wizard_loading_steps_creating']()}</span>
+      </div>
+      <div class="loading-step">
+        <span class="loading-step-icon">⏳</span>
+        <span>{m['wizard_loading_steps_sending']()}</span>
       </div>
     </div>
   </div>
-
+</div>
 
 <style lang="postcss">
   @reference '../../../../app.css';

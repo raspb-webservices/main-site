@@ -1,4 +1,4 @@
-@import "./font-collection.css";
+@import './font-collection.css';
 @import 'tailwindcss';
 
 :root {
@@ -44,12 +44,12 @@
   --iconic-blue: #121d33;
 }
 
-@plugin "daisyui" {
+@plugin 'daisyui' {
   themes:
     light --default,
     dark --prefersdark;
 }
-@plugin "daisyui/theme" {
+@plugin 'daisyui/theme' {
   name: 'light';
   default: true;
   prefersdark: false;
@@ -88,7 +88,7 @@
   --noise: 1;
   --color-iconic-blue: #121d33;
 }
-@plugin "daisyui/theme" {
+@plugin 'daisyui/theme' {
   name: 'dark';
   default: false;
   prefersdark: false;
@@ -131,7 +131,7 @@
   --font-circular: 'Circular', sans-serif;
   --spacing-fhd: 120rem;
   --spacing-wqhd: 160rem;
-  --breakpoint-xs: 26rem;  
+  --breakpoint-xs: 26rem;
   --breakpoint-fhd: 120rem;
   --breakpoint-wqhd: 160rem;
   --color-white: var(--white);
@@ -201,7 +201,7 @@ p {
     @apply pb-5;
   }
   &.tiny-label {
-    @apply text-xs text-base-content/70;
+    @apply text-base-content/70 text-xs;
   }
   &.teaser {
     @apply text-2xl;
@@ -237,23 +237,23 @@ h1 {
   &.massive {
     @apply text-6xl md:text-8xl;
     &.add-padding {
-      @apply pb-10 pt-3;
+      @apply pt-3 pb-10;
     }
   }
   &.add-padding {
-    @apply pb-8 pt-2;
+    @apply pt-2 pb-8;
   }
 }
 h2 {
   @apply text-3xl md:text-4xl;
   &.add-padding {
-    @apply pb-7 pt-2;
+    @apply pt-2 pb-7;
   }
 }
 h3 {
   @apply text-xl;
   &.add-padding {
-    @apply pb-6 pt-2;
+    @apply pt-2 pb-6;
   }
 }
 h4,
@@ -261,7 +261,7 @@ h5,
 h6 {
   @apply text-lg;
   &.add-padding {
-    @apply pb-6 pt-1;
+    @apply pt-1 pb-6;
   }
 }
 
@@ -273,27 +273,27 @@ h6 {
     }
   }
   > h1 {
-    @apply pb-8 pt-2;
+    @apply pt-2 pb-8;
     &.massive {
-      @apply pb-10 pt-3;
+      @apply pt-3 pb-10;
     }
   }
   > h2 {
-    @apply pb-7 pt-2;
+    @apply pt-2 pb-7;
   }
   > h3 {
-    @apply pb-6 pt-2;
+    @apply pt-2 pb-6;
   }
   > h4,
   > h5,
   > h6 {
-    @apply pb-5 pt-1;
+    @apply pt-1 pb-5;
   }
 }
 
 a,
 .text-link-button {
-  @apply cursor-pointer m-0 p-0 underline opacity-70 duration-300;
+  @apply m-0 cursor-pointer p-0 underline opacity-70 duration-300;
   color: inherit;
   font-size: inherit;
   line-height: inherit;
@@ -355,7 +355,7 @@ textarea:not([rows]) {
     @apply bg-base-50 xl:min-h-[calc(100vh-738px)];
 
     .inner-box {
-      @apply h-full w-full max-w-7xl px-10 mx-auto;
+      @apply mx-auto h-full w-full max-w-7xl px-10;
       &.reduced {
         @apply max-w-5xl;
       }
@@ -421,9 +421,9 @@ textarea:not([rows]) {
   }
 }
 .btn-inverted-outline {
-  @apply bg-transparent border-1 border-white text-nowrap text-white transition-all rounded-md px-8 py-5 text-lg leading-none;
+  @apply rounded-md border-1 border-white bg-transparent px-8 py-5 text-lg leading-none text-nowrap text-white transition-all;
   &:hover {
-    @apply bg-white/20 cursor-pointer;
+    @apply cursor-pointer bg-white/20;
   }
 }
 .btn-outline-basic {
@@ -454,10 +454,10 @@ textarea:not([rows]) {
 /* Custom Styles / Overwrites */
 .modal-box {
   &.small-modal {
-    @apply max-w-2xl max-h-[92vh];
+    @apply max-h-[92vh] max-w-2xl;
   }
   &.large-modal {
-    @apply max-w-6xl max-h-[96vh];
+    @apply max-h-[96vh] max-w-6xl;
   }
 }
 div.alert {

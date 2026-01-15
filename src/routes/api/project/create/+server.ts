@@ -122,7 +122,7 @@ export const POST: RequestHandler = async ({ request }) => {
       pages: projectData.pages ? JSON.stringify(projectData.pages) : null,
       setup: projectData.setup ? JSON.stringify(projectData.setup) : null,
       fileIDs: projectData.relatedFiles?.length ? projectData.relatedFiles : null,
-      projectStatus: "created"
+      projectStatus: 'created'
     };
 
     console.log('PROJECT VARIABLES ', variables);

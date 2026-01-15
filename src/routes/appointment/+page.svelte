@@ -86,7 +86,7 @@
 </script>
 
 <Section fullWidth={true} noSpacing={true}>
-  <div class="flex flex-col justify-center items-center py-8 px-24" >
+  <div class="flex flex-col items-center justify-center px-24 py-8">
     <VirtualTourViewer {nodes} startNodeId="room-1" />
   </div>
 </Section>
@@ -94,8 +94,8 @@
 <!-- <section class="appointment-content-wrapper">
   <Stage style={'basic-gradient'}>
     <div class="inner-box reduced prose py-36">
-      <h1 class="massive animate-fade-in-up">{m['appointment.title']()}</h1>
-      <p class="teaser animate-fade-in-up">{m['appointment.subtitle']()}</p>
+      <h1 class="massive animate-fade-in-up">{m['appointment_title']()}</h1>
+      <p class="teaser animate-fade-in-up">{m['appointment_subtitle']()}</p>
     </div>
   </Stage>
 

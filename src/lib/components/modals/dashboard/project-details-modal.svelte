@@ -1,7 +1,7 @@
 <script lang="ts">
   import { formatDate, formatBudget, getStatusBadgeClass, getStatusLabel } from '$lib/helper/projectUtils';
   import { m } from '$lib/paraglide/messages';
-  
+
   let { selectedProject } = $props();
   let modal: HTMLDialogElement;
 
@@ -117,12 +117,12 @@
                 {/each}
               </div>
             {:else}
-              <p class="text-sm text-base-content/60">Keine Features ausgewählt</p>
+              <p class="text-base-content/60 text-sm">Keine Features ausgewählt</p>
             {/if}
             {#if selectedProject.customFeature}
               <div class="mt-2">
-                <div class="text-sm text-base-content/60">Custom Feature:</div>
-                <div class="text-sm pt-1">{selectedProject.customFeature}</div>
+                <div class="text-base-content/60 text-sm">Custom Feature:</div>
+                <div class="pt-1 text-sm">{selectedProject.customFeature}</div>
               </div>
             {/if}
           </div>

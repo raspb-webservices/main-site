@@ -1,0 +1,5 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "appointment_title": "Schedule...",
+  "appointment_subtitle": "a non-binding call - now"
+}

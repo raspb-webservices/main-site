@@ -8,6 +8,7 @@
   import ProfileEditModal from '$lib/components/modals/profile/edit.svelte';
   import auth from '$services/auth-service';
   import { openAuth0Popup } from '$helper/loginOpener';
+  import { localizeHref } from '$lib/paraglide/runtime';
 
   let isAuth = $derived(isAuthenticated.get());
   let currentUser = $derived(user.get()) as User;
@@ -51,18 +52,18 @@
 </script>
 
 <svelte:head>
-  <title>{m['profile.meta.title']()}</title>
-  <meta name="description" content={m['profile.meta.description']()} />
+  <title>{m['profile_meta_title']()}</title>
+  <meta name="description" content={m['profile_meta_description']()} />
 </svelte:head>
 
 {#if isAuth}
   <Section>
     <div class="prose text-center">
-      <h1><span class="inner-text-special">{m['profile.title']()}</span></h1>
+      <h1><span class="inner-text-special">{m['profile_title']()}</span></h1>
     </div>
 
-    <div class="grid grid-cols-12 gap-8 relative">
-      <div class="absolute -top-7 right-5 bg-primary px-2 py-0.5 rounded-tl-md rounded-tr-md text-white">{currentUserRoles}</div>
+    <div class="relative grid grid-cols-12 gap-8">
+      <div class="bg-primary absolute -top-7 right-5 rounded-tl-md rounded-tr-md px-2 py-0.5 text-white">{currentUserRoles}</div>
       <div class="col-span-3 flex flex-col items-center justify-center">
         <div class="avatar">
           <div class="mask mask-squircle w-full">
@@ -86,58 +87,58 @@
             <div class="grid grid-cols-12 gap-x-8 gap-y-4">
               <!-- Email first -->
               <div class="col-span-7">
-                <p class="tiny-label">{m['profile.emailLogin']()}</p>
+                <p class="tiny-label">{m['profile_emailLogin']()}</p>
                 <p class="no-padding"><strong>{currentUser.email}</strong></p>
               </div>
               <div class="col-span-5">
-                <p class="tiny-label">{m['profile.id']()}</p>
+                <p class="tiny-label">{m['profile_id']()}</p>
                 <p class="no-padding"><strong>{currentUser.sub}</strong></p>
               </div>
               {#if currentUser.salutation}
                 <div class="col-span-3">
-                  <p class="tiny-label">{m['profile.salutation']()}</p>
+                  <p class="tiny-label">{m['profile_salutation']()}</p>
                   <p class="no-padding"><strong>{currentUser.salutation}</strong></p>
                 </div>
               {/if}
               {#if currentUser.givenName}
                 <div class="col-span-4">
-                  <p class="tiny-label">{m['profile.firstName']()}</p>
+                  <p class="tiny-label">{m['profile_firstName']()}</p>
                   <p class="no-padding"><strong>{currentUser.givenName}</strong></p>
                 </div>
               {/if}
               {#if currentUser.familyName}
                 <div class="col-span-5">
-                  <p class="tiny-label">{m['profile.lastName']()}</p>
+                  <p class="tiny-label">{m['profile_lastName']()}</p>
                   <p class="no-padding"><strong>{currentUser.familyName}</strong></p>
                 </div>
               {/if}
               {#if currentUser.companyAddress}
                 <div class="col-span-full">
-                  <p class="tiny-label">{m['profile.address']()}</p>
+                  <p class="tiny-label">{m['profile_address']()}</p>
                   <p class="no-padding"><strong>{currentUser.companyAddress}</strong></p>
                 </div>
               {/if}
               {#if currentUser.postCode}
                 <div class="col-span-3">
-                  <p class="tiny-label">{m['profile.zipCode']()}</p>
+                  <p class="tiny-label">{m['profile_zipCode']()}</p>
                   <p class="no-padding"><strong>{currentUser.postCode}</strong></p>
                 </div>
               {/if}
               {#if currentUser.city}
                 <div class="col-span-9">
-                  <p class="tiny-label">{m['profile.city']()}</p>
+                  <p class="tiny-label">{m['profile_city']()}</p>
                   <p class="no-padding"><strong>{currentUser.city}</strong></p>
                 </div>
               {/if}
               {#if currentUser.country}
                 <div class="col-span-full">
-                  <p class="tiny-label">{m['profile.country']()}</p>
+                  <p class="tiny-label">{m['profile_country']()}</p>
                   <p class="no-padding"><strong>{currentUser.country}</strong></p>
                 </div>
               {/if}
               {#if currentUser.phone}
                 <div class="col-span-6">
-                  <p class="tiny-label">{m['profile.phone']()}</p>
+                  <p class="tiny-label">{m['profile_phone']()}</p>
                   <p class="no-padding"><strong>{currentUser.phone}</strong></p>
                 </div>
               {/if}
@@ -146,7 +147,7 @@
                   class="btn btn-simple"
                   onclick={() => {
                     editModal.openModal();
-                  }}>{m['profile.editData']()}</button
+                  }}>{m['profile_editData']()}</button
                 >
               </div>
             </div>
@@ -154,21 +155,23 @@
             <!-- Projects at the bottom -->
             <div class="divider"></div>
             <div class="col-span-full flex items-center justify-between">
-              <h3 class="no-padding">{m['profile.activeProjects']()} <span class="inner-text-special">{currentUser.projectIds ? currentUser.projectIds.length : 0}</span></h3>
+              <h3 class="no-padding">
+                {m['profile_activeProjects']()} <span class="inner-text-special">{currentUser.projectIds ? currentUser.projectIds.length : 0}</span>
+              </h3>
               <div>
                 <button
                   class="btn btn-simple mr-3"
                   onclick={() => {
-                    goto('/dashboard');
-                  }}>{m['profile.toProjects']()}</button
+                    goto(localizeHref('/dashboard'));
+                  }}>{m['profile_toProjects']()}</button
                 >
                 <button
                   class="btn btn-simple"
                   onclick={() => {
-                    goto('/extended-project-wizard');
+                    goto(localizeHref('/wizard/extended'));
                   }}
                 >
-                  {m['profile.startNewProject']()}</button
+                  {m['profile_startNewProject']()}</button
                 >
               </div>
             </div>
@@ -180,21 +183,25 @@
 {:else if showSection === 'not-authorized'}
   <Section type={'fullCenterTeaser'}>
     <div class="inner-content-wrapper prose">
-      <h1> {m['profile.notAuthorized.title']()}</h1>
-      <p class="teaser">{m['profile.notAuthorized.teaser']()}</p>
+      <h1>{m['profile_notAuthorized_title']()}</h1>
+      <p class="teaser">{m['profile_notAuthorized_teaser']()}</p>
       <div class="spacer"></div>
       <div class="flex gap-6">
         <button
           class="btn-basic"
           onclick={() => {
             login();
-          }}> {m['profile.notAuthorized.loginButton']()}</button
+          }}
+        >
+          {m['profile_notAuthorized_loginButton']()}</button
         >
         <button
           class="btn-basic"
           onclick={() => {
-            goto('/registration');
-          }}> {m['profile.notAuthorized.registrationButton']()}</button
+            goto(localizeHref('/registration'));
+          }}
+        >
+          {m['profile_notAuthorized_registrationButton']()}</button
         >
       </div>
     </div>

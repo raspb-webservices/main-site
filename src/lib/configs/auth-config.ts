@@ -1,7 +1,7 @@
-import { PUBLIC_VITE_AUTH0_DOMAIN } from "$env/static/public";
-import { PUBLIC_VITE_AUTH0_AUDIENCE } from "$env/static/public";
-import { PUBLIC_VITE_AUTH0_CALLBACK_URL } from "$env/static/public";
-import { PUBLIC_VITE_AUTH0_CLIENT_ID } from "$env/static/public";
+import { PUBLIC_VITE_AUTH0_DOMAIN } from '$env/static/public';
+import { PUBLIC_VITE_AUTH0_AUDIENCE } from '$env/static/public';
+import { PUBLIC_VITE_AUTH0_CALLBACK_URL } from '$env/static/public';
+import { PUBLIC_VITE_AUTH0_CLIENT_ID } from '$env/static/public';
 
 interface AuthConfig {
   domain: string;

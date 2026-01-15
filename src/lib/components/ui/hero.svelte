@@ -12,7 +12,13 @@
   } = $props();
 </script>
 
-<div class="hero-container" class:centered={variant === 'centered'} class:split={variant === 'split'} class:pushDown={position === 'bottom'} class:pushUp={position === 'top'}>
+<div
+  class="hero-container"
+  class:centered={variant === 'centered'}
+  class:split={variant === 'split'}
+  class:pushDown={position === 'bottom'}
+  class:pushUp={position === 'top'}
+>
   <div class="hero-content">
     <div class="text-content" class:animate-fade-in-up={variant === 'centered'} class:animate-fade-in-from-side={variant === 'split'}>
       {#if headline}
@@ -47,14 +53,14 @@
 <style lang="postcss">
   @reference '../../../app.css';
   .hero-container {
-    @apply relative min-h-[50vh] w-full overflow-hidden flex;
+    @apply relative flex min-h-[50vh] w-full overflow-hidden;
 
     &.centered {
       @apply flex items-center justify-center text-center;
     }
 
     &.pushDown {
-      @apply items-end ;
+      @apply items-end;
     }
 
     &.pushUp {
@@ -62,8 +68,7 @@
     }
   }
 
-  .hero-container
-  .hero-content {
+  .hero-container .hero-content {
     @apply relative z-10 w-full;
   }
 

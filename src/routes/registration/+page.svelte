@@ -24,12 +24,12 @@
   // Validation
   function validateForm() {
     if (!email || !password || !confirmPassword) {
-      errorMessage = 'registration.form.validation.requiredFields'
+      errorMessage = 'registration_form_validation_requiredFields';
       return false;
     }
 
     if (password !== confirmPassword) {
-      errorMessage = 'registration.form.validation.passwordMismatch';
+      errorMessage = 'registration_form_validation_passwordMismatch';
       isPasswordMatch = false;
       return false;
     }
@@ -77,7 +77,7 @@
       confirmPassword = '';
     } catch (error) {
       console.error('Registration error:', error);
-      errorMessage = error.message || 'registration.form.validation.registrationError';
+      errorMessage = error.message || 'registration_form_validation_registrationError';
     } finally {
       isLoading = false;
     }
@@ -94,19 +94,18 @@
 </script>
 
 <svelte:head>
-  <title>{m['registration.meta.title']()}</title>
-  <meta name="description" content="{m['registration.meta.description']()}"/>
+  <title>{m['registration_meta_title']()}</title>
+  <meta name="description" content={m['registration_meta_description']()} />
 </svelte:head>
-
 
 <div class="content-area">
   <Section noSpacing={true}>
-    <div class="inner-box reduced pt-24 pb-12 prose">
-      <h1 class="animate-fade-in mb-8 text-center text-4xl font-bold max-w-[850px]">
-        {m['registration.intro.titleFirst']()}
-        <span class="inner-text-special">{m['registration.intro.titleHighlight']()}</span>
+    <div class="inner-box reduced prose pt-24 pb-12">
+      <h1 class="animate-fade-in mb-8 max-w-[850px] text-center text-4xl font-bold">
+        {m['registration_intro_titleFirst']()}
+        <span class="inner-text-special">{m['registration_intro_titleHighlight']()}</span>
       </h1>
-      <p class="teaser animate-fade-in-up boxed text-center">{m['registration.intro.teaser']()}</p>
+      <p class="teaser animate-fade-in-up boxed text-center">{m['registration_intro_teaser']()}</p>
     </div>
   </Section>
 
@@ -114,7 +113,7 @@
     <div class="md:inner-box pb-24">
       <div class="animate-fade-in-up bg-base-200 text-base-content mx-auto max-w-2xl rounded-3xl p-8">
         {#if isSuccess}
-          <div class="py-12 text-center prose">
+          <div class="prose py-12 text-center">
             <div class="mb-6">
               <svg
                 class="text-success mx-auto h-24 w-24 animate-pulse"
@@ -126,9 +125,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
               </svg>
             </div>
-            <h2 class="mb-4 text-2xl font-bold">{m['registration.success.title']()}</h2>
-            <p class="mb-6">{m['registration.success.message']()}</p>
-            <button class="btn-basic mx-auto" onclick={() => (isSuccess = false)}> {m['registration.success.backToForm']()} </button>
+            <h2 class="mb-4 text-2xl font-bold">{m['registration_success_title']()}</h2>
+            <p class="mb-6">{m['registration_success_message']()}</p>
+            <button class="btn-basic mx-auto" onclick={() => (isSuccess = false)}> {m['registration_success_backToForm']()} </button>
           </div>
         {:else}
           <form
@@ -146,32 +145,51 @@
               </div>
             {/if}
 
-            <div class="grid grid-cols-1 md:gap-6 md:grid-cols-2">
+            <div class="grid grid-cols-1 md:grid-cols-2 md:gap-6">
               <div class="form-control">
                 <label for="firstName" class="label">
-                  <span class="label-text">{m['registration.form.firstName.label']()}</span>
+                  <span class="label-text">{m['registration_form_firstName_label']()}</span>
                 </label>
-                <input type="text" id="firstName" class="input input-bordered w-full" bind:value={firstName} placeholder="{m['registration.form.firstName.placeholder']()}" />
+                <input
+                  type="text"
+                  id="firstName"
+                  class="input input-bordered w-full"
+                  bind:value={firstName}
+                  placeholder={m['registration_form_firstName_placeholder']()}
+                />
               </div>
 
               <div class="form-control">
                 <label for="lastName" class="label">
-                  <span class="label-text">{m['registration.form.lastName.label']()}</span>
+                  <span class="label-text">{m['registration_form_lastName_label']()}</span>
                 </label>
-                <input type="text" id="lastName" class="input input-bordered w-full" bind:value={lastName} placeholder="{m['registration.form.lastName.placeholder']()}" />
+                <input
+                  type="text"
+                  id="lastName"
+                  class="input input-bordered w-full"
+                  bind:value={lastName}
+                  placeholder={m['registration_form_lastName_placeholder']()}
+                />
               </div>
             </div>
 
             <div class="form-control">
               <label for="email" class="label">
-                <span class="label-text">{m['registration.form.email.label']()}</span>
+                <span class="label-text">{m['registration_form_email_label']()}</span>
               </label>
-              <input type="email" id="email" class="input input-bordered w-full" bind:value={email} placeholder="{m['registration.form.email.placeholder']()}" required />
+              <input
+                type="email"
+                id="email"
+                class="input input-bordered w-full"
+                bind:value={email}
+                placeholder={m['registration_form_email_placeholder']()}
+                required
+              />
             </div>
 
             <div class="form-control">
               <label for="password" class="label">
-                <span class="label-text">{m['registration.form.password.label']()}</span>
+                <span class="label-text">{m['registration_form_password_label']()}</span>
               </label>
               <div class="relative">
                 <input
@@ -179,7 +197,7 @@
                   id="password"
                   class="input input-bordered relative z-0 w-full pr-12"
                   bind:value={password}
-                  placeholder="{m['registration.form.password.placeholder']()}"
+                  placeholder={m['registration_form_password_placeholder']()}
                   required
                   minlength="8"
                 />
@@ -187,7 +205,7 @@
                   type="button"
                   class="absolute inset-y-0 right-0 z-10 flex items-center pr-3"
                   onclick={() => (showPassword = !showPassword)}
-                  aria-label={showPassword ? m['registration.form.password.hide']() : m['registration.form.password.show']()}
+                  aria-label={showPassword ? m['registration_form_password_hide']() : m['registration_form_password_show']()}
                 >
                   {#if showPassword}
                     <svg xmlns="http://www.w3.org/2000/svg" class="text-base-content/50 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -211,12 +229,12 @@
                   {/if}
                 </button>
               </div>
-              <div class="label-text mt-1 text-sm opacity-70">{m['registration.form.password.minLength']()}</div>
+              <div class="label-text mt-1 text-sm opacity-70">{m['registration_form_password_minLength']()}</div>
             </div>
 
             <div class="form-control">
               <label for="confirmPassword" class="label">
-                <span class="label-text">{m['registration.form.confirmPassword.label']()}</span>
+                <span class="label-text">{m['registration_form_confirmPassword_label']()}</span>
               </label>
               <div class="relative">
                 <input
@@ -225,14 +243,14 @@
                   class={`input input-bordered relative z-0 w-full pr-12 ${!isPasswordMatch ? 'input-error' : ''}`}
                   bind:value={confirmPassword}
                   oninput={checkPasswordMatch}
-                  placeholder="{m['registration.form.confirmPassword.placeholder']()}"
+                  placeholder={m['registration_form_confirmPassword_placeholder']()}
                   required
                 />
                 <button
                   type="button"
                   class="absolute inset-y-0 right-0 z-10 flex items-center pr-3"
                   onclick={() => (showConfirmPassword = !showConfirmPassword)}
-                  aria-label={showConfirmPassword ? m['registration.form.password.hide']() : m['registration.form.password.show']()}
+                  aria-label={showConfirmPassword ? m['registration_form_password_hide']() : m['registration_form_password_show']()}
                 >
                   {#if showConfirmPassword}
                     <svg xmlns="http://www.w3.org/2000/svg" class="text-base-content/50 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -257,15 +275,17 @@
                 </button>
               </div>
               {#if !isPasswordMatch && confirmPassword}
-                <div class="label-text text-error mt-1 text-sm">{m['registration.form.confirmPassword.mismatch']()}</div>
+                <div class="label-text text-error mt-1 text-sm">{m['registration_form_confirmPassword_mismatch']()}</div>
               {/if}
             </div>
 
             <div class="form-control">
               <label class="cursor-pointer">
                 <input type="checkbox" class="checkbox checkbox-primary" required />
-                <span class="text-black/60 ml-1">
-                  {m['registration.form.privacy.prefix']()}<a href="/privacy-notice" class="link link-primary">{m['registration.form.privacy.link']()}</a>{m['registration.form.privacy.suffix']()}
+                <span class="ml-1 text-black/60">
+                  {m['registration_form_privacy_prefix']()}<a href="/privacy-notice" class="link link-primary">{m['registration_form_privacy_link']()}</a>{m[
+                    'registration_form_privacy_suffix'
+                  ]()}
                 </span>
               </label>
             </div>
@@ -274,9 +294,9 @@
               <button type="submit" class="btn-basic w-full" disabled={isLoading}>
                 {#if isLoading}
                   <span class="loading loading-spinner loading-sm mr-2"></span>
-                  {m['registration.form.button.loading']()}
+                  {m['registration_form_button_loading']()}
                 {:else}
-                  {m['registration.form.button.createAccount']()}
+                  {m['registration_form_button_createAccount']()}
                 {/if}
               </button>
             </div>

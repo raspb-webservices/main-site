@@ -17,12 +17,12 @@
       <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2" onclick={closeModal}>✕</button>
     </form>
 
-    <h3 class="mb-4 text-lg font-bold">{m['wizard.modals.reset.title']()}</h3>
-    <p class="py-4">{m['wizard.modals.reset.description']()}</p>
+    <h3 class="mb-4 text-lg font-bold">{m['wizard_modals_reset_title']()}</h3>
+    <p class="py-4">{m['wizard_modals_reset_description']()}</p>
 
     <div class="modal-action">
-      <button type="button" class="btn btn-outline" onclick={closeModal}>{m['wizard.modals.reset.cancel']()}</button>
-      <button type="button" class="btn btn-error" onclick={confirmReset}>{m['wizard.modals.reset.confirm']()}</button>
+      <button type="button" class="btn btn-outline" onclick={closeModal}>{m['wizard_modals_reset_cancel']()}</button>
+      <button type="button" class="btn btn-error" onclick={confirmReset}>{m['wizard_modals_reset_confirm']()}</button>
     </div>
   </div>
   <form method="dialog" class="modal-backdrop">
