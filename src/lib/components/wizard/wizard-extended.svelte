@@ -3,15 +3,13 @@
   import type { WizardConfig, Project } from '$interfaces/project.interface';
   import type { User } from '$interfaces/user.interface';
   import { uploadAsset, publishAsset, createAsset, uploadMultipleAssetsWithDelay, publishMultipleAssets } from '$helper/uploadAsset';
-  import { projectTypes, subTypes, availableFeatures, googleFonts, formFieldTypes, featureCategoryColors, getStepConfig } from '$lib/configs/wizard-config';
+  import { projectTypesWebApp, projectCategories, availableFeatures, getStepConfig, featureCategoryColors, projectTypesAiFreestyle, projectSubTypesAi, projectSubTypesApp, projectSubTypesWebsite, formFieldTypes } from '$lib/configs/wizard-config';
   import { goto } from '$app/navigation';
   import { m } from '$lib/paraglide/messages';
   import { getLocale, localizeHref, setLocale } from '$lib/paraglide/runtime';
   import auth from '$services/auth-service';
   import { user } from '$store/sharedStates.svelte';
   import ProjectContent from './steps/project-content.svelte';
-  import ProjectType from './steps/project-type.svelte';
-  import ProjectSubType from './steps/project-sub-type.svelte';
   import ProjectDetails from './steps/project-details.svelte';
   import ProjectFeatures from './steps/project-features.svelte';
   import ProjectMaterials from './steps/project-materials.svelte';
@@ -21,13 +19,20 @@
   import ErrorModal from '../modals/general/error-modal.svelte';
   import SubmittingModal from './steps/submitting.svelte';
 
+  import ProjectCategory from './steps/project-category.svelte';
+  import ProjectTypeWebApp from './steps/project-type-web-app.svelte';
+  import ProjectSubTypesWebsite from './steps/project-sub-type-website.svelte'
+  import ProjectSubTypesApp from './steps/project-sub-type-apps.svelte'
+  import ProjectTypeAiFreestyle from './steps/project-type-ai-freestyle.svelte';
+
   // Props for initial values from URL parameters
   interface Props {
+    initialProjectCategory?: string | null;
     initialProjectType?: string | null;
     initialSubType?: string | null;
   }
 
-  const { initialProjectType = null, initialSubType = null }: Props = $props();
+  const { initialProjectCategory = null, initialProjectType = null, initialSubType = null }: Props = $props();
 
   // State
   let currentStep = $state(1);
@@ -40,6 +45,7 @@
     step: 1,
     name: '',
     description: '',
+    projectCategory: '',
     projectType: '',
     subType: '',
     projectDetails: '',
@@ -90,6 +96,10 @@
   const maxSteps = $derived(stepConfig.length);
 
   // Functions
+  function selectProjectCategory(category: string) {
+    config.projectCategory = category;
+  }
+
   function selectProjectType(type: string) {
     config.projectType = type;
     config.subType = '';
@@ -202,38 +212,6 @@
     let totalFeatureComplexity = 0;
     let highesPossible;
     let lowestPossible;
-
-    const projectType = projectTypes.find((p) => p.id === config.projectType);
-    if (projectType) {
-      basePrice = (projectType.lowestPrice + projectType.highestPrice) / 2;
-    }
-
-    const subTypeData = subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType);
-    if (subTypeData) {
-      basePrice = subTypeData.lowestPrice;
-      lowestPossible = subTypeData.lowestPrice;
-      highesPossible = subTypeData.highestPrice;
-    }
-
-    config.features.forEach((featureName) => {
-      const feature = availableFeatures.find((f) => f.name === featureName);
-      if (feature && feature.category) {
-        totalFeatureComplexity += feature.complexityFactor || 0;
-      }
-    });
-
-    if (totalFeatureComplexity > 15) {
-      basePrice = highesPossible;
-    } else if (totalFeatureComplexity <= 2) {
-      basePrice = lowestPossible;
-    } else {
-      const range = highesPossible - lowestPossible;
-      let x = (1 / 15) * totalFeatureComplexity;
-      basePrice = lowestPossible + range * x;
-    }
-    config.estimatedPrice = basePrice;
-    console.log('Estimated Price:', config.estimatedPrice);
-    console.log('Total Feature Complexity:', totalFeatureComplexity);
   }
 
   async function handleFileUpload(event: Event) {
@@ -532,24 +510,32 @@
   function initializeFromParams() {
     let shouldAdvance = false;
 
-    // Check if initialProjectType is valid
-    if (initialProjectType && projectTypes.some((pt) => pt.id === initialProjectType)) {
-      config.projectType = initialProjectType;
+    if (initialProjectCategory && projectCategories.some((pt) => pt.id === initialProjectCategory)) {
+      config.projectCategory = initialProjectCategory;
       shouldAdvance = true;
 
-      // Check if initialSubType is valid for the selected project type
-      if (initialSubType && subTypes.some((st) => st.id === initialSubType && st.parentId === initialProjectType)) {
-        config.subType = initialSubType;
-        // If both projectType and subType are valid, skip to step 3
-        currentStep = 3;
-        return;
+      // Check if initialProjectType is valid
+      if (initialProjectType && (projectTypesWebApp.some((pt) => pt.id === initialProjectType) || projectTypesAiFreestyle.some((pt) => pt.id === initialProjectType))) {
+        config.projectType = initialProjectType;
+        shouldAdvance = true;
+
+        // Check if initialSubType is valid for the selected project type
+        if (initialSubType && (projectSubTypesAi.some((st) => st.id === initialSubType) || projectSubTypesApp.some((st) => st.id === initialSubType) || projectSubTypesWebsite.some((st) => st.id === initialSubType))) {
+          config.subType = initialSubType;
+          // If both projectType and subType are valid, skip to step 3
+          currentStep = 4;
+          return;
+        } else {
+          // If only projectType is valid, go to step 2
+          currentStep = 3;
+          return;
+        }
       } else {
-        // If only projectType is valid, go to step 2
+        // If only projectCategory is valid, go to step 2
         currentStep = 2;
         return;
       }
     }
-
     // If no valid parameters, stay on step 1
     currentStep = 1;
   }
@@ -614,9 +600,7 @@
               {i + 1}
             </div>
             <!-- Step Title -->
-            <div class="text-base-content mt-2 max-w-20 text-center text-xs font-medium">
-
-            </div>
+            <div class="text-base-content mt-2 max-w-20 text-center text-xs font-medium"></div>
           </button>
         {/each}
       </div>
@@ -647,8 +631,7 @@
               {i + 1}
             </div>
             <!-- Step Title -->
-            <div class="text-base-content mt-2 text-center text-xs font-medium">
-            </div>
+            <div class="text-base-content mt-2 text-center text-xs font-medium"></div>
           </button>
         {/each}
       </div>
@@ -658,9 +641,9 @@
   <!-- Step Content -->
   <div class="step-content-wrapper">
     {#if currentStep === 1}
-      <ProjectType {config} {selectProjectType}></ProjectType>
+      <ProjectCategory {config} {selectProjectCategory}></ProjectCategory>
     {:else if currentStep === 2 && config.projectType !== 'freestyle'}
-      <ProjectSubType {config} {selectSubType}></ProjectSubType>
+      <ProjectTypeWebApp {config} {selectProjectType}></ProjectTypeWebApp>
     {:else if (currentStep === 3 && config.projectType !== 'freestyle') || (currentStep === 2 && config.projectType === 'freestyle')}
       <ProjectDetails {config}></ProjectDetails>
     {:else if currentStep === 4 && (config.projectType === 'website' || config.projectType === 'cms' || config.projectType === 'webApplication')}
@@ -748,7 +731,6 @@
 <ErrorModal bind:this={errorModal} {errorDetails}></ErrorModal>
 <!-- Reset Modal -->
 <ResetModal bind:this={resetModal} {confirmReset}></ResetModal>
-
 
 <style lang="postcss">
   @reference '../../../app.css';

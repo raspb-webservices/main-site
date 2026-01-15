@@ -21,6 +21,7 @@
 
     viewer = new Viewer({
       container,
+      defaultZoomLvl: 1,
       plugins: [
         VirtualTourPlugin.withConfig({
           nodes,

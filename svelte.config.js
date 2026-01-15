@@ -12,6 +12,9 @@ const config = {
       $services: './src/lib/services',
       $interfaces: './src/interfaces',
       $styles: './src/lib/styles',
+    },
+    serviceWorker: {
+      register: false
     }
   },
   prerender: {

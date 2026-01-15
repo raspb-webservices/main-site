@@ -1,23 +1,21 @@
+export interface ProjectCategory {
+  id: string;
+  title: string;
+  description: string;
+  icon?: string;
+}
+
 export interface ProjectType {
   id: string;
   title: string;
   description: string;
-  icon: string;
-  lowestPrice: number;
-  highestPrice: number;
-}
-
-export interface SubType {
-  id: string;
-  title: string;
-  description: string;
-  parentId: string;
-  lowestPrice: number;
-  highestPrice: number;
+  icon?: string;
+  parentId?: string;
+  lowestPrice?: number;
 }
 
 export interface Feature {
-  name: string;
+  id: string;
   title: string;
   description?: string;
   category?: string;
@@ -29,428 +27,458 @@ export interface FormFieldType {
   title: string;
 }
 
-export const projectTypes: ProjectType[] = [
+export interface WizardStep {
+  id: number;
+  title: string;
+  required: boolean;
+}
+
+export const projectCategories: ProjectCategory[] = [
   {
-    id: 'website',
-    title: 'wizard.config.projectTypes.website.title',
-    description: 'wizard.config.projectTypes.website.description',
-    icon: '🌐',
-    lowestPrice: 399,
-    highestPrice: 5000
+    id: 'websites-and-apps',
+    title: 'wizard.categories.websitesAndApps',
+    description: 'wizard.categories.websitesAndApps.description',
+    icon: '🛫',
   },
   {
-    id: 'cms',
-    title: 'wizard.config.projectTypes.cms.title',
-    description: 'wizard.config.projectTypes.cms.description',
-    icon: '📝',
-    lowestPrice: 1999,
-    highestPrice: 10000
-  },
-  {
-    id: 'webApplication',
-    title: 'wizard.config.projectTypes.webApplication.title',
-    description: 'wizard.config.projectTypes.webApplication.description',
-    icon: '💻',
-    lowestPrice: 5999,
-    highestPrice: 15000
-  },
-  {
-    id: 'artificialIntelligence',
-    title: 'wizard.config.projectTypes.artificialIntelligence.title',
-    description: 'wizard.config.projectTypes.artificialIntelligence.description',
-    icon: '🤖',
-    lowestPrice: 10000,
-    highestPrice: 50000
-  },
-  {
-    id: 'freestyle',
-    title: 'wizard.config.projectTypes.freestyle.title',
-    description: 'wizard.config.projectTypes.freestyle.description',
-    icon: '🛠️',
-    lowestPrice: 5000,
-    highestPrice: 50000
+    id: 'ki-and-freestyle',
+    title: 'wizard.categories.kiAndFreestyle',
+    description: 'wizard.categories.kiAndFreestyle.description',
+    icon: '🦄',
   }
 ];
 
-export const subTypes: SubType[] = [
+export const projectTypesWebApp: ProjectType[] = [
+  {
+    id: 'website',
+    title: 'wizard.type.website',
+    description: 'wizard.type.website.description',
+    icon: '🖥️',
+    lowestPrice: 399
+  },
+  {
+    id: 'app',
+    title: 'wizard.type.app',
+    description: 'wizard.type.app.description',
+    icon: '🚀',
+    lowestPrice: 3000
+  }
+];
+
+export const projectTypesAiFreestyle: ProjectType[] = [
+  {
+    id: 'aiSolution',
+    title: 'wizard.type.aiSolution',
+    description: 'wizard.type.aiSolution.description',
+    icon: '🤖',
+    lowestPrice: 5000
+  },
+  {
+    id: 'freestyle',
+    title: 'wizard.type.freestyle',
+    description: 'wizard.type.freestyle.description',
+    icon: '⚗️',
+    lowestPrice: 3000
+  }
+];
+
+export const projectSubTypesWebsite: ProjectType[] = [
   {
     id: 'onepager',
-    title: 'wizard.config.subTypes.onepager.title',
-    description: 'wizard.config.subTypes.onepager.description',
-    parentId: 'website',
+    title: 'wizard.subTypes.onepager',
+    description: 'wizard.subTypes.onepager.description',
     lowestPrice: 399,
-    highestPrice: 1000
   },
   {
     id: 'onepagerPlus',
-    title: 'wizard.config.subTypes.onepagerPlus.title',
-    description: 'wizard.config.subTypes.onepagerPlus.description',
-    parentId: 'website',
-    lowestPrice: 699,
-    highestPrice: 1999
+    title: 'wizard.subTypes.onepagerPlus',
+    description: 'wizard.subTypes.onepagerPlus.description',
+    lowestPrice: 699
   },
   {
     id: 'corporateWebsite',
-    title: 'wizard.config.subTypes.corporateWebsite.title',
-    description: 'wizard.config.subTypes.corporateWebsite.description',
-    parentId: 'website',
-    lowestPrice: 999,
-    highestPrice: 3000
+    title: 'wizard.subTypes.corporateWebsite',
+    description: 'wizard.subTypes.corporateWebsite.description',
+    lowestPrice: 999
   },
   {
-    id: 'corporateWebsitePremium',
-    title: 'wizard.config.subTypes.corporateWebsitePremium.title',
-    description: 'wizard.config.subTypes.corporateWebsitePremium.description',
-    parentId: 'website',
-    lowestPrice: 1999,
-    highestPrice: 5000
+    id: 'corporateWebsitePlus',
+    title: 'wizard.subTypes.corporateWebsitePlus',
+    description: 'wizard.subTypes.corporateWebsitePlus.description',
+    lowestPrice: 1999
   },
   {
-    id: 'cmsSimple',
-    title: 'wizard.config.subTypes.cmsSimple.title',
-    description: 'wizard.config.subTypes.cmsSimple.description',
-    parentId: 'cms',
-    lowestPrice: 1999,
-    highestPrice: 6999
+    id: 'cms',
+    title: 'wizard.subTypes.cms',
+    description: 'wizard.subTypes.cms.description',
+    lowestPrice: 1999
   },
   {
-    id: 'cmsPremium',
-    title: 'wizard.config.subTypes.cmsPremium.title',
-    description: 'wizard.config.subTypes.cmsPremium.description',
-    parentId: 'cms',
+    id: 'cmsPlus',
+    title: 'wizard.subTypes.cmsPlus',
+    description: 'wizard.subTypes.cmsPlus.description',
+    lowestPrice: 4999
+  }
+];
+
+export const projectSubTypesApp: ProjectType[] = [
+  {
+    id: 'webApp',
+    title: 'wizard.subTypes.webApp',
+    description: 'wizard.subTypes.webApp.description',
     lowestPrice: 4999,
-    highestPrice: 10000
   },
   {
-    id: 'blogSystem',
-    title: 'wizard.config.subTypes.blogSystem.title',
-    description: 'wizard.config.subTypes.blogSystem.description',
-    parentId: 'cms',
-    lowestPrice: 3999,
-    highestPrice: 7999
+    id: 'pwaSimple',
+    title: 'wizard.subTypes.pwaSimple',
+    description: 'wizard.subTypes.pwaSimple.description',
+    lowestPrice: 1999
   },
   {
-    id: 'headlessCms',
-    title: 'wizard.config.subTypes.headlessCms.title',
-    description: 'wizard.config.subTypes.headlessCms.description',
-    parentId: 'cms',
-    lowestPrice: 5999,
-    highestPrice: 10000
+    id: 'pwaExtended',
+    title: 'wizard.subTypes.pwaExtended',
+    description: 'wizard.subTypes.pwaExtended.description',
+    lowestPrice: 5999
   },
   {
-    id: 'pwa',
-    title: 'wizard.config.subTypes.pwa.title',
-    description: 'wizard.config.subTypes.pwa.description',
-    parentId: 'webApplication',
-    lowestPrice: 5999,
-    highestPrice: 15000
-  },
-  {
-    id: 'customApp',
-    title: 'wizard.config.subTypes.customApp.title',
-    description: 'wizard.config.subTypes.customApp.description',
-    parentId: 'webApplication',
-    lowestPrice: 5999,
-    highestPrice: 15000
-  },
-  {
-    id: 'apiIntegration',
-    title: 'wizard.config.subTypes.apiIntegration.title',
-    description: 'wizard.config.subTypes.apiIntegration.description',
-    parentId: 'webApplication',
-    lowestPrice: 3999,
-    highestPrice: 8999
-  },
-  // AI Use Case Subtypes
+    id: 'individualApp',
+    title: 'wizard.subTypes.individualApp',
+    description: 'wizard.subTypes.individualApp.description',
+    lowestPrice: 5999
+  }
+];
+
+export const projectSubTypesAi: ProjectType[] = [
   {
     id: 'aiConsulting',
-    title: 'wizard.config.subTypes.aiConsulting.title',
-    description: 'wizard.config.subTypes.aiConsulting.description',
-    parentId: 'artificialIntelligence',
-    lowestPrice: 5000,
-    highestPrice: 50000
+    title: 'wizard.subTypes.aiConsulting',
+    description: 'wizard.subTypes.aiConsulting.description',
+    lowestPrice: 3000,
   },
   {
-    id: 'aiWorkflows',
-    title: 'wizard.config.subTypes.aiWorkflows.title',
-    description: 'wizard.config.subTypes.aiWorkflows.description',
-    parentId: 'artificialIntelligence',
-    lowestPrice: 10000,
-    highestPrice: 50000
+    id: 'agenticAi',
+    title: 'wizard.subTypes.agenticAi',
+    description: 'wizard.subTypes.agenticAi.description',
+    lowestPrice: 3000
   },
   {
-    id: 'aiAgents',
-    title: 'wizard.config.subTypes.aiAgents.title',
-    description: 'wizard.config.subTypes.aiAgents.description',
-    parentId: 'artificialIntelligence',
-    lowestPrice: 10000,
-    highestPrice: 50000
+    id: 'generativeAi',
+    title: 'wizard.subTypes.generativeAi',
+    description: 'wizard.subTypes.generativeAi.description',
+    lowestPrice: 3000
   },
   {
-    id: 'aiIndividual',
-    title: 'wizard.config.subTypes.aiIndividual.title',
-    description: 'wizard.config.subTypes.aiIndividual.description',
-    parentId: 'artificialIntelligence',
-    lowestPrice: 20000,
-    highestPrice: 50000
+    id: 'bots',
+    title: 'wizard.subTypes.bots',
+    description: 'wizard.subTypes.bots.description',
+    lowestPrice: 5000
+  },
+  {
+    id: 'workflowAutomation',
+    title: 'wizard.subTypes.workflowAutomation',
+    description: 'wizard.subTypes.workflowAutomation.description',
+    lowestPrice: 5000
+  },
+  {
+    id: 'individualAi',
+    title: 'wizard.subTypes.individualAi',
+    description: 'wizard.subTypes.individualAi.description',
+    lowestPrice: 5000
+  }
+];
+
+export const projectSubTypesFreestyle: ProjectType[] = [
+  {
+    id: 'individualConsulting',
+    title: 'wizard.subTypes.individualConsulting',
+    description: 'wizard.subTypes.individualConsulting.description',
+    lowestPrice: 3000,
+  },
+  {
+    id: 'fullDevelopment',
+    title: 'wizard.subTypes.fullDevelopment',
+    description: 'wizard.subTypes.fullDevelopment.description',
+    lowestPrice: 15000
+  },
+  {
+    id: 'partDevelopment',
+    title: 'wizard.subTypes.partDevelopment',
+    description: 'wizard.subTypes.partDevelopment.description',
+    lowestPrice: 3000
   }
 ];
 
 export const availableFeatures: Feature[] = [
-  // Kommunikation & Kontakt
+  // Kommunikation
   {
-    name: 'kontaktformular',
-    title: 'wizard.config.features.kontaktformular.title',
-    description: 'wizard.config.features.kontaktformular.description',
-    category: 'wizard.config.categories.kommunikation',
+    id: 'contactForm',
+    title: 'wizard.features.contactForm.title',
+    description: 'wizard.features.contactForm.description',
+    category: 'communication',
     complexityFactor: 3
   },
   {
-    name: 'newsletterRegistrierung',
-    title: 'wizard.config.features.newsletterRegistrierung.title',
-    description: 'wizard.config.features.newsletterRegistrierung.description',
-    category: 'wizard.config.categories.kommunikation',
+    id: 'newsletterRegistration',
+    title: 'wizard.features.newsletterRegistration.title',
+    description: 'wizard.features.newsletterRegistration.description',
+    category: 'communication',
     complexityFactor: 3
   },
   {
-    name: 'chatbot',
-    title: 'wizard.config.features.chatbot.title',
-    description: 'wizard.config.features.chatbot.description',
-    category: 'wizard.config.categories.kommunikation',
+    id: 'chatbot',
+    title: 'wizard.features.chatbot.title',
+    description: 'wizard.features.chatbot.description',
+    category: 'communication',
     complexityFactor: 3
   },
   {
-    name: 'terminbuchung',
-    title: 'wizard.config.features.terminbuchung.title',
-    description: 'wizard.config.features.terminbuchung.description',
-    category: 'wizard.config.categories.kommunikation',
+    id: 'voicebot',
+    title: 'wizard.features.voicebot.title',
+    description: 'wizard.features.voicebot.description',
+    category: 'communication',
+    complexityFactor: 3
+  },
+  {
+    id: 'appointments',
+    title: 'wizard.features.appointments.title',
+    description: 'wizard.features.appointments.description',
+    category: 'communication',
     complexityFactor: 3
   },
 
   // Content & Medien
   {
-    name: 'bildergalerie',
-    title: 'wizard.config.features.bildergalerie.title',
-    description: 'wizard.config.features.bildergalerie.description',
-    category: 'wizard.config.categories.content',
+    id: 'imageGallery',
+    title: 'wizard.features.imageGallery.title',
+    description: 'wizard.features.imageGallery.description',
+    category: 'content',
     complexityFactor: 3
   },
   {
-    name: 'videoEmbedding',
-    title: 'wizard.config.features.videoEmbedding.title',
-    description: 'wizard.config.features.videoEmbedding.description',
-    category: 'wizard.config.categories.content',
+    id: 'videoEmbedding',
+    title: 'wizard.features.videoEmbedding.title',
+    description: 'wizard.features.videoEmbedding.description',
+    category: 'content',
     complexityFactor: 3
   },
   {
-    name: 'portfolioGrid',
-    title: 'wizard.config.features.portfolioGrid.title',
-    description: 'wizard.config.features.portfolioGrid.description',
-    category: 'wizard.config.categories.content',
+    id: 'portfolioGrid',
+    title: 'wizard.features.portfolioGrid.title',
+    description: 'wizard.features.portfolioGrid.description',
+    category: 'content',
     complexityFactor: 3
   },
   {
-    name: 'kalender',
-    title: 'wizard.config.features.kalender.title',
-    description: 'wizard.config.features.kalender.description',
-    category: 'wizard.config.categories.content',
+    id: 'calendar',
+    title: 'wizard.features.calendar.title',
+    description: 'wizard.features.calendar.description',
+    category: 'content',
     complexityFactor: 3
   },
   {
-    name: 'dateiupload',
-    title: 'wizard.config.features.dateiupload.title',
-    description: 'wizard.config.features.dateiupload.description',
-    category: 'wizard.config.categories.content',
+    id: 'fileUpload',
+    title: 'wizard.features.fileUpload.title',
+    description: 'wizard.features.fileUpload.description',
+    category: 'content',
     complexityFactor: 3
   },
 
   // Navigation & UI
   {
-    name: 'megaMenu',
-    title: 'wizard.config.features.megaMenu.title',
-    description: 'wizard.config.features.megaMenu.description',
-    category: 'wizard.config.categories.navigation',
+    id: 'megaMenu',
+    title: 'wizard.features.megaMenu.title',
+    description: 'wizard.features.megaMenu.description',
+    category: 'navigation',
     complexityFactor: 3
   },
   {
-    name: 'customTeaser',
-    title: 'wizard.config.features.customTeaser.title',
-    description: 'wizard.config.features.customTeaser.description',
-    category: 'wizard.config.categories.navigation',
+    id: 'customTeaser',
+    title: 'wizard.features.customTeaser.title',
+    description: 'wizard.features.customTeaser.description',
+    category: 'navigation',
     complexityFactor: 3
   },
   {
-    name: 'customCarousel',
-    title: 'wizard.config.features.customCarousel.title',
-    description: 'wizard.config.features.customCarousel.description',
-    category: 'wizard.config.categories.navigation',
+    id: 'customCarousel',
+    title: 'wizard.features.customCarousel.title',
+    description: 'wizard.features.customCarousel.description',
+    category: 'navigation',
     complexityFactor: 3
   },
   {
-    name: 'akkordeon',
-    title: 'wizard.config.features.akkordeon.title',
-    description: 'wizard.config.features.akkordeon.description',
-    category: 'wizard.config.categories.navigation',
+    id: 'accordeon',
+    title: 'wizard.features.accordeon.title',
+    description: 'wizard.features.accordeon.description',
+    category: 'navigation',
     complexityFactor: 3
   },
   {
-    name: 'tabs',
-    title: 'wizard.config.features.tabs.title',
-    description: 'wizard.config.features.tabs.description',
-    category: 'wizard.config.categories.navigation',
+    id: 'tabs',
+    title: 'wizard.features.tabs.title',
+    description: 'wizard.features.tabs.description',
+    category: 'navigation',
     complexityFactor: 3
   },
   {
-    name: 'themeSwitcher',
-    title: 'wizard.config.features.themeSwitcher.title',
-    description: 'wizard.config.features.themeSwitcher.description',
-    category: 'wizard.config.categories.navigation',
+    id: 'themeSwitcher',
+    title: 'wizard.features.themeSwitcher.title',
+    description: 'wizard.features.themeSwitcher.description',
+    category: 'navigation',
     complexityFactor: 3
   },
 
   // Funktionalität & Tools
   {
-    name: 'suchfunktion',
-    title: 'wizard.config.features.suchfunktion.title',
-    description: 'wizard.config.features.suchfunktion.description',
-    category: 'wizard.config.categories.funktionalitaet',
+    id: 'search',
+    title: 'wizard.features.search.title',
+    description: 'wizard.features.search.description',
+    category: 'functionality',
     complexityFactor: 3
   },
   {
-    name: 'customFilter',
-    title: 'wizard.config.features.customFilter.title',
-    description: 'wizard.config.features.customFilter.description',
-    category: 'wizard.config.categories.funktionalitaet',
+    id: 'customFilter',
+    title: 'wizard.features.customFilter.title',
+    description: 'wizard.features.customFilter.description',
+    category: 'functionality',
     complexityFactor: 3
   },
   {
-    name: 'multiStepDialog',
-    title: 'wizard.config.features.multiStepDialog.title',
-    description: 'wizard.config.features.multiStepDialog.description',
-    category: 'wizard.config.categories.funktionalitaet',
+    id: 'multiStepDialog',
+    title: 'wizard.features.multiStepDialog.title',
+    description: 'wizard.features.multiStepDialog.description',
+    category: 'functionality',
     complexityFactor: 3
   },
   {
-    name: 'konfigurator',
-    title: 'wizard.config.features.konfigurator.title',
-    description: 'wizard.config.features.konfigurator.description',
-    category: 'wizard.config.categories.funktionalitaet',
+    id: 'configurator',
+    title: 'wizard.features.configurator.title',
+    description: 'wizard.features.configurator.description',
+    category: 'functionality',
     complexityFactor: 3
   },
   {
-    name: 'assistent',
-    title: 'wizard.config.features.assistent.title',
-    description: 'wizard.config.features.assistent.description',
-    category: 'wizard.config.categories.funktionalitaet',
+    id: 'assistant',
+    title: 'wizard.features.assistant.title',
+    description: 'wizard.features.assistant.description',
+    category: 'functionality',
     complexityFactor: 3
   },
   {
-    name: 'bewertungsmechanismus',
-    title: 'wizard.config.features.bewertungsmechanismus.title',
-    description: 'wizard.config.features.bewertungsmechanismus.description',
-    category: 'wizard.config.categories.funktionalitaet',
+    id: 'rating',
+    title: 'wizard.features.rating.title',
+    description: 'wizard.features.rating.description',
+    category: 'functionality',
     complexityFactor: 3
   },
 
   // E-Commerce & Zahlungen
   {
-    name: 'zahlungsbawicklung',
-    title: 'wizard.config.features.zahlungsbawicklung.title',
-    description: 'wizard.config.features.zahlungsbawicklung.description',
-    category: 'wizard.config.categories.ecommerce',
+    id: 'payment',
+    title: 'wizard.features.payment.title',
+    description: 'wizard.features.payment.description',
+    category: 'ecommerce',
     complexityFactor: 3
   },
 
   // Benutzer & Sicherheit
   {
-    name: 'benutzerkonten',
-    title: 'wizard.config.features.benutzerkonten.title',
-    description: 'wizard.config.features.benutzerkonten.description',
-    category: 'wizard.config.categories.benutzer',
+    id: 'userAccounts',
+    title: 'wizard.features.userAccounts.title',
+    description: 'wizard.features.userAccounts.description',
+    category: 'users',
     complexityFactor: 3
   },
   {
-    name: 'altersverifikation',
-    title: 'wizard.config.features.altersverifikation.title',
-    description: 'wizard.config.features.altersverifikation.description',
-    category: 'wizard.config.categories.benutzer',
+    id: 'ageVerification',
+    title: 'wizard.features.ageVerification.title',
+    description: 'wizard.features.ageVerification.description',
+    category: 'users',
     complexityFactor: 3
   },
   {
-    name: 'cookieConsent',
-    title: 'wizard.config.features.cookieConsent.title',
-    description: 'wizard.config.features.cookieConsent.description',
-    category: 'wizard.config.categories.benutzer',
+    id: 'cookieConsent',
+    title: 'wizard.features.cookieConsent.title',
+    description: 'wizard.features.cookieConsent.description',
+    category: 'users',
     complexityFactor: 3
   },
   {
-    name: 'barrierefreiheitTools',
-    title: 'wizard.config.features.barrierefreiheitTools.title',
-    description: 'wizard.config.features.barrierefreiheitTools.description',
-    category: 'wizard.config.categories.benutzer',
+    id: 'accessibility',
+    title: 'wizard.features.accessibility.title',
+    description: 'wizard.features.accessibility.description',
+    category: 'users',
     complexityFactor: 3
   },
 
   // Integration & Services
   {
-    name: 'mapsIntegration',
-    title: 'wizard.config.features.mapsIntegration.title',
-    description: 'wizard.config.features.mapsIntegration.description',
-    category: 'wizard.config.categories.integration',
+    id: 'mapsIntegration',
+    title: 'wizard.features.mapsIntegration.title',
+    description: 'wizard.features.mapsIntegration.description',
+    category: 'integration',
     complexityFactor: 3
   },
   {
-    name: 'socialMediaIntegration',
-    title: 'wizard.config.features.socialMediaIntegration.title',
-    description: 'wizard.config.features.socialMediaIntegration.description',
-    category: 'wizard.config.categories.integration',
+    id: 'socialMediaIntegration',
+    title: 'wizard.features.socialMediaIntegration.title',
+    description: 'wizard.features.socialMediaIntegration.description',
+    category: 'integration',
     complexityFactor: 3
   },
   {
-    name: 'analyticsIntegration',
-    title: 'wizard.config.features.analyticsIntegration.title',
-    description: 'wizard.config.features.analyticsIntegration.description',
-    category: 'wizard.config.categories.integration',
+    id: 'analyticsIntegration',
+    title: 'wizard.features.analyticsIntegration.title',
+    description: 'wizard.features.analyticsIntegration.description',
+    category: 'integration',
     complexityFactor: 3
   },
 
   // Marketing & SEO
   {
-    name: 'seo',
-    title: 'wizard.config.features.seo.title',
-    description: 'wizard.config.features.seo.description',
-    category: 'wizard.config.categories.marketing',
+    id: 'seo',
+    title: 'wizard.features.seo.title',
+    description: 'wizard.features.seo.description',
+    category: 'marketing',
     complexityFactor: 3
   },
   {
-    name: 'marketingTools',
-    title: 'wizard.config.features.marketingTools.title',
-    description: 'wizard.config.features.marketingTools.description',
-    category: 'wizard.config.categories.marketing',
+    id: 'marketingTools',
+    title: 'wizard.features.marketingTools.title',
+    description: 'wizard.features.marketingTools.description',
+    category: 'marketing',
     complexityFactor: 3
   },
 
   // Lokalisierung
   {
-    name: 'mehrsprachigkeit',
-    title: 'wizard.config.features.mehrsprachigkeit.title',
-    description: 'wizard.config.features.mehrsprachigkeit.description',
-    category: 'wizard.config.categories.lokalisierung',
+    id: 'localization',
+    title: 'wizard.features.localization.title',
+    description: 'wizard.features.localization.description',
+    category: 'localization',
+    complexityFactor: 3
+  },
+
+  // Special Features
+  {
+    id: 'virtualTour',
+    title: 'wizard.features.virtualTour.title',
+    description: 'wizard.features.virtualTour.description',
+    category: 'specialFeatures',
     complexityFactor: 3
   }
 ];
 
-// Feature category colors for badges
 export const featureCategoryColors: Record<string, string> = {
-  'wizard.config.categories.kommunikation': 'badge-primary',
-  'wizard.config.categories.content': 'badge-secondary',
-  'wizard.config.categories.navigation': 'badge-accent',
-  'wizard.config.categories.funktionalitaet': 'badge-info',
-  'wizard.config.categories.ecommerce': 'badge-success',
-  'wizard.config.categories.benutzer': 'badge-warning',
-  'wizard.config.categories.integration': 'badge-error',
-  'wizard.config.categories.marketing': 'badge-neutral',
-  'wizard.config.categories.lokalisierung': 'badge-ghost'
+  'communication': 'badge-primary',
+  'content': 'badge-secondary',
+  'navigation': 'badge-accent',
+  'functionality': 'badge-info',
+  'ecommerce': 'badge-success',
+  'users': 'badge-warning',
+  'integration': 'badge-error',
+  'marketing': 'badge-neutral',
+  'localization': 'badge-ghost',
+  'specialFeatures': 'badge-soft'
 };
 
 export const googleFonts: string[] = [
@@ -487,26 +515,19 @@ export const googleFonts: string[] = [
 ];
 
 export const formFieldTypes: FormFieldType[] = [
-  { id: 'text', title: 'wizard.config.formFieldTypes.text' },
-  { id: 'email', title: 'wizard.config.formFieldTypes.email' },
-  { id: 'phone', title: 'wizard.config.formFieldTypes.phone' },
-  { id: 'textarea', title: 'wizard.config.formFieldTypes.textarea' },
-  { id: 'select', title: 'wizard.config.formFieldTypes.select' },
-  { id: 'checkbox', title: 'wizard.config.formFieldTypes.checkbox' },
-  { id: 'radio', title: 'wizard.config.formFieldTypes.radio' },
-  { id: 'file', title: 'wizard.config.formFieldTypes.file' },
-  { id: 'date', title: 'wizard.config.formFieldTypes.date' },
-  { id: 'number', title: 'wizard.config.formFieldTypes.number' },
+  { id: 'text', title: 'wizard.formFieldTypes.text' },
+  { id: 'email', title: 'wizard.formFieldTypes.email' },
+  { id: 'phone', title: 'wizard.formFieldTypes.phone' },
+  { id: 'textarea', title: 'wizard.formFieldTypes.textarea' },
+  { id: 'select', title: 'wizard.formFieldTypes.select' },
+  { id: 'checkbox', title: 'wizard.formFieldTypes.checkbox' },
+  { id: 'radio', title: 'wizard.formFieldTypes.radio' },
+  { id: 'file', title: 'wizard.formFieldTypes.file' },
+  { id: 'date', title: 'wizard.formFieldTypes.date' },
+  { id: 'number', title: 'wizard.formFieldTypes.number' },
 ];
 
-// Step Configuration Interface
-export interface WizardStep {
-  id: number;
-  title: string;
-  required: boolean;
-}
-
-// Dynamic step configuration function
+// Dynamic step configuration function EXTENDED!!!
 export function getStepConfig(projectType: string): WizardStep[] {
   const baseSteps: WizardStep[] = [{ id: 1, title: 'wizard.config.steps.projekttyp', required: true }];
 

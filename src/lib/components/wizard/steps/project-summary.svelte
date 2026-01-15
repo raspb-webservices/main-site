@@ -1,20 +1,45 @@
 <script lang="ts">
   import { m } from '$lib/paraglide/messages';
-  import { projectTypes, subTypes, availableFeatures } from '$lib/configs/wizard-config';
+  import {
+    projectCategories,
+    projectTypesWebApp,
+    projectTypesAiFreestyle,
+    projectSubTypesWebsite,
+    projectSubTypesApp,
+    projectSubTypesAi,
+    availableFeatures,
+    featureCategoryColors
+  } from '$lib/configs/wizard-config';
   import { goto } from '$app/navigation';
-  let { config, featureCategoryColors, getTop, getLow, openContact, openResetModal } = $props();
+  let { config, openContactModal, openResetModal } = $props();
 </script>
 
 <div class="step-header">
-  <h1><span class="inner-text-special">{m['wizard.steps.stepSummary.titleHighlight']()}</span></h1>
-  <p class="teaser">{m['wizard.steps.stepSummary.teaser']()}</p>
+  <h1>{m['wizard.stepSummary.titleFirst']()} <span class="inner-text-special">{m['wizard.stepSummary.titleHighlight']()}</span> {m['wizard.stepSummary.titleSecond']()} </h1>
+  <p class="teaser">{m['wizard.stepSummary.teaser']()}</p>
 </div>
 
 <div class="summary-grid">
   <div class="summary-card">
-    <h3>{m['wizard.steps.stepSummary.projectType']()}</h3>
-    <p class="summary-value">{m[projectTypes?.find((p) => p.id === config.projectType)?.title]()}</p>
-    <p class="summary-subvalue">{m[subTypes?.find((s) => s.id === config.subType && s.parentId === config.projectType)?.title]()}</p>
+    <h3>{m['wizard.stepSummary.projectCategory']()}</h3>
+    <p class="summary-value">{m[projectCategories?.find((p) => p.id === config.projectCategory)?.title]()}</p>
+  </div>
+
+  <div class="summary-card">
+    <h3>{m['wizard.stepSummary.projectType']()}</h3>
+    {#if config.projectCategory === 'websites-and-apps'}
+      <p class="summary-value">{m[projectTypesWebApp?.find((p) => p.id === config.projectType)?.title]()}</p>
+      {#if config.projectType === 'website'}
+        <p class="summary-subvalue">{m[projectSubTypesWebsite?.find((p) => p.id === config.subType)?.title]()}</p>
+      {:else}
+        <p class="summary-subvalue">{m[projectSubTypesApp?.find((p) => p.id === config.subType)?.title]()}</p>
+      {/if}
+    {:else}
+      <p class="summary-value">{m[projectTypesAiFreestyle?.find((p) => p.id === config.projectType)?.title]()}</p>
+      {#if config.subType !== ''}
+        <p class="summary-subvalue">{m[projectSubTypesAi?.find((p) => p.id === config.subType)?.title]()}</p>
+      {/if}
+    {/if}
   </div>
 
   {#if config.features.length > 1}
@@ -22,8 +47,8 @@
       <h3>{m['wizard.steps.stepSummary.selectedFeatures']()}</h3>
       <div class="flex flex-wrap gap-2">
         {#each config.features.filter((f) => f !== 'cookieConsent') as featureId}
-          <div class="badge {featureCategoryColors[availableFeatures.find((f) => f.name === featureId)?.category] || 'badge-info'}">
-            {m[availableFeatures?.find((f) => f.name === featureId)?.title]()}
+          <div class="badge {featureCategoryColors[availableFeatures.find((f) => f.id === featureId)?.category] || 'badge-info'}">
+            {m[availableFeatures?.find((f) => f.id === featureId)?.title]()}
           </div>
         {/each}
       </div>
@@ -34,26 +59,15 @@
     <h3>{m['wizard.steps.stepSummary.estimatedPrice']()}</h3>
     {#key config.estimatedPrice}
       <div class="price-display">
-        {#if config.estimatedPrice === getTop()}
-          <p class="price-message">{m['wizard.steps.stepSummary.priceTiers.tier4.message']()}</p>
-          <div class="price">mind. {Math.round(config.estimatedPrice)}€</div>
-        {:else if config.estimatedPrice == getLow()}
-          <p class="price-message">{m['wizard.steps.stepSummary.priceTiers.tier1.message']()}</p>
-          <div class="price">ca. {Math.round(config.estimatedPrice)}€</div>
-        {:else if config.estimatedPrice < getTop() && getTop() - config.estimatedPrice < 1000}
-          <p class="price-message">{m['wizard.steps.stepSummary.priceTiers.tier3.message']()}</p>
-          <div class="price">ca. {Math.round(config.estimatedPrice)}€</div>
-        {:else if config.estimatedPrice < getTop() && getTop() - config.estimatedPrice >= 1000}
-          <p class="price-message">{m['wizard.steps.stepSummary.priceTiers.tier2.message']()}</p>
-          <div class="price">ca. {Math.round(config.estimatedPrice)}€</div>
-        {/if}
+        <p class="price-message">{m['wizard.steps.stepSummary.priceTiers.tier2.message']()}</p>
+        <div class="price">ca. {Math.round(config.estimatedPrice)}€</div>
       </div>
     {/key}
   </div>
 </div>
 
 <div class="action-buttons">
-  <button type="button" class="btn btn-simple btn-lg" onclick={openContact}>
+  <button type="button" class="btn btn-simple btn-lg" onclick={openContactModal}>
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path
         stroke-linecap="round"

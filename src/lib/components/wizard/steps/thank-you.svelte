@@ -1,7 +1,7 @@
 <script lang="ts">
   import { m } from '$lib/paraglide/messages';
   import { goto } from '$app/navigation';
-  import { projectTypes } from '$configs/wizard-config';
+  import { projectTypesWebApp } from '$configs/wizard-config';
   let { config } = $props();
 </script>
 
@@ -37,7 +37,7 @@
       <div class="thank-you-info">
         <p><strong>{m['wizard.modals.thankYou.projectName']()}</strong><br /> {config.name}</p>
         <p><strong>{m['wizard.modals.thankYou.estimatedPrice']()}</strong> {config.estimatedPrice.toLocaleString()} €</p>
-        <p><strong>{m['wizard.modals.thankYou.projectType']()}</strong><br /> {m[(projectTypes.find((p) => p.id === config.projectType)) + '.title']()}</p>
+        <p><strong>{m['wizard.modals.thankYou.projectType']()}</strong><br /> {m[(projectTypesWebApp.find((p) => p.id === config.projectType)) + '.title']()}</p>
       </div>
     </div>
     <div class="thank-you-actions">

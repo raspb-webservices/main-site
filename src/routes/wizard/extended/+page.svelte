@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { isAuthenticated, userroles } from '$store/sharedStates.svelte';
   import Section from '$lib/components/ui/section.svelte';
-  import Wizard from '$lib/components/wizard/wizard.svelte';
+  import Wizard from '$lib/components/wizard/wizard-extended.svelte';
   import { goto } from '$app/navigation';
   import auth from '$services/auth-service';
   import Loader from '$lib/components/loader.svelte';
@@ -97,7 +97,7 @@
 {/if}
 
 <style lang="postcss">
-  @reference '../../app.css';
+  @reference '../../../app.css';
   .inner-content-wrapper {
     @apply m-auto flex max-w-5xl flex-col items-center justify-center text-center;
   }

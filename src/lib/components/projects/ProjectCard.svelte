@@ -17,7 +17,7 @@
   <div class="card-body">
     <div class="mb-4 flex items-start justify-between">
       <h2 class="line-clamp-3">{project.name}</h2>
-      <div class="flex flex-row absolute top-[-7px] right-[25px] gap-1">
+      <div class="flex flex-row absolute -top-1.75 right-6.25 gap-1">
         <div class="badge badge-primary badge-sm">{ getProjectTypeLabel(project.projectType)}</div>
         {#if project.projectStatus}
           <div class="badge {getStatusBadgeClass(project.projectStatus)} badge-sm">

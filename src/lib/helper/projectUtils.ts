@@ -1,5 +1,5 @@
 import { features, projectStatus, subType } from '$interfaces/project.interface';
-import { projectTypes, subTypes, type ProjectType, type SubType } from '$lib/configs/wizard-config';
+import { projectCategories, projectTypesWebApp, projectTypesAiFreestyle, projectSubTypesWebsite, projectSubTypesApp, projectSubTypesAi, availableFeatures, type ProjectCategory, type ProjectType, type Feature } from '$lib/configs/wizard-config';
 
 const StringIsNumber = (value) => isNaN(Number(value)) === false;
 export function ToArray(enumme) {

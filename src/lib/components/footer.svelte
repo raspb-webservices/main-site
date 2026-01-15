@@ -66,8 +66,8 @@
         { name: 'footer.nav.legal.contact', path: '/contact' },
         { name: 'footer.nav.legal.registration', path: '/registration' },
         { name: 'footer.nav.legal.imprint', path: '/imprint' },
-        { name: 'footer.nav.legal.privacy', path: '/privacy-notice' },
-        { name: 'footer.nav.legal.terms', path: '/terms-and-conditions' }
+        { name: 'footer.nav.legal.privacy', path: '/privacy' },
+        { name: 'footer.nav.legal.terms', path: '/terms' }
       ]
     }
   ];

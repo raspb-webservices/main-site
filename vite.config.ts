@@ -1,6 +1,7 @@
 import { paraglideVitePlugin } from '@inlang/paraglide-js';
 import tailwindcss from '@tailwindcss/vite';
 import { sveltekit } from '@sveltejs/kit/vite';
+import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 import { defineConfig } from 'vite';
 
 const emptySourceMap = JSON.stringify({
@@ -16,6 +17,66 @@ export default defineConfig({
       optimize: false
     }),
     sveltekit(),
+    SvelteKitPWA({
+      registerType: 'autoUpdate',
+      manifest: {
+        name: 'raspb Webservices',
+        short_name: 'raspb',
+        start_url: '/',
+        icons: [
+          {
+            src: '/icons/web-app-manifest-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: 'any'
+          },
+          {
+            src: '/icons/web-app-manifest-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any'
+          }
+        ],
+        screenshots: [
+          {
+            src: '/screenshots/screenshot-desktop.png',
+            sizes: '1280x720',
+            type: 'image/png',
+            form_factor: 'wide'
+          },
+          {
+            src: '/screenshots/screenshot-mobile.png',
+            sizes: '720x1280',
+            type: 'image/png'
+          }
+        ],
+        theme_color: '#f33199',
+        background_color: '#ffffff',
+        display: 'standalone'
+      },
+      workbox: {
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
+        runtimeCaching: [
+          {
+            urlPattern: ({ request }) => request.mode === 'navigate',
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'html-cache'
+            }
+          },
+          {
+            urlPattern: ({ request }) => request.destination === 'style' || request.destination === 'script' || request.destination === 'worker',
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'asset-cache'
+            }
+          }
+        ]
+      },
+      kit: {
+        includeVersionFile: true
+      }
+    }),
     paraglideVitePlugin({
       project: './project.inlang',
       outdir: './src/lib/paraglide',
@@ -40,6 +101,20 @@ export default defineConfig({
           ]
         },
         {
+          pattern: '/appointment',
+          localized: [
+            ['de', '/de/erstgespraech-vereinbaren'],
+            ['en', '/en/schedule-an-appointment']
+          ]
+        },
+        {
+          pattern: '/appointment/:id',
+          localized: [
+            ['de', '/de/erstgespraech-vereinbaren/:id'],
+            ['en', '/en/schedule-an-appointment/:id']
+          ]
+        },
+        {
           pattern: '/contact',
           localized: [
             ['de', '/de/kontakt'],
@@ -54,17 +129,45 @@ export default defineConfig({
           ]
         },
         {
-          pattern: '/services',
+          pattern: '/dashboard',
           localized: [
-            ['de', '/de/leistungsportfolio'],
-            ['en', '/en/services']
+            ['de', '/de/verwaltungszentrale'],
+            ['en', '/en/dashboard']
           ]
         },
         {
-          pattern: '/services/:id',
+          pattern: '/dashboard/:id',
           localized: [
-            ['de', '/de/leistungsportfolio/:id'],
-            ['en', '/en/services/:id']
+            ['de', '/de/verwaltungszentrale/:id'],
+            ['en', '/en/dashboard/:id']
+          ]
+        },
+        {
+          pattern: '/faq',
+          localized: [
+            ['de', '/de/haeufig-gestellte-fragen'],
+            ['en', '/en/frequently-asked-questions']
+          ]
+        },
+        {
+          pattern: '/faq/:id',
+          localized: [
+            ['de', '/de/haeufig-gestellte-fragen/:id'],
+            ['en', '/en/frequently-asked-questions/:id']
+          ]
+        },
+        {
+          pattern: '/imprint',
+          localized: [
+            ['de', '/de/impressum'],
+            ['en', '/en/imprint']
+          ]
+        },
+        {
+          pattern: '/imprint/:id',
+          localized: [
+            ['de', '/de/impressum/:id'],
+            ['en', '/en/imprint/:id']
           ]
         },
         {
@@ -82,45 +185,129 @@ export default defineConfig({
           ]
         },
         {
-          pattern: '/faq',
+          pattern: '/login',
           localized: [
-            ['de', '/de/faq'],
-            ['en', '/en/faq']
+            ['de', '/de/anmelden'],
+            ['en', '/en/login']
           ]
         },
         {
-          pattern: '/faq/:id',
+          pattern: '/login/:id',
           localized: [
-            ['de', '/de/faq/:id'],
-            ['en', '/en/faq/:id']
+            ['de', '/de/anmelden/:id'],
+            ['en', '/en/login/:id']
           ]
         },
         {
-          pattern: '/get-started',
+          pattern: '/playground',
+          localized: [
+            ['de', '/de/uebungsplatz'],
+            ['en', '/en/playground']
+          ]
+        },
+        {
+          pattern: '/playground/:id',
+          localized: [
+            ['de', '/de/uebungsplatz/:id'],
+            ['en', '/en/playground/:id']
+          ]
+        },
+        {
+          pattern: '/privacy',
+          localized: [
+            ['de', '/de/datenschutzhinweis'],
+            ['en', '/en/privacy-notice']
+          ]
+        },
+        {
+          pattern: '/privacy/:id',
+          localized: [
+            ['de', '/de/datenschutzhinweis/:id'],
+            ['en', '/en/privacy-notice/:id']
+          ]
+        },
+        {
+          pattern: '/profile',
+          localized: [
+            ['de', '/de/persoenliches-profil'],
+            ['en', '/en/personal-profile']
+          ]
+        },
+        {
+          pattern: '/profile/:id',
+          localized: [
+            ['de', '/de/persoenliches-profil/:id'],
+            ['en', '/en/personal-profile/:id']
+          ]
+        },
+        {
+          pattern: '/registration',
+          localized: [
+            ['de', '/de/registrierung'],
+            ['en', '/en/registration']
+          ]
+        },
+        {
+          pattern: '/profile/:id',
+          localized: [
+            ['de', '/de/registrierung/:id'],
+            ['en', '/en/registration/:id']
+          ]
+        },
+        {
+          pattern: '/services',
+          localized: [
+            ['de', '/de/leistungsportfolio'],
+            ['en', '/en/services']
+          ]
+        },
+        {
+          pattern: '/services/:id',
+          localized: [
+            ['de', '/de/leistungsportfolio/:id'],
+            ['en', '/en/services/:id']
+          ]
+        },
+        {
+          pattern: '/terms',
+          localized: [
+            ['de', '/de/allgemeine-geschaeftsbedingungen'],
+            ['en', '/en/terms-and-conditions']
+          ]
+        },
+        {
+          pattern: '/services/:id',
+          localized: [
+            ['de', '/de/allgemeine-geschaeftsbedingungen/:id'],
+            ['en', '/en/terms-and-conditions/:id']
+          ]
+        },
+        {
+          pattern: '/thank-you',
+          localized: [
+            ['de', '/de/vielen-dank'],
+            ['en', '/en/thank-you']
+          ]
+        },
+        {
+          pattern: '/thank-you/:id',
+          localized: [
+            ['de', '/de/vielen-dank/:id'],
+            ['en', '/en/thank-you/:id']
+          ]
+        },
+        {
+          pattern: '/wizard',
           localized: [
             ['de', '/de/projektkonfigurator'],
             ['en', '/en/project-wizard']
           ]
         },
         {
-          pattern: '/get-started/:id',
+          pattern: '/wizard/:id',
           localized: [
             ['de', '/de/projektkonfigurator/:id'],
             ['en', '/en/project-wizard/:id']
-          ]
-        },
-        {
-          pattern: '/make-an-appointment',
-          localized: [
-            ['de', '/de/einen-termin-vereinbaren'],
-            ['en', '/en/make-an-appointment']
-          ]
-        },
-        {
-          pattern: '/make-an-appointment/:id',
-          localized: [
-            ['de', '/de/einen-termin-vereinbaren/:id'],
-            ['en', '/en/make-an-appointment/:id']
           ]
         }
       ]

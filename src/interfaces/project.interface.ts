@@ -1,7 +1,7 @@
 export interface ServiceSetup {
   username?: string;
   password?: string;
-  authTokens?: Record<string, any>;
+  authTokens?: Record<string, unknown>;
   isConfigured?: boolean;
   lastUpdated?: string;
 }
@@ -17,6 +17,7 @@ export interface Project {
   id?: string;
   name: string;
   description?: string;
+  projectCategory?: string;
   projectType?: string;
   subType?: string;
   projectDetails?: string;
@@ -80,32 +81,39 @@ export interface ProjectResponse extends Omit<Project, 'pages' | 'formFields' | 
   setup?: string;
 }
 
-export enum projectType {
-  freestyle,
-  cms,
+
+export enum projectCetegory {
   website,
-  webApplication,
-  artificialIntelligence
+  app,
+  aiSolution,
+  freestyle
+}
+
+export enum projectType {
+  website,
+  app,
+  aiSolution,
+  freestyle
 }
 
 export enum subType {
   onepager,
-  corporateWebsite,
-  corporateWebsitePremium,
-  cmsSimple,
-  cmsPremium,
-  blogSystem,
-  headlessCms,
-  pwa,
-  customApp,
-  eCommerce,
-  apiIntegration,
-  customTool,
   onepagerPlus,
+  corporateWebsite,
+  corporateWebsitePlus,
+  cms,
+  cmsPlus,
+  webApp,
+  pwaSimple,
+  pwaExtended,
+  individualApp,
   aiConsulting,
+  agenticAi,
+  generativeAi,
+  bots,
+  workflowAutomation,
   aiWorkflows,
-  aiAgents,
-  aiIndividual
+  individualAi
 }
 
 export enum projectStatus {
@@ -135,37 +143,38 @@ export enum salutationOptions {
 }
 
 export enum features {
-  kontaktformular,
-  bildergalerie,
-  mapsIntegration,
-  socialMedieIntegration,
-  newsletterRegistrierung,
-  suchfunktion,
-  mehrsprachigkeit,
-  terminbuchung,
-  zahlungsbawicklung,
-  benutzerkonten,
-  analyticsIntegration,
-  seo,
+  contactForm,
+  newsletterRegistration,
+  chatbot,
+  voicebot,
+  appointments,
+  imageGallery,
+  videoEmbedding,
+  portfolioGrid,
+  calendar,
+  fileUpload,
+  megaMenu,
   customTeaser,
   customCarousel,
-  customFilter,
-  megaMenu,
-  kalender,
-  portfolioGrid,
-  downloadbereich,
-  dateiupload,
-  akkordeon,
+  accordeon,
   tabs,
-  multiStepDialog,
-  chatbot,
-  konfigurator,
-  assistent,
-  bewertungsmechanismus,
   themeSwitcher,
+  search,
+  customFilter,
+  multiStepDialog,
+  configurator,
+  assistant,
+  rating,
+  payment,
+  userAccounts,
+  ageVerification,
   cookieConsent,
-  videoEmbedding,
-  barrierefreiheitTools,
-  altersverifikation,
-  marketingTools
+  accessibility,
+  mapsIntegration,
+  socialMediaIntegration,
+  analyticsIntegration,
+  seo,
+  marketingTools,
+  localization,
+  virtualTour
 }

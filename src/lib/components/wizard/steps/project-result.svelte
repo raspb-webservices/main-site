@@ -1,6 +1,6 @@
 <script lang="ts">
   import { m } from '$lib/paraglide/messages';
-  import { projectTypes, subTypes, availableFeatures, formFieldTypes } from '$lib/configs/wizard-config';
+  import { projectCategories, projectTypesWebApp,  projectTypesAiFreestyle, projectSubTypesWebsite, projectSubTypesApp, projectSubTypesAi,  availableFeatures, formFieldTypes } from '$lib/configs/wizard-config';
   let { config, isPreparingAssets, assetPreparationProgress } = $props();
 </script>
 
@@ -43,9 +43,9 @@
     <div class="card bg-base-200">
       <div class="card-body">
         <h3 class="card-title">{m['wizard.steps.stepSummary.projectType']()}</h3>
-        <p class="no-padding">{projectTypes.find((p) => p.id === config.projectType)?.title}</p>
+        <p class="no-padding">{projectTypesWebApp.find((p) => p.id === config.projectType)?.title}</p>
         <p class="text-base-content/70 no-padding text-sm">
-          {subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType)?.title}
+          {projectSubTypesWebsite.find((s) => s.id === config.subType && s.parentId === config.projectType)?.title}
         </p>
       </div>
     </div>
@@ -65,7 +65,7 @@
           <h3 class="card-title">{m['wizard.steps.stepSummary.selectedFeatures']()}</h3>
           <div class="flex flex-wrap gap-2">
             {#each config.features as featureId}
-              <div class="badge badge-primary">{m[(availableFeatures.find((f) => f.name === featureId)) + '.title']()}</div>
+              <div class="badge badge-primary">{m[(availableFeatures.find((f) => f.id === featureId)) + '.title']()}</div>
             {/each}
           </div>
         </div>
@@ -143,15 +143,13 @@
         <div class="flex justify-between">
           <span>{m['wizard.steps.stepSummary.basePrice']()}</span>
           <span
-            >{projectTypes.find((p) => p.id === config.projectType)?.lowestPrice.toLocaleString()}€ - {projectTypes
-              .find((p) => p.id === config.projectType)
-              ?.highestPrice.toLocaleString()}€</span
+            >{projectTypesWebApp.find((p) => p.id === config.projectType)?.lowestPrice.toLocaleString()}€</span
           >
         </div>
         {#if config.subType}
           <div class="flex justify-between">
 
-            <span>{subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType)?.lowestPrice}€</span>
+            <span>{projectTypesWebApp.find((s) => s.id === config.subType && s.parentId === config.projectType)?.lowestPrice}€</span>
           </div>
         {/if}
         {#if config.features.length > 0}

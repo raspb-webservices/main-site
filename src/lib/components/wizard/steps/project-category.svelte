@@ -1,39 +1,36 @@
 <script lang="ts">
   import { m } from '$lib/paraglide/messages';
-  import { projectTypes } from '$lib/configs/wizard-config';
-  let { config, selectProjectType } = $props();
+  import { projectCategories } from '$lib/configs/wizard-config';
+  let { config, selectProjectCategory } = $props();
 </script>
 
 <div class="step-header">
-  <h1>{m['wizard.steps.step1.titleFirst']()} <span class="inner-text-special">{m['wizard.steps.step1.titleHighlight']()}</span></h1>
-  <p class="teaser">{m['wizard.steps.step1.teaser']()}</p>
+  <h1>{m['wizard.stepCategory.titleFirst']()} <span class="inner-text-special">{m['wizard.stepCategory.titleHighlight']()}</span> {m['wizard.stepCategory.titleSecond']()}</h1>
+  <p class="teaser">{m['wizard.stepCategory.teaser']()}</p>
 </div>
 
-<div class="project-types-grid">
-  {#each projectTypes as type}
+<div class="project-categories">
+  {#each projectCategories as category}
     <div
       class="card service-card cursor-pointer transition-all duration-300"
-      class:card-selected={config.projectType === type.id}
+      class:card-selected={config.projectCategory === category.id}
       role="button"
       tabindex="0"
-      onclick={() => selectProjectType(type.id)}
+      onclick={() => selectProjectCategory(category.id)}
       onkeydown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          selectProjectType(type.id);
+          selectProjectCategory(category.id);
         }
       }}
-      aria-label="Select project type: {type.title}"
+      aria-label="Select project type: {category.title}"
     >
       <div class="card-body">
         <div class="service-card-header">
-          <h3 class="card-title no-padding">{m[type.title]()}</h3>
-          <div class="service-icon">{type.icon}</div>
+          <h3 class="card-title no-padding">{m[category.title]?.() ?? category.title}</h3>
+          <div class="service-icon">{category.icon}</div>
         </div>
-        <p class="no-padding">{m[type.description]()}</p>
-        <div class="card-actions justify-end">
-          <div class="badge badge-primary">{type.lowestPrice.toLocaleString()}€ - {type.highestPrice.toLocaleString()}€</div>
-        </div>
+        <p class="no-padding">{m[category.description]()}</p>
       </div>
     </div>
   {/each}
@@ -42,20 +39,20 @@
 <style lang="postcss">
   @reference '../../../../app.css';
   .step-header {
-    @apply border-t-base-content/40 mt-0 mb-8 border-t pt-0 text-center md:border-t-0; /* Adjusted margins and padding */
+    @apply border-t-base-content/40 mt-0 mb-12 border-t pt-8 text-center md:border-t-0;
 
     h1 {
       @apply text-base-content mb-4;
     }
 
     p.teaser {
-      @apply text-base-content/70;
+      @apply text-base-content/70 max-w-5xl m-auto;
     }
   }
-  .project-types-grid {
-    @apply grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3;
+  .project-categories {
+    @apply flex flex-row gap-10 items-center justify-center flex-wrap md:flex-nowrap;
     .service-card {
-      @apply bg-white border-base-300/80 border transition-all duration-300;
+      @apply bg-white border-base-300/80 border transition-all duration-300 max-w-md;
 
       &:hover {
         @apply bg-primary/1 border-base-300 shadow-md;

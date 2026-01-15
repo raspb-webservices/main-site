@@ -3,26 +3,26 @@ export interface User {
   name?: string;
   nickname?: string;
   email?: string;
+  salutation?: string;
   familyName?: string;
   givenName?: string;
-  city?: string;
   company?: string;
+  postCode?: string;
+  city?: string;
+  address?: string;
   country?: string;
   phone?: string;
-  postCode?: string;
   projectIds?: string[];
-  salutation?: string;
-  companyAddress?: string;
   createdAt?: string;
   password?: string;
   picture?: string;
-  role?: string
+  role?: string;
 }
 
 export interface Member {
-  id: string,
-  name: string,
-  role: string,
-  avatar: string,
-  skills: string[]
+  id: string;
+  name: string;
+  role: string;
+  avatar: string;
+  skills: string[];
 }

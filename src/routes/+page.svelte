@@ -49,10 +49,10 @@
       <button
         class="btn-basic animate-fade-in-from-side"
         onclick={() => {
-          goto(localizeHref('get-started'));
+          goto(localizeHref('/wizard'));
         }}>{m['homepage.hero.buttonText']()}</button
       >
-      <button class="btn-inverted-outline animate-fade-in-from-side" onclick={()=>{goto(localizeHref('make-an-appointment'))}}>{m['homepage.hero.buttonText2']()}</button>
+      <button class="btn-inverted-outline animate-fade-in-from-side" onclick={()=>{goto(localizeHref('/appointment'))}}>{m['homepage.hero.buttonText2']()}</button>
     </div>
   </div>
 </Stage>

@@ -76,30 +76,30 @@
     <nav class="navigation">
       <button
         class="nav-item"
-        class:active={page.url.pathname == localizeHref('services')}
+        class:active={page.url.pathname == localizeHref('/services')}
         onclick={() => {
-          goto(localizeHref('services'));
+          goto(localizeHref('/services'));
         }}>{m['menu.services']()}</button
       >
       <button
         class="nav-item"
-        class:active={page.url.pathname == localizeHref('insights')}
+        class:active={page.url.pathname == localizeHref('/insights')}
         onclick={() => {
-          goto(localizeHref('insights'));
+          goto(localizeHref('/insights'));
         }}>{m['menu.insights']()}</button
       >
       <button
         class="nav-item"
-        class:active={page.url.pathname == localizeHref('about-us')}
+        class:active={page.url.pathname == localizeHref('/about-us')}
         onclick={() => {
-          goto(localizeHref('about-us'));
+          goto(localizeHref('/about-us'));
         }}>{m['menu.aboutUs']()}</button
       >
       <button
         class="nav-item"
-        class:active={page.url.pathname == localizeHref('faq')}
+        class:active={page.url.pathname == localizeHref('/faq')}
         onclick={() => {
-          goto(localizeHref('faq'));
+          goto(localizeHref('/faq'));
         }}>{m['menu.faq']()}</button
       >
     </nav>
@@ -119,7 +119,7 @@
       <button
         class="btn-basic-header"
         onclick={() => {
-          goto(localizeHref('get-started'));
+          goto(localizeHref('/wizard'));
         }}><span class="halfXl:block hidden">{m['menu.configureProject']()}</span><span class="halfXl:hidden">{m['menu.start']()}</span></button
       >
     </div>
@@ -157,7 +157,7 @@
                   class="btn-basic mx-0 mt-1.5 mb-4 w-full"
                   onclick={() => {
                     mobileNavOpen = false;
-                    goto(localizeHref('get-started'));
+                    goto(localizeHref('/wizard'));
                   }}>{m['menu.configureProject']()}</button
                 >
                 <button

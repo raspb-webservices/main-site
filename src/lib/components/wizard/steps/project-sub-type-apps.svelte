@@ -1,40 +1,35 @@
 <script lang="ts">
   import { m } from '$lib/paraglide/messages';
-  import { subTypes, projectTypes } from '$lib/configs/wizard-config';
+  import { projectSubTypesApp } from '$lib/configs/wizard-config';
+  let { config, selectProjectSubType } = $props();
 
-  export let config: any; // TODO: Use proper type for config
-  export let selectSubType: (type: string) => void;
 </script>
 
 <div class="step-header">
-  <h1>
-    {m['wizard.steps.step2.titleFirst']()} <span class="inner-text-special">{m['wizard.config.projectTypes.' + config.projectType + '.title']()}</span>
-    {m['wizard.steps.step2.titleSecond']()}
-  </h1>
-  <p class="teaser">{m['wizard.steps.step2.teaser']()}</p>
+  <h1>{m['wizard.stepSubType.titleFirst']()} <span class="inner-text-special">{m['wizard.stepSubType.titleHighlight']()}</span>{m['wizard.stepSubType.titleSecond']()}</h1>
+  <p class="teaser">{m['wizard.stepSubType.teaser']({project:m['wizard.type.'+config.projectType+'.title']?.() ?? config.projectType})}</p>
 </div>
-
 <div class="subtypes-grid">
-  {#each subTypes.filter((st) => st.parentId === config.projectType) as subtype}
+  {#each projectSubTypesApp as subtype}
     <div
       class="card service-card cursor-pointer transition-all duration-300"
       class:card-selected={config.subType === subtype.id}
       role="button"
       tabindex="0"
-      onclick={() => selectSubType(subtype.id)}
+      onclick={() => selectProjectSubType(subtype.id)}
       onkeydown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          selectSubType(subtype.id);
+          selectProjectSubType(subtype.id);
         }
       }}
       aria-label="Select subtype: {subtype.title}"
     >
       <div class="card-body">
-        <h3 class="card-title">{m[subtype.title]()}</h3>
-        <p class="no-padding">{m[subtype.description]()}</p>
+        <h3 class="card-title">{m[subtype.title]?.() ?? subtype.title}</h3>
+        <p class="no-padding">{m[subtype.description]?.() ?? subtype.description}</p>
         <div class="card-actions justify-end">
-          <div class="badge badge-success">ab {subtype.lowestPrice}€</div>
+          <div class="badge badge-success">berits ab {subtype.lowestPrice}€</div>
         </div>
       </div>
     </div>
@@ -44,7 +39,7 @@
 <style lang="postcss">
   @reference '../../../../app.css';
   .step-header {
-    @apply border-t-base-content/40 mt-0 mb-8 border-t pt-0 text-center md:border-t-0; /* Adjusted margins and padding */
+    @apply border-t-base-content/40 mt-0 mb-8 border-t pt-8 text-center md:border-t-0; /* Adjusted margins and padding */
 
     h1 {
       @apply text-base-content mb-4;
@@ -55,9 +50,9 @@
     }
   }
   .subtypes-grid {
-    @apply grid grid-cols-1 gap-6 md:grid-cols-2;
+    @apply flex flex-row gap-10 items-center justify-center flex-wrap;
     .service-card {
-      @apply bg-white border-base-300/80 border transition-all duration-300;
+      @apply bg-white border-base-300/80 border transition-all duration-300 max-w-md md:max-w-lg;
 
       &:hover {
         @apply bg-primary/1 border-base-300 shadow-md;

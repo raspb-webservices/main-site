@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { teamMembers } from '$lib/configs/teamMembers';
+  import { teamMembers } from '$configs/ai-team-member';
   import Stage from '$lib/components/ui/stage.svelte';
   import Section from '$lib/components/ui/section.svelte';
   import RaspbPhilosophyModal from '$lib/components/modals/general/philosophy.svelte';
@@ -8,7 +8,6 @@
   import MemberModal from '$lib/components/modals/about-us/member-modal.svelte';
   import type { Member } from '$interfaces/user.interface';
   import { m } from '$lib/paraglide/messages';
-  import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 
   let currentTheme = $state('light');
   let selectedMember: Member | null = $state(null);

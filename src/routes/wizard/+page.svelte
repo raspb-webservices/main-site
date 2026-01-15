@@ -3,7 +3,7 @@
   import { goto } from '$app/navigation';
   import { m } from '$lib/paraglide/messages';
   import WizardBasic from '$lib/components/wizard/wizard-basic.svelte';
-  import Wizard from '$lib/components/wizard/wizard.svelte';
+  import Wizard from '$lib/components/wizard/wizard-extended.svelte';
   import { isAuthenticated } from '$store/sharedStates.svelte';
   import auth from '$services/auth-service';
   import { openAuth0Popup } from '$helper/loginOpener';
@@ -29,29 +29,23 @@
   let selectedWizard = $state<'basic' | 'advanced' | null>(null);
 
   function scrollToWizard(offset = 0) {
-    const target = document.getElementById('wizard');
-    if (!target) return;
-
-    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
-    window.scrollTo({
-      top: targetPosition,
-      behavior: 'smooth'
-    });
+    setTimeout(() => {
+      const target = document.getElementById('wizard');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }, 150);
   }
 
   onMount(() => {
-    if (data.projectType || data.subType) {
-      setTimeout(() => {
-        scrollToWizard(30);
-      }, 300);
-    }
+    if (data.projectType || data.subType) scrollToWizard();
   });
 
   function selectWizard(type: 'basic' | 'advanced') {
     selectedWizard = type;
-    setTimeout(() => {
-      scrollToWizard(100);
-    }, 100);
+    scrollToWizard();
   }
 </script>
 
@@ -199,7 +193,7 @@
     transition: all 0.3s ease;
 
     &:hover {
-      @apply translate-y-[-2px] shadow-md;
+      @apply -translate-y-0.5 shadow-md;
     }
   }
 
@@ -212,7 +206,7 @@
   }
 
   .benefit-icon {
-    @apply flex-shrink-0 text-3xl;
+    @apply shrink-0 text-3xl;
   }
 
   .benefit-text {
@@ -239,6 +233,6 @@
   }
 
   .wizard-section {
-    @apply mb-16;
+    @apply mb-24;
   }
 </style>
