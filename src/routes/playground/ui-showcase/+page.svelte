@@ -4,6 +4,10 @@
   import { m } from '$lib/paraglide/messages';
 </script>
 
+<Section fullWidth={true} noSpacing={true}>
+  <h1>Jetzt Kontakt ...</h1>
+</Section>
+
 <Stage style={'svg-gradient'}>
   <div class="inner-box reduced">
     <h1>Digitale Experience nach Maß</h1>

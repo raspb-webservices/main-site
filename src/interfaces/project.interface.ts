@@ -36,6 +36,20 @@ export interface Project {
   accentColour?: string;
   desiredFont?: string;
   estimatedPrice?: number;
+  // PWA-specific fields
+  pwaApproach?: string; // 'new' or 'extend'
+  pwaExistingUrl?: string;
+  // CMS-specific fields
+  cmsComplexity?: number; // 0-100 scale
+  cmsContentStructure?: string;
+  // Extended project details
+  serviceLevel?: number; // 0-100: 0 = Full-Service, 100 = Active Participation
+  engineeringApproach?: number; // 0-100: 0 = Quick & Dirty, 100 = Over-engineered
+  specialRequirements?: string;
+  projectGoal?: string;
+  timelinePreference?: string; // 'urgent', 'fast', 'moderate', 'flexible', 'delayed', 'deadline', 'whenever'
+  specificDeadline?: string; // ISO date string
+  budgetRange?: string; // 'small', 'medium', 'large', 'xlarge', 'enterprise', 'flexible'
   formFields?: {
     type: string;
     name: string;
