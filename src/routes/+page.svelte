@@ -391,70 +391,68 @@
 
   <Section customColor={'#fafafa'}>
     <div class="inner-section-wrapper">
-      <div class="intro prose">
-        <h1>{m['homepage_features_titleFirst']()} <span class="inner-text-special">{m['homepage_features_titleHighlight']()}</span></h1>
-        <p class="teaser">{m['homepage_features_subtitle']()}</p>
+      <div class="intro-wide prose">
+        <h1>{m['homepage_features_titleFirst']()} <span class="inner-text-special">{m['homepage_features_titleHighlight']()}</span> -<br>{m['homepage_features_titleSecond']()} </h1>
+        <p class="teaser">{@html m['homepage_features_subtitle']()}</p>
       </div>
 
       <div class="features-grid">
         <div class="feature-card prose">
           <div class="feature-card-header">
-            <div class="feature-icon">🎯</div>
-            <h2 class="pt-2.5">{m['homepage_features_allesAusEinerHand_title']()}</h2>
-          </div>
-          <p>{m['homepage_features_allesAusEinerHand_description']()}</p>
-          <div class="very-tiny-spacer"></div>
-          <ul class="feature-list">
-            <li>{m['homepage_features_allesAusEinerHand_features_konzeption']()}</li>
-            <li>{m['homepage_features_allesAusEinerHand_features_design']()}</li>
-            <li>{m['homepage_features_allesAusEinerHand_features_entwicklung']()}</li>
-            <li>{m['homepage_features_allesAusEinerHand_features_hosting']()}</li>
-          </ul>
-        </div>
-
-        <div class="feature-card prose">
-          <div class="feature-card-header">
             <div class="feature-icon">💎</div>
-            <h2 class="pt-2.5">{m['homepage_features_preise_title']()}</h2>
+            <h2 class="pt-2.5">{m['homepage_features_qualitaet_title']()}</h2>
           </div>
-          <p>{m['homepage_features_preise_description']()}</p>
+          <p>{m['homepage_features_qualitaet_description']()}</p>
           <div class="very-tiny-spacer"></div>
+          <h3>{m['homepage_features_qualitaet_middleLine']()}</h3>
           <ul class="feature-list">
-            <li>{m['homepage_features_preise_benefits_sofort']()}</li>
-            <li>{m['homepage_features_preise_benefits_keineVersteckten']()}</li>
-            <li>{m['homepage_features_preise_benefits_keineFolgegebuehren']()}</li>
+            <li>{m['homepage_features_qualitaet_point1']()}</li>
+            <li>{m['homepage_features_qualitaet_point2']()}</li>
+            <li>{m['homepage_features_qualitaet_point3']()}</li>
           </ul>
         </div>
 
         <div class="feature-card prose">
           <div class="feature-card-header">
-            <div class="feature-icon">👤</div>
-            <h2 class="pt-2.5">{m['homepage_features_ansprechpartner_title']()}</h2>
+            <div class="feature-icon">⚡</div>
+            <h2 class="pt-2.5">{m['homepage_features_schnell_title']()}</h2>
           </div>
-          <p>{m['homepage_features_ansprechpartner_description']()}</p>
+          <p>{m['homepage_features_schnell_description']()}</p>
           <div class="very-tiny-spacer"></div>
-          <div class="contact-info">
-            <div class="contact-avatar"></div>
-            <div class="contact-details">
-              <p><strong>{m['homepage_features_ansprechpartner_contact_title']()}</strong></p>
-              <p>{m['homepage_features_ansprechpartner_contact_description']()}</p>
-            </div>
+          <h3>{m['homepage_features_schnell_middleLine']()}</h3>
+          <ul class="feature-list">
+            <li>{m['homepage_features_schnell_point1']()}</li>
+            <li>{m['homepage_features_schnell_point2']()}</li>
+            <li>{m['homepage_features_schnell_point3']()}</li>
+          </ul>
+        </div>
+
+        <div class="feature-card prose">
+          <div class="feature-card-header">
+            <div class="feature-icon">🔍</div>
+            <h2 class="pt-2.5">{m['homepage_features_transparenz_title']()}</h2>
           </div>
+          <p>{m['homepage_features_transparenz_description']()}</p>
+          <div class="very-tiny-spacer"></div>
+                    <h3>{m['homepage_features_transparenz_middleLine']()}</h3>
+          <ul class="feature-list">
+            <li>{m['homepage_features_transparenz_point1']()}</li>
+            <li>{m['homepage_features_transparenz_point2']()}</li>
+            <li>{m['homepage_features_transparenz_point3']()}</li>
+          </ul>
         </div>
 
         <div class="feature-card">
           <div class="feature-card-header">
-            <div class="feature-icon">🛠️</div>
-            <h2 class="pt-2.5">{m['homepage_features_massgeschneidert_title']()}</h2>
+            <div class="feature-icon">🔓</div>
+            <h2 class="pt-2.5">{m['homepage_features_kontrolle_title']()}</h2>
           </div>
-          <p>{m['homepage_features_massgeschneidert_description']()}</p>
-
-          <div class="solution-types mt-auto">
-            <span class="solution-tag">{m['homepage_features_massgeschneidert_types_individual']()}</span>
-            <span class="solution-tag">{m['homepage_features_massgeschneidert_types_flexibel']()}</span>
-            <span class="solution-tag">{m['homepage_features_massgeschneidert_types_skalierbar']()}</span>
-            <span class="solution-tag">{m['homepage_features_massgeschneidert_types_zukunftssicher']()}</span>
-          </div>
+          <p>{m['homepage_features_kontrolle_description']()}</p>
+          <ul class="feature-list">
+            <li>{m['homepage_features_kontrolle_point1']()}</li>
+            <li>{m['homepage_features_kontrolle_point2']()}</li>
+            <li>{m['homepage_features_kontrolle_point3']()}</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -491,6 +489,9 @@
     .inner-section-wrapper {
       .intro {
         @apply m-auto flex max-w-4xl flex-col items-center justify-center pb-8 text-center;
+      }
+      .intro-wide {
+        @apply m-auto flex max-w-5xl flex-col items-center justify-center pb-8 text-center;
       }
     }
     .services-grid {
@@ -634,26 +635,6 @@
               @apply from-purple to-pink mt-1.5 mr-3 h-2 w-2 min-w-2 rounded-full bg-linear-to-r;
               content: '';
             }
-          }
-        }
-
-        .contact-info {
-          @apply flex items-center gap-4;
-          .contact-avatar {
-            @apply h-10 w-10 rounded-full bg-white bg-cover bg-center bg-no-repeat;
-            background-image: url('/images/markus-foto.jpg');
-          }
-          .contact-details {
-            p {
-              @apply text-sm;
-            }
-          }
-        }
-        .solution-types {
-          @apply flex flex-wrap gap-2;
-
-          .solution-tag {
-            @apply bg-primary/10 text-primary rounded-full px-3 py-1 text-sm font-medium;
           }
         }
       }

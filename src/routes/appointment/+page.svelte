@@ -91,25 +91,10 @@
   </div>
 </Section>
 
-<!-- <section class="appointment-content-wrapper">
-  <Stage style={'basic-gradient'}>
-    <div class="inner-box reduced prose py-36">
-      <h1 class="massive animate-fade-in-up">{m['appointment_title']()}</h1>
-      <p class="teaser animate-fade-in-up">{m['appointment_subtitle']()}</p>
-    </div>
-  </Stage>
-
-  <div class="spacer"></div>
-
-  <Section customColor={'#fafafa'} noSpacing={true}>
-    <iframe src="https://calendly.com/raspb-webservices/erstgespraech?hide_gdpr_banner=1" title="Termin vereinbaren" width="100%" height="900"></iframe>
-  </Section>
-</section> -->
-
 <style lang="postcss">
   @reference '../../app.css';
 
   iframe {
-    @apply h-[calc(100vh-150px)] w-full rounded-2xl;
+    @apply h-[calc(100vh-150px)] min-h-199.5 w-full rounded-2xl;
   }
 </style>
