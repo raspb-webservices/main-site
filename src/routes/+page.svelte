@@ -418,7 +418,7 @@
 
         <div class="feature-card prose">
           <div class="feature-card-header">
-            <div class="feature-icon">⚡</div>
+            <div class="feature-icon">🚀</div>
             <h2 class="pt-2.5">{m['homepage_features_schnell_title']()}</h2>
           </div>
           <p>{@html m['homepage_features_schnell_description']()}</p>
