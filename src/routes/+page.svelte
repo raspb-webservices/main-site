@@ -392,7 +392,11 @@
   <Section customColor={'#fafafa'}>
     <div class="inner-section-wrapper">
       <div class="intro-wide prose">
-        <h1>{m['homepage_features_titleFirst']()} <span class="inner-text-special">{m['homepage_features_titleHighlight']()}</span> -<br>{m['homepage_features_titleSecond']()} </h1>
+        <h1>
+          {m['homepage_features_titleFirst']()} <span class="inner-text-special">{m['homepage_features_titleHighlight']()}</span> -<br />{m[
+            'homepage_features_titleSecond'
+          ]()}
+        </h1>
         <p class="teaser">{@html m['homepage_features_subtitle']()}</p>
       </div>
 
@@ -402,13 +406,13 @@
             <div class="feature-icon">💎</div>
             <h2 class="pt-2.5">{m['homepage_features_qualitaet_title']()}</h2>
           </div>
-          <p>{m['homepage_features_qualitaet_description']()}</p>
+          <p>{@html m['homepage_features_qualitaet_description']()}</p>
           <div class="very-tiny-spacer"></div>
-          <h3>{m['homepage_features_qualitaet_middleLine']()}</h3>
+          <h3>{@html m['homepage_features_qualitaet_middleLine']()}</h3>
           <ul class="feature-list">
-            <li>{m['homepage_features_qualitaet_point1']()}</li>
-            <li>{m['homepage_features_qualitaet_point2']()}</li>
-            <li>{m['homepage_features_qualitaet_point3']()}</li>
+            <li><span>{@html m['homepage_features_qualitaet_point1']()}</span></li>
+            <li><span>{@html m['homepage_features_qualitaet_point2']()}</span></li>
+            <li><span>{@html m['homepage_features_qualitaet_point3']()}</span></li>
           </ul>
         </div>
 
@@ -417,13 +421,13 @@
             <div class="feature-icon">⚡</div>
             <h2 class="pt-2.5">{m['homepage_features_schnell_title']()}</h2>
           </div>
-          <p>{m['homepage_features_schnell_description']()}</p>
+          <p>{@html m['homepage_features_schnell_description']()}</p>
           <div class="very-tiny-spacer"></div>
-          <h3>{m['homepage_features_schnell_middleLine']()}</h3>
+          <h3>{@html m['homepage_features_schnell_middleLine']()}</h3>
           <ul class="feature-list">
-            <li>{m['homepage_features_schnell_point1']()}</li>
-            <li>{m['homepage_features_schnell_point2']()}</li>
-            <li>{m['homepage_features_schnell_point3']()}</li>
+            <li><span>{@html m['homepage_features_schnell_point1']()}</span></li>
+            <li><span>{@html m['homepage_features_schnell_point2']()}</span></li>
+            <li><span>{@html m['homepage_features_schnell_point3']()}</span></li>
           </ul>
         </div>
 
@@ -432,26 +436,28 @@
             <div class="feature-icon">🔍</div>
             <h2 class="pt-2.5">{m['homepage_features_transparenz_title']()}</h2>
           </div>
-          <p>{m['homepage_features_transparenz_description']()}</p>
+          <p>{@html m['homepage_features_transparenz_description']()}</p>
           <div class="very-tiny-spacer"></div>
-                    <h3>{m['homepage_features_transparenz_middleLine']()}</h3>
+          <h3>{@html m['homepage_features_transparenz_middleLine']()}</h3>
           <ul class="feature-list">
-            <li>{m['homepage_features_transparenz_point1']()}</li>
-            <li>{m['homepage_features_transparenz_point2']()}</li>
-            <li>{m['homepage_features_transparenz_point3']()}</li>
+            <li><span>{@html m['homepage_features_transparenz_point1']()}</span></li>
+            <li><span>{@html m['homepage_features_transparenz_point2']()}</span></li>
+            <li><span>{@html m['homepage_features_transparenz_point3']()}</span></li>
           </ul>
         </div>
 
-        <div class="feature-card">
+        <div class="feature-card prose">
           <div class="feature-card-header">
             <div class="feature-icon">🔓</div>
             <h2 class="pt-2.5">{m['homepage_features_kontrolle_title']()}</h2>
           </div>
-          <p>{m['homepage_features_kontrolle_description']()}</p>
+          <p>{@html m['homepage_features_kontrolle_description']()}</p>
+          <div class="very-tiny-spacer"></div>
+          <h3>{@html m['homepage_features_kontrolle_middleLine']()}</h3>
           <ul class="feature-list">
-            <li>{m['homepage_features_kontrolle_point1']()}</li>
-            <li>{m['homepage_features_kontrolle_point2']()}</li>
-            <li>{m['homepage_features_kontrolle_point3']()}</li>
+            <li><span>{@html m['homepage_features_kontrolle_point1']()}</span></li>
+            <li><span>{@html m['homepage_features_kontrolle_point2']()}</span></li>
+            <li><span>{@html m['homepage_features_kontrolle_point3']()}</span></li>
           </ul>
         </div>
       </div>
@@ -612,7 +618,7 @@
       @apply grid grid-cols-1 gap-8 lg:grid-cols-2;
 
       .feature-card {
-        @apply from-white to-base-50 text-base-content flex cursor-default flex-col rounded-2xl border-0 bg-linear-to-tl p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg;
+        @apply to-base-50 text-base-content flex cursor-default flex-col rounded-2xl border-0 bg-linear-to-tl from-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg;
 
         .feature-card-header {
           @apply mb-4 flex min-w-full flex-wrap items-center gap-4;
