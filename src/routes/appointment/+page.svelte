@@ -85,9 +85,9 @@
   ];
 </script>
 
-<Section fullWidth={true} noSpacing={true}>
-  <div class="flex flex-col items-center justify-center px-24 py-8">
-    <VirtualTourViewer {nodes} startNodeId="room-1" />
+<Section noSpacing={true}>
+  <div class="py-10">
+    <iframe src="https://nextcloud.raspb.eu/apps/appointments/embed/QC0rcD04c8q8NbC1/form" title="Erstgespräch vereinbaren"></iframe>
   </div>
 </Section>
 
@@ -108,4 +108,8 @@
 
 <style lang="postcss">
   @reference '../../app.css';
+
+  iframe {
+    @apply h-[calc(100vh-150px)] w-full rounded-2xl;
+  }
 </style>

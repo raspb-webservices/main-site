@@ -9,6 +9,7 @@
   "homepage_hero_subtitleSecond": "raspb philosophy",
   "homepage_hero_subtitleThird": "- super affordable",
   "homepage_hero_buttonText": "Learn more",
+  "homepage_hero_buttonText2": "Schedule consultation",
   "homepage_thisIsUs_title": "Get to know raspb",
   "homepage_thisIsUs_titleFirst": "Get to know ",
   "homepage_thisIsUs_titleHighlight": "raspb",
@@ -157,6 +158,5 @@
   "homepage_cta_benefits_contact_description": "A fixed contact person accompanies you through the entire project",
   "homepage_cta_buttonText": "Configure project now",
   "homepage_cta_faqButtonText": "Frequently Asked Questions",
-  "homepage_cta_note": "?? <strong>Tip:</strong> The configurator takes only 3-5 minutes and you immediately receive your personal project price. No obligation and free of charge.",
-  "homepage_hero_buttonText2": "Schedule initial consultation"
+  "homepage_cta_note": "<strong>Tip:</strong> The configurator takes only 3-5 minutes and you immediately receive your personal project price. No obligation and free of charge."
 }

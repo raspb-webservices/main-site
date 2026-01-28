@@ -1,7 +1,7 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "aboutUs_meta_title": "raspb Webservices - Über uns",
-  "aboutUs_meta_description": "Lernen du das Team von raspb Webservices kennen - Markus als Solopreneur und unser innovatives KI-Team für moderne Webentwicklung.",
+  "aboutUs_meta_description": "Lerne das Team von raspb Webservices kennen - Markus als Solopreneur und unser innovatives KI-Team für moderne Webentwicklung.",
   "aboutUs_header_title": "Über uns",
   "aboutUs_header_titleFirst": "Über",
   "aboutUs_header_titleHighlight": "uns",
@@ -53,7 +53,7 @@
   "aboutUs_teamMembers_alex_description": "Alex ist unser technischer Visionär und übernimmt die Entwicklung komplexer Webseiten und Anwendungen. Mit viel Erfahrung in modernen Frameworks und KI-Integration sowie gezieltem Anlernen innerhalb des raspb-Ökosystems bringt Alex innovative Lösungen für jede Herausforderung - in Rekordzeit.",
   "aboutUs_teamMembers_alex_experience": "Erfahrungen aus vielen Projekten in der Softwareentwicklung kommen ihm zugute. Er ist spezialisiert auf Node.js, TypeScript, Svelte/SvelteKit, etc. - aber auch Experte für KI-gestützte Entwicklungstools und Cloud-Architekturen.",
   "aboutUs_teamMembers_alex_personality": "Analytisch, innovativ und immer auf der Suche nach der elegantesten Lösung. Alex liebt es, komplexe Probleme in einfache, benutzerfreundliche Lösungen zu verwandeln.",
-  "aboutUs_teamMembers_maya_description": "Maya verwandelt Ideen in intuitive und ästhetisch ansprechende Benutzererfahrungen. Du versteht es, komplexe Anforderungen in klare, benutzerfreundliche Designs zu übersetzen.",
+  "aboutUs_teamMembers_maya_description": "Maya verwandelt Ideen in intuitive und ästhetisch ansprechende Benutzererfahrungen. Sie versteht es, komplexe Anforderungen in klare, benutzerfreundliche Designs zu übersetzen.",
   "aboutUs_teamMembers_maya_experience": "Spezialistin für moderne Design-Tools wie Figma und Adobe Creative Suite. Expertin für responsive Design und Accessibility-Standards.",
   "aboutUs_teamMembers_maya_personality": "Kreativ, empathisch und detailorientiert. Maya hat ein Auge für Ästhetik und versteht die Bedürfnisse der Nutzer intuitiv.",
   "aboutUs_teamMembers_sam_description": "Sam sorgt dafür, dass deine Inhalte nicht nur gefunden, sondern auch geliebt werden. Mit datengetriebenen Strategien optimiert Sam die Online-Präsenz für maximale Reichweite.",
@@ -62,7 +62,7 @@
   "aboutUs_teamMembers_rio_description": "Rio stellt sicher, dass jede Zeile Code perfekt funktioniert. Mit systematischen Tests und automatisierten Prüfverfahren garantiert Rio höchste Qualitätsstandards.",
   "aboutUs_teamMembers_rio_experience": "Spezialist für Test-Frameworks wie Playwright, Jest und Cypress. Experte für CI/CD-Pipelines und automatisierte Qualitätssicherung.",
   "aboutUs_teamMembers_rio_personality": "Präzise, geduldig und lösungsorientiert. Rio hat ein Talent dafür, auch die kleinsten Fehler aufzuspüren und zu beheben.",
-  "aboutUs_teamMembers_melinda_description": "Melinda ist das Herz unseres Kundenservice und die Hüterin unserer Finanzen. Mit ihrer ruhigen und professionellen Art stellt sie sicher, dass jeder Kunde zufrieden ist und alle administrativen Prozesse reibungslos ablaufen. Du findet stets die richtige Balance zwischen Empathie und Effizienz.",
+  "aboutUs_teamMembers_melinda_description": "Melinda ist das Herz unseres Kundenservice und die Hüterin unserer Finanzen. Mit ihrer ruhigen und professionellen Art stellt sie sicher, dass jeder Kunde zufrieden ist und alle administrativen Prozesse reibungslos ablaufen. Sie findet stets die richtige Balance zwischen Empathie und Effizienz.",
   "aboutUs_teamMembers_melinda_experience": "Durch ihre jahrelange Erfahrung in der Kundenbetreuung und im Rechnungswesen beherrscht sie die komplexen Zusammenhänge beider Bereiche. Sie ist versiert im Umgang mit Buchhaltungssoftware, kennt sich mit Projektmanagement-Tools aus und hat ein tiefes Verständnis für Kundenbedürfnisse.",
-  "aboutUs_teamMembers_melinda_personality": "Organisiert, empathisch und lösungsorientiert. Melinda behält auch in stressigen Situationen den Überblick und meistert jede Herausforderung mit einem Lächeln. Du liebt es, durch strukturierte Prozesse einen Mehrwert für unser Team und unsere Kunden zu schaffen."
+  "aboutUs_teamMembers_melinda_personality": "Organisiert, empathisch und lösungsorientiert. Melinda behält auch in stressigen Situationen den Überblick und meistert jede Herausforderung mit einem Lächeln. Sie liebt es, durch strukturierte Prozesse einen Mehrwert für unser Team und unsere Kunden zu schaffen."
 }

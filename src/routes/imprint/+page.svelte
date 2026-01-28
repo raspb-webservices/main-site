@@ -2,6 +2,7 @@
   import { goto } from '$app/navigation';
   import Section from '$lib/components/ui/section.svelte';
   import { m } from '$lib/paraglide/messages';
+  import { getLocale } from '$lib/paraglide/runtime';
 </script>
 
 <svelte:head>
@@ -25,7 +26,11 @@
     <h3>{m['imprint_contact']()}</h3>
     <div class="contact-details">
       <p class="no-padding"><strong>{m['imprint_phone']()}</strong> 06732 - 9648113</p>
+      {#if getLocale() !== 'en'}
+      <p><strong>{m['imprint_email']()}</strong> <a href="mailto:kontakt@raspb.de">kontakt@raspb.de</a></p>
+      {:else}
       <p><strong>{m['imprint_email']()}</strong> <a href="mailto:contact@raspb.de">contact@raspb.de</a></p>
+      {/if}
     </div>
 
     <div class="spacer"></div>

@@ -52,6 +52,7 @@
 
 <style lang="postcss">
   @reference '../../../app.css';
+  
   .hero-container {
     @apply relative flex min-h-[50vh] w-full overflow-hidden;
 

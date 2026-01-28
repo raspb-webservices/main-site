@@ -114,10 +114,10 @@
             Wiese neu entwickelt werden?
           </p>
           <div class="form-section">
-            <label class="section-label">
+            <div class="section-label">
               <span class="label-icon">🔧</span>
               Ansatz wählen
-            </label>
+            </div>
             <div class="radio-group">
               <label class="radio-option">
                 <input
@@ -163,10 +163,10 @@
         </p>
 
         <div class="form-section">
-          <label class="section-label">
+          <div class="section-label">
             <span class="label-icon">📊</span>
             Komplexität einschätzen
-          </label>
+          </div>
           <div class="slider-container">
             <div class="slider-labels">
               <span class="slider-label-left">Einfach</span>
@@ -470,8 +470,6 @@
 
   .section-label {
     @apply text-base-content mb-2 flex items-center gap-2 text-base font-semibold;
-    display: flex;
-
     .label-icon {
       @apply text-lg;
     }

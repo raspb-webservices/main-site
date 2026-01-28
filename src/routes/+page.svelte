@@ -10,6 +10,7 @@
   import { DotLottieSvelte } from '@lottiefiles/dotlottie-svelte';
   import { m } from '$lib/paraglide/messages';
   import { getLocale, localizeHref } from '$lib/paraglide/runtime';
+  import MainOffering from '$lib/components/ui/main-offering.svelte';
 
   let philosophyModal: PhilosophyModal;
   let timeAsFactorModal: TimeAsFactorModal;
@@ -86,7 +87,7 @@
         </p>
       </div>
       <div class="lg:items-top order-1 col-span-full items-center md:order-2 md:col-span-5">
-        <div class="lottie-container">
+        <div class="lottie-container m-auto max-w-117.5">
           <DotLottieSvelte src="/lotties/robot-supports.lottie" loop autoplay />
         </div>
       </div>
@@ -120,6 +121,16 @@
         <div class="item">{m['homepage_intro_benefits_monitoring']()}</div>
       </div>
     </div>
+  </Section>
+
+  <Section customColor={'#fafafa'}>
+    <div class="inner-section-wrapper">
+      <div class="intro prose pt-10 md:pt-0">
+        <h1>Dein digitales <span class="inner-text-special">Upgrade</span> beginnt hier</h1>
+        <p class="teaser">Individuelle Web-Lösungen oder KI-Power für dein Business - maßgeschneidert, modern, zukunftssicher.</p>
+      </div>
+    </div>
+    <MainOffering></MainOffering>
   </Section>
 
   {#if false}
@@ -378,7 +389,7 @@
     </div>
   </Section>
 
-  <Section>
+  <Section customColor={'#fafafa'}>
     <div class="inner-section-wrapper">
       <div class="intro prose">
         <h1>{m['homepage_features_titleFirst']()} <span class="inner-text-special">{m['homepage_features_titleHighlight']()}</span></h1>
@@ -471,14 +482,12 @@
         object-fit: contain;
       }
     }
-
     .benefits {
       @apply flex flex-wrap items-center justify-center gap-2;
       .item {
         @apply text-base-content bg-primary/8 w-fit rounded-lg px-4 py-2 text-sm;
       }
     }
-
     .inner-section-wrapper {
       .intro {
         @apply m-auto flex max-w-4xl flex-col items-center justify-center pb-8 text-center;
@@ -602,7 +611,7 @@
       @apply grid grid-cols-1 gap-8 lg:grid-cols-2;
 
       .feature-card {
-        @apply from-base-100 to-base-200 text-base-content flex cursor-default flex-col rounded-2xl border-0 bg-linear-to-tl p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg;
+        @apply from-white to-base-50 text-base-content flex cursor-default flex-col rounded-2xl border-0 bg-linear-to-tl p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg;
 
         .feature-card-header {
           @apply mb-4 flex min-w-full flex-wrap items-center gap-4;
@@ -631,7 +640,8 @@
         .contact-info {
           @apply flex items-center gap-4;
           .contact-avatar {
-            @apply h-10 w-10 rounded-full bg-white;
+            @apply h-10 w-10 rounded-full bg-white bg-cover bg-center bg-no-repeat;
+            background-image: url('/images/markus-foto.jpg');
           }
           .contact-details {
             p {

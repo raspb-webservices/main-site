@@ -421,7 +421,7 @@ textarea:not([rows]) {
   }
 }
 .btn-inverted-outline {
-  @apply rounded-md border-1 border-white bg-transparent px-8 py-5 text-lg leading-none text-nowrap text-white transition-all;
+  @apply rounded-md border border-white bg-transparent px-8 py-5 text-lg leading-none text-nowrap text-white transition-all;
   &:hover {
     @apply cursor-pointer bg-white/20;
   }
