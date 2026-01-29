@@ -2,6 +2,13 @@
   import { DotLottieSvelte } from '@lottiefiles/dotlottie-svelte';
   import { goto } from '$app/navigation';
   import { localizeHref } from '$lib/paraglide/runtime';
+  import GetAnAppointmentModal from '$lib/components/modals/general/get-an-appointment-modal.svelte';
+
+  let getAnAppointmentModal: GetAnAppointmentModal;
+
+  function openGetAnAppointmentModal() {
+    getAnAppointmentModal?.openModal();
+  }
 </script>
 
 <div class="main-section">
@@ -31,9 +38,7 @@
       </button>
       <button
         class="text-link-button animate-fade-in-from-side"
-        onclick={() => {
-          goto(localizeHref('/appointment'));
-        }}
+        onclick={openGetAnAppointmentModal}
       >
         Erstgespräch vereinbaren
       </button>
@@ -42,7 +47,6 @@
 
   <div class="feature-block">
     <h2>KI - die Superpower für dein Business</h2>
-
     <div class="lottie-container py-4">
       <DotLottieSvelte src="/lotties/abstract-robot-with-cloud.lottie" loop autoplay />
     </div>
@@ -67,9 +71,7 @@
       </button>
       <button
         class="text-link-button animate-fade-in-from-side"
-        onclick={() => {
-          goto(localizeHref('/appointment'));
-        }}
+        onclick={openGetAnAppointmentModal}
       >
         Erstgespräch vereinbaren
       </button>
@@ -87,6 +89,7 @@
     Unser Service-Angebot im Detail
   </button>
 </div>
+<GetAnAppointmentModal bind:this={getAnAppointmentModal} />
 
 <style lang="postcss">
   @reference '../../../app.css';
