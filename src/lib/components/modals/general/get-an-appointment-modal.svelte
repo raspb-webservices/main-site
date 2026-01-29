@@ -27,12 +27,12 @@
 <style lang="postcss">
   @reference '../../../../app.css';
   .modal-box {
-    @apply w-full p-0 rounded-none md:p-6 md:rounded-4xl;
+    @apply w-full p-0 rounded-none md:p-6 md:rounded-4xl max-w-120;
   }
   .iframe-container {
     @apply flex w-full items-center md:items-start justify-center;
     iframe {
-      @apply w-full h-full min-h-screen md:w-125 md:min-h-150 md:rounded-2xl;
+      @apply w-full h-full min-h-screen md:w-125 md:min-h-157 md:rounded-2xl;
     }
   }
 </style>
