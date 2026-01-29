@@ -35,7 +35,7 @@ const config: CookieConsent.CookieConsentConfig = {
           acceptAllBtn: 'Alle akzeptieren',
           acceptNecessaryBtn: 'Alle ablehnen',
           showPreferencesBtn: 'Individuelle Einstellungen',
-          footer: `<a href="/imprint" target="_blank">Impressum</a> <a href="/privacy-notice" target="_blank">Datenschutzbestimmungen</a>`
+          footer: `<a href="/imprint" target="_blank">Impressum</a> <a href="/privacy" target="_blank">Datenschutzbestimmungen</a>`
         },
         preferencesModal: {
           title: 'Cookie Einstellungen',

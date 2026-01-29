@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { goto } from '$app/navigation';
   import Stage from '$lib/components/ui/stage.svelte';
   import Section from '$lib/components/ui/section.svelte';
@@ -18,6 +19,14 @@
   let costAsFactorModal: CostAsFactorModal;
   let qualityAsFactorModal: QualityAsFactorModal;
   let getAnAppointmentModal: GetAnAppointmentModal;
+
+  onMount(() => {
+    // Check URL parameter on client side to handle appointment modal opening
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('openAppointment') === 'true') {
+      openGetAnAppointmentModal();
+    }
+  });
 
   function openPhilosophyModal() {
     philosophyModal?.openModal();

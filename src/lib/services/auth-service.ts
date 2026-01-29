@@ -17,7 +17,7 @@ async function getRoles(userid: string): Promise<string[]> {
     const userRoles = [];
     if (userRoleObjects && userRoleObjects.length) {
       userRoleObjects.forEach((element: unknown) => {
-        userRoles.push(element.name);
+        userRoles.push(element['name']);
       });
     }
     return userRoles;
