@@ -30,9 +30,9 @@
     @apply w-full p-0 rounded-none md:p-6 md:rounded-4xl;
   }
   .iframe-container {
-    @apply flex w-full items-center justify-center p-0 md:p-8;
+    @apply flex w-full items-center md:items-start justify-center;
     iframe {
-      @apply w-full h-full min-h-screen md:w-125 md:min-h-175 md:rounded-2xl;
+      @apply w-full h-full min-h-screen md:w-125 md:min-h-150 md:rounded-2xl;
     }
   }
 </style>
