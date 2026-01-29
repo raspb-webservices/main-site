@@ -66,7 +66,7 @@ export const POST: RequestHandler = async ({ params, request }) => {
     console.error('Fehler beim Verknüpfen von Customer und Projekt:', error);
 
     let errorMessage = 'Unbekannter Fehler beim Verknüpfen von Customer und Projekt';
-    let errorDetails: string[] = [];
+    const errorDetails: string[] = [];
 
     if (error instanceof Error) {
       errorMessage = error.message;

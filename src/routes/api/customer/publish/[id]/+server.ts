@@ -1,11 +1,11 @@
 import { client } from '$lib/server/graphql-client.server';
 import { gql } from 'graphql-request';
 import type { RequestHandler } from '@sveltejs/kit';
-import type { Customer } from '$interfaces/customer.interface';
+import type { User } from '$interfaces/user.interface';
 
 export const POST: RequestHandler = async ({ request }) => {
   try {
-    const customerData: Customer = await request.json();
+    const customerData: User = await request.json();
     const customerId = customerData.id;
     const mutation = gql`
       mutation PublishCustomer($id: ID!) {
@@ -32,7 +32,7 @@ export const POST: RequestHandler = async ({ request }) => {
     `;
 
     const variables = { id: customerId };
-    const response = (await client.request(mutation, variables)) as { publishCustomer: Customer };
+    const response = (await client.request(mutation, variables)) as { publishCustomer: User };
 
     return new Response(
       JSON.stringify({

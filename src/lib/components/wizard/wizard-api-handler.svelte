@@ -1,11 +1,11 @@
 <script lang="ts">
   import type { WizardConfig, Project } from '$interfaces/project.interface';
-  import type { Customer } from '$interfaces/customer.interface';
+  import type { User } from '$interfaces/user.interface';
   import { uploadMultipleAssetsWithDelay, publishMultipleAssets } from '$helper/uploadAsset';
 
   interface Props {
     config: WizardConfig;
-    customerData: Partial<Customer>;
+    customerData: Partial<User>;
     uploadedFiles?: File[];
     customFeatures?: string;
     uploadedAssetIds?: string[];

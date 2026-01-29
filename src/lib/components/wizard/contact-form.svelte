@@ -1,10 +1,10 @@
 <script lang="ts">
-  import type { Customer } from '$interfaces/customer.interface';
+  import type { User } from '$interfaces/user.interface';
   import { m } from '$lib/paraglide/messages';
 
   interface Props {
-    customerData: Partial<Customer>;
-    onUpdate: (data: Partial<Customer>) => void;
+    customerData: Partial<User>;
+    onUpdate: (data: Partial<User>) => void;
     isValid?: boolean;
   }
 
@@ -53,7 +53,7 @@
     return `Passwort benötigt: ${requirements.join(', ')}`;
   }
 
-  function updateField(field: keyof Customer, value: string) {
+  function updateField(field: keyof User, value: string) {
     const updatedData = { ...customerData, [field]: value };
     customerData = updatedData;
     onUpdate(updatedData);

@@ -1,4 +1,5 @@
 export interface User {
+  id?: string;
   sub?: string;
   name?: string;
   nickname?: string;
@@ -15,8 +16,10 @@ export interface User {
   projectIds?: string[];
   createdAt?: string;
   password?: string;
+  passwordConfirm?: string;
   picture?: string;
   role?: string;
+  auth0Id?: string;
 }
 
 export interface Member {

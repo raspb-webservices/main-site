@@ -1,11 +1,11 @@
 import { client } from '$lib/server/graphql-client.server';
 import { gql } from 'graphql-request';
-import type { Customer } from '$interfaces/customer.interface';
+import type { User } from '$interfaces/user.interface';
 import type { RequestHandler } from '@sveltejs/kit';
 
-export const PATCH: RequestHandler = async ({ request, url }) => {
+export const PATCH: RequestHandler = async ({ request }) => {
   try {
-    const customerData: Customer = await request.json();
+    const customerData: User = await request.json();
 
     if (!customerData.id) {
       return new Response(
@@ -59,7 +59,7 @@ export const PATCH: RequestHandler = async ({ request, url }) => {
     `;
 
     // GraphQL Request an Hygraph senden
-    const response = (await client.request(mutation, variables)) as { updateCustomer: Customer };
+    const response = (await client.request(mutation, variables)) as { updateCustomer: User };
 
     return new Response(
       JSON.stringify({

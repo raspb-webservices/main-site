@@ -1,11 +1,11 @@
 import { client } from '$lib/server/graphql-client.server';
 import { gql } from 'graphql-request';
-import type { Customer } from '$interfaces/customer.interface';
+import type { User } from '$interfaces/user.interface';
 import type { RequestHandler } from '@sveltejs/kit';
 
-export const PATCH: RequestHandler = async ({ request, url }) => {
+export const PATCH: RequestHandler = async ({ request }) => {
   try {
-    const customerData: Customer = await request.json();
+    const customerData: User = await request.json();
 
     if (!customerData.email) {
       return new Response(
@@ -24,7 +24,7 @@ export const PATCH: RequestHandler = async ({ request, url }) => {
 
     // Dynamisch nur die vorhandenen Felder für die Mutation vorbereiten
     const updateFields: string[] = [];
-    const variables: Record<string, any> = { email: customerData.email };
+    const variables: Record<string, unknown> = { email: customerData.email };
 
     if (customerData.address !== undefined) variables.address = customerData.address;
     if (customerData.auth0Id !== undefined) variables.auth0Id = customerData.auth0Id;
@@ -91,7 +91,7 @@ export const PATCH: RequestHandler = async ({ request, url }) => {
     `;
 
     // GraphQL Request an Hygraph senden
-    const response = (await client.request(mutation, variables)) as { updateCustomer: Customer };
+    const response = (await client.request(mutation, variables)) as { updateCustomer: User };
 
     return new Response(
       JSON.stringify({

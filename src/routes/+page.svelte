@@ -11,11 +11,13 @@
   import { m } from '$lib/paraglide/messages';
   import { getLocale, localizeHref } from '$lib/paraglide/runtime';
   import MainOffering from '$lib/components/ui/main-offering.svelte';
+  import GetAnAppointmentModal from '$lib/components/modals/general/get-an-appointment-modal.svelte';
 
   let philosophyModal: PhilosophyModal;
   let timeAsFactorModal: TimeAsFactorModal;
   let costAsFactorModal: CostAsFactorModal;
   let qualityAsFactorModal: QualityAsFactorModal;
+  let getAnAppointmentModal: GetAnAppointmentModal;
 
   function openPhilosophyModal() {
     philosophyModal?.openModal();
@@ -31,6 +33,10 @@
 
   function openQualityAsFactorModal() {
     qualityAsFactorModal?.openModal();
+  }
+
+  function openGetAnAppointmentModal() {
+    getAnAppointmentModal?.openModal();
   }
 </script>
 
@@ -55,9 +61,7 @@
       >
       <button
         class="btn-inverted-outline animate-fade-in-from-side"
-        onclick={() => {
-          goto(localizeHref('/appointment'));
-        }}>{m['homepage_hero_buttonText2']()}</button
+        onclick={openGetAnAppointmentModal}>{m['homepage_hero_buttonText2']()}</button
       >
     </div>
   </div>
@@ -474,6 +478,7 @@
 <TimeAsFactorModal bind:this={timeAsFactorModal} />
 <CostAsFactorModal bind:this={costAsFactorModal} />
 <QualityAsFactorModal bind:this={qualityAsFactorModal} />
+<GetAnAppointmentModal bind:this={getAnAppointmentModal} />
 
 <style lang="postcss">
   @reference '../app.css';
