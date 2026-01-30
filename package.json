@@ -58,6 +58,7 @@
     "@lottiefiles/dotlottie-svelte": "^0.8.13",
     "@photo-sphere-viewer/core": "^5.14.1",
     "@photo-sphere-viewer/virtual-tour-plugin": "^5.14.1",
+    "@plausible-analytics/tracker": "^0.4.4",
     "dotenv": "^17.2.3",
     "mapbox-gl": "^3.18.0",
     "markdown-it": "^14.1.0",

@@ -10,7 +10,7 @@
 
     <div class="spacer"></div>
 
-    <form name="contact" method="POST" action={target} netlify>
+    <form name="contact" method="POST" action={target} data-netlify="true">
       <input type="hidden" name="form-name" value="contact" />
       <div class="form-field-container">
         <div class="form-field-section">

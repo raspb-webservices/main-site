@@ -2446,6 +2446,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@plausible-analytics/tracker@npm:^0.4.4":
+  version: 0.4.4
+  resolution: "@plausible-analytics/tracker@npm:0.4.4"
+  checksum: 10c0/82f584712fa8d4490c12d59da9bf99b05dc2b52c698fa126dbff45d457b782dd0f6093227f16557f5608277f36e65af5843c70c86d5430cbb6af21b136a52ec9
+  languageName: node
+  linkType: hard
+
 "@polka/url@npm:^1.0.0-next.24":
   version: 1.0.0-next.29
   resolution: "@polka/url@npm:1.0.0-next.29"
@@ -6219,6 +6226,7 @@ __metadata:
     "@lottiefiles/dotlottie-svelte": "npm:^0.8.13"
     "@photo-sphere-viewer/core": "npm:^5.14.1"
     "@photo-sphere-viewer/virtual-tour-plugin": "npm:^5.14.1"
+    "@plausible-analytics/tracker": "npm:^0.4.4"
     "@sveltejs/adapter-netlify": "npm:^5.2.4"
     "@sveltejs/kit": "npm:^2.49.4"
     "@sveltejs/vite-plugin-svelte": "npm:^6.2.4"

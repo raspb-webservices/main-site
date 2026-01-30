@@ -11,6 +11,7 @@ export interface User {
   postCode?: string;
   city?: string;
   address?: string;
+  companyAddress?: string;
   country?: string;
   phone?: string;
   projectIds?: string[];

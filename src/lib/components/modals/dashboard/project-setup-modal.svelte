@@ -130,31 +130,52 @@
 
           <div class="space-y-4">
             <div class="form-control">
-              <label class="label">
+              <label class="label" for="github-username">
                 <span class="label-text">Username</span>
               </label>
-              <input type="text" bind:value={setupForm.github.username} placeholder="GitHub Username" class="input input-bordered input-sm" />
+              <input
+                id="github-username"
+                type="text"
+                bind:value={setupForm.github.username}
+                placeholder="GitHub Username"
+                class="input input-bordered input-sm"
+              />
             </div>
 
             <div class="form-control">
-              <label class="label">
+              <label class="label" for="github-password">
                 <span class="label-text">Passwort</span>
               </label>
-              <input type="password" bind:value={setupForm.github.password} placeholder="GitHub Passwort" class="input input-bordered input-sm" />
+              <input
+                id="github-password"
+                type="password"
+                bind:value={setupForm.github.password}
+                placeholder="GitHub Passwort"
+                class="input input-bordered input-sm"
+              />
             </div>
 
             <div class="form-control">
-              <label class="label">
+              <label class="label" for="github-authTokens">
                 <span class="label-text">Auth Tokens (JSON)</span>
               </label>
-              <textarea bind:value={setupForm.github.authTokens} placeholder="Token" class="textarea textarea-bordered textarea-sm h-20 font-mono text-xs"
+              <textarea
+                id="github-authTokens"
+                bind:value={setupForm.github.authTokens}
+                placeholder="Token"
+                class="textarea textarea-bordered textarea-sm h-20 font-mono text-xs"
               ></textarea>
             </div>
 
             <div class="form-control">
-              <label class="label cursor-pointer">
+              <label class="label cursor-pointer" for="github-isConfigured">
                 <span class="label-text">Konfiguriert</span>
-                <input type="checkbox" bind:checked={setupForm.github.isConfigured} class="checkbox checkbox-primary" />
+                <input
+                  id="github-isConfigured"
+                  type="checkbox"
+                  bind:checked={setupForm.github.isConfigured}
+                  class="checkbox checkbox-primary"
+                />
               </label>
             </div>
           </div>
@@ -175,31 +196,52 @@
 
           <div class="space-y-4">
             <div class="form-control">
-              <label class="label">
+              <label class="label" for="netlify-username">
                 <span class="label-text">Username</span>
               </label>
-              <input type="text" bind:value={setupForm.netlify.username} placeholder="Netlify Username" class="input input-bordered input-sm" />
+              <input
+                id="netlify-username"
+                type="text"
+                bind:value={setupForm.netlify.username}
+                placeholder="Netlify Username"
+                class="input input-bordered input-sm"
+              />
             </div>
 
             <div class="form-control">
-              <label class="label">
+              <label class="label" for="netlify-password">
                 <span class="label-text">Passwort</span>
               </label>
-              <input type="password" bind:value={setupForm.netlify.password} placeholder="Netlify Passwort" class="input input-bordered input-sm" />
+              <input
+                id="netlify-password"
+                type="password"
+                bind:value={setupForm.netlify.password}
+                placeholder="Netlify Passwort"
+                class="input input-bordered input-sm"
+              />
             </div>
 
             <div class="form-control">
-              <label class="label">
+              <label class="label" for="netlify-authTokens">
                 <span class="label-text">Auth Tokens (JSON)</span>
               </label>
-              <textarea bind:value={setupForm.netlify.authTokens} placeholder="Token" class="textarea textarea-bordered textarea-sm h-20 font-mono text-xs"
+              <textarea
+                id="netlify-authTokens"
+                bind:value={setupForm.netlify.authTokens}
+                placeholder="Token"
+                class="textarea textarea-bordered textarea-sm h-20 font-mono text-xs"
               ></textarea>
             </div>
 
             <div class="form-control">
-              <label class="label cursor-pointer">
+              <label class="label cursor-pointer" for="netlify-isConfigured">
                 <span class="label-text">Konfiguriert</span>
-                <input type="checkbox" bind:checked={setupForm.netlify.isConfigured} class="checkbox checkbox-primary" />
+                <input
+                  id="netlify-isConfigured"
+                  type="checkbox"
+                  bind:checked={setupForm.netlify.isConfigured}
+                  class="checkbox checkbox-primary"
+                />
               </label>
             </div>
           </div>
@@ -220,31 +262,52 @@
 
           <div class="space-y-4">
             <div class="form-control">
-              <label class="label">
+              <label class="label" for="hygraph-username">
                 <span class="label-text">Username</span>
               </label>
-              <input type="text" bind:value={setupForm.hygraph.username} placeholder="Hygraph Username" class="input input-bordered input-sm" />
+              <input
+                id="hygraph-username"
+                type="text"
+                bind:value={setupForm.hygraph.username}
+                placeholder="Hygraph Username"
+                class="input input-bordered input-sm"
+              />
             </div>
 
             <div class="form-control">
-              <label class="label">
+              <label class="label" for="hygraph-password">
                 <span class="label-text">Passwort</span>
               </label>
-              <input type="password" bind:value={setupForm.hygraph.password} placeholder="Hygraph Passwort" class="input input-bordered input-sm" />
+              <input
+                id="hygraph-password"
+                type="password"
+                bind:value={setupForm.hygraph.password}
+                placeholder="Hygraph Passwort"
+                class="input input-bordered input-sm"
+              />
             </div>
 
             <div class="form-control">
-              <label class="label">
+              <label class="label" for="hygraph-authTokens">
                 <span class="label-text">Auth Tokens (JSON)</span>
               </label>
-              <textarea bind:value={setupForm.hygraph.authTokens} placeholder="Token" class="textarea textarea-bordered textarea-sm h-20 font-mono text-xs"
+              <textarea
+                id="hygraph-authTokens"
+                bind:value={setupForm.hygraph.authTokens}
+                placeholder="Token"
+                class="textarea textarea-bordered textarea-sm h-20 font-mono text-xs"
               ></textarea>
             </div>
 
             <div class="form-control">
-              <label class="label cursor-pointer">
+              <label class="label cursor-pointer" for="hygraph-isConfigured">
                 <span class="label-text">Konfiguriert</span>
-                <input type="checkbox" bind:checked={setupForm.hygraph.isConfigured} class="checkbox checkbox-primary" />
+                <input
+                  id="hygraph-isConfigured"
+                  type="checkbox"
+                  bind:checked={setupForm.hygraph.isConfigured}
+                  class="checkbox checkbox-primary"
+                />
               </label>
             </div>
           </div>
@@ -263,31 +326,52 @@
 
           <div class="space-y-4">
             <div class="form-control">
-              <label class="label">
+              <label class="label" for="auth0-username">
                 <span class="label-text">Username</span>
               </label>
-              <input type="text" bind:value={setupForm.auth0.username} placeholder="Auth0 Username" class="input input-bordered input-sm" />
+              <input
+                id="auth0-username"
+                type="text"
+                bind:value={setupForm.auth0.username}
+                placeholder="Auth0 Username"
+                class="input input-bordered input-sm"
+              />
             </div>
 
             <div class="form-control">
-              <label class="label">
+              <label class="label" for="auth0-password">
                 <span class="label-text">Passwort</span>
               </label>
-              <input type="password" bind:value={setupForm.auth0.password} placeholder="Auth0 Passwort" class="input input-bordered input-sm" />
+              <input
+                id="auth0-password"
+                type="password"
+                bind:value={setupForm.auth0.password}
+                placeholder="Auth0 Passwort"
+                class="input input-bordered input-sm"
+              />
             </div>
 
             <div class="form-control">
-              <label class="label">
+              <label class="label" for="auth0-authTokens">
                 <span class="label-text">Auth Tokens (JSON)</span>
               </label>
-              <textarea bind:value={setupForm.auth0.authTokens} placeholder="Token" class="textarea textarea-bordered textarea-sm h-20 font-mono text-xs"
+              <textarea
+                id="auth0-authTokens"
+                bind:value={setupForm.auth0.authTokens}
+                placeholder="Token"
+                class="textarea textarea-bordered textarea-sm h-20 font-mono text-xs"
               ></textarea>
             </div>
 
             <div class="form-control">
-              <label class="label cursor-pointer">
+              <label class="label cursor-pointer" for="auth0-isConfigured">
                 <span class="label-text">Konfiguriert</span>
-                <input type="checkbox" bind:checked={setupForm.auth0.isConfigured} class="checkbox checkbox-primary" />
+                <input
+                  id="auth0-isConfigured"
+                  type="checkbox"
+                  bind:checked={setupForm.auth0.isConfigured}
+                  class="checkbox checkbox-primary"
+                />
               </label>
             </div>
           </div>
