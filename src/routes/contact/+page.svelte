@@ -73,7 +73,7 @@
           &.checkbox-dialog {
             @apply flex h-6 items-center;
             label {
-              @apply !mb-0 !ml-3 cursor-pointer;
+              @apply mb-0! ml-3! cursor-pointer;
               &:hover {
                 @apply text-mediumGrey;
               }

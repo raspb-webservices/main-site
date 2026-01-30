@@ -215,7 +215,7 @@
       .top-row {
         @apply flex w-full items-center justify-between py-10;
         .footer-logo {
-          @apply aspect-video h-[70px] bg-contain bg-center bg-no-repeat;
+          @apply aspect-video h-17.5 bg-contain bg-center bg-no-repeat;
           background-image: url('/images/logo.webp');
         }
         .line {

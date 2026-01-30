@@ -236,7 +236,7 @@
       @apply m-auto flex h-full w-full max-w-7xl items-center justify-between px-4;
 
       .logo {
-        @apply aspect-video h-[70px] cursor-pointer bg-contain bg-center bg-no-repeat;
+        @apply aspect-video h-17.5 cursor-pointer bg-contain bg-center bg-no-repeat;
         background-image: url('/images/logo.webp');
       }
       nav.navigation {
@@ -246,7 +246,7 @@
 
           &::before,
           &::after {
-            @apply from-pink to-purple absolute -bottom-1 left-0 block h-0.5 w-full origin-right scale-x-0 bg-gradient-to-r transition-transform duration-500;
+            @apply from-pink to-purple absolute -bottom-1 left-0 block h-0.5 w-full origin-right scale-x-0 bg-linear-to-r transition-transform duration-500;
             content: '';
           }
           &::before {
@@ -265,7 +265,7 @@
           &.active {
             @apply text-base-content;
             &::after {
-              @apply via-base-content/80 scale-x-100 bg-gradient-to-r from-gray-500 to-gray-500;
+              @apply via-base-content/80 scale-x-100 bg-linear-to-r from-gray-500 to-gray-500;
             }
             &:hover {
               @apply cursor-default;
@@ -290,7 +290,7 @@
             @apply text-base-content relative flex w-full cursor-pointer items-center justify-center p-3 pb-4 text-2xl transition-all duration-300;
 
             &::after {
-              @apply from-pink to-purple absolute bottom-0 left-0 block h-0.5 w-full origin-left bg-gradient-to-r;
+              @apply from-pink to-purple absolute bottom-0 left-0 block h-0.5 w-full origin-left bg-linear-to-r;
               content: '';
             }
 

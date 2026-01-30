@@ -5,9 +5,9 @@
 
   "ctaBox_titleFirst": "Lass uns",
   "ctaBox_titleHighlight": "gemeinsam starten",
-  "ctaBox_description": "Bereit für dein nächstes digitales Projekt? Unser intelligenter Konfigurator hilft dir dabei, dein Projekt zu spezifizieren und du erhältst sofort eine realistische Preiseinschätzung.",
+  "ctaBox_description": "Bereit für dein nächstes digitales Projekt? Unser intelligenter Konfigurator hilft dir dabei, dein Projekt zu spezifizieren, und du erhältst sofort eine realistische Preiseinschätzung.",
   "ctaBox_benefits_zeit_title": "Sofortiger Kostenrahmen",
-  "ctaBox_benefits_zeit_description": "Erhalte binnen Minuten einen ungefähren Preis für dein Vorhaben",
+  "ctaBox_benefits_zeit_description": "Erhalte innerhalb weniger Minuten einen ungefähren Preis",
   "ctaBox_benefits_massgeschneidert_title": "Maßgeschneidert",
   "ctaBox_benefits_massgeschneidert_description": "Jede Lösung wird individuell auf deine Bedürfnisse zugeschnitten",
   "ctaBox_benefits_contact_title": "Persönlicher Kontakt",
@@ -18,7 +18,7 @@
 
   "ctaBox_variant2_titleFirst": "Bereit für dein",
   "ctaBox_variant2_titleHighlight": "digitales Projekt",
-  "ctaBox_variant2_description": "Du hast die perfekte Lösung für dein Vorhaben gefunden? Unser intelligenter Konfigurator hilft dir dabei, dein Projekt zu spezifizieren und du erhältst sofort einen transparenten Festpreis.",
+  "ctaBox_variant2_description": "Du hast die perfekte Lösung für dein Vorhaben gefunden? Unser intelligenter Konfigurator hilft dir dabei, dein Projekt zu spezifizieren, und du erhältst sofort einen transparenten Festpreis.",
 
   "menu_services": "Services",
   "menu_insights": "Einblicke",
@@ -29,7 +29,7 @@
   "menu_logout": "Logout",
   "menu_configureProject": "Projekt konfigurieren",
   "menu_start": "Starten",
-  "menu_switchLanguageToEnglish": "Switch to English",
+  "menu_switchLanguageToEnglish": "Auf Englisch wechseln",
   "menu_switchLanguageToGerman": "Auf Deutsch wechseln",
   "footer_title": "raspb webservices",
   "footer_nav_services_title": "Services",

@@ -1,11 +1,11 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "faq_meta_title": "raspb Webservices - FAQ",
-  "faq_meta_description": "Häufig gestellte Fragen zu unseren Webentwicklungs-, CMS-, KI-Services und dem Projektprozess. Erfahren du mehr über unsere Vorgehensweise, Technologien und Preise.",
+  "faq_meta_description": "Häufig gestellte Fragen zu unseren Webentwicklungs-, CMS- und KI-Services sowie zum Projektprozess. Erfahre mehr über unsere Vorgehensweise, Technologien und Preise.",
   "faq_title": "Häufig gestellte Fragen",
   "faq_teaser": "Hier findest du Antworten auf die häufigsten Fragen zu unseren Services, dem Projektablauf und technischen Details. Falls du weitere Fragen hast, kontaktiere uns gerne direkt.",
   "faq_questions_q1_title": "Wie schnell könnt ihr ein Projekt umsetzen?",
-  "faq_questions_q1_content": "Dank unserer einzigartigen raspb-Methode liefern wir bereits nach wenigen Tagen erste Ergebnisse. Unser Geheimnis liegt in der perfekten Kombination aus bewährten Bausteinen, KI-gestützten Entwicklungsprozessen und der Expertise unseres Teams. Agile Entwicklungsmethoden sorgen dafür, dass du bereits während der Entwicklung Feedback geben können.",
+  "faq_questions_q1_content": "Dank unserer einzigartigen raspb-Methode liefern wir bereits nach wenigen Tagen erste Ergebnisse. Unser Geheimnis liegt in der perfekten Kombination aus bewährten Bausteinen, KI-gestützten Entwicklungsprozessen und der Expertise unseres Teams. Agile Entwicklungsmethoden sorgen dafür, dass du bereits während der Entwicklung Feedback geben kannst.",
   "faq_questions_q2_title": "Welche Technologien verwendet ihr?",
   "faq_questions_q2_content": "Wir setzen auf moderne Webtechnologien wie SvelteKit, TypeScript, TailwindCSS und Node.js. Unser JAMstack-Setup basiert auf Vorab-Generierung von Inhalten, was zu blitzschnellen Ladezeiten führt. Für CMS-Lösungen integrieren wir Headless-Systeme über GraphQL APIs, und für Webanwendungen nutzen wir Progressive Web App Technologie.",
   "faq_questions_q3_title": "Wie funktioniert euer Preismodell?",
