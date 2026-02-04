@@ -1,10 +1,10 @@
-import { MAILTRAP_TOKEN } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import { MailtrapClient } from 'mailtrap';
 import type { Actions } from '@sveltejs/kit';
 
 export const actions = {
 	sendTestMail: async () => {
-		const client = new MailtrapClient({ token: MAILTRAP_TOKEN });
+		const client = new MailtrapClient({ token: env.MAILTRAP_TOKEN });
 
 		await client.send({
 			from: { email: 'noreply@raspb.de' },
