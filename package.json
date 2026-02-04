@@ -61,6 +61,7 @@
     "@photo-sphere-viewer/virtual-tour-plugin": "^5.14.1",
     "@plausible-analytics/tracker": "^0.4.4",
     "dotenv": "^17.2.3",
+    "mailtrap": "^4.4.0",
     "mapbox-gl": "^3.18.1",
     "markdown-it": "^14.1.0",
     "swiper": "^12.1.0",

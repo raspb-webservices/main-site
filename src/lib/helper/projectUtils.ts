@@ -7,10 +7,7 @@ import {
   projectSubTypesApp,
   projectSubTypesAi,
   projectSubTypesFreestyle,
-  availableFeatures,
-  type ProjectCategory,
-  type ProjectType,
-  type Feature
+  type ProjectType
 } from '$lib/configs/wizard-config';
 
 const StringIsNumber = (value) => isNaN(Number(value)) === false;

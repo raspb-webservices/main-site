@@ -35,7 +35,7 @@
         <p class="no-padding">{m[subtype.description]?.() ?? subtype.description}</p>
         <div class="tinySpacer"></div>
         <div class="card-actions justify-end">
-          <div class="badge badge-success">bereits ab {subtype.lowestPrice}€</div>
+          <div class="badge badge-success">bereits ab {subtype.basePrice}€</div>
         </div>
       </div>
     </div>

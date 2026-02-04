@@ -22,7 +22,12 @@
         </div>
         <p class="no-padding">{m[feature.description]?.() ?? feature.description}</p>
 
-        <div class="card-actions justify-end">
+        <div class="card-actions items-center justify-between">
+          {#if feature.basePrice != 0}
+            <div class="badge">~ {feature.basePrice} €</div>
+          {:else}
+            {#if feature.isSideProject}<div class="badge">~ {feature.basePrice} €</div>{/if}
+          {/if}
           <div class="badge {featureCategoryColors[feature.category] || 'badge-info'}">
             {m['wizard.features.categories.' + feature.category]?.() ?? feature.category}
           </div>

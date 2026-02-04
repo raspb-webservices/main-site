@@ -3576,7 +3576,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.13.4":
+"axios@npm:>=0.27, axios@npm:^1.13.4":
   version: 1.13.4
   resolution: "axios@npm:1.13.4"
   dependencies:
@@ -6097,6 +6097,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mailtrap@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "mailtrap@npm:4.4.0"
+  dependencies:
+    axios: "npm:>=0.27"
+  peerDependencies:
+    "@types/nodemailer": ^6.4.9
+    nodemailer: ^7.0.7
+  peerDependenciesMeta:
+    "@types/nodemailer":
+      optional: true
+    nodemailer:
+      optional: true
+  checksum: 10c0/1fae513cc2f614a94bcc8258bef76553248b7e45233d84ab5731cfc489378b60e0031c71a3c4baf177ca3008fe0f1048cce58ff1cba0540e4c87ce7da49e1258
+  languageName: node
+  linkType: hard
+
 "main-site@workspace:.":
   version: 0.0.0-use.local
   resolution: "main-site@workspace:."
@@ -6135,6 +6152,7 @@ __metadata:
     globals: "npm:^17.3.0"
     graphql: "npm:^16.12.0"
     graphql-request: "npm:^7.4.0"
+    mailtrap: "npm:^4.4.0"
     mapbox-gl: "npm:^3.18.1"
     markdown-it: "npm:^14.1.0"
     postcss: "npm:^8.5.6"

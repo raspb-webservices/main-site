@@ -82,39 +82,9 @@
     let highesPossible;
     let lowestPossible;
 
+  
+
     config.estimatedPrice = 1000;
-
-    // const projectType = projectTypes.find((p) => p.id === config.projectType);
-    // if (projectType) {
-    //   basePrice = (projectType.lowestPrice + projectType.highestPrice) / 2;
-    // }
-
-    // const subTypeData = subTypes.find((s) => s.id === config.subType && s.parentId === config.projectType);
-    // if (subTypeData) {
-    //   basePrice = subTypeData.lowestPrice;
-    //   lowestPossible = subTypeData.lowestPrice;
-    //   highesPossible = subTypeData.highestPrice;
-    // }
-
-    // config.features.forEach((featureName) => {
-    //   const feature = availableFeatures.find((f) => f.name === featureName);
-    //   if (feature && feature.category) {
-    //     totalFeatureComplexity += feature.complexityFactor || 0;
-    //   }
-    // });
-
-    // if (totalFeatureComplexity > 15) {
-    //   basePrice = highesPossible;
-    // } else if (totalFeatureComplexity <= 2) {
-    //   basePrice = lowestPossible;
-    // } else {
-    //   const range = highesPossible - lowestPossible;
-    //   let x = (1 / 15) * totalFeatureComplexity;
-    //   basePrice = lowestPossible + range * x;
-    // }
-    // config.estimatedPrice = basePrice;
-    // console.log('Estimated Price:', config.estimatedPrice);
-    // console.log('Total Feature Complexity:', totalFeatureComplexity);
   }
 
   function scrollToTop() {

@@ -1,6 +1,10 @@
 <script lang="ts">
+  import { enhance } from '$app/forms';
   import { m } from '$lib/paraglide/messages';
   import Stage from '$lib/components/ui/stage.svelte';
+  import type { ActionData } from './$types';
+
+  export let form: ActionData;
 
   let myFaqSelection = 'q1';
 </script>
@@ -63,6 +67,7 @@
     </div>
   </div>
 </div>
+
 <div class="big-spacer"></div>
 
 <style lang="postcss">

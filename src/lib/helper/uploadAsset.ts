@@ -3,7 +3,16 @@ export async function createAsset() {
   const requiredFields = ['url', 'date', 'key', 'signature', 'algorithm', 'policy', 'credential', 'securityToken'];
 
   let assetId: string;
-  let uploadData: any;
+  let uploadData: {
+    date:string,
+    key:string,
+    signature: string,
+    algorithm:string,
+    policy:string,
+    credential:string
+    securityToken: string,
+    url:string
+  };
 
   if (!response.ok) {
     console.error('Upload Asset API Error:', response.status, response.statusText);

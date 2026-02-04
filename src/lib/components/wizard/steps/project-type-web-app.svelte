@@ -35,7 +35,7 @@
         </div>
         <p class="no-padding">{m[type.description]?.() ?? type.description}</p>
         <div class="card-actions justify-end">
-          <div class="badge badge-primary">ab {type.lowestPrice.toLocaleString()} €</div>
+          <div class="badge badge-primary">ab {type.basePrice.toLocaleString()} €</div>
         </div>
       </div>
     </div>

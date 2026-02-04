@@ -33,7 +33,7 @@
         <h3 class="card-title">{m[subtype.title]?.() ?? subtype.title}</h3>
         <p class="no-padding">{m[subtype.description]?.() ?? subtype.description}</p>
         <div class="card-actions justify-end">
-          <div class="badge badge-success">berits ab {subtype.lowestPrice}€</div>
+          <div class="badge badge-success">berits ab {subtype.basePrice}€</div>
         </div>
       </div>
     </div>

@@ -151,11 +151,11 @@
       <div class="space-y-2 text-left">
         <div class="flex justify-between">
           <span>{m['wizard_steps_stepSummary_basePrice']()}</span>
-          <span>{projectTypesWebApp.find((p) => p.id === config.projectType)?.lowestPrice.toLocaleString()}€</span>
+          <span>{projectTypesWebApp.find((p) => p.id === config.projectType)?.basePrice.toLocaleString()}€</span>
         </div>
         {#if config.subType}
           <div class="flex justify-between">
-            <span>{projectTypesWebApp.find((s) => s.id === config.subType && s.parentId === config.projectType)?.lowestPrice}€</span>
+            <span>{projectTypesWebApp.find((s) => s.id === config.subType && s.parentId === config.projectType)?.basePrice}€</span>
           </div>
         {/if}
         {#if config.features.length > 0}
