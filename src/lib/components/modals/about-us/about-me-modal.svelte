@@ -21,7 +21,7 @@
         <img class="h-36 w-auto rounded-full" src="/images/markus-foto.jpg" alt="Markus Härtig" />
       </div>
       <h3 class="no-padding">Markus Härtig</h3>
-      <p class="opacity-70">Geschäftsführender Gesellschafter</p>
+      <p class="opacity-70">Gesellschafter-Geschäftsführer</p>
     </div>
 
     <div class="prose py-4">

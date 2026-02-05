@@ -26,6 +26,7 @@
     <h3>{m['imprint_contact']()}</h3>
     <div class="contact-details">
       <p class="no-padding"><strong>{m['imprint_phone']()}</strong> 06732 - 9648113</p>
+      <p class="no-padding"><strong>{m['imprint_fax']()}</strong> 06732 - 2734969</p>
       {#if getLocale() !== 'en'}
       <p><strong>{m['imprint_email']()}</strong> <a href="mailto:kontakt@raspb.de">kontakt@raspb.de</a></p>
       {:else}
