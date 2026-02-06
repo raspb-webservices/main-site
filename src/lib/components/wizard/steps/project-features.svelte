@@ -26,7 +26,7 @@
           {#if feature.basePrice != 0}
             <div class="badge">~ {feature.basePrice} €</div>
           {:else}
-            {#if feature.isSideProject}<div class="badge">~ {feature.basePrice} €</div>{/if}
+            {#if feature.isSideProject}<div class="badge">Side-Project</div>{/if}
           {/if}
           <div class="badge {featureCategoryColors[feature.category] || 'badge-info'}">
             {m['wizard.features.categories.' + feature.category]?.() ?? feature.category}
