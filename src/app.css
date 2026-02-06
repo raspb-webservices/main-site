@@ -321,6 +321,28 @@ a,
   }
 }
 
+ul.basic-list {
+  @apply mb-7 pl-5;
+  list-style-type: square;
+  li {
+    @apply p-1 text-lg font-light;
+    &::marker {
+      @apply text-primary;
+    }
+  }
+}
+
+ol.basic-list {
+  @apply mb-7 pl-5;
+  list-style-type: decimal; 
+  li {
+    @apply p-1 text-lg font-light;
+    &::marker {
+      @apply text-primary font-semibold;
+    }
+  }
+}
+
 img,
 picture {
   @apply block max-w-full;
@@ -366,6 +388,9 @@ textarea:not([rows]) {
 /* HELPER */
 .very-tiny-spacer {
   @apply m-0 h-1 w-full p-0;
+}
+.tiny-spacer {
+  @apply m-0 h-2 w-full p-0;
 }
 .medium-spacer {
   @apply m-0 h-4 w-full p-0;

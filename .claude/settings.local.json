@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm view:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(node -e:*)",
+      "Bash(git checkout:*)",
+      "Bash(node:*)"
+    ]
+  }
+}
