@@ -6,37 +6,51 @@
   import FOOTER from '$lib/components/footer.svelte';
   import LottieLoader from '$lib/components/lottie-loader.svelte';
   import CookieConsentComponent from '$lib/components/cookie-consent.svelte';
+  import "flag-icons/css/flag-icons.min.css";
 
   let { children } = $props();
 
   const webManifestLink = pwaInfo?.webManifest.linkTag ?? '';
   $effect(() => {
     if (!pwaInfo) return;
+
+    let preventReload = true;
+
     (async () => {
       const { registerSW } = await import('virtual:pwa-register');
       registerSW({
         immediate: true,
-        onRegistered(registration) {
-          console.log('PWA Service Worker registered', registration);
+        onRegisteredSW(_swUrl, registration) {
+          if (registration) {
+            setTimeout(() => { preventReload = false; }, 2000);
+            setInterval(() => { registration.update(); }, 60 * 1000);
+          }
         },
         onRegisterError(error) {
-          console.error('PWA Service Worker registration error', error);
+          console.error('SW registration error:', error);
         }
       });
     })();
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (preventReload) return;
+        window.location.reload();
+      });
+    }
   });
 </script>
 
 <svelte:head>
   {@html webManifestLink}
   <link rel="preload" href="/lotties/loading.lottie" as="fetch" crossorigin="anonymous" />
-  <link rel="preload" href="/icons/flags/germany-flag.svg" as="image" type="image/svg+xml" fetchpriority="high" />
-  <link rel="preload" href="/icons/flags/uk-flag.svg" as="image" type="image/svg+xml" fetchpriority="high" />
-  <link rel="preload" href="/images/home-gradient.svg" as="image" type="image/svg+xml" fetchpriority="high" />
-  <link rel="preload" href="/fonts/circular/CircularStd-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="preload" href="/fonts/circular/CircularStd-Book.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="preload" href="/fonts/circular/CircularStd-Light.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="preload" href="/fonts/circular/CircularStd-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="$icons/flags/germany.svg" as="image" type="image/svg+xml" fetchpriority="high" />
+  <link rel="preload" href="$icons/flags/uk.svg" as="image" type="image/svg+xml" fetchpriority="high" />
+  <link rel="preload" href="$images/home-gradient.svg" as="image" type="image/svg+xml" fetchpriority="high" />
+  <link rel="preload" href="$fonts/circular/CircularStd-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="$fonts/circular/CircularStd-Book.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="$fonts/circular/CircularStd-Light.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="$fonts/circular/CircularStd-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="anonymous" />
   <link rel="icon" type="image/png" href="/icons/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />

@@ -184,7 +184,7 @@
 html,
 body {
   @apply relative m-0 h-full w-full p-0;
-  min-height: 100vh;
+  min-height: 100dvh;
   scroll-behavior: smooth;
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -374,7 +374,7 @@ textarea:not([rows]) {
     z-index: 9999;
   }
   main {
-    @apply bg-base-50 xl:min-h-[calc(100vh-738px)];
+    @apply bg-base-50 xl:min-h-[calc(100dvh-738px)];
 
     .inner-box {
       @apply mx-auto h-full w-full max-w-7xl px-10;

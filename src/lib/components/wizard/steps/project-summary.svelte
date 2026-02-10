@@ -82,7 +82,8 @@
     </svg>
     {m['wizard_navigation_projectRequest']()}
   </button>
-  <button
+  <div class="tooltip" data-tip="{m['wizard_navigation_register_tooltip']()}">
+      <button
     type="button"
     class="btn btn-simple btn-lg"
     onclick={() => {
@@ -91,10 +92,8 @@
   >
     {m['wizard_navigation_register']()}
   </button>
+  </div>
 
-  <button type="button" class="btn btn-simple btn-lg" onclick={openResetModal}>
-    {m['wizard_navigation_reset']()}
-  </button>
 </div>
 
 <style lang="postcss">

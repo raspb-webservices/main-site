@@ -4,9 +4,9 @@
   font-weight: 300;
   font-display: swap;
   src:
-    url('/fonts/circular/CircularStd-Light.woff2') format('woff2'),
-    url('/fonts/circular/CircularStd-Light.woff') format('woff'),
-    url('/fonts/circular/CircularStd-Light.ttf') format('truetype');
+    url('$fonts/circular/CircularStd-Light.woff2') format('woff2'),
+    url('$fonts/circular/CircularStd-Light.woff') format('woff'),
+    url('$fonts/circular/CircularStd-Light.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Circular';
@@ -14,9 +14,9 @@
   font-weight: 400;
   font-display: swap;
   src:
-    url('/fonts/circular/CircularStd-Book.woff2') format('woff2'),
-    url('/fonts/circular/CircularStd-Book.woff') format('woff'),
-    url('/fonts/circular/CircularStd-Book.ttf') format('truetype');
+    url('$fonts/circular/CircularStd-Book.woff2') format('woff2'),
+    url('$fonts/circular/CircularStd-Book.woff') format('woff'),
+    url('$fonts/circular/CircularStd-Book.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Circular';
@@ -24,9 +24,9 @@
   font-weight: 500;
   font-display: swap;
   src:
-    url('/fonts/circular/CircularStd-Medium.woff2') format('woff2'),
-    url('/fonts/circular/CircularStd-Medium.woff') format('woff'),
-    url('/fonts/circular/CircularStd-Medium.ttf') format('truetype');
+    url('$fonts/circular/CircularStd-Medium.woff2') format('woff2'),
+    url('$fonts/circular/CircularStd-Medium.woff') format('woff'),
+    url('$fonts/circular/CircularStd-Medium.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Circular';
@@ -34,9 +34,9 @@
   font-weight: 700;
   font-display: swap;
   src:
-    url('/fonts/circular/CircularStd-Bold.woff2') format('woff2'),
-    url('/fonts/circular/CircularStd-Bold.woff') format('woff'),
-    url('/fonts/circular/CircularStd-Bold.ttf') format('truetype');
+    url('$fonts/circular/CircularStd-Bold.woff2') format('woff2'),
+    url('$fonts/circular/CircularStd-Bold.woff') format('woff'),
+    url('$fonts/circular/CircularStd-Bold.ttf') format('truetype');
 }
 
 /* vietnamese */

@@ -39,6 +39,6 @@
 <style lang="postcss">
   @reference '../../app.css';
   .psv-container {
-    @apply h-[calc(100vh-200px)] w-full overflow-hidden rounded-2xl;
+    @apply h-[calc(100dvh-200px)] w-full overflow-hidden rounded-2xl;
   }
 </style>

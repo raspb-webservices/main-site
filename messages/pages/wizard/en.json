@@ -290,6 +290,10 @@
   "wizard_navigation_next": "Next",
   "wizard_navigation_downloadPDF": "Creating PDF...",
   "wizard_navigation_submitProject": "Submit project",
+  "wizard_navigation_projectRequest": "Request project",
+  "wizard_navigation_register": "Register",
+  "wizard_navigation_reset": "start over",
+  "wizard_navigation_register_tooltip": "and go on using the extended configurator",
   "wizard_loading_title": "Submitting project...",
   "wizard_loading_description": "Please wait while we process your project.",
   "wizard_loading_steps_preparing": "Preparing data",
@@ -391,8 +395,5 @@
   "wizard_form_placeholders_webApplication": "Describe in detail the desired functions and features of your application: What main functions should it have? How should users interact with it? What data will be processed? Are there special requirements for performance or security?",
   "wizard_form_placeholders_freestyle": "Describe your individual project in detail: What problem should be solved? What specific requirements do you have? Which systems should be integrated? Which functions are particularly important?",
   "wizard_form_placeholders_default": "Describe your project in detail: What is the goal? What problems should it solve? Which target group are you addressing? Do you already have concrete ideas about design or functions?",
-  "getStarted_registrationPrompt_loginButton": "Log in now",
-  "wizard_navigation_projectRequest": "Request project without obligation",
-  "wizard_navigation_register": "Register to use the extended configurator",
-  "wizard_navigation_reset": "start over"
+  "getStarted_registrationPrompt_loginButton": "Log in now"
 }

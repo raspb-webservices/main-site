@@ -678,7 +678,7 @@
     @apply relative aspect-[5/3] w-full overflow-hidden rounded-2xl shadow-2xl;
     .services-image {
       @apply h-full w-full bg-cover bg-center bg-no-repeat;
-      background-image: url('/images/visualisation-1.jpg');
+      background-image: url('$images/visualisation-1.jpg');
     }
   }
 </style>

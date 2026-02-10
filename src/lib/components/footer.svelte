@@ -216,7 +216,7 @@
         @apply flex w-full items-center justify-between py-10;
         .footer-logo {
           @apply aspect-video h-17.5 bg-contain bg-center bg-no-repeat;
-          background-image: url('/images/logo.webp');
+          background-image: url('$images/logo.webp');
         }
         .line {
           @apply bg-base-content-100 xs:flex mx-2 hidden h-0.5 w-full grow;
@@ -229,19 +229,19 @@
               @apply mr-0;
             }
             &.x {
-              mask-image: url('/icons/x-logo.svg');
+              mask-image: url('$icons/social-media/x-logo.svg');
             }
             &.linkedin {
-              mask-image: url('/icons/linkedin-logo.svg');
+              mask-image: url('$icons/social-media/linkedin-logo.svg');
             }
             &.instagram {
-              mask-image: url('/icons/instagram-logo.svg');
+              mask-image: url('$icons/social-media/instagram-logo.svg');
             }
             &.xing {
-              mask-image: url('/icons/xing-logo.svg');
+              mask-image: url('$icons/social-media/xing-logo.svg');
             }
             &.facebook {
-              mask-image: url('/icons/facebook-logo.svg');
+              mask-image: url('$icons/social-media/facebook-logo.svg');
             }
             &:hover {
               @apply scale-105 cursor-pointer opacity-100;
@@ -292,10 +292,10 @@
   .locale-toggle-btn {
     @apply bg-base-50 flex h-8 w-8 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-cover bg-center bg-no-repeat p-0 transition-all duration-300;
     &.german {
-      background-image: url('/icons/flags/germany-flag.svg');
+      background-image: url('$icons/flags/germany.svg');
     }
     &.english {
-      background-image: url('/icons/flags/uk-flag.svg');
+      background-image: url('$icons/flags/uk.svg');
     }
     &:hover {
       @apply scale-105 transform shadow-lg;

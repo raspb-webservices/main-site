@@ -49,7 +49,7 @@
     &.full-center-teaser {
       @apply from-secondary/30 via-primary/10 to-secondary/20 bg-linear-to-br py-10;
       .inner-container {
-        @apply flex min-h-[calc(100vh-160px)] flex-col items-center justify-center text-center;
+        @apply flex min-h-[calc(100dvh-160px)] flex-col items-center justify-center text-center;
       }
     }
   }

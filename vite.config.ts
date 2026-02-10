@@ -18,7 +18,10 @@ export default defineConfig({
     }),
     sveltekit(),
     SvelteKitPWA({
+      strategies: 'injectManifest',
       registerType: 'autoUpdate',
+      srcDir: 'src',
+      filename: 'service-worker.ts',
       manifest: {
         name: 'raspb Webservices',
         short_name: 'raspb',
@@ -54,27 +57,14 @@ export default defineConfig({
         background_color: '#ffffff',
         display: 'standalone'
       },
-      workbox: {
-        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
-        runtimeCaching: [
-          {
-            urlPattern: ({ request }) => request.mode === 'navigate',
-            handler: 'NetworkFirst',
-            options: {
-              cacheName: 'html-cache'
-            }
-          },
-          {
-            urlPattern: ({ request }) => request.destination === 'style' || request.destination === 'script' || request.destination === 'worker',
-            handler: 'StaleWhileRevalidate',
-            options: {
-              cacheName: 'asset-cache'
-            }
-          }
-        ]
+      injectManifest: {
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024
       },
       kit: {
         includeVersionFile: true
+      },
+      devOptions: {
+        enabled: false
       }
     }),
     paraglideVitePlugin({

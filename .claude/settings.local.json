@@ -5,7 +5,13 @@
       "WebFetch(domain:github.com)",
       "Bash(node -e:*)",
       "Bash(git checkout:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(yarn build:*)",
+      "Bash(set:*)",
+      "Bash(cmd /c \"set MAILTRAP_TOKEN=dummy&& yarn build\")",
+      "Bash($env:MAILTRAP_TOKEN=\"dummy\")",
+      "Bash(MAILTRAP_TOKEN=dummy yarn build:*)",
+      "Bash(export MAILTRAP_TOKEN=dummy)"
     ]
   }
 }

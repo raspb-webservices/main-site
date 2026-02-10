@@ -19,7 +19,7 @@
     }
     &.svg-gradient {
       @apply bg-cover bg-bottom bg-no-repeat;
-      background-image: url('/images/home-gradient.svg');
+      background-image: url('$images/home-gradient.svg');
     }
   }
 </style>

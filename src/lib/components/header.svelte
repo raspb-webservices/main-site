@@ -237,7 +237,7 @@
 
       .logo {
         @apply aspect-video h-17.5 cursor-pointer bg-contain bg-center bg-no-repeat;
-        background-image: url('/images/logo.webp');
+        background-image: url('$images/logo.webp');
       }
       nav.navigation {
         @apply hidden w-fit items-center justify-center md:flex;

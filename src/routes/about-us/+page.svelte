@@ -86,7 +86,7 @@
     <div class="hero-content flex-col gap-12 p-10 pr-8 lg:flex-row-reverse">
       <div class="shrink-0">
         <img
-          src="/images/markus.jpg"
+          src="$images/markus.jpg"
           alt="Markus - Gründer von raspb Webservices"
           class="h-104 w-72 rounded-2xl object-cover shadow-2xl transition-transform duration-300 hover:scale-105"
         />

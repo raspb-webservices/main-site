@@ -14,11 +14,14 @@ const config = {
     alias: {
       $store: './src/store',
       $helper: './src/lib/helper',
-      $images: './src/lib/images',
+      $images: './src/lib/assets/images',
+      $icons: './src/lib/assets/icons',
+      $fonts: './src/lib/assets/fonts',
+      $lotties: './src/lib/assets/lotties',
+      $components: './src/lib/components',
       $configs: './src/lib/configs',
       $services: './src/lib/services',
-      $interfaces: './src/interfaces',
-      $styles: './src/lib/styles'
+      $interfaces: './src/interfaces'
     },
     serviceWorker: {
       register: false
