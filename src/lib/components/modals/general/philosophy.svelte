@@ -21,7 +21,7 @@
     }
   }
 
-  $: philosophyItems = [
+  const philosophyItems = [
     {
       letter: m['philosophyModal_items_rapid_letter'](),
       title: m['philosophyModal_items_rapid_title'](),

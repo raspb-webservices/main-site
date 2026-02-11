@@ -107,7 +107,7 @@
                 <select id="fieldType{i}" class="select select-bordered w-full" bind:value={config.formFields[i].type}>
                   <option value="">{m['wizard_content_formFields_fieldTypePlaceholder']()}</option>
                   {#each formFieldTypes as fieldType}
-                    <option value={fieldType.id}>{m[fieldType.title]()}</option>
+                    <option value={fieldType.id}>{(m as unknown as Record<string, () => string>)[fieldType.title]()}</option>
                   {/each}
                 </select>
               </div>

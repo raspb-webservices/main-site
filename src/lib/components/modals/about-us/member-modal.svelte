@@ -28,17 +28,17 @@
     <div class="space-y-6">
       <div>
         <h4 class="no-padding mb-2">{m['aboutUs_modals_member_about']({ name: selectedMember?.name })}</h4>
-        <p class="leading-relaxed">{m[`aboutUs_teamMembers_${selectedMember?.id || 'alex'}_description`]()}</p>
+        <p class="leading-relaxed">{(m as unknown as Record<string, () => string>)[`aboutUs_teamMembers_${selectedMember?.id || 'alex'}_description`]()}</p>
       </div>
 
       <div>
         <h4 class="no-padding mb-2">{m['aboutUs_modals_member_personality']()}</h4>
-        <p class="leading-relaxed">{m[`aboutUs_teamMembers_${selectedMember?.id || 'alex'}_personality`]()}</p>
+        <p class="leading-relaxed">{(m as unknown as Record<string, () => string>)[`aboutUs_teamMembers_${selectedMember?.id || 'alex'}_personality`]()}</p>
       </div>
 
       <div>
         <h4 class="no-padding mb-2">{m['aboutUs_modals_member_experience']()}</h4>
-        <p class="leading-relaxed">{m[`aboutUs_teamMembers_${selectedMember?.id || 'alex'}_experience`]()}</p>
+        <p class="leading-relaxed">{(m as unknown as Record<string, () => string>)[`aboutUs_teamMembers_${selectedMember?.id || 'alex'}_experience`]()}</p>
       </div>
 
       <div class="pt-2 pb-8">

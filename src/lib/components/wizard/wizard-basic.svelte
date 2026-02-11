@@ -1,6 +1,15 @@
 <script lang="ts">
   import { m } from '$lib/paraglide/messages';
   import type { WizardConfig } from '$interfaces/project.interface';
+  import {
+    projectTypesWebApp,
+    projectTypesAiFreestyle,
+    projectSubTypesWebsite,
+    projectSubTypesApp,
+    projectSubTypesAi,
+    projectSubTypesFreestyle,
+    availableFeatures
+  } from '$lib/configs/wizard-config';
   import ResetModal from '../modals/general/reset-modal.svelte';
   import ContactModal from '../modals/general/contact-modal.svelte';
   import ProjectCategory from './steps/project-category.svelte';
@@ -77,14 +86,60 @@
   }
 
   function calculatePrice() {
+    // 1. Determine base price from subType (more specific) or projectType
+    const allSubTypes = [...projectSubTypesWebsite, ...projectSubTypesApp, ...projectSubTypesAi, ...projectSubTypesFreestyle];
+    const allProjectTypes = [...projectTypesWebApp, ...projectTypesAiFreestyle];
+
     let basePrice = 0;
-    let totalFeatureComplexity = 0;
-    let highesPossible;
-    let lowestPossible;
 
-  
+    if (config.subType) {
+      const subType = allSubTypes.find((st) => st.id === config.subType);
+      if (subType?.basePrice) basePrice = subType.basePrice;
+    }
 
-    config.estimatedPrice = 1000;
+    if (basePrice === 0 && config.projectType) {
+      const projectType = allProjectTypes.find((pt) => pt.id === config.projectType);
+      if (projectType?.basePrice) basePrice = projectType.basePrice;
+    }
+
+    // 2. Service level factor (±25%)
+    // 0 = Full-Service (+25% cost), 50 = neutral, 100 = Active participation (-25% cost)
+    const sl = config.serviceLevel ?? 50;
+    const serviceFactor = ((50 - sl) / 50) * 0.25;
+
+    // 3. Engineering approach factor (±25%)
+    // 0 = Quick & Dirty (-25% cost), 50 = neutral, 100 = Over-engineered (+25% cost)
+    const ea = config.engineeringApproach ?? 50;
+    const engineeringFactor = ((ea - 50) / 50) * 0.25;
+
+    // 4. Apply factors to base price
+    const adjustedBasePrice = basePrice * (1 + serviceFactor + engineeringFactor);
+
+    // 5. Calculate feature costs
+    const selectedFeatures = availableFeatures.filter((f) => (config.features ?? []).includes(f.id));
+    const totalFeatureCost = selectedFeatures.reduce((sum, f) => sum + (f.basePrice || 0), 0);
+
+    // 6. Feature volume discount based on count
+    // Up to 10: 2% per feature (max 20%)
+    // 11-20: +1.5% per feature (max 35% at 20)
+    // 21+: +1% per feature (max 40% total)
+    const featureCount = selectedFeatures.length;
+    let featureDiscountPercent = 0;
+
+    if (featureCount <= 10) {
+      featureDiscountPercent = featureCount * 2;
+    } else if (featureCount <= 20) {
+      featureDiscountPercent = 20 + (featureCount - 10) * 1.5;
+    } else {
+      featureDiscountPercent = 35 + (featureCount - 20) * 1;
+    }
+
+    featureDiscountPercent = Math.min(featureDiscountPercent, 40);
+
+    const discountedFeatureCost = totalFeatureCost * (1 - featureDiscountPercent / 100);
+
+    // 7. Final estimated price
+    config.estimatedPrice = Math.round(adjustedBasePrice + discountedFeatureCost);
   }
 
   function scrollToTop() {
@@ -194,7 +249,7 @@
                 goToStep(i + 1);
               }
             }}
-            aria-label="Go to step {i + 1}: {m[step.title]?.() ?? step.title}">{m[step.title]?.() ?? step.title}</button
+            aria-label="Go to step {i + 1}: {(m as unknown as Record<string, () => string>)[step.title]?.() ?? step.title}">{(m as unknown as Record<string, () => string>)[step.title]?.() ?? step.title}</button
           >
         {/each}
       </div>

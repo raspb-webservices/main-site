@@ -10,9 +10,9 @@
   import { openAuth0Popup } from '$helper/loginOpener';
   import { localizeHref } from '$lib/paraglide/runtime';
 
-  let isAuth = $derived(isAuthenticated.get());
-  let currentUser = $derived(user.get()) as User;
-  let currentUserRoles = $derived(userroles.get());
+  let isAuth = $derived(isAuthenticated.value);
+  let currentUser = $derived(user.value) as User;
+  let currentUserRoles = $derived(userroles.value);
   let editModal: ProfileEditModal;
 
   let showSection = $state('');
@@ -40,7 +40,7 @@
   }
 
   async function login() {
-    const popup: Window = openAuth0Popup(450, 650);
+    const popup = openAuth0Popup(450, 650);
     try {
       if (!popup) throw new Error('Popup konnte nicht geöffnet werden (Popup-Blocker?).');
       const auth0Client = await auth.createClient();

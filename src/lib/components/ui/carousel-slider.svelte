@@ -4,8 +4,8 @@
 
   register();
 
-  let mySwiper;
-  let textSwiper;
+  let mySwiper: any;
+  let textSwiper: any;
 
   type Slide = {
     image: string;
@@ -50,11 +50,11 @@
   const active = 1;
   const spaceBetween = 10;
 
-  const onProgress = (e) => {
-    const [swiper, progress] = e.detail;
+  const onProgress = (e: CustomEvent) => {
+    const [swiper, progress]: [any, any] = e.detail;
     console.log(progress);
   };
-  const onSlideChange = (e) => {
+  const onSlideChange = (e: CustomEvent) => {
     console.log('slide changed');
   };
 

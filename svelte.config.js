@@ -25,17 +25,12 @@ const config = {
     },
     serviceWorker: {
       register: false
-    }
-  },
-  prerender: {
-    entries: ['*'],
-    crawl: true
-  },
-  inlineStyleThreshold: 1024,
-  vite: {
-    optimizeDeps: {
-      include: ['lodash.get', 'lodash.isequal', 'lodash.clonedeep']
-    }
+    },
+    prerender: {
+      entries: ['*'],
+      crawl: true
+    },
+    inlineStyleThreshold: 1024
   }
 };
 

@@ -10,9 +10,9 @@
     "sourceMap": true,
     "strict": true,
     "moduleResolution": "bundler",
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "useUnknownInCatchVariables": false,
-    "strictNullChecks": false,
+    "strictNullChecks": true,
     "types": ["vite-plugin-pwa/client", "vite-plugin-pwa/svelte", "vite-plugin-pwa/info", "vite-plugin-pwa/pwa-assets"]
   }
   // Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias

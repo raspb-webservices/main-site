@@ -211,7 +211,7 @@
   function toggleFeature(feature: string) {
     const index = editForm?.features?.indexOf(feature);
     if (index > -1) {
-      editForm.features = editForm.features.filter((f) => f !== feature);
+      editForm.features = editForm.features.filter((f: string) => f !== feature);
     } else {
       editForm.features = [...editForm.features, feature];
     }
@@ -362,13 +362,13 @@
               </div>
 
               <div class="form-control">
-                <label class="label" for="projectCetegory">
+                <label class="label" for="projectCategory">
                   <span class="label-text">Projektkategorie</span>
                 </label>
-                <select bind:value={editForm.projectCategory} id="projectCetegory" name="projectCetegory" class="select select-bordered select-sm">
+                <select bind:value={editForm.projectCategory} id="projectCategory" name="projectCategory" class="select select-bordered select-sm">
                   <option value="">Bitte wählen...</option>
                   {#each projectCategories as category}
-                    <option value={category.id}>{m[category.title]()}</option>
+                    <option value={category.id}>{(m as unknown as Record<string, () => string>)[category.title]()}</option>
                   {/each}
                 </select>
               </div>
@@ -380,10 +380,10 @@
                 <select bind:value={editForm.projectType} id="projectType" name="projectType" class="select select-bordered select-sm">
                   <option value="">Bitte wählen...</option>
                   {#each projectTypesWebApp as type}
-                    <option value={type.id}>{m[type.title]?.() ?? type.title}</option>
+                    <option value={type.id}>{(m as unknown as Record<string, () => string>)[type.title]?.() ?? type.title}</option>
                   {/each}
                   {#each projectTypesAiFreestyle as type}
-                    <option value={type.id}>{m[type.title]?.() ?? type.title}</option>
+                    <option value={type.id}>{(m as unknown as Record<string, () => string>)[type.title]?.() ?? type.title}</option>
                   {/each}
                 </select>
               </div>
@@ -395,13 +395,13 @@
                 <select bind:value={editForm.subType} id="subType" name="subType" class="select select-bordered select-sm">
                   <option value="">Bitte wählen</option>
                   {#each projectSubTypesWebsite as subtype}
-                    <option value={subtype.id}>{m[subtype.title]?.() ?? subtype.title}</option>
+                    <option value={subtype.id}>{(m as unknown as Record<string, () => string>)[subtype.title]?.() ?? subtype.title}</option>
                   {/each}
                   {#each projectSubTypesApp as subtype}
-                    <option value={subtype.id}>{m[subtype.title]?.() ?? subtype.title}</option>
+                    <option value={subtype.id}>{(m as unknown as Record<string, () => string>)[subtype.title]?.() ?? subtype.title}</option>
                   {/each}
                   {#each projectSubTypesAi as subtype}
-                    <option value={subtype.id}>{m[subtype.title]?.() ?? subtype.title}</option>
+                    <option value={subtype.id}>{(m as unknown as Record<string, () => string>)[subtype.title]?.() ?? subtype.title}</option>
                   {/each}
                 </select>
               </div>

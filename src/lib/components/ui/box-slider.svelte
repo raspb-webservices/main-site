@@ -4,7 +4,7 @@
 
   register();
 
-  let mySwiper;
+  let mySwiper: any;
   const params = {
     slidesPerView: 1,
     spaceBetween: 5,

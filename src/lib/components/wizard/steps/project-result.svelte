@@ -68,25 +68,25 @@
       </div>
     {/if}
 
-    {#if config.features.length > 0}
+    {#if (config.features ?? []).length > 0}
       <div class="card bg-base-200">
         <div class="card-body">
           <h3 class="card-title">{m['wizard_steps_stepSummary_selectedFeatures']()}</h3>
           <div class="flex flex-wrap gap-2">
-            {#each config.features as featureId}
-              <div class="badge badge-primary">{m[availableFeatures.find((f) => f.id === featureId) + '.title']()}</div>
+            {#each (config.features ?? []) as featureId}
+              <div class="badge badge-primary">{(m as unknown as Record<string, () => string>)[availableFeatures.find((f) => f.id === featureId)?.title ?? '']?.()}</div>
             {/each}
           </div>
         </div>
       </div>
     {/if}
 
-    {#if config.pages.length > 0}
+    {#if (config.pages ?? []).length > 0}
       <div class="card bg-base-200">
         <div class="card-body">
           <h3 class="card-title">{m['wizard_steps_stepSummary_pagesSections']()}</h3>
           <div class="flex flex-wrap items-center gap-2">
-            {#each config.pages as page}
+            {#each (config.pages ?? []) as page}
               {#if page.name.trim()}
                 <div class="badge badge-outline">{page.name}</div>
               {/if}
@@ -96,15 +96,15 @@
       </div>
     {/if}
 
-    {#if config.formFields.length > 0}
+    {#if (config.formFields ?? []).length > 0}
       <div class="card bg-base-200">
         <div class="card-body">
           <h3 class="card-title">{m['wizard_steps_stepSummary_formFields']()}</h3>
           <div class="space-y-1">
-            {#each config.formFields as field}
+            {#each (config.formFields ?? []) as field}
               {#if field.name.trim()}
                 <div class="flex items-center gap-2">
-                  <div class="badge badge-outline">{m[formFieldTypes.find((f) => f.id === field.type) + '.title']()}</div>
+                  <div class="badge badge-outline">{(m as unknown as Record<string, () => string>)[formFieldTypes.find((f) => f.id === field.type)?.title ?? '']?.()}</div>
                   <span class="text-sm">{field.name}</span>
                   {#if field.required}
                     <div class="badge badge-error badge-xs">{m['wizard_steps_stepSummary_required']()}</div>
@@ -143,7 +143,7 @@
     <div class="card-body text-center">
       <h2 class="card-title justify-center text-3xl">{m['wizard_steps_stepSummary_estimatedPrice']()}</h2>
       <div class="text-5xl font-bold">{config.estimatedPrice}€</div>
-      <div class="text-sm opacity-80">{m['wizard_steps_stepSummary_average']({ price: config.estimatedPrice.toLocaleString() })}</div>
+      <div class="text-sm opacity-80">{m['wizard_steps_stepSummary_average']({ price: (config.estimatedPrice ?? 0).toLocaleString() })}</div>
       <p class="no-padding text-sm opacity-80">{m['wizard_steps_stepSummary_disclaimer']()}</p>
 
       <div class="divider"></div>
@@ -151,16 +151,16 @@
       <div class="space-y-2 text-left">
         <div class="flex justify-between">
           <span>{m['wizard_steps_stepSummary_basePrice']()}</span>
-          <span>{projectTypesWebApp.find((p) => p.id === config.projectType)?.basePrice.toLocaleString()}€</span>
+          <span>{(projectTypesWebApp.find((p) => p.id === config.projectType)?.basePrice ?? 0).toLocaleString()}€</span>
         </div>
         {#if config.subType}
           <div class="flex justify-between">
-            <span>{projectTypesWebApp.find((s) => s.id === config.subType && s.parentId === config.projectType)?.basePrice}€</span>
+            <span>{projectTypesWebApp.find((s) => s.id === config.subType && s.parentId === config.projectType)?.basePrice ?? 0}€</span>
           </div>
         {/if}
-        {#if config.features.length > 0}
+        {#if (config.features ?? []).length > 0}
           <div class="flex justify-between">
-            <span>{m['wizard_steps_stepSummary_featuresIncluded']({ count: config.features.length })}</span>
+            <span>{m['wizard_steps_stepSummary_featuresIncluded']({ count: (config.features ?? []).length })}</span>
             <span>{m['wizard_steps_stepSummary_included']()}</span>
           </div>
         {/if}

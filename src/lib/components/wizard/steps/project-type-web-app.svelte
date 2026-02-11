@@ -30,12 +30,12 @@
     >
       <div class="card-body">
         <div class="service-card-header">
-          <h3 class="card-title no-padding">{m[type.title]?.() ?? type.title}</h3>
+          <h3 class="card-title no-padding">{(m as unknown as Record<string, () => string>)[type.title]?.() ?? type.title}</h3>
           <div class="service-icon">{type.icon}</div>
         </div>
-        <p class="no-padding">{m[type.description]?.() ?? type.description}</p>
+        <p class="no-padding">{(m as unknown as Record<string, () => string>)[type.description]?.() ?? type.description}</p>
         <div class="card-actions justify-end">
-          <div class="badge badge-primary">ab {type.basePrice.toLocaleString()} €</div>
+          <div class="badge badge-primary">ab {(type.basePrice ?? 0).toLocaleString()} €</div>
         </div>
       </div>
     </div>

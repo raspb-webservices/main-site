@@ -1,6 +1,7 @@
 import { client } from '$lib/server/graphql-client.server';
 import type { RequestHandler } from '@sveltejs/kit';
 import { gql } from 'graphql-request';
+import { apiErrorResponse } from '$lib/server/api-error.server';
 
 export const GET: RequestHandler = async () => {
   try {
@@ -16,6 +17,6 @@ export const GET: RequestHandler = async () => {
     const { __type } = (await client.request(query)) as any;
     return new Response(JSON.stringify(__type.enumValues));
   } catch (error) {
-    return new Response(JSON.stringify(error));
+    return apiErrorResponse(error);
   }
 };

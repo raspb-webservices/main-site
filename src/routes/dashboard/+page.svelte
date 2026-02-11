@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { user, isAuthenticated, userroles } from '$store/sharedStates.svelte';
   import Section from '$lib/components/ui/section.svelte';
   import ProjectCard from '$lib/components/projects/ProjectCard.svelte';
@@ -15,9 +14,9 @@
   import { openAuth0Popup } from '$helper/loginOpener';
   import { localizeHref } from '$lib/paraglide/runtime';
 
-  let isAuth = $derived(isAuthenticated.get());
-  let currentUser = $derived(user.get()) as User;
-  let currentUserRoles = $derived(userroles.get());
+  let isAuth = $derived(isAuthenticated.value);
+  let currentUser = $derived(user.value) as User;
+  let currentUserRoles = $derived(userroles.value);
   let hasCustomerAccess = $derived(isAuth && currentUserRoles.includes('customer'));
   let hasAdminAccess = $derived(isAuth && currentUserRoles.includes('admin'));
 
@@ -32,30 +31,17 @@
   let error = $state('');
   let viewMode = $state<'grid' | 'list'>('grid');
 
-  onMount(async () => {
-    loading = true;
-    checkAccess();
-    loadProjects();
-  });
-
   $effect(() => {
-    checkAccess();
-    if (hasCustomerAccess || hasAdminAccess) {
-      loadProjects();
-    }
-  });
-
-  function checkAccess() {
     if (!isAuth) {
       showSection = 'not-authorized';
       loading = false;
       return;
-    } else {
-      showSection = 'projects';
-      loading = false;
-      return;
     }
-  }
+    showSection = 'projects';
+    if (hasCustomerAccess || hasAdminAccess) {
+      loadProjects();
+    }
+  });
 
   async function loadProjects() {
     loading = true;
@@ -85,27 +71,21 @@
         return;
       }
       try {
-        const projectPromises = currentUser.projectIds.map(async (projectId: string) => {
-          try {
-            const response = await fetch(`/api/project/get/${projectId}`);
-            const data = await response.json();
-
-            if (response.ok && data.project) {
-              return data.project;
-            } else {
-              error = m['dashboard_errorLoadingProjects']();
-              console.error(`Error fetching project ${projectId}:`, data);
-              return null;
-            }
-          } catch (err) {
-            error = m['dashboard_networkErrorLoadingProjects']();
-            console.error(`Error fetching project ${projectId}:`, err);
-            return null;
-          }
+        const response = await fetch('/api/project/get/batch', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ids: currentUser.projectIds })
         });
-        projects = await Promise.all(projectPromises);
+        const data = await response.json();
+
+        if (response.ok) {
+          projects = data.projects || [];
+        } else {
+          error = m['dashboard_errorLoadingProjects']();
+        }
+        if (projects.length === 0) showSection = 'no-projects';
       } catch (err) {
-        error = m['dashboard_errorLoadingProjects']();
+        error = m['dashboard_networkErrorLoadingProjects']();
         console.error('Error loading projects:', err);
       } finally {
         loading = false;
@@ -123,7 +103,7 @@
   }
 
   async function login() {
-    const popup: Window = openAuth0Popup(450, 650);
+    const popup = openAuth0Popup(450, 650);
     try {
       if (!popup) throw new Error('Popup konnte nicht geöffnet werden (Popup-Blocker?).');
       const auth0Client = await auth.createClient();

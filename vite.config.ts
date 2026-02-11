@@ -91,20 +91,6 @@ export default defineConfig({
           ]
         },
         {
-          pattern: '/appointment',
-          localized: [
-            ['de', '/de/erstgespraech-vereinbaren'],
-            ['en', '/en/schedule-an-appointment']
-          ]
-        },
-        {
-          pattern: '/appointment/:id',
-          localized: [
-            ['de', '/de/erstgespraech-vereinbaren/:id'],
-            ['en', '/en/schedule-an-appointment/:id']
-          ]
-        },
-        {
           pattern: '/contact',
           localized: [
             ['de', '/de/kontakt'],
@@ -238,7 +224,7 @@ export default defineConfig({
           ]
         },
         {
-          pattern: '/profile/:id',
+          pattern: '/registration/:id',
           localized: [
             ['de', '/de/registrierung/:id'],
             ['en', '/en/registration/:id']
@@ -266,7 +252,7 @@ export default defineConfig({
           ]
         },
         {
-          pattern: '/services/:id',
+          pattern: '/terms/:id',
           localized: [
             ['de', '/de/allgemeine-geschaeftsbedingungen/:id'],
             ['en', '/en/terms-and-conditions/:id']

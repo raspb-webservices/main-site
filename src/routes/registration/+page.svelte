@@ -75,9 +75,9 @@
       email = '';
       password = '';
       confirmPassword = '';
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Registration error:', error);
-      errorMessage = error.message || 'registration_form_validation_registrationError';
+      errorMessage = (error instanceof Error ? error.message : '') || 'registration_form_validation_registrationError';
     } finally {
       isLoading = false;
     }
@@ -131,7 +131,7 @@
           </div>
         {:else}
           <form
-            onsubmit={() => {
+            onsubmit={(event: SubmitEvent) => {
               event.preventDefault();
               handleSubmit();
             }}

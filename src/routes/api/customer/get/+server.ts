@@ -1,6 +1,7 @@
 import { client } from '$lib/server/graphql-client.server';
 import type { RequestHandler } from '@sveltejs/kit';
 import { gql } from 'graphql-request';
+import { apiErrorResponse } from '$lib/server/api-error.server';
 
 export const GET: RequestHandler = async () => {
   try {
@@ -30,6 +31,6 @@ export const GET: RequestHandler = async () => {
     const response = await client.request(query);
     return new Response(JSON.stringify(response));
   } catch (error) {
-    return new Response(JSON.stringify(error));
+    return apiErrorResponse(error);
   }
 };

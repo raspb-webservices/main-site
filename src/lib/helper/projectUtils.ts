@@ -6,15 +6,14 @@ import {
   projectSubTypesWebsite,
   projectSubTypesApp,
   projectSubTypesAi,
-  projectSubTypesFreestyle,
-  type ProjectType
+  projectSubTypesFreestyle
 } from '$lib/configs/wizard-config';
 
-const StringIsNumber = (value) => isNaN(Number(value)) === false;
-export function ToArray(enumme) {
+const StringIsNumber = (value: string) => isNaN(Number(value)) === false;
+export function ToArray(enumme: Record<string, string | number>): string[] {
   return Object.keys(enumme)
     .filter(StringIsNumber)
-    .map((key) => enumme[key]);
+    .map((key) => enumme[key] as string);
 }
 
 export function formatDate(dateString: string) {
@@ -148,28 +147,18 @@ export function getFeatureLabel(feature: string) {
 }
 
 export function getProjectCategoryLabel(projectType: string) {
-  const projectCategoryArray = ToArray(projectCategories);
-  const result: ProjectType[] = projectCategoryArray.filter((obj) => {
-    return obj.id === projectType;
-  });
-  return result[0]?.title;
+  const result = projectCategories.find((obj) => obj.id === projectType);
+  return result?.title;
 }
 
 export function getProjectTypeLabel(projectType: string) {
-  const projectTypeArray = [];
-  projectTypeArray.concat(ToArray(projectTypesWebApp), ToArray(projectTypesAiFreestyle));
-
-  const result: ProjectType[] = projectTypeArray.filter((obj) => {
-    return obj.id === projectType;
-  });
-  return result[0]?.title;
+  const projectTypeArray = [...projectTypesWebApp, ...projectTypesAiFreestyle];
+  const result = projectTypeArray.find((obj) => obj.id === projectType);
+  return result?.title;
 }
 
 export function getProjectSubTypeLabel(subProjectType: string) {
-  const subProjectTypeArray = [];
-  subProjectTypeArray.concat(ToArray(projectSubTypesWebsite), ToArray(projectSubTypesApp), ToArray(projectSubTypesAi), ToArray(projectSubTypesFreestyle));
-  const result: ProjectType[] = subProjectTypeArray.filter((obj) => {
-    return obj.id === subProjectType;
-  });
-  return result[0]?.title;
+  const subProjectTypeArray = [...projectSubTypesWebsite, ...projectSubTypesApp, ...projectSubTypesAi, ...projectSubTypesFreestyle];
+  const result = subProjectTypeArray.find((obj) => obj.id === subProjectType);
+  return result?.title;
 }

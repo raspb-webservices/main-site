@@ -2,8 +2,9 @@
 import { client } from '$lib/server/graphql-client.server';
 import { gql } from 'graphql-request';
 import type { RequestHandler } from '@sveltejs/kit';
+import { apiErrorResponse } from '$lib/server/api-error.server';
 
-export const GET: RequestHandler = async (req) => {
+export const POST: RequestHandler = async (req) => {
   const id = req.params.id;
   try {
     const query = gql`
@@ -22,6 +23,6 @@ export const GET: RequestHandler = async (req) => {
 
     return new Response(JSON.stringify(response));
   } catch (error) {
-    return new Response(JSON.stringify(error));
+    return apiErrorResponse(error);
   }
 };

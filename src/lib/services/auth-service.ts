@@ -1,5 +1,5 @@
 import { createAuth0Client, type Auth0Client } from '@auth0/auth0-spa-js';
-import { user, isAuthenticated, popupOpen, userroles } from '$store/sharedStates.svelte';
+import { user, isAuthenticated, userroles } from '$store/sharedStates.svelte';
 import authConfig from '../configs/auth-config';
 
 async function createClient() {
@@ -14,10 +14,10 @@ async function getRoles(userid: string): Promise<string[]> {
   if (userRolesResponse.ok) {
     const userRoleObjects = await userRolesResponse.json();
 
-    const userRoles = [];
+    const userRoles: string[] = [];
     if (userRoleObjects && userRoleObjects.length) {
       userRoleObjects.forEach((element: unknown) => {
-        userRoles.push(element['name']);
+        userRoles.push((element as Record<string, string>)['name']);
       });
     }
     return userRoles;
@@ -25,27 +25,24 @@ async function getRoles(userid: string): Promise<string[]> {
   throw new Error('Could not fetch user roles from /api/userRoles/user[sub]!');
 }
 
-async function loginWithPopup(client: Auth0Client, options?: unknown, popup?: Window) {
-  popupOpen.set(true);
-
+async function loginWithPopup(client: Auth0Client, options?: Record<string, unknown>, popup?: Window) {
   try {
-    await client.loginWithPopup(options, { popup });
+    await client.loginWithPopup(options as Parameters<Auth0Client['loginWithPopup']>[0], { popup });
     const currentUser = await client.getUser();
+    if (!currentUser?.sub) return;
     const currentUserRole = await getRoles(currentUser.sub);
 
-    userroles.set(currentUserRole);
-    user.set(currentUser);
-    isAuthenticated.set(true);
+    userroles.value = currentUserRole;
+    user.value = currentUser;
+    isAuthenticated.value = true;
   } catch (e) {
     console.error(e);
-  } finally {
-    popupOpen.set(false);
   }
 }
 
 function logout(client: Auth0Client) {
-  isAuthenticated.set(false);
-  user.set({ email: '' });
+  isAuthenticated.value = false;
+  user.value = { email: '' };
   return client.logout({
     clientId: authConfig.clientId,
     logoutParams: {
@@ -63,14 +60,14 @@ async function checkAuthState(client: Auth0Client) {
     const isAuth = await client.isAuthenticated();
     if (isAuth) {
       const currentUser = await client.getUser();
-      user.set(currentUser);
-      isAuthenticated.set(true);
+      if (currentUser) user.value = currentUser;
+      isAuthenticated.value = true;
     } else {
-      isAuthenticated.set(false);
+      isAuthenticated.value = false;
     }
   } catch (e) {
     console.error('Error checking auth state:', e);
-    isAuthenticated.set(false);
+    isAuthenticated.value = false;
   }
 }
 

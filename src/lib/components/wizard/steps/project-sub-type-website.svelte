@@ -10,7 +10,7 @@
       'wizard_stepSubType_titleSecond'
     ]()}
   </h1>
-  <p class="teaser">{m['wizard_stepSubType_teaser']({ project: m['wizard.type.' + config.projectType + '.title']?.() ?? config.projectType })}</p>
+  <p class="teaser">{m['wizard_stepSubType_teaser']({ project: (m as unknown as Record<string, () => string>)['wizard.type.' + config.projectType + '.title']?.() ?? config.projectType })}</p>
 </div>
 
 <div class="subtypes-grid">
@@ -30,8 +30,8 @@
       aria-label="Select subtype: {subtype.title}"
     >
       <div class="card-body">
-        <h3 class="card-title">{m[subtype.title]?.() ?? subtype.title}</h3>
-        <p class="no-padding">{m[subtype.description]?.() ?? subtype.description}</p>
+        <h3 class="card-title">{(m as unknown as Record<string, () => string>)[subtype.title]?.() ?? subtype.title}</h3>
+        <p class="no-padding">{(m as unknown as Record<string, () => string>)[subtype.description]?.() ?? subtype.description}</p>
         <div class="card-actions justify-end">
           <div class="badge badge-success">bereits ab {subtype.basePrice}€</div>
         </div>

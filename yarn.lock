@@ -3689,28 +3689,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"auth0-legacy@npm:auth0@^4.27.0":
-  version: 4.37.0
-  resolution: "auth0@npm:4.37.0"
-  dependencies:
-    jose: "npm:^4.13.2"
-    undici-types: "npm:^6.15.0"
-    uuid: "npm:^9.0.0"
-  checksum: 10c0/42aac4366003e3d64164460c4911857bd4d5cf410fb05607383778abdaf3efc09ee4050f9f6c1d6ee4624d62d230ee305a9b0580b139f1a4544348025fe0c70f
-  languageName: node
-  linkType: hard
-
-"auth0@npm:^5.3.0":
-  version: 5.3.0
-  resolution: "auth0@npm:5.3.0"
-  dependencies:
-    auth0-legacy: "npm:auth0@^4.27.0"
-    jose: "npm:^4.13.2"
-    uuid: "npm:^11.1.0"
-  checksum: 10c0/22995c9ace06ca4277339170df8ff86613ec97aacd41c46198678aeaec2ba0781b0378443c124af7293bd7c905af18f16c9b7ee0db04ca1783f98b38177cbd8b
-  languageName: node
-  linkType: hard
-
 "autoprefixer@npm:^10.4.24":
   version: 10.4.24
   resolution: "autoprefixer@npm:10.4.24"
@@ -6187,13 +6165,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jose@npm:^4.13.2":
-  version: 4.15.9
-  resolution: "jose@npm:4.15.9"
-  checksum: 10c0/4ed4ddf4a029db04bd167f2215f65d7245e4dc5f36d7ac3c0126aab38d66309a9e692f52df88975d99429e357e5fd8bab340ff20baab544d17684dd1d940a0f4
-  languageName: node
-  linkType: hard
-
 "jose@npm:^6.0.8, jose@npm:^6.1.0":
   version: 6.1.3
   resolution: "jose@npm:6.1.3"
@@ -6692,7 +6663,6 @@ __metadata:
     "@types/three": "npm:^0.182.0"
     "@vite-pwa/assets-generator": "npm:^1.0.2"
     "@vite-pwa/sveltekit": "npm:^1.1.0"
-    auth0: "npm:^5.3.0"
     autoprefixer: "npm:^10.4.24"
     axios: "npm:^1.13.5"
     better-svelte-email: "npm:^1.4.0"
@@ -9091,13 +9061,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici-types@npm:^6.15.0":
-  version: 6.23.0
-  resolution: "undici-types@npm:6.23.0"
-  checksum: 10c0/109eaff53165b76f527979a12252fb10ff5079942e461c18ec68ac9e91b603ede39edb29a04151d64645d449663bc360e50d60ad889445cac74a3cbe0b50e309
-  languageName: node
-  linkType: hard
-
 "undici-types@npm:~7.16.0":
   version: 7.16.0
   resolution: "undici-types@npm:7.16.0"
@@ -9283,30 +9246,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:^11.1.0":
-  version: 11.1.0
-  resolution: "uuid@npm:11.1.0"
-  bin:
-    uuid: dist/esm/bin/uuid
-  checksum: 10c0/34aa51b9874ae398c2b799c88a127701408cd581ee89ec3baa53509dd8728cbb25826f2a038f9465f8b7be446f0fbf11558862965b18d21c993684297628d4d3
-  languageName: node
-  linkType: hard
-
 "uuid@npm:^13.0.0":
   version: 13.0.0
   resolution: "uuid@npm:13.0.0"
   bin:
     uuid: dist-node/bin/uuid
   checksum: 10c0/950e4c18d57fef6c69675344f5700a08af21e26b9eff2bf2180427564297368c538ea11ac9fb2e6528b17fc3966a9fd2c5049361b0b63c7d654f3c550c9b3d67
-  languageName: node
-  linkType: hard
-
-"uuid@npm:^9.0.0":
-  version: 9.0.1
-  resolution: "uuid@npm:9.0.1"
-  bin:
-    uuid: dist/bin/uuid
-  checksum: 10c0/1607dd32ac7fc22f2d8f77051e6a64845c9bce5cd3dd8aa0070c074ec73e666a1f63c7b4e0f4bf2bc8b9d59dc85a15e17807446d9d2b17c8485fbc2147b27f9b
   languageName: node
   linkType: hard
 

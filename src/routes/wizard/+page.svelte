@@ -10,7 +10,7 @@
   import { localizeHref } from '$lib/paraglide/runtime';
 
   async function login() {
-    const popup: Window = openAuth0Popup(450, 650);
+    const popup = openAuth0Popup(450, 650);
     try {
       if (!popup) throw new Error('Popup konnte nicht geöffnet werden (Popup-Blocker?).');
       const auth0Client = await auth.createClient();
@@ -20,7 +20,7 @@
     }
   }
 
-  let loggedin = $derived(isAuthenticated.get());
+  let loggedin = $derived(isAuthenticated.value);
   interface PageData {
     projectType: string | null;
     subType: string | null;

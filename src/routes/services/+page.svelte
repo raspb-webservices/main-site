@@ -5,25 +5,8 @@
   import Stage from '$lib/components/ui/stage.svelte';
   import Section from '$lib/components/ui/section.svelte';
   import CTABox from '$lib/components/snippets/cta-box.svelte';
-  import OnePage from '$lib/components/modals/services/one-page.svelte';
-  import LandingPage from '$lib/components/modals/services/landing-page.svelte';
-  import CorporateWebsites from '$lib/components/modals/services/corporate-websites.svelte';
-  import SimpleCms from '$lib/components/modals/services/simple-cms.svelte';
-  import ComplexCms from '$lib/components/modals/services/complex-cms.svelte';
-  import BlogCms from '$lib/components/modals/services/blog-cms.svelte';
-  import HeadlessCms from '$lib/components/modals/services/headless-cms.svelte';
-  import WebApps from '$lib/components/modals/services/web-apps.svelte';
-  import Pwa from '$lib/components/modals/services/pwa.svelte';
-  import NativeApps from '$lib/components/modals/services/native-apps.svelte';
-  import ComplexApps from '$lib/components/modals/services/complex-apps.svelte';
-  import FreestyleComponents from '$lib/components/modals/services/freestyle-components.svelte';
-  import FreestyleDesign from '$lib/components/modals/services/freestyle-design.svelte';
-  import FreestyleExtensions from '$lib/components/modals/services/freestyle-extensions.svelte';
-  import FreestyleSpecialApps from '$lib/components/modals/services/freestyle-special-apps.svelte';
-  import KIAgenten from '$lib/components/modals/services/ki-agenten.svelte';
-  import KIBeratung from '$lib/components/modals/services/ki-beratung.svelte';
-  import KIInfrastructure from '$lib/components/modals/services/ki-infrastructure.svelte';
-  import KIWorkflows from '$lib/components/modals/services/ki-workflows.svelte';
+  import ServiceModal from '$lib/components/modals/services/service-modal.svelte';
+  import { serviceModalConfigs } from '$lib/configs/service-modal-config';
   import { localizeHref } from '$lib/paraglide/runtime';
 
   const handleHashChange = (event: HashChangeEvent) => {
@@ -568,25 +551,9 @@
 </Section>
 
 <!-- DaisyUI Modals for detailed information -->
-<OnePage />
-<LandingPage />
-<CorporateWebsites />
-<SimpleCms />
-<ComplexCms />
-<BlogCms />
-<HeadlessCms />
-<WebApps />
-<Pwa />
-<NativeApps />
-<ComplexApps />
-<FreestyleComponents />
-<FreestyleDesign />
-<FreestyleExtensions />
-<FreestyleSpecialApps />
-<KIAgenten />
-<KIBeratung />
-<KIInfrastructure />
-<KIWorkflows />
+{#each serviceModalConfigs as config}
+  <ServiceModal {config} />
+{/each}
 
 <style lang="postcss">
   @reference '../../app.css';

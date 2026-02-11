@@ -65,11 +65,29 @@
       <LottieLoader />
     </div>
   {:else}
+    <a href="#main-content" class="skip-nav">Skip to main content</a>
     <HEADER />
-    <main>
+    <main id="main-content">
       {@render children?.()}
     </main>
     <FOOTER />
   {/if}
   <CookieConsentComponent />
 </div>
+
+<style>
+  .skip-nav {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 100;
+    padding: 0.5rem 1rem;
+    background: var(--color-primary, #6366f1);
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  .skip-nav:focus {
+    left: 0;
+  }
+</style>

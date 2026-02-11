@@ -124,7 +124,7 @@
         <div class="footer-nav-items">
           {#each footerNav[0].subItems as item}
             <button class="footer-nav-item" onclick={() => goto(localizeHref(item.path))}>
-              {m[item.name]()}
+              {(m as unknown as Record<string, () => string>)[item.name]()}
             </button>
           {/each}
         </div>
@@ -134,7 +134,7 @@
         <div class="footer-nav-items">
           {#each footerNav[1].subItems as item}
             <button class="footer-nav-item" onclick={() => goto(localizeHref(item.path))}>
-              {m[item.name]()}
+              {(m as unknown as Record<string, () => string>)[item.name]()}
             </button>
           {/each}
         </div>
@@ -144,7 +144,7 @@
         <div class="footer-nav-items">
           {#each footerNav[2].subItems as item}
             <button class="footer-nav-item" onclick={() => goto(localizeHref(item.path))}>
-              {m[item.name]()}
+              {(m as unknown as Record<string, () => string>)[item.name]()}
             </button>
           {/each}
         </div>
@@ -154,7 +154,7 @@
         <div class="footer-nav-items">
           {#each footerNav[3].subItems as item}
             <button class="footer-nav-item" onclick={() => goto(localizeHref(item.path))}>
-              {m[item.name]()}
+              {(m as unknown as Record<string, () => string>)[item.name]()}
             </button>
           {/each}
         </div>

@@ -26,33 +26,33 @@
 <div class="summary-grid">
   <div class="summary-card">
     <h3>{m['wizard_stepSummary_projectCategory']()}</h3>
-    <p class="summary-value">{m[projectCategories?.find((p) => p.id === config.projectCategory)?.title]()}</p>
+    <p class="summary-value">{(m as unknown as Record<string, () => string>)[projectCategories?.find((p) => p.id === config.projectCategory)?.title ?? '']?.()}</p>
   </div>
 
   <div class="summary-card">
     <h3>{m['wizard_stepSummary_projectType']()}</h3>
     {#if config.projectCategory === 'websites-and-apps'}
-      <p class="summary-value">{m[projectTypesWebApp?.find((p) => p.id === config.projectType)?.title]()}</p>
+      <p class="summary-value">{(m as unknown as Record<string, () => string>)[projectTypesWebApp?.find((p) => p.id === config.projectType)?.title ?? '']?.()}</p>
       {#if config.projectType === 'website'}
-        <p class="summary-subvalue">{m[projectSubTypesWebsite?.find((p) => p.id === config.subType)?.title]()}</p>
+        <p class="summary-subvalue">{(m as unknown as Record<string, () => string>)[projectSubTypesWebsite?.find((p) => p.id === config.subType)?.title ?? '']?.()}</p>
       {:else}
-        <p class="summary-subvalue">{m[projectSubTypesApp?.find((p) => p.id === config.subType)?.title]()}</p>
+        <p class="summary-subvalue">{(m as unknown as Record<string, () => string>)[projectSubTypesApp?.find((p) => p.id === config.subType)?.title ?? '']?.()}</p>
       {/if}
     {:else}
-      <p class="summary-value">{m[projectTypesAiFreestyle?.find((p) => p.id === config.projectType)?.title]()}</p>
+      <p class="summary-value">{(m as unknown as Record<string, () => string>)[projectTypesAiFreestyle?.find((p) => p.id === config.projectType)?.title ?? '']?.()}</p>
       {#if config.subType !== ''}
-        <p class="summary-subvalue">{m[projectSubTypesAi?.find((p) => p.id === config.subType)?.title]()}</p>
+        <p class="summary-subvalue">{(m as unknown as Record<string, () => string>)[projectSubTypesAi?.find((p) => p.id === config.subType)?.title ?? '']?.()}</p>
       {/if}
     {/if}
   </div>
 
-  {#if config.features.length > 1}
+  {#if (config.features ?? []).length > 1}
     <div class="summary-card">
       <h3>{m['wizard_steps_stepSummary_selectedFeatures']()}</h3>
       <div class="flex flex-wrap gap-2">
-        {#each config.features.filter((f) => f !== 'cookieConsent') as featureId}
-          <div class="badge {featureCategoryColors[availableFeatures.find((f) => f.id === featureId)?.category] || 'badge-info'}">
-            {m[availableFeatures?.find((f) => f.id === featureId)?.title]()}
+        {#each (config.features ?? []).filter((f: string) => f !== 'cookieConsent') as featureId}
+          <div class="badge {featureCategoryColors[availableFeatures.find((f) => f.id === featureId)?.category ?? ''] || 'badge-info'}">
+            {(m as unknown as Record<string, () => string>)[availableFeatures?.find((f) => f.id === featureId)?.title ?? '']?.()}
           </div>
         {/each}
       </div>

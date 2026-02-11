@@ -30,10 +30,10 @@
     >
       <div class="card-body">
         <div class="service-card-header">
-          <h3 class="card-title no-padding">{m[category.title]?.() ?? category.title}</h3>
+          <h3 class="card-title no-padding">{(m as unknown as Record<string, () => string>)[category.title]?.() ?? category.title}</h3>
           <div class="service-icon">{category.icon}</div>
         </div>
-        <p class="no-padding">{m[category.description]()}</p>
+        <p class="no-padding">{(m as unknown as Record<string, () => string>)[category.description]()}</p>
       </div>
     </div>
   {/each}

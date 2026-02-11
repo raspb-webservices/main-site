@@ -75,7 +75,7 @@
 
       if (response.ok) {
         // Projekt in der Liste aktualisieren
-        const projectIndex = editingProject.findIndex((p) => p.id === editingProject.id);
+        const projectIndex = projects.findIndex((p: { id: string }) => p.id === editingProject.id);
         if (projectIndex !== -1) {
           projects[projectIndex] = { ...projects[projectIndex], setup: setupData };
         }

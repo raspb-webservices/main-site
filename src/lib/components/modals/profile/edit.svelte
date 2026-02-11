@@ -5,7 +5,7 @@
   import type { User } from '$interfaces/user.interface';
 
   let modal: HTMLDialogElement;
-  let currentUser = $derived(user.get()) as User;
+  let currentUser = $derived(user.value) as User;
 
   export function openModal() {
     modal?.showModal();

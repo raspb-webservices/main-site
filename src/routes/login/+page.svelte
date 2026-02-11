@@ -4,9 +4,10 @@
   import { goto } from '$app/navigation';
   import auth from '$services/auth-service';
   import { localizeHref } from '$lib/paraglide/runtime';
+  import { openAuth0Popup } from '$helper/loginOpener';
 
   async function login() {
-    const popup: Window = openAuth0Popup(450, 650);
+    const popup = openAuth0Popup(450, 650);
     try {
       if (!popup) throw new Error('Popup konnte nicht geöffnet werden (Popup-Blocker?).');
       const auth0Client = await auth.createClient();
@@ -14,10 +15,6 @@
     } catch (e) {
       console.error('Error occurred: ', e);
     }
-  }
-
-  function openAuth0Popup(arg0: number, arg1: number): Window {
-    throw new Error('Function not implemented.');
   }
 </script>
 

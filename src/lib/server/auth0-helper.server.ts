@@ -1,12 +1,9 @@
-import axios from 'axios';
-import { PUBLIC_VITE_AUTH0_AUDIENCE } from '$env/static/public';
-import { PUBLIC_VITE_AUTH0_CLIENT_ID } from '$env/static/public';
-import { PUBLIC_VITE_AUTH0_TOKEN_URL } from '$env/static/public';
+import {
+  PUBLIC_VITE_AUTH0_AUDIENCE,
+  PUBLIC_VITE_AUTH0_CLIENT_ID,
+  PUBLIC_VITE_AUTH0_TOKEN_URL
+} from '$env/static/public';
 import { env } from '$env/dynamic/private';
-
-const axiosAPI = axios.create({
-  baseURL: PUBLIC_VITE_AUTH0_AUDIENCE
-});
 
 async function getToken() {
   try {
@@ -29,27 +26,33 @@ async function getToken() {
     return data.access_token;
   } catch (error) {
     console.error('Error fetching token:', error);
+    throw new Error('Failed to obtain Auth0 management token');
   }
 }
 
 const apiRequest = async (method: string, url: string, request: unknown) => {
   const token = await getToken();
-  const headers = {
-    authorization: `Bearer ${token}`
+
+  const options: RequestInit = {
+    method,
+    headers: {
+      authorization: `Bearer ${token}`,
+      'content-type': 'application/json'
+    }
   };
 
-  return axiosAPI({
-    method,
-    url,
-    data: request,
-    headers
-  })
-    .then((res) => {
-      return Promise.resolve(res.data);
-    })
-    .catch((err) => {
-      return Promise.reject(err);
-    });
+  if (request && method !== 'get') {
+    options.body = JSON.stringify(request);
+  }
+
+  const response = await fetch(`${PUBLIC_VITE_AUTH0_AUDIENCE}${url}`, options);
+
+  if (!response.ok) {
+    const errorBody = await response.text();
+    throw new Error(`Auth0 API error ${response.status}: ${errorBody}`);
+  }
+
+  return response.json();
 };
 
 const get = (url: string, request: unknown) => apiRequest('get', url, request);

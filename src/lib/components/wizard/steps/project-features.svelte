@@ -14,13 +14,13 @@
 
 <div class="features-grid">
   {#each availableFeatures as feature}
-    <label class="card service-card cursor-pointer transition-all duration-300" class:card-selected={config.features.includes(feature.id)}>
+    <label class="card service-card cursor-pointer transition-all duration-300" class:card-selected={(config.features ?? []).includes(feature.id)}>
       <div class="card-body">
         <div class="card-actions items-center justify-start">
           <input type="checkbox" class="checkbox checkbox-primary" bind:group={config.features} value={feature.id} onchange={() => calculatePrice()} />
-          <h3 class="card-title no-padding">{m[feature.title]?.() ?? feature.title}</h3>
+          <h3 class="card-title no-padding">{(m as unknown as Record<string, () => string>)[feature.title]?.() ?? feature.title}</h3>
         </div>
-        <p class="no-padding">{m[feature.description]?.() ?? feature.description}</p>
+        <p class="no-padding">{(m as unknown as Record<string, () => string>)[feature.description ?? '']?.() ?? feature.description}</p>
 
         <div class="card-actions items-center justify-between">
           {#if feature.basePrice != 0}
@@ -28,8 +28,8 @@
           {:else}
             {#if feature.isSideProject}<div class="badge">Side-Project</div>{/if}
           {/if}
-          <div class="badge {featureCategoryColors[feature.category] || 'badge-info'}">
-            {m['wizard.features.categories.' + feature.category]?.() ?? feature.category}
+          <div class="badge {featureCategoryColors[feature.category ?? ''] || 'badge-info'}">
+            {(m as unknown as Record<string, () => string>)['wizard.features.categories.' + feature.category]?.() ?? feature.category}
           </div>
         </div>
       </div>

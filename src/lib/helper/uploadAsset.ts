@@ -1,5 +1,5 @@
 export async function createAsset() {
-  const response = await fetch('/api/asset/create');
+  const response = await fetch('/api/asset/create', { method: 'POST' });
   const requiredFields = ['url', 'date', 'key', 'signature', 'algorithm', 'policy', 'credential', 'securityToken'];
 
   let assetId: string;
@@ -37,7 +37,7 @@ export async function createAsset() {
         } else {
           uploadData = createAsset.upload.requestPostData;
           for (const field of requiredFields) {
-            if (!uploadData[field]) {
+            if (!(uploadData as Record<string, string>)[field]) {
               console.error(`Missing required upload field: ${field}`, uploadData);
               assetId = 'error';
             }
@@ -48,8 +48,8 @@ export async function createAsset() {
   }
 
   return {
-    id: assetId,
-    uploadData: uploadData
+    id: assetId!,
+    uploadData: uploadData!
   };
 }
 
@@ -88,7 +88,7 @@ export async function uploadAsset(file: File) {
   }
 }
 
-export async function uploadImage(fileName, dataUrlString) {
+export async function uploadImage(fileName: string, dataUrlString: string) {
   if (!fileName || !dataUrlString) {
     console.error('Missing fileName or dataUrlString');
     return 'error';
@@ -127,9 +127,9 @@ export async function uploadImage(fileName, dataUrlString) {
 }
 
 export async function publishAsset(id: string) {
-  if (id === 'error ') return id;
+  if (id === 'error') return id;
   const fetchString = '/api/asset/publish/' + id;
-  const publishAssetsResponse = await fetch(fetchString);
+  const publishAssetsResponse = await fetch(fetchString, { method: 'POST' });
   if (publishAssetsResponse.ok) {
     const json = await publishAssetsResponse.json();
     return JSON.stringify(json);
@@ -232,7 +232,7 @@ export async function uploadAssetWithStatusCheck(file: File, onProgress?: (messa
     return assetId;
   } catch (error) {
     console.error('Upload Asset With Status Check Error:', error);
-    onProgress?.(`Unerwarteter Fehler bei ${file.name}: ${error.message}`);
+    onProgress?.(`Unerwarteter Fehler bei ${file.name}: ${error instanceof Error ? error.message : error}`);
     return 'error';
   }
 }
@@ -327,7 +327,7 @@ export async function uploadAssetOnly(file: File, onProgress?: (message: string)
     return assetId;
   } catch (error) {
     console.error('Upload Asset Only Error:', error);
-    onProgress?.(`Unerwarteter Fehler bei ${file.name}: ${error.message}`);
+    onProgress?.(`Unerwarteter Fehler bei ${file.name}: ${error instanceof Error ? error.message : error}`);
     return 'error';
   }
 }

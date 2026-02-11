@@ -171,5 +171,17 @@
   "homepage_features_kontrolle_middleLine": "Das macht den Unterschied:",
   "homepage_features_kontrolle_point1": "<strong>100% Code-Ownership</strong> – vollständiges Repository wird übergeben, lesebarer, kommentierter Code – keine versteckten Einschränkungen",
   "homepage_features_kontrolle_point2": "<strong>Keine Abhängigkeit von einem Anbieter oder Baukasten</strong> – kein Vendor Lock-In, Projekte lassen sich leicht umziehen, anpassen, weiterentwickeln.",
-  "homepage_features_kontrolle_point3": "<strong>Empowerment statt Blackbox</strong> – wir befähigen dich u. a. mit kleinen Trainings & Wissenstransfers (optional), damit du mit deinem Team auch selbst handlungsfähig bist."
+  "homepage_features_kontrolle_point3": "<strong>Empowerment statt Blackbox</strong> – wir befähigen dich u. a. mit kleinen Trainings & Wissenstransfers (optional), damit du mit deinem Team auch selbst handlungsfähig bist.",
+  "homepage_cta_titleFirst": "Lass uns",
+  "homepage_cta_titleHighlight": "gemeinsam starten",
+  "homepage_cta_description": "Bereit für dein nächstes digitales Projekt? Unser intelligenter Konfigurator hilft dir, dein Projekt zu spezifizieren und du erhältst sofort einen transparenten Festpreis.",
+  "homepage_cta_benefits_zeit_title": "Sofortiger Preis",
+  "homepage_cta_benefits_zeit_description": "Erhalte innerhalb von Minuten einen verbindlichen Festpreis",
+  "homepage_cta_benefits_massgeschneidert_title": "Maßgeschneidert",
+  "homepage_cta_benefits_massgeschneidert_description": "Jede Lösung wird individuell auf deine Bedürfnisse zugeschnitten",
+  "homepage_cta_benefits_contact_title": "Persönlicher Ansprechpartner",
+  "homepage_cta_benefits_contact_description": "Ein fester Ansprechpartner begleitet dich durch das gesamte Projekt",
+  "homepage_cta_buttonText": "Projekt jetzt konfigurieren",
+  "homepage_cta_faqButtonText": "Häufig gestellte Fragen",
+  "homepage_cta_note": "<strong>Tipp:</strong> Der Konfigurator dauert nur 3-5 Minuten und du erhältst sofort deinen persönlichen Projektpreis. Unverbindlich und kostenlos."
 }
