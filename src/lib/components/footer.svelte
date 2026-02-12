@@ -177,6 +177,7 @@
           class="theme-controller"
           id="dark-theme-checkbox"
           name="dark-theme-checkbox"
+          aria-label="Dark Mode umschalten"
           bind:checked={darkActive}
           value="dark"
           onchange={updateDataAttribute}
