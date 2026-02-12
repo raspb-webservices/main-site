@@ -2,11 +2,13 @@ import { json } from '@sveltejs/kit';
 import { client } from '$lib/server/graphql-client.server';
 import { gql } from 'graphql-request';
 import type { RequestHandler } from '@sveltejs/kit';
+import { validateBody, validationErrorResponse, ValidationError } from '$lib/server/validate.server';
+import { projectLinkCustomerSchema } from '$lib/server/schemas/project.schema';
 
 export const POST: RequestHandler = async ({ params, request }) => {
   try {
     const projectId = params.id;
-    const { customerId } = await request.json();
+    const { customerId } = validateBody(projectLinkCustomerSchema, await request.json());
 
     if (!projectId) {
       return json(
@@ -14,17 +16,6 @@ export const POST: RequestHandler = async ({ params, request }) => {
           success: false,
           error: 'Projekt ID ist erforderlich',
           details: ['Keine Projekt ID in der URL gefunden.']
-        },
-        { status: 400 }
-      );
-    }
-
-    if (!customerId) {
-      return json(
-        {
-          success: false,
-          error: 'Customer ID ist erforderlich',
-          details: ['Keine Customer ID im Request Body gefunden.']
         },
         { status: 400 }
       );
@@ -63,6 +54,10 @@ export const POST: RequestHandler = async ({ params, request }) => {
       throw new Error('Customer konnte nicht mit Projekt verknüpft werden');
     }
   } catch (error) {
+    if (error instanceof ValidationError) {
+      return validationErrorResponse(error);
+    }
+
     console.error('Fehler beim Verknüpfen von Customer und Projekt:', error);
 
     let errorMessage = 'Unbekannter Fehler beim Verknüpfen von Customer und Projekt';

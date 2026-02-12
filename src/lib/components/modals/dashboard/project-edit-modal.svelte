@@ -20,6 +20,7 @@
     getProjectSubTypeLabel
   } from '$lib/helper/projectUtils';
   import { m } from '$lib/paraglide/messages';
+  import { authFetch } from '$lib/helper/auth-fetch';
 
   let { selectedProject } = $props();
 
@@ -121,7 +122,7 @@
           break;
       }
 
-      const response = await fetch(`/api/project/patch/${selectedProject?.id}`, {
+      const response = await authFetch(`/api/project/patch/${selectedProject?.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'
@@ -167,7 +168,7 @@
     customerSuccess = '';
 
     try {
-      const response = await fetch(`/api/customer/patch/${selectedProject?.owner.id}`, {
+      const response = await authFetch(`/api/customer/patch/${selectedProject?.owner.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'
@@ -267,7 +268,7 @@
         }
       };
 
-      const response = await fetch(`/api/project/patch/${selectedProject?.id}`, {
+      const response = await authFetch(`/api/project/patch/${selectedProject?.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'

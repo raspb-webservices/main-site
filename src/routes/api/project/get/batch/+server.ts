@@ -2,15 +2,19 @@ import { client } from '$lib/server/graphql-client.server';
 import type { RequestHandler } from '@sveltejs/kit';
 import { gql } from 'graphql-request';
 import { apiErrorResponse } from '$lib/server/api-error.server';
+import { checkAdmin } from '$lib/server/ownership.server';
+import { validateBody, validationErrorResponse } from '$lib/server/validate.server';
+import { projectBatchSchema } from '$lib/server/schemas/project.schema';
 
-export const POST: RequestHandler = async ({ request }) => {
-	const { ids } = await request.json();
-
-	if (!Array.isArray(ids) || ids.length === 0) {
-		return new Response(JSON.stringify({ projects: [] }), {
-			headers: { 'Content-Type': 'application/json' }
-		});
+export const POST: RequestHandler = async ({ request, locals }) => {
+	let body;
+	try {
+		body = validateBody(projectBatchSchema, await request.json());
+	} catch (error) {
+		return validationErrorResponse(error);
 	}
+
+	const { ids } = body;
 
 	try {
 		const query = gql`
@@ -47,6 +51,7 @@ export const POST: RequestHandler = async ({ request }) => {
 					}
 					owner {
 						id
+						auth0Id
 						familyName
 						givenName
 					}
@@ -55,7 +60,18 @@ export const POST: RequestHandler = async ({ request }) => {
 			}
 		`;
 
-		const response = await client.request(query, { ids });
+		const response = (await client.request(query, { ids })) as {
+			projects: Array<{ owner?: { auth0Id?: string } }>;
+		};
+
+		// Ownership-Filter: Nur eigene Projekte zurueckgeben (ausser Admin)
+		const userIsAdmin = await checkAdmin(locals);
+		if (!userIsAdmin && response.projects) {
+			response.projects = response.projects.filter(
+				(p) => p.owner?.auth0Id === locals.user?.sub
+			);
+		}
+
 		return new Response(JSON.stringify(response), {
 			headers: { 'Content-Type': 'application/json' }
 		});

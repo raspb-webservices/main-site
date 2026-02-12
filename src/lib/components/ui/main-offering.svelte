@@ -15,7 +15,7 @@
   <div class="feature-block">
     <h2>Die beste Webseite, die du je hattest</h2>
     <div class="lottie-container">
-      <DotLottieSvelte src="/lotties/solution-development-web.lottie" loop autoplay />
+      <DotLottieSvelte src=" /lotties/solution-development-web.lottie" loop autoplay />
     </div>
     <p>
       Ob One Pager, CMS oder komplexe Web-App - wir entwickeln digitale Lösungen, die begeistern und genau zu deinem Unternehmen passen. Modernste Technologien,
@@ -48,7 +48,7 @@
   <div class="feature-block">
     <h2>KI - die Superpower für dein Business</h2>
     <div class="lottie-container py-4">
-      <DotLottieSvelte src="/lotties/abstract-robot-with-cloud.lottie" loop autoplay />
+      <DotLottieSvelte src=" /lotties/abstract-robot-with-cloud.lottie" loop autoplay />
     </div>
     <p>
       Nutze künstliche Intelligenz, um Prozesse zu automatisieren, Kosten zu sparen und neue Möglichkeiten zu erschließen. Von smarter Datenanalyse bis hin zu

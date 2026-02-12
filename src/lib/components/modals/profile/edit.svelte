@@ -34,7 +34,7 @@
     };
 
     try {
-      await auth.updateMetadata(currentUser.sub, updatedMetadata);
+      await auth.updateMetadata(updatedMetadata);
       closeModal();
     } catch (error) {
       console.error('Error updating Auth0 metadata: ', error);

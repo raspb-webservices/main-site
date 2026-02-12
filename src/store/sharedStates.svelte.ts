@@ -17,3 +17,9 @@ class RolesState {
   value = $state<string[]>([]);
 }
 export const userroles = new RolesState();
+
+// Store fuer ID-Token (JWT-String fuer Authorization-Header)
+class TokenState {
+  value = $state<string | null>(null);
+}
+export const idToken = new TokenState();

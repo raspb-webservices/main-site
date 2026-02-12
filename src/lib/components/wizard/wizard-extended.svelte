@@ -504,7 +504,7 @@
             projectIds: currentUser.projectIds
           };
 
-          const updateMetaResponse = await auth.updateMetadata(currentUser.sub!, custom_metadata);
+          await auth.updateMetadata(custom_metadata);
         } else {
           console.warn('User not logged in or user ID not available, cannot update Auth0 metadata.');
         }

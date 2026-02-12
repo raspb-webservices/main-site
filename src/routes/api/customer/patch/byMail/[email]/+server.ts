@@ -1,15 +1,22 @@
 import type { RequestHandler } from '@sveltejs/kit';
-import type { User } from '$interfaces/user.interface';
 import { updateCustomer } from '$lib/server/customer-helpers.server';
+import { checkAdmin, forbiddenResponse } from '$lib/server/ownership.server';
+import { validateBody, validationErrorResponse } from '$lib/server/validate.server';
+import { customerPatchByMailSchema } from '$lib/server/schemas/customer.schema';
 
-export const PATCH: RequestHandler = async ({ request }) => {
-	const customerData: User = await request.json();
+export const PATCH: RequestHandler = async ({ request, locals }) => {
+	let customerData;
+	try {
+		customerData = validateBody(customerPatchByMailSchema, await request.json());
+	} catch (error) {
+		return validationErrorResponse(error);
+	}
 
-	if (!customerData.email) {
-		return new Response(JSON.stringify({ success: false, error: 'Customer Email is required' }), {
-			status: 400,
-			headers: { 'Content-Type': 'application/json' }
-		});
+	// Ownership-Check: Email muss zum eingeloggten User passen
+	const isOwner = locals.user?.email === customerData.email;
+	const userIsAdmin = await checkAdmin(locals);
+	if (!isOwner && !userIsAdmin) {
+		return forbiddenResponse();
 	}
 
 	return updateCustomer({ email: customerData.email }, customerData);

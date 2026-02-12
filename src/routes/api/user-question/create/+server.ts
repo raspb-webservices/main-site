@@ -5,11 +5,8 @@ import Renderer from 'better-svelte-email/render';
 import { env } from '$env/dynamic/private';
 import UserQuestionNotification from '$lib/emails/user-question-notification.svelte';
 import type { RequestHandler } from '@sveltejs/kit';
-
-interface UserQuestionInput {
-  question: string;
-  email?: string;
-}
+import { validateBody, validationErrorResponse, ValidationError } from '$lib/server/validate.server';
+import { userQuestionSchema } from '$lib/server/schemas/mail.schema';
 
 const { render } = new Renderer();
 
@@ -26,11 +23,7 @@ function getMailtrapClient(): MailtrapClient {
 
 export const POST: RequestHandler = async ({ request }) => {
   try {
-    const data: UserQuestionInput = await request.json();
-
-    if (!data.question || data.question.trim().length === 0) {
-      return Response.json({ success: false, error: 'Question is required' }, { status: 400 });
-    }
+    const data = validateBody(userQuestionSchema, await request.json());
 
     // 1. Create entry in Hygraph
     const mutation = gql`
@@ -79,6 +72,10 @@ export const POST: RequestHandler = async ({ request }) => {
       { status: 201 }
     );
   } catch (error) {
+    if (error instanceof ValidationError) {
+      return validationErrorResponse(error);
+    }
+
     console.error('Error creating user question:', error);
 
     let errorMessage = 'Unknown error occurred';
@@ -89,9 +86,6 @@ export const POST: RequestHandler = async ({ request }) => {
       if (error.message.includes('authorization') || error.message.includes('Unauthorized')) {
         statusCode = 401;
         errorMessage = 'Authorization failed';
-      } else if (error.message.includes('validation') || error.message.includes('required')) {
-        statusCode = 400;
-        errorMessage = 'Validation error: ' + error.message;
       }
     }
 

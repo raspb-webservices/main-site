@@ -1,5 +1,6 @@
 <script lang="ts">
   import { m } from '$lib/paraglide/messages';
+  import { authFetch } from '$lib/helper/auth-fetch';
 
   let { projects, selectedProject, editingProject, setupForm } = $props();
   let setupSaving = $state(false);
@@ -60,7 +61,7 @@
         }
       };
 
-      const response = await fetch(`/api/project/patch/${editingProject.id}`, {
+      const response = await authFetch(`/api/project/patch/${editingProject.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'

@@ -1,26 +1,31 @@
 import { client } from '$lib/server/graphql-client.server';
 import { gql } from 'graphql-request';
 import type { RequestHandler } from '@sveltejs/kit';
-import type { Project, ProjectResponse } from '$interfaces/project.interface';
+import type { ProjectResponse } from '$interfaces/project.interface';
+import { checkAdmin, forbiddenResponse } from '$lib/server/ownership.server';
+import { validateBody, validationErrorResponse, ValidationError } from '$lib/server/validate.server';
+import { projectPatchSchema } from '$lib/server/schemas/project.schema';
 
-export const PATCH: RequestHandler = async ({ request }) => {
+export const PATCH: RequestHandler = async ({ request, locals }) => {
   try {
-    const projectData: Project = await request.json();
+    const projectData = validateBody(projectPatchSchema, await request.json());
     const projectId = projectData.id;
 
-    if (!projectId) {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          error: 'Project ID is required'
-        }),
-        {
-          status: 400,
-          headers: {
-            'Content-Type': 'application/json'
-          }
+    // Ownership-Check: Projekt-Owner pruefen
+    const ownerQuery = gql`
+      query getProjectOwner($id: ID!) {
+        project(where: { id: $id }, stage: PUBLISHED) {
+          owner { auth0Id }
         }
-      );
+      }
+    `;
+    const ownerResult = (await client.request(ownerQuery, { id: projectId })) as {
+      project: { owner?: { auth0Id?: string } } | null;
+    };
+    const isOwner = ownerResult.project?.owner?.auth0Id === locals.user?.sub;
+    const userIsAdmin = await checkAdmin(locals);
+    if (!isOwner && !userIsAdmin) {
+      return forbiddenResponse();
     }
 
     // Dynamisch nur die vorhandenen Felder für die Mutation vorbereiten
@@ -230,22 +235,21 @@ export const PATCH: RequestHandler = async ({ request }) => {
       }
     );
   } catch (error) {
+    if (error instanceof ValidationError) {
+      return validationErrorResponse(error);
+    }
+
     console.error('Error updating project:', error);
 
-    // Spezifische Fehlerbehandlung für GraphQL-Fehler
     let errorMessage = 'Unknown error occurred';
     let statusCode = 500;
 
     if (error instanceof Error) {
       errorMessage = error.message;
 
-      // Prüfe auf spezifische GraphQL-Fehler
       if (error.message.includes('authorization') || error.message.includes('Unauthorized')) {
         statusCode = 401;
         errorMessage = 'Authorization failed';
-      } else if (error.message.includes('validation') || error.message.includes('required')) {
-        statusCode = 400;
-        errorMessage = 'Validation error: ' + error.message;
       } else if (error.message.includes('not found') || error.message.includes('does not exist')) {
         statusCode = 404;
         errorMessage = 'Project not found';

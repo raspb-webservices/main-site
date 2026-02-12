@@ -1,11 +1,13 @@
 import { client } from '$lib/server/graphql-client.server';
 import { gql } from 'graphql-request';
 import type { RequestHandler } from '@sveltejs/kit';
-import type { Project, ProjectResponse } from '$interfaces/project.interface';
+import type { ProjectResponse } from '$interfaces/project.interface';
+import { validateBody, validationErrorResponse, ValidationError } from '$lib/server/validate.server';
+import { projectCreateSchema } from '$lib/server/schemas/project.schema';
 
 export const POST: RequestHandler = async ({ request }) => {
   try {
-    const projectData: Project = await request.json();
+    const projectData = validateBody(projectCreateSchema, await request.json());
     const mutation = gql`
       mutation CreateProject(
         $name: String
@@ -143,22 +145,21 @@ export const POST: RequestHandler = async ({ request }) => {
       }
     );
   } catch (error) {
+    if (error instanceof ValidationError) {
+      return validationErrorResponse(error);
+    }
+
     console.error('Error creating project:', error);
 
-    // Spezifische Fehlerbehandlung für GraphQL-Fehler
     let errorMessage = 'Unknown error occurred';
     let statusCode = 500;
 
     if (error instanceof Error) {
       errorMessage = error.message;
 
-      // Prüfe auf spezifische GraphQL-Fehler
       if (error.message.includes('authorization') || error.message.includes('Unauthorized')) {
         statusCode = 401;
         errorMessage = 'Authorization failed';
-      } else if (error.message.includes('validation') || error.message.includes('required')) {
-        statusCode = 400;
-        errorMessage = 'Validation error: ' + error.message;
       }
     }
 

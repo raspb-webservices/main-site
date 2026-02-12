@@ -3,17 +3,8 @@ import Renderer from 'better-svelte-email/render';
 import { env } from '$env/dynamic/private';
 import WelcomeEmail from '$lib/emails/welcome.svelte';
 import type { RequestHandler } from '@sveltejs/kit';
-
-interface MailRequest {
-  from: { email: string; name: string };
-  to: { email: string; name?: string }[];
-  subject: string;
-  text?: string;
-  template?: string;
-  templateProps?: Record<string, unknown>;
-  html?: string;
-  category?: string;
-}
+import { validateBody, validationErrorResponse, ValidationError } from '$lib/server/validate.server';
+import { mailSendSchema } from '$lib/server/schemas/mail.schema';
 
 export interface MailRecipient {
   email: string;
@@ -46,11 +37,11 @@ function getMailtrapClient(): MailtrapClient {
 
 let mailtrapClient: MailtrapClient | null = null;
 const { render } = new Renderer();
-const client = getMailtrapClient();
 
 export const POST: RequestHandler = async ({ request }) => {
   try {
-    const mailData: MailRequest = await request.json();
+    const mailData = validateBody(mailSendSchema, await request.json());
+    const client = getMailtrapClient();
     const html = await render(WelcomeEmail, { props:mailData.templateProps });
     const sendOptions: SendMailOptions = {
       from: mailData.from,
@@ -68,6 +59,9 @@ export const POST: RequestHandler = async ({ request }) => {
       return Response.json({ success: false, error: 'unknown error occurred' }, { status: 500 });
     }
   } catch (error) {
+    if (error instanceof ValidationError) {
+      return validationErrorResponse(error);
+    }
     console.error('Error in mail API:', error);
     return Response.json(
       { success: false, error: error instanceof Error ? error.message : 'Unknown error' },

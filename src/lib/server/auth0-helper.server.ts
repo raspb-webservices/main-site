@@ -70,3 +70,31 @@ const API = {
 };
 
 export default API;
+
+// --- Typed helpers for specific Auth0 Management API operations ---
+
+interface Auth0Role {
+  id: string;
+  name: string;
+  description?: string;
+}
+
+export async function getUserRoles(userId: string): Promise<Auth0Role[]> {
+  return apiRequest('get', `users/${userId}/roles`, null) as Promise<Auth0Role[]>;
+}
+
+export async function isAdmin(userId: string): Promise<boolean> {
+  const roles = await getUserRoles(userId);
+  return roles.some((r) => r.name === 'admin');
+}
+
+export async function assignRoleToUser(userId: string, roleIds: string[]): Promise<void> {
+  await apiRequest('post', `users/${userId}/roles`, { roles: roleIds });
+}
+
+export async function updateUserMetadata(
+  userId: string,
+  metadata: Record<string, unknown>
+): Promise<unknown> {
+  return apiRequest('patch', `users/${userId}`, { user_metadata: metadata });
+}

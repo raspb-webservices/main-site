@@ -1,11 +1,12 @@
 import { client } from '$lib/server/graphql-client.server';
 import { gql } from 'graphql-request';
 import type { RequestHandler } from '@sveltejs/kit';
-import type { User } from '$interfaces/user.interface';
+import { validateBody, validationErrorResponse, ValidationError } from '$lib/server/validate.server';
+import { customerCreateSchema } from '$lib/server/schemas/customer.schema';
 
 export const POST: RequestHandler = async ({ request }) => {
   try {
-    const customerData: User = await request.json();
+    const customerData = validateBody(customerCreateSchema, await request.json());
     const mutation = gql`
       mutation CreateCustomer(
         $address: String
@@ -87,6 +88,10 @@ export const POST: RequestHandler = async ({ request }) => {
       }
     );
   } catch (error) {
+    if (error instanceof ValidationError) {
+      return validationErrorResponse(error);
+    }
+
     console.error('Error creating customer:', error);
 
     let errorMessage = 'Unknown error occurred';
@@ -95,13 +100,9 @@ export const POST: RequestHandler = async ({ request }) => {
     if (error instanceof Error) {
       errorMessage = error.message;
 
-      // Prüfe auf spezifische GraphQL-Fehler
       if (error.message.includes('authorization') || error.message.includes('Unauthorized')) {
         statusCode = 401;
         errorMessage = 'Authorization failed';
-      } else if (error.message.includes('validation') || error.message.includes('required')) {
-        statusCode = 400;
-        errorMessage = 'Validation error: ' + error.message;
       }
     }
 

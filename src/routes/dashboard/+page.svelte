@@ -10,6 +10,7 @@
   import { goto } from '$app/navigation';
   import { m } from '$lib/paraglide/messages';
   import auth from '$services/auth-service';
+  import { authFetch } from '$lib/helper/auth-fetch';
   import LottieLoader from '$lib/components/lottie-loader.svelte';
   import { openAuth0Popup } from '$helper/loginOpener';
   import { localizeHref } from '$lib/paraglide/runtime';
@@ -49,7 +50,7 @@
 
     if (hasAdminAccess) {
       try {
-        const response = await fetch('/api/project/get');
+        const response = await authFetch('/api/project/get');
         const data = await response.json();
 
         if (response.ok) {
@@ -71,7 +72,7 @@
         return;
       }
       try {
-        const response = await fetch('/api/project/get/batch', {
+        const response = await authFetch('/api/project/get/batch', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ ids: currentUser.projectIds })

@@ -1,169 +1,121 @@
 import { createAuth0Client, type Auth0Client } from '@auth0/auth0-spa-js';
-import { user, isAuthenticated, userroles } from '$store/sharedStates.svelte';
+import { user, isAuthenticated, userroles, idToken } from '$store/sharedStates.svelte';
+import { authFetch } from '$lib/helper/auth-fetch';
 import authConfig from '../configs/auth-config';
 
 async function createClient() {
-  return await createAuth0Client({
-    domain: authConfig.domain,
-    clientId: authConfig.clientId
-  });
+	return await createAuth0Client({
+		domain: authConfig.domain,
+		clientId: authConfig.clientId
+	});
 }
 
-async function getRoles(userid: string): Promise<string[]> {
-  const userRolesResponse = await fetch('/api/user/role/get/' + userid);
-  if (userRolesResponse.ok) {
-    const userRoleObjects = await userRolesResponse.json();
+/** Token aus Auth0 SDK holen und im globalen State speichern */
+async function storeIdToken(client: Auth0Client) {
+	const claims = await client.getIdTokenClaims();
+	if (claims?.__raw) {
+		idToken.value = claims.__raw;
+	}
+}
 
-    const userRoles: string[] = [];
-    if (userRoleObjects && userRoleObjects.length) {
-      userRoleObjects.forEach((element: unknown) => {
-        userRoles.push((element as Record<string, string>)['name']);
-      });
-    }
-    return userRoles;
-  }
-  throw new Error('Could not fetch user roles from /api/userRoles/user[sub]!');
+async function getRoles(): Promise<string[]> {
+	const response = await authFetch('/api/auth/user-roles');
+	if (response.ok) {
+		const roleObjects = await response.json();
+		if (roleObjects && roleObjects.length) {
+			return roleObjects.map((r: Record<string, string>) => r.name);
+		}
+		return [];
+	}
+	throw new Error('Could not fetch user roles');
 }
 
 async function loginWithPopup(client: Auth0Client, options?: Record<string, unknown>, popup?: Window) {
-  try {
-    await client.loginWithPopup(options as Parameters<Auth0Client['loginWithPopup']>[0], { popup });
-    const currentUser = await client.getUser();
-    if (!currentUser?.sub) return;
-    const currentUserRole = await getRoles(currentUser.sub);
+	try {
+		await client.loginWithPopup(options as Parameters<Auth0Client['loginWithPopup']>[0], { popup });
+		const currentUser = await client.getUser();
+		if (!currentUser?.sub) return;
 
-    userroles.value = currentUserRole;
-    user.value = currentUser;
-    isAuthenticated.value = true;
-  } catch (e) {
-    console.error(e);
-  }
+		// Token speichern fuer authentifizierte API-Calls
+		await storeIdToken(client);
+
+		const currentUserRole = await getRoles();
+
+		// Wenn keine Rolle vorhanden → Kunden-Rolle zuweisen (Erstanmeldung)
+		if (currentUserRole.length === 0) {
+			await assignRole();
+			currentUserRole.push('customer');
+		}
+
+		userroles.value = currentUserRole;
+		user.value = currentUser;
+		isAuthenticated.value = true;
+	} catch (e) {
+		console.error(e);
+	}
 }
 
 function logout(client: Auth0Client) {
-  isAuthenticated.value = false;
-  user.value = { email: '' };
-  return client.logout({
-    clientId: authConfig.clientId,
-    logoutParams: {
-      returnTo: authConfig.callbackUrl
-    }
-  });
-}
-
-async function getIdTokenClaims(client: Auth0Client) {
-  return await client.getIdTokenClaims();
+	isAuthenticated.value = false;
+	user.value = { email: '' };
+	userroles.value = [];
+	idToken.value = null;
+	return client.logout({
+		clientId: authConfig.clientId,
+		logoutParams: {
+			returnTo: authConfig.callbackUrl
+		}
+	});
 }
 
 async function checkAuthState(client: Auth0Client) {
-  try {
-    const isAuth = await client.isAuthenticated();
-    if (isAuth) {
-      const currentUser = await client.getUser();
-      if (currentUser) user.value = currentUser;
-      isAuthenticated.value = true;
-    } else {
-      isAuthenticated.value = false;
-    }
-  } catch (e) {
-    console.error('Error checking auth state:', e);
-    isAuthenticated.value = false;
-  }
+	try {
+		const isAuth = await client.isAuthenticated();
+		if (isAuth) {
+			const currentUser = await client.getUser();
+			if (currentUser) user.value = currentUser;
+			isAuthenticated.value = true;
+
+			// Token speichern fuer authentifizierte API-Calls
+			await storeIdToken(client);
+
+			// Rollen laden
+			const roles = await getRoles();
+			userroles.value = roles;
+		} else {
+			isAuthenticated.value = false;
+		}
+	} catch (e) {
+		console.error('Error checking auth state:', e);
+		isAuthenticated.value = false;
+	}
 }
 
-async function createAuth0User(userData: { email: string; password: string; givenName: string; familyName: string; user_metadata: object }): Promise<unknown> {
-  try {
-    const fetchString = '/api/auth/post/' + 'users';
-    const requestData = {
-      email: userData.email,
-      password: userData.password,
-      given_name: userData.givenName,
-      family_name: userData.familyName,
-      connection: 'Username-Password-Authentication',
-      verify_email: true,
-      user_metadata: userData.user_metadata
-    };
-
-    const response = await fetch(fetchString, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(requestData)
-    });
-    return response;
-  } catch (error) {
-    console.error('Error creating Auth0 user:', error);
-    throw error;
-  }
+async function assignRole(): Promise<unknown> {
+	const response = await authFetch('/api/auth/assign-role', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' }
+	});
+	return response.json();
 }
 
-async function assignRole(userId: string, rolesToAssign: string[]): Promise<unknown> {
-  try {
-    const fetchString = '/api/auth/post/userRole/' + userId;
-    const requestData = {
-      roles: rolesToAssign
-    };
-    const response = await fetch(fetchString, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(requestData)
-    });
-    return response;
-  } catch (error) {
-    console.error('Error assigning role:', error);
-    throw error;
-  }
-}
-
-async function updateMetadata(userId: string, metadata: object): Promise<unknown> {
-  if (userId) {
-    try {
-      const fetchString = '/api/auth/patch/users/' + userId;
-      const requestData = {
-        user_metadata: metadata
-      };
-      const response = await fetch(fetchString, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(requestData)
-      });
-      return response;
-    } catch (error) {
-      console.error('Error updating metadata:', error);
-      throw error;
-    }
-  } else {
-    return 'error - no id';
-  }
-}
-
-async function getAuth0UserByEmail(email: string): Promise<unknown> {
-  try {
-    const fetchString = '/api/auth/get/' + `users-by-email?email=${encodeURIComponent(email)}`;
-    const response = await fetch(fetchString);
-    return response;
-  } catch (error) {
-    console.error('Error fetching Auth0 user by email:', error);
-    throw error;
-  }
+async function updateMetadata(metadata: object): Promise<unknown> {
+	const response = await authFetch('/api/auth/update-metadata', {
+		method: 'PATCH',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ user_metadata: metadata })
+	});
+	return response.json();
 }
 
 const auth = {
-  assignRole,
-  createClient,
-  getRoles,
-  loginWithPopup,
-  logout,
-  getIdTokenClaims,
-  checkAuthState,
-  createAuth0User,
-  getAuth0UserByEmail,
-  updateMetadata
+	createClient,
+	getRoles,
+	loginWithPopup,
+	logout,
+	checkAuthState,
+	assignRole,
+	updateMetadata
 };
 
 export default auth;
