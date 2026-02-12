@@ -64,7 +64,7 @@ export const projectCreateSchema = z.object({
 	estimatedPrice: z.number().min(0).optional(),
 	formFields: z.array(formFieldSchema).optional(),
 	pages: z.array(pageSchema).optional(),
-	setup: z.record(z.unknown()).optional(),
+	setup: z.record(z.string(), z.unknown()).optional(),
 	relatedFiles: z.array(relatedFileSchema).optional()
 });
 
@@ -92,7 +92,7 @@ export const projectPatchSchema = z.object({
 	estimatedPrice: z.number().min(0).optional(),
 	formFields: z.array(formFieldSchema).optional(),
 	pages: z.array(pageSchema).optional(),
-	setup: z.record(z.unknown()).optional(),
+	setup: z.record(z.string(), z.unknown()).optional(),
 	relatedFiles: z.array(relatedFileSchema).optional()
 });
 

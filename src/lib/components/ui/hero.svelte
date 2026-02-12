@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { m } from '$lib/paraglide/messages';
+
   let {
     headline = '',
     subheadline = '',
@@ -7,7 +9,7 @@
     variant = 'default',
     position = 'default',
     showButton = false,
-    buttonText = 'learn more',
+    buttonText = m.hero_default_button(),
     buttonAction
   } = $props();
 </script>
@@ -108,7 +110,7 @@
   }
 
   .hero-headline :global(span.inner-text-special) {
-    @apply inline-block bg-gradient-to-r from-purple-500 via-pink-500 to-violet-500 bg-clip-text text-transparent;
+    @apply inline-block bg-linear-to-r from-purple-500 via-pink-500 to-violet-500 bg-clip-text text-transparent;
   }
 
   .hero-subheadline {
@@ -128,7 +130,7 @@
   }
 
   .hero-image-container {
-    @apply relative aspect-[5/3] w-full overflow-hidden rounded-2xl shadow-2xl;
+    @apply relative aspect-5/3 w-full overflow-hidden rounded-2xl shadow-2xl;
   }
 
   .hero-image {
@@ -140,7 +142,7 @@
   }
 
   .background-image::after {
-    @apply absolute inset-0 bg-gradient-to-r from-black/30 to-transparent;
+    @apply absolute inset-0 bg-linear-to-r from-black/30 to-transparent;
     content: '';
   }
 

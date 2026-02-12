@@ -18,24 +18,24 @@
 
     <div class="mt-10 mb-6 flex flex-col items-center text-center">
       <div class="mb-4">
-        <img class="h-36 w-auto rounded-full" src="$images/test.jpg" alt="Markus Härtig" />
+        <img class="h-36 w-auto rounded-full" src="$images/test.jpg" alt={m.aboutUs_modals_aboutMe_imageAlt()} />
       </div>
-      <h3 class="no-padding">Markus Härtig</h3>
-      <p class="opacity-70">Gesellschafter-Geschäftsführer</p>
+      <h3 class="no-padding">{m.aboutUs_modals_aboutMe_name()}</h3>
+      <p class="opacity-70">{m.aboutUs_modals_aboutMe_role()}</p>
     </div>
 
     <div class="prose py-4">
-      <h2>{m['aboutUs_modals_aboutMe_title']()}</h2>
-      <p>{@html m['aboutUs_modals_aboutMe_paragraph1']()}</p>
+      <h2>{m.aboutUs_modals_aboutMe_title()}</h2>
+      <p>{@html m.aboutUs_modals_aboutMe_paragraph1()}</p>
     </div>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">{m['aboutUs_modals_closeButton']()}</button>
+        <button class="btn">{m.aboutUs_modals_closeButton()}</button>
       </form>
     </div>
   </div>
   <form method="dialog" class="modal-backdrop">
-    <button onclick={closeModal}>close</button>
+    <button onclick={closeModal}>{m.modal_close()}</button>
   </form>
 </dialog>
 

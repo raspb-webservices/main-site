@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { register } from 'swiper/element/bundle';
+  import { m } from '$lib/paraglide/messages';
 
   register();
 
@@ -48,9 +49,9 @@
         <div class="hero-overlay"></div>
         <div class="hero-content">
           <div class="hero-text">
-            <h1 class="hero-headline">Experience Adventure Like Never Before</h1>
-            <p class="hero-subtext">Discover breathtaking landscapes and create unforgettable memories with our premium outdoor experiences.</p>
-            <button class="btn-basic hero-cta">Get Started</button>
+            <h1 class="hero-headline">{m.carousel_slide1_title()}</h1>
+            <p class="hero-subtext">{m.carousel_slide1_text()}</p>
+            <button class="btn-basic hero-cta">{m.carousel_slide1_cta()}</button>
           </div>
         </div>
       </div>
@@ -62,9 +63,9 @@
         <div class="hero-overlay"></div>
         <div class="hero-content">
           <div class="hero-text">
-            <h1 class="hero-headline">Push Your Limits</h1>
-            <p class="hero-subtext">Challenge yourself with thrilling adventures that test your courage and reward your spirit.</p>
-            <button class="btn-basic hero-cta">Join Adventure</button>
+            <h1 class="hero-headline">{m.carousel_slide2_title()}</h1>
+            <p class="hero-subtext">{m.carousel_slide2_text()}</p>
+            <button class="btn-basic hero-cta">{m.carousel_slide2_cta()}</button>
           </div>
         </div>
       </div>
@@ -76,9 +77,9 @@
         <div class="hero-overlay"></div>
         <div class="hero-content">
           <div class="hero-text">
-            <h1 class="hero-headline">Nature's Playground Awaits</h1>
-            <p class="hero-subtext">Immerse yourself in pristine wilderness and connect with the raw beauty of the natural world.</p>
-            <button class="btn-basic hero-cta">Explore Now</button>
+            <h1 class="hero-headline">{m.carousel_slide3_title()}</h1>
+            <p class="hero-subtext">{m.carousel_slide3_text()}</p>
+            <button class="btn-basic hero-cta">{m.carousel_slide3_cta()}</button>
           </div>
         </div>
       </div>
@@ -90,9 +91,9 @@
         <div class="hero-overlay"></div>
         <div class="hero-content">
           <div class="hero-text">
-            <h1 class="hero-headline">Create Lasting Memories</h1>
-            <p class="hero-subtext">Every moment becomes a story worth telling when you embrace the adventure that calls to you.</p>
-            <button class="btn-basic hero-cta">Start Journey</button>
+            <h1 class="hero-headline">{m.carousel_slide4_title()}</h1>
+            <p class="hero-subtext">{m.carousel_slide4_text()}</p>
+            <button class="btn-basic hero-cta">{m.carousel_slide4_cta()}</button>
           </div>
         </div>
       </div>
@@ -104,9 +105,9 @@
         <div class="hero-overlay"></div>
         <div class="hero-content">
           <div class="hero-text">
-            <h1 class="hero-headline">Where Dreams Take Flight</h1>
-            <p class="hero-subtext">Soar beyond your comfort zone and discover what lies beyond the horizon of possibility.</p>
-            <button class="btn-basic hero-cta">Take Flight</button>
+            <h1 class="hero-headline">{m.carousel_slide5_title()}</h1>
+            <p class="hero-subtext">{m.carousel_slide5_text()}</p>
+            <button class="btn-basic hero-cta">{m.carousel_slide5_cta()}</button>
           </div>
         </div>
       </div>
@@ -115,12 +116,12 @@
 
   <!-- Custom Navigation -->
   <div class="hero-navigation">
-    <button class="full-width-swiper-button-prev hero-nav-btn" type="button" aria-label="previous">
+    <button class="full-width-swiper-button-prev hero-nav-btn" type="button" aria-label={m.carousel_nav_previous()}>
       <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none">
         <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6" />
       </svg>
     </button>
-    <button class="full-width-swiper-button-next hero-nav-btn" type="button" aria-label="next">
+    <button class="full-width-swiper-button-next hero-nav-btn" type="button" aria-label={m.carousel_nav_next()}>
       <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none">
         <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6" />
       </svg>

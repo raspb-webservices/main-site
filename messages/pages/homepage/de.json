@@ -82,7 +82,7 @@
   "homepage_services_ki_services_agenten_description": "Custom Chatbots, Content-Generierung, System-Integration",
   "homepage_services_ki_services_workflow_title": "Workflow-Optimierung",
   "homepage_services_ki_services_workflow_description": "Prozessanalyse, Automatisierung, Predictive Analytics",
-  "homepage_services_ki_services_infrastructure_title": "AI as Infrastructure",
+  "homepage_services_ki_services_infrastructure_title": "KI als Infrastruktur",
   "homepage_services_ki_services_infrastructure_description": "Skalierbare KI-Infrastruktur, Pay-per-Use, 24/7 Support",
   "homepage_services_ki_buttonText": "KI-Beratung anfragen",
   "homepage_balance_titleFirst": "Die perfekte",
@@ -183,5 +183,33 @@
   "homepage_cta_benefits_contact_description": "Ein fester Ansprechpartner begleitet dich durch das gesamte Projekt",
   "homepage_cta_buttonText": "Projekt jetzt konfigurieren",
   "homepage_cta_faqButtonText": "Häufig gestellte Fragen",
-  "homepage_cta_note": "<strong>Tipp:</strong> Der Konfigurator dauert nur 3-5 Minuten und du erhältst sofort deinen persönlichen Projektpreis. Unverbindlich und kostenlos."
+  "homepage_cta_note": "<strong>Tipp:</strong> Der Konfigurator dauert nur 3-5 Minuten und du erhältst sofort deinen persönlichen Projektpreis. Unverbindlich und kostenlos.",
+
+  "homepage_offering_titleFirst": "Dein digitales",
+  "homepage_offering_titleHighlight": "Upgrade",
+  "homepage_offering_titleSecond": "beginnt hier",
+  "homepage_offering_subtitle": "Individuelle Web-Lösungen oder KI-Power für dein Business - maßgeschneidert, modern, zukunftssicher.",
+
+  "homepage_offering_web_title": "Die beste Webseite, die du je hattest",
+  "homepage_offering_web_description": "Ob One Pager, CMS oder komplexe Web-App - wir entwickeln digitale Lösungen, die begeistern und genau zu deinem Unternehmen passen. Modernste Technologien, individuelle Designs und ein reibungsloser Ablauf sorgen für ein Ergebnis, das dich und deine Kunden überzeugt.",
+  "homepage_offering_web_feature1": "Modernes, responsives Design",
+  "homepage_offering_web_feature2": "Individuelle Funktionen & Integrationen",
+  "homepage_offering_web_feature3": "SEO & Performance optimiert",
+  "homepage_offering_web_feature4": "Persönliche Beratung & Support",
+  "homepage_offering_configure_button": "Projekt konfigurieren",
+  "homepage_offering_appointment_button": "Erstgespräch vereinbaren",
+
+  "homepage_offering_ki_title": "KI - die Superpower für dein Business",
+  "homepage_offering_ki_description": "Nutze künstliche Intelligenz, um Prozesse zu automatisieren, Kosten zu sparen und neue Möglichkeiten zu erschließen. Von smarter Datenanalyse bis hin zu individuellen KI-Lösungen - wir zeigen dir, wie du das volle Potenzial für dein Unternehmen ausschöpfst.",
+  "homepage_offering_ki_feature1": "Automatisierung & Effizienzsteigerung",
+  "homepage_offering_ki_feature2": "Intelligente Datenanalyse",
+  "homepage_offering_ki_feature3": "Individuelle KI-Integrationen",
+  "homepage_offering_ki_feature4": "Wettbewerbsvorteil sichern",
+
+  "homepage_offering_services_detail_button": "Unser Service-Angebot im Detail",
+
+  "homepage_tech_title": "Unser Technologie-Stack",
+  "homepage_tech_subtitle": "Moderne Tools für außergewöhnliche Ergebnisse",
+  "homepage_tech_pause_animation": "Logo-Animation pausieren oder fortsetzen",
+  "homepage_tech_hover_hint": "Fahren Sie mit der Maus darüber, um die Animation zu pausieren"
 }

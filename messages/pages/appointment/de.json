@@ -1,5 +1,6 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "appointment_title": "Jetzt...",
-  "appointment_subtitle": "einen unverbindlichen Termin vereinbaren"
+  "appointment_subtitle": "einen unverbindlichen Termin vereinbaren",
+  "appointment_iframe_title": "Erstgespräch vereinbaren"
 }

@@ -26,33 +26,33 @@
         <!-- Grundinformationen -->
         <div class="card bg-base-200">
           <div class="card-body">
-            <h4 class="card-title text-base">Grundinformationen</h4>
+            <h4 class="card-title text-base">{m.dashboard_details_section_basic()}</h4>
             <div class="space-y-3">
               <div class="flex justify-between">
-                <span class="text-base-content/60">Projekttyp:</span>
-                <span class="font-medium">{selectedProject.projectType || 'Nicht angegeben'}</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_type()}</span>
+                <span class="font-medium">{selectedProject.projectType || m.dashboard_details_fallback_not_specified()}</span>
               </div>
               <div class="flex justify-between">
-                <span class="text-base-content/60">Untertyp:</span>
-                <span class="font-medium">{selectedProject.subType || 'Nicht angegeben'}</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_subtype()}</span>
+                <span class="font-medium">{selectedProject.subType || m.dashboard_details_fallback_not_specified()}</span>
               </div>
               <div class="flex justify-between">
-                <span class="text-base-content/60">Projektstatus:</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_status()}</span>
                 {#if selectedProject.projectStatus}
                   <div class="badge {getStatusBadgeClass(selectedProject.projectStatus)} badge-sm">
                     {getStatusLabel(selectedProject.projectStatus)}
                   </div>
                 {:else}
-                  <span class="font-medium">Nicht angegeben</span>
+                  <span class="font-medium">{m.dashboard_details_fallback_not_specified()}</span>
                 {/if}
               </div>
               <div class="flex flex-col gap-1">
-                <span class="text-base-content/60">Beschreibung:</span>
-                <span class="text-sm">{selectedProject.description || 'Keine Beschreibung verfügbar'}</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_description()}</span>
+                <span class="text-sm">{selectedProject.description || m.dashboard_details_fallback_no_description()}</span>
               </div>
               <div class="flex flex-col gap-1">
-                <span class="text-base-content/60">Projektdetails:</span>
-                <span class="text-sm">{selectedProject.projectDetails || 'Keine Details verfügbar'}</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_details()}</span>
+                <span class="text-sm">{selectedProject.projectDetails || m.dashboard_details_fallback_no_details()}</span>
               </div>
             </div>
           </div>
@@ -61,27 +61,27 @@
         <!-- Projekt-Spezifikationen -->
         <div class="card bg-base-200">
           <div class="card-body">
-            <h4 class="card-title text-base">Projekt-Spezifikationen</h4>
+            <h4 class="card-title text-base">{m.dashboard_details_section_specs()}</h4>
             <div class="space-y-3">
               <div class="flex justify-between">
-                <span class="text-base-content/60">Domain:</span>
-                <span class="font-medium">{selectedProject.desiredDomain || 'Nicht angegeben'}</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_domain()}</span>
+                <span class="font-medium">{selectedProject.desiredDomain || m.dashboard_details_fallback_not_specified()}</span>
               </div>
               <div class="flex justify-between">
-                <span class="text-base-content/60">Domain-Status:</span>
-                <div class="badge badge-outline badge-sm">{selectedProject.domainStatus || 'Nicht angegeben'}</div>
+                <span class="text-base-content/60">{m.dashboard_details_label_domain_status()}</span>
+                <div class="badge badge-outline badge-sm">{selectedProject.domainStatus || m.dashboard_details_fallback_not_specified()}</div>
               </div>
               <div class="flex flex-col gap-1">
-                <span class="text-base-content/60">Ziele:</span>
-                <span class="text-sm">{selectedProject.goals || 'Nicht angegeben'}</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_goals()}</span>
+                <span class="text-sm">{selectedProject.goals || m.dashboard_details_fallback_not_specified()}</span>
               </div>
               <div class="flex flex-col gap-1">
-                <span class="text-base-content/60">Zielgruppe:</span>
-                <span class="text-sm">{selectedProject.targetAudience || 'Nicht angegeben'}</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_audience()}</span>
+                <span class="text-sm">{selectedProject.targetAudience || m.dashboard_details_fallback_not_specified()}</span>
               </div>
               <div class="flex justify-between">
-                <span class="text-base-content/60">Timeline:</span>
-                <span class="font-medium">{selectedProject.timeline || 'Nicht angegeben'}</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_timeline()}</span>
+                <span class="font-medium">{selectedProject.timeline || m.dashboard_details_fallback_not_specified()}</span>
               </div>
             </div>
           </div>
@@ -90,16 +90,16 @@
         <!-- Budget & Preise -->
         <div class="card bg-base-200">
           <div class="card-body">
-            <h4 class="card-title text-base">Budget & Preise</h4>
+            <h4 class="card-title text-base">{m.dashboard_details_section_budget()}</h4>
             <div class="space-y-3">
               <div class="flex justify-between">
-                <span class="text-base-content/60">Budget:</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_budget()}</span>
                 <span class="font-medium">{formatBudget(selectedProject.budget || '')}</span>
               </div>
               <div class="flex justify-between">
-                <span class="text-base-content/60">Geschätzter Preis:</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_estimated_price()}</span>
                 <span class="font-medium">
-                  {selectedProject.estimatedPrice ? `${selectedProject.estimatedPrice}€` : 'Nicht berechnet'}
+                  {selectedProject.estimatedPrice ? `${selectedProject.estimatedPrice}€` : m.dashboard_details_fallback_not_calculated()}
                 </span>
               </div>
             </div>
@@ -109,7 +109,7 @@
         <!-- Features -->
         <div class="card bg-base-200">
           <div class="card-body">
-            <h4 class="card-title text-base">Features</h4>
+            <h4 class="card-title text-base">{m.dashboard_details_section_features()}</h4>
             {#if selectedProject.features && selectedProject.features.length > 0}
               <div class="flex flex-wrap gap-2">
                 {#each selectedProject.features as feature}
@@ -117,11 +117,11 @@
                 {/each}
               </div>
             {:else}
-              <p class="text-base-content/60 text-sm">Keine Features ausgewählt</p>
+              <p class="text-base-content/60 text-sm">{m.dashboard_details_fallback_no_features()}</p>
             {/if}
             {#if selectedProject.customFeature}
               <div class="mt-2">
-                <div class="text-base-content/60 text-sm">Custom Feature:</div>
+                <div class="text-base-content/60 text-sm">{m.dashboard_details_label_custom_feature()}</div>
                 <div class="pt-1 text-sm">{selectedProject.customFeature}</div>
               </div>
             {/if}
@@ -131,44 +131,44 @@
         <!-- Design -->
         <div class="card bg-base-200">
           <div class="card-body">
-            <h4 class="card-title text-base">Design</h4>
+            <h4 class="card-title text-base">{m.dashboard_details_section_design()}</h4>
             <div class="space-y-3">
               <div class="flex items-center justify-between">
-                <span class="text-base-content/60">Primärfarbe:</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_primary_color()}</span>
                 <div class="flex items-center gap-2">
                   {#if selectedProject.primaryColour}
                     <div class="border-base-300 h-4 w-4 rounded border" style="background-color: {selectedProject.primaryColour}"></div>
                     <span class="font-mono text-xs">{selectedProject.primaryColour}</span>
                   {:else}
-                    <span class="text-sm">Nicht angegeben</span>
+                    <span class="text-sm">{m.dashboard_details_fallback_not_specified()}</span>
                   {/if}
                 </div>
               </div>
               <div class="flex items-center justify-between">
-                <span class="text-base-content/60">Sekundärfarbe:</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_secondary_color()}</span>
                 <div class="flex items-center gap-2">
                   {#if selectedProject.secondaryColour}
                     <div class="border-base-300 h-4 w-4 rounded border" style="background-color: {selectedProject.secondaryColour}"></div>
                     <span class="font-mono text-xs">{selectedProject.secondaryColour}</span>
                   {:else}
-                    <span class="text-sm">Nicht angegeben</span>
+                    <span class="text-sm">{m.dashboard_details_fallback_not_specified()}</span>
                   {/if}
                 </div>
               </div>
               <div class="flex items-center justify-between">
-                <span class="text-base-content/60">Akzentfarbe:</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_accent_color()}</span>
                 <div class="flex items-center gap-2">
                   {#if selectedProject.accentColour}
                     <div class="border-base-300 h-4 w-4 rounded border" style="background-color: {selectedProject.accentColour}"></div>
                     <span class="font-mono text-xs">{selectedProject.accentColour}</span>
                   {:else}
-                    <span class="text-sm">Nicht angegeben</span>
+                    <span class="text-sm">{m.dashboard_details_fallback_not_specified()}</span>
                   {/if}
                 </div>
               </div>
               <div class="flex justify-between">
-                <span class="text-base-content/60">Schriftart:</span>
-                <span class="font-medium">{selectedProject.desiredFont || 'Nicht angegeben'}</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_font()}</span>
+                <span class="font-medium">{selectedProject.desiredFont || m.dashboard_details_fallback_not_specified()}</span>
               </div>
             </div>
           </div>
@@ -178,13 +178,13 @@
         {#if selectedProject.relatedFiles && selectedProject.relatedFiles.length > 0}
           <div class="card bg-base-200">
             <div class="card-body">
-              <h4 class="card-title text-base">Dateien</h4>
+              <h4 class="card-title text-base">{m.dashboard_details_section_files()}</h4>
               <div class="space-y-2">
                 {#each selectedProject.relatedFiles as file}
                   <div class="bg-base-100 flex items-center justify-between rounded p-2">
-                    <span class="truncate text-sm">{file.fileName || 'Unbenannte Datei'}</span>
+                    <span class="truncate text-sm">{file.fileName || m.dashboard_details_fallback_unnamed_file()}</span>
                     {#if file.url}
-                      <button onclick={() => window.open(file.url, '_blank')} class="btn btn-xs btn-simple"> Öffnen </button>
+                      <button onclick={() => window.open(file.url, '_blank')} class="btn btn-xs btn-simple"> {m.dashboard_details_button_open()} </button>
                     {/if}
                   </div>
                 {/each}
@@ -196,16 +196,16 @@
         <!-- Metadaten -->
         <div class="card bg-base-200">
           <div class="card-body">
-            <h4 class="card-title text-base">Metadaten</h4>
+            <h4 class="card-title text-base">{m.dashboard_details_section_meta()}</h4>
             <div class="space-y-3">
               <div class="flex flex-col gap-1">
-                <span class="text-base-content/60">Projekt ID:</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_project_id()}</span>
                 <span class="font-mono text-xs">{selectedProject.id}</span>
               </div>
               <div class="flex justify-between">
-                <span class="text-base-content/60">Erstellt am:</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_created_at()}</span>
                 <span class="font-medium">
-                  {selectedProject.createdAt ? formatDate(selectedProject.createdAt) : 'Unbekannt'}
+                  {selectedProject.createdAt ? formatDate(selectedProject.createdAt) : m.dashboard_details_fallback_unknown()}
                 </span>
               </div>
             </div>
@@ -215,7 +215,7 @@
     {/if}
   </div>
   <form method="dialog" class="modal-backdrop">
-    <button onclick={closeModal}>close</button>
+    <button onclick={closeModal}>{m.modal_close()}</button>
   </form>
 </dialog>
 

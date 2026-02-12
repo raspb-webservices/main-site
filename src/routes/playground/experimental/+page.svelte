@@ -234,32 +234,32 @@
 </script>
 
 <svelte:head>
-  <title>PDF Generator Test - Sandbox</title>
-  <meta name="description" content="Test-Seite für den PDF-Generator" />
+  <title>{m.experimental_meta_title()}</title>
+  <meta name="description" content={m.experimental_meta_description()} />
 </svelte:head>
 
 <div class="content-area">
   <Section>
-    <h1>PDF Generator Test</h1>
-    <p class="teaser">Hier können Sie den PDF-Generator mit einer Sample-Konfiguration testen.</p>
+    <h1>{m.experimental_title()}</h1>
+    <p class="teaser">{m.experimental_teaser()}</p>
 
     <!-- Sample Config Display -->
     <div class="mt-8">
-      <h2>Sample-Konfiguration</h2>
+      <h2>{m.experimental_sample_config()}</h2>
       <div class="bg-base-200 mt-4 rounded-lg p-6">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
           <div>
-            <h3 class="mb-2 text-lg font-bold">Projekt-Details</h3>
+            <h3 class="mb-2 text-lg font-bold">{m.experimental_project_details()}</h3>
             <ul class="space-y-1 text-sm">
-              <li><strong>Name:</strong> {sampleConfig.name}</li>
-              <li><strong>Typ:</strong> {sampleConfig.projectType} - {sampleConfig.subType}</li>
-              <li><strong>Budget:</strong> {sampleConfig.budget}</li>
-              <li><strong>Geschätzter Preis:</strong> {sampleConfig.estimatedPrice}€</li>
-              <li><strong>Timeline:</strong> {sampleConfig.timeline}</li>
+              <li><strong>{m.experimental_project_name()}</strong> {sampleConfig.name}</li>
+              <li><strong>{m.experimental_project_type()}</strong> {sampleConfig.projectType} - {sampleConfig.subType}</li>
+              <li><strong>{m.experimental_project_budget()}</strong> {sampleConfig.budget}</li>
+              <li><strong>{m.experimental_project_estimated_price()}</strong> {sampleConfig.estimatedPrice}€</li>
+              <li><strong>{m.experimental_project_timeline()}</strong> {sampleConfig.timeline}</li>
             </ul>
           </div>
           <div>
-            <h3 class="mb-2 text-lg font-bold">Features</h3>
+            <h3 class="mb-2 text-lg font-bold">{m.experimental_features()}</h3>
             <div class="flex flex-wrap gap-1">
               {#each sampleConfig.features as feature}
                 <span class="badge badge-primary badge-sm">{feature}</span>
@@ -269,7 +269,7 @@
         </div>
 
         <div class="mt-4">
-          <h3 class="mb-2 text-lg font-bold">Seiten ({sampleConfig.pages.length})</h3>
+          <h3 class="mb-2 text-lg font-bold">{m.experimental_pages()} ({sampleConfig.pages.length})</h3>
           <div class="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
             {#each sampleConfig.pages as page}
               <div class="bg-base-100 rounded p-3">
@@ -281,7 +281,7 @@
         </div>
 
         <div class="mt-4">
-          <h3 class="mb-2 text-lg font-bold">Kunde</h3>
+          <h3 class="mb-2 text-lg font-bold">{m.experimental_customer()}</h3>
           <p class="text-sm">
             {sampleCustomerData.givenName}
             {sampleCustomerData.familyName}
@@ -290,7 +290,7 @@
         </div>
 
         <div class="mt-4">
-          <h3 class="mb-2 text-lg font-bold">Dateien ({sampleUploadedFiles.length})</h3>
+          <h3 class="mb-2 text-lg font-bold">{m.experimental_files()} ({sampleUploadedFiles.length})</h3>
           <div class="grid grid-cols-1 gap-2 md:grid-cols-2">
             {#each sampleUploadedFiles as file}
               <div class="bg-base-100 rounded p-2 text-sm">
@@ -308,9 +308,9 @@
       <button class="btn btn-simple btn-lg" onclick={generateTestPDF} disabled={isGenerating}>
         {#if isGenerating}
           <span class="loading loading-spinner loading-sm"></span>
-          PDF wird generiert...
+          {m.experimental_generating()}
         {:else}
-          Test-PDF generieren
+          {m.experimental_generate_button()}
         {/if}
       </button>
     </div>
@@ -327,23 +327,23 @@
 
     <!-- Instructions -->
     <div class="mt-8">
-      <h2>Anleitung</h2>
+      <h2>{m.experimental_instructions_title()}</h2>
       <div class="bg-info/10 border-info/20 mt-4 rounded-lg border p-4">
         <ol class="list-inside list-decimal space-y-2 text-sm">
-          <li>Klicken Sie auf "Test-PDF generieren" um den PDF-Generator zu testen</li>
-          <li>Das PDF wird automatisch heruntergeladen, wenn die Generierung erfolgreich war</li>
-          <li>Überprüfen Sie das generierte PDF auf korrekte Darstellung aller Daten</li>
-          <li>Bei Fehlern werden diese hier angezeigt</li>
+          <li>{m.experimental_instructions_step1()}</li>
+          <li>{m.experimental_instructions_step2()}</li>
+          <li>{m.experimental_instructions_step3()}</li>
+          <li>{m.experimental_instructions_step4()}</li>
         </ol>
       </div>
     </div>
 
     <!-- Sample Data JSON -->
     <div class="mt-8">
-      <h2>Sample-Daten (JSON)</h2>
+      <h2>{m.experimental_sample_data()}</h2>
       <div class="collapse-arrow bg-base-200 collapse mt-4">
         <input type="checkbox" />
-        <div class="collapse-title text-lg font-medium">Vollständige Konfiguration anzeigen</div>
+        <div class="collapse-title text-lg font-medium">{m.experimental_show_config()}</div>
         <div class="collapse-content">
           <pre class="bg-base-100 overflow-x-auto rounded p-4 text-xs"><code
               >{JSON.stringify(

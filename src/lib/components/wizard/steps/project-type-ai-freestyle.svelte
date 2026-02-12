@@ -6,10 +6,10 @@
 
 <div class="step-header">
   <h1>
-    {m['wizard_stepType_titleFirst']()} <span class="inner-text-special">{m['wizard_stepType_titleHighlight']()}</span>
-    {m['wizard_stepType_titleSecond']()}
+    {m.wizard_stepType_titleFirst()} <span class="inner-text-special">{m.wizard_stepType_titleHighlight()}</span>
+    {m.wizard_stepType_titleSecond()}
   </h1>
-  <p class="teaser">{m['wizard_stepType_teaser']()}</p>
+  <p class="teaser">{m.wizard_stepType_teaser()}</p>
 </div>
 
 <div class="project-types">
@@ -35,7 +35,7 @@
         </div>
         <p class="no-padding">{(m as unknown as Record<string, () => string>)[type.description]?.() ?? type.description}</p>
         <div class="card-actions justify-end">
-          <div class="badge badge-primary">ab {(type.basePrice ?? 0).toLocaleString()} €</div>
+          <div class="badge badge-primary">{m.wizard_badge_from()} {(type.basePrice ?? 0).toLocaleString()} €</div>
         </div>
       </div>
     </div>

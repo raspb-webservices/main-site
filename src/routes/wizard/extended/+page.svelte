@@ -52,8 +52,8 @@
 </script>
 
 <svelte:head>
-  <title>{m['extendedProjectWizard_meta_title']()}</title>
-  <meta name="description" content={m['extendedProjectWizard_meta_description']()} />
+  <title>{m.extendedProjectWizard_meta_title()}</title>
+  <meta name="description" content={m.extendedProjectWizard_meta_description()} />
 </svelte:head>
 
 {#if loading}
@@ -63,21 +63,21 @@
 {:else if showSection === 'not-authorized'}
   <Section type={'fullCenterTeaser'}>
     <div class="inner-content-wrapper prose">
-      <h1>{m['extendedProjectWizard_notAuthorized_title']()}</h1>
-      <p class="teaser">{m['extendedProjectWizard_notAuthorized_teaser']()}</p>
+      <h1>{m.extendedProjectWizard_notAuthorized_title()}</h1>
+      <p class="teaser">{m.extendedProjectWizard_notAuthorized_teaser()}</p>
       <div class="spacer"></div>
       <div class="flex gap-6">
         <button
           class="btn-basic"
           onclick={() => {
             login();
-          }}>{m['extendedProjectWizard_notAuthorized_loginButton']()}</button
+          }}>{m.extendedProjectWizard_notAuthorized_loginButton()}</button
         >
         <button
           class="btn-basic"
           onclick={() => {
             goto(localizeHref('/registration'));
-          }}>{m['extendedProjectWizard_notAuthorized_registrationButton']()}</button
+          }}>{m.extendedProjectWizard_notAuthorized_registrationButton()}</button
         >
       </div>
     </div>
@@ -86,12 +86,10 @@
   <Section>
     <div class="prose">
       <h1>
-        {m['extendedProjectWizard_wizard_title']()} <span class="inner-text-special">{m['extendedProjectWizard_wizard_titleHighlight']()}</span>{m[
-          'extendedProjectWizard_wizard_titleSuffix'
-        ]()}
+        {m.extendedProjectWizard_wizard_title()} <span class="inner-text-special">{m.extendedProjectWizard_wizard_titleHighlight()}</span>{m.extendedProjectWizard_wizard_titleSuffix()}
       </h1>
       <p class="teaser">
-        {m['extendedProjectWizard_wizard_teaser']()}
+        {m.extendedProjectWizard_wizard_teaser()}
       </p>
       <div class="spacer"></div>
       <div class="wizard-section" id="wizard">

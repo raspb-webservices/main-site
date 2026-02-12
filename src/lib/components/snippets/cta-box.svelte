@@ -9,14 +9,14 @@
 <div class="cta-section">
   <div class="cta-content">
     {#if variant === 'default'}
-      <h1>{m['ctaBox_titleFirst']()} <span class="inner-text-special">{m['ctaBox_titleHighlight']()}</span></h1>
+      <h1>{m.ctaBox_titleFirst()} <span class="inner-text-special">{m.ctaBox_titleHighlight()}</span></h1>
       <p class="cta-text">
-        {m['ctaBox_description']()}
+        {m.ctaBox_description()}
       </p>
     {:else}
-      <h1>{m['ctaBox_variant2_titleFirst']()} <span class="inner-text-special">{m['ctaBox_variant2_titleHighlight']()}</span></h1>
+      <h1>{m.ctaBox_variant2_titleFirst()} <span class="inner-text-special">{m.ctaBox_variant2_titleHighlight()}</span></h1>
       <p class="cta-text">
-        {m['ctaBox_variant2_description']()}
+        {m.ctaBox_variant2_description()}
       </p>
     {/if}
 
@@ -24,22 +24,22 @@
       <div class="cta-benefit">
         <div class="benefit-icon">⚡</div>
         <div>
-          <h2>{m['ctaBox_benefits_zeit_title']()}</h2>
-          <p>{m['ctaBox_benefits_zeit_description']()}</p>
+          <h2>{m.ctaBox_benefits_zeit_title()}</h2>
+          <p>{m.ctaBox_benefits_zeit_description()}</p>
         </div>
       </div>
       <div class="cta-benefit">
         <div class="benefit-icon">🎯</div>
         <div>
-          <h2>{m['ctaBox_benefits_massgeschneidert_title']()}</h2>
-          <p>{m['ctaBox_benefits_massgeschneidert_description']()}</p>
+          <h2>{m.ctaBox_benefits_massgeschneidert_title()}</h2>
+          <p>{m.ctaBox_benefits_massgeschneidert_description()}</p>
         </div>
       </div>
       <div class="cta-benefit">
         <div class="benefit-icon">🤝</div>
         <div>
-          <h2>{m['ctaBox_benefits_contact_title']()}</h2>
-          <p>{m['ctaBox_benefits_contact_description']()}</p>
+          <h2>{m.ctaBox_benefits_contact_title()}</h2>
+          <p>{m.ctaBox_benefits_contact_description()}</p>
         </div>
       </div>
     </div>
@@ -51,13 +51,13 @@
           goto(localizeHref('/wizard'));
         }}
       >
-        {m['ctaBox_buttonText']()}
+        {m.ctaBox_buttonText()}
       </button>
-      <button class="btn btn-outline btn-lg px-8 py-4" onclick={() => goto(localizeHref('/faq'))}> {m['ctaBox_faqButtonText']()} </button>
+      <button class="btn btn-outline btn-lg px-8 py-4" onclick={() => goto(localizeHref('/faq'))}> {m.ctaBox_faqButtonText()} </button>
     </div>
 
     <p class="cta-note">
-      {@html m['ctaBox_note']()}
+      {@html m.ctaBox_note()}
     </p>
   </div>
 </div>

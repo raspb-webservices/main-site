@@ -6,11 +6,9 @@
 
 <div class="step-header">
   <h1>
-    {m['wizard_stepSubType_titleFirst']()} <span class="inner-text-special">{m['wizard_stepSubType_titleHighlight']()}</span>{m[
-      'wizard_stepSubType_titleSecond'
-    ]()}
+    {m.wizard_stepSubType_titleFirst()} <span class="inner-text-special">{m.wizard_stepSubType_titleHighlight()}</span>{m.wizard_stepSubType_titleSecond()}
   </h1>
-  <p class="teaser">{m['wizard_stepSubType_teaser']({ project: (m as unknown as Record<string, () => string>)['wizard.type.' + config.projectType + '.title']?.() ?? config.projectType })}</p>
+  <p class="teaser">{m.wizard_stepSubType_teaser({ project: (m as unknown as Record<string, () => string>)['wizard.type.' + config.projectType + '.title']?.() ?? config.projectType })}</p>
 </div>
 <div class="subtypes-grid">
   {#each projectSubTypesApp as subtype}
@@ -32,7 +30,7 @@
         <h3 class="card-title">{(m as unknown as Record<string, () => string>)[subtype.title]?.() ?? subtype.title}</h3>
         <p class="no-padding">{(m as unknown as Record<string, () => string>)[subtype.description]?.() ?? subtype.description}</p>
         <div class="card-actions justify-end">
-          <div class="badge badge-success">berits ab {subtype.basePrice}€</div>
+          <div class="badge badge-success">{m.wizard_badge_starting_from()} {subtype.basePrice}€</div>
         </div>
       </div>
     </div>

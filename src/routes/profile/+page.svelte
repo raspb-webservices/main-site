@@ -52,14 +52,14 @@
 </script>
 
 <svelte:head>
-  <title>{m['profile_meta_title']()}</title>
-  <meta name="description" content={m['profile_meta_description']()} />
+  <title>{m.profile_meta_title()}</title>
+  <meta name="description" content={m.profile_meta_description()} />
 </svelte:head>
 
 {#if isAuth}
   <Section>
     <div class="prose text-center">
-      <h1><span class="inner-text-special">{m['profile_title']()}</span></h1>
+      <h1><span class="inner-text-special">{m.profile_title()}</span></h1>
     </div>
 
     <div class="relative grid grid-cols-12 gap-8">
@@ -87,58 +87,58 @@
             <div class="grid grid-cols-12 gap-x-8 gap-y-4">
               <!-- Email first -->
               <div class="col-span-7">
-                <p class="tiny-label">{m['profile_emailLogin']()}</p>
+                <p class="tiny-label">{m.profile_emailLogin()}</p>
                 <p class="no-padding"><strong>{currentUser.email}</strong></p>
               </div>
               <div class="col-span-5">
-                <p class="tiny-label">{m['profile_id']()}</p>
+                <p class="tiny-label">{m.profile_id()}</p>
                 <p class="no-padding"><strong>{currentUser.sub}</strong></p>
               </div>
               {#if currentUser.salutation}
                 <div class="col-span-3">
-                  <p class="tiny-label">{m['profile_salutation']()}</p>
+                  <p class="tiny-label">{m.profile_salutation()}</p>
                   <p class="no-padding"><strong>{currentUser.salutation}</strong></p>
                 </div>
               {/if}
               {#if currentUser.givenName}
                 <div class="col-span-4">
-                  <p class="tiny-label">{m['profile_firstName']()}</p>
+                  <p class="tiny-label">{m.profile_firstName()}</p>
                   <p class="no-padding"><strong>{currentUser.givenName}</strong></p>
                 </div>
               {/if}
               {#if currentUser.familyName}
                 <div class="col-span-5">
-                  <p class="tiny-label">{m['profile_lastName']()}</p>
+                  <p class="tiny-label">{m.profile_lastName()}</p>
                   <p class="no-padding"><strong>{currentUser.familyName}</strong></p>
                 </div>
               {/if}
               {#if currentUser.companyAddress}
                 <div class="col-span-full">
-                  <p class="tiny-label">{m['profile_address']()}</p>
+                  <p class="tiny-label">{m.profile_address()}</p>
                   <p class="no-padding"><strong>{currentUser.companyAddress}</strong></p>
                 </div>
               {/if}
               {#if currentUser.postCode}
                 <div class="col-span-3">
-                  <p class="tiny-label">{m['profile_zipCode']()}</p>
+                  <p class="tiny-label">{m.profile_zipCode()}</p>
                   <p class="no-padding"><strong>{currentUser.postCode}</strong></p>
                 </div>
               {/if}
               {#if currentUser.city}
                 <div class="col-span-9">
-                  <p class="tiny-label">{m['profile_city']()}</p>
+                  <p class="tiny-label">{m.profile_city()}</p>
                   <p class="no-padding"><strong>{currentUser.city}</strong></p>
                 </div>
               {/if}
               {#if currentUser.country}
                 <div class="col-span-full">
-                  <p class="tiny-label">{m['profile_country']()}</p>
+                  <p class="tiny-label">{m.profile_country()}</p>
                   <p class="no-padding"><strong>{currentUser.country}</strong></p>
                 </div>
               {/if}
               {#if currentUser.phone}
                 <div class="col-span-6">
-                  <p class="tiny-label">{m['profile_phone']()}</p>
+                  <p class="tiny-label">{m.profile_phone()}</p>
                   <p class="no-padding"><strong>{currentUser.phone}</strong></p>
                 </div>
               {/if}
@@ -147,7 +147,7 @@
                   class="btn btn-simple"
                   onclick={() => {
                     editModal.openModal();
-                  }}>{m['profile_editData']()}</button
+                  }}>{m.profile_editData()}</button
                 >
               </div>
             </div>
@@ -156,14 +156,14 @@
             <div class="divider"></div>
             <div class="col-span-full flex items-center justify-between">
               <h3 class="no-padding">
-                {m['profile_activeProjects']()} <span class="inner-text-special">{currentUser.projectIds ? currentUser.projectIds.length : 0}</span>
+                {m.profile_activeProjects()} <span class="inner-text-special">{currentUser.projectIds ? currentUser.projectIds.length : 0}</span>
               </h3>
               <div>
                 <button
                   class="btn btn-simple mr-3"
                   onclick={() => {
                     goto(localizeHref('/dashboard'));
-                  }}>{m['profile_toProjects']()}</button
+                  }}>{m.profile_toProjects()}</button
                 >
                 <button
                   class="btn btn-simple"
@@ -171,7 +171,7 @@
                     goto(localizeHref('/wizard/extended'));
                   }}
                 >
-                  {m['profile_startNewProject']()}</button
+                  {m.profile_startNewProject()}</button
                 >
               </div>
             </div>
@@ -183,8 +183,8 @@
 {:else if showSection === 'not-authorized'}
   <Section type={'fullCenterTeaser'}>
     <div class="inner-content-wrapper prose">
-      <h1>{m['profile_notAuthorized_title']()}</h1>
-      <p class="teaser">{m['profile_notAuthorized_teaser']()}</p>
+      <h1>{m.profile_notAuthorized_title()}</h1>
+      <p class="teaser">{m.profile_notAuthorized_teaser()}</p>
       <div class="spacer"></div>
       <div class="flex gap-6">
         <button
@@ -193,7 +193,7 @@
             login();
           }}
         >
-          {m['profile_notAuthorized_loginButton']()}</button
+          {m.profile_notAuthorized_loginButton()}</button
         >
         <button
           class="btn-basic"
@@ -201,7 +201,7 @@
             goto(localizeHref('/registration'));
           }}
         >
-          {m['profile_notAuthorized_registrationButton']()}</button
+          {m.profile_notAuthorized_registrationButton()}</button
         >
       </div>
     </div>

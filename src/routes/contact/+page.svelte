@@ -4,9 +4,9 @@
 </script>
 
 <section class="contact-content-wrapper">
-  <h1>{m['contact_title']()}</h1>
+  <h1>{m.contact_title()}</h1>
   <div class="px-20 pt-10">
-    <p>{m['contact_intro']()}</p>
+    <p>{m.contact_intro()}</p>
 
     <div class="spacer"></div>
 
@@ -14,32 +14,32 @@
       <input type="hidden" name="form-name" value="contact" />
       <div class="form-field-container">
         <div class="form-field-section">
-          <label for="first-name">{m['contact_form_firstNameLabel']()}</label>
-          <input type="text" id="first-name" name="first-name" placeholder={m['contact_form_firstNamePlaceholder']()} required />
+          <label for="first-name">{m.contact_form_firstNameLabel()}</label>
+          <input type="text" id="first-name" name="first-name" placeholder={m.contact_form_firstNamePlaceholder()} required />
         </div>
         <div class="form-field-section">
-          <label for="last-name">{m['contact_form_lastNameLabel']()}</label>
-          <input type="text" id="last-name" name="last-name" placeholder={m['contact_form_lastNamePlaceholder']()} required />
+          <label for="last-name">{m.contact_form_lastNameLabel()}</label>
+          <input type="text" id="last-name" name="last-name" placeholder={m.contact_form_lastNamePlaceholder()} required />
         </div>
       </div>
 
       <div class="form-field-container">
         <div class="form-field-section full-width">
-          <label for="email">{m['contact_form_emailLabel']()}</label>
-          <input type="email" id="email" name="email" placeholder={m['contact_form_emailPlaceholder']()} required />
+          <label for="email">{m.contact_form_emailLabel()}</label>
+          <input type="email" id="email" name="email" placeholder={m.contact_form_emailPlaceholder()} required />
         </div>
       </div>
 
       <div class="form-field-container">
         <div class="form-field-section full-width">
-          <label for="phone">{m['contact_form_phoneLabel']()}</label>
-          <input type="tel" id="phone" name="phone" placeholder={m['contact_form_phonePlaceholder']()} />
+          <label for="phone">{m.contact_form_phoneLabel()}</label>
+          <input type="tel" id="phone" name="phone" placeholder={m.contact_form_phonePlaceholder()} />
         </div>
       </div>
 
       <div class="form-field-container">
         <div class="form-field-section full-width">
-          <label for="message">{m['contact_form_messageLabel']()}</label>
+          <label for="message">{m.contact_form_messageLabel()}</label>
           <span class="additional-information"></span>
           <textarea id="message" name="message" rows="4" placeholder="" required></textarea>
         </div>
@@ -47,11 +47,11 @@
       <div class="form-field-container">
         <div class="form-field-section full-width checkbox-dialog">
           <input id="dsgvo" name="dsgvo" type="checkbox" value="dsgvo-confirmed" class="is-checkbox accent-secondary" required />
-          <label for="dsgvo">{m['contact_form_dsgvoLabel']()}</label>
+          <label for="dsgvo">{m.contact_form_dsgvoLabel()}</label>
         </div>
       </div>
       <div class="medium-spacer"></div>
-      <button type="submit" class="btn-basic">{m['contact_form_submitButton']()}</button>
+      <button type="submit" class="btn-basic">{m.contact_form_submitButton()}</button>
     </form>
   </div>
 

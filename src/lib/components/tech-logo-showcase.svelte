@@ -67,18 +67,20 @@
   function handleMouseLeave() {
     isHovered = false;
   }
+
+  import { m } from '$lib/paraglide/messages';
 </script>
 
 <div class="bg-base-200 w-full overflow-hidden py-12">
   <div class="mb-2 text-center">
-    <h2 class="mb-2 text-3xl font-bold">Unser Technologie-Stack</h2>
-    <p class="text-base-content/70">Moderne Tools für außergewöhnliche Ergebnisse</p>
+    <h2 class="mb-2 text-3xl font-bold">{m.homepage_tech_title()}</h2>
+    <p class="text-base-content/70">{m.homepage_tech_subtitle()}</p>
   </div>
 
   <div
     class="relative w-full overflow-hidden py-4"
     role="button"
-    aria-label="Pause or resume the logo animation"
+    aria-label={m.homepage_tech_pause_animation()}
     aria-pressed={isHovered}
     tabindex="0"
     on:mouseenter={handleMouseEnter}
@@ -121,7 +123,7 @@
   </div>
 
   <div class="mt-6 text-center">
-    <p class="tiny-label">Fahren Sie mit der Maus darüber, um die Animation zu pausieren</p>
+    <p class="tiny-label">{m.homepage_tech_hover_hint()}</p>
   </div>
 </div>
 

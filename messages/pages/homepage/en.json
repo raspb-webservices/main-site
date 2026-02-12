@@ -188,5 +188,33 @@
   "homepage_cta_benefits_contact_description": "A fixed contact person accompanies you through the entire project",
   "homepage_cta_buttonText": "Configure project now",
   "homepage_cta_faqButtonText": "Frequently Asked Questions",
-  "homepage_cta_note": "<strong>Tip:</strong> The configurator takes only 3-5 minutes and you immediately receive your personal project price. No obligation and free of charge."
+  "homepage_cta_note": "<strong>Tip:</strong> The configurator takes only 3-5 minutes and you immediately receive your personal project price. No obligation and free of charge.",
+
+  "homepage_offering_titleFirst": "Your digital",
+  "homepage_offering_titleHighlight": "Upgrade",
+  "homepage_offering_titleSecond": "starts here",
+  "homepage_offering_subtitle": "Custom web solutions or AI power for your business - tailored, modern, future-proof.",
+
+  "homepage_offering_web_title": "The best website you've ever had",
+  "homepage_offering_web_description": "Whether one-pager, CMS or complex web app - we develop digital solutions that inspire and perfectly fit your business. Cutting-edge technologies, custom designs and a smooth process ensure a result that convinces you and your customers.",
+  "homepage_offering_web_feature1": "Modern, responsive design",
+  "homepage_offering_web_feature2": "Custom features & integrations",
+  "homepage_offering_web_feature3": "SEO & performance optimized",
+  "homepage_offering_web_feature4": "Personal consulting & support",
+  "homepage_offering_configure_button": "Configure project",
+  "homepage_offering_appointment_button": "Schedule consultation",
+
+  "homepage_offering_ki_title": "AI - the superpower for your business",
+  "homepage_offering_ki_description": "Use artificial intelligence to automate processes, save costs and unlock new possibilities. From smart data analysis to custom AI solutions - we show you how to unleash the full potential for your business.",
+  "homepage_offering_ki_feature1": "Automation & efficiency improvement",
+  "homepage_offering_ki_feature2": "Intelligent data analysis",
+  "homepage_offering_ki_feature3": "Custom AI integrations",
+  "homepage_offering_ki_feature4": "Secure competitive advantage",
+
+  "homepage_offering_services_detail_button": "Our service offering in detail",
+
+  "homepage_tech_title": "Our Technology Stack",
+  "homepage_tech_subtitle": "Modern tools for extraordinary results",
+  "homepage_tech_pause_animation": "Pause or resume the logo animation",
+  "homepage_tech_hover_hint": "Hover over the logos to pause the animation"
 }

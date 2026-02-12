@@ -4,6 +4,23 @@ import type { RequestHandler } from '@sveltejs/kit';
 import { validateBody, validationErrorResponse, ValidationError } from '$lib/server/validate.server';
 import { customerCreateSchema } from '$lib/server/schemas/customer.schema';
 
+interface Customer {
+  address?: string;
+  auth0Id?: string;
+  city?: string;
+  company?: string;
+  country?: string;
+  createdAt: string;
+  email: string;
+  familyName?: string;
+  givenName?: string;
+  id: string;
+  phone?: string;
+  postCode?: string;
+  projects?: Array<{ id: string; name: string }>;
+  salutation?: string;
+}
+
 export const POST: RequestHandler = async ({ request }) => {
   try {
     const customerData = validateBody(customerCreateSchema, await request.json());
@@ -73,7 +90,7 @@ export const POST: RequestHandler = async ({ request }) => {
       salutation: customerData.salutation || null
     };
 
-    const response = (await client.request(mutation, variables)) as { createCustomer: User };
+    const response = (await client.request(mutation, variables)) as { createCustomer: Customer };
 
     return new Response(
       JSON.stringify({

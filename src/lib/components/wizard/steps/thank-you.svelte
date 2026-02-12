@@ -15,30 +15,30 @@
         </svg>
       </div>
     </div>
-    <h1 class="thank-you-title">{m['wizard_modals_thankYou_title']()}</h1>
-    <p class="thank-you-subtitle">{m['wizard_modals_thankYou_subtitle']()}</p>
+    <h1 class="thank-you-title">{m.wizard_modals_thankYou_title()}</h1>
+    <p class="thank-you-subtitle">{m.wizard_modals_thankYou_subtitle()}</p>
     <div class="thank-you-details">
       <div class="thank-you-card">
-        <h3>{m['wizard_modals_thankYou_whatHappensNext']()}</h3>
+        <h3>{m.wizard_modals_thankYou_whatHappensNext()}</h3>
         <ul class="thank-you-steps">
           <li>
             <span class="step-number">1</span>
-            <span>{m['wizard_modals_thankYou_steps_step1']()}</span>
+            <span>{m.wizard_modals_thankYou_steps_step1()}</span>
           </li>
           <li>
             <span class="step-number">2</span>
-            <span>{m['wizard_modals_thankYou_steps_step2']()}</span>
+            <span>{m.wizard_modals_thankYou_steps_step2()}</span>
           </li>
           <li>
             <span class="step-number">3</span>
-            <span>{m['wizard_modals_thankYou_steps_step3']()}</span>
+            <span>{m.wizard_modals_thankYou_steps_step3()}</span>
           </li>
         </ul>
       </div>
       <div class="thank-you-info">
-        <p><strong>{m['wizard_modals_thankYou_projectName']()}</strong><br /> {config.name}</p>
-        <p><strong>{m['wizard_modals_thankYou_estimatedPrice']()}</strong> {config.estimatedPrice.toLocaleString()} €</p>
-        <p><strong>{m['wizard_modals_thankYou_projectType']()}</strong><br /> {(m as unknown as Record<string, () => string>)[projectTypesWebApp.find((p) => p.id === config.projectType) + '.title']()}</p>
+        <p><strong>{m.wizard_modals_thankYou_projectName()}</strong><br /> {config.name}</p>
+        <p><strong>{m.wizard_modals_thankYou_estimatedPrice()}</strong> {config.estimatedPrice.toLocaleString()} €</p>
+        <p><strong>{m.wizard_modals_thankYou_projectType()}</strong><br /> {(m as unknown as Record<string, () => string>)[projectTypesWebApp.find((p) => p.id === config.projectType) + '.title']()}</p>
       </div>
     </div>
     <div class="thank-you-actions">
@@ -56,7 +56,7 @@
             d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
           />
         </svg>
-        {m['wizard_modals_thankYou_dashboard']()}
+        {m.wizard_modals_thankYou_dashboard()}
       </button>
       <a href="/contact" class="btn btn-link btn-lg">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -67,7 +67,7 @@
             d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
           />
         </svg>
-        {m['wizard_modals_thankYou_contact']()}
+        {m.wizard_modals_thankYou_contact()}
       </a>
     </div>
   </div>
@@ -124,7 +124,7 @@
   }
 
   .step-number {
-    @apply bg-primary text-primary-content mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold;
+    @apply bg-primary text-primary-content mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold;
   }
 
   .thank-you-info {

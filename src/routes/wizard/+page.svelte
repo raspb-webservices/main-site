@@ -51,15 +51,15 @@
 </script>
 
 <svelte:head>
-  <title>{m['getStarted_meta_title']()}</title>
-  <meta name="description" content={m['getStarted_meta_description']()} />
+  <title>{m.getStarted_meta_title()}</title>
+  <meta name="description" content={m.getStarted_meta_description()} />
 </svelte:head>
 
 <section class="get-started-content-wrapper">
   <div class="hero-section">
     <div class="intro prose">
-      <h1>{m['getStarted_hero_title']()} <span class="inner-text-special">{m['getStarted_hero_titleHighlight']()}</span></h1>
-      <p class="teaser">{m['getStarted_teaser_description']()}</p>
+      <h1>{m.getStarted_hero_title()} <span class="inner-text-special">{m.getStarted_hero_titleHighlight()}</span></h1>
+      <p class="teaser">{m.getStarted_teaser_description()}</p>
     </div>
 
     <div class="teaser-content">
@@ -67,40 +67,40 @@
         <div class="benefit-item">
           <div class="benefit-icon">⚡</div>
           <div class="benefit-text">
-            <h3>{m['getStarted_benefits_fast_title']()}</h3>
-            <p>{m['getStarted_benefits_fast_description']()}</p>
+            <h3>{m.getStarted_benefits_fast_title()}</h3>
+            <p>{m.getStarted_benefits_fast_description()}</p>
           </div>
         </div>
 
         <div class="benefit-item">
           <div class="benefit-icon">💰</div>
           <div class="benefit-text">
-            <h3>{m['getStarted_benefits_transparent_title']()}</h3>
-            <p>{m['getStarted_benefits_transparent_description']()}</p>
+            <h3>{m.getStarted_benefits_transparent_title()}</h3>
+            <p>{m.getStarted_benefits_transparent_description()}</p>
           </div>
         </div>
 
         <div class="benefit-item">
           <div class="benefit-icon">🎯</div>
           <div class="benefit-text">
-            <h3>{m['getStarted_benefits_precise_title']()}</h3>
-            <p>{m['getStarted_benefits_precise_description']()}</p>
+            <h3>{m.getStarted_benefits_precise_title()}</h3>
+            <p>{m.getStarted_benefits_precise_description()}</p>
           </div>
         </div>
 
         <div class="benefit-item">
           <div class="benefit-icon">📋</div>
           <div class="benefit-text">
-            <h3>{m['getStarted_benefits_documentation_title']()}</h3>
-            <p>{m['getStarted_benefits_documentation_description']()}</p>
+            <h3>{m.getStarted_benefits_documentation_title()}</h3>
+            <p>{m.getStarted_benefits_documentation_description()}</p>
           </div>
         </div>
       </div>
 
       <div class="cta-text">
         <p class="no-padding">
-          <strong>{m['getStarted_cta_title']()}</strong>
-          {m['getStarted_cta_description']()}
+          <strong>{m.getStarted_cta_title()}</strong>
+          {m.getStarted_cta_description()}
         </p>
       </div>
     </div>
@@ -113,8 +113,8 @@
       onclick={() => selectWizard('basic')}
     >
       <div class="wizard-icon">✨</div>
-      <h2 class="mb-4 text-2xl font-bold">{m['getStarted_wizardSelection_basicConfiguratorTitle']()}</h2>
-      <p class="text-lg">{m['getStarted_wizardSelection_basicConfiguratorDescription']()}</p>
+      <h2 class="mb-4 text-2xl font-bold">{m.getStarted_wizardSelection_basicConfiguratorTitle()}</h2>
+      <p class="text-lg">{m.getStarted_wizardSelection_basicConfiguratorDescription()}</p>
     </button>
 
     <button
@@ -123,8 +123,8 @@
       onclick={() => selectWizard('advanced')}
     >
       <div class="wizard-icon">⚙️</div>
-      <h2 class="mb-4 text-2xl font-bold">{m['getStarted_wizardSelection_advancedConfiguratorTitle']()}</h2>
-      <p class="text-lg">{m['getStarted_wizardSelection_advancedConfiguratorDescription']()}</p>
+      <h2 class="mb-4 text-2xl font-bold">{m.getStarted_wizardSelection_advancedConfiguratorTitle()}</h2>
+      <p class="text-lg">{m.getStarted_wizardSelection_advancedConfiguratorDescription()}</p>
     </button>
   </div>
 
@@ -135,25 +135,25 @@
       {#if loggedin}
         <Wizard />
       {:else}
-        <h2>{m['getStarted_registrationPrompt_title']()}</h2>
+        <h2>{m.getStarted_registrationPrompt_title()}</h2>
         <p>
-          {m['getStarted_registrationPrompt_description1']()}
+          {m.getStarted_registrationPrompt_description1()}
         </p>
         <p>
-          {m['getStarted_registrationPrompt_description2']()}
+          {m.getStarted_registrationPrompt_description2()}
         </p>
         <div class="flex gap-6">
           <button
             class="btn-basic animate-fade-in-from-side"
             onclick={() => {
               goto(localizeHref('/registration'));
-            }}>{m['getStarted_registrationPrompt_registrationButton']()}</button
+            }}>{m.getStarted_registrationPrompt_registrationButton()}</button
           >
           <button
             class="btn-basic animate-fade-in-from-side"
             onclick={() => {
               login();
-            }}>{m['getStarted_registrationPrompt_loginButton']()}</button
+            }}>{m.getStarted_registrationPrompt_loginButton()}</button
           >
         </div>
       {/if}

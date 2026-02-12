@@ -6,10 +6,10 @@
 
 <div class="step-header">
   <h1>
-    {m['wizard_stepFeatures_titleFirst']()} <span class="inner-text-special">{m['wizard_stepFeatures_titleHighlight']()}</span>
-    {m['wizard_stepFeatures_titleSecond']()}
+    {m.wizard_stepFeatures_titleFirst()} <span class="inner-text-special">{m.wizard_stepFeatures_titleHighlight()}</span>
+    {m.wizard_stepFeatures_titleSecond()}
   </h1>
-  <p class="teaser">{m['wizard_stepFeatures_teaser']()}</p>
+  <p class="teaser">{m.wizard_stepFeatures_teaser()}</p>
 </div>
 
 <div class="features-grid">
@@ -26,7 +26,7 @@
           {#if feature.basePrice != 0}
             <div class="badge">~ {feature.basePrice} €</div>
           {:else}
-            {#if feature.isSideProject}<div class="badge">Side-Project</div>{/if}
+            {#if feature.isSideProject}<div class="badge">{m.wizard_features_badge_side_project()}</div>{/if}
           {/if}
           <div class="badge {featureCategoryColors[feature.category ?? ''] || 'badge-info'}">
             {(m as unknown as Record<string, () => string>)['wizard.features.categories.' + feature.category]?.() ?? feature.category}
@@ -39,13 +39,13 @@
 
 <div class="form-control mt-8 md:mx-10 lg:mx-20">
   <label class="label" for="customFeatures">
-    <span class="label-text text-lg font-semibold">{m['wizard_form_customFeatures']()}</span>
+    <span class="label-text text-lg font-semibold">{m.wizard_form_customFeatures()}</span>
   </label>
   <textarea
     id="customFeatures"
     class="textarea textarea-bordered textarea-lg w-full"
     bind:value={customFeatures}
-    placeholder={m['wizard_form_customFeaturesPlaceholder']()}
+    placeholder={m.wizard_form_customFeaturesPlaceholder()}
     rows="4"
   ></textarea>
 </div>

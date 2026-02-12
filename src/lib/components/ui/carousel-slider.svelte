@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { register } from 'swiper/element/bundle';
+  import { m } from '$lib/paraglide/messages';
 
   register();
 
@@ -17,33 +18,33 @@
   const slides: Slide[] = [
     {
       image: '/images/slider/slide1.jpg',
-      title: 'Experience Adventure Like Never Before',
-      text: 'Discover breathtaking landscapes and create unforgettable memories with our premium outdoor experiences.',
-      cta: 'Get Started'
+      title: m.carousel_slide1_title(),
+      text: m.carousel_slide1_text(),
+      cta: m.carousel_slide1_cta()
     },
     {
       image: '/images/slider/slide2.jpg',
-      title: 'Push Your Limits',
-      text: 'Challenge yourself with thrilling adventures that test your courage and reward your spirit.',
-      cta: 'Join Adventure'
+      title: m.carousel_slide2_title(),
+      text: m.carousel_slide2_text(),
+      cta: m.carousel_slide2_cta()
     },
     {
       image: '/images/slider/slide3.jpg',
-      title: "Nature's Playground Awaits",
-      text: 'Immerse yourself in pristine wilderness and connect with the raw beauty of the natural world.',
-      cta: 'Explore Now'
+      title: m.carousel_slide3_title(),
+      text: m.carousel_slide3_text(),
+      cta: m.carousel_slide3_cta()
     },
     {
       image: '/images/slider/slide4.jpg',
-      title: 'Create Lasting Memories',
-      text: 'Every moment becomes a story worth telling when you embrace the adventure that calls to you.',
-      cta: 'Start Journey'
+      title: m.carousel_slide4_title(),
+      text: m.carousel_slide4_text(),
+      cta: m.carousel_slide4_cta()
     },
     {
       image: '/images/slider/slide5.jpg',
-      title: 'Where Dreams Take Flight',
-      text: 'Soar beyond your comfort zone and discover what lies beyond the horizon of possibility.',
-      cta: 'Take Flight'
+      title: m.carousel_slide5_title(),
+      text: m.carousel_slide5_text(),
+      cta: m.carousel_slide5_cta()
     }
   ];
 
@@ -120,7 +121,7 @@
   </swiper-container>
 
   <div class="carousel-card">
-    <button class="carousel-swiper-button-prev carousel-card-nav" type="button" aria-label="previous">
+    <button class="carousel-swiper-button-prev carousel-card-nav" type="button" aria-label={m.carousel_nav_previous()}>
       <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none">
         <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6" />
       </svg>
@@ -140,7 +141,7 @@
       {/each}
     </swiper-container>
 
-    <button class="carousel-swiper-button-next carousel-card-nav" type="button" aria-label="next">
+    <button class="carousel-swiper-button-next carousel-card-nav" type="button" aria-label={m.carousel_nav_next()}>
       <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none">
         <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6" />
       </svg>

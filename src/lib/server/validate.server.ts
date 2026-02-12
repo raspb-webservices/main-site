@@ -4,7 +4,7 @@ export class ValidationError extends Error {
 	public details: z.ZodError;
 
 	constructor(zodError: z.ZodError) {
-		const messages = zodError.errors.map((e) => `${e.path.join('.')}: ${e.message}`);
+		const messages = zodError.issues.map((e: z.ZodIssue) => `${e.path.join('.')}: ${e.message}`);
 		super(`Validation failed: ${messages.join(', ')}`);
 		this.name = 'ValidationError';
 		this.details = zodError;
@@ -25,7 +25,7 @@ export function validationErrorResponse(error: unknown): Response {
 		return new Response(
 			JSON.stringify({
 				error: 'Validation failed',
-				details: error.details.errors.map((e) => ({
+				details: error.details.issues.map((e: z.ZodIssue) => ({
 					field: e.path.join('.'),
 					message: e.message
 				}))

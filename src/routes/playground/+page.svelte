@@ -7,123 +7,124 @@
   import BoxSlider from '$lib/components/ui/box-slider.svelte';
   import Section from '$lib/components/ui/section.svelte';
   import Hero from '$lib/components/ui/hero.svelte';
+  import { m } from '$lib/paraglide/messages';
 </script>
 
 <Section>
   <div class="prose">
-    <h1>BoxSlider (placed in SECTION)</h1>
+    <h1>{m.playground_boxslider_title()}</h1>
   </div>
   <BoxSlider></BoxSlider>
 </Section>
 
 <Section>
   <div class="prose">
-    <h1>HeroSlider (placed in SECTION)</h1>
+    <h1>{m.playground_heroslider_title()}</h1>
   </div>
   <HeroSlider></HeroSlider>
 </Section>
 
 <Section>
   <div class="prose">
-    <h1>CarouselSlider (placed in SECTION)</h1>
+    <h1>{m.playground_carouselslider_title()}</h1>
   </div>
   <CarouselSlider></CarouselSlider>
 </Section>
 
 <div class="prose">
-  <h1>FullWidthSlider</h1>
+  <h1>{m.playground_fullwidthslider_title()}</h1>
 </div>
 <FullWidthSlider></FullWidthSlider>
 
 <Section>
   <Hero
-    headline={'Default with image'}
-    subheadline={'This is a Subheadline'}
+    headline={m.playground_hero_default_with_image()}
+    subheadline={m.playground_hero_subheadline()}
     image={'/images/slider/slide1.jpg'}
     position={'top'}
-    imageAlt={'This is an image'}
+    imageAlt={m.playground_hero_image_alt()}
     variant={'default '}
     showButton={true}
-    buttonText={'this is the CTA text... '}
+    buttonText={m.playground_hero_cta_text()}
     buttonAction={{}}
   ></Hero>
 </Section>
 
 <Section>
   <Hero
-    headline={'Default without image'}
-    subheadline={'This is a Subheadline'}
+    headline={m.playground_hero_default_without_image()}
+    subheadline={m.playground_hero_subheadline()}
     variant={'default'}
     position={'bottom'}
     showButton={true}
-    buttonText={'this is the CTA text... '}
+    buttonText={m.playground_hero_cta_text()}
     buttonAction={{}}
   ></Hero>
 </Section>
 
 <Section>
   <Hero
-    headline={'Centered with image'}
-    subheadline={'This is a Subheadline'}
+    headline={m.playground_hero_centered_with_image()}
+    subheadline={m.playground_hero_subheadline()}
     image={'/images/slider/slide2.jpg'}
-    imageAlt={'This is an image'}
+    imageAlt={m.playground_hero_image_alt()}
     variant={'centered'}
     showButton={true}
-    buttonText={'this is the CTA text...  '}
+    buttonText={m.playground_hero_cta_text()}
     buttonAction={{}}
   ></Hero>
 </Section>
 
 <Section>
   <Hero
-    headline={'Centered without image'}
-    subheadline={'This is a Subheadline'}
+    headline={m.playground_hero_centered_without_image()}
+    subheadline={m.playground_hero_subheadline()}
     variant={'centered'}
     showButton={true}
-    buttonText={'this is the CTA text...  '}
+    buttonText={m.playground_hero_cta_text()}
     buttonAction={{}}
   ></Hero>
 </Section>
 
 <Section>
   <Hero
-    headline={'Split with image'}
-    subheadline={'This is a Subheadline'}
+    headline={m.playground_hero_split_with_image()}
+    subheadline={m.playground_hero_subheadline()}
     image={'/images/slider/slide3.jpg'}
-    imageAlt={'This is an image'}
+    imageAlt={m.playground_hero_image_alt()}
     variant={'split'}
     showButton={true}
-    buttonText={'this is the CTA text...  '}
+    buttonText={m.playground_hero_cta_text()}
     buttonAction={{}}
   ></Hero>
 </Section>
 
 <Section>
   <Hero
-    headline={'Split without image'}
-    subheadline={'This is a Subheadline'}
+    headline={m.playground_hero_split_without_image()}
+    subheadline={m.playground_hero_subheadline()}
     variant={'split'}
     showButton={true}
-    buttonText={'this is the CTA text...  '}
+    buttonText={m.playground_hero_cta_text()}
     buttonAction={{}}
   ></Hero>
 </Section>
 
 <Section fullWidth={true}>
   <Hero
-    headline={'FullWidth Hero'}
-    subheadline={'This is a Subheadline'}
+    headline={m.playground_hero_fullwidth()}
+    subheadline={m.playground_hero_subheadline()}
     image={'/images/slider/slide1.jpg'}
     position={'bottom'}
-    imageAlt={'This is an image'}
+    imageAlt={m.playground_hero_image_alt()}
     variant={'default '}
     showButton={true}
-    buttonText={'this is the CTA text... '}
+    buttonText={m.playground_hero_cta_text()}
     buttonAction={{}}
   ></Hero>
 </Section>
 
-<TEASER customImageURL={'https://picsum.photos/id/46/1920/1080'} headline={'Hier kommt eine tolle Headline'} subheadline={'Und eine super SubHeadline'}
+<TEASER customImageURL={'https://picsum.photos/id/46/1920/1080'} headline={m.teaser_default_headline()} subheadline={m.teaser_default_subheadline()}
 ></TEASER>
 
 <Section>
@@ -131,7 +132,7 @@
     class="btn-basic"
     onclick={() => {
       goto('/');
-    }}>Zurück zur Startseite</button
+    }}>{m.playground_back_to_home()}</button
   >
   <div class="spacer"></div>
 </Section>

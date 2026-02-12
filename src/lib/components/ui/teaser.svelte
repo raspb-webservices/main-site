@@ -2,8 +2,10 @@
   import { goto } from '$app/navigation';
 
   export let customImageURL;
-  export let headline = 'no headline';
-  export let subheadline = 'no sub-headline';
+  import { m } from '$lib/paraglide/messages';
+
+  export let headline = m.teaser_default_headline();
+  export let subheadline = m.teaser_default_subheadline();
 
   let customImageStyle = 'url(' + customImageURL + ')';
 </script>

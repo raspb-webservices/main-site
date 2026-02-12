@@ -2,5 +2,20 @@
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "playground_meta_title": "Playground - raspb Webservices",
   "playground_meta_description": "Spielplatz bzw. Raum zum Experimentieren",
-  "playground_title": "Playground Seite"
+  "playground_title": "Playground Seite",
+  "playground_boxslider_title": "BoxSlider (platziert in SECTION)",
+  "playground_heroslider_title": "HeroSlider (platziert in SECTION)",
+  "playground_carouselslider_title": "CarouselSlider (platziert in SECTION)",
+  "playground_fullwidthslider_title": "FullWidthSlider",
+  "playground_hero_default_with_image": "Standard mit Bild",
+  "playground_hero_default_without_image": "Standard ohne Bild",
+  "playground_hero_centered_with_image": "Zentriert mit Bild",
+  "playground_hero_centered_without_image": "Zentriert ohne Bild",
+  "playground_hero_split_with_image": "Geteilt mit Bild",
+  "playground_hero_split_without_image": "Geteilt ohne Bild",
+  "playground_hero_fullwidth": "Vollbreiter Hero",
+  "playground_hero_subheadline": "Das ist eine Unterüberschrift",
+  "playground_hero_image_alt": "Das ist ein Bild",
+  "playground_hero_cta_text": "Das ist der CTA-Text...",
+  "playground_back_to_home": "Zurück zur Startseite"
 }

@@ -26,7 +26,7 @@
         try {
           return JSON.parse(tokenString);
         } catch (e) {
-          throw new Error('Ungültiges JSON-Format in Auth Tokens');
+      throw new Error(m.dashboard_setup_error_invalid_json());
         }
       };
 
@@ -88,11 +88,11 @@
 
         closeModal();
       } else {
-        setupError = result.error || 'Fehler beim Speichern der Setup-Daten';
+        setupError = result.error || m.dashboard_setup_error_save_failed();
       }
     } catch (error) {
       console.error('Error saving setup:', error);
-      setupError = error instanceof Error ? error.message : 'Unbekannter Fehler beim Speichern';
+      setupError = error instanceof Error ? error.message : m.dashboard_setup_error_unknown();
     } finally {
       setupSaving = false;
     }
@@ -105,7 +105,7 @@
       <button class="btn btn-sm btn-circle btn-ghost absolute top-4 right-4" onclick={closeModal}>✕</button>
     </form>
 
-    <h3 class="mb-4 text-lg font-bold">Service Setup bearbeiten - {editingProject.name}</h3>
+    <h3 class="mb-4 text-lg font-bold">{m.dashboard_setup_title({ project: editingProject.name })}</h3>
 
     {#if setupError}
       <div class="alert alert-error mb-4">
@@ -126,13 +126,13 @@
                 d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
               />
             </svg>
-            <h4 class="card-title text-base">GitHub</h4>
+            <h4 class="card-title text-base">{m.dashboard_setup_section_github()}</h4>
           </div>
 
           <div class="space-y-4">
             <div class="form-control">
               <label class="label" for="github-username">
-                <span class="label-text">Username</span>
+                <span class="label-text">{m.dashboard_setup_label_username()}</span>
               </label>
               <input
                 id="github-username"
@@ -145,7 +145,7 @@
 
             <div class="form-control">
               <label class="label" for="github-password">
-                <span class="label-text">Passwort</span>
+                <span class="label-text">{m.dashboard_setup_label_password()}</span>
               </label>
               <input
                 id="github-password"
@@ -158,7 +158,7 @@
 
             <div class="form-control">
               <label class="label" for="github-authTokens">
-                <span class="label-text">Auth Tokens (JSON)</span>
+                <span class="label-text">{m.dashboard_setup_label_tokens()}</span>
               </label>
               <textarea
                 id="github-authTokens"
@@ -170,7 +170,7 @@
 
             <div class="form-control">
               <label class="label cursor-pointer" for="github-isConfigured">
-                <span class="label-text">Konfiguriert</span>
+                <span class="label-text">{m.dashboard_setup_label_configured()}</span>
                 <input
                   id="github-isConfigured"
                   type="checkbox"
@@ -192,13 +192,13 @@
                 d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.042-3.441.219-.937 1.404-5.965 1.404-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.888-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.357-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24c6.624 0 11.99-5.367 11.99-12C24.007 5.367 18.641.001.017.001z"
               />
             </svg>
-            <h4 class="card-title text-base">Netlify</h4>
+            <h4 class="card-title text-base">{m.dashboard_setup_section_netlify()}</h4>
           </div>
 
           <div class="space-y-4">
             <div class="form-control">
               <label class="label" for="netlify-username">
-                <span class="label-text">Username</span>
+                <span class="label-text">{m.dashboard_setup_label_username()}</span>
               </label>
               <input
                 id="netlify-username"
@@ -211,7 +211,7 @@
 
             <div class="form-control">
               <label class="label" for="netlify-password">
-                <span class="label-text">Passwort</span>
+                <span class="label-text">{m.dashboard_setup_label_password()}</span>
               </label>
               <input
                 id="netlify-password"
@@ -224,7 +224,7 @@
 
             <div class="form-control">
               <label class="label" for="netlify-authTokens">
-                <span class="label-text">Auth Tokens (JSON)</span>
+                <span class="label-text">{m.dashboard_setup_label_tokens()}</span>
               </label>
               <textarea
                 id="netlify-authTokens"
@@ -236,7 +236,7 @@
 
             <div class="form-control">
               <label class="label cursor-pointer" for="netlify-isConfigured">
-                <span class="label-text">Konfiguriert</span>
+                <span class="label-text">{m.dashboard_setup_label_configured()}</span>
                 <input
                   id="netlify-isConfigured"
                   type="checkbox"
@@ -258,13 +258,13 @@
                 d="M12 0L1.608 6v12L12 24l10.392-6V6L12 0zm-1.073 18.564L5.5 15.846V8.154l5.427 2.718v7.692zm2.146 0V10.872L18.5 8.154v7.692l-5.427 2.718zM12 9.282L6.573 6.564 12 3.846l5.427 2.718L12 9.282z"
               />
             </svg>
-            <h4 class="card-title text-base">Hygraph</h4>
+            <h4 class="card-title text-base">{m.dashboard_setup_section_hygraph()}</h4>
           </div>
 
           <div class="space-y-4">
             <div class="form-control">
               <label class="label" for="hygraph-username">
-                <span class="label-text">Username</span>
+                <span class="label-text">{m.dashboard_setup_label_username()}</span>
               </label>
               <input
                 id="hygraph-username"
@@ -277,7 +277,7 @@
 
             <div class="form-control">
               <label class="label" for="hygraph-password">
-                <span class="label-text">Passwort</span>
+                <span class="label-text">{m.dashboard_setup_label_password()}</span>
               </label>
               <input
                 id="hygraph-password"
@@ -290,7 +290,7 @@
 
             <div class="form-control">
               <label class="label" for="hygraph-authTokens">
-                <span class="label-text">Auth Tokens (JSON)</span>
+                <span class="label-text">{m.dashboard_setup_label_tokens()}</span>
               </label>
               <textarea
                 id="hygraph-authTokens"
@@ -302,7 +302,7 @@
 
             <div class="form-control">
               <label class="label cursor-pointer" for="hygraph-isConfigured">
-                <span class="label-text">Konfiguriert</span>
+                <span class="label-text">{m.dashboard_setup_label_configured()}</span>
                 <input
                   id="hygraph-isConfigured"
                   type="checkbox"
@@ -322,13 +322,13 @@
             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
               <path d="M21.98 7.448L19.62 0H4.347L2.02 7.448c-1.352 4.312.03 9.206 3.815 12.015L12.007 24l6.157-4.537c3.785-2.809 5.167-7.703 3.815-12.015z" />
             </svg>
-            <h4 class="card-title text-base">Auth0</h4>
+            <h4 class="card-title text-base">{m.dashboard_setup_section_auth0()}</h4>
           </div>
 
           <div class="space-y-4">
             <div class="form-control">
               <label class="label" for="auth0-username">
-                <span class="label-text">Username</span>
+                <span class="label-text">{m.dashboard_setup_label_username()}</span>
               </label>
               <input
                 id="auth0-username"
@@ -341,7 +341,7 @@
 
             <div class="form-control">
               <label class="label" for="auth0-password">
-                <span class="label-text">Passwort</span>
+                <span class="label-text">{m.dashboard_setup_label_password()}</span>
               </label>
               <input
                 id="auth0-password"
@@ -354,7 +354,7 @@
 
             <div class="form-control">
               <label class="label" for="auth0-authTokens">
-                <span class="label-text">Auth Tokens (JSON)</span>
+                <span class="label-text">{m.dashboard_setup_label_tokens()}</span>
               </label>
               <textarea
                 id="auth0-authTokens"
@@ -366,7 +366,7 @@
 
             <div class="form-control">
               <label class="label cursor-pointer" for="auth0-isConfigured">
-                <span class="label-text">Konfiguriert</span>
+                <span class="label-text">{m.dashboard_setup_label_configured()}</span>
                 <input
                   id="auth0-isConfigured"
                   type="checkbox"
@@ -381,19 +381,19 @@
     </div>
 
     <div class="modal-action mt-6">
-      <button type="button" class="btn btn-ghost" onclick={closeModal}> Abbrechen </button>
+      <button type="button" class="btn btn-ghost" onclick={closeModal}> {m.dashboard_setup_button_cancel()} </button>
       <button type="button" class="btn btn-simple" onclick={saveProjectSetup} disabled={setupSaving}>
         {#if setupSaving}
           <span class="loading loading-spinner loading-sm"></span>
-          Speichern...
+          {m.dashboard_setup_button_saving()}
         {:else}
-          Speichern
+          {m.dashboard_setup_button_save()}
         {/if}
       </button>
     </div>
   </div>
   <form method="dialog" class="modal-backdrop">
-    <button onclick={closeModal}>close</button>
+    <button onclick={closeModal}>{m.modal_close()}</button>
   </form>
 </dialog>
 

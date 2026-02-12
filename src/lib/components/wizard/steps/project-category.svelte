@@ -6,10 +6,10 @@
 
 <div class="step-header">
   <h1>
-    {m['wizard_stepCategory_titleFirst']()} <span class="inner-text-special">{m['wizard_stepCategory_titleHighlight']()}</span>
-    {m['wizard_stepCategory_titleSecond']()}
+    {m.wizard_stepCategory_titleFirst()} <span class="inner-text-special">{m.wizard_stepCategory_titleHighlight()}</span>
+    {m.wizard_stepCategory_titleSecond()}
   </h1>
-  <p class="teaser">{m['wizard_stepCategory_teaser']()}</p>
+  <p class="teaser">{m.wizard_stepCategory_teaser()}</p>
 </div>
 
 <div class="project-categories">

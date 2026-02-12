@@ -14,7 +14,7 @@
   <td>
     <div class="font-medium">{project.name}</div>
   </td>
-  <td>{project.projectType || 'Unbekannt'}</td>
+  <td>{project.projectType || m.dashboard_details_fallback_unknown()}</td>
   <td>
     {#if project.projectStatus}
       <div class="badge {getStatusBadgeClass(project.projectStatus)} badge-sm">
@@ -23,5 +23,5 @@
     {/if}
   </td>
   <td>{formatBudget(project.budget || '')}</td>
-  <td>{project.createdAt ? formatDate(project.createdAt) : 'Unbekannt'}</td>
+  <td>{project.createdAt ? formatDate(project.createdAt) : m.dashboard_details_fallback_unknown()}</td>
 </tr>

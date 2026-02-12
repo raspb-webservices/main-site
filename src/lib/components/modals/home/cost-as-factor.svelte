@@ -18,26 +18,26 @@
 
     <div class="mb-6 flex items-center gap-3">
       <div class="text-5xl leading-tight">💰</div>
-      <h2 class="pt-4">{m['costAsFactorModal_header_title']()}</h2>
+      <h2 class="pt-4">{m.costAsFactorModal_header_title()}</h2>
     </div>
 
     <div class="prose md:px-4">
       <p>
-        {m['costAsFactorModal_content_paragraph1']()}
+        {m.costAsFactorModal_content_paragraph1()}
       </p>
 
       <p>
-        {m['costAsFactorModal_content_paragraph2']()}
+        {m.costAsFactorModal_content_paragraph2()}
       </p>
 
       <p>
-        {m['costAsFactorModal_content_paragraph3']()}
+        {m.costAsFactorModal_content_paragraph3()}
       </p>
     </div>
   </div>
 
   <form method="dialog" class="modal-backdrop">
-    <button onclick={closeModal}>close</button>
+    <button onclick={closeModal}>{m.modal_close()}</button>
   </form>
 </dialog>
 

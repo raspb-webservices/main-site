@@ -19,27 +19,27 @@
 </script>
 
 <svelte:head>
-  <title>{m['login_meta_title']()}</title>
-  <meta name="description" content={m['login_meta_description']()} />
+  <title>{m.login_meta_title()}</title>
+  <meta name="description" content={m.login_meta_description()} />
 </svelte:head>
 
 <Section type={'fullCenterTeaser'}>
   <div class="inner-content-wrapper prose">
-    <h1>{m['login_title']()}</h1>
-    <p class="teaser">{m['login_teaser']()}</p>
+    <h1>{m.login_title()}</h1>
+    <p class="teaser">{m.login_teaser()}</p>
     <div class="spacer"></div>
     <div class="flex gap-6">
       <button
         class="btn-basic"
         onclick={() => {
           login();
-        }}>{m['login_loginButton']()}</button
+        }}>{m.login_loginButton()}</button
       >
       <button
         class="btn-basic"
         onclick={() => {
           goto(localizeHref('/registration'));
-        }}>{m['login_registerButton']()}</button
+        }}>{m.login_registerButton()}</button
       >
     </div>
   </div>

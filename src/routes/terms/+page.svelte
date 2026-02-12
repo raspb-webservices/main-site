@@ -5,20 +5,20 @@
 </script>
 
 <svelte:head>
-  <title>{m['terms_meta_title']()}</title>
-  <meta name="description" content={m['terms_meta_description']()} />
+  <title>{m.terms_meta_title()}</title>
+  <meta name="description" content={m.terms_meta_description()} />
 </svelte:head>
 
 <Section>
   <div class="terms-and-conditions-content prose">
-    <h1>{m['terms_title']()}</h1>
+    <h1>{m.terms_title()}</h1>
 
     <div class="spacer"></div>
     <button
       class="btn-basic"
       onclick={() => {
         goto('/');
-      }}>{m['terms_backToHomepage']()}</button
+      }}>{m.terms_backToHomepage()}</button
     >
   </div>
 </Section>

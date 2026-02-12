@@ -43,18 +43,18 @@
 </script>
 
 <svelte:head>
-	<title>{m['registration_meta_title']()}</title>
-	<meta name="description" content={m['registration_meta_description']()} />
+	<title>{m.registration_meta_title()}</title>
+	<meta name="description" content={m.registration_meta_description()} />
 </svelte:head>
 
 <div class="content-area">
 	<Section noSpacing={true}>
 		<div class="inner-box reduced prose pt-24 pb-12">
 			<h1 class="animate-fade-in mb-8 max-w-212.5 text-center text-4xl font-bold">
-				{m['registration_intro_titleFirst']()}
-				<span class="inner-text-special">{m['registration_intro_titleHighlight']()}</span>
+				{m.registration_intro_titleFirst()}
+				<span class="inner-text-special">{m.registration_intro_titleHighlight()}</span>
 			</h1>
-			<p class="teaser animate-fade-in-up boxed text-center">{m['registration_intro_teaser']()}</p>
+			<p class="teaser animate-fade-in-up boxed text-center">{m.registration_intro_teaser()}</p>
 		</div>
 	</Section>
 
@@ -69,14 +69,14 @@
 					</div>
 				{/if}
 
-				<p class="mb-8 text-lg">{m['registration_intro_teaser']()}</p>
+				<p class="mb-8 text-lg">{m.registration_intro_teaser()}</p>
 
 				<button class="btn-basic w-full max-w-md" onclick={handleSignup} disabled={isLoading}>
 					{#if isLoading}
 						<span class="loading loading-spinner loading-sm mr-2"></span>
-						{m['registration_form_button_loading']()}
+						{m.registration_form_button_loading()}
 					{:else}
-						{m['registration_form_button_createAccount']()}
+						{m.registration_form_button_createAccount()}
 					{/if}
 				</button>
 			</div>

@@ -23,41 +23,41 @@
 
   const philosophyItems = [
     {
-      letter: m['philosophyModal_items_rapid_letter'](),
-      title: m['philosophyModal_items_rapid_title'](),
-      subtitle: m['philosophyModal_items_rapid_subtitle'](),
-      description: m['philosophyModal_items_rapid_description'](),
-      icon: m['philosophyModal_items_rapid_icon'](),
+      letter: m.philosophyModal_items_rapid_letter(),
+      title: m.philosophyModal_items_rapid_title(),
+      subtitle: m.philosophyModal_items_rapid_subtitle(),
+      description: m.philosophyModal_items_rapid_description(),
+      icon: m.philosophyModal_items_rapid_icon(),
       gradient: 'from-yellow-400 to-orange-500',
       bgColor: 'bg-yellow-50',
       textColor: 'text-yellow-800'
     },
     {
-      letter: m['philosophyModal_items_accurate_letter'](),
-      title: m['philosophyModal_items_accurate_title'](),
-      subtitle: m['philosophyModal_items_accurate_subtitle'](),
-      description: m['philosophyModal_items_accurate_description'](),
-      icon: m['philosophyModal_items_accurate_icon'](),
+      letter: m.philosophyModal_items_accurate_letter(),
+      title: m.philosophyModal_items_accurate_title(),
+      subtitle: m.philosophyModal_items_accurate_subtitle(),
+      description: m.philosophyModal_items_accurate_description(),
+      icon: m.philosophyModal_items_accurate_icon(),
       gradient: 'from-blue-400 to-indigo-500',
       bgColor: 'bg-blue-50',
       textColor: 'text-blue-800'
     },
     {
-      letter: m['philosophyModal_items_services_letter'](),
-      title: m['philosophyModal_items_services_title'](),
-      subtitle: m['philosophyModal_items_services_subtitle'](),
-      description: m['philosophyModal_items_services_description'](),
-      icon: m['philosophyModal_items_services_icon'](),
+      letter: m.philosophyModal_items_services_letter(),
+      title: m.philosophyModal_items_services_title(),
+      subtitle: m.philosophyModal_items_services_subtitle(),
+      description: m.philosophyModal_items_services_description(),
+      icon: m.philosophyModal_items_services_icon(),
       gradient: 'from-green-400 to-emerald-500',
       bgColor: 'bg-green-50',
       textColor: 'text-green-800'
     },
     {
-      letter: m['philosophyModal_items_perfectlyBalanced_letter'](),
-      title: m['philosophyModal_items_perfectlyBalanced_title'](),
-      subtitle: m['philosophyModal_items_perfectlyBalanced_subtitle'](),
-      description: m['philosophyModal_items_perfectlyBalanced_description'](),
-      icon: m['philosophyModal_items_perfectlyBalanced_icon'](),
+      letter: m.philosophyModal_items_perfectlyBalanced_letter(),
+      title: m.philosophyModal_items_perfectlyBalanced_title(),
+      subtitle: m.philosophyModal_items_perfectlyBalanced_subtitle(),
+      description: m.philosophyModal_items_perfectlyBalanced_description(),
+      icon: m.philosophyModal_items_perfectlyBalanced_icon(),
       gradient: 'from-teal-400 to-cyan-500',
       bgColor: 'bg-teal-50',
       textColor: 'text-teal-800'
@@ -73,10 +73,10 @@
 
     <div class="my-8 flex flex-col items-center justify-center gap-4">
       <h2>
-        {m['philosophyModal_header_titleFirst']()} <span class="inner-text-special">{m['philosophyModal_header_titleHighlight']()}</span>
-        {m['philosophyModal_header_titleSecond']()}
+        {m.philosophyModal_header_titleFirst()} <span class="inner-text-special">{m.philosophyModal_header_titleHighlight()}</span>
+        {m.philosophyModal_header_titleSecond()}
       </h2>
-      <p class="teaser text-center">{m['philosophyModal_header_subtitle']()}</p>
+      <p class="teaser text-center">{m.philosophyModal_header_subtitle()}</p>
     </div>
 
     <div class="mb-8 text-center">
@@ -88,7 +88,7 @@
               type="button"
               class="mx-2 h-12 w-12 rounded-full bg-gradient-to-br md:mx-3 md:h-16 md:w-16 {item.gradient} flex transform cursor-pointer items-center justify-center text-2xl font-bold text-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl"
               onclick={() => scrollToSection(item.letter)}
-              title="Zu {item.title} springen"
+              title={m.philosophyModal_jump_to_title({ item: item.title })}
             >
               {item.letter}
             </button>
@@ -142,16 +142,16 @@
     <!-- Footer -->
     <div class="border-base-300 mt-8 border-t pt-6 text-center">
       <div class="from-primary/10 to-secondary/10 rounded-2xl bg-gradient-to-r p-6 sm:mx-4 lg:mx-20">
-        <h3 class="mb-3 text-xl font-bold">{m['philosophyModal_footer_missionTitle']()}</h3>
+        <h3 class="mb-3 text-xl font-bold">{m.philosophyModal_footer_missionTitle()}</h3>
         <p class="text-base-content/80 mx-auto max-w-4xl leading-relaxed">
-          {m['philosophyModal_footer_missionDescription']()}
+          {m.philosophyModal_footer_missionDescription()}
         </p>
         <div class="mt-4 flex justify-center">
           <div class="flex flex-wrap items-center justify-center gap-2 text-sm opacity-70">
-            <span class="mx-2">{m['philosophyModal_footer_principles_rapid']()}</span>
-            <span class="mx-2">{m['philosophyModal_footer_principles_accurate']()}</span>
-            <span class="mx-2">{m['philosophyModal_footer_principles_services']()}</span>
-            <span class="mx-2">{m['philosophyModal_footer_principles_perfectlyBalanced']()}</span>
+            <span class="mx-2">{m.philosophyModal_footer_principles_rapid()}</span>
+            <span class="mx-2">{m.philosophyModal_footer_principles_accurate()}</span>
+            <span class="mx-2">{m.philosophyModal_footer_principles_services()}</span>
+            <span class="mx-2">{m.philosophyModal_footer_principles_perfectlyBalanced()}</span>
           </div>
         </div>
       </div>
@@ -168,14 +168,14 @@
             d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
           />
         </svg>
-        {m['philosophyModal_footer_closeButton']()}
+        {m.philosophyModal_footer_closeButton()}
       </button>
     </div>
   </div>
 
   <!-- Modal Backdrop -->
   <form method="dialog" class="modal-backdrop">
-    <button onclick={closeModal}>close</button>
+    <button onclick={closeModal}>{m.modal_close()}</button>
   </form>
 </dialog>
 

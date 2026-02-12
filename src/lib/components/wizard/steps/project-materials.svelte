@@ -5,18 +5,18 @@
 </script>
 
 <div class="step-header">
-  <h1>{m['wizard_steps_step6_titleFirst']()} <span class="inner-text-special">{m['wizard_steps_step6_titleHighlight']()}</span></h1>
-  <p class="teaser">{m['wizard_steps_step6_teaser']()}</p>
+  <h1>{m.wizard_steps_step6_titleFirst()} <span class="inner-text-special">{m.wizard_steps_step6_titleHighlight()}</span></h1>
+  <p class="teaser">{m.wizard_steps_step6_teaser()}</p>
 </div>
 
 <!-- Color Selection -->
 <div class="content-section">
-  <h2>{m['wizard_design_colorScheme']()}</h2>
-  <p>{m['wizard_design_colorSchemeDescription']()}</p>
+  <h2>{m.wizard_design_colorScheme()}</h2>
+  <p>{m.wizard_design_colorSchemeDescription()}</p>
   <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
     <div class="form-control w-full">
       <label class="label" for="primaryColor">
-        <span class="label-text font-semibold">{m['wizard_design_primaryColor']()}</span>
+        <span class="label-text font-semibold">{m.wizard_design_primaryColor()}</span>
       </label>
       <div class="join w-full">
         <input type="color" id="primaryColor" class="join-item h-12 w-16 border-0" bind:value={config.primaryColour} />
@@ -26,7 +26,7 @@
 
     <div class="form-control w-full">
       <label class="label" for="secondaryColor">
-        <span class="label-text font-semibold">{m['wizard_design_secondaryColor']()}</span>
+        <span class="label-text font-semibold">{m.wizard_design_secondaryColor()}</span>
       </label>
       <div class="join w-full">
         <input type="color" id="secondaryColor" class="join-item h-12 w-16 border-0" bind:value={config.secondaryColour} />
@@ -36,7 +36,7 @@
 
     <div class="form-control w-full">
       <label class="label" for="accentColor">
-        <span class="label-text font-semibold">{m['wizard_design_accentColor']()}</span>
+        <span class="label-text font-semibold">{m.wizard_design_accentColor()}</span>
       </label>
       <div class="join w-full">
         <input type="color" id="accentColor" class="join-item h-12 w-16 border-0" bind:value={config.accentColour} />
@@ -48,32 +48,32 @@
 
 <!-- Font Selection -->
 <div class="content-section">
-  <h2>{m['wizard_design_font']()}</h2>
-  <p>{m['wizard_design_fontDescription']()}</p>
+  <h2>{m.wizard_design_font()}</h2>
+  <p>{m.wizard_design_fontDescription()}</p>
 
   <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
     <div class="form-control w-full">
       <label class="label" for="googleFonts">
-        <span class="label-text font-semibold">{m['wizard_design_googleFonts']()}</span>
+        <span class="label-text font-semibold">{m.wizard_design_googleFonts()}</span>
       </label>
       <select id="googleFonts" class="select select-bordered w-full" bind:value={config.desiredFont}>
         {#each googleFonts as font}
           <option value={font}>{font}</option>
         {/each}
-        <option value="Other Google Fonts">{m['wizard_design_otherGoogleFonts']()}</option>
+        <option value="Other Google Fonts">{m.wizard_design_otherGoogleFonts()}</option>
       </select>
     </div>
 
     <div class="form-control w-full">
       <label class="label" for="customFont">
-        <span class="label-text font-semibold">{m['wizard_design_customFont']()}</span>
+        <span class="label-text font-semibold">{m.wizard_design_customFont()}</span>
       </label>
       <input
         type="text"
         id="customFont"
         class="input input-bordered w-full"
         bind:value={config.customFont}
-        placeholder={m['wizard_design_customFontPlaceholder']()}
+        placeholder={m.wizard_design_customFontPlaceholder()}
       />
     </div>
   </div>
@@ -85,9 +85,9 @@
       </svg>
 
       <div>
-        <div class="pt-3 font-bold">{m['wizard_design_fontPreviewTitle']({ font: config.desiredFont })}</div>
+        <div class="pt-3 font-bold">{m.wizard_design_fontPreviewTitle({ font: config.desiredFont })}</div>
         <div class="my-2 text-2xl" style="font-family: {config.desiredFont}">
-          {m['wizard_design_fontPreview']()}
+          {m.wizard_design_fontPreview()}
         </div>
       </div>
     </div>
@@ -96,8 +96,8 @@
 
 <!-- File Upload -->
 <div class="content-section">
-  <h2>{m['wizard_steps_stepMaterials_files_title']()}</h2>
-  <p>{m['wizard_steps_stepMaterials_files_description']()}</p>
+  <h2>{m.wizard_steps_stepMaterials_files_title()}</h2>
+  <p>{m.wizard_steps_stepMaterials_files_description()}</p>
 
   <div class="form-control w-full">
     <input
@@ -109,13 +109,13 @@
       onchange={handleFileUpload}
     />
     <div class="label">
-      <span class="label-text-alt">{m['wizard_steps_stepMaterials_files_formats']()}</span>
+      <span class="label-text-alt">{m.wizard_steps_stepMaterials_files_formats()}</span>
     </div>
   </div>
 
   {#if uploadedFiles.length > 0}
     <div class="mt-6">
-      <h3>{m['wizard_steps_stepMaterials_files_uploaded']()}</h3>
+      <h3>{m.wizard_steps_stepMaterials_files_uploaded()}</h3>
       <div class="space-y-2">
         {#each uploadedFiles as file, i}
           <div class="alert">
@@ -128,7 +128,7 @@
               ></path>
             </svg>
             <span>{file.name} ({Math.round(file.size / 1024)}KB)</span>
-            <button type="button" class="btn btn-sm btn-error" onclick={() => removeFile(i)} aria-label={m['wizard_steps_stepMaterials_files_removeFile']()}>
+            <button type="button" class="btn btn-sm btn-error" onclick={() => removeFile(i)} aria-label={m.wizard_steps_stepMaterials_files_removeFile()}>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
@@ -146,7 +146,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
         </svg>
         <div>
-          <div class="font-bold">{m['wizard_steps_stepMaterials_files_uploadRunning']()}</div>
+          <div class="font-bold">{m.wizard_steps_stepMaterials_files_uploadRunning()}</div>
           <div class="text-sm">{uploadProgress}</div>
         </div>
         <span class="loading loading-ring loading-md"></span>

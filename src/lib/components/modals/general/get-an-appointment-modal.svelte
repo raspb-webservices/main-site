@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { m } from '$lib/paraglide/messages';
   let modal: HTMLDialogElement;
   let isOpen = $state(false);
 
@@ -20,12 +21,12 @@
 
     <div class="iframe-container">
       {#if isOpen}
-        <iframe src="https://nextcloud.raspb.eu/apps/appointments/embed/QC0rcD04c8q8NbC1/form" title="Erstgespräch vereinbaren"></iframe>
+        <iframe src="https://nextcloud.raspb.eu/apps/appointments/embed/QC0rcD04c8q8NbC1/form" title={m.appointment_iframe_title()}></iframe>
       {/if}
     </div>
   </div>
   <form method="dialog" class="modal-backdrop">
-    <button onclick={closeModal}>close</button>
+    <button onclick={closeModal}>{m.modal_close()}</button>
   </form>
 </dialog>
 

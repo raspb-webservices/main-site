@@ -58,26 +58,26 @@
 </script>
 
 <svelte:head>
-  <title>{m['aboutUs_meta_title']()}</title>
-  <meta name="description" content={m['aboutUs_meta_description']()} />
+  <title>{m.aboutUs_meta_title()}</title>
+  <meta name="description" content={m.aboutUs_meta_description()} />
 </svelte:head>
 
 <Stage style={'fancy-gradient'}>
   <div class="inner-box reduced prose py-36">
-    <h1 class="massive animate-fade-in-up">{m['aboutUs_header_title']()}</h1>
-    <p class="teaser animate-fade-in-up">{@html m['aboutUs_header_subtitle']()}</p>
+    <h1 class="massive animate-fade-in-up">{m.aboutUs_header_title()}</h1>
+    <p class="teaser animate-fade-in-up">{@html m.aboutUs_header_subtitle()}</p>
   </div>
 </Stage>
 
 <Section noSpacing={true}>
   <div id="raspb" class="inner-box animate-fade-in-up prose pt-30 pb-24">
     <h2>
-      {m['aboutUs_introSection_titleFirst']()} <span class="inner-text-special">{m['aboutUs_introSection_titleHighlight']()}</span>
-      {m['aboutUs_introSection_titleSecond']()}
+      {m.aboutUs_introSection_titleFirst()} <span class="inner-text-special">{m.aboutUs_introSection_titleHighlight()}</span>
+      {m.aboutUs_introSection_titleSecond()}
     </h2>
-    <p>{@html m['aboutUs_introSection_teaser1']()}</p>
-    <p>{@html m['aboutUs_introSection_teaser2']()}</p>
-    <p class="no-padding">{@html m['aboutUs_introSection_teaser3']()}</p>
+    <p>{@html m.aboutUs_introSection_teaser1()}</p>
+    <p>{@html m.aboutUs_introSection_teaser2()}</p>
+    <p class="no-padding">{@html m.aboutUs_introSection_teaser3()}</p>
   </div>
 </Section>
 
@@ -87,24 +87,24 @@
       <div class="shrink-0">
         <img
           src="$images/markus.jpg"
-          alt="Markus - Gründer von raspb Webservices"
+          alt={m.aboutUs_markusSection_imageAlt()}
           class="h-104 w-72 rounded-2xl object-cover shadow-2xl transition-transform duration-300 hover:scale-105"
         />
       </div>
       <div class="flex-1">
-        <div class="badge badge-primary badge-lg mb-4 animate-bounce">{m['aboutUs_markusSection_badge']()}</div>
-        <h2 class="mb-6 text-5xl font-bold">{m['aboutUs_markusSection_title']()}</h2>
+        <div class="badge badge-primary badge-lg mb-4 animate-bounce">{m.aboutUs_markusSection_badge()}</div>
+        <h2 class="mb-6 text-5xl font-bold">{m.aboutUs_markusSection_title()}</h2>
         <p class="mb-6 text-xl leading-relaxed">
-          {m['aboutUs_markusSection_paragraph1']()}
+          {m.aboutUs_markusSection_paragraph1()}
         </p>
         <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
           <div class="stat bg-base-300 rounded-xl {currentTheme === 'light' ? 'shadow-lg' : ''}">
-            <div class="stat-title">{m['aboutUs_markusSection_statSpecializationTitle']()}</div>
-            <div class="stat-value text-base-content-50 text-lg">{m['aboutUs_markusSection_statSpecializationValue']()}</div>
+            <div class="stat-title">{m.aboutUs_markusSection_statSpecializationTitle()}</div>
+            <div class="stat-value text-base-content-50 text-lg">{m.aboutUs_markusSection_statSpecializationValue()}</div>
           </div>
           <div class="stat bg-base-300 rounded-xl {currentTheme === 'light' ? 'shadow-lg' : ''}">
-            <div class="stat-title">{m['aboutUs_markusSection_statExperienceTitle']()}</div>
-            <div class="stat-value text-base-content-50 text-lg">{m['aboutUs_markusSection_statExperienceValue']()}</div>
+            <div class="stat-title">{m.aboutUs_markusSection_statExperienceTitle()}</div>
+            <div class="stat-value text-base-content-50 text-lg">{m.aboutUs_markusSection_statExperienceValue()}</div>
           </div>
         </div>
         <div class="mb-6 flex flex-wrap gap-2">
@@ -113,17 +113,17 @@
           {/each}
         </div>
         <p class="add-padding text-lg opacity-80">
-          {m['aboutUs_markusSection_paragraph2']()}
-          {m['aboutUs_markusSection_philosophyPrefix']()}
+          {m.aboutUs_markusSection_paragraph2()}
+          {m.aboutUs_markusSection_philosophyPrefix()}
           <button type="button" class="link link-primary hover:link-hover" onclick={() => philosophyModal.openModal()}>
-            {m['aboutUs_markusSection_philosophyButton']()}
+            {m.aboutUs_markusSection_philosophyButton()}
           </button>.
         </p>
         <button
           class="btn-basic-header animate-fade-in-from-side mt-4 mb-2"
           onclick={() => {
             aboutMeModal.openModal();
-          }}>{m['mehrErfahren']()}</button
+          }}>{m.mehrErfahren()}</button
         >
       </div>
     </div>
@@ -133,8 +133,8 @@
 <Section noSpacing={true}>
   <div id="ai-team" class="inner-box animate-fade-in-up pt-36">
     <div class="prose m-auto max-w-5xl text-center">
-      <h2>{m['aboutUs_aiTeamSection_titleFirst']()} <span class="inner-text-special">{m['aboutUs_aiTeamSection_titleHighlight']()}</span></h2>
-      <p class="teaser boxed no-padding">{m['aboutUs_aiTeamSection_subtitle']()}</p>
+      <h2>{m.aboutUs_aiTeamSection_titleFirst()} <span class="inner-text-special">{m.aboutUs_aiTeamSection_titleHighlight()}</span></h2>
+      <p class="teaser boxed no-padding">{m.aboutUs_aiTeamSection_subtitle()}</p>
     </div>
   </div>
 </Section>
@@ -166,7 +166,7 @@
                 class="btn btn-simple btn-xs"
                 onclick={() => {
                   openMemberModal(member);
-                }}>{m['aboutUs_aiTeamSection_memberCardButton']()}</button
+                }}>{m.aboutUs_aiTeamSection_memberCardButton()}</button
               >
             </div>
           </div>

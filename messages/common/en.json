@@ -62,5 +62,44 @@
   "login_title": "Please log in",
   "login_teaser": "If you want to access your own dashboard or use the extended configurator, you must be logged in.",
   "login_loginButton": "Login",
-  "login_registerButton": "Register"
+  "login_registerButton": "Register",
+
+  "header_welcome": "Welcome,",
+  "header_dashboard": "Dashboard",
+  "header_profile": "Profile",
+  "header_open_menu": "Open menu",
+  "header_close_sidebar": "Close sidebar",
+
+  "layout_skip_to_content": "Skip to main content",
+
+  "footer_toggle_dark_mode": "Toggle dark mode",
+  "footer_scroll_to_top": "Scroll to top",
+
+  "carousel_slide1_title": "Experience Adventure Like Never Before",
+  "carousel_slide1_text": "Discover breathtaking landscapes and create unforgettable memories with our premium outdoor experiences.",
+  "carousel_slide1_cta": "Get Started",
+  "carousel_slide2_title": "Push Your Limits",
+  "carousel_slide2_text": "Challenge yourself with thrilling adventures that test your courage and reward your spirit.",
+  "carousel_slide2_cta": "Join Adventure",
+  "carousel_slide3_title": "Nature's Playground Awaits",
+  "carousel_slide3_text": "Immerse yourself in pristine wilderness and connect with the raw beauty of the natural world.",
+  "carousel_slide3_cta": "Explore Now",
+  "carousel_slide4_title": "Create Lasting Memories",
+  "carousel_slide4_text": "Every moment becomes a story worth telling when you embrace the adventure that calls to you.",
+  "carousel_slide4_cta": "Start Journey",
+  "carousel_slide5_title": "Where Dreams Take Flight",
+  "carousel_slide5_text": "Soar beyond your comfort zone and discover what lies beyond the horizon of possibility.",
+  "carousel_slide5_cta": "Take Flight",
+  "carousel_nav_previous": "Previous slide",
+  "carousel_nav_next": "Next slide",
+
+  "hero_default_button": "Learn more",
+  "teaser_default_headline": "No headline",
+  "teaser_default_subheadline": "No sub-headline",
+
+  "offline_title": "Offline | raspb Webservices",
+  "offline_heading": "You are offline",
+  "offline_description": "There is currently no internet connection. Please check your connection and try again.",
+  "offline_retry": "Try again",
+  "modal_close": "Close"
 }

@@ -8,20 +8,20 @@
       <div class="loading-spinner"></div>
       <div class="loading-pulse"></div>
     </div>
-    <h2 class="loading-title">{m['wizard_loading_title']()}</h2>
-    <p class="loading-text">{m['wizard_loading_description']()}</p>
+    <h2 class="loading-title">{m.wizard_loading_title()}</h2>
+    <p class="loading-text">{m.wizard_loading_description()}</p>
     <div class="loading-steps">
       <div class="loading-step">
         <span class="loading-step-icon">✓</span>
-        <span>{m['wizard_loading_steps_preparing']()}</span>
+        <span>{m.wizard_loading_steps_preparing()}</span>
       </div>
       <div class="loading-step">
         <span class="loading-step-icon">⏳</span>
-        <span>{m['wizard_loading_steps_creating']()}</span>
+        <span>{m.wizard_loading_steps_creating()}</span>
       </div>
       <div class="loading-step">
         <span class="loading-step-icon">⏳</span>
-        <span>{m['wizard_loading_steps_sending']()}</span>
+        <span>{m.wizard_loading_steps_sending()}</span>
       </div>
     </div>
   </div>

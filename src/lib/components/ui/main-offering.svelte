@@ -2,6 +2,7 @@
   import { DotLottieSvelte } from '@lottiefiles/dotlottie-svelte';
   import { goto } from '$app/navigation';
   import { localizeHref } from '$lib/paraglide/runtime';
+  import { m } from '$lib/paraglide/messages';
   import GetAnAppointmentModal from '$lib/components/modals/general/get-an-appointment-modal.svelte';
 
   let getAnAppointmentModal: GetAnAppointmentModal;
@@ -13,19 +14,18 @@
 
 <div class="main-section">
   <div class="feature-block">
-    <h2>Die beste Webseite, die du je hattest</h2>
+    <h2>{m.homepage_offering_web_title()}</h2>
     <div class="lottie-container">
       <DotLottieSvelte src=" /lotties/solution-development-web.lottie" loop autoplay />
     </div>
     <p>
-      Ob One Pager, CMS oder komplexe Web-App - wir entwickeln digitale Lösungen, die begeistern und genau zu deinem Unternehmen passen. Modernste Technologien,
-      individuelle Designs und ein reibungsloser Ablauf sorgen für ein Ergebnis, das dich und deine Kunden überzeugt.
+      {m.homepage_offering_web_description()}
     </p>
     <ul class="feature-list">
-      <li>Modernes, responsives Design</li>
-      <li>Individuelle Funktionen & Integrationen</li>
-      <li>SEO & Performance optimiert</li>
-      <li>Persönliche Beratung & Support</li>
+      <li>{m.homepage_offering_web_feature1()}</li>
+      <li>{m.homepage_offering_web_feature2()}</li>
+      <li>{m.homepage_offering_web_feature3()}</li>
+      <li>{m.homepage_offering_web_feature4()}</li>
     </ul>
     <div class="cta-row">
       <button
@@ -34,31 +34,30 @@
           goto(localizeHref('/wizard'));
         }}
       >
-        Projekt konfigurieren
+        {m.homepage_offering_configure_button()}
       </button>
       <button
         class="text-link-button animate-fade-in-from-side"
         onclick={openGetAnAppointmentModal}
       >
-        Erstgespräch vereinbaren
+        {m.homepage_offering_appointment_button()}
       </button>
     </div>
   </div>
 
   <div class="feature-block">
-    <h2>KI - die Superpower für dein Business</h2>
+    <h2>{m.homepage_offering_ki_title()}</h2>
     <div class="lottie-container py-4">
       <DotLottieSvelte src=" /lotties/abstract-robot-with-cloud.lottie" loop autoplay />
     </div>
     <p>
-      Nutze künstliche Intelligenz, um Prozesse zu automatisieren, Kosten zu sparen und neue Möglichkeiten zu erschließen. Von smarter Datenanalyse bis hin zu
-      individuellen KI-Lösungen - wir zeigen dir, wie du das volle Potenzial für dein Unternehmen ausschöpfst.
+      {m.homepage_offering_ki_description()}
     </p>
     <ul class="feature-list">
-      <li>Automatisierung & Effizienzsteigerung</li>
-      <li>Intelligente Datenanalyse</li>
-      <li>Individuelle KI-Integrationen</li>
-      <li>Wettbewerbsvorteil sichern</li>
+      <li>{m.homepage_offering_ki_feature1()}</li>
+      <li>{m.homepage_offering_ki_feature2()}</li>
+      <li>{m.homepage_offering_ki_feature3()}</li>
+      <li>{m.homepage_offering_ki_feature4()}</li>
     </ul>
     <div class="cta-row">
       <button
@@ -67,13 +66,13 @@
           goto(localizeHref('/wizard'));
         }}
       >
-        Projekt konfigurieren
+        {m.homepage_offering_configure_button()}
       </button>
       <button
         class="text-link-button animate-fade-in-from-side"
         onclick={openGetAnAppointmentModal}
       >
-        Erstgespräch vereinbaren
+        {m.homepage_offering_appointment_button()}
       </button>
     </div>
   </div>
@@ -86,7 +85,7 @@
       goto(localizeHref('/services'));
     }}
   >
-    Unser Service-Angebot im Detail
+    {m.homepage_offering_services_detail_button()}
   </button>
 </div>
 <GetAnAppointmentModal bind:this={getAnAppointmentModal} />

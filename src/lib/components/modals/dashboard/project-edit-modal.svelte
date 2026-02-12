@@ -132,18 +132,18 @@
       const result = await response.json();
 
       if (response.ok) {
-        editSuccess = 'Änderungen erfolgreich gespeichert!';
+        editSuccess = m.dashboard_edit_success_saved();
 
         setTimeout(() => {
           editingSection = null;
           editSuccess = '';
         }, 2000);
       } else {
-        editError = result.error || 'Fehler beim Speichern der Änderungen';
+        editError = result.error || m.dashboard_edit_error_save();
       }
     } catch (error) {
       console.error('Error saving project:', error);
-      editError = error instanceof Error ? error.message : 'Unbekannter Fehler beim Speichern';
+      editError = error instanceof Error ? error.message : m.dashboard_edit_error_unknown();
     } finally {
       editSaving = false;
     }
@@ -191,7 +191,7 @@
 
       if (response.ok) {
         selectedProject.owner = customerForm;
-        customerSuccess = 'Kundendaten erfolgreich gespeichert!';
+        customerSuccess = m.dashboard_edit_success_customer();
 
         // Nach 2 Sekunden den Bearbeitungsmodus verlassen
         setTimeout(() => {
@@ -199,11 +199,11 @@
           customerSuccess = '';
         }, 2000);
       } else {
-        customerError = result.error || 'Fehler beim Speichern der Kundendaten';
+        customerError = result.error || m.dashboard_edit_error_customer();
       }
     } catch (error) {
       console.error('Error saving customer:', error);
-      customerError = error instanceof Error ? error.message : 'Unbekannter Fehler beim Speichern';
+      customerError = error instanceof Error ? error.message : m.dashboard_edit_error_unknown();
     } finally {
       customerSaving = false;
     }
@@ -252,7 +252,7 @@
         try {
           return JSON.parse(tokenString);
         } catch (e) {
-          throw new Error('Ungültiges JSON-Format in Auth Tokens');
+          throw new Error(m.dashboard_setup_error_invalid_json());
         }
       };
 
@@ -283,7 +283,7 @@
 
       if (response.ok) {
         selectedProject = { ...selectedProject, setup: updatedSetup };
-        serviceSuccess = 'Service Setup erfolgreich gespeichert!';
+        serviceSuccess = m.dashboard_edit_success_setup();
 
         // Nach 2 Sekunden den Bearbeitungsmodus verlassen
         setTimeout(() => {
@@ -291,11 +291,11 @@
           serviceSuccess = '';
         }, 2000);
       } else {
-        serviceError = result.error || 'Fehler beim Speichern der Service-Daten';
+        serviceError = result.error || m.dashboard_edit_error_setup();
       }
     } catch (error) {
       console.error('Error saving service setup:', error);
-      serviceError = error instanceof Error ? error.message : 'Unbekannter Fehler beim Speichern';
+      serviceError = error instanceof Error ? error.message : m.dashboard_edit_error_unknown();
     } finally {
       serviceSaving = false;
     }
@@ -314,7 +314,7 @@
       <div class="card bg-base-200">
         <div class="card-body">
           <div class="mb-4 flex items-center justify-between">
-            <h4 class="card-title text-base">Grundinformationen</h4>
+            <h4 class="card-title text-base">{m.dashboard_details_section_basic()}</h4>
             {#if editingSection !== 'grundinformationen'}
               <button class="btn btn-xs btn-simple" onclick={() => editProjectSection('grundinformationen')}>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -325,7 +325,7 @@
                     d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                   />
                 </svg>
-                Bearbeiten
+                {m.dashboard_edit_button_edit()}
               </button>
             {/if}
           </div>
@@ -357,17 +357,17 @@
 
               <div class="form-control">
                 <label class="label" for="projektname">
-                  <span class="label-text">Projektname</span>
+                  <span class="label-text">{m.dashboard_edit_label_name()}</span>
                 </label>
                 <input type="text" bind:value={editForm.name} id="projektname" name="projektname" class="input input-bordered input-sm" />
               </div>
 
               <div class="form-control">
                 <label class="label" for="projectCategory">
-                  <span class="label-text">Projektkategorie</span>
+                  <span class="label-text">{m.dashboard_edit_label_category()}</span>
                 </label>
                 <select bind:value={editForm.projectCategory} id="projectCategory" name="projectCategory" class="select select-bordered select-sm">
-                  <option value="">Bitte wählen...</option>
+                  <option value="">{m.dashboard_edit_placeholder_select()}</option>
                   {#each projectCategories as category}
                     <option value={category.id}>{(m as unknown as Record<string, () => string>)[category.title]()}</option>
                   {/each}
@@ -376,10 +376,10 @@
 
               <div class="form-control">
                 <label class="label" for="projectType">
-                  <span class="label-text">Projekttyp</span>
+                  <span class="label-text">{m.dashboard_details_label_type()}</span>
                 </label>
                 <select bind:value={editForm.projectType} id="projectType" name="projectType" class="select select-bordered select-sm">
-                  <option value="">Bitte wählen...</option>
+                  <option value="">{m.dashboard_edit_placeholder_select()}</option>
                   {#each projectTypesWebApp as type}
                     <option value={type.id}>{(m as unknown as Record<string, () => string>)[type.title]?.() ?? type.title}</option>
                   {/each}
@@ -391,10 +391,10 @@
 
               <div class="form-control">
                 <label class="label" for="subType">
-                  <span class="label-text">Untertyp</span>
+                  <span class="label-text">{m.dashboard_details_label_subtype()}</span>
                 </label>
                 <select bind:value={editForm.subType} id="subType" name="subType" class="select select-bordered select-sm">
-                  <option value="">Bitte wählen</option>
+                  <option value="">{m.dashboard_edit_placeholder_select()}</option>
                   {#each projectSubTypesWebsite as subtype}
                     <option value={subtype.id}>{(m as unknown as Record<string, () => string>)[subtype.title]?.() ?? subtype.title}</option>
                   {/each}
@@ -409,10 +409,10 @@
 
               <div class="form-control">
                 <label class="label" for="projectStatus">
-                  <span class="label-text">Projektstatus</span>
+                  <span class="label-text">{m.dashboard_details_label_status()}</span>
                 </label>
                 <select bind:value={editForm.projectStatus} id="projectStatus" name="projectStatus" class="select select-bordered select-sm">
-                  <option value="">Bitte wählen</option>
+                  <option value="">{m.dashboard_edit_placeholder_select()}</option>
                   {#each ToArray(projectStatus) as status}
                     <option value={status as string}>{getStatusLabel(status as string)}</option>
                   {/each}
@@ -421,38 +421,38 @@
 
               <div class="form-control">
                 <label class="label" for="description">
-                  <span class="label-text">Beschreibung</span>
+                  <span class="label-text">{m.dashboard_details_label_description()}</span>
                 </label>
                 <textarea
                   bind:value={editForm.description}
                   id="description"
                   name="description"
                   class="textarea textarea-bordered textarea-sm h-20"
-                  placeholder="Projektbeschreibung"
+                  placeholder={m.dashboard_edit_placeholder_description()}
                 ></textarea>
               </div>
 
               <div class="form-control">
                 <label class="label" for="projectDetails">
-                  <span class="label-text">Projektdetails</span>
+                  <span class="label-text">{m.dashboard_details_label_details()}</span>
                 </label>
                 <textarea
                   id="projectDetails"
                   name="projectDetails"
                   bind:value={editForm.projectDetails}
                   class="textarea textarea-bordered textarea-sm h-20"
-                  placeholder="Detaillierte Projektbeschreibung"
+                  placeholder={m.dashboard_edit_placeholder_details()}
                 ></textarea>
               </div>
 
               <div class="flex justify-end gap-2">
-                <button class="btn btn-sm btn-ghost" onclick={cancelEdit}>Abbrechen</button>
+                <button class="btn btn-sm btn-ghost" onclick={cancelEdit}>{m.dashboard_edit_button_cancel()}</button>
                 <button class="btn btn-sm btn-simple" onclick={saveProjectSection} disabled={editSaving}>
                   {#if editSaving}
                     <span class="loading loading-spinner loading-xs"></span>
-                    Speichern...
+                    {m.dashboard_edit_button_save_loading()}
                   {:else}
-                    Speichern
+                    {m.dashboard_edit_button_save()}
                   {/if}
                 </button>
               </div>
@@ -461,30 +461,30 @@
             <!-- Anzeigemodus -->
             <div class="space-y-3">
               <div class="flex justify-between">
-                <span class="text-base-content/60">Projekttyp:</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_type()}</span>
                 <span class="font-medium">{getProjectTypeLabel(selectedProject?.projectType)}</span>
               </div>
               <div class="flex justify-between">
-                <span class="text-base-content/60">Untertyp:</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_subtype()}</span>
                 <span class="font-medium">{getProjectSubTypeLabel(selectedProject?.subType)}</span>
               </div>
               <div class="flex justify-between">
-                <span class="text-base-content/60">Projektstatus:</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_status()}</span>
                 {#if selectedProject?.projectStatus}
                   <div class="badge {getStatusBadgeClass(selectedProject?.projectStatus)} badge-sm">
                     {getStatusLabel(selectedProject?.projectStatus)}
                   </div>
                 {:else}
-                  <span class="font-medium">Nicht angegeben</span>
+                  <span class="font-medium">{m.dashboard_details_fallback_not_specified()}</span>
                 {/if}
               </div>
               <div class="flex flex-col gap-1">
-                <span class="text-base-content/60">Beschreibung:</span>
-                <span class="text-sm">{selectedProject?.description || 'Keine Beschreibung verfügbar'}</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_description()}</span>
+                <span class="text-sm">{selectedProject?.description || m.dashboard_details_fallback_no_description()}</span>
               </div>
               <div class="flex flex-col gap-1">
-                <span class="text-base-content/60">Projektdetails:</span>
-                <span class="text-sm">{selectedProject?.projectDetails || 'Keine Details verfügbar'}</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_details()}</span>
+                <span class="text-sm">{selectedProject?.projectDetails || m.dashboard_details_fallback_no_details()}</span>
               </div>
             </div>
           {/if}
@@ -495,7 +495,7 @@
       <div class="card bg-base-200">
         <div class="card-body">
           <div class="mb-4 flex items-center justify-between">
-            <h4 class="card-title text-base">Kunde & Kontakt</h4>
+            <h4 class="card-title text-base">{m.dashboard_edit_section_customer()}</h4>
             {#if !editingCustomer && selectedProject?.owner?.id}
               <button class="btn btn-xs btn-simple" onclick={editCustomer}>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -506,7 +506,7 @@
                     d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                   />
                 </svg>
-                Bearbeiten
+                {m.dashboard_edit_button_edit()}
               </button>
             {/if}
           </div>
@@ -538,10 +538,10 @@
 
               <div class="form-control">
                 <label class="label" for="salutation">
-                  <span class="label-text">Anrede</span>
+                  <span class="label-text">{m.dashboard_edit_label_salutation()}</span>
                 </label>
                 <select bind:value={customerForm.salutation} id="salutation" name="salutation" class="select select-bordered select-sm">
-                  <option value="">Bitte wählen</option>
+                  <option value="">{m.dashboard_edit_placeholder_select()}</option>
                   {#each ToArray(salutationOptions) as salutation}
                     <option value={salutation}>{salutation}</option>
                   {/each}
@@ -551,13 +551,13 @@
               <div class="grid grid-cols-2 gap-2">
                 <div class="form-control">
                   <label class="label" for="givenName">
-                    <span class="label-text">Vorname</span>
+                    <span class="label-text">{m.dashboard_edit_label_firstname()}</span>
                   </label>
                   <input type="text" bind:value={customerForm.givenName} id="givenName" name="givenName" class="input input-bordered input-sm" />
                 </div>
                 <div class="form-control">
                   <label class="label" for="familyName">
-                    <span class="label-text">Nachname</span>
+                    <span class="label-text">{m.dashboard_edit_label_lastname()}</span>
                   </label>
                   <input type="text" bind:value={customerForm.familyName} id="familyName" name="familyName" class="input input-bordered input-sm" />
                 </div>
@@ -565,28 +565,28 @@
 
               <div class="form-control">
                 <label class="label" for="email">
-                  <span class="label-text">E-Mail</span>
+                  <span class="label-text">{m.dashboard_edit_label_email()}</span>
                 </label>
                 <input type="email" bind:value={customerForm.email} id="email" name="email" class="input input-bordered input-sm" />
               </div>
 
               <div class="form-control">
                 <label class="label" for="phone">
-                  <span class="label-text">Telefon</span>
+                  <span class="label-text">{m.dashboard_edit_label_phone()}</span>
                 </label>
                 <input type="tel" bind:value={customerForm.phone} id="phone" name="phone" class="input input-bordered input-sm" />
               </div>
 
               <div class="form-control">
                 <label class="label" for="company">
-                  <span class="label-text">Unternehmen</span>
+                  <span class="label-text">{m.dashboard_edit_label_company()}</span>
                 </label>
                 <input type="text" bind:value={customerForm.company} id="company" name="company" class="input input-bordered input-sm" />
               </div>
 
               <div class="form-control">
                 <label class="label" for="address">
-                  <span class="label-text">Adresse</span>
+                  <span class="label-text">{m.dashboard_edit_label_address()}</span>
                 </label>
                 <input type="text" bind:value={customerForm.address} id="address" name="address" class="input input-bordered input-sm" />
               </div>
@@ -594,13 +594,13 @@
               <div class="grid grid-cols-2 gap-2">
                 <div class="form-control">
                   <label class="label" for="postCode">
-                    <span class="label-text">PLZ</span>
+                    <span class="label-text">{m.dashboard_edit_label_zip()}</span>
                   </label>
                   <input type="text" bind:value={customerForm.postCode} id="postCode" name="postCode" class="input input-bordered input-sm" />
                 </div>
                 <div class="form-control">
                   <label class="label" for="city">
-                    <span class="label-text">Stadt</span>
+                    <span class="label-text">{m.dashboard_edit_label_city()}</span>
                   </label>
                   <input type="text" bind:value={customerForm.city} id="city" name="city" class="input input-bordered input-sm" />
                 </div>
@@ -608,19 +608,19 @@
 
               <div class="form-control">
                 <label class="label" for="country">
-                  <span class="label-text">Land</span>
+                  <span class="label-text">{m.dashboard_edit_label_country()}</span>
                 </label>
                 <input type="text" bind:value={customerForm.country} id="country" name="country" class="input input-bordered input-sm" />
               </div>
 
               <div class="flex justify-end gap-2">
-                <button class="btn btn-sm btn-ghost" onclick={cancelCustomerEdit}>Abbrechen</button>
+                <button class="btn btn-sm btn-ghost" onclick={cancelCustomerEdit}>{m.dashboard_edit_button_cancel()}</button>
                 <button class="btn btn-sm btn-simple" onclick={saveCustomer} disabled={customerSaving}>
                   {#if customerSaving}
                     <span class="loading loading-spinner loading-xs"></span>
-                    Speichern...
+                    {m.dashboard_edit_button_save_loading()}
                   {:else}
-                    Speichern
+                    {m.dashboard_edit_button_save()}
                   {/if}
                 </button>
               </div>
@@ -630,7 +630,7 @@
             <div class="space-y-3">
               {#if selectedProject?.owner?.salutation}
                 <div class="flex justify-between">
-                  <span class="text-base-content/60">Anrede:</span>
+                  <span class="text-base-content/60">{m.dashboard_edit_label_salutation()}</span>
                   <span class="font-medium">{selectedProject?.owner.salutation}</span>
                 </div>
               {/if}
@@ -638,12 +638,12 @@
                 <span class="text-base-content/60">Name:</span>
                 <span class="font-medium">
                   {selectedProject?.owner?.givenName || ''}
-                  {selectedProject?.owner?.familyName || 'Unbekannt'}
+                  {selectedProject?.owner?.familyName || m.dashboard_details_fallback_unknown()}
                 </span>
               </div>
               {#if selectedProject?.owner?.email}
                 <div class="flex justify-between">
-                  <span class="text-base-content/60">E-Mail:</span>
+                  <span class="text-base-content/60">{m.dashboard_edit_label_email()}</span>
                   <a href="mailto:{selectedProject?.owner.email}" class="text-primary font-medium hover:underline">
                     {selectedProject?.owner.email}
                   </a>
@@ -651,7 +651,7 @@
               {/if}
               {#if selectedProject?.owner?.phone}
                 <div class="flex justify-between">
-                  <span class="text-base-content/60">Telefon:</span>
+                  <span class="text-base-content/60">{m.dashboard_edit_label_phone()}</span>
                   <a href="tel:{selectedProject?.owner.phone}" class="text-primary font-medium hover:underline">
                     {selectedProject?.owner.phone}
                   </a>
@@ -659,13 +659,13 @@
               {/if}
               {#if selectedProject?.owner?.company}
                 <div class="flex justify-between">
-                  <span class="text-base-content/60">Unternehmen:</span>
+                  <span class="text-base-content/60">{m.dashboard_edit_label_company()}</span>
                   <span class="font-medium">{selectedProject?.owner.company}</span>
                 </div>
               {/if}
               {#if selectedProject?.owner?.address || selectedProject?.owner?.postCode || selectedProject?.owner?.city}
                 <div class="flex flex-col gap-1">
-                  <span class="text-base-content/60">Adresse:</span>
+                  <span class="text-base-content/60">{m.dashboard_edit_label_address()}</span>
                   <div class="text-sm">
                     {#if selectedProject?.owner?.address}
                       <div>{selectedProject?.owner.address}</div>
@@ -684,8 +684,8 @@
               {/if}
               <div class="divider my-2"></div>
               <div class="flex justify-between">
-                <span class="text-base-content/60">Kunde ID:</span>
-                <span class="font-mono text-xs font-medium">{selectedProject?.owner?.id || 'Nicht verfügbar'}</span>
+                <span class="text-base-content/60">{m.dashboard_edit_label_customer_id()}</span>
+                <span class="font-mono text-xs font-medium">{selectedProject?.owner?.id || m.dashboard_edit_status_unavailable()}</span>
               </div>
             </div>
           {/if}
@@ -696,7 +696,7 @@
       <div class="card bg-base-200">
         <div class="card-body">
           <div class="mb-4 flex items-center justify-between">
-            <h4 class="card-title text-base">Projekt-Spezifikationen</h4>
+            <h4 class="card-title text-base">{m.dashboard_details_section_specs()}</h4>
             {#if editingSection !== 'spezifikationen'}
               <button class="btn btn-xs btn-simple" onclick={() => editProjectSection('spezifikationen')}>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -707,7 +707,7 @@
                     d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                   />
                 </svg>
-                Bearbeiten
+                {m.dashboard_edit_button_edit()}
               </button>
             {/if}
           </div>
@@ -739,7 +739,7 @@
 
               <div class="form-control">
                 <label class="label" for="desiredDomain">
-                  <span class="label-text">Domain</span>
+                  <span class="label-text">{m.dashboard_details_label_domain()}</span>
                 </label>
                 <input
                   type="text"
@@ -747,16 +747,16 @@
                   id="desiredDomain"
                   name="desiredDomain"
                   class="input input-bordered input-sm"
-                  placeholder="example.com"
+                  placeholder={m.dashboard_edit_placeholder_domain()}
                 />
               </div>
 
               <div class="form-control">
                 <label class="label" for="domainStatus">
-                  <span class="label-text">Domain-Status</span>
+                  <span class="label-text">{m.dashboard_details_label_domain_status()}</span>
                 </label>
                 <select bind:value={editForm.domainStatus} id="domainStatus" name="domainStatus" class="select select-bordered select-sm">
-                  <option value="">Bitte wählen</option>
+                  <option value="">{m.dashboard_edit_placeholder_select()}</option>
                   {#each ToArray(domainStatus) as status}
                     <option value={status}>{status}</option>
                   {/each}
@@ -765,33 +765,33 @@
 
               <div class="form-control">
                 <label class="label" for="goals">
-                  <span class="label-text">Ziele</span>
+                  <span class="label-text">{m.dashboard_details_label_goals()}</span>
                 </label>
                 <textarea
                   bind:value={editForm.goals}
                   id="goals"
                   name="goals"
                   class="textarea textarea-bordered textarea-sm h-20"
-                  placeholder="Projektziele beschreiben"
+                  placeholder={m.dashboard_edit_placeholder_goals()}
                 ></textarea>
               </div>
 
               <div class="form-control">
                 <label class="label" for="targetAudience">
-                  <span class="label-text">Zielgruppe</span>
+                  <span class="label-text">{m.dashboard_details_label_audience()}</span>
                 </label>
                 <textarea
                   bind:value={editForm.targetAudience}
                   id="targetAudience"
                   name="targetAudience"
                   class="textarea textarea-bordered textarea-sm h-20"
-                  placeholder="Zielgruppe beschreiben"
+                  placeholder={m.dashboard_edit_placeholder_audience()}
                 ></textarea>
               </div>
 
               <div class="form-control">
                 <label class="label" for="timeline">
-                  <span class="label-text">Timeline</span>
+                  <span class="label-text">{m.dashboard_details_label_timeline()}</span>
                 </label>
                 <input
                   type="text"
@@ -799,18 +799,18 @@
                   id="timeline"
                   name="timeline"
                   class="input input-bordered input-sm"
-                  placeholder="z.B. 3 Monate"
+                  placeholder={m.dashboard_edit_placeholder_timeline()}
                 />
               </div>
 
               <div class="flex justify-end gap-2">
-                <button class="btn btn-sm btn-ghost" onclick={cancelEdit}>Abbrechen</button>
+                <button class="btn btn-sm btn-ghost" onclick={cancelEdit}>{m.dashboard_edit_button_cancel()}</button>
                 <button class="btn btn-sm btn-simple" onclick={saveProjectSection} disabled={editSaving}>
                   {#if editSaving}
                     <span class="loading loading-spinner loading-xs"></span>
-                    Speichern...
+                    {m.dashboard_edit_button_save_loading()}
                   {:else}
-                    Speichern
+                    {m.dashboard_edit_button_save()}
                   {/if}
                 </button>
               </div>
@@ -819,24 +819,24 @@
             <!-- Anzeigemodus -->
             <div class="space-y-3">
               <div class="flex justify-between">
-                <span class="text-base-content/60">Domain:</span>
-                <span class="font-medium">{selectedProject?.desiredDomain || 'Nicht angegeben'}</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_domain()}</span>
+                <span class="font-medium">{selectedProject?.desiredDomain || m.dashboard_details_fallback_not_specified()}</span>
               </div>
               <div class="flex justify-between">
-                <span class="text-base-content/60">Domain-Status:</span>
-                <div class="badge badge-outline badge-sm">{selectedProject?.domainStatus || 'Nicht angegeben'}</div>
+                <span class="text-base-content/60">{m.dashboard_details_label_domain_status()}</span>
+                <div class="badge badge-outline badge-sm">{selectedProject?.domainStatus || m.dashboard_details_fallback_not_specified()}</div>
               </div>
               <div class="flex flex-col gap-1">
-                <span class="text-base-content/60">Ziele:</span>
-                <span class="text-sm">{selectedProject?.goals || 'Nicht angegeben'}</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_goals()}</span>
+                <span class="text-sm">{selectedProject?.goals || m.dashboard_details_fallback_not_specified()}</span>
               </div>
               <div class="flex flex-col gap-1">
-                <span class="text-base-content/60">Zielgruppe:</span>
-                <span class="text-sm">{selectedProject?.targetAudience || 'Nicht angegeben'}</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_audience()}</span>
+                <span class="text-sm">{selectedProject?.targetAudience || m.dashboard_details_fallback_not_specified()}</span>
               </div>
               <div class="flex justify-between">
-                <span class="text-base-content/60">Timeline:</span>
-                <span class="font-medium">{selectedProject?.timeline || 'Nicht angegeben'}</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_timeline()}</span>
+                <span class="font-medium">{selectedProject?.timeline || m.dashboard_details_fallback_not_specified()}</span>
               </div>
             </div>
           {/if}
@@ -847,7 +847,7 @@
       <div class="card bg-base-200">
         <div class="card-body">
           <div class="mb-4 flex items-center justify-between">
-            <h4 class="card-title text-base">Budget & Preise</h4>
+            <h4 class="card-title text-base">{m.dashboard_details_section_budget()}</h4>
             {#if editingSection !== 'budget'}
               <button class="btn btn-xs btn-simple" onclick={() => editProjectSection('budget')}>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -858,7 +858,7 @@
                     d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                   />
                 </svg>
-                Bearbeiten
+                {m.dashboard_edit_button_edit()}
               </button>
             {/if}
           </div>
@@ -890,14 +890,14 @@
 
               <div class="form-control">
                 <label class="label" for="budget">
-                  <span class="label-text">Budget</span>
+                  <span class="label-text">{m.dashboard_details_label_budget()}</span>
                 </label>
-                <input type="text" bind:value={editForm.budget} id="budget" name="budget" class="input input-bordered input-sm" placeholder="z.B. 5000" />
+                <input type="text" bind:value={editForm.budget} id="budget" name="budget" class="input input-bordered input-sm" placeholder={m.dashboard_edit_placeholder_budget()} />
               </div>
 
               <div class="form-control">
                 <label class="label" for="estimatedPrice">
-                  <span class="label-text">Geschätzter Preis</span>
+                  <span class="label-text">{m.dashboard_details_label_estimated_price()}</span>
                 </label>
                 <input
                   type="number"
@@ -905,18 +905,18 @@
                   id="estimatedPrice"
                   name="estimatedPrice"
                   class="input input-bordered input-sm"
-                  placeholder="0"
+                  placeholder={m.dashboard_edit_placeholder_price()}
                 />
               </div>
 
               <div class="flex justify-end gap-2">
-                <button class="btn btn-sm btn-ghost" onclick={cancelEdit}>Abbrechen</button>
+                <button class="btn btn-sm btn-ghost" onclick={cancelEdit}>{m.dashboard_edit_button_cancel()}</button>
                 <button class="btn btn-sm btn-simple" onclick={saveProjectSection} disabled={editSaving}>
                   {#if editSaving}
                     <span class="loading loading-spinner loading-xs"></span>
-                    Speichern...
+                    {m.dashboard_edit_button_save_loading()}
                   {:else}
-                    Speichern
+                    {m.dashboard_edit_button_save()}
                   {/if}
                 </button>
               </div>
@@ -925,13 +925,13 @@
             <!-- Anzeigemodus -->
             <div class="space-y-3">
               <div class="flex justify-between">
-                <span class="text-base-content/60">Budget:</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_budget()}</span>
                 <span class="font-medium">{formatBudget(selectedProject?.budget || '')}</span>
               </div>
               <div class="flex justify-between">
-                <span class="text-base-content/60">Geschätzter Preis:</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_estimated_price()}</span>
                 <span class="font-medium">
-                  {selectedProject?.estimatedPrice ? `${selectedProject?.estimatedPrice}€` : 'Nicht berechnet'}
+                  {selectedProject?.estimatedPrice ? `${selectedProject?.estimatedPrice}€` : m.dashboard_details_fallback_not_calculated()}
                 </span>
               </div>
             </div>
@@ -943,7 +943,7 @@
       <div class="card bg-base-200">
         <div class="card-body">
           <div class="mb-4 flex items-center justify-between">
-            <h4 class="card-title text-base">Features</h4>
+            <h4 class="card-title text-base">{m.dashboard_details_section_features()}</h4>
             {#if editingSection !== 'features'}
               <button class="btn btn-xs btn-simple" onclick={() => editProjectSection('features')}>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -954,7 +954,7 @@
                     d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                   />
                 </svg>
-                Bearbeiten
+                {m.dashboard_edit_button_edit()}
               </button>
             {/if}
           </div>
@@ -985,7 +985,7 @@
               {/if}
               <div class="form-control">
                 <label class="label" for="feature">
-                  <span class="label-text">Features auswählen</span>
+                  <span class="label-text">{m.dashboard_edit_label_features_select()}</span>
                 </label>
                 <div class="grid max-h-60 grid-cols-2 gap-2 overflow-y-auto">
                   {#each ToArray(features) as feature}
@@ -1006,7 +1006,7 @@
 
               <div class="form-control">
                 <label class="label" for="customFeature">
-                  <span class="label-text">Custom Feature</span>
+                  <span class="label-text">{m.dashboard_details_label_custom_feature()}</span>
                 </label>
                 <input
                   type="text"
@@ -1014,18 +1014,18 @@
                   id="customFeature"
                   name="customFeature"
                   class="input input-bordered input-sm"
-                  placeholder="Individuelles Feature"
+                  placeholder={m.dashboard_edit_placeholder_custom_feature()}
                 />
               </div>
 
               <div class="flex justify-end gap-2">
-                <button class="btn btn-sm btn-ghost" onclick={cancelEdit}>Abbrechen</button>
+                <button class="btn btn-sm btn-ghost" onclick={cancelEdit}>{m.dashboard_edit_button_cancel()}</button>
                 <button class="btn btn-sm btn-simple" onclick={saveProjectSection} disabled={editSaving}>
                   {#if editSaving}
                     <span class="loading loading-spinner loading-xs"></span>
-                    Speichern...
+                    {m.dashboard_edit_button_save_loading()}
                   {:else}
-                    Speichern
+                    {m.dashboard_edit_button_save()}
                   {/if}
                 </button>
               </div>
@@ -1039,11 +1039,11 @@
                 {/each}
               </div>
             {:else}
-              <p class="text-base-content/60 text-sm">Keine Features ausgewählt</p>
+              <p class="text-base-content/60 text-sm">{m.dashboard_details_fallback_no_features()}</p>
             {/if}
             {#if selectedProject?.customFeature}
               <div class="mt-2">
-                <div class="text-base-content/60 text-sm">Custom Feature:</div>
+                <div class="text-base-content/60 text-sm">{m.dashboard_details_label_custom_feature()}</div>
                 <div class="pt-1 text-sm">{selectedProject?.customFeature}</div>
               </div>
             {/if}
@@ -1055,7 +1055,7 @@
       <div class="card bg-base-200">
         <div class="card-body">
           <div class="mb-4 flex items-center justify-between">
-            <h4 class="card-title text-base">Design</h4>
+            <h4 class="card-title text-base">{m.dashboard_details_section_design()}</h4>
             {#if editingSection !== 'design'}
               <button class="btn btn-xs btn-simple" onclick={() => editProjectSection('design')}>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1066,7 +1066,7 @@
                     d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                   />
                 </svg>
-                Bearbeiten
+                {m.dashboard_edit_button_edit()}
               </button>
             {/if}
           </div>
@@ -1098,7 +1098,7 @@
 
               <div class="form-control">
                 <label class="label" for="primaryColourText">
-                  <span class="label-text">Primärfarbe</span>
+                  <span class="label-text">{m.dashboard_details_label_primary_color()}</span>
                 </label>
                 <div class="flex items-center gap-2">
                   <input
@@ -1114,14 +1114,14 @@
                     name="primaryColourText"
                     bind:value={editForm.primaryColour}
                     class="input input-bordered input-sm flex-1"
-                    placeholder="#000000"
+                    placeholder={m.dashboard_edit_placeholder_color()}
                   />
                 </div>
               </div>
 
               <div class="form-control">
                 <label class="label" for="secondaryColourText">
-                  <span class="label-text">Sekundärfarbe</span>
+                  <span class="label-text">{m.dashboard_details_label_secondary_color()}</span>
                 </label>
                 <div class="flex items-center gap-2">
                   <input
@@ -1137,14 +1137,14 @@
                     name="secondaryColourText"
                     bind:value={editForm.secondaryColour}
                     class="input input-bordered input-sm flex-1"
-                    placeholder="#000000"
+                    placeholder={m.dashboard_edit_placeholder_color()}
                   />
                 </div>
               </div>
 
               <div class="form-control">
                 <label class="label" for="accentColourText">
-                  <span class="label-text">Akzentfarbe</span>
+                  <span class="label-text">{m.dashboard_details_label_accent_color()}</span>
                 </label>
                 <div class="flex items-center gap-2">
                   <input
@@ -1160,14 +1160,14 @@
                     name="accentColourText"
                     bind:value={editForm.accentColour}
                     class="input input-bordered input-sm flex-1"
-                    placeholder="#000000"
+                    placeholder={m.dashboard_edit_placeholder_color()}
                   />
                 </div>
               </div>
 
               <div class="form-control">
                 <label class="label" for="desiredFont">
-                  <span class="label-text">Schriftart</span>
+                  <span class="label-text">{m.dashboard_details_label_font()}</span>
                 </label>
                 <input
                   type="text"
@@ -1175,18 +1175,18 @@
                   id="desiredFont"
                   name="desiredFont"
                   class="input input-bordered input-sm"
-                  placeholder="z.B. Arial, Helvetica"
+                  placeholder={m.dashboard_edit_placeholder_font()}
                 />
               </div>
 
               <div class="flex justify-end gap-2">
-                <button class="btn btn-sm btn-ghost" onclick={cancelEdit}>Abbrechen</button>
+                <button class="btn btn-sm btn-ghost" onclick={cancelEdit}>{m.dashboard_edit_button_cancel()}</button>
                 <button class="btn btn-sm btn-simple" onclick={saveProjectSection} disabled={editSaving}>
                   {#if editSaving}
                     <span class="loading loading-spinner loading-xs"></span>
-                    Speichern...
+                    {m.dashboard_edit_button_save_loading()}
                   {:else}
-                    Speichern
+                    {m.dashboard_edit_button_save()}
                   {/if}
                 </button>
               </div>
@@ -1195,41 +1195,41 @@
             <!-- Anzeigemodus -->
             <div class="space-y-3">
               <div class="flex items-center justify-between">
-                <span class="text-base-content/60">Primärfarbe:</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_primary_color()}</span>
                 <div class="flex items-center gap-2">
                   {#if selectedProject?.primaryColour}
                     <div class="border-base-300 h-4 w-4 rounded border" style="background-color: {selectedProject?.primaryColour}"></div>
                     <span class="font-mono text-xs">{selectedProject?.primaryColour}</span>
                   {:else}
-                    <span class="text-sm">Nicht angegeben</span>
+                    <span class="text-sm">{m.dashboard_details_fallback_not_specified()}</span>
                   {/if}
                 </div>
               </div>
               <div class="flex items-center justify-between">
-                <span class="text-base-content/60">Sekundärfarbe:</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_secondary_color()}</span>
                 <div class="flex items-center gap-2">
                   {#if selectedProject?.secondaryColour}
                     <div class="border-base-300 h-4 w-4 rounded border" style="background-color: {selectedProject?.secondaryColour}"></div>
                     <span class="font-mono text-xs">{selectedProject?.secondaryColour}</span>
                   {:else}
-                    <span class="text-sm">Nicht angegeben</span>
+                    <span class="text-sm">{m.dashboard_details_fallback_not_specified()}</span>
                   {/if}
                 </div>
               </div>
               <div class="flex items-center justify-between">
-                <span class="text-base-content/60">Akzentfarbe:</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_accent_color()}</span>
                 <div class="flex items-center gap-2">
                   {#if selectedProject?.accentColour}
                     <div class="border-base-300 h-4 w-4 rounded border" style="background-color: {selectedProject?.accentColour}"></div>
                     <span class="font-mono text-xs">{selectedProject?.accentColour}</span>
                   {:else}
-                    <span class="text-sm">Nicht angegeben</span>
+                    <span class="text-sm">{m.dashboard_details_fallback_not_specified()}</span>
                   {/if}
                 </div>
               </div>
               <div class="flex justify-between">
-                <span class="text-base-content/60">Schriftart:</span>
-                <span class="font-medium">{selectedProject?.desiredFont || 'Nicht angegeben'}</span>
+                <span class="text-base-content/60">{m.dashboard_details_label_font()}</span>
+                <span class="font-medium">{selectedProject?.desiredFont || m.dashboard_details_fallback_not_specified()}</span>
               </div>
             </div>
           {/if}
@@ -1240,13 +1240,13 @@
       {#if selectedProject?.relatedFiles && selectedProject?.relatedFiles.length > 0}
         <div class="card bg-base-200">
           <div class="card-body">
-            <h4 class="card-title text-base">Dateien</h4>
+            <h4 class="card-title text-base">{m.dashboard_details_section_files()}</h4>
             <div class="space-y-2">
               {#each selectedProject?.relatedFiles as file}
                 <div class="bg-base-100 flex items-center justify-between rounded p-2">
-                  <span class="truncate text-sm">{file.fileName || 'Unbenannte Datei'}</span>
+                  <span class="truncate text-sm">{file.fileName || m.dashboard_details_fallback_unnamed_file()}</span>
                   {#if file.url}
-                    <button onclick={() => window.open(file.url, '_blank')} class="btn btn-xs btn-simple"> Öffnen </button>
+                    <button onclick={() => window.open(file.url, '_blank')} class="btn btn-xs btn-simple"> {m.dashboard_details_button_open()} </button>
                   {/if}
                 </div>
               {/each}
@@ -1258,7 +1258,7 @@
       <!-- Service Setup -->
       <div class="card bg-base-200 lg:col-span-2">
         <div class="card-body">
-          <h4 class="card-title text-base">Service Setup</h4>
+          <h4 class="card-title text-base">{m.dashboard_edit_section_setup()}</h4>
           <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
             <!-- GitHub Setup -->
             <div class="bg-base-100 rounded-lg p-4">
@@ -1269,11 +1269,11 @@
                       d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
                     />
                   </svg>
-                  <span class="font-semibold">GitHub</span>
+                  <span class="font-semibold">{m.dashboard_setup_section_github()}</span>
                   {#if selectedProject?.setup?.github?.isConfigured}
-                    <div class="badge badge-success badge-xs">Konfiguriert</div>
+                    <div class="badge badge-success badge-xs">{m.dashboard_edit_status_configured()}</div>
                   {:else}
-                    <div class="badge badge-warning badge-xs">Nicht konfiguriert</div>
+                    <div class="badge badge-warning badge-xs">{m.dashboard_edit_status_not_configured()}</div>
                   {/if}
                 </div>
                 {#if editingSetupService !== 'github'}
@@ -1286,7 +1286,7 @@
                         d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                       />
                     </svg>
-                    Bearbeiten
+                    {m.dashboard_edit_button_edit()}
                   </button>
                 {/if}
               </div>
@@ -1371,12 +1371,13 @@
                   </div>
 
                   <div class="flex justify-end gap-1">
-                    <button class="btn btn-xs btn-ghost" onclick={cancelServiceEdit}>Abbrechen</button>
+                    <button class="btn btn-xs btn-ghost" onclick={cancelServiceEdit}>{m.dashboard_edit_button_cancel()}</button>
                     <button class="btn btn-xs btn-simple" onclick={saveSetupService} disabled={serviceSaving}>
                       {#if serviceSaving}
                         <span class="loading loading-spinner loading-xs"></span>
+                        {m.dashboard_edit_button_save_loading()}
                       {:else}
-                        Speichern
+                        {m.dashboard_edit_button_save()}
                       {/if}
                     </button>
                   </div>
@@ -1386,15 +1387,15 @@
                 <div class="space-y-2 text-sm">
                   <div class="flex justify-between">
                     <span class="text-base-content/60">Username:</span>
-                    <span>{selectedProject?.setup?.github?.username || 'Nicht angegeben'}</span>
+                    <span>{selectedProject?.setup?.github?.username || m.dashboard_details_fallback_not_specified()}</span>
                   </div>
                   <div class="flex justify-between">
                     <span class="text-base-content/60">Passwort:</span>
-                    <span>{selectedProject?.setup?.github?.password ? '••••••••' : 'Nicht angegeben'}</span>
+                    <span>{selectedProject?.setup?.github?.password ? '••••••••' : m.dashboard_details_fallback_not_specified()}</span>
                   </div>
                   <div class="flex justify-between">
                     <span class="text-base-content/60">Auth Tokens:</span>
-                    <span>{selectedProject?.setup?.github?.authTokens ? 'Vorhanden' : 'Nicht vorhanden'}</span>
+                    <span>{selectedProject?.setup?.github?.authTokens ? m.dashboard_edit_status_tokens_present() : m.dashboard_edit_status_tokens_missing()}</span>
                   </div>
                 </div>
               {/if}
@@ -1409,25 +1410,25 @@
                       d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.042-3.441.219-.937 1.404-5.965 1.404-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.888-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.357-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24c6.624 0 11.99-5.367 11.99-12C24.007 5.367 18.641.001.017.001z"
                     />
                   </svg>
-                  <span class="font-semibold">Netlify</span>
+                  <span class="font-semibold">{m.dashboard_setup_section_netlify()}</span>
                   {#if selectedProject?.setup?.netlify?.isConfigured}
-                    <div class="badge badge-success badge-xs">Konfiguriert</div>
+                    <div class="badge badge-success badge-xs">{m.dashboard_edit_status_configured()}</div>
                   {:else}
-                    <div class="badge badge-warning badge-xs">Nicht konfiguriert</div>
+                    <div class="badge badge-warning badge-xs">{m.dashboard_edit_status_not_configured()}</div>
                   {/if}
                 </div>
                 {#if editingSetupService !== 'netlify'}
-                  <button class="btn btn-xs btn-simple" onclick={() => editSetupService('netlify')}>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                      />
-                    </svg>
-                    Bearbeiten
-                  </button>
+                    <button class="btn btn-xs btn-simple" onclick={() => editSetupService('netlify')}>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                        />
+                      </svg>
+                      {m.dashboard_edit_button_edit()}
+                    </button>
                 {/if}
               </div>
 
@@ -1511,12 +1512,13 @@
                   </div>
 
                   <div class="flex justify-end gap-1">
-                    <button class="btn btn-xs btn-ghost" onclick={cancelServiceEdit}>Abbrechen</button>
+                    <button class="btn btn-xs btn-ghost" onclick={cancelServiceEdit}>{m.dashboard_edit_button_cancel()}</button>
                     <button class="btn btn-xs btn-simple" onclick={saveSetupService} disabled={serviceSaving}>
                       {#if serviceSaving}
                         <span class="loading loading-spinner loading-xs"></span>
+                        {m.dashboard_edit_button_save_loading()}
                       {:else}
-                        Speichern
+                        {m.dashboard_edit_button_save()}
                       {/if}
                     </button>
                   </div>
@@ -1526,15 +1528,15 @@
                 <div class="space-y-2 text-sm">
                   <div class="flex justify-between">
                     <span class="text-base-content/60">Username:</span>
-                    <span>{selectedProject?.setup?.netlify?.username || 'Nicht angegeben'}</span>
+                    <span>{selectedProject?.setup?.netlify?.username || m.dashboard_details_fallback_not_specified()}</span>
                   </div>
                   <div class="flex justify-between">
                     <span class="text-base-content/60">Passwort:</span>
-                    <span>{selectedProject?.setup?.netlify?.password ? '••••••••' : 'Nicht angegeben'}</span>
+                    <span>{selectedProject?.setup?.netlify?.password ? '••••••••' : m.dashboard_details_fallback_not_specified()}</span>
                   </div>
                   <div class="flex justify-between">
                     <span class="text-base-content/60">Auth Tokens:</span>
-                    <span>{selectedProject?.setup?.netlify?.authTokens ? 'Vorhanden' : 'Nicht vorhanden'}</span>
+                    <span>{selectedProject?.setup?.netlify?.authTokens ? m.dashboard_edit_status_tokens_present() : m.dashboard_edit_status_tokens_missing()}</span>
                   </div>
                 </div>
               {/if}
@@ -1549,25 +1551,25 @@
                       d="M12 0L1.608 6v12L12 24l10.392-6V6L12 0zm-1.073 18.564L5.5 15.846V8.154l5.427 2.718v7.692zm2.146 0V10.872L18.5 8.154v7.692l-5.427 2.718zM12 9.282L6.573 6.564 12 3.846l5.427 2.718L12 9.282z"
                     />
                   </svg>
-                  <span class="font-semibold">Hygraph</span>
+                  <span class="font-semibold">{m.dashboard_setup_section_hygraph()}</span>
                   {#if selectedProject?.setup?.hygraph?.isConfigured}
-                    <div class="badge badge-success badge-xs">Konfiguriert</div>
+                    <div class="badge badge-success badge-xs">{m.dashboard_edit_status_configured()}</div>
                   {:else}
-                    <div class="badge badge-warning badge-xs">Nicht konfiguriert</div>
+                    <div class="badge badge-warning badge-xs">{m.dashboard_edit_status_not_configured()}</div>
                   {/if}
                 </div>
                 {#if editingSetupService !== 'hygraph'}
-                  <button class="btn btn-xs btn-simple" onclick={() => editSetupService('hygraph')}>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                      />
-                    </svg>
-                    Bearbeiten
-                  </button>
+                    <button class="btn btn-xs btn-simple" onclick={() => editSetupService('hygraph')}>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                        />
+                      </svg>
+                      {m.dashboard_edit_button_edit()}
+                    </button>
                 {/if}
               </div>
 
@@ -1651,12 +1653,13 @@
                   </div>
 
                   <div class="flex justify-end gap-1">
-                    <button class="btn btn-xs btn-ghost" onclick={cancelServiceEdit}>Abbrechen</button>
+                    <button class="btn btn-xs btn-ghost" onclick={cancelServiceEdit}>{m.dashboard_edit_button_cancel()}</button>
                     <button class="btn btn-xs btn-simple" onclick={saveSetupService} disabled={serviceSaving}>
                       {#if serviceSaving}
                         <span class="loading loading-spinner loading-xs"></span>
+                        {m.dashboard_edit_button_save_loading()}
                       {:else}
-                        Speichern
+                        {m.dashboard_edit_button_save()}
                       {/if}
                     </button>
                   </div>
@@ -1666,15 +1669,15 @@
                 <div class="space-y-2 text-sm">
                   <div class="flex justify-between">
                     <span class="text-base-content/60">Username:</span>
-                    <span>{selectedProject?.setup?.hygraph?.username || 'Nicht angegeben'}</span>
+                    <span>{selectedProject?.setup?.hygraph?.username || m.dashboard_details_fallback_not_specified()}</span>
                   </div>
                   <div class="flex justify-between">
                     <span class="text-base-content/60">Passwort:</span>
-                    <span>{selectedProject?.setup?.hygraph?.password ? '••••••••' : 'Nicht angegeben'}</span>
+                    <span>{selectedProject?.setup?.hygraph?.password ? '••••••••' : m.dashboard_details_fallback_not_specified()}</span>
                   </div>
                   <div class="flex justify-between">
                     <span class="text-base-content/60">Auth Tokens:</span>
-                    <span>{selectedProject?.setup?.hygraph?.authTokens ? 'Vorhanden' : 'Nicht vorhanden'}</span>
+                    <span>{selectedProject?.setup?.hygraph?.authTokens ? m.dashboard_edit_status_tokens_present() : m.dashboard_edit_status_tokens_missing()}</span>
                   </div>
                 </div>
               {/if}
@@ -1689,25 +1692,25 @@
                       d="M21.98 7.448L19.62 0H4.347L2.02 7.448c-1.352 4.312.03 9.206 3.815 12.015L12.007 24l6.157-4.537c3.785-2.809 5.167-7.703 3.815-12.015z"
                     />
                   </svg>
-                  <span class="font-semibold">Auth0</span>
+                  <span class="font-semibold">{m.dashboard_setup_section_auth0()}</span>
                   {#if selectedProject?.setup?.auth0?.isConfigured}
-                    <div class="badge badge-success badge-xs">Konfiguriert</div>
+                    <div class="badge badge-success badge-xs">{m.dashboard_edit_status_configured()}</div>
                   {:else}
-                    <div class="badge badge-warning badge-xs">Nicht konfiguriert</div>
+                    <div class="badge badge-warning badge-xs">{m.dashboard_edit_status_not_configured()}</div>
                   {/if}
                 </div>
                 {#if editingSetupService !== 'auth0'}
-                  <button class="btn btn-xs btn-simple" onclick={() => editSetupService('auth0')}>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                      />
-                    </svg>
-                    Bearbeiten
-                  </button>
+                    <button class="btn btn-xs btn-simple" onclick={() => editSetupService('auth0')}>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                        />
+                      </svg>
+                      {m.dashboard_edit_button_edit()}
+                    </button>
                 {/if}
               </div>
 
@@ -1791,12 +1794,13 @@
                   </div>
 
                   <div class="flex justify-end gap-1">
-                    <button class="btn btn-xs btn-ghost" onclick={cancelServiceEdit}>Abbrechen</button>
+                    <button class="btn btn-xs btn-ghost" onclick={cancelServiceEdit}>{m.dashboard_edit_button_cancel()}</button>
                     <button class="btn btn-xs btn-simple" onclick={saveSetupService} disabled={serviceSaving}>
                       {#if serviceSaving}
                         <span class="loading loading-spinner loading-xs"></span>
+                        {m.dashboard_edit_button_save_loading()}
                       {:else}
-                        Speichern
+                        {m.dashboard_edit_button_save()}
                       {/if}
                     </button>
                   </div>
@@ -1806,15 +1810,15 @@
                 <div class="space-y-2 text-sm">
                   <div class="flex justify-between">
                     <span class="text-base-content/60">Username:</span>
-                    <span>{selectedProject?.setup?.auth0?.username || 'Nicht angegeben'}</span>
+                    <span>{selectedProject?.setup?.auth0?.username || m.dashboard_details_fallback_not_specified()}</span>
                   </div>
                   <div class="flex justify-between">
                     <span class="text-base-content/60">Passwort:</span>
-                    <span>{selectedProject?.setup?.auth0?.password ? '••••••••' : 'Nicht angegeben'}</span>
+                    <span>{selectedProject?.setup?.auth0?.password ? '••••••••' : m.dashboard_details_fallback_not_specified()}</span>
                   </div>
                   <div class="flex justify-between">
                     <span class="text-base-content/60">Auth Tokens:</span>
-                    <span>{selectedProject?.setup?.auth0?.authTokens ? 'Vorhanden' : 'Nicht vorhanden'}</span>
+                    <span>{selectedProject?.setup?.auth0?.authTokens ? m.dashboard_edit_status_tokens_present() : m.dashboard_edit_status_tokens_missing()}</span>
                   </div>
                 </div>
               {/if}
@@ -1826,21 +1830,21 @@
       <!-- Metadaten -->
       <div class="card bg-base-200">
         <div class="card-body">
-          <h4 class="card-title text-base">Metadaten</h4>
+          <h4 class="card-title text-base">{m.dashboard_details_section_meta()}</h4>
           <div class="space-y-3">
             <div class="flex flex-col gap-1">
-              <span class="text-base-content/60">Projekt ID:</span>
+              <span class="text-base-content/60">{m.dashboard_details_label_project_id()}</span>
               <span class="font-mono text-xs">{selectedProject?.id}</span>
             </div>
             <div class="flex justify-between">
-              <span class="text-base-content/60">Erstellt am:</span>
+              <span class="text-base-content/60">{m.dashboard_details_label_created_at()}</span>
               <span class="font-medium">
-                {selectedProject?.createdAt ? formatDate(selectedProject?.createdAt) : 'Unbekannt'}
+                {selectedProject?.createdAt ? formatDate(selectedProject?.createdAt) : m.dashboard_details_fallback_unknown()}
               </span>
             </div>
             {#if selectedProject?.setup?.github?.lastUpdated || selectedProject?.setup?.netlify?.lastUpdated || selectedProject?.setup?.hygraph?.lastUpdated || selectedProject?.setup?.auth0?.lastUpdated}
               <div class="flex justify-between">
-                <span class="text-base-content/60">Setup zuletzt aktualisiert:</span>
+                <span class="text-base-content/60">{m.dashboard_edit_label_setup_updated()}</span>
                 <span class="text-xs font-medium">
                   {formatDate(
                     selectedProject?.setup?.github?.lastUpdated ||
@@ -1858,7 +1862,7 @@
     </div>
   </div>
   <form method="dialog" class="modal-backdrop">
-    <button onclick={closeModal}>close</button>
+    <button onclick={closeModal}>{m.modal_close()}</button>
   </form>
 </dialog>
 

@@ -4,124 +4,124 @@
 </script>
 
 <div class="step-header">
-  <h1>{m['wizard_steps_step3_titleFirst']()} <span class="inner-text-special">{m['wizard_steps_step3_titleHighlight']()}</span></h1>
-  <p class="teaser">{m['wizard_steps_step3_teaser']()}</p>
+  <h1>{m.wizard_steps_step3_titleFirst()} <span class="inner-text-special">{m.wizard_steps_step3_titleHighlight()}</span></h1>
+  <p class="teaser">{m.wizard_steps_step3_teaser()}</p>
 </div>
 
 <div class="content-section">
   <div class="form-control mb-8 w-full">
     <label class="label" for="projectName">
-      <span class="label-text text-lg font-semibold">{m['wizard_form_projectName']()}</span>
+      <span class="label-text text-lg font-semibold">{m.wizard_form_projectName()}</span>
     </label>
     <input
       type="text"
       id="projectName"
       class="input input-bordered input-lg w-full"
       bind:value={config.name}
-      placeholder={m['wizard_form_projectNamePlaceholder']()}
+      placeholder={m.wizard_form_projectNamePlaceholder()}
     />
   </div>
 
   <div class="form-control mb-8 w-full">
     <label class="label" for="description">
-      <span class="label-text text-lg font-semibold">{m['wizard_form_projectDescription']()}</span>
+      <span class="label-text text-lg font-semibold">{m.wizard_form_projectDescription()}</span>
     </label>
     <textarea
       id="description"
       class="textarea textarea-bordered textarea-lg w-full"
       bind:value={config.description}
       placeholder={config.projectType === 'webApplication' || config.projectType === 'artificialIntelligence'
-        ? m['wizard_form_placeholders_webApplication']()
+        ? m.wizard_form_placeholders_webApplication()
         : config.projectType === 'freestyle'
-          ? m['wizard_form_placeholders_freestyle']()
-          : m['wizard_form_placeholders_default']()}
+          ? m.wizard_form_placeholders_freestyle()
+          : m.wizard_form_placeholders_default()}
       rows="8"
     ></textarea>
     <div class="label">
-      <span class="label-text-alt">{m['wizard_form_characters']({ count: config.description.length })}</span>
+      <span class="label-text-alt">{m.wizard_form_characters({ count: config.description.length })}</span>
     </div>
   </div>
 
   <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
     <div class="form-control w-full">
       <label class="label" for="targetAudience">
-        <span class="label-text font-semibold">{m['wizard_form_targetAudience']()}</span>
+        <span class="label-text font-semibold">{m.wizard_form_targetAudience()}</span>
       </label>
       <input
         type="text"
         id="targetAudience"
         class="input input-bordered w-full"
         bind:value={config.targetAudience}
-        placeholder={m['wizard_form_targetAudiencePlaceholder']()}
+        placeholder={m.wizard_form_targetAudiencePlaceholder()}
       />
     </div>
 
     <div class="form-control w-full">
       <label class="label" for="goals">
-        <span class="label-text font-semibold">{m['wizard_form_goals']()}</span>
+        <span class="label-text font-semibold">{m.wizard_form_goals()}</span>
       </label>
-      <input type="text" id="goals" class="input input-bordered w-full" bind:value={config.goals} placeholder={m['wizard_form_goalsPlaceholder']()} />
+      <input type="text" id="goals" class="input input-bordered w-full" bind:value={config.goals} placeholder={m.wizard_form_goalsPlaceholder()} />
     </div>
 
     <div class="form-control w-full">
       <label class="label" for="inspiration">
-        <span class="label-text font-semibold">{m['wizard_form_inspiration']()}</span>
+        <span class="label-text font-semibold">{m.wizard_form_inspiration()}</span>
       </label>
       <input
         type="text"
         id="inspiration"
         class="input input-bordered w-full"
         bind:value={config.inspiration}
-        placeholder={m['wizard_form_inspirationPlaceholder']()}
+        placeholder={m.wizard_form_inspirationPlaceholder()}
       />
     </div>
 
     <div class="form-control w-full">
       <label class="label" for="desiredDomain">
-        <span class="label-text font-semibold">{m['wizard_form_desiredDomain']()}</span>
+        <span class="label-text font-semibold">{m.wizard_form_desiredDomain()}</span>
       </label>
       <input
         type="text"
         id="desiredDomain"
         class="input input-bordered w-full"
         bind:value={config.desiredDomain}
-        placeholder={m['wizard_form_desiredDomainPlaceholder']()}
+        placeholder={m.wizard_form_desiredDomainPlaceholder()}
       />
     </div>
 
     <div class="form-control w-full">
       <label class="label" for="domainStatus">
-        <span class="label-text font-semibold">{m['wizard_form_domainStatus']()}</span>
+        <span class="label-text font-semibold">{m.wizard_form_domainStatus()}</span>
       </label>
       <select id="domainStatus" class="select select-bordered w-full" bind:value={config.domainStatus}>
-        <option value="">{m['wizard_form_domainStatusPlaceholder']()}</option>
-        <option value="owned">{m['wizard_form_domainStatusOptions_owned']()}</option>
+        <option value="">{m.wizard_form_domainStatusPlaceholder()}</option>
+        <option value="owned">{m.wizard_form_domainStatusOptions_owned()}</option>
         <option value="needs-registration">{m['wizard_form_domainStatusOptions_needs-registration']()}</option>
         <option value="needs-transfer">{m['wizard_form_domainStatusOptions_needs-transfer']()}</option>
-        <option value="undecided">{m['wizard_form_domainStatusOptions_undecided']()}</option>
+        <option value="undecided">{m.wizard_form_domainStatusOptions_undecided()}</option>
       </select>
     </div>
 
     <div class="form-control w-full">
       <label class="label" for="timeline">
-        <span class="label-text font-semibold">{m['wizard_form_timeline']()}</span>
+        <span class="label-text font-semibold">{m.wizard_form_timeline()}</span>
       </label>
       <select id="timeline" class="select select-bordered w-full" bind:value={config.timeline}>
-        <option value="">{m['wizard_form_timelinePlaceholder']()}</option>
-        <option value="asap">{m['wizard_form_timelineOptions_asap']()}</option>
+        <option value="">{m.wizard_form_timelinePlaceholder()}</option>
+        <option value="asap">{m.wizard_form_timelineOptions_asap()}</option>
         <option value="5-10-days">{m['wizard_form_timelineOptions_5-10-days']()}</option>
         <option value="2-4-weeks">{m['wizard_form_timelineOptions_2-4-weeks']()}</option>
         <option value="2-6-months">{m['wizard_form_timelineOptions_2-6-months']()}</option>
-        <option value="flexible">{m['wizard_form_timelineOptions_flexible']()}</option>
+        <option value="flexible">{m.wizard_form_timelineOptions_flexible()}</option>
       </select>
     </div>
 
     <div class="form-control w-full">
       <label class="label" for="budget">
-        <span class="label-text font-semibold">{m['wizard_form_budget']()}</span>
+        <span class="label-text font-semibold">{m.wizard_form_budget()}</span>
       </label>
       <select id="budget" class="select select-bordered w-full" bind:value={config.budget}>
-        <option value="">{m['wizard_form_budgetPlaceholder']()}</option>
+        <option value="">{m.wizard_form_budgetPlaceholder()}</option>
         <option value="under-500">{m['wizard_form_budgetOptions_under-500']()}</option>
         <option value="1k-3k">{m['wizard_form_budgetOptions_1k-3k']()}</option>
         <option value="3k-7k">{m['wizard_form_budgetOptions_3k-7k']()}</option>

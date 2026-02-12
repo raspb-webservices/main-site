@@ -7,6 +7,7 @@
   import LottieLoader from '$lib/components/lottie-loader.svelte';
   import CookieConsentComponent from '$lib/components/cookie-consent.svelte';
   import "flag-icons/css/flag-icons.min.css";
+  import { m } from '$lib/paraglide/messages';
 
   let { children } = $props();
 
@@ -65,7 +66,7 @@
       <LottieLoader />
     </div>
   {:else}
-    <a href="#main-content" class="skip-nav">Skip to main content</a>
+    <a href="#main-content" class="skip-nav">{m.layout_skip_to_content()}</a>
     <HEADER />
     <main id="main-content">
       {@render children?.()}

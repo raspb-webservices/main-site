@@ -292,13 +292,13 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
             </svg>
-            {m['wizard_navigation_back']()}
+            {m.wizard_navigation_back()}
           </button>
         {/if}
 
         {#if currentStep < maxSteps}
           <button type="button" class="btn-basic m-auto max-w-md grow md:mr-0 md:ml-auto md:grow-0" onclick={nextStep}>
-            {m['wizard_navigation_next']()}
+            {m.wizard_navigation_next()}
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
@@ -317,8 +317,8 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
       <div>
-        <div class="font-bold">{m['wizard_modals_thankYou_title']()}</div>
-        <div class="text-sm">{m['wizard_modals_thankYou_subtitle']()}</div>
+        <div class="font-bold">{m.wizard_modals_thankYou_title()}</div>
+        <div class="text-sm">{m.wizard_modals_thankYou_subtitle()}</div>
       </div>
       <button type="button" class="btn btn-sm btn-circle btn-ghost" onclick={() => (showSuccessMessage = false)}>✕</button>
     </div>

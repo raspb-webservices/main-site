@@ -43,14 +43,14 @@
     if (!password) return '';
 
     const requirements = [];
-    if (password.length < 8) requirements.push('mindestens 8 Zeichen');
-    if (!/[!@#$%^&*]/.test(password)) requirements.push('Sonderzeichen (!@#$%^&*)');
-    if (!/[a-z]/.test(password)) requirements.push('Kleinbuchstaben (a-z)');
-    if (!/[A-Z]/.test(password)) requirements.push('Großbuchstaben (A-Z)');
-    if (!/[0-9]/.test(password)) requirements.push('Zahlen (0-9)');
+    if (password.length < 8) requirements.push(m.wizard_password_validation_min_length());
+    if (!/[!@#$%^&*]/.test(password)) requirements.push(m.wizard_password_validation_special_char());
+    if (!/[a-z]/.test(password)) requirements.push(m.wizard_password_validation_lowercase());
+    if (!/[A-Z]/.test(password)) requirements.push(m.wizard_password_validation_uppercase());
+    if (!/[0-9]/.test(password)) requirements.push(m.wizard_password_validation_number());
 
     if (requirements.length === 0) return '';
-    return `Passwort benötigt: ${requirements.join(', ')}`;
+    return `${m.wizard_password_validation_required()} ${requirements.join(', ')}`;
   }
 
   function updateField(field: keyof User, value: string) {

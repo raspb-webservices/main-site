@@ -6,8 +6,8 @@
 
 <Section type={'fullCenterTeaser'}>
   <div class="inner-content-wrapper prose">
-    <h1 class="text-center"><span class="inner-text-special">{m['thankYouHighlight']()}</span> {m['thankYouMessageSecond']()}</h1>
-    <p class="teaser text-center">{m['thankYouTeaser']()}</p>
+    <h1 class="text-center"><span class="inner-text-special">{m.thankYouHighlight()}</span> {m.thankYouMessageSecond()}</h1>
+    <p class="teaser text-center">{m.thankYouTeaser()}</p>
 
     <div class="spacer"></div>
     <div class="flex w-full justify-center">
@@ -15,7 +15,7 @@
         class="btn-basic"
         onclick={() => {
           goto('/');
-        }}>{m['backToHomepage']()}</button
+        }}>{m.backToHomepage()}</button
       >
     </div>
 

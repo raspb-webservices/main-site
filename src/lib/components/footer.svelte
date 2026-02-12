@@ -120,7 +120,7 @@
     <div class="footer-nav-wrapper">
       <div class="pre-column"></div>
       <div class="service-column">
-        <h3 class="pb-4">{m['footer_nav_services_title']()}</h3>
+        <h3 class="pb-4">{m.footer_nav_services_title()}</h3>
         <div class="footer-nav-items">
           {#each footerNav[0].subItems as item}
             <button class="footer-nav-item" onclick={() => goto(localizeHref(item.path))}>
@@ -130,7 +130,7 @@
         </div>
       </div>
       <div class="insights-column">
-        <h3 class="pb-4">{m['footer_nav_insights_title']()}</h3>
+        <h3 class="pb-4">{m.footer_nav_insights_title()}</h3>
         <div class="footer-nav-items">
           {#each footerNav[1].subItems as item}
             <button class="footer-nav-item" onclick={() => goto(localizeHref(item.path))}>
@@ -140,7 +140,7 @@
         </div>
       </div>
       <div class="about-us-column">
-        <h3 class="pb-4">{m['footer_nav_aboutUs_title']()}</h3>
+        <h3 class="pb-4">{m.footer_nav_aboutUs_title()}</h3>
         <div class="footer-nav-items">
           {#each footerNav[2].subItems as item}
             <button class="footer-nav-item" onclick={() => goto(localizeHref(item.path))}>
@@ -150,7 +150,7 @@
         </div>
       </div>
       <div class="legal-column">
-        <h3 class="pb-4">{m['footer_nav_legal_title']()}</h3>
+        <h3 class="pb-4">{m.footer_nav_legal_title()}</h3>
         <div class="footer-nav-items">
           {#each footerNav[3].subItems as item}
             <button class="footer-nav-item" onclick={() => goto(localizeHref(item.path))}>
@@ -167,8 +167,8 @@
         class:german={getLocale() === 'de'}
         class:english={getLocale() === 'en'}
         onclick={toggleLocale}
-        aria-label={getLocale() === 'de' ? m['menu_switchLanguageToEnglish']() : m['menu_switchLanguageToGerman']()}
-        title={getLocale() === 'de' ? m['menu_switchLanguageToEnglish']() : m['menu_switchLanguageToGerman']()}
+        aria-label={getLocale() === 'de' ? m.menu_switchLanguageToEnglish() : m.menu_switchLanguageToGerman()}
+        title={getLocale() === 'de' ? m.menu_switchLanguageToEnglish() : m.menu_switchLanguageToGerman()}
       ></button>
 
       <label class="swap swap-rotate ml-4 hover:scale-105" for="dark-theme-checkbox">
@@ -177,7 +177,7 @@
           class="theme-controller"
           id="dark-theme-checkbox"
           name="dark-theme-checkbox"
-          aria-label="Dark Mode umschalten"
+          aria-label={m.footer_toggle_dark_mode()}
           bind:checked={darkActive}
           value="dark"
           onchange={updateDataAttribute}
@@ -197,7 +197,7 @@
 
     <div class="final-row">
       <p class="brand"><strong>raspb webservices</strong> &copy; {currentYear}</p>
-      <button class="btn btn-circle opacity-70" onclick={scrollToTop} title="Scroll to top" aria-label="Scroll to top">
+      <button class="btn btn-circle opacity-70" onclick={scrollToTop} title={m.footer_scroll_to_top()} aria-label={m.footer_scroll_to_top()}>
         <svg class="text-base-content-50/80 h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
         </svg>

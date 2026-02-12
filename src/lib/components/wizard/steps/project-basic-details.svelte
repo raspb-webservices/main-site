@@ -44,55 +44,55 @@
   });
 
   const timelineOptions = [
-    { value: 'urgent', label: 'Schnellstmöglich - Zeit ist entscheidend' },
-    { value: 'fast', label: 'Sehr schnell - kann einige Tage/Wochen warten' },
-    { value: 'moderate', label: 'Längere Projektlaufzeit - mehrere Monate' },
-    { value: 'flexible', label: 'Kein Zeitdruck - alles vorbereitet' },
-    { value: 'delayed', label: 'Langsamer Start - Konzeption noch nicht fertig' },
-    { value: 'deadline', label: 'Konkretes Datum in der Zukunft' },
-    { value: 'whenever', label: 'Ganz egal - fertig ist fertig' }
+    { value: 'urgent', label: m.wizard_basic_timeline_option_urgent() },
+    { value: 'fast', label: m.wizard_basic_timeline_option_fast() },
+    { value: 'moderate', label: m.wizard_basic_timeline_option_moderate() },
+    { value: 'flexible', label: m.wizard_basic_timeline_option_flexible() },
+    { value: 'delayed', label: m.wizard_basic_timeline_option_delayed() },
+    { value: 'deadline', label: m.wizard_basic_timeline_option_deadline() },
+    { value: 'whenever', label: m.wizard_basic_timeline_option_whenever() }
   ];
 
   const budgetOptions = [
-    { value: 'small', label: 'Bis 5.000 €' },
-    { value: 'medium', label: '5.000 € - 15.000 €' },
-    { value: 'large', label: '15.000 € - 30.000 €' },
-    { value: 'xlarge', label: '30.000 € - 50.000 €' },
-    { value: 'enterprise', label: 'Über 50.000 €' },
-    { value: 'flexible', label: 'Flexibel - abhängig vom Umfang' }
+    { value: 'small', label: m.wizard_basic_budget_option_small() },
+    { value: 'medium', label: m.wizard_basic_budget_option_medium() },
+    { value: 'large', label: m.wizard_basic_budget_option_large() },
+    { value: 'xlarge', label: m.wizard_basic_budget_option_xlarge() },
+    { value: 'enterprise', label: m.wizard_basic_budget_option_enterprise() },
+    { value: 'flexible', label: m.wizard_basic_budget_option_flexible() }
   ];
 </script>
 
 <div class="step-header">
   <h1>
-    {m['wizard_stepBasicDetails_titleFirst']()} <span class="inner-text-special">{m['wizard_stepBasicDetails_titleHighlight']()}</span>
-    {m['wizard_stepBasicDetails_titleSecond']()}
+    {m.wizard_stepBasicDetails_titleFirst()} <span class="inner-text-special">{m.wizard_stepBasicDetails_titleHighlight()}</span>
+    {m.wizard_stepBasicDetails_titleSecond()}
   </h1>
-  <p class="teaser">{m['wizard_stepBasicDetails_teaser']()}</p>
+  <p class="teaser">{m.wizard_stepBasicDetails_teaser()}</p>
 </div>
 
 <div class="basic-details-section">
   <!-- Project Description -->
   <div class="form-control mb-8 w-full">
     <label class="label" for="description">
-      <span class="label-text text-lg font-semibold">{m['wizard_form_projectDescription']()}</span>
+      <span class="label-text text-lg font-semibold">{m.wizard_form_projectDescription()}</span>
     </label>
 
-    <p class="description-subtitle">{m['wizard_form_projectDescription_subTitle']()}</p>
+    <p class="description-subtitle">{m.wizard_form_projectDescription_subTitle()}</p>
 
     <textarea
       id="description"
       class="textarea textarea-bordered textarea-lg w-full"
       bind:value={config.description}
       placeholder={config.projectType === 'app' || config.projectType === 'aiSolution'
-        ? m['wizard_form_placeholders_webApplication']()
+        ? m.wizard_form_placeholders_webApplication()
         : config.projectType === 'freestyle'
-          ? m['wizard_form_placeholders_freestyle']()
-          : m['wizard_form_placeholders_default']()}
+          ? m.wizard_form_placeholders_freestyle()
+          : m.wizard_form_placeholders_default()}
       rows="8"
     ></textarea>
     <div class="label">
-      <span class="label-text-alt">{m['wizard_form_characters']({ count: config.description.length })}</span>
+      <span class="label-text-alt">{m.wizard_form_characters({ count: config.description.length })}</span>
     </div>
   </div>
 
@@ -102,36 +102,34 @@
       <div class="card detail-card">
         <div class="card-body prose">
           <div class="detail-card-header">
-            <h3 class="card-title no-padding">Du hast eine PWA - Progressive Web Application - als Wunschprojekt ausgewählt</h3>
+            <h3 class="card-title no-padding">{m.wizard_basic_pwa_title()}</h3>
             <div class="detail-icon">📱</div>
           </div>
           <p>
-            Der perfekte Wahl für eine schnelle, flexible Anwendungen mit größerem Funktionsumfang als eine Webseite, aber mit weniger Komplexität als native
-            iOS oder Android Apps.
+            {m.wizard_basic_pwa_description1()}
           </p>
           <p>
-            Bleibt die Frage: Möchste du eine bestehende Webseite oder Webanwendugn zu einer PWA ausbauen oder soll eine entsprechende Anwendung auf der grünen
-            Wiese neu entwickelt werden?
+            {m.wizard_basic_pwa_description2()}
           </p>
           <div class="form-section">
             <div class="section-label">
               <span class="label-icon">🔧</span>
-              Ansatz wählen
+              {m.wizard_basic_pwa_approach_label()}
             </div>
             <div class="radio-group">
               <label class="radio-option">
                 <input type="radio" name="pwaApproach" value="new" bind:group={pwaApproach} class="radio radio-primary" />
                 <div class="radio-content">
-                  <span class="radio-title">Neu starten</span>
-                  <span class="radio-description">Eine komplett neue PWA entwickeln</span>
+                  <span class="radio-title">{m.wizard_basic_pwa_new_title()}</span>
+                  <span class="radio-description">{m.wizard_basic_pwa_new_description()}</span>
                 </div>
               </label>
 
               <label class="radio-option">
                 <input type="radio" name="pwaApproach" value="extend" bind:group={pwaApproach} class="radio radio-primary" />
                 <div class="radio-content">
-                  <span class="radio-title">Bestehendes ausbauen</span>
-                  <span class="radio-description">Eine vorhandene Webseite oder App zur PWA erweitern</span>
+                  <span class="radio-title">{m.wizard_basic_pwa_extend_title()}</span>
+                  <span class="radio-description">{m.wizard_basic_pwa_extend_description()}</span>
                 </div>
               </label>
             </div>
@@ -146,33 +144,32 @@
         <div class="card-body">
           <div class="detail-card-header">
             <div class="card-icon">📝</div>
-            <h3 class="card-title">Content Management System</h3>
+            <h3 class="card-title">{m.wizard_basic_cms_title()}</h3>
           </div>
 
           <p class="card-description">
-            Ein CMS ermöglicht komfortable Inhaltsverwaltung – von einer einzelnen bearbeitbaren Seite bis zu komplexen Redaktionssystemen mit hunderten
-            Objekten, Berechtigungen und Sonderfunktionen.
+            {m.wizard_basic_cms_description()}
           </p>
 
           <div class="form-section">
             <div class="section-label">
               <span class="label-icon">📊</span>
-              Komplexität einschätzen
+              {m.wizard_basic_cms_complexity_label()}
             </div>
             <div class="slider-container">
               <div class="slider-labels">
-                <span class="slider-label-left">Einfach</span>
-                <span class="slider-label-right">Sehr komplex</span>
+                <span class="slider-label-left">{m.wizard_basic_cms_slider_simple()}</span>
+                <span class="slider-label-right">{m.wizard_basic_cms_slider_complex()}</span>
               </div>
               <input type="range" min="0" max="100" bind:value={cmsComplexity} class="custom-slider complexity-slider" />
               <div class="slider-value">
-                Komplexität: {cmsComplexity < 25
-                  ? 'Einfach (wenige Seiten)'
+                {m.wizard_basic_cms_complexity_prefix()} {cmsComplexity < 25
+                  ? m.wizard_basic_cms_complexity_level1()
                   : cmsComplexity < 50
-                    ? 'Moderat (mehrere Seitentypen)'
+                    ? m.wizard_basic_cms_complexity_level2()
                     : cmsComplexity < 75
-                      ? 'Komplex (viele Inhaltsbausteine)'
-                      : 'Sehr komplex (Redaktionssystem)'}
+                      ? m.wizard_basic_cms_complexity_level3()
+                      : m.wizard_basic_cms_complexity_level4()}
               </div>
             </div>
           </div>
@@ -180,12 +177,12 @@
           <div class="form-section">
             <label for="cmsContentStructure" class="section-label">
               <span class="label-icon">🗂️</span>
-              Beschreibe die Inhaltsstruktur
+              {m.wizard_basic_cms_structure_label()}
             </label>
             <textarea
               id="cmsContentStructure"
               bind:value={cmsContentStructure}
-              placeholder="z.B. Welche Arten von Inhalten sollen verwaltet werden? Wie viele Seiten/Objekte? Welche Berechtigungen?"
+              placeholder={m.wizard_basic_cms_structure_placeholder()}
               class="form-textarea"
               rows="4"
             ></textarea>
@@ -199,34 +196,33 @@
       <div class="card-body">
         <div class="detail-card-header">
           <div class="card-icon">🤝</div>
-          <h3 class="card-title">Full-Service oder aktive Beteiligung?</h3>
+          <h3 class="card-title">{m.wizard_basic_service_title()}</h3>
         </div>
 
         <p class="card-description">
-          Wie viel möchtest du selbst beitragen? Stellst du strukturierte Inhalte, Bilder und Assets zur Verfügung, oder sollen wir alles übernehmen – von
-          Texten über Design bis Konzeption?
+          {m.wizard_basic_service_description()}
         </p>
 
         <div class="form-section">
           <div class="slider-container">
             <div class="slider-labels">
-              <span class="slider-label-left">Full-Service<br /><small>Alles abnehmen</small></span>
-              <span class="slider-label-right">Aktive Beteiligung<br /><small>Ich liefere viel zu</small></span>
+              <span class="slider-label-left">{m.wizard_basic_service_slider_left()}<br /><small>{m.wizard_basic_service_slider_left_sub()}</small></span>
+              <span class="slider-label-right">{m.wizard_basic_service_slider_right()}<br /><small>{m.wizard_basic_service_slider_right_sub()}</small></span>
             </div>
             <input type="range" min="0" max="100" bind:value={serviceLevel} class="custom-slider" />
             <div class="slider-value">
               {serviceLevel < 20
-                ? 'Kompletter Full-Service – ihr übernehmt alles'
+                ? m.wizard_basic_service_level1()
                 : serviceLevel < 40
-                  ? 'Überwiegend Full-Service mit meinen Inputs'
+                  ? m.wizard_basic_service_level2()
                   : serviceLevel < 60
-                    ? 'Ausgeglichene Zusammenarbeit'
+                    ? m.wizard_basic_service_level3()
                     : serviceLevel < 80
-                      ? 'Ich liefere viel zu, ihr unterstützt'
-                      : 'Maximale Eigenleistung – ihr setzt nur um'}
+                      ? m.wizard_basic_service_level4()
+                      : m.wizard_basic_service_level5()}
             </div>
           </div>
-          <p class="hint-text">💡 Je mehr du selbst beisteuerst, umso geringer fallen die Kosten aus.</p>
+          <p class="hint-text">{m.wizard_basic_service_hint()}</p>
         </div>
       </div>
     </div>
@@ -236,31 +232,30 @@
       <div class="card-body">
         <div class="detail-card-header">
           <div class="card-icon">⚙️</div>
-          <h3 class="card-title">Quick & Dirty oder Over-engineered?</h3>
+          <h3 class="card-title">{m.wizard_basic_engineering_title()}</h3>
         </div>
 
         <p class="card-description">
-          Ein kleiner Unternehmensauftritt braucht nicht die Security-Features eines Online-Bankings. Was ist dir wichtiger: schnell, günstig und innovativ,
-          oder bullet-proof, hochsicher und hochverfügbar?
+          {m.wizard_basic_engineering_description()}
         </p>
 
         <div class="form-section">
           <div class="slider-container">
             <div class="slider-labels">
-              <span class="slider-label-left">Quick & Dirty<br /><small>Schnell, flexibel</small></span>
-              <span class="slider-label-right">Over-engineered<br /><small>Sicher, robust</small></span>
+              <span class="slider-label-left">{m.wizard_basic_engineering_slider_left()}<br /><small>{m.wizard_basic_engineering_slider_left_sub()}</small></span>
+              <span class="slider-label-right">{m.wizard_basic_engineering_slider_right()}<br /><small>{m.wizard_basic_engineering_slider_right_sub()}</small></span>
             </div>
             <input type="range" min="0" max="100" bind:value={engineeringApproach} class="custom-slider engineering-slider" />
             <div class="slider-value">
               {engineeringApproach < 20
-                ? 'Pragmatisch & schnell – MVP-Ansatz'
+                ? m.wizard_basic_engineering_level1()
                 : engineeringApproach < 40
-                  ? 'Solide Basis mit Fokus auf Speed'
+                  ? m.wizard_basic_engineering_level2()
                   : engineeringApproach < 60
-                    ? 'Ausgewogener Mittelweg'
+                    ? m.wizard_basic_engineering_level3()
                     : engineeringApproach < 80
-                      ? 'Hohe Qualität & Sicherheit'
-                      : 'Maximum Security & Verfügbarkeit'}
+                      ? m.wizard_basic_engineering_level4()
+                      : m.wizard_basic_engineering_level5()}
             </div>
           </div>
         </div>
@@ -272,17 +267,17 @@
       <div class="card-body">
         <div class="detail-card-header">
           <div class="card-icon">✨</div>
-          <h3 class="card-title">Besonderheiten deines Projekts</h3>
+          <h3 class="card-title">{m.wizard_basic_requirements_title()}</h3>
         </div>
 
         <p class="card-description">
-          Gibt es externe Systeme oder Dienste, die angebunden werden müssen? Spezielle Anforderungen, die dein Projekt vom Standard abheben?
+          {m.wizard_basic_requirements_description()}
         </p>
 
         <div class="form-section">
           <textarea
             bind:value={specialRequirements}
-            placeholder="z.B. Integration mit ERP-System, spezielle API-Anbindungen, Barrierefreiheit, mehrsprachig..."
+            placeholder={m.wizard_basic_requirements_placeholder()}
             class="form-textarea"
             rows="5"
           ></textarea>
@@ -295,15 +290,15 @@
       <div class="card-body">
         <div class="detail-card-header">
           <div class="card-icon">🎯</div>
-          <h3 class="card-title">Projektziel & Erfolgsmessung</h3>
+          <h3 class="card-title">{m.wizard_basic_goal_title()}</h3>
         </div>
 
-        <p class="card-description">Beschreibe das Ziel präzise: Was möchtest du erreichen? Lässt sich das messen? Wann gilt die Umsetzung als Erfolg?</p>
+        <p class="card-description">{m.wizard_basic_goal_description()}</p>
 
         <div class="form-section">
           <textarea
             bind:value={projectGoal}
-            placeholder="z.B. 100 neue Leads pro Monat, 50% weniger Support-Anfragen, erfolgreicher Produktlaunch..."
+            placeholder={m.wizard_basic_goal_placeholder()}
             class="form-textarea"
             rows="5"
           ></textarea>
@@ -316,15 +311,15 @@
       <div class="card-body">
         <div class="detail-card-header">
           <div class="card-icon">👥</div>
-          <h3 class="card-title">Zielgruppe</h3>
+          <h3 class="card-title">{m.wizard_basic_audience_title()}</h3>
         </div>
 
-        <p class="card-description">Welche Personengruppe wird mit deiner Webseite/Anwendung arbeiten? Kennst du ihre Bedürfnisse?</p>
+        <p class="card-description">{m.wizard_basic_audience_description()}</p>
 
         <div class="form-section">
           <textarea
             bind:value={targetAudience}
-            placeholder="z.B. B2B-Kunden, Endverbraucher 25-45 Jahre, technisch versierte Nutzer, internationale Zielgruppe..."
+            placeholder={m.wizard_basic_audience_placeholder()}
             class="form-textarea"
             rows="4"
           ></textarea>
@@ -337,13 +332,13 @@
       <div class="card-body">
         <div class="detail-card-header">
           <div class="card-icon">⏱️</div>
-          <h3 class="card-title">Zeitliche Vorstellungen</h3>
+          <h3 class="card-title">{m.wizard_basic_timeline_title()}</h3>
         </div>
 
-        <p class="card-description">Wie dringend ist das Projekt? Gibt es einen konkreten Zeitrahmen oder Deadline?</p>
+        <p class="card-description">{m.wizard_basic_timeline_description()}</p>
 
         <div class="form-section">
-          <label for="timeline" class="section-label">Zeitrahmen auswählen</label>
+          <label for="timeline" class="section-label">{m.wizard_basic_timeline_label()}</label>
           <select id="timeline" bind:value={timelinePreference} class="form-select">
             {#each timelineOptions as option}
               <option value={option.value}>{option.label}</option>
@@ -354,7 +349,7 @@
             <div class="form-section mt-4">
               <label for="specificDeadline" class="section-label">
                 <span class="label-icon">📅</span>
-                Konkretes Datum
+                {m.wizard_basic_timeline_deadline_label()}
               </label>
               <input id="specificDeadline" type="date" bind:value={specificDeadline} class="form-input" />
             </div>
@@ -368,18 +363,17 @@
       <div class="card-body">
         <div class="detail-card-header">
           <div class="card-icon">💰</div>
-          <h3 class="card-title">Budgetrahmen</h3>
+          <h3 class="card-title">{m.wizard_basic_budget_title()}</h3>
         </div>
 
         <p class="card-description">
-          Um sicherzustellen, dass der erwartete Funktionsumfang in dein Budget passt, hilft uns eine grobe Einschätzung. Möglicherweise gibt es auch Raum für
-          zusätzliche Features!
+          {m.wizard_basic_budget_description()}
         </p>
 
         <div class="form-section">
-          <label for="budget" class="section-label">Budget-Range</label>
+          <label for="budget" class="section-label">{m.wizard_basic_budget_label()}</label>
           <select id="budget" bind:value={budgetRange} class="form-select">
-            <option value="">Bitte auswählen...</option>
+            <option value="">{m.wizard_basic_budget_placeholder()}</option>
             {#each budgetOptions as option}
               <option value={option.value}>{option.label}</option>
             {/each}
@@ -394,15 +388,14 @@
         <div class="card-body">
           <div class="detail-card-header">
             <div class="card-icon">🚀</div>
-            <h3 class="card-title">Freestyle / KI Use Case</h3>
+            <h3 class="card-title">{m.wizard_basic_freestyle_title()}</h3>
           </div>
 
           <p class="card-description">
-            Freestyle- und KI-Projekte sind keine Festpreisprojekte, sondern werden nach Time, Material & Effort abgerechnet. Wir schätzen die Komplexität und
-            buchen ein Kontingent an Manntagen. Wenn das aufgebraucht ist, kann nachbudgetiert werden – übrige Ressourcen werden verteilt oder ausgezahlt.
+            {m.wizard_basic_freestyle_description()}
           </p>
           <div class="info-box">
-            <strong>Du buchst den Experten</strong> und setzt ihn ein, wie du es für richtig hältst.
+            <strong>{m.wizard_basic_freestyle_info()}</strong>{m.wizard_basic_freestyle_info_suffix()}
           </div>
         </div>
       </div>

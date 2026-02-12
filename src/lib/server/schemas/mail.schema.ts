@@ -17,7 +17,7 @@ export const mailSendSchema = z.object({
 	subject: z.string().min(1).max(500),
 	text: z.string().max(10000).optional(),
 	template: z.string().max(200).optional(),
-	templateProps: z.record(z.unknown()).optional(),
+	templateProps: z.record(z.string(), z.unknown()).optional(),
 	html: z.string().max(100000).optional(),
 	category: z.string().max(100).optional()
 });

@@ -1,6 +1,6 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "login_meta_title": "Loginseite - raspb Webservices",
-  "login_meta_description": "Isolierte Loginseite von raspb Webservices UG (in Gründung)",
-  "imprint_title": "Loginseite"
+  "login_meta_title": "Login Page - raspb Webservices",
+  "login_meta_description": "Isolated login page of raspb Webservices UG (in formation)",
+  "imprint_title": "Login Page"
 }

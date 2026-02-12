@@ -2,6 +2,7 @@
   import type { WizardConfig, Project } from '$interfaces/project.interface';
   import type { User } from '$interfaces/user.interface';
   import { uploadMultipleAssetsWithDelay, publishMultipleAssets } from '$helper/uploadAsset';
+  import { m } from '$lib/paraglide/messages';
 
   interface Props {
     config: WizardConfig;
@@ -27,7 +28,7 @@
     if (uploadedFiles.length === 0 || uploadedAssetIds.length > 0) return;
 
     isPreparingAssets = true;
-    assetPreparationProgress = 'Bereite Assets vor...';
+    assetPreparationProgress = m.wizard_api_preparing_assets();
 
     try {
       const preparedAssetIds = await uploadMultipleAssetsWithDelay(
@@ -41,13 +42,13 @@
       uploadedAssetIds = preparedAssetIds;
 
       if (preparedAssetIds.length > 0) {
-        assetPreparationProgress = `${preparedAssetIds.length} von ${uploadedFiles.length} Assets bereit zum Veröffentlichen`;
+        assetPreparationProgress = m.wizard_api_assets_ready({ count: preparedAssetIds.length.toString(), total: uploadedFiles.length.toString() });
       } else {
-        assetPreparationProgress = 'Keine Assets konnten vorbereitet werden';
+        assetPreparationProgress = m.wizard_api_no_assets_prepared();
       }
     } catch (error) {
       console.error('Fehler beim Vorbereiten der Assets:', error);
-      assetPreparationProgress = 'Fehler beim Vorbereiten der Assets';
+      assetPreparationProgress = m.wizard_api_assets_preparation_error();
     } finally {
       isPreparingAssets = false;
     }
@@ -120,7 +121,7 @@
       const customerResult = await customerResponse.json();
 
       if (!customerResult.success) {
-        errorDetails.push(`Customer-Fehler: ${customerResult.error || 'Unbekannter Fehler'}`);
+        errorDetails.push(`${m.wizard_modals_error_customerError()}: ${customerResult.error || m.wizard_modals_error_unknownError()}`);
         if (customerResult.details) {
           errorDetails.push(...customerResult.details);
         }
@@ -159,7 +160,7 @@
         finalAssetIds = await uploadAllFiles();
 
         if (finalAssetIds.length === 0 && uploadedFiles.length > 0) {
-          errorDetails.push('Fehler beim Hochladen der Dateien');
+          errorDetails.push(m.wizard_modals_error_fileUploadError());
           throw new Error('File upload failed');
         }
       }
@@ -262,8 +263,8 @@
 
       // Add network error if no other errors were collected
       if (errorDetails.length === 0) {
-        errorDetails.push('Netzwerk Fehler: Verbindung zum Server fehlgeschlagen');
-        errorDetails.push('Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut');
+        errorDetails.push(m.wizard_modals_error_networkError());
+        errorDetails.push(m.wizard_modals_error_checkConnection());
       }
 
       return { success: false };

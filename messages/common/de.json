@@ -65,5 +65,44 @@
   "login_title": "Bitte meld dich an",
   "login_teaser": "Wenn du dein eigenes Dashboard aufrufen oder den erweiterten Konfigurator nutzen möchtest, musst du angemeldet sein.",
   "login_loginButton": "Anmelden",
-  "login_registerButton": "Registrieren"
+  "login_registerButton": "Registrieren",
+
+  "header_welcome": "Herzlich Willkommen,",
+  "header_dashboard": "Dashboard",
+  "header_profile": "Profil",
+  "header_open_menu": "Menü öffnen",
+  "header_close_sidebar": "Seitenleiste schließen",
+
+  "layout_skip_to_content": "Zum Hauptinhalt springen",
+
+  "footer_toggle_dark_mode": "Dark Mode umschalten",
+  "footer_scroll_to_top": "Nach oben scrollen",
+
+  "carousel_slide1_title": "Erlebe Abenteuer wie nie zuvor",
+  "carousel_slide1_text": "Entdecke atemberaubende Landschaften und schaffe unvergessliche Erinnerungen mit unseren Premium-Outdoor-Erlebnissen.",
+  "carousel_slide1_cta": "Jetzt starten",
+  "carousel_slide2_title": "Überschreite deine Grenzen",
+  "carousel_slide2_text": "Fordere dich selbst heraus mit aufregenden Abenteuern, die deinen Mut testen und deinen Geist belohnen.",
+  "carousel_slide2_cta": "Abenteuer starten",
+  "carousel_slide3_title": "Natur als Spielplatz erwartet dich",
+  "carousel_slide3_text": "Tauche ein in unberührte Wildnis und verbinde dich mit der rohen Schönheit der natürlichen Welt.",
+  "carousel_slide3_cta": "Jetzt erkunden",
+  "carousel_slide4_title": "Schaffe bleibende Erinnerungen",
+  "carousel_slide4_text": "Jeder Moment wird zu einer Geschichte, die es wert ist, erzählt zu werden, wenn du das Abenteuer annimmst, das dich ruft.",
+  "carousel_slide4_cta": "Reise beginnen",
+  "carousel_slide5_title": "Wo Träume Flügel bekommen",
+  "carousel_slide5_text": "Fliege über deine Komfortzone hinaus und entdecke, was jenseits des Horizonts der Möglichkeiten liegt.",
+  "carousel_slide5_cta": "Abheben",
+  "carousel_nav_previous": "Vorheriges Bild",
+  "carousel_nav_next": "Nächstes Bild",
+
+  "hero_default_button": "Mehr erfahren",
+  "teaser_default_headline": "Keine Überschrift",
+  "teaser_default_subheadline": "Keine Unterüberschrift",
+
+  "offline_title": "Offline | raspb Webservices",
+  "offline_heading": "Du bist offline",
+  "offline_description": "Es besteht aktuell keine Internetverbindung. Bitte prüfe deine Verbindung und versuche es erneut.",
+  "offline_retry": "Erneut versuchen",
+  "modal_close": "Schließen"
 }

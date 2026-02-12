@@ -28,25 +28,25 @@
     </div>
 
     <p class="text-base-content/70 mb-4 line-clamp-3 text-sm">
-      {project.description || 'Keine Beschreibung verfügbar'}
+      {project.description || m.dashboard_details_fallback_no_description()}
     </p>
 
     <div class="space-y-2">
       <div class="flex justify-between text-sm">
-        <span class="text-base-content/60">Budget:</span>
+        <span class="text-base-content/60">{m.dashboard_projectCard_label_budget()}</span>
         <span class="font-medium">{formatBudget(project.budget || '')}</span>
       </div>
 
       <div class="flex justify-between text-sm">
-        <span class="text-base-content/60">Erstellt:</span>
+        <span class="text-base-content/60">{m.dashboard_projectCard_label_created()}</span>
         <span class="font-medium">
-          {project.createdAt ? formatDate(project.createdAt) : 'Unbekannt'}
+          {project.createdAt ? formatDate(project.createdAt) : m.dashboard_details_fallback_unknown()}
         </span>
       </div>
     </div>
 
     <div class="card-actions mt-4 justify-end">
-      <div class="text-base-content/50 text-xs italic">Klicken für Details →</div>
+      <div class="text-base-content/50 text-xs italic">{m.dashboard_projectCard_click_for_details()}</div>
     </div>
   </div>
 </button>

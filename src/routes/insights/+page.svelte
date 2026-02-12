@@ -43,14 +43,14 @@
 </script>
 
 <svelte:head>
-  <title>{m['insights_meta_title']()}</title>
-  <meta name="description" content={m['insights_meta_description']()} />
+  <title>{m.insights_meta_title()}</title>
+  <meta name="description" content={m.insights_meta_description()} />
 </svelte:head>
 
 <Stage style={'fancy-gradient'}>
   <div class="inner-box reduced prose py-36">
-    <h1 class="massive animate-fade-in-up">{m['insights_header_title']()}</h1>
-    <p class="teaser animate-fade-in-up">{m['insights_header_subtitle']()}</p>
+    <h1 class="massive animate-fade-in-up">{m.insights_header_title()}</h1>
+    <p class="teaser animate-fade-in-up">{m.insights_header_subtitle()}</p>
   </div>
 
   <div class="inner-box reduced -mt-12 -mb-24">
@@ -63,8 +63,8 @@
           scrollToSection('insights-content-container');
         }}
       >
-        <h3 class="add-padding">{m['insights_tabs_tech_title']()}</h3>
-        <p>{m['insights_tabs_tech_description']()}</p>
+        <h3 class="add-padding">{m.insights_tabs_tech_title()}</h3>
+        <p>{m.insights_tabs_tech_description()}</p>
       </button>
       <button
         class="tab-tile project"
@@ -74,8 +74,8 @@
           scrollToSection('insights-content-container');
         }}
       >
-        <h3 class="add-padding">{m['insights_tabs_project_title']()}</h3>
-        <p>{m['insights_tabs_project_description']()}</p>
+        <h3 class="add-padding">{m.insights_tabs_project_title()}</h3>
+        <p>{m.insights_tabs_project_description()}</p>
       </button>
       <button
         class="tab-tile showcase"
@@ -85,8 +85,8 @@
           scrollToSection('insights-content-container');
         }}
       >
-        <h3 class="add-padding">{m['insights_tabs_showcase_title']()}</h3>
-        <p>{m['insights_tabs_showcase_description']()}</p>
+        <h3 class="add-padding">{m.insights_tabs_showcase_title()}</h3>
+        <p>{m.insights_tabs_showcase_description()}</p>
       </button>
     </div>
   </div>
@@ -97,11 +97,11 @@
     <Section noSpacing={true}>
       <div class="inner-box fade-in prose pt-36 pb-16">
         <h2>
-          {m['insights_techInsights_titleFirst']()} <span class="inner-text-special">{m['insights_techInsights_titleHightlight']()}</span>
-          {m['insights_techInsights_titleSecond']()}
+          {m.insights_techInsights_titleFirst()} <span class="inner-text-special">{m.insights_techInsights_titleHightlight()}</span>
+          {m.insights_techInsights_titleSecond()}
         </h2>
         <p class="teaser">
-          {@html m['insights_techInsights_teaser']()}
+          {@html m.insights_techInsights_teaser()}
         </p>
       </div>
     </Section>
@@ -112,51 +112,51 @@
 
     <Section noSpacing={true}>
       <div class="inner-box animate-fade-in-up prose py-24">
-        <h2>{m['insights_webtechnologien_title']()}</h2>
+        <h2>{m.insights_webtechnologien_title()}</h2>
         <p class="teaser">
-          {m['insights_webtechnologien_subtitle']()}
+          {m.insights_webtechnologien_subtitle()}
         </p>
         <div class="bg-base-200 prose rounded-2xl p-8 shadow-lg">
-          <h3 class="text-primary pt-1">{m['insights_webtechnologien_absatz1headline']()}</h3>
+          <h3 class="text-primary pt-1">{m.insights_webtechnologien_absatz1headline()}</h3>
           <p class="leading-relaxed">
-            {@html m['insights_webtechnologien_absatz1']()}
+            {@html m.insights_webtechnologien_absatz1()}
           </p>
-          <h3 class="text-primary pt-6">{m['insights_webtechnologien_absatz2headline']()}</h3>
+          <h3 class="text-primary pt-6">{m.insights_webtechnologien_absatz2headline()}</h3>
           <p class="leading-relaxed">
-            {@html m['insights_webtechnologien_absatz2']()}
+            {@html m.insights_webtechnologien_absatz2()}
           </p>
-          <h3 class="text-primary pt-6">{m['insights_webtechnologien_absatz3headline']()}</h3>
+          <h3 class="text-primary pt-6">{m.insights_webtechnologien_absatz3headline()}</h3>
           <p class="mb-4 leading-relaxed">
-            {@html m['insights_webtechnologien_absatz3']()}
+            {@html m.insights_webtechnologien_absatz3()}
           </p>
 
           <div class="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2">
             <div class="bg-base-100 rounded-xl px-4 py-2">
-              <p>{@html m['insights_webtechnologien_vorteile_sicherheit']()}</p>
+              <p>{@html m.insights_webtechnologien_vorteile_sicherheit()}</p>
             </div>
             <div class="bg-base-100 rounded-xl px-4 py-2">
-              <p>{@html m['insights_webtechnologien_vorteile_performance']()}</p>
+              <p>{@html m.insights_webtechnologien_vorteile_performance()}</p>
             </div>
             <div class="bg-base-100 rounded-xl px-4 py-2">
-              <p>{@html m['insights_webtechnologien_vorteile_skalierbarkeit']()}</p>
+              <p>{@html m.insights_webtechnologien_vorteile_skalierbarkeit()}</p>
             </div>
             <div class="bg-base-100 rounded-xl px-4 py-2">
-              <p>{@html m['insights_webtechnologien_vorteile_skalierbarkeit2']()}</p>
+              <p>{@html m.insights_webtechnologien_vorteile_skalierbarkeit2()}</p>
             </div>
             <div class="bg-base-100 rounded-xl px-4 py-2">
-              <p>{@html m['insights_webtechnologien_vorteile_entwicklerfreundlichkeit']()}</p>
+              <p>{@html m.insights_webtechnologien_vorteile_entwicklerfreundlichkeit()}</p>
             </div>
             <div class="bg-base-100 rounded-xl px-4 py-2">
-              <p>{@html m['insights_webtechnologien_vorteile_kosteneffizienz']()}</p>
+              <p>{@html m.insights_webtechnologien_vorteile_kosteneffizienz()}</p>
             </div>
           </div>
-          <h3 class="text-primary pt-6">{m['insights_webtechnologien_absatz4headline']()}</h3>
+          <h3 class="text-primary pt-6">{m.insights_webtechnologien_absatz4headline()}</h3>
           <p class="leading-relaxed">
-            {@html m['insights_webtechnologien_absatz4']()}
+            {@html m.insights_webtechnologien_absatz4()}
           </p>
-          <h3 class="text-primary pt-6">{m['insights_webtechnologien_absatz5headline']()}</h3>
+          <h3 class="text-primary pt-6">{m.insights_webtechnologien_absatz5headline()}</h3>
           <p class="leading-relaxed">
-            {@html m['insights_webtechnologien_absatz5']()}
+            {@html m.insights_webtechnologien_absatz5()}
           </p>
         </div>
       </div>
@@ -165,40 +165,40 @@
     <Section noSpacing={true}>
       <div class="inner-box animate-fade-in-up prose pt-36 pb-24">
         <h2 class="text-4xl font-bold">
-          {m['insights_projectInsights_titleFirst']()} <span class="inner-text-special">{m['insights_projectInsights_titleHighlight']()}</span>
-          {m['insights_projectInsights_titleSecond']()}?
+          {m.insights_projectInsights_titleFirst()} <span class="inner-text-special">{m.insights_projectInsights_titleHighlight()}</span>
+          {m.insights_projectInsights_titleSecond()}?
         </h2>
         <p class="animate-fade-in-up">
-          {@html m['insights_projectInsights_paragraph1']()}
+          {@html m.insights_projectInsights_paragraph1()}
         </p>
         <p class="animate-fade-in-up">
-          {@html m['insights_projectInsights_paragraph2']()}
+          {@html m.insights_projectInsights_paragraph2()}
         </p>
         <p class="animate-fade-in-up">
-          {@html m['insights_projectInsights_paragraph3']()}
+          {@html m.insights_projectInsights_paragraph3()}
         </p>
         <p class="animate-fade-in-up">
-          {@html m['insights_projectInsights_paragraph4']()}
+          {@html m.insights_projectInsights_paragraph4()}
         </p>
         <p class="animate-fade-in-up">
-          {@html m['insights_projectInsights_paragraph5']()}
+          {@html m.insights_projectInsights_paragraph5()}
         </p>
         <p class="animate-fade-in-up">
-          {@html m['insights_projectInsights_paragraph6']()}
+          {@html m.insights_projectInsights_paragraph6()}
         </p>
         <p class="animate-fade-in-up">
-          {@html m['insights_projectInsights_paragraph7']()}
+          {@html m.insights_projectInsights_paragraph7()}
         </p>
         <p class="animate-fade-in-up">
-          {@html m['insights_projectInsights_paragraph8']()}
+          {@html m.insights_projectInsights_paragraph8()}
         </p>
       </div>
     </Section>
   {:else if activeContent === 'showcase'}
     <Section noSpacing={true}>
       <div class="inner-box animate-fade-in-up prose pt-36 pb-24">
-        <h2>{m['insights_showcase_title']()}</h2>
-        <p>{m['insights_showcase_description']()}</p>
+        <h2>{m.insights_showcase_title()}</h2>
+        <p>{m.insights_showcase_description()}</p>
       </div>
     </Section>
   {/if}

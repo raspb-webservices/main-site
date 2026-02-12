@@ -39,27 +39,27 @@
   {#if isAuth}
     <div class="logged-in-header">
       <div class="inner-box flex items-center justify-between">
-        <p>Herzlich Willkommen, {currentUser.givenName} {currentUser.familyName}!</p>
+        <p>{m.header_welcome()} {currentUser.givenName} {currentUser.familyName}!</p>
         <div class="ml-auto"></div>
         <button
           class="text-link-button white-link"
           onclick={() => {
             goto(localizeHref('/dashboard'));
-          }}>Dashboard</button
+          }}>{m.header_dashboard()}</button
         >
         <div class="w-8 text-center text-white opacity-70">|</div>
         <button
           class="text-link-button white-link"
           onclick={() => {
             goto(localizeHref('/profile'));
-          }}>Profil</button
+          }}>{m.header_profile()}</button
         >
         <div class="w-8 text-center text-white opacity-70">|</div>
         <button
           class="text-link-button white-link"
           onclick={() => {
             logout();
-          }}>Logout</button
+          }}>{m.menu_logout()}</button
         >
       </div>
     </div>
@@ -79,28 +79,28 @@
         class:active={page.url.pathname == localizeHref('/services')}
         onclick={() => {
           goto(localizeHref('/services'));
-        }}>{m['menu_services']()}</button
+        }}>{m.menu_services()}</button
       >
       <button
         class="nav-item"
         class:active={page.url.pathname == localizeHref('/insights')}
         onclick={() => {
           goto(localizeHref('/insights'));
-        }}>{m['menu_insights']()}</button
+        }}>{m.menu_insights()}</button
       >
       <button
         class="nav-item"
         class:active={page.url.pathname == localizeHref('/about-us')}
         onclick={() => {
           goto(localizeHref('/about-us'));
-        }}>{m['menu_aboutUs']()}</button
+        }}>{m.menu_aboutUs()}</button
       >
       <button
         class="nav-item"
         class:active={page.url.pathname == localizeHref('/faq')}
         onclick={() => {
           goto(localizeHref('/faq'));
-        }}>{m['menu_faq']()}</button
+        }}>{m.menu_faq()}</button
       >
     </nav>
 
@@ -112,7 +112,7 @@
             login();
           }}
           ><div class="button-inner">
-            {#if logginIn || logginOut}<span class="loading loading-ring loading-sm"></span>{:else}<span>{m['menu_login']()}</span>{/if}
+            {#if logginIn || logginOut}<span class="loading loading-ring loading-sm"></span>{:else}<span>{m.menu_login()}</span>{/if}
           </div></button
         >
       {/if}
@@ -120,7 +120,7 @@
         class="btn-basic-header"
         onclick={() => {
           goto(localizeHref('/wizard'));
-        }}><span class="halfXl:block hidden">{m['menu_configureProject']()}</span><span class="halfXl:hidden">{m['menu_start']()}</span></button
+        }}><span class="halfXl:block hidden">{m.menu_configureProject()}</span><span class="halfXl:hidden">{m.menu_start()}</span></button
       >
     </div>
 
@@ -128,20 +128,20 @@
       <div class="drawer drawer-end">
         <input id="mobile-navigation" type="checkbox" class="drawer-toggle" bind:checked={mobileNavOpen} />
         <div class="drawer-content">
-          <label for="mobile-navigation" aria-label="Open menu" class="drawer-button text-text-base-content hover:text-primary block h-11 cursor-pointer rounded-full p-1">
+          <label for="mobile-navigation" aria-label={m.header_open_menu()} class="drawer-button text-text-base-content hover:text-primary block h-11 cursor-pointer rounded-full p-1">
             <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 512 512" aria-hidden="true">
               <path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" />
             </svg>
           </label>
         </div>
         <div class="drawer-side">
-          <label for="mobile-navigation" aria-label="close sidebar" class="drawer-overlay"></label>
+          <label for="mobile-navigation" aria-label={m.header_close_sidebar()} class="drawer-overlay"></label>
           <div class="flex min-h-full w-80 flex-col bg-white">
             <div class="bg-base-100 w-full grow">
               <div class="flex w-full items-center justify-end px-4 pt-6 pb-4">
                 <label
                   for="mobile-navigation"
-                  aria-label="close sidebar"
+                  aria-label={m.header_close_sidebar()}
                   class="text-base-content hover:text-primary block h-11 cursor-pointer rounded-full p-1"
                 >
                   <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 512 512">
@@ -158,49 +158,49 @@
                   onclick={() => {
                     mobileNavOpen = false;
                     goto(localizeHref('/wizard'));
-                  }}>{m['menu_configureProject']()}</button
+                  }}>{m.menu_configureProject()}</button
                 >
                 <button
                   class="nav-item"
                   class:active={page.url.pathname == localizeHref('services')}
                   onclick={() => {
                     goto(localizeHref('services'));
-                  }}>{m['menu_services']()}</button
+                  }}>{m.menu_services()}</button
                 >
                 <button
                   class="nav-item"
                   class:active={page.url.pathname == localizeHref('insights')}
                   onclick={() => {
                     goto(localizeHref('insights'));
-                  }}>{m['menu_insights']()}</button
+                  }}>{m.menu_insights()}</button
                 >
                 <button
                   class="nav-item"
                   class:active={page.url.pathname == localizeHref('about-us')}
                   onclick={() => {
                     goto(localizeHref('about-us'));
-                  }}>{m['menu_aboutUs']()}</button
+                  }}>{m.menu_aboutUs()}</button
                 >
                 <button
                   class="nav-item"
                   class:active={page.url.pathname == localizeHref('faq')}
                   onclick={() => {
                     goto(localizeHref('faq'));
-                  }}>{m['menu_faq']()}</button
+                  }}>{m.menu_faq()}</button
                 >
                 {#if !isAuth}
                   <button
                     class="nav-item"
                     onclick={() => {
                       login();
-                    }}>{m['menu_login']()}</button
+                    }}>{m.menu_login()}</button
                   >
                 {:else}
                   <button
                     class="nav-item"
                     onclick={() => {
                       logout();
-                    }}>{m['menu_logout']()}</button
+                    }}>{m.menu_logout()}</button
                   >
                 {/if}
               </div>
