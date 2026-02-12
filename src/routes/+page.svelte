@@ -26,13 +26,6 @@
     if (urlParams.get('openAppointment') === 'true') {
       openGetAnAppointmentModal();
     }
-
-    // Load ElevenLabs ConvAI widget script dynamically
-    const script = document.createElement('script');
-    script.src = 'https://unpkg.com/@elevenlabs/convai-widget-embed';
-    script.async = true;
-    script.type = 'text/javascript';
-    document.head.appendChild(script);
   });
 
   function openPhilosophyModal() {

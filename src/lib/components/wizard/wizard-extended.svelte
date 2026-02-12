@@ -757,7 +757,7 @@
     {#if currentStep < maxSteps}
       <button
         type="button"
-        class="btn-basic flex-grow md:flex-grow-0"
+        class="btn-basic grow md:grow-0"
         onclick={nextStep}
         disabled={(currentStep === 1 && !config.projectType) || (currentStep === 2 && !config.subType && config.projectType !== 'freestyle')}
       >
@@ -768,7 +768,7 @@
       </button>
     {:else}
       <div class="flex flex-wrap gap-4">
-        <button type="button" class="btn-basic flex-grow md:flex-grow-0" onclick={generatePDF} disabled={isGeneratingPDF}>
+        <button type="button" class="btn-basic grow md:grow-0" onclick={generatePDF} disabled={isGeneratingPDF}>
           {#if isGeneratingPDF}
             <span class="loading loading-ring loading-sm"></span>
             {m['wizard_navigation_downloadPDF']()}
@@ -784,7 +784,7 @@
             {m['wizard_navigation_downloadPDF']()}
           {/if}
         </button>
-        <button type="button" class="btn-basic flex-grow md:flex-grow-0" onclick={submitToAPI}>
+        <button type="button" class="btn-basic grow md:grow-0" onclick={submitToAPI}>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path
               stroke-linecap="round"

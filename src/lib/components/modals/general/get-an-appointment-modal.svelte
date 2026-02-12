@@ -1,22 +1,27 @@
 <script lang="ts">
   let modal: HTMLDialogElement;
+  let isOpen = $state(false);
 
   export function openModal() {
+    isOpen = true;
     modal?.showModal();
   }
   export function closeModal() {
     modal?.close();
+    isOpen = false;
   }
 </script>
 
-<dialog bind:this={modal} class="modal">
+<dialog bind:this={modal} class="modal" onclose={() => isOpen = false}>
   <div class="modal-box">
     <form method="dialog">
       <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2" onclick={closeModal}>✕</button>
     </form>
 
     <div class="iframe-container">
-      <iframe src="https://nextcloud.raspb.eu/apps/appointments/embed/QC0rcD04c8q8NbC1/form" title="Erstgespräch vereinbaren"></iframe>
+      {#if isOpen}
+        <iframe src="https://nextcloud.raspb.eu/apps/appointments/embed/QC0rcD04c8q8NbC1/form" title="Erstgespräch vereinbaren"></iframe>
+      {/if}
     </div>
   </div>
   <form method="dialog" class="modal-backdrop">

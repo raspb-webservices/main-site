@@ -50,7 +50,7 @@
 <div class="content-area">
 	<Section noSpacing={true}>
 		<div class="inner-box reduced prose pt-24 pb-12">
-			<h1 class="animate-fade-in mb-8 max-w-[850px] text-center text-4xl font-bold">
+			<h1 class="animate-fade-in mb-8 max-w-212.5 text-center text-4xl font-bold">
 				{m['registration_intro_titleFirst']()}
 				<span class="inner-text-special">{m['registration_intro_titleHighlight']()}</span>
 			</h1>

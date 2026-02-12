@@ -30,7 +30,7 @@ const config = {
       entries: ['*'],
       crawl: true
     },
-    inlineStyleThreshold: 1024
+    inlineStyleThreshold: 2048
   }
 };
 
