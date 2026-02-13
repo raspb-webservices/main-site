@@ -12,7 +12,8 @@
       "Bash($env:MAILTRAP_TOKEN=\"dummy\")",
       "Bash(MAILTRAP_TOKEN=dummy yarn build:*)",
       "Bash(export MAILTRAP_TOKEN=dummy)",
-      "Bash(find messages -name \"*.json\" -exec sh -c 'echo \"\"File: {}\"\" && wc -l \"\"{}\"\"' ;)"
+      "Bash(find messages -name \"*.json\" -exec sh -c 'echo \"\"File: {}\"\" && wc -l \"\"{}\"\"' ;)",
+      "Bash(git revert:*)"
     ]
   }
 }

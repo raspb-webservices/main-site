@@ -2,8 +2,7 @@
 
 import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching';
 import { registerRoute, NavigationRoute } from 'workbox-routing';
-import { NetworkFirst, CacheFirst } from 'workbox-strategies';
-import { ExpirationPlugin } from 'workbox-expiration';
+import { NetworkFirst } from 'workbox-strategies';
 
 declare let self: ServiceWorkerGlobalScope;
 
@@ -21,16 +20,10 @@ self.addEventListener('activate', (event) => {
 });
 
 // --- Navigation requests (HTML pages) ---
-// NetworkFirst: try server, fall back to cache, then offline page
+// NetworkFirst: always try server for fresh HTML, fall back to cache, then offline page
 const navigationHandler = new NetworkFirst({
 	cacheName: 'pages',
-	networkTimeoutSeconds: 3,
-	plugins: [
-		new ExpirationPlugin({
-			maxEntries: 50,
-			maxAgeSeconds: 24 * 60 * 60
-		})
-	]
+	networkTimeoutSeconds: 3
 });
 
 registerRoute(
@@ -53,50 +46,4 @@ registerRoute(
 			denylist: [/^\/api\//, /^\/__/, /^\/\.netlify\//]
 		}
 	)
-);
-
-// --- Static images ---
-registerRoute(
-	({ url }) =>
-		url.pathname.startsWith('/images/') ||
-		url.pathname.startsWith('/tour/') ||
-		url.pathname.startsWith('/screenshots/'),
-	new CacheFirst({
-		cacheName: 'static-images',
-		plugins: [
-			new ExpirationPlugin({
-				maxEntries: 60,
-				maxAgeSeconds: 30 * 24 * 60 * 60
-			})
-		]
-	})
-);
-
-// --- Lottie animations ---
-registerRoute(
-	({ url }) => url.pathname.startsWith('/lotties/'),
-	new CacheFirst({
-		cacheName: 'lotties',
-		plugins: [
-			new ExpirationPlugin({
-				maxEntries: 20,
-				maxAgeSeconds: 30 * 24 * 60 * 60
-			})
-		]
-	})
-);
-
-// --- Google Fonts ---
-registerRoute(
-	({ url }) =>
-		url.origin === 'https://fonts.gstatic.com' || url.origin === 'https://fonts.googleapis.com',
-	new CacheFirst({
-		cacheName: 'google-fonts',
-		plugins: [
-			new ExpirationPlugin({
-				maxEntries: 10,
-				maxAgeSeconds: 365 * 24 * 60 * 60
-			})
-		]
-	})
 );
