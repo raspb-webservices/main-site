@@ -31,7 +31,6 @@
 </script>
 
 <svelte:head>
-  <link rel="preload" href="/lotties/loading.lottie" as="fetch" crossorigin="anonymous" />
   <link rel="preload" href="$icons/flags/germany.svg" as="image" type="image/svg+xml" fetchpriority="high" />
   <link rel="preload" href="$icons/flags/uk.svg" as="image" type="image/svg+xml" fetchpriority="high" />
   <link rel="preload" href="$images/home-gradient.svg" as="image" type="image/svg+xml" fetchpriority="high" />
