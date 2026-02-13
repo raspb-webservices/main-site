@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button, Html, Head, Body, Container, Section, Text, Hr, Heading, Row, Column } from 'better-svelte-email';
+  import { Button, Html, Head, Body, Container, Section, Text, Hr, Row, Column } from 'better-svelte-email';
   
   let { projectData, projectId } = $props();
 
@@ -62,9 +62,9 @@
     <Container style="margin: 0 auto; padding: 20px 0; max-width: 600px;">
       <!-- Header -->
       <Section style="background-color: #c1121f; padding: 30px 20px; text-align: center;">
-        <Heading style="color: #ffffff; font-size: 28px; margin: 0;">
+        <Text style="color: #ffffff; font-size: 28px; margin: 0; font-weight: bold;">
           🎉 Neue Projektanfrage!
-        </Heading>
+        </Text>
         <Text style="color: #fdf0d5; font-size: 16px; margin: 10px 0 0 0;">
           Ein neuer Lead hat den Wizard abgeschlossen
         </Text>
@@ -81,9 +81,9 @@
 
       <!-- Customer Information -->
       <Section style="padding: 30px 20px;">
-        <Heading style="font-size: 22px; color: #c1121f; margin-bottom: 15px;">
+        <Text style="font-size: 22px; color: #c1121f; margin-bottom: 15px; font-weight: bold;">
           👤 Kundendaten
-        </Heading>
+        </Text>
         
         <Text style="margin: 5px 0; font-size: 14px;">
           <strong>Anrede:</strong> {salutationMap[owner.salutation] || owner.salutation || '-'}<br/>
@@ -107,9 +107,9 @@
 
       <!-- Project Overview -->
       <Section style="padding: 30px 20px; background-color: #fdf0d5;">
-        <Heading style="font-size: 22px; color: #c1121f; margin-bottom: 15px;">
+        <Text style="font-size: 22px; color: #c1121f; margin-bottom: 15px; font-weight: bold;">
           📋 Projekt-Übersicht
-        </Heading>
+        </Text>
         
         <Text style="margin: 5px 0; font-size: 14px;">
           <strong>Kategorie:</strong> {projectData.projectCategory || '-'}<br/>
@@ -132,9 +132,9 @@
       <!-- Project Goals & Audience -->
       {#if projectData.projectGoal || projectData.targetAudience}
         <Section style="padding: 30px 20px;">
-          <Heading style="font-size: 22px; color: #c1121f; margin-bottom: 15px;">
+          <Text style="font-size: 22px; color: #c1121f; margin-bottom: 15px; font-weight: bold;">
             🎯 Ziel & Zielgruppe
-          </Heading>
+          </Text>
           
           {#if projectData.projectGoal}
             <Text style="margin: 5px 0; font-size: 14px;">
@@ -161,9 +161,9 @@
       <!-- Service Level & Engineering -->
       {#if projectData.serviceLevel !== undefined || projectData.engineeringApproach !== undefined}
         <Section style="padding: 30px 20px; background-color: #fdf0d5;">
-          <Heading style="font-size: 22px; color: #c1121f; margin-bottom: 15px;">
+          <Text style="font-size: 22px; color: #c1121f; margin-bottom: 15px; font-weight: bold;">
             ⚙️ Zusammenarbeit & Umsetzung
-          </Heading>
+          </Text>
           
           <Text style="margin: 5px 0; font-size: 14px;">
             {#if projectData.serviceLevel !== undefined}
@@ -181,9 +181,9 @@
       <!-- Timeline & Budget -->
       {#if projectData.timelinePreference || projectData.budgetRange}
         <Section style="padding: 30px 20px;">
-          <Heading style="font-size: 22px; color: #c1121f; margin-bottom: 15px;">
+          <Text style="font-size: 22px; color: #c1121f; margin-bottom: 15px; font-weight: bold;">
             ⏱️ Timeline & Budget
-          </Heading>
+          </Text>
           
           <Text style="margin: 5px 0; font-size: 14px;">
             {#if projectData.timelinePreference}
@@ -204,9 +204,9 @@
       <!-- Features -->
       {#if projectData.features && projectData.features.length > 0}
         <Section style="padding: 30px 20px; background-color: #fdf0d5;">
-          <Heading style="font-size: 22px; color: #c1121f; margin-bottom: 15px;">
+          <Text style="font-size: 22px; color: #c1121f; margin-bottom: 15px; font-weight: bold;">
             🎨 Features ({projectData.features.length})
-          </Heading>
+          </Text>
           
           <Text style="margin: 0; font-size: 14px;">
             {projectData.features.join(', ')}
@@ -219,9 +219,9 @@
       <!-- Special Requirements -->
       {#if projectData.specialRequirements}
         <Section style="padding: 30px 20px;">
-          <Heading style="font-size: 22px; color: #c1121f; margin-bottom: 15px;">
+          <Text style="font-size: 22px; color: #c1121f; margin-bottom: 15px; font-weight: bold;">
             ✨ Besondere Anforderungen
-          </Heading>
+          </Text>
           
           <Text style="margin: 0; font-size: 14px; background-color: #f5f5f5; padding: 10px; border-radius: 5px;">
             {projectData.specialRequirements}
@@ -234,9 +234,9 @@
       <!-- Price Estimation -->
       {#if projectData.estimatedPrice}
         <Section style="padding: 30px 20px; background-color: #003049; text-align: center;">
-          <Heading style="font-size: 22px; color: #fdf0d5; margin-bottom: 10px;">
+          <Text style="font-size: 22px; color: #fdf0d5; margin-bottom: 10px; font-weight: bold;">
             💰 Geschätzter Preis
-          </Heading>
+          </Text>
           
           <Text style="margin: 0; font-size: 36px; font-weight: bold; color: #ffffff;">
             {Math.round(projectData.estimatedPrice).toLocaleString('de-DE')} €
@@ -253,9 +253,9 @@
       <!-- PWA/CMS Details -->
       {#if projectData.pwaApproach || projectData.cmsComplexity}
         <Section style="padding: 30px 20px;">
-          <Heading style="font-size: 22px; color: #c1121f; margin-bottom: 15px;">
+          <Text style="font-size: 22px; color: #c1121f; margin-bottom: 15px; font-weight: bold;">
             🔧 Spezifische Details
-          </Heading>
+          </Text>
           
           <Text style="margin: 5px 0; font-size: 14px;">
             {#if projectData.pwaApproach}
