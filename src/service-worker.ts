@@ -20,11 +20,35 @@ self.addEventListener('activate', (event) => {
 	event.waitUntil(self.clients.claim());
 });
 
+// --- Stale asset detection ---
+// Catches /_app/immutable/ requests NOT served by precache (i.e. old HTML referencing deleted assets).
+// If the network returns 404, notify all clients to clear caches and reload.
+registerRoute(
+	({ url }) => url.pathname.startsWith('/_app/immutable/'),
+	async ({ request }) => {
+		try {
+			const response = await fetch(request);
+			if (response.status === 404) {
+				const allClients = await self.clients.matchAll({ type: 'window' });
+				for (const client of allClients) {
+					client.postMessage({ type: 'CACHE_STALE' });
+				}
+			}
+			return response;
+		} catch (error) {
+			return new Response('', { status: 404 });
+		}
+	}
+);
+
 // --- Navigation requests (HTML pages) ---
 // NetworkFirst: try server, fall back to cache, then offline page
 const navigationHandler = new NetworkFirst({
 	cacheName: 'pages',
 	networkTimeoutSeconds: 3,
+	fetchOptions: {
+		cache: 'no-store'
+	},
 	plugins: [
 		new ExpirationPlugin({
 			maxEntries: 50,

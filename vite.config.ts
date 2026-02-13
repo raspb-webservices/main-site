@@ -1,6 +1,6 @@
 import { paraglideVitePlugin } from '@inlang/paraglide-js';
-import tailwindcss from '@tailwindcss/vite';
 import { sveltekit } from '@sveltejs/kit/vite';
+import tailwindcss from '@tailwindcss/vite';
 import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 import { defineConfig } from 'vite';
 
@@ -13,7 +13,7 @@ const emptySourceMap = JSON.stringify({
 
 export default defineConfig({
   plugins: [
-    tailwindcss(),
+    tailwindcss({ optimize: false }),
     sveltekit(),
     SvelteKitPWA({
       strategies: 'injectManifest',

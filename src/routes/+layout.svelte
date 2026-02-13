@@ -41,6 +41,14 @@
         if (preventReload) return;
         window.location.reload();
       });
+
+      navigator.serviceWorker.addEventListener('message', async (event) => {
+        if (event.data?.type === 'CACHE_STALE') {
+          const keys = await caches.keys();
+          await Promise.all(keys.map((k) => caches.delete(k)));
+          window.location.reload();
+        }
+      });
     }
   });
 </script>
