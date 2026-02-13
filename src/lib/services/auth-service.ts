@@ -108,6 +108,30 @@ async function updateMetadata(metadata: object): Promise<unknown> {
 	return response.json();
 }
 
+async function createAuth0User(userData: {
+	email: string;
+	password: string;
+	givenName: string;
+	familyName: string;
+	user_metadata: {
+		familyName: string;
+		givenName: string;
+	};
+}): Promise<unknown> {
+	const response = await authFetch('/api/auth/create-user', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(userData)
+	});
+
+	if (!response.ok) {
+		const error = await response.json();
+		throw new Error(error.message || 'Failed to create user');
+	}
+
+	return response.json();
+}
+
 const auth = {
 	createClient,
 	getRoles,
@@ -115,7 +139,8 @@ const auth = {
 	logout,
 	checkAuthState,
 	assignRole,
-	updateMetadata
+	updateMetadata,
+	createAuth0User
 };
 
 export default auth;

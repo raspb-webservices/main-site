@@ -60,7 +60,7 @@
 
 	<Section noSpacing={true}>
 		<div class="md:inner-box pb-24">
-			<div class="animate-fade-in-up bg-base-200 text-base-content mx-auto max-w-2xl rounded-3xl p-8 text-center">
+			<div class="animate-fade-in-up bg-base-200 text-base-content mx-auto max-w-2xl rounded-3xl p-8 text-center flex justify-center">
 				{#if errorMessage}
 					<div class="alert alert-error mb-6 shadow-lg">
 						<div>

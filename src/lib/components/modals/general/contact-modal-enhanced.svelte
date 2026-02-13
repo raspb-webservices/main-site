@@ -179,12 +179,12 @@
         body: JSON.stringify({
           from: {
             email: 'request@raspb.de',
-            name: 'RASPB Webservices - Wizard'
+            name: 'raspb Webservices - Wizard'
           },
           to: [
             {
               email: 'raspb.webservices@gmail.com',
-              name: 'RASPB Webservices'
+              name: 'raspb Webservices'
             }
           ],
           subject: `Neue Projektanfrage: ${completeProjectData.projectType || 'Projekt'} - ${company}`,

@@ -26,7 +26,6 @@ async function getToken() {
     return data.access_token;
   } catch (error) {
     console.error('Error fetching token:', error);
-    throw new Error('Failed to obtain Auth0 management token');
   }
 }
 
@@ -97,4 +96,19 @@ export async function updateUserMetadata(
   metadata: Record<string, unknown>
 ): Promise<unknown> {
   return apiRequest('patch', `users/${userId}`, { user_metadata: metadata });
+}
+
+export async function createUser(userData: {
+  email: string;
+  password?: string;
+  given_name?: string;
+  family_name?: string;
+  user_metadata?: Record<string, unknown>;
+  connection?: string;
+}): Promise<unknown> {
+  const payload = {
+    ...userData,
+    connection: userData.connection || 'Username-Password-Authentication'
+  };
+  return apiRequest('post', 'users', payload);
 }
