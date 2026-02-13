@@ -1,49 +1,79 @@
+/// <reference types="@sveltejs/kit" />
+/// <reference no-default-lib="true"/>
+/// <reference lib="esnext" />
 /// <reference lib="webworker" />
 
-import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching';
-import { registerRoute, NavigationRoute } from 'workbox-routing';
-import { NetworkFirst } from 'workbox-strategies';
+declare const self: ServiceWorkerGlobalScope;
 
-declare let self: ServiceWorkerGlobalScope;
+import { build, prerendered, version } from '$service-worker';
 
-// Precache all build assets (/_app/immutable/**, prerendered pages, etc.)
-// __WB_MANIFEST is replaced at build time by @vite-pwa/sveltekit
-precacheAndRoute(self.__WB_MANIFEST);
+const CACHE_NAME = `cache-${version}`;
 
-// Remove old precache entries from previous SW versions
-cleanupOutdatedCaches();
+// Cache build assets (immutable CSS/JS) + prerendered pages
+// Skip static files to avoid caching large tour images etc.
+const ASSETS = [...build, ...prerendered];
 
-// Activate new SW immediately, take control of all tabs
-self.skipWaiting();
-self.addEventListener('activate', (event) => {
-	event.waitUntil(self.clients.claim());
+// Install: cache all assets for this version, activate immediately
+self.addEventListener('install', (event: ExtendableEvent) => {
+	self.skipWaiting();
+	event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)));
 });
 
-// --- Navigation requests (HTML pages) ---
-// NetworkFirst: always try server for fresh HTML, fall back to cache, then offline page
-const navigationHandler = new NetworkFirst({
-	cacheName: 'pages',
-	networkTimeoutSeconds: 3
+// Activate: delete old version caches, take control of all tabs
+self.addEventListener('activate', (event: ExtendableEvent) => {
+	event.waitUntil(
+		caches
+			.keys()
+			.then((keys) =>
+				Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)))
+			)
+			.then(() => self.clients.claim())
+	);
 });
 
-registerRoute(
-	new NavigationRoute(
-		{
-			handle: async (params) => {
+// Fetch handler
+self.addEventListener('fetch', (event: FetchEvent) => {
+	if (event.request.method !== 'GET') return;
+
+	const url = new URL(event.request.url);
+
+	// Only handle same-origin requests
+	if (url.origin !== self.location.origin) return;
+
+	// Skip API, Netlify, and internal routes
+	if (
+		url.pathname.startsWith('/api/') ||
+		url.pathname.startsWith('/__') ||
+		url.pathname.startsWith('/.netlify/')
+	)
+		return;
+
+	// Immutable build assets (/_app/immutable/*): cache-first (safe, content-hashed)
+	if (ASSETS.includes(url.pathname)) {
+		event.respondWith(
+			caches.match(event.request).then((cached) => cached || fetch(event.request))
+		);
+		return;
+	}
+
+	// Navigation requests (HTML): network-first with offline fallback
+	if (event.request.mode === 'navigate') {
+		event.respondWith(
+			(async () => {
 				try {
-					return await navigationHandler.handle(params);
+					return await fetch(event.request);
 				} catch {
-					const offlineResponse = await caches.match('/offline');
-					if (offlineResponse) return offlineResponse;
+					const cached = await caches.match(event.request);
+					if (cached) return cached;
+					const offline = await caches.match('/offline');
+					if (offline) return offline;
 					return new Response('Offline', {
 						status: 503,
 						headers: { 'Content-Type': 'text/html' }
 					});
 				}
-			}
-		},
-		{
-			denylist: [/^\/api\//, /^\/__/, /^\/\.netlify\//]
-		}
-	)
-);
+			})()
+		);
+		return;
+	}
+});

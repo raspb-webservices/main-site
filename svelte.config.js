@@ -24,7 +24,7 @@ const config = {
       $interfaces: './src/interfaces'
     },
     serviceWorker: {
-      register: false
+      register: true
     },
     prerender: {
       entries: ['*'],

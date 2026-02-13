@@ -13,26 +13,19 @@
 
   const ogLocaleMap: Record<string, string> = { de: 'de_DE', en: 'en_US' };
 
-  // Clean up any existing service workers from previous deployments
+  // Reload page when a new service worker version takes over
   $effect(() => {
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then((registrations) => {
-        for (const registration of registrations) {
-          registration.unregister();
-        }
-      });
-      caches.keys().then((keys) => {
-        for (const key of keys) {
-          caches.delete(key);
-        }
+      const hadController = !!navigator.serviceWorker.controller;
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (hadController) window.location.reload();
       });
     }
   });
 </script>
 
 <svelte:head>
-  <link rel="preload" href="$icons/flags/germany.svg" as="image" type="image/svg+xml" fetchpriority="high" />
-  <link rel="preload" href="$icons/flags/uk.svg" as="image" type="image/svg+xml" fetchpriority="high" />
+  <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="preload" href="$images/home-gradient.svg" as="image" type="image/svg+xml" fetchpriority="high" />
   <link rel="preload" href="$fonts/circular/CircularStd-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
   <link rel="preload" href="$fonts/circular/CircularStd-Book.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
