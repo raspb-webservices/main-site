@@ -1,7 +1,7 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "privacyNotice_meta_title": "Datenschutzerklärung - raspb Webservices",
-  "privacyNotice_meta_description": "Datenschutzerklärung der raspb Webservices UG (in Gründung)",
+  "privacyNotice_meta_description": "Datenschutzerklärung der raspb Webservices UG",
   "privacyNotice_title": "Datenschutzerklärung",
   "privacyNotice_section1_title": "1. Datenschutz auf einen Blick",
   "privacyNotice_section1_generalNotes_title": "Allgemeine Hinweise",
@@ -29,7 +29,7 @@
   "privacyNotice_section3_dataProtection_text2": "Wenn du diese Website benutzt, werden verschiedene personenbezogene Daten erhoben. Personenbezogene Daten sind Daten, mit denen du persönlich identifiziert werden kannst. Die vorliegende Datenschutzerklärung erläutert, welche Daten wir erheben und wofür wir sie nutzen. Die Datenschutzerklärung erläutert auch, wie und zu welchem Zweck das geschieht.",
   "privacyNotice_section3_responsibleBody_title": "Hinweis zur verantwortlichen Stelle",
   "privacyNotice_section3_responsibleBody_text1": "Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:",
-  "privacyNotice_section3_responsibleBody_companyName": "raspb Webservices UG (in Gründung)",
+  "privacyNotice_section3_responsibleBody_companyName": "raspb Webservices UG",
   "privacyNotice_section3_responsibleBody_name": "Markus Härtig",
   "privacyNotice_section3_responsibleBody_address": "Am Eselsborn 4a",
   "privacyNotice_section3_responsibleBody_zipCity": "55286 Sulzheim",

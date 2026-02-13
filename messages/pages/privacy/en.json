@@ -1,7 +1,7 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "privacyNotice_meta_title": "Privacy Policy - raspb Webservices",
-  "privacyNotice_meta_description": "Privacy Policy of raspb Webservices UG (in formation)",
+  "privacyNotice_meta_description": "Privacy Policy of raspb Webservices UG",
   "privacyNotice_title": "Privacy Policy",
   "privacyNotice_section1_title": "1. Data Protection at a Glance",
   "privacyNotice_section1_generalNotes_title": "General Information",
@@ -27,7 +27,7 @@
   "privacyNotice_section3_dataProtection_text2": "When you use this website, various personal data are collected. Personal data are data with which you can be personally identified. This privacy policy explains what data we collect and what we use it for. It also explains how and for what purpose this happens.",
   "privacyNotice_section3_responsibleBody_title": "Information on the Responsible Party",
   "privacyNotice_section3_responsibleBody_text1": "The responsible party for data processing on this website is:",
-  "privacyNotice_section3_responsibleBody_companyName": "raspb Webservices UG (in formation)",
+  "privacyNotice_section3_responsibleBody_companyName": "raspb Webservices UG",
   "privacyNotice_section3_responsibleBody_name": "Markus Härtig",
   "privacyNotice_section3_responsibleBody_address": "Am Eselsborn 4a",
   "privacyNotice_section3_responsibleBody_zipCity": "55286 Sulzheim",
