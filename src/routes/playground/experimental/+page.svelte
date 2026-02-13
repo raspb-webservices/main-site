@@ -206,8 +206,6 @@
         })
       });
 
-      console.log('PDF res ', response);
-
       if (response.ok) {
         // PDF erfolgreich generiert - Download starten
         const blob = await response.blob();
@@ -221,7 +219,6 @@
         document.body.removeChild(a);
       } else {
         const errorData = await response.json();
-        console.log('errorData ', errorData);
         error = errorData.error || 'PDF-Generierung fehlgeschlagen';
       }
     } catch (err) {

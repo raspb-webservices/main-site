@@ -19,7 +19,7 @@
 
     <div class="mt-10 mb-6 flex flex-col items-center text-center">
       <div class="mb-4">
-        <img class="h-36 w-auto" src={selectedMember?.avatar} alt={selectedMember?.name} />
+        <img class="h-36 w-auto" src={selectedMember?.avatar} alt={selectedMember?.name} loading="lazy" />
       </div>
       <h3 class="no-padding">{selectedMember?.name}</h3>
       <p class="opacity-70">{selectedMember?.role}</p>

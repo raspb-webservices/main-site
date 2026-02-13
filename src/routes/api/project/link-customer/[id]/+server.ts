@@ -21,8 +21,6 @@ export const POST: RequestHandler = async ({ params, request }) => {
       );
     }
 
-    console.log('Linking customer to project:', { projectId, customerId });
-
     // Projekt mit Customer verknüpfen
     const linkCustomerMutation = gql`
       mutation LinkCustomerToProject($projectId: ID!, $customerId: ID!) {
@@ -43,8 +41,6 @@ export const POST: RequestHandler = async ({ params, request }) => {
     const result = (await client.request(linkCustomerMutation, variables)) as any;
 
     if (result.updateProject) {
-      console.log('Customer erfolgreich mit Projekt verknüpft:', result.updateProject.id);
-
       return json({
         success: true,
         data: result.updateProject,
@@ -64,9 +60,6 @@ export const POST: RequestHandler = async ({ params, request }) => {
     const errorDetails: string[] = [];
 
     if (error instanceof Error) {
-      errorMessage = error.message;
-
-      // Spezifische Hygraph-Fehler behandeln
       if (error.message.includes('not found')) {
         errorMessage = 'Projekt oder Customer nicht gefunden';
         errorDetails.push('Das angegebene Projekt oder der Customer existiert nicht.');

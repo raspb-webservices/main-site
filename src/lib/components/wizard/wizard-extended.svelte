@@ -144,8 +144,6 @@
     setTimeout(() => {
       const wizardContainer = document.querySelector('.wizard-container');
 
-      console.log('wizardContainer', wizardContainer);
-
       if (wizardContainer) {
         wizardContainer.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
       } else {
@@ -436,11 +434,9 @@
       // Prepare asset IDs (use pre-uploaded or fallback to upload now)
       let finalAssetIds: string[] = [];
       if (uploadedAssetIds.length > 0) {
-        console.log(m.wizard_modals_error_usingPreUploaded(), uploadedAssetIds);
         finalAssetIds = uploadedAssetIds;
       } else if (uploadedFiles.length > 0) {
         // Fallback: If no pre-uploaded assets, upload them now
-        console.log(m.wizard_modals_error_noPreUploaded());
         finalAssetIds = await uploadAllFiles();
 
         if (finalAssetIds.length === 0 && uploadedFiles.length > 0) {
@@ -450,8 +446,6 @@
       }
 
       // Create project
-      console.log(m.wizard_modals_error_creatingProject(), finalAssetIds);
-
       const projectData: Project = {
         name: config.name,
         description: config.description,
@@ -490,8 +484,6 @@
       if (result.success && result.data?.id) {
         const projectId = result.data.id;
 
-        console.log(m.wizard_modals_error_projectCreated(), projectId);
-
         // Update Auth0 metadata with projectId
         if (currentUser) {
           if (Array.isArray(currentUser.projectIds)) {
@@ -505,57 +497,43 @@
           };
 
           await auth.updateMetadata(custom_metadata);
-        } else {
-          console.warn('User not logged in or user ID not available, cannot update Auth0 metadata.');
         }
 
         // Show thank you page immediately while publishing happens in background
         showThankYouPage();
 
         // Wait 3.5 seconds to ensure everything is properly saved before publishing
-        console.log(m.wizard_modals_error_waiting());
         await new Promise((resolve) => setTimeout(resolve, 3500));
 
         // Publish the project
         try {
-          console.log(m.wizard_modals_error_publishingProject(), projectId);
           const publishProjectResponse = await fetch(`/api/project/publish/${projectId}`, {
             method: 'POST'
           });
           const publishProjectResult = await publishProjectResponse.json();
 
           if (publishProjectResponse.ok && publishProjectResult.success) {
-            console.log(m.wizard_modals_error_projectPublished(), publishProjectResult);
+            // Project published successfully
           } else {
-            console.warn(m.wizard_modals_error_projectPublishingFailed(), publishProjectResult);
+            // Project publishing failed
             // Don't fail the entire process if publishing fails
           }
         } catch (publishProjectError) {
-          console.warn(m.wizard_modals_error_projectPublishingError(), publishProjectError);
           // Don't fail the entire process if publishing fails
         }
 
         // Publish all assets that are part of the project
         if (finalAssetIds.length > 0) {
-          console.log(m.wizard_modals_error_publishingAssets(), finalAssetIds);
-
           try {
             const publishedAssetIds = await publishMultipleAssets(finalAssetIds, (message, current, total) => {
-              console.log(`${m.wizard_modals_error_assetPublishingProgress()}: ${message} (${current}/${total})`);
+              // Asset publishing progress callback
             });
 
-            if (publishedAssetIds.length > 0) {
-              console.log(m.wizard_modals_error_assetsPublished(), publishedAssetIds);
-            } else {
-              console.warn(m.wizard_modals_error_noAssetsPublished());
-            }
           } catch (assetPublishError) {
-            console.warn(m.wizard_modals_error_assetPublishingError(), assetPublishError);
             // Don't fail the entire process if asset publishing fails
           }
         }
 
-        console.log(m.wizard_modals_error_submissionCompleted());
       } else {
         // Collect detailed error information
         errorDetails.push(`${m.wizard_modals_error_apiError()} : ${result.error || m.wizard_modals_error_unknownError()}`);

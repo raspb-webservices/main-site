@@ -8,6 +8,8 @@
 <svelte:head>
   <title>{m.imprint_meta_title()}</title>
   <meta name="description" content={m.imprint_meta_description()} />
+  <meta property="og:title" content={m.imprint_meta_title()} />
+  <meta property="og:description" content={m.imprint_meta_description()} />
 </svelte:head>
 
 <Section>

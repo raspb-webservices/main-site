@@ -12,5 +12,7 @@
   "contact_form_phonePlaceholder": "0123-456789",
   "contact_form_messageLabel": "Deine Nachricht an uns",
   "contact_form_dsgvoLabel": "Ich stimme der Speicherung und Verarbeitung meiner Daten durch diese Website zu",
-  "contact_form_submitButton": "Abschicken"
+  "contact_form_submitButton": "Abschicken",
+  "contact_meta_title": "Kontakt | raspb",
+  "contact_meta_description": "Schreibe uns eine Nachricht – wir freuen uns auf deine Anfrage."
 }

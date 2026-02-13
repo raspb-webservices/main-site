@@ -52,6 +52,8 @@
 <svelte:head>
   <title>{m.homepage_meta_title()}</title>
   <meta name="description" content={m.homepage_meta_description()} />
+  <meta property="og:title" content={m.homepage_meta_title()} />
+  <meta property="og:description" content={m.homepage_meta_description()} />
 </svelte:head>
 
 <Stage style={'svg-gradient'}>
@@ -203,13 +205,13 @@
               <button class="text-link-button inverted-underline" onclick={openQualityAsFactorModal}>{m.homepage_balance_qualitaet_buttonText()}</button>
             </p>
             <div class="tech-stack">
-              <img src="/icons/tech-logos/node-js-logo.svg" alt="Node.js" class="tech-logo" />
-              <img src="/icons/tech-logos/svelte-logo.svg" alt="Svelte" class="tech-logo smaller" />
-              <img src="/icons/tech-logos/typescript-logo.svg" alt="TypeScript" class="tech-logo smaller" />
-              <img src="/icons/tech-logos/GitHub-logo.svg" alt="GitHub" class="tech-logo" />
-              <img src="/icons/tech-logos/netlify-logo.svg" alt="Netlify" class="tech-logo long" />
-              <img src="/icons/tech-logos/tailwind-css-logo-full.svg" alt="TailwindCSS" class="tech-logo long" />
-              <img src="/icons/tech-logos/GraphQL-logo.svg" alt="GraphQL" class="tech-logo long" />
+              <img src="/icons/tech-logos/node-js-logo.svg" alt="Node.js" class="tech-logo" loading="lazy" />
+              <img src="/icons/tech-logos/svelte-logo.svg" alt="Svelte" class="tech-logo smaller" loading="lazy" />
+              <img src="/icons/tech-logos/typescript-logo.svg" alt="TypeScript" class="tech-logo smaller" loading="lazy" />
+              <img src="/icons/tech-logos/GitHub-logo.svg" alt="GitHub" class="tech-logo" loading="lazy" />
+              <img src="/icons/tech-logos/netlify-logo.svg" alt="Netlify" class="tech-logo long" loading="lazy" />
+              <img src="/icons/tech-logos/tailwind-css-logo-full.svg" alt="TailwindCSS" class="tech-logo long" loading="lazy" />
+              <img src="/icons/tech-logos/GraphQL-logo.svg" alt="GraphQL" class="tech-logo long" loading="lazy" />
             </div>
           </div>
         </div>

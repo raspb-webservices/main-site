@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /playground
+Disallow: /registration
+
+Sitemap: https://raspb.de/sitemap.xml

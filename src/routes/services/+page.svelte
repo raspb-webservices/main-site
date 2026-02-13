@@ -51,6 +51,8 @@
 <svelte:head>
   <title>{m.servicesPage_meta_title()}</title>
   <meta name="description" content={m.servicesPage_meta_description()} />
+  <meta property="og:title" content={m.servicesPage_meta_title()} />
+  <meta property="og:description" content={m.servicesPage_meta_description()} />
 </svelte:head>
 
 <Stage style={'basic-gradient'}>
@@ -559,7 +561,7 @@
   @reference '../../app.css';
 
   .service-overview-highlight {
-    @apply from-primary/10 via-secondary/5 to-accent/10 mt-30 rounded-3xl bg-gradient-to-br py-16;
+    @apply from-primary/10 via-secondary/5 to-accent/10 mt-30 rounded-3xl bg-linear-to-br py-16;
 
     .highlight-content {
       @apply mx-auto max-w-6xl px-6;
@@ -584,7 +586,7 @@
         }
 
         p {
-          @apply text-base-content mb-4 flex-grow text-sm;
+          @apply text-base-content mb-4 grow text-sm;
         }
       }
     }
@@ -602,7 +604,7 @@
     @apply from-base-100 to-base-200 text-base-content flex cursor-default flex-col justify-between rounded-2xl border-0 bg-linear-to-tl p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg;
 
     &.large {
-      @apply min-h-[280px];
+      @apply min-h-70;
     }
 
     .service-card-content {
@@ -622,7 +624,7 @@
     }
 
     p {
-      @apply text-base-content mb-4 flex-grow;
+      @apply text-base-content mb-4 grow;
     }
 
     .service-highlights {
@@ -642,7 +644,7 @@
   }
 
   .image-container {
-    @apply relative aspect-[5/3] w-full overflow-hidden rounded-2xl shadow-2xl;
+    @apply relative aspect-5/3 w-full overflow-hidden rounded-2xl shadow-2xl;
     .services-image {
       @apply h-full w-full bg-cover bg-center bg-no-repeat;
       background-image: url('$images/visualisation-1.jpg');

@@ -7,6 +7,8 @@
 <svelte:head>
   <title>{m.privacyNotice_meta_title()}</title>
   <meta name="description" content={m.privacyNotice_meta_description()} />
+  <meta property="og:title" content={m.privacyNotice_meta_title()} />
+  <meta property="og:description" content={m.privacyNotice_meta_description()} />
 </svelte:head>
 
 <Section>

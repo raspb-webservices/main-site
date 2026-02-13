@@ -53,10 +53,8 @@
 
   const onProgress = (e: CustomEvent) => {
     const [swiper, progress]: [any, any] = e.detail;
-    console.log(progress);
   };
   const onSlideChange = (e: CustomEvent) => {
-    console.log('slide changed');
   };
 
   const params = {

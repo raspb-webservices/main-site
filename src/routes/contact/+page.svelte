@@ -3,6 +3,13 @@
   const target = '/thank-you';
 </script>
 
+<svelte:head>
+  <title>{m.contact_meta_title()}</title>
+  <meta name="description" content={m.contact_meta_description()} />
+  <meta property="og:title" content={m.contact_meta_title()} />
+  <meta property="og:description" content={m.contact_meta_description()} />
+</svelte:head>
+
 <section class="contact-content-wrapper">
   <h1>{m.contact_title()}</h1>
   <div class="px-20 pt-10">

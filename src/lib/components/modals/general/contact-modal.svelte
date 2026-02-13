@@ -11,7 +11,7 @@
   }
 
   function confirm() {
-    (console.log('Confirm triggered...'), closeModal());
+    closeModal();
   }
 </script>
 

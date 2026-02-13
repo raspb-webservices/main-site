@@ -4,6 +4,11 @@
   import { m } from '$lib/paraglide/messages';
 </script>
 
+<svelte:head>
+  <title>{m.thankYou_meta_title()}</title>
+  <meta name="robots" content="noindex" />
+</svelte:head>
+
 <Section type={'fullCenterTeaser'}>
   <div class="inner-content-wrapper prose">
     <h1 class="text-center"><span class="inner-text-special">{m.thankYouHighlight()}</span> {m.thankYouMessageSecond()}</h1>

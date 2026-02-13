@@ -45,6 +45,8 @@
 <svelte:head>
   <title>{m.insights_meta_title()}</title>
   <meta name="description" content={m.insights_meta_description()} />
+  <meta property="og:title" content={m.insights_meta_title()} />
+  <meta property="og:description" content={m.insights_meta_description()} />
 </svelte:head>
 
 <Stage style={'fancy-gradient'}>

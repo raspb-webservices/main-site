@@ -60,6 +60,8 @@
 <svelte:head>
   <title>{m.aboutUs_meta_title()}</title>
   <meta name="description" content={m.aboutUs_meta_description()} />
+  <meta property="og:title" content={m.aboutUs_meta_title()} />
+  <meta property="og:description" content={m.aboutUs_meta_description()} />
 </svelte:head>
 
 <Stage style={'fancy-gradient'}>
@@ -152,7 +154,7 @@
         >
           <figure class="px-6 pt-6">
             <div>
-              <img class="h-24 w-auto" src={member.avatar} alt={member.name} />
+              <img class="h-24 w-auto" src={member.avatar} alt={member.name} loading="lazy" />
             </div>
           </figure>
           <div class="card-body flex flex-col items-center justify-between p-4 text-center">

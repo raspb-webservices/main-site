@@ -19,7 +19,6 @@ export async function createAsset() {
     assetId = 'error';
   } else {
     const json = await response.json();
-    console.log('Upload Asset API Response:', json);
     // Überprüfe die Struktur der API-Antwort
     if (!json || !json.createAsset) {
       console.error('Invalid API response structure:', json);
@@ -73,7 +72,6 @@ export async function uploadAsset(file: File) {
       });
 
       if (fileUploadResponse.ok) {
-        console.log('File uploaded successfully:', file.name, 'Asset ID:', createdAssetResponse.id);
         return createdAssetResponse.id;
       } else {
         console.error('File upload failed:', fileUploadResponse.status, fileUploadResponse.statusText);
@@ -114,7 +112,6 @@ export async function uploadImage(fileName: string, dataUrlString: string) {
     });
 
     if (fileUploadResponse.ok) {
-      console.log('Image uploaded successfully:', fileName, 'Asset ID:', imageId);
       return imageId;
     } else {
       console.error('Image upload failed:', fileUploadResponse.status, fileUploadResponse.statusText);
@@ -174,14 +171,12 @@ export async function waitForAssetProcessing(id: string, maxWaitTime: number = 6
       if (statusResult.status === 'success' && statusResult.data) {
         // Check if asset exists in DRAFT stage (means it's processed and ready)
         if (statusResult.data.draft && statusResult.data.draft.id) {
-          console.log(`Asset ${id} is ready for publishing after ${attempt} attempts`);
           return true;
         }
       }
 
       // Exponential backoff: 1s, 2s, 4s, 8s, etc.
       const waitTime = Math.min(1000 * Math.pow(2, attempt - 1), 8000);
-      console.log(`Asset ${id} not ready yet, waiting ${waitTime}ms before retry ${attempt}/${maxAttempts}`);
 
       await new Promise((resolve) => setTimeout(resolve, waitTime));
     } catch (error) {

@@ -35,15 +35,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@auth0/auth0-spa-js@npm:^2.14.0":
-  version: 2.14.0
-  resolution: "@auth0/auth0-spa-js@npm:2.14.0"
+"@auth0/auth0-spa-js@npm:^2.15.0":
+  version: 2.15.0
+  resolution: "@auth0/auth0-spa-js@npm:2.15.0"
   dependencies:
     "@auth0/auth0-auth-js": "npm:^1.4.0"
     browser-tabs-lock: "npm:^1.2.15"
     dpop: "npm:^2.1.1"
     es-cookie: "npm:~1.3.2"
-  checksum: 10c0/b1a3a9c1a76f1a5b72e838128d9ea875e99cd59c8ad566ac30bac7b70611946d4b364396467be35eaf8405f9c4c1414ece3765fc15955951996a7aec4fa53de3
+  checksum: 10c0/a2b4663f31ca68adae0e6614a74c514701ccba5920e0a51eb3194cbf5b78be0609de9378edc041c611488c04b3fcb30dc6bbe35e526400197d3fade0a1424be5
   languageName: node
   linkType: hard
 
@@ -2107,12 +2107,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@inlang/paraglide-js@npm:^2.10.0":
-  version: 2.10.0
-  resolution: "@inlang/paraglide-js@npm:2.10.0"
+"@inlang/paraglide-js@npm:^2.11.0":
+  version: 2.11.0
+  resolution: "@inlang/paraglide-js@npm:2.11.0"
   dependencies:
     "@inlang/recommend-sherlock": "npm:^0.2.1"
-    "@inlang/sdk": "npm:2.6.2"
+    "@inlang/sdk": "npm:^2.7.0"
     commander: "npm:11.1.0"
     consola: "npm:3.4.0"
     json5: "npm:2.2.3"
@@ -2120,7 +2120,7 @@ __metadata:
     urlpattern-polyfill: "npm:^10.0.0"
   bin:
     paraglide-js: bin/run.js
-  checksum: 10c0/3399814e7b571f0f806e4ab8f84565948f3e820bba2ea7f2548d270ee1c98ed2a9eb0470104f40fbb917e78bf06c376b401567bd80042b35086d6513b8c55e4f
+  checksum: 10c0/7f1ac6b4f389d01ab371097e1291e01eb2acf51e9a6ddc0323461755f00fd446172ded870408dfea47f4e5f346b17d37985f4c28a8d4d4fff88c57a88fcdca32
   languageName: node
   linkType: hard
 
@@ -2133,16 +2133,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@inlang/sdk@npm:2.6.2":
-  version: 2.6.2
-  resolution: "@inlang/sdk@npm:2.6.2"
+"@inlang/sdk@npm:^2.7.0":
+  version: 2.7.0
+  resolution: "@inlang/sdk@npm:2.7.0"
   dependencies:
     "@lix-js/sdk": "npm:0.4.7"
     "@sinclair/typebox": "npm:^0.31.17"
     kysely: "npm:^0.27.4"
     sqlite-wasm-kysely: "npm:0.3.0"
     uuid: "npm:^13.0.0"
-  checksum: 10c0/5908025435dd1eaf63b3e1812012e95e00a3ee0abdae13ef2e3194e7eb5693b24daed98c312c87759ae242022493069a25b5a38d735b15412de415f27420bd92
+  checksum: 10c0/f2bb1caf51f3d35504fb49033858f9a40912641398612d7c7635b56f560f82f73b06c322aaecdf1bd16b1df10f641c55df694878ea4076f2980afd231ee8152f
   languageName: node
   linkType: hard
 
@@ -2254,21 +2254,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lottiefiles/dotlottie-svelte@npm:^0.8.14":
-  version: 0.8.14
-  resolution: "@lottiefiles/dotlottie-svelte@npm:0.8.14"
+"@lottiefiles/dotlottie-svelte@npm:^0.8.15":
+  version: 0.8.15
+  resolution: "@lottiefiles/dotlottie-svelte@npm:0.8.15"
   dependencies:
-    "@lottiefiles/dotlottie-web": "npm:0.62.0"
+    "@lottiefiles/dotlottie-web": "npm:0.63.0"
   peerDependencies:
     svelte: ^4.0.0 || ^5.0.0
-  checksum: 10c0/93174a8042dc6f0051236b11dc829a20da4a17091a1ff8e7e805a23ff355ddbbed539a22d39a6f98a0b5745a769deca9858a38f0c1a8f4e55eac377dc6aab55a
+  checksum: 10c0/2d5e6c70885d3ca2f2e23811f4e88ad4d03b3b82118837292db93b0a4b4a74dd3252077011d58d1bfc9a244c64d3ef9d1ba773776a2dc8041cc3912eb9972a79
   languageName: node
   linkType: hard
 
-"@lottiefiles/dotlottie-web@npm:0.62.0":
-  version: 0.62.0
-  resolution: "@lottiefiles/dotlottie-web@npm:0.62.0"
-  checksum: 10c0/557fcb967552e9d6f51fd4117634fe0510ec19293812e222a03c32988a6f51b4e138f10cb760236cedce6a6e8ca1ec5b9287514193ee7943d6a94c662ab175ec
+"@lottiefiles/dotlottie-web@npm:0.63.0":
+  version: 0.63.0
+  resolution: "@lottiefiles/dotlottie-web@npm:0.63.0"
+  checksum: 10c0/54f024bcfc723f4cbd7cdcf610dc62301435781c03adb1046aadb92adafb28042590854b8ba911dd5b584801382694a20c29d3ac8a0f41559fa7605179402d77
   languageName: node
   linkType: hard
 
@@ -2795,22 +2795,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sveltejs/adapter-netlify@npm:^5.2.4":
-  version: 5.2.4
-  resolution: "@sveltejs/adapter-netlify@npm:5.2.4"
+"@sveltejs/adapter-netlify@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "@sveltejs/adapter-netlify@npm:6.0.0"
   dependencies:
     "@iarna/toml": "npm:^2.2.5"
     esbuild: "npm:^0.25.4"
-    set-cookie-parser: "npm:^2.6.0"
   peerDependencies:
-    "@sveltejs/kit": ^2.4.0
-  checksum: 10c0/d6aa820273f690a3e194c864e61c0bd4404c55865cac74f43994512d7520d44014523326669a51f0d0f8dadfbc6a5eb39da8654dc241c9098675942c83076260
+    "@sveltejs/kit": ^2.31.0
+  checksum: 10c0/997367515ae846cefbc004d82734f6422a0647e0017f902cc05703239d3a5bac13418a27983a2a3dca6cc095e5ebb5f60afa2c8e70f364f42c74e2626e16f5b7
   languageName: node
   linkType: hard
 
-"@sveltejs/kit@npm:^2.50.2":
-  version: 2.50.2
-  resolution: "@sveltejs/kit@npm:2.50.2"
+"@sveltejs/kit@npm:^2.51.0":
+  version: 2.51.0
+  resolution: "@sveltejs/kit@npm:2.51.0"
   dependencies:
     "@standard-schema/spec": "npm:^1.0.0"
     "@sveltejs/acorn-typescript": "npm:^1.0.5"
@@ -2838,7 +2837,7 @@ __metadata:
       optional: true
   bin:
     svelte-kit: svelte-kit.js
-  checksum: 10c0/a5e6c7781ae180bc35c5cdac8f17cc5795a3c50bd6b1ef422db11dafc0c52e95f3ab6f8fe2d08a90141d3541d60f4067deaff362d6da0022243263eee32d9205
+  checksum: 10c0/952640a50b2a161ee44c642712002ce9b5b7b53738343a2f4ea90106a7e91cbce42dde485ff65cd37531e1c05f817ae4952593394a7176c57da486a4c27800da
   languageName: node
   linkType: hard
 
@@ -4291,10 +4290,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:^17.2.4":
-  version: 17.2.4
-  resolution: "dotenv@npm:17.2.4"
-  checksum: 10c0/901aeee9cb40860291bdb452f6ca66aada78438331a026b0bd86fd41b94a79752dbc6a8971f4f26e6cafef11b4a27bb12ea99c0cbe7dfa61791f194727f799e5
+"dotenv@npm:^17.3.1":
+  version: 17.3.1
+  resolution: "dotenv@npm:17.3.1"
+  checksum: 10c0/c78e0c2d5a549c751e544cc60e2b95e7cb67e0c551f42e094d161c6b297aa44b630a3c2dcacf5569e529a6c2a6b84e2ab9be8d37b299d425df5a18b81ce4a35f
   languageName: node
   linkType: hard
 
@@ -6381,17 +6380,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "main-site@workspace:."
   dependencies:
-    "@auth0/auth0-spa-js": "npm:^2.14.0"
+    "@auth0/auth0-spa-js": "npm:^2.15.0"
     "@eslint/compat": "npm:^2.0.2"
     "@eslint/js": "npm:^10.0.1"
     "@hygraph/management-sdk": "npm:^1.5.2"
-    "@inlang/paraglide-js": "npm:^2.10.0"
-    "@lottiefiles/dotlottie-svelte": "npm:^0.8.14"
+    "@inlang/paraglide-js": "npm:^2.11.0"
+    "@lottiefiles/dotlottie-svelte": "npm:^0.8.15"
     "@photo-sphere-viewer/core": "npm:^5.14.1"
     "@photo-sphere-viewer/virtual-tour-plugin": "npm:^5.14.1"
     "@plausible-analytics/tracker": "npm:^0.4.4"
-    "@sveltejs/adapter-netlify": "npm:^5.2.4"
-    "@sveltejs/kit": "npm:^2.50.2"
+    "@sveltejs/adapter-netlify": "npm:^6.0.0"
+    "@sveltejs/kit": "npm:^2.51.0"
     "@sveltejs/vite-plugin-svelte": "npm:^6.2.4"
     "@tailwindcss/forms": "npm:^0.5.11"
     "@tailwindcss/nesting": "npm:^0.0.0-insiders.565cd3e"
@@ -6406,7 +6405,7 @@ __metadata:
     "@vite-pwa/sveltekit": "npm:^1.1.0"
     better-svelte-email: "npm:^1.4.0"
     daisyui: "npm:^5.5.18"
-    dotenv: "npm:^17.2.4"
+    dotenv: "npm:^17.3.1"
     eslint: "npm:^10.0.0"
     eslint-config-prettier: "npm:^10.1.8"
     eslint-plugin-svelte: "npm:^3.15.0"
@@ -6417,13 +6416,13 @@ __metadata:
     jose: "npm:^6.1.3"
     mailtrap: "npm:^4.4.0"
     mapbox-gl: "npm:^3.18.1"
-    markdown-it: "npm:^14.1.0"
+    markdown-it: "npm:^14.1.1"
     postcss: "npm:^8.5.6"
     prettier: "npm:^3.8.1"
     prettier-plugin-svelte: "npm:^3.4.1"
     prettier-plugin-tailwindcss: "npm:^0.7.2"
     rollup-plugin-visualizer: "npm:^6.0.5"
-    svelte: "npm:^5.50.1"
+    svelte: "npm:^5.50.3"
     svelte-check: "npm:^4.3.6"
     svelte-preprocess-import-assets: "npm:^1.1.0"
     swiper: "npm:^12.1.0"
@@ -6494,9 +6493,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"markdown-it@npm:^14.1.0":
-  version: 14.1.0
-  resolution: "markdown-it@npm:14.1.0"
+"markdown-it@npm:^14.1.1":
+  version: 14.1.1
+  resolution: "markdown-it@npm:14.1.1"
   dependencies:
     argparse: "npm:^2.0.1"
     entities: "npm:^4.4.0"
@@ -6506,7 +6505,7 @@ __metadata:
     uc.micro: "npm:^2.1.0"
   bin:
     markdown-it: bin/markdown-it.mjs
-  checksum: 10c0/9a6bb444181d2db7016a4173ae56a95a62c84d4cbfb6916a399b11d3e6581bf1cc2e4e1d07a2f022ae72c25f56db90fbe1e529fca16fbf9541659dc53480d4b4
+  checksum: 10c0/c67f2a4c8069a307c78d8c15104bbcb15a2c6b17f4c904364ca218ec2eccf76a397eba1ea05f5ac5de72c4b67fcf115d422d22df0bfb86a09b663f55b9478d4f
   languageName: node
   linkType: hard
 
@@ -7755,13 +7754,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"set-cookie-parser@npm:^2.6.0":
-  version: 2.7.2
-  resolution: "set-cookie-parser@npm:2.7.2"
-  checksum: 10c0/4381a9eb7ee951dfe393fe7aacf76b9a3b4e93a684d2162ab35594fa4053cc82a4d7d7582bf397718012c9adcf839b8cd8f57c6c42901ea9effe33c752da4a45
-  languageName: node
-  linkType: hard
-
 "set-cookie-parser@npm:^3.0.0":
   version: 3.0.1
   resolution: "set-cookie-parser@npm:3.0.1"
@@ -8395,9 +8387,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte@npm:^5.50.1":
-  version: 5.50.1
-  resolution: "svelte@npm:5.50.1"
+"svelte@npm:^5.50.3":
+  version: 5.50.3
+  resolution: "svelte@npm:5.50.3"
   dependencies:
     "@jridgewell/remapping": "npm:^2.3.4"
     "@jridgewell/sourcemap-codec": "npm:^1.5.0"
@@ -8414,7 +8406,7 @@ __metadata:
     locate-character: "npm:^3.0.0"
     magic-string: "npm:^0.30.11"
     zimmerframe: "npm:^1.1.2"
-  checksum: 10c0/9eee4b3ef3ba921090c4f0ab9eb66d9a85e58458875f342403c3ef516085e0fc02daf763295fb6133898832cd106fc2e7bd74ecb8a33ac399a5a568a77854244
+  checksum: 10c0/0352483d178f5f987a57e3bd3ed0802b4a545c2e909f1ec17230baeb2970b29fda2cc4b697707f55b01804802d69c1edca5d0a67e1b84469625dfedab8f99e6f
   languageName: node
   linkType: hard
 

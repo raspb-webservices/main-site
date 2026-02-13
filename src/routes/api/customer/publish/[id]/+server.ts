@@ -53,15 +53,12 @@ export const POST: RequestHandler = async ({ request }) => {
     let statusCode = 500;
 
     if (error instanceof Error) {
-      errorMessage = error.message;
-
-      // Prüfe auf spezifische GraphQL-Fehler
       if (error.message.includes('authorization') || error.message.includes('Unauthorized')) {
         statusCode = 401;
         errorMessage = 'Authorization failed';
       } else if (error.message.includes('validation') || error.message.includes('required')) {
         statusCode = 400;
-        errorMessage = 'Validation error: ' + error.message;
+        errorMessage = 'Validation error';
       }
     }
 

@@ -39,7 +39,7 @@ export const POST: RequestHandler = async ({ request }) => {
         $projectIds: [AssetWhereUniqueInput!]
         $salutation: String
       ) {
-        createProject(
+        createCustomer(
           data: {
             address: $address
             auth0Id: $auth0Id
@@ -73,6 +73,7 @@ export const POST: RequestHandler = async ({ request }) => {
           }
           salutation
         }
+      }
       `;
 
     const variables = {
@@ -86,7 +87,7 @@ export const POST: RequestHandler = async ({ request }) => {
       givenName: customerData.givenName || null,
       phone: customerData.phone || null,
       postCode: customerData.postCode || null,
-      projectsIds: customerData.projectIds?.length ? customerData.projectIds : null,
+      projectIds: customerData.projectIds?.length ? customerData.projectIds : null,
       salutation: customerData.salutation || null
     };
 
@@ -115,8 +116,6 @@ export const POST: RequestHandler = async ({ request }) => {
     let statusCode = 500;
 
     if (error instanceof Error) {
-      errorMessage = error.message;
-
       if (error.message.includes('authorization') || error.message.includes('Unauthorized')) {
         statusCode = 401;
         errorMessage = 'Authorization failed';

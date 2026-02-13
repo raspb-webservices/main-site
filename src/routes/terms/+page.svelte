@@ -7,6 +7,8 @@
 <svelte:head>
   <title>{m.terms_meta_title()}</title>
   <meta name="description" content={m.terms_meta_description()} />
+  <meta property="og:title" content={m.terms_meta_title()} />
+  <meta property="og:description" content={m.terms_meta_description()} />
 </svelte:head>
 
 <Section>

@@ -64,7 +64,7 @@ export const POST: RequestHandler = async ({ request }) => {
     }
     console.error('Error in mail API:', error);
     return Response.json(
-      { success: false, error: error instanceof Error ? error.message : 'Unknown error' },
+      { success: false, error: 'Failed to send email' },
       { status: 500 }
     );
   }

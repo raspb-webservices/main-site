@@ -8,8 +8,11 @@
   import CookieConsentComponent from '$lib/components/cookie-consent.svelte';
   import "flag-icons/css/flag-icons.min.css";
   import { m } from '$lib/paraglide/messages';
+  import { getLocale } from '$lib/paraglide/runtime';
 
   let { children } = $props();
+
+  const ogLocaleMap: Record<string, string> = { de: 'de_DE', en: 'en_US' };
 
   const webManifestLink = pwaInfo?.webManifest.linkTag ?? '';
   $effect(() => {
@@ -58,6 +61,11 @@
   <link rel="shortcut icon" href="/icons/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-title" content="raspb" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="raspb" />
+  <meta property="og:image" content="https://raspb.de/icons/apple-touch-icon.png" />
+  <meta property="og:locale" content={ogLocaleMap[getLocale()] ?? 'de_DE'} />
+  <meta name="twitter:card" content="summary" />
 </svelte:head>
 
 <div class="wrapper">

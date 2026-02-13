@@ -2,5 +2,7 @@
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "appointment_title": "Jetzt...",
   "appointment_subtitle": "einen unverbindlichen Termin vereinbaren",
-  "appointment_iframe_title": "Erstgespräch vereinbaren"
+  "appointment_iframe_title": "Erstgespräch vereinbaren",
+  "appointment_meta_title": "Termin vereinbaren | raspb",
+  "appointment_meta_description": "Vereinbare jetzt einen unverbindlichen Termin für ein Erstgespräch."
 }

@@ -51,6 +51,8 @@
 <svelte:head>
   <title>{m.faq_meta_title()}</title>
   <meta name="description" content={m.faq_meta_description()} />
+  <meta property="og:title" content={m.faq_meta_title()} />
+  <meta property="og:description" content={m.faq_meta_description()} />
 </svelte:head>
 
 <Stage style={'basic-gradient'}>

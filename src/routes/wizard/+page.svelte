@@ -53,6 +53,8 @@
 <svelte:head>
   <title>{m.getStarted_meta_title()}</title>
   <meta name="description" content={m.getStarted_meta_description()} />
+  <meta property="og:title" content={m.getStarted_meta_title()} />
+  <meta property="og:description" content={m.getStarted_meta_description()} />
 </svelte:head>
 
 <section class="get-started-content-wrapper">

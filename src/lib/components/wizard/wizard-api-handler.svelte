@@ -56,15 +56,11 @@
 
   // Helper function to publish project with retry mechanism and delay
   async function publishProjectWithRetry(projectId: string, maxRetries: number = 3, delayMs: number = 2000) {
-    console.log(`Attempting to publish project ${projectId} with ${maxRetries} retries and ${delayMs}ms delay`);
-
     // Wait before first attempt to ensure project is fully created
     await new Promise((resolve) => setTimeout(resolve, delayMs));
 
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
       try {
-        console.log(`Publishing attempt ${attempt}/${maxRetries} for project ${projectId}`);
-
         const publishResponse = await fetch(`/api/project/publish/${projectId}`, {
           method: 'POST',
           headers: {
@@ -75,23 +71,16 @@
         const publishResult = await publishResponse.json();
 
         if (publishResponse.ok && publishResult.success) {
-          console.log(`Projekt erfolgreich veröffentlicht (Versuch ${attempt}):`, publishResult);
           return true;
         } else {
-          console.warn(`Publishing attempt ${attempt} failed:`, publishResult);
-
           // If this is not the last attempt, wait before retrying
           if (attempt < maxRetries) {
-            console.log(`Waiting ${delayMs}ms before retry...`);
             await new Promise((resolve) => setTimeout(resolve, delayMs));
           }
         }
       } catch (publishError) {
-        console.warn(`Publishing attempt ${attempt} error:`, publishError);
-
         // If this is not the last attempt, wait before retrying
         if (attempt < maxRetries) {
-          console.log(`Waiting ${delayMs}ms before retry...`);
           await new Promise((resolve) => setTimeout(resolve, delayMs));
         }
       }
@@ -108,8 +97,6 @@
 
     try {
       // Step 1: Create customer first
-      console.log('Creating customer:', customerData);
-
       const customerResponse = await fetch('/api/customer/create', {
         method: 'POST',
         headers: {
@@ -129,7 +116,6 @@
       }
 
       createdCustomerId = customerResult.data.id;
-      console.log('Customer erstellt/gefunden:', createdCustomerId);
 
       // Step 2: Publish customer
       try {
@@ -139,24 +125,21 @@
         const publishCustomerResult = await publishCustomerResponse.json();
 
         if (publishCustomerResponse.ok && publishCustomerResult.success) {
-          console.log('Customer veröffentlicht:', publishCustomerResult);
+          // Customer published successfully
         } else {
-          console.warn('Customer publishing failed, but customer was created:', publishCustomerResult);
+          // Customer publishing failed, but customer was created
           // Don't fail the entire process if customer publishing fails
         }
       } catch (publishCustomerError) {
-        console.warn('Customer publishing error:', publishCustomerError);
         // Don't fail the entire process if customer publishing fails
       }
 
       // Step 3: Prepare asset IDs (use pre-uploaded or fallback to upload now)
       let finalAssetIds: string[] = [];
       if (uploadedAssetIds.length > 0) {
-        console.log('Using pre-uploaded assets:', uploadedAssetIds);
         finalAssetIds = uploadedAssetIds;
       } else if (uploadedFiles.length > 0) {
         // Fallback: If no pre-uploaded assets, upload them now
-        console.log('No pre-uploaded assets found, uploading now...');
         finalAssetIds = await uploadAllFiles();
 
         if (finalAssetIds.length === 0 && uploadedFiles.length > 0) {
@@ -166,8 +149,6 @@
       }
 
       // Step 4: Create project (without owner initially to avoid circular dependency)
-      console.log('Creating project with assets:', finalAssetIds);
-
       const projectData: Project = {
         name: config.name,
         description: config.description,
@@ -205,7 +186,6 @@
 
       if (result.success && result.data?.id) {
         const projectId = result.data.id;
-        console.log('Projekt erstellt:', projectId);
 
         // Step 5: Link customer to project
         try {
@@ -219,13 +199,12 @@
           const linkResult = await linkResponse.json();
 
           if (linkResponse.ok && linkResult.success) {
-            console.log('Customer mit Projekt verknüpft:', linkResult);
+            // Customer linked to project successfully
           } else {
-            console.warn('Customer linking failed, but project was created:', linkResult);
+            // Customer linking failed, but project was created
             // Don't fail the entire process if linking fails
           }
         } catch (linkError) {
-          console.warn('Customer linking error:', linkError);
           // Don't fail the entire process if linking fails
         }
 
@@ -234,18 +213,13 @@
 
         // Step 7: Now publish all assets AFTER project is published
         if (finalAssetIds.length > 0) {
-          console.log('Publishing assets after project publication:', finalAssetIds);
-
           const publishedAssetIds = await publishMultipleAssets(finalAssetIds, (message, current, total) => {
             // Update loading steps to show asset publishing progress
-            console.log(`Asset publishing: ${message}`);
           });
 
           if (publishedAssetIds.length === 0 && finalAssetIds.length > 0) {
-            console.warn('Asset publishing failed, but project was created and published');
+            // Asset publishing failed, but project was created and published
             // Don't fail the entire process if asset publishing fails
-          } else {
-            console.log('Assets successfully published:', publishedAssetIds);
           }
         }
 
@@ -279,14 +253,8 @@
 
     try {
       const uploadedAssetIds = await uploadMultipleAssetsWithDelay(uploadedFiles, 2000, (message, current, total) => {
-        console.log(`[${current}/${total}] ${message}`);
+        // Progress callback
       });
-
-      if (uploadedAssetIds.length > 0) {
-        console.log(`Alle ${uploadedAssetIds.length} von ${uploadedFiles.length} Dateien erfolgreich verarbeitet`);
-      } else {
-        console.log('Keine Dateien konnten erfolgreich hochgeladen werden');
-      }
 
       return uploadedAssetIds;
     } catch (error) {

@@ -216,9 +216,6 @@ export const PATCH: RequestHandler = async ({ request, locals }) => {
       }
     `;
 
-    console.log('UPDATE PROJECT VARIABLES:', variables);
-    console.log('UPDATE FIELDS:', updateFields);
-
     // GraphQL Request an Hygraph senden
     const response = (await client.request(mutation, variables)) as { updateProject: ProjectResponse };
 
@@ -245,8 +242,6 @@ export const PATCH: RequestHandler = async ({ request, locals }) => {
     let statusCode = 500;
 
     if (error instanceof Error) {
-      errorMessage = error.message;
-
       if (error.message.includes('authorization') || error.message.includes('Unauthorized')) {
         statusCode = 401;
         errorMessage = 'Authorization failed';

@@ -13,9 +13,7 @@ const emptySourceMap = JSON.stringify({
 
 export default defineConfig({
   plugins: [
-    tailwindcss({
-      optimize: false
-    }),
+    tailwindcss(),
     sveltekit(),
     SvelteKitPWA({
       strategies: 'injectManifest',

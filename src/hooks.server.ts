@@ -4,6 +4,15 @@ import { paraglideMiddleware } from '$lib/paraglide/server';
 import { validateIdToken } from '$lib/server/auth.server';
 import { getAuthLevel } from '$lib/server/route-auth.server';
 import { isAdmin } from '$lib/server/auth0-helper.server';
+import { checkRateLimit } from '$lib/server/rate-limit.server';
+
+/** Public POST-Routes die rate-limited werden */
+const RATE_LIMITED_ROUTES = [
+	'/api/mail/send',
+	'/api/project/create',
+	'/api/customer/create',
+	'/api/user-question/create'
+];
 
 const handleAuth: Handle = async ({ event, resolve }) => {
 	event.locals.user = null;
@@ -14,6 +23,16 @@ const handleAuth: Handle = async ({ event, resolve }) => {
 	}
 
 	const authLevel = getAuthLevel(event.request.method, event.url.pathname);
+
+	// Rate-Limiting fuer oeffentliche POST-Endpoints
+	if (authLevel === 'public' && event.request.method === 'POST') {
+		const pathname = event.url.pathname;
+		if (RATE_LIMITED_ROUTES.some((route) => pathname.startsWith(route))) {
+			const ip = event.getClientAddress();
+			const limited = checkRateLimit(ip, pathname);
+			if (limited) return limited;
+		}
+	}
 
 	// Public Routes brauchen keine Auth
 	if (authLevel === 'public') {
