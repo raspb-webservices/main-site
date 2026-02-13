@@ -43,8 +43,6 @@
 
     <h3>{m.imprint_registerEntry()}</h3>
     <div class="details-wrapper">
-      <p>{m.imprint_companyInFormation()}</p>
-      <div class="medium-spacer"></div>
       <p><strong>{m.imprint_registerCourt()}</strong> {m.imprint_registerCourt_name()}</p>
       <p><strong>{m.imprint_registerEntity()}</strong> {m.imprint_registerEntity_name()}</p>
     </div>
