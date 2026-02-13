@@ -1,6 +1,5 @@
 <script lang="ts">
   import '../app.css';
-  import { pwaInfo } from 'virtual:pwa-info';
   import { navigating } from '$app/state';
   import HEADER from '$lib/components/header.svelte';
   import FOOTER from '$lib/components/footer.svelte';
@@ -14,39 +13,24 @@
 
   const ogLocaleMap: Record<string, string> = { de: 'de_DE', en: 'en_US' };
 
-  const webManifestLink = pwaInfo?.webManifest.linkTag ?? '';
+  // Clean up any existing service workers from previous deployments
   $effect(() => {
-    if (!pwaInfo) return;
-
-    let preventReload = true;
-
-    (async () => {
-      const { registerSW } = await import('virtual:pwa-register');
-      registerSW({
-        immediate: true,
-        onRegisteredSW(_swUrl, registration) {
-          if (registration) {
-            setTimeout(() => { preventReload = false; }, 2000);
-            setInterval(() => { registration.update(); }, 60 * 1000);
-          }
-        },
-        onRegisterError(error) {
-          console.error('SW registration error:', error);
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (const registration of registrations) {
+          registration.unregister();
         }
       });
-    })();
-
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.addEventListener('controllerchange', () => {
-        if (preventReload) return;
-        window.location.reload();
+      caches.keys().then((keys) => {
+        for (const key of keys) {
+          caches.delete(key);
+        }
       });
     }
   });
 </script>
 
 <svelte:head>
-  {@html webManifestLink}
   <link rel="preload" href="/lotties/loading.lottie" as="fetch" crossorigin="anonymous" />
   <link rel="preload" href="$icons/flags/germany.svg" as="image" type="image/svg+xml" fetchpriority="high" />
   <link rel="preload" href="$icons/flags/uk.svg" as="image" type="image/svg+xml" fetchpriority="high" />

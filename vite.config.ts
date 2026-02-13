@@ -1,7 +1,6 @@
 import { paraglideVitePlugin } from '@inlang/paraglide-js';
 import tailwindcss from '@tailwindcss/vite';
 import { sveltekit } from '@sveltejs/kit/vite';
-import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 import { defineConfig } from 'vite';
 
 const emptySourceMap = JSON.stringify({
@@ -13,58 +12,8 @@ const emptySourceMap = JSON.stringify({
 
 export default defineConfig({
   plugins: [
-    tailwindcss(),
+    tailwindcss({ optimize: false }),
     sveltekit(),
-    SvelteKitPWA({
-      strategies: 'injectManifest',
-      registerType: 'autoUpdate',
-      srcDir: 'src',
-      filename: 'service-worker.ts',
-      manifest: {
-        name: 'raspb Webservices',
-        short_name: 'raspb',
-        start_url: '/',
-        icons: [
-          {
-            src: '/icons/web-app-manifest-192x192.png',
-            sizes: '192x192',
-            type: 'image/png',
-            purpose: 'any'
-          },
-          {
-            src: '/icons/web-app-manifest-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any'
-          }
-        ],
-        screenshots: [
-          {
-            src: '/screenshots/screenshot-desktop.png',
-            sizes: '1280x720',
-            type: 'image/png',
-            form_factor: 'wide'
-          },
-          {
-            src: '/screenshots/screenshot-mobile.png',
-            sizes: '720x1280',
-            type: 'image/png'
-          }
-        ],
-        theme_color: '#f33199',
-        background_color: '#ffffff',
-        display: 'standalone'
-      },
-      injectManifest: {
-        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024
-      },
-      kit: {
-        includeVersionFile: true
-      },
-      devOptions: {
-        enabled: false
-      }
-    }),
     paraglideVitePlugin({
       project: './project.inlang',
       outdir: './src/lib/paraglide',
