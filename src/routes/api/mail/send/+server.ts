@@ -1,7 +1,9 @@
+
 import { MailtrapClient } from 'mailtrap';
 import Renderer from 'better-svelte-email/render';
 import { env } from '$env/dynamic/private';
 import WelcomeEmail from '$lib/emails/welcome.svelte';
+import ProjectRequestEmail from '$lib/emails/project-request.svelte';
 import type { RequestHandler } from '@sveltejs/kit';
 import { validateBody, validationErrorResponse, ValidationError } from '$lib/server/validate.server';
 import { mailSendSchema } from '$lib/server/schemas/mail.schema';
@@ -42,7 +44,15 @@ export const POST: RequestHandler = async ({ request }) => {
   try {
     const mailData = validateBody(mailSendSchema, await request.json());
     const client = getMailtrapClient();
-    const html = await render(WelcomeEmail, { props:mailData.templateProps });
+    
+    // Select template and render based on category
+    let html: string;
+    if (mailData.category === 'project-request') {
+      html = await render(ProjectRequestEmail, { props: mailData.templateProps });
+    } else {
+      html = await render(WelcomeEmail, { props: mailData.templateProps });
+    }
+    
     const sendOptions: SendMailOptions = {
       from: mailData.from,
       to: mailData.to,

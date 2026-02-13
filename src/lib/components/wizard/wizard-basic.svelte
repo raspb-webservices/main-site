@@ -11,7 +11,7 @@
     availableFeatures
   } from '$lib/configs/wizard-config';
   import ResetModal from '../modals/general/reset-modal.svelte';
-  import ContactModal from '../modals/general/contact-modal.svelte';
+  import ContactModalEnhanced from '../modals/general/contact-modal-enhanced.svelte';
   import ProjectCategory from './steps/project-category.svelte';
   import ProjectTypeWebApp from './steps/project-type-web-app.svelte';
   import ProjectTypeAiFreestyle from './steps/project-type-ai-freestyle.svelte';
@@ -21,7 +21,7 @@
   import ProjectSubTypeFreestyle from './steps/project-sub-type-freestyle.svelte';
   import ProjectFeatures from './steps/project-features.svelte';
   import ProjectBasicDetails from './steps/project-basic-details.svelte';
-  import ProjectSummary from './steps/project-summary.svelte';
+  import ProjectSummaryEnhanced from './steps/project-summary-enhanced.svelte';
 
   let config: WizardConfig = $state({
     step: 1,
@@ -63,7 +63,7 @@
   let currentStep = $state(1);
   let showSuccessMessage = $state(false);
   let resetModal: ResetModal;
-  let contactModal: ContactModal;
+  let contactModal: ContactModalEnhanced;
 
   // Functions
   function selectProjectCategory(category: string) {
@@ -280,7 +280,7 @@
       {:else if currentStep === 5}
         <ProjectFeatures {config} {calculatePrice}></ProjectFeatures>
       {:else if currentStep === 6}
-        <ProjectSummary {config} {openContactModal} {openResetModal}></ProjectSummary>
+        <ProjectSummaryEnhanced {config} {openContactModal} {openResetModal}></ProjectSummaryEnhanced>
       {/if}
     </div>
 
@@ -327,7 +327,7 @@
 
 <!-- Reset Modal -->
 <ResetModal bind:this={resetModal} {confirmReset} />
-<ContactModal bind:this={contactModal} projectData={config} />
+<ContactModalEnhanced bind:this={contactModal} projectData={config} />
 
 <style lang="postcss">
   @reference '../../../app.css';

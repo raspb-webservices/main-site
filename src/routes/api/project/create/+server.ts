@@ -4,14 +4,18 @@ import type { RequestHandler } from '@sveltejs/kit';
 import type { ProjectResponse } from '$interfaces/project.interface';
 import { validateBody, validationErrorResponse, ValidationError } from '$lib/server/validate.server';
 import { projectCreateSchema } from '$lib/server/schemas/project.schema';
+import { mapFeaturesToHygraph } from '$lib/server/feature-mapping';
+import { nameByRace } from "fantasy-name-generator";
 
 export const POST: RequestHandler = async ({ request }) => {
   try {
-    const projectData = validateBody(projectCreateSchema, await request.json());
+    const projectData = validateBody(projectCreateSchema, await request.json()) as any;
+    
     const mutation = gql`
       mutation CreateProject(
         $name: String
         $description: String
+        $projectCategory: String
         $projectType: ProjectType
         $subType: SubType
         $projectDetails: String
@@ -29,6 +33,17 @@ export const POST: RequestHandler = async ({ request }) => {
         $accentColour: String
         $desiredFont: String
         $estimatedPrice: Float
+        $serviceLevel: Int
+        $engineeringApproach: Int
+        $specialRequirements: String
+        $projectGoal: String
+        $timelinePreference: String
+        $specificDeadline: Date
+        $budgetRange: String
+        $pwaApproach: String
+        $pwaExistingUrl: String
+        $cmsComplexity: Int
+        $cmsContentStructure: String
         $formFields: Json!
         $pages: Json!
         $setup: Json
@@ -39,6 +54,7 @@ export const POST: RequestHandler = async ({ request }) => {
           data: {
             name: $name
             description: $description
+            projectCategory: $projectCategory
             projectType: $projectType
             subType: $subType
             projectDetails: $projectDetails
@@ -56,6 +72,17 @@ export const POST: RequestHandler = async ({ request }) => {
             accentColour: $accentColour
             desiredFont: $desiredFont
             estimatedPrice: $estimatedPrice
+            serviceLevel: $serviceLevel
+            engineeringApproach: $engineeringApproach
+            specialRequirements: $specialRequirements
+            projectGoal: $projectGoal
+            timelinePreference: $timelinePreference
+            specificDeadline: $specificDeadline
+            budgetRange: $budgetRange
+            pwaApproach: $pwaApproach
+            pwaExistingUrl: $pwaExistingUrl
+            cmsComplexity: $cmsComplexity
+            cmsContentStructure: $cmsContentStructure
             formFields: $formFields
             pages: $pages
             setup: $setup
@@ -101,8 +128,9 @@ export const POST: RequestHandler = async ({ request }) => {
 
     // Variablen für die Mutation vorbereiten
     const variables = {
-      name: projectData.name || 'untitled',
+      name: projectData.name || '[BASIC]-'+nameByRace("dragon", { gender: "male" }),
       description: projectData.description || null,
+      projectCategory: projectData.projectCategory || null,
       projectType: projectData.projectType || null,
       subType: projectData.subType || null,
       projectDetails: projectData.projectDetails || null,
@@ -113,15 +141,26 @@ export const POST: RequestHandler = async ({ request }) => {
       targetAudience: projectData.targetAudience || null,
       budget: projectData.budget || null,
       timeline: projectData.timeline || null,
-      features: projectData.features?.length ? projectData.features : null,
+      features: projectData.features?.length ? mapFeaturesToHygraph(projectData.features) : null,
       customFeature: projectData.customFeature || null,
       primaryColour: projectData.primaryColour || null,
       secondaryColour: projectData.secondaryColour || null,
       accentColour: projectData.accentColour || null,
       desiredFont: projectData.desiredFont || null,
       estimatedPrice: projectData.estimatedPrice || null,
-      formFields: projectData.formFields ? JSON.stringify(projectData.formFields) : null,
-      pages: projectData.pages ? JSON.stringify(projectData.pages) : null,
+      serviceLevel: projectData.serviceLevel ?? null,
+      engineeringApproach: projectData.engineeringApproach ?? null,
+      specialRequirements: projectData.specialRequirements || null,
+      projectGoal: projectData.projectGoal || null,
+      timelinePreference: projectData.timelinePreference || null,
+      specificDeadline: projectData.specificDeadline || null,
+      budgetRange: projectData.budgetRange || null,
+      pwaApproach: projectData.pwaApproach || null,
+      pwaExistingUrl: projectData.pwaExistingUrl || null,
+      cmsComplexity: projectData.cmsComplexity ?? null,
+      cmsContentStructure: projectData.cmsContentStructure || null,
+      formFields: JSON.stringify(projectData.formFields || []),
+      pages: JSON.stringify(projectData.pages || []),
       setup: projectData.setup ? JSON.stringify(projectData.setup) : null,
       fileIDs: projectData.relatedFiles?.length ? projectData.relatedFiles : null,
       projectStatus: 'created'

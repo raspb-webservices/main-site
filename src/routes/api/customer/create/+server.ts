@@ -3,6 +3,7 @@ import { gql } from 'graphql-request';
 import type { RequestHandler } from '@sveltejs/kit';
 import { validateBody, validationErrorResponse, ValidationError } from '$lib/server/validate.server';
 import { customerCreateSchema } from '$lib/server/schemas/customer.schema';
+import { randomUUID } from 'crypto';
 
 interface Customer {
   address?: string;
@@ -36,8 +37,9 @@ export const POST: RequestHandler = async ({ request }) => {
         $givenName: String
         $phone: String
         $postCode: String
-        $projectIds: [AssetWhereUniqueInput!]
+        $projectIds: [ProjectWhereUniqueInput!]
         $salutation: String
+        $uuid: String!
       ) {
         createCustomer(
           data: {
@@ -53,6 +55,7 @@ export const POST: RequestHandler = async ({ request }) => {
             postCode: $postCode
             projects: { connect: $projectIds }
             salutation: $salutation
+            uuid: $uuid
           }
         ) {
           address
@@ -88,7 +91,8 @@ export const POST: RequestHandler = async ({ request }) => {
       phone: customerData.phone || null,
       postCode: customerData.postCode || null,
       projectIds: customerData.projectIds?.length ? customerData.projectIds : null,
-      salutation: customerData.salutation || null
+      salutation: customerData.salutation || null,
+      uuid: randomUUID()
     };
 
     const response = (await client.request(mutation, variables)) as { createCustomer: Customer };

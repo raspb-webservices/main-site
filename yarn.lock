@@ -2067,6 +2067,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"commander@npm:^2.20.0":
+  version: 2.20.3
+  resolution: "commander@npm:2.20.3"
+  checksum: 10c0/74c781a5248c2402a0a3e966a0a2bba3c054aad144f5c023364be83265e796b20565aa9feff624132ff629aa64e16999fa40a743c10c12f7c61e96a794b99288
+  languageName: node
+  linkType: hard
+
 "comment-json@npm:^4.2.3":
   version: 4.5.1
   resolution: "comment-json@npm:4.5.1"
@@ -2812,6 +2819,21 @@ __metadata:
   version: 9.0.0
   resolution: "extract-files@npm:9.0.0"
   checksum: 10c0/60259624c5e7a927d6bccdbedd685462ceee3dcaa28e509ecfff5e2c1032a652bb96ac645837ef1ac4c4fd4461b7896b008f106f7718245befdb0e1c98024640
+  languageName: node
+  linkType: hard
+
+"fantasy-name-generator@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "fantasy-name-generator@npm:2.0.0"
+  dependencies:
+    commander: "npm:^2.20.0"
+    lodash.capitalize: "npm:^4.2.1"
+    lodash.endswith: "npm:^4.2.1"
+    lodash.sample: "npm:^4.2.1"
+    lodash.startcase: "npm:^4.4.0"
+  bin:
+    fantasy-name-generator: index.js
+  checksum: 10c0/1d423c0a87389c09458c0298da567b4fc02e1f390f990cda1c44a97339150d70fb57da0c631208828348f1641bc6123af71dcc817c3d90091b3bd615a934ee78
   languageName: node
   linkType: hard
 
@@ -3646,6 +3668,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.capitalize@npm:^4.2.1":
+  version: 4.2.1
+  resolution: "lodash.capitalize@npm:4.2.1"
+  checksum: 10c0/b289326497c2e24d6b8afa2af2ca4e068ef6ef007ade36bfb6f70af77ce10ea3f090eeee947d5fdcf2db4bcfa4703c8c10a5857a2b39e308bddfd1d11ad35970
+  languageName: node
+  linkType: hard
+
+"lodash.endswith@npm:^4.2.1":
+  version: 4.2.1
+  resolution: "lodash.endswith@npm:4.2.1"
+  checksum: 10c0/b011469cf91d32e5a1fb89c9b99da96c648abf5d9e9b419a3ae3b18cce10a868a003de5762df3be9a5d1894df3b0e045675d06c794bd39d8f1ce1e16c4f32cea
+  languageName: node
+  linkType: hard
+
+"lodash.sample@npm:^4.2.1":
+  version: 4.2.1
+  resolution: "lodash.sample@npm:4.2.1"
+  checksum: 10c0/4c83190df382192660e23a002e6e4b9f8a26531cc84f025bb86869a25dcc916d9c73e08f93f2c8a0a16e7873ed6b82b7b5360d85243f523656218da555c67d46
+  languageName: node
+  linkType: hard
+
+"lodash.startcase@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "lodash.startcase@npm:4.4.0"
+  checksum: 10c0/bd82aa87a45de8080e1c5ee61128c7aee77bf7f1d86f4ff94f4a6d7438fc9e15e5f03374b947be577a93804c8ad6241f0251beaf1452bf716064eeb657b3a9f0
+  languageName: node
+  linkType: hard
+
 "lodash@npm:>=4.17.21":
   version: 4.17.23
   resolution: "lodash@npm:4.17.23"
@@ -3735,6 +3785,7 @@ __metadata:
     eslint: "npm:^10.0.0"
     eslint-config-prettier: "npm:^10.1.8"
     eslint-plugin-svelte: "npm:^3.15.0"
+    fantasy-name-generator: "npm:^2.0.0"
     flag-icons: "npm:^7.5.0"
     globals: "npm:^17.3.0"
     graphql: "npm:^16.12.0"
