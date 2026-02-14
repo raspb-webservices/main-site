@@ -7,6 +7,24 @@
   let modal: HTMLDialogElement;
   let currentUser = $derived(user.value) as User;
 
+  let formData = $state<Partial<User>>({});
+
+  $effect(() => {
+    if (currentUser) {
+      formData = {
+        givenName: currentUser.givenName,
+        familyName: currentUser.familyName,
+        city: currentUser.city,
+        company: currentUser.company,
+        country: currentUser.country,
+        phone: currentUser.phone,
+        postCode: currentUser.postCode,
+        salutation: currentUser.salutation,
+        companyAddress: currentUser.companyAddress
+      };
+    }
+  });
+
   export function openModal() {
     modal?.showModal();
   }
@@ -15,26 +33,19 @@
     modal?.close();
   }
 
-  async function handleSubmit() {
+  async function handleSubmit(e: SubmitEvent) {
+    e.preventDefault();
     if (!currentUser?.sub) {
       console.error('User ID (sub) not available for updating metadata.');
       return;
     }
 
-    const updatedMetadata = {
-      givenName: currentUser.givenName,
-      familyName: currentUser.familyName,
-      city: currentUser.city,
-      company: currentUser.company,
-      country: currentUser.country,
-      phone: currentUser.phone,
-      postCode: currentUser.postCode,
-      salutation: currentUser.salutation,
-      companyAddress: currentUser.companyAddress
-    };
-
     try {
-      await auth.updateMetadata(updatedMetadata);
+      await auth.updateMetadata(formData);
+      
+      // Optimistic update of local store
+      user.value = { ...currentUser, ...formData };
+      
       closeModal();
     } catch (error) {
       console.error('Error updating Auth0 metadata: ', error);
@@ -54,7 +65,7 @@
           <label for="salutation" class="label">
             <span class="label-text">{m.profile_salutation()}</span>
           </label>
-          <select id="salutation" class="select select-bordered w-full" bind:value={currentUser.salutation}>
+          <select id="salutation" class="select select-bordered w-full" bind:value={formData.salutation}>
             <option value="">{m.profile_salutationPlaceholder()}</option>
             <option value="Herr">{m.profile_salutationOptions_mr()}</option>
             <option value="Frau">{m.profile_salutationOptions_mrs()}</option>
@@ -65,50 +76,50 @@
           <label for="givenName" class="label">
             <span class="label-text">{m.profile_givenName()}</span>
           </label>
-          <input type="text" id="givenName" class="input input-bordered w-full" bind:value={currentUser.givenName} />
+          <input type="text" id="givenName" class="input input-bordered w-full" bind:value={formData.givenName} />
         </div>
         <div class="form-control">
           <label for="familyName" class="label">
             <span class="label-text">{m.profile_familyName()}</span>
           </label>
-          <input type="text" id="familyName" class="input input-bordered w-full" bind:value={currentUser.familyName} />
+          <input type="text" id="familyName" class="input input-bordered w-full" bind:value={formData.familyName} />
         </div>
         <div class="form-control">
           <label for="company" class="label">
             <span class="label-text">{m.profile_company()}</span>
           </label>
-          <input type="text" id="company" class="input input-bordered w-full" bind:value={currentUser.company} />
+          <input type="text" id="company" class="input input-bordered w-full" bind:value={formData.company} />
         </div>
         <div class="form-control">
           <label for="phone" class="label">
             <span class="label-text">{m.profile_phone()}</span>
           </label>
-          <input type="text" id="phone" class="input input-bordered w-full" bind:value={currentUser.phone} />
+          <input type="text" id="phone" class="input input-bordered w-full" bind:value={formData.phone} />
         </div>
         <div class="form-control">
           <label for="address" class="label">
             <span class="label-text">{m.profile_address()}</span>
           </label>
-          <input type="text" id="address" class="input input-bordered w-full" bind:value={currentUser.companyAddress} />
+          <input type="text" id="address" class="input input-bordered w-full" bind:value={formData.companyAddress} />
         </div>
         <div class="form-control">
           <label for="postCode" class="label">
             <span class="label-text">{m.profile_postCode()}</span>
           </label>
-          <input type="text" id="postCode" class="input input-bordered w-full" bind:value={currentUser.postCode} />
+          <input type="text" id="postCode" class="input input-bordered w-full" bind:value={formData.postCode} />
         </div>
         <div class="form-control">
           <label for="city" class="label">
             <span class="label-text">{m.profile_city()}</span>
           </label>
-          <input type="text" id="city" class="input input-bordered w-full" bind:value={currentUser.city} />
+          <input type="text" id="city" class="input input-bordered w-full" bind:value={formData.city} />
         </div>
 
         <div class="form-control">
           <label for="country" class="label">
             <span class="label-text">{m.profile_country()}</span>
           </label>
-          <input type="text" id="country" class="input input-bordered w-full" bind:value={currentUser.country} />
+          <input type="text" id="country" class="input input-bordered w-full" bind:value={formData.country} />
         </div>
       </div>
 

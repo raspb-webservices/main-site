@@ -1,0 +1,15 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "welcome_meta_title": "raspb Webservices - Welcome",
+  "welcome_meta_description": "Welcome to raspb – complete your profile",
+  "welcome_title": "Welcome to",
+  "welcome_titleHighlight": " raspb!",
+  "welcome_teaser": "Great to have you on board! Would you like to tell us your name? This way we can address you personally.",
+  "welcome_firstName_label": "First Name",
+  "welcome_firstName_placeholder": "Max",
+  "welcome_lastName_label": "Last Name",
+  "welcome_lastName_placeholder": "Doe",
+  "welcome_submit": "Continue to Dashboard",
+  "welcome_submit_loading": "Saving...",
+  "welcome_skip": "Skip"
+}

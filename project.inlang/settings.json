@@ -28,7 +28,8 @@
       "./messages/pages/appointment/{locale}.json",
       "./messages/pages/playground/{locale}.json",
       "./messages/pages/playground/experimental/{locale}.json",
-      "./messages/pages/playground/ui-showcase/{locale}.json"
+      "./messages/pages/playground/ui-showcase/{locale}.json",
+      "./messages/pages/welcome/{locale}.json"
     ]
   }
 }

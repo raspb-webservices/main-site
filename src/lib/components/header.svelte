@@ -20,7 +20,7 @@
     const popup = openAuth0Popup(450, 650);
     try {
       if (!popup) throw new Error('Popup konnte nicht geöffnet werden (Popup-Blocker?).');
-      const auth0Client = await auth.createClient();
+      const auth0Client = await auth.getClient();
       await auth.loginWithPopup(auth0Client, { authorizationParams: {} }, popup);
     } finally {
       logginIn = false;
@@ -29,7 +29,7 @@
 
   async function logout() {
     logginOut = true;
-    const auth0Client = await auth.createClient();
+    const auth0Client = await auth.getClient();
     await auth.logout(auth0Client);
     logginOut = false;
   }

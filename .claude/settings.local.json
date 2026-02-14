@@ -14,7 +14,9 @@
       "Bash(export MAILTRAP_TOKEN=dummy)",
       "Bash(find messages -name \"*.json\" -exec sh -c 'echo \"\"File: {}\"\" && wc -l \"\"{}\"\"' ;)",
       "Bash(git revert:*)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(grep:*)",
+      "Bash(npx @inlang/paraglide-js compile:*)"
     ]
   }
 }

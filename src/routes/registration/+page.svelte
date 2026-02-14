@@ -11,9 +11,9 @@
   let errorMessage = $state('');
   let isAuth = $derived(isAuthenticated.value);
 
-  // Nach Login zum Dashboard weiterleiten
+  // Nach Login zum Dashboard weiterleiten (nur bei erneutem Besuch wenn schon eingeloggt)
   $effect(() => {
-    if (isAuth) {
+    if (isAuth && !isLoading) {
       goto(localizeHref('/dashboard'));
     }
   });
@@ -26,8 +26,11 @@
       const popup = openAuth0Popup(450, 650);
       if (!popup) throw new Error('Popup konnte nicht geoeffnet werden (Popup-Blocker?).');
 
-      const auth0Client = await auth.createClient();
-      await auth.loginWithPopup(auth0Client, { authorizationParams: { screen_hint: 'signup' } }, popup);
+      const auth0Client = await auth.getClient();
+      const { isFirstLogin } = await auth.loginWithPopup(auth0Client, { authorizationParams: { screen_hint: 'signup' } }, popup);
+
+      // Erstanmeldung → Welcome-Page, sonst Dashboard
+      goto(localizeHref(isFirstLogin ? '/welcome' : '/dashboard'));
     } catch (error: unknown) {
       console.error('Registration error:', error);
       errorMessage = error instanceof Error ? error.message : 'Ein Fehler ist aufgetreten.';

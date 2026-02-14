@@ -8,10 +8,16 @@
   import 'flag-icons/css/flag-icons.min.css';
   import { m } from '$lib/paraglide/messages';
   import { getLocale } from '$lib/paraglide/runtime';
+  import auth from '$services/auth-service';
+  import { onMount } from 'svelte';
 
   let { children } = $props();
 
   const ogLocaleMap: Record<string, string> = { de: 'de_DE', en: 'en_US' };
+
+  onMount(() => {
+    auth.checkSession();
+  });
 
   // Reload page when a new service worker version takes over or assets go stale
   $effect(() => {

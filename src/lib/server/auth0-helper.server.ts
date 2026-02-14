@@ -15,13 +15,16 @@ async function getToken() {
     });
 
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      const errorText = await response.text();
+      console.error('Error fetching token response:', errorText);
+      throw new Error(`Network response was not ok: ${response.statusText}`);
     }
 
     const data = await response.json();
     return data.access_token;
   } catch (error) {
     console.error('Error fetching token:', error);
+    throw error;
   }
 }
 
@@ -29,32 +32,41 @@ const apiRequest = async (method: string, url: string, request: unknown) => {
   const token = await getToken();
 
   const options: RequestInit = {
-    method,
+    method: method.toUpperCase(),
     headers: {
       authorization: `Bearer ${token}`,
       'content-type': 'application/json'
     }
   };
 
-  if (request && method !== 'get') {
+  if (request && method.toUpperCase() !== 'GET') {
     options.body = JSON.stringify(request);
   }
 
-  const response = await fetch(`${PUBLIC_VITE_AUTH0_AUDIENCE}${url}`, options);
+  // Ensure url doesn't start with / if PUBLIC_VITE_AUTH0_AUDIENCE ends with /
+  const cleanUrl = url.startsWith('/') ? url.substring(1) : url;
+  const fullUrl = `${PUBLIC_VITE_AUTH0_AUDIENCE}${cleanUrl}`;
+
+  const response = await fetch(fullUrl, options);
 
   if (!response.ok) {
     const errorBody = await response.text();
     throw new Error(`Auth0 API error ${response.status}: ${errorBody}`);
   }
 
+  // Some endpoints return 204 No Content
+  if (response.status === 204) {
+    return null;
+  }
+
   return response.json();
 };
 
-const get = (url: string, request: unknown) => apiRequest('get', url, request);
-const deleteRequest = (url: string, request: unknown) => apiRequest('delete', url, request);
-const post = (url: string, request: unknown) => apiRequest('post', url, request);
-const put = (url: string, request: unknown) => apiRequest('put', url, request);
-const patch = (url: string, request: unknown) => apiRequest('patch', url, request);
+const get = (url: string, request: unknown) => apiRequest('GET', url, request);
+const deleteRequest = (url: string, request: unknown) => apiRequest('DELETE', url, request);
+const post = (url: string, request: unknown) => apiRequest('POST', url, request);
+const put = (url: string, request: unknown) => apiRequest('PUT', url, request);
+const patch = (url: string, request: unknown) => apiRequest('PATCH', url, request);
 
 const API = {
   get,
@@ -75,7 +87,7 @@ interface Auth0Role {
 }
 
 export async function getUserRoles(userId: string): Promise<Auth0Role[]> {
-  return apiRequest('get', `users/${userId}/roles`, null) as Promise<Auth0Role[]>;
+  return apiRequest('GET', `users/${userId}/roles`, null) as Promise<Auth0Role[]>;
 }
 
 export async function isAdmin(userId: string): Promise<boolean> {
@@ -84,11 +96,11 @@ export async function isAdmin(userId: string): Promise<boolean> {
 }
 
 export async function assignRoleToUser(userId: string, roleIds: string[]): Promise<void> {
-  await apiRequest('post', `users/${userId}/roles`, { roles: roleIds });
+  await apiRequest('POST', `users/${userId}/roles`, { roles: roleIds });
 }
 
 export async function updateUserMetadata(userId: string, metadata: Record<string, unknown>): Promise<unknown> {
-  return apiRequest('patch', `users/${userId}`, { user_metadata: metadata });
+  return apiRequest('PATCH', `users/${userId}`, { user_metadata: metadata });
 }
 
 export async function createUser(userData: {
@@ -103,5 +115,5 @@ export async function createUser(userData: {
     ...userData,
     connection: userData.connection || 'Username-Password-Authentication'
   };
-  return apiRequest('post', 'users', payload);
+  return apiRequest('POST', 'users', payload);
 }
