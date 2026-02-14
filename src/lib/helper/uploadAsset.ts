@@ -4,14 +4,14 @@ export async function createAsset() {
 
   let assetId: string;
   let uploadData: {
-    date:string,
-    key:string,
-    signature: string,
-    algorithm:string,
-    policy:string,
-    credential:string
-    securityToken: string,
-    url:string
+    date: string;
+    key: string;
+    signature: string;
+    algorithm: string;
+    policy: string;
+    credential: string;
+    securityToken: string;
+    url: string;
   };
 
   if (!response.ok) {

@@ -1,8 +1,4 @@
-import {
-  PUBLIC_VITE_AUTH0_AUDIENCE,
-  PUBLIC_VITE_AUTH0_CLIENT_ID,
-  PUBLIC_VITE_AUTH0_TOKEN_URL
-} from '$env/static/public';
+import { PUBLIC_VITE_AUTH0_AUDIENCE, PUBLIC_VITE_AUTH0_CLIENT_ID, PUBLIC_VITE_AUTH0_TOKEN_URL } from '$env/static/public';
 import { env } from '$env/dynamic/private';
 
 async function getToken() {
@@ -91,10 +87,7 @@ export async function assignRoleToUser(userId: string, roleIds: string[]): Promi
   await apiRequest('post', `users/${userId}/roles`, { roles: roleIds });
 }
 
-export async function updateUserMetadata(
-  userId: string,
-  metadata: Record<string, unknown>
-): Promise<unknown> {
+export async function updateUserMetadata(userId: string, metadata: Record<string, unknown>): Promise<unknown> {
   return apiRequest('patch', `users/${userId}`, { user_metadata: metadata });
 }
 

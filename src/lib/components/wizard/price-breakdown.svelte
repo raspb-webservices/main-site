@@ -205,7 +205,7 @@
     @apply mb-6 text-center;
 
     .price-label {
-      @apply mb-2 text-sm font-medium uppercase tracking-wide;
+      @apply mb-2 text-sm font-medium tracking-wide uppercase;
       color: rgba(var(--base-content) / 0.7);
     }
 

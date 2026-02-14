@@ -15,7 +15,9 @@ export const PATCH: RequestHandler = async ({ request, locals }) => {
     const ownerQuery = gql`
       query getProjectOwner($id: ID!) {
         project(where: { id: $id }, stage: PUBLISHED) {
-          owner { auth0Id }
+          owner {
+            auth0Id
+          }
         }
       }
     `;

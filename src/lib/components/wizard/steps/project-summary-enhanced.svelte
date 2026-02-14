@@ -286,7 +286,7 @@
     </svg>
     {m.wizard_navigation_projectRequest()}
   </button>
-  <div class="tooltip" data-tip="{m.wizard_navigation_register_tooltip()}">
+  <div class="tooltip" data-tip={m.wizard_navigation_register_tooltip()}>
     <button
       type="button"
       class="btn btn-simple btn-lg"
@@ -334,7 +334,7 @@
     @apply bg-base-200 border-base-300 rounded-lg border p-4;
 
     .card-label {
-      @apply text-base-content/60 mb-1 text-xs font-semibold uppercase tracking-wide;
+      @apply text-base-content/60 mb-1 text-xs font-semibold tracking-wide uppercase;
     }
 
     .card-value {
@@ -354,7 +354,7 @@
     @apply bg-base-200 border-base-300 rounded-lg border p-4;
 
     .card-label {
-      @apply text-base-content/60 mb-2 text-xs font-semibold uppercase tracking-wide;
+      @apply text-base-content/60 mb-2 text-xs font-semibold tracking-wide uppercase;
     }
 
     p {
@@ -366,7 +366,7 @@
     @apply bg-base-200 border-base-300 rounded-lg border p-4;
 
     .card-label {
-      @apply text-base-content/60 mb-3 text-xs font-semibold uppercase tracking-wide;
+      @apply text-base-content/60 mb-3 text-xs font-semibold tracking-wide uppercase;
     }
 
     .slider-visual {
@@ -377,7 +377,7 @@
       @apply relative mb-2 h-2 rounded-full bg-gray-200;
 
       .slider-fill {
-        @apply absolute left-0 top-0 h-full rounded-full bg-primary;
+        @apply bg-primary absolute top-0 left-0 h-full rounded-full;
 
         &.engineering {
           @apply bg-secondary;

@@ -249,7 +249,8 @@
                 goToStep(i + 1);
               }
             }}
-            aria-label="Go to step {i + 1}: {(m as unknown as Record<string, () => string>)[step.title]?.() ?? step.title}">{(m as unknown as Record<string, () => string>)[step.title]?.() ?? step.title}</button
+            aria-label="Go to step {i + 1}: {(m as unknown as Record<string, () => string>)[step.title]?.() ?? step.title}"
+            >{(m as unknown as Record<string, () => string>)[step.title]?.() ?? step.title}</button
           >
         {/each}
       </div>

@@ -67,8 +67,7 @@ const config: CookieConsent.CookieConsentConfig = {
             },
             {
               title: 'Analyse',
-              description:
-                'Diese Cookies helfen uns zu verstehen, wie unsere Website genutzt wird (Plausible Analytics).',
+              description: 'Diese Cookies helfen uns zu verstehen, wie unsere Website genutzt wird (Plausible Analytics).',
               linkedCategory: 'analytics'
             },
             {

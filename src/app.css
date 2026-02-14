@@ -334,7 +334,7 @@ ul.basic-list {
 
 ol.basic-list {
   @apply mb-7 pl-5;
-  list-style-type: decimal; 
+  list-style-type: decimal;
   li {
     @apply p-1 text-lg font-light;
     &::marker {

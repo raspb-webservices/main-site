@@ -36,10 +36,7 @@
       >
         {m.homepage_offering_configure_button()}
       </button>
-      <button
-        class="text-link-button animate-fade-in-from-side"
-        onclick={openGetAnAppointmentModal}
-      >
+      <button class="text-link-button animate-fade-in-from-side" onclick={openGetAnAppointmentModal}>
         {m.homepage_offering_appointment_button()}
       </button>
     </div>
@@ -68,10 +65,7 @@
       >
         {m.homepage_offering_configure_button()}
       </button>
-      <button
-        class="text-link-button animate-fade-in-from-side"
-        onclick={openGetAnAppointmentModal}
-      >
+      <button class="text-link-button animate-fade-in-from-side" onclick={openGetAnAppointmentModal}>
         {m.homepage_offering_appointment_button()}
       </button>
     </div>
@@ -104,7 +98,7 @@
     }
 
     .lottie-container {
-      @apply h-full w-full max-h-67.5 aspect-video;
+      @apply aspect-video h-full max-h-67.5 w-full;
       :global(dotlottie-player),
       :global(canvas) {
         @apply h-full max-h-full w-full max-w-full;

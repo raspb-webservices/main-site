@@ -528,12 +528,10 @@
             const publishedAssetIds = await publishMultipleAssets(finalAssetIds, (message, current, total) => {
               // Asset publishing progress callback
             });
-
           } catch (assetPublishError) {
             // Don't fail the entire process if asset publishing fails
           }
         }
-
       } else {
         // Collect detailed error information
         errorDetails.push(`${m.wizard_modals_error_apiError()} : ${result.error || m.wizard_modals_error_unknownError()}`);

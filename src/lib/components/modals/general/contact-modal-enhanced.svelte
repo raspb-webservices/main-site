@@ -1,7 +1,7 @@
 <script lang="ts">
   import { m } from '$lib/paraglide/messages';
   import { localizeHref } from '$lib/paraglide/runtime';
-  
+
   let { projectData } = $props();
   let modal: HTMLDialogElement;
   let isLoading = $state(false);
@@ -204,7 +204,6 @@
       // Success! Keep loading indicator until everything is done
       isLoading = false;
       success = true;
-
     } catch (err) {
       isLoading = false;
       error = err instanceof Error ? err.message : 'Ein unerwarteter Fehler ist aufgetreten.';
@@ -254,30 +253,14 @@
             <label for="givenName" class="form-label">
               Vorname <span class="required">*</span>
             </label>
-            <input
-              id="givenName"
-              type="text"
-              bind:value={givenName}
-              class="form-input"
-              placeholder="Max"
-              disabled={isLoading}
-              required
-            />
+            <input id="givenName" type="text" bind:value={givenName} class="form-input" placeholder="Max" disabled={isLoading} required />
           </div>
 
           <div class="form-group">
             <label for="familyName" class="form-label">
               Nachname <span class="required">*</span>
             </label>
-            <input
-              id="familyName"
-              type="text"
-              bind:value={familyName}
-              class="form-input"
-              placeholder="Mustermann"
-              disabled={isLoading}
-              required
-            />
+            <input id="familyName" type="text" bind:value={familyName} class="form-input" placeholder="Mustermann" disabled={isLoading} required />
           </div>
         </div>
 
@@ -287,29 +270,14 @@
             <label for="email" class="form-label">
               Email <span class="required">*</span>
             </label>
-            <input
-              id="email"
-              type="email"
-              bind:value={email}
-              class="form-input"
-              placeholder="max@beispiel.de"
-              disabled={isLoading}
-              required
-            />
+            <input id="email" type="email" bind:value={email} class="form-input" placeholder="max@beispiel.de" disabled={isLoading} required />
           </div>
 
           <div class="form-group">
             <label for="phone" class="form-label">
               Telefon <span class="optional">(optional)</span>
             </label>
-            <input
-              id="phone"
-              type="tel"
-              bind:value={phone}
-              class="form-input"
-              placeholder="+49 123 456789"
-              disabled={isLoading}
-            />
+            <input id="phone" type="tel" bind:value={phone} class="form-input" placeholder="+49 123 456789" disabled={isLoading} />
           </div>
         </div>
 
@@ -318,15 +286,7 @@
           <label for="company" class="form-label">
             Firma/Organisation <span class="required">*</span>
           </label>
-          <input
-            id="company"
-            type="text"
-            bind:value={company}
-            class="form-input"
-            placeholder="Beispiel GmbH"
-            disabled={isLoading}
-            required
-          />
+          <input id="company" type="text" bind:value={company} class="form-input" placeholder="Beispiel GmbH" disabled={isLoading} required />
         </div>
 
         <!-- Address (Optional) -->
@@ -334,14 +294,7 @@
           <label for="address" class="form-label">
             Adresse <span class="optional">(optional)</span>
           </label>
-          <input
-            id="address"
-            type="text"
-            bind:value={address}
-            class="form-input"
-            placeholder="Musterstraße 123"
-            disabled={isLoading}
-          />
+          <input id="address" type="text" bind:value={address} class="form-input" placeholder="Musterstraße 123" disabled={isLoading} />
         </div>
 
         <!-- City Fields -->
@@ -350,56 +303,31 @@
             <label for="postCode" class="form-label">
               PLZ <span class="optional">(opt.)</span>
             </label>
-            <input
-              id="postCode"
-              type="text"
-              bind:value={postCode}
-              class="form-input"
-              placeholder="12345"
-              disabled={isLoading}
-            />
+            <input id="postCode" type="text" bind:value={postCode} class="form-input" placeholder="12345" disabled={isLoading} />
           </div>
 
           <div class="form-group form-group-large">
             <label for="city" class="form-label">
               Stadt <span class="optional">(opt.)</span>
             </label>
-            <input
-              id="city"
-              type="text"
-              bind:value={city}
-              class="form-input"
-              placeholder="Berlin"
-              disabled={isLoading}
-            />
+            <input id="city" type="text" bind:value={city} class="form-input" placeholder="Berlin" disabled={isLoading} />
           </div>
 
           <div class="form-group form-group-large">
             <label for="country" class="form-label">
               Land <span class="optional">(opt.)</span>
             </label>
-            <input
-              id="country"
-              type="text"
-              bind:value={country}
-              class="form-input"
-              disabled={isLoading}
-            />
+            <input id="country" type="text" bind:value={country} class="form-input" disabled={isLoading} />
           </div>
         </div>
 
         <!-- Privacy Checkbox -->
         <div class="form-group">
-          <label class="flex items-start gap-3 cursor-pointer">
-            <input
-              type="checkbox"
-              bind:checked={acceptPrivacy}
-              class="checkbox checkbox-primary mt-1"
-              disabled={isLoading}
-              required
-            />
+          <label class="flex cursor-pointer items-start gap-3">
+            <input type="checkbox" bind:checked={acceptPrivacy} class="checkbox checkbox-primary mt-1" disabled={isLoading} required />
             <span class="text-sm">
-              Ich habe die <a href={localizeHref('/privacy')} target="_blank" class="link link-primary">Datenschutzbestimmungen</a> gelesen und akzeptiere sie. <span class="required">*</span>
+              Ich habe die <a href={localizeHref('/privacy')} target="_blank" class="link link-primary">Datenschutzbestimmungen</a> gelesen und akzeptiere sie.
+              <span class="required">*</span>
             </span>
           </label>
         </div>
@@ -431,7 +359,12 @@
             Wird versendet...
           {:else}
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              />
             </svg>
             Projekt anfragen
           {/if}
@@ -439,7 +372,7 @@
       </div>
     {/if}
   </div>
-  
+
   <form method="dialog" class="modal-backdrop">
     <button onclick={closeModal} disabled={isLoading}>{m.modal_close()}</button>
   </form>

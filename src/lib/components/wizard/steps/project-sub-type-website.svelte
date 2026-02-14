@@ -8,7 +8,11 @@
   <h1>
     {m.wizard_stepSubType_titleFirst()} <span class="inner-text-special">{m.wizard_stepSubType_titleHighlight()}</span>{m.wizard_stepSubType_titleSecond()}
   </h1>
-  <p class="teaser">{m.wizard_stepSubType_teaser({ project: (m as unknown as Record<string, () => string>)['wizard.type.' + config.projectType + '.title']?.() ?? config.projectType })}</p>
+  <p class="teaser">
+    {m.wizard_stepSubType_teaser({
+      project: (m as unknown as Record<string, () => string>)['wizard.type.' + config.projectType + '.title']?.() ?? config.projectType
+    })}
+  </p>
 </div>
 
 <div class="subtypes-grid">

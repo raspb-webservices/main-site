@@ -67,10 +67,7 @@ export const POST: RequestHandler = async ({ request }) => {
       console.error('Failed to send notification email:', mailError);
     }
 
-    return Response.json(
-      { success: true, data: response.createUserQuestion },
-      { status: 201 }
-    );
+    return Response.json({ success: true, data: response.createUserQuestion }, { status: 201 });
   } catch (error) {
     if (error instanceof ValidationError) {
       return validationErrorResponse(error);

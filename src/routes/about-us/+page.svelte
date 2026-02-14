@@ -111,7 +111,9 @@
         </div>
         <div class="mb-6 flex flex-wrap gap-2">
           {#each myskills as myskill}
-            <span class="badge badge-primary badge-lg transition-colors duration-200">{(m as unknown as Record<string, () => string>)[`aboutUs_markusSection_skills_${myskill}`]()}</span>
+            <span class="badge badge-primary badge-lg transition-colors duration-200"
+              >{(m as unknown as Record<string, () => string>)[`aboutUs_markusSection_skills_${myskill}`]()}</span
+            >
           {/each}
         </div>
         <p class="add-padding text-lg opacity-80">
@@ -161,7 +163,9 @@
             <div class="grow">
               <h3 class="card-title justify-center">{member.name}</h3>
               <p class="add-padding opacity-70">{member.role}</p>
-              <p class="line-clamp-4 px-4 leading-relaxed">{(m as unknown as Record<string, () => string>)[`aboutUs_teamMembers_${member.id}_description`]()}</p>
+              <p class="line-clamp-4 px-4 leading-relaxed">
+                {(m as unknown as Record<string, () => string>)[`aboutUs_teamMembers_${member.id}_description`]()}
+              </p>
             </div>
             <div class="card-actions pt-2 pb-4">
               <button

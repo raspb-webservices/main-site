@@ -5,12 +5,12 @@ import type { ProjectResponse } from '$interfaces/project.interface';
 import { validateBody, validationErrorResponse, ValidationError } from '$lib/server/validate.server';
 import { projectCreateSchema } from '$lib/server/schemas/project.schema';
 import { mapFeaturesToHygraph } from '$lib/server/feature-mapping';
-import { nameByRace } from "fantasy-name-generator";
+import { nameByRace } from 'fantasy-name-generator';
 
 export const POST: RequestHandler = async ({ request }) => {
   try {
     const projectData = validateBody(projectCreateSchema, await request.json()) as any;
-    
+
     const mutation = gql`
       mutation CreateProject(
         $name: String
@@ -128,7 +128,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
     // Variablen für die Mutation vorbereiten
     const variables = {
-      name: projectData.name || '[BASIC]-'+nameByRace("dragon", { gender: "male" }),
+      name: projectData.name || '[BASIC]-' + nameByRace('dragon', { gender: 'male' }),
       description: projectData.description || null,
       projectCategory: projectData.projectCategory || null,
       projectType: projectData.projectType || null,

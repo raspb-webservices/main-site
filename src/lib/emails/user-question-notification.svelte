@@ -17,7 +17,7 @@
           <Text class="mt-4 font-semibold text-zinc-800">E-Mail des Fragenden:</Text>
           <Text class="text-purple-600">{email}</Text>
         {:else}
-          <Text class="mt-4 italic text-zinc-400">Keine E-Mail-Adresse angegeben.</Text>
+          <Text class="mt-4 text-zinc-400 italic">Keine E-Mail-Adresse angegeben.</Text>
         {/if}
         <Hr />
         <Text class="text-xs text-zinc-400">Diese Nachricht wurde automatisch generiert.</Text>

@@ -124,8 +124,7 @@
   ></Hero>
 </Section>
 
-<TEASER customImageURL={'https://picsum.photos/id/46/1920/1080'} headline={m.teaser_default_headline()} subheadline={m.teaser_default_subheadline()}
-></TEASER>
+<TEASER customImageURL={'https://picsum.photos/id/46/1920/1080'} headline={m.teaser_default_headline()} subheadline={m.teaser_default_subheadline()}></TEASER>
 
 <Section>
   <button

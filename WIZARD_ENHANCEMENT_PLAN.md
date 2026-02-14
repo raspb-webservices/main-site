@@ -3,6 +3,7 @@
 ## 📋 Zusammenfassung der Analyse
 
 ### Aktueller Stand
+
 Der Wizard Basic hat 6 Schritte und sammelt umfangreiche Daten, jedoch:
 
 1. **Step 6 (Zusammenfassung)** zeigt nur:
@@ -33,6 +34,7 @@ Der Wizard Basic hat 6 Schritte und sammelt umfangreiche Daten, jedoch:
    - Wird NICHT visualisiert oder erklärt
 
 ### Verfügbare Infrastruktur
+
 ✅ API `/api/project/create` - GraphQL Mutation an Hygraph
 ✅ API `/api/mail/send` - Mailtrap Email-Versand
 ✅ `@hygraph/management-sdk` - installiert (Version 1.5.2)
@@ -40,7 +42,9 @@ Der Wizard Basic hat 6 Schritte und sammelt umfangreiche Daten, jedoch:
 ✅ Project Interface mit allen benötigten Feldern
 
 ### Fehlende Hygraph-Schema-Felder
+
 Die API verwendet folgende Felder, die möglicherweise nicht im Hygraph-Schema existieren:
+
 - `projectCategory` (String)
 - `serviceLevel` (Int/Float)
 - `engineeringApproach` (Int/Float)
@@ -59,9 +63,11 @@ Die API verwendet folgende Felder, die möglicherweise nicht im Hygraph-Schema e
 ## 🎯 Umsetzungsplan
 
 ### Phase 1: Hygraph Schema erweitern
+
 **Ziel:** Alle neuen Felder im Hygraph-Schema hinzufügen
 
 **Aufgaben:**
+
 1. Script erstellen, das die Hygraph Management API nutzt
 2. Schema-Introspection durchführen (prüfen, welche Felder fehlen)
 3. Fehlende Felder zum `Project` Model hinzufügen:
@@ -80,15 +86,18 @@ Die API verwendet folgende Felder, die möglicherweise nicht im Hygraph-Schema e
 4. Schema veröffentlichen
 
 **Dateien:**
+
 - Neu: `src/scripts/extend-hygraph-schema.ts`
 - Update: `src/routes/api/project/create/+server.ts`
 
 ---
 
 ### Phase 2: Projekt-Zusammenfassung erweitern
+
 **Ziel:** Alle gesammelten Daten übersichtlich darstellen
 
 **Design:**
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  Ihre Projektkonfiguration                              │
@@ -133,21 +142,25 @@ Die API verwendet folgende Felder, die möglicherweise nicht im Hygraph-Schema e
 ```
 
 **Aufgaben:**
+
 1. `project-summary.svelte` komplett überarbeiten
 2. Alle Daten aus `config` anzeigen
 3. Visuelles Design mit Cards/Sections
 4. Preisberechnung als Breakdown-Komponente
 
 **Dateien:**
+
 - Update: `src/lib/components/wizard/steps/project-summary.svelte`
 - Neu: `src/lib/components/wizard/price-breakdown.svelte` (optional, für bessere Struktur)
 
 ---
 
 ### Phase 3: Contact Modal mit Kundendaten
+
 **Ziel:** Kundendaten erfassen und Projekt + Email senden
 
 **Design:**
+
 ```
 ┌────────────────────────────────────────┐
 │  Projekt anfragen                      │
@@ -171,6 +184,7 @@ Die API verwendet folgende Felder, die möglicherweise nicht im Hygraph-Schema e
 ```
 
 **Flow:**
+
 1. Benutzer klickt "Projekt anfragen"
 2. Modal öffnet sich mit Formular
 3. Validierung der Pflichtfelder (Anrede, Vorname, Nachname, Email)
@@ -181,6 +195,7 @@ Die API verwendet folgende Felder, die möglicherweise nicht im Hygraph-Schema e
    - Success-Message anzeigen
 
 **Aufgaben:**
+
 1. Contact Modal neu implementieren mit Form
 2. Zod-Schema für Kundendaten-Validierung
 3. Submit-Handler implementiert
@@ -188,46 +203,56 @@ Die API verwendet folgende Felder, die möglicherweise nicht im Hygraph-Schema e
 5. Error-Handling
 
 **Dateien:**
+
 - Update: `src/lib/components/modals/general/contact-modal.svelte`
 
 ---
 
 ### Phase 4: Email-Template für Projektanfragen
+
 **Ziel:** Schönes Email-Template mit allen Projektdaten
 
 **Inhalt:**
+
 - Kundendaten
 - Vollständige Projekt-Konfiguration
 - Preisberechnung-Breakdown
 - Call-to-Action (Rückruf/Meeting vereinbaren)
 
 **Aufgaben:**
+
 1. Neues Email-Template erstellen
 2. Alle Projektdaten formatiert darstellen
 3. Responsive Design
 
 **Dateien:**
+
 - Neu: `src/lib/emails/project-request.svelte`
 - Update: `src/routes/api/mail/send/+server.ts` (Template-Switcher)
 
 ---
 
 ### Phase 5: API-Integration
+
 **Ziel:** Projekt in Hygraph speichern und Email versenden
 
 **Aufgaben:**
+
 1. `/api/project/create` um neue Felder erweitern
 2. Validation-Schema erweitern
 3. Email-API-Call mit neuem Template
 
 **Dateien:**
+
 - Update: `src/routes/api/project/create/+server.ts`
 - Update: `src/lib/server/schemas/project.schema.ts`
 
 ---
 
 ### Phase 6: Testing & Refinement
+
 **Aufgaben:**
+
 1. End-to-end Test durchführen
 2. Error-Handling testen
 3. UI/UX-Verbesserungen
@@ -238,36 +263,48 @@ Die API verwendet folgende Felder, die möglicherweise nicht im Hygraph-Schema e
 ## 🔍 Klärungsfragen
 
 ### 1. Email-Empfänger
+
 **Frage:** An welche Email-Adresse sollen die Projektanfragen gesendet werden?
+
 - Soll es eine feste Firmen-Email sein?
 - Soll es konfigurierbar sein?
 - Soll auch der Kunde eine Bestätigungs-Email erhalten?
 
 ### 2. Hygraph Schema-Änderungen
+
 **Frage:** Soll das Schema automatisch erweitert werden oder möchtest du es manuell machen?
+
 - **Option A:** Ich erstelle ein Script, das automatisch fehlende Felder hinzufügt
 - **Option B:** Ich gebe dir eine Liste der benötigten Felder zum manuellen Hinzufügen
 - **Option C:** Ich erstelle Migration-Steps, die du reviewen kannst
 
 ### 3. Projekt-Status nach Erstellung
+
 **Frage:** Welchen initialen Status sollen neue Projekte haben?
+
 - Aktuell: `projectStatus: 'created'`
 - Alternatives: `projectStatus: 'inquiry'` oder `'pending'`?
 
 ### 4. Pflichtfelder im Contact Modal
+
 **Frage:** Welche Kundendaten sind Pflicht?
+
 - **Aktuell vorgeschlagen:** Anrede, Vorname, Nachname, Email
 - **Optional:** Telefon, Firma, Adresse
 - Soll Telefon auch Pflicht sein?
 
 ### 5. Preisberechnung-Details
+
 **Frage:** Wie detailliert soll die Preisaufschlüsselung sein?
+
 - **Option A:** Nur Hauptkategorien (wie oben im Design)
 - **Option B:** Jedes Feature einzeln aufgeführt
 - **Option C:** Toggle zwischen Summary und Detail-View
 
 ### 6. Erfolgs-Flow nach Absenden
+
 **Frage:** Was soll nach erfolgreichem Absenden passieren?
+
 - Success-Message im Modal
 - Weiterleitung zu einer Thank-You-Page
 - Wizard zurücksetzen
@@ -277,15 +314,15 @@ Die API verwendet folgende Felder, die möglicherweise nicht im Hygraph-Schema e
 
 ## 📊 Aufwandsschätzung
 
-| Phase | Aufwand | Priorität |
-|-------|---------|-----------|
-| Phase 1: Schema-Erweiterung | 2-3h | Hoch |
-| Phase 2: Zusammenfassung | 3-4h | Hoch |
-| Phase 3: Contact Modal | 3-4h | Hoch |
-| Phase 4: Email-Template | 2-3h | Mittel |
-| Phase 5: API-Integration | 2-3h | Hoch |
-| Phase 6: Testing | 2-3h | Hoch |
-| **Gesamt** | **14-20h** | - |
+| Phase                       | Aufwand    | Priorität |
+| --------------------------- | ---------- | --------- |
+| Phase 1: Schema-Erweiterung | 2-3h       | Hoch      |
+| Phase 2: Zusammenfassung    | 3-4h       | Hoch      |
+| Phase 3: Contact Modal      | 3-4h       | Hoch      |
+| Phase 4: Email-Template     | 2-3h       | Mittel    |
+| Phase 5: API-Integration    | 2-3h       | Hoch      |
+| Phase 6: Testing            | 2-3h       | Hoch      |
+| **Gesamt**                  | **14-20h** | -         |
 
 ---
 
@@ -302,6 +339,7 @@ Die API verwendet folgende Felder, die möglicherweise nicht im Hygraph-Schema e
 ## 💡 Zusätzliche Überlegungen
 
 ### Mögliche Erweiterungen (optional):
+
 - **PDF-Export** der Projektzusammenfassung
 - **Projekt-Link** zum späteren Bearbeiten (für eingeloggte User)
 - **Preisvergleich** mit verschiedenen Konfigurationen
@@ -310,5 +348,5 @@ Die API verwendet folgende Felder, die möglicherweise nicht im Hygraph-Schema e
 
 ---
 
-*Erstellt am: 13.02.2026*
-*Status: Warte auf Feedback & Klärungen*
+_Erstellt am: 13.02.2026_
+_Status: Warte auf Feedback & Klärungen_

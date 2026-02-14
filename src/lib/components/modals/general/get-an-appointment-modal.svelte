@@ -13,7 +13,7 @@
   }
 </script>
 
-<dialog bind:this={modal} class="modal" onclose={() => isOpen = false}>
+<dialog bind:this={modal} class="modal" onclose={() => (isOpen = false)}>
   <div class="modal-box">
     <form method="dialog">
       <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2" onclick={closeModal}>✕</button>
@@ -33,12 +33,12 @@
 <style lang="postcss">
   @reference '../../../../app.css';
   .modal-box {
-    @apply w-full p-0 rounded-none md:p-6 md:rounded-4xl max-w-120;
+    @apply w-full max-w-120 rounded-none p-0 md:rounded-4xl md:p-6;
   }
   .iframe-container {
-    @apply flex w-full items-center md:items-start justify-center;
+    @apply flex w-full items-center justify-center md:items-start;
     iframe {
-      @apply w-full h-full min-h-screen md:w-125 md:min-h-157 md:rounded-2xl;
+      @apply h-full min-h-screen w-full md:min-h-157 md:w-125 md:rounded-2xl;
     }
   }
 </style>

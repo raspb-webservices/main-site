@@ -54,8 +54,7 @@
   const onProgress = (e: CustomEvent) => {
     const [swiper, progress]: [any, any] = e.detail;
   };
-  const onSlideChange = (e: CustomEvent) => {
-  };
+  const onSlideChange = (e: CustomEvent) => {};
 
   const params = {
     slidesPerView: 1.3,

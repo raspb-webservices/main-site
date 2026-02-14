@@ -66,77 +66,137 @@
   <div class="collapse-plus bg-base-100 border-base-300 collapse border">
     <input type="radio" name="faq-accordion" />
     <div class="collapse-title font-semibold">{m.faq_questions_q1_title()}</div>
-    <div class="collapse-content text-base"><div class="tiny-spacer"></div>{@html m.faq_questions_q1_content()}<div class="spacer"></div></div>
+    <div class="collapse-content text-base">
+      <div class="tiny-spacer"></div>
+      {@html m.faq_questions_q1_content()}
+      <div class="spacer"></div>
+    </div>
   </div>
   <div class="collapse-plus bg-base-100 border-base-300 collapse border">
     <input type="radio" name="faq-accordion" />
     <div class="collapse-title font-semibold">{m.faq_questions_q2_title()}</div>
-    <div class="collapse-content text-base"><div class="tiny-spacer"></div>{@html m.faq_questions_q2_content()}<div class="spacer"></div></div>
+    <div class="collapse-content text-base">
+      <div class="tiny-spacer"></div>
+      {@html m.faq_questions_q2_content()}
+      <div class="spacer"></div>
+    </div>
   </div>
   <div class="collapse-plus bg-base-100 border-base-300 collapse border">
     <input type="radio" name="faq-accordion" />
     <div class="collapse-title font-semibold">{m.faq_questions_q3_title()}</div>
-    <div class="collapse-content text-base"><div class="tiny-spacer"></div>{@html m.faq_questions_q3_content()}<div class="spacer"></div></div>
+    <div class="collapse-content text-base">
+      <div class="tiny-spacer"></div>
+      {@html m.faq_questions_q3_content()}
+      <div class="spacer"></div>
+    </div>
   </div>
   <div class="collapse-plus bg-base-100 border-base-300 collapse border">
     <input type="radio" name="faq-accordion" />
     <div class="collapse-title font-semibold">{m.faq_questions_q4_title()}</div>
-    <div class="collapse-content text-base"><div class="tiny-spacer"></div>{@html m.faq_questions_q4_content()}<div class="spacer"></div></div>
+    <div class="collapse-content text-base">
+      <div class="tiny-spacer"></div>
+      {@html m.faq_questions_q4_content()}
+      <div class="spacer"></div>
+    </div>
   </div>
   <div class="collapse-plus bg-base-100 border-base-300 collapse border">
     <input type="radio" name="faq-accordion" />
     <div class="collapse-title font-semibold">{m.faq_questions_q5_title()}</div>
-    <div class="collapse-content text-base"><div class="tiny-spacer"></div>{@html m.faq_questions_q5_content()}<div class="spacer"></div></div>
+    <div class="collapse-content text-base">
+      <div class="tiny-spacer"></div>
+      {@html m.faq_questions_q5_content()}
+      <div class="spacer"></div>
+    </div>
   </div>
   <div class="collapse-plus bg-base-100 border-base-300 collapse border">
     <input type="radio" name="faq-accordion" />
     <div class="collapse-title font-semibold">{m.faq_questions_q6_title()}</div>
-    <div class="collapse-content text-base"><div class="tiny-spacer"></div>{@html m.faq_questions_q6_content()}<div class="spacer"></div></div>
+    <div class="collapse-content text-base">
+      <div class="tiny-spacer"></div>
+      {@html m.faq_questions_q6_content()}
+      <div class="spacer"></div>
+    </div>
   </div>
   <div class="collapse-plus bg-base-100 border-base-300 collapse border">
     <input type="radio" name="faq-accordion" />
     <div class="collapse-title font-semibold">{m.faq_questions_q7_title()}</div>
-    <div class="collapse-content text-base"><div class="tiny-spacer"></div>{@html m.faq_questions_q7_content()}<div class="spacer"></div></div>
+    <div class="collapse-content text-base">
+      <div class="tiny-spacer"></div>
+      {@html m.faq_questions_q7_content()}
+      <div class="spacer"></div>
+    </div>
   </div>
   <div class="collapse-plus bg-base-100 border-base-300 collapse border">
     <input type="radio" name="faq-accordion" />
     <div class="collapse-title font-semibold">{m.faq_questions_q8_title()}</div>
-    <div class="collapse-content text-base"><div class="tiny-spacer"></div>{@html m.faq_questions_q8_content()}<div class="spacer"></div></div>
+    <div class="collapse-content text-base">
+      <div class="tiny-spacer"></div>
+      {@html m.faq_questions_q8_content()}
+      <div class="spacer"></div>
+    </div>
   </div>
   <div class="collapse-plus bg-base-100 border-base-300 collapse border">
     <input type="radio" name="faq-accordion" />
     <div class="collapse-title font-semibold">{m.faq_questions_q9_title()}</div>
-    <div class="collapse-content text-base"><div class="tiny-spacer"></div>{@html m.faq_questions_q9_content()}<div class="spacer"></div></div>
+    <div class="collapse-content text-base">
+      <div class="tiny-spacer"></div>
+      {@html m.faq_questions_q9_content()}
+      <div class="spacer"></div>
+    </div>
   </div>
   <div class="collapse-plus bg-base-100 border-base-300 collapse border">
     <input type="radio" name="faq-accordion" />
     <div class="collapse-title font-semibold">{m.faq_questions_q10_title()}</div>
-    <div class="collapse-content text-base"><div class="tiny-spacer"></div>{@html m.faq_questions_q10_content()}<div class="spacer"></div></div>
+    <div class="collapse-content text-base">
+      <div class="tiny-spacer"></div>
+      {@html m.faq_questions_q10_content()}
+      <div class="spacer"></div>
+    </div>
   </div>
   <div class="collapse-plus bg-base-100 border-base-300 collapse border">
     <input type="radio" name="faq-accordion" />
     <div class="collapse-title font-semibold">{m.faq_questions_q11_title()}</div>
-    <div class="collapse-content text-base"><div class="tiny-spacer"></div>{@html m.faq_questions_q11_content()}<div class="spacer"></div></div>
+    <div class="collapse-content text-base">
+      <div class="tiny-spacer"></div>
+      {@html m.faq_questions_q11_content()}
+      <div class="spacer"></div>
+    </div>
   </div>
   <div class="collapse-plus bg-base-100 border-base-300 collapse border">
     <input type="radio" name="faq-accordion" />
     <div class="collapse-title font-semibold">{m.faq_questions_q12_title()}</div>
-    <div class="collapse-content text-base"><div class="tiny-spacer"></div>{@html m.faq_questions_q12_content()}<div class="spacer"></div></div>
+    <div class="collapse-content text-base">
+      <div class="tiny-spacer"></div>
+      {@html m.faq_questions_q12_content()}
+      <div class="spacer"></div>
+    </div>
   </div>
   <div class="collapse-plus bg-base-100 border-base-300 collapse border">
     <input type="radio" name="faq-accordion" />
     <div class="collapse-title font-semibold">{m.faq_questions_q13_title()}</div>
-    <div class="collapse-content text-base"><div class="tiny-spacer"></div>{@html m.faq_questions_q13_content()}<div class="spacer"></div></div>
+    <div class="collapse-content text-base">
+      <div class="tiny-spacer"></div>
+      {@html m.faq_questions_q13_content()}
+      <div class="spacer"></div>
+    </div>
   </div>
   <div class="collapse-plus bg-base-100 border-base-300 collapse border">
     <input type="radio" name="faq-accordion" />
     <div class="collapse-title font-semibold">{m.faq_questions_q14_title()}</div>
-    <div class="collapse-content text-base"><div class="tiny-spacer"></div>{@html m.faq_questions_q14_content()}<div class="spacer"></div></div>
+    <div class="collapse-content text-base">
+      <div class="tiny-spacer"></div>
+      {@html m.faq_questions_q14_content()}
+      <div class="spacer"></div>
+    </div>
   </div>
   <div class="collapse-plus bg-base-100 border-base-300 collapse border">
     <input type="radio" name="faq-accordion" />
     <div class="collapse-title font-semibold">{m.faq_questions_q15_title()}</div>
-    <div class="collapse-content text-base"><div class="tiny-spacer"></div>{@html m.faq_questions_q15_content()}<div class="spacer"></div></div>
+    <div class="collapse-content text-base">
+      <div class="tiny-spacer"></div>
+      {@html m.faq_questions_q15_content()}
+      <div class="spacer"></div>
+    </div>
   </div>
 </div>
 
@@ -147,19 +207,9 @@
   {#if submitted}
     <!-- svelte-ignore a11y_click_events_have_key_events -->
     <!-- svelte-ignore a11y_no_static_element_interactions -->
-    <div
-      class="success-container mt-8 cursor-pointer py-12 text-center"
-      class:fade-out={fadingOut}
-      onclick={resetForm}
-    >
+    <div class="success-container mt-8 cursor-pointer py-12 text-center" class:fade-out={fadingOut} onclick={resetForm}>
       <div class="mb-6">
-        <svg
-          class="text-success mx-auto h-24 w-24 animate-pulse"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg class="text-success mx-auto h-24 w-24 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
         </svg>
       </div>
@@ -213,7 +263,7 @@
     @apply text-xl;
   }
   .collapse-content {
-    @apply pl-6 pr-8 text-lg leading-normal font-light;
+    @apply pr-8 pl-6 text-lg leading-normal font-light;
   }
   .collapse input[type='radio']:checked ~ .collapse-title,
   .collapse input[type='radio']:checked ~ .collapse-content {

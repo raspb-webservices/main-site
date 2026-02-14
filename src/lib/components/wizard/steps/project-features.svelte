@@ -25,9 +25,7 @@
         <div class="card-actions items-center justify-between">
           {#if feature.basePrice != 0}
             <div class="badge">~ {feature.basePrice} €</div>
-          {:else}
-            {#if feature.isSideProject}<div class="badge">{m.wizard_features_badge_side_project()}</div>{/if}
-          {/if}
+          {:else if feature.isSideProject}<div class="badge">{m.wizard_features_badge_side_project()}</div>{/if}
           <div class="badge {featureCategoryColors[feature.category ?? ''] || 'badge-info'}">
             {(m as unknown as Record<string, () => string>)['wizard.features.categories.' + feature.category]?.() ?? feature.category}
           </div>

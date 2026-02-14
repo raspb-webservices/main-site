@@ -1,6 +1,9 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "login_meta_title": "Login Page - raspb Webservices",
-  "login_meta_description": "Isolated login page of raspb Webservices UG (in formation)",
-  "imprint_title": "Login Page"
+  "login_loginButton": "Login",
+  "login_meta_description": "You can log in here",
+  "login_meta_title": "Login",
+  "login_registerButton": "Register",
+  "login_teaser": "If you want to access your own dashboard or use the extended configurator, you must be logged in.",
+  "login_title": "Please log in"
 }

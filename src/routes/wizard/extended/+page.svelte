@@ -86,7 +86,8 @@
   <Section>
     <div class="prose">
       <h1>
-        {m.extendedProjectWizard_wizard_title()} <span class="inner-text-special">{m.extendedProjectWizard_wizard_titleHighlight()}</span>{m.extendedProjectWizard_wizard_titleSuffix()}
+        {m.extendedProjectWizard_wizard_title()}
+        <span class="inner-text-special">{m.extendedProjectWizard_wizard_titleHighlight()}</span>{m.extendedProjectWizard_wizard_titleSuffix()}
       </h1>
       <p class="teaser">
         {m.extendedProjectWizard_wizard_teaser()}

@@ -79,7 +79,7 @@
     </div>
 
     <div class="spacer"></div>
-    
+
     <p>
       {m.privacyNotice_section3_responsibleBody_text2()}
     </p>

@@ -38,7 +38,10 @@
       <div class="thank-you-info">
         <p><strong>{m.wizard_modals_thankYou_projectName()}</strong><br /> {config.name}</p>
         <p><strong>{m.wizard_modals_thankYou_estimatedPrice()}</strong> {config.estimatedPrice.toLocaleString()} €</p>
-        <p><strong>{m.wizard_modals_thankYou_projectType()}</strong><br /> {(m as unknown as Record<string, () => string>)[projectTypesWebApp.find((p) => p.id === config.projectType) + '.title']()}</p>
+        <p>
+          <strong>{m.wizard_modals_thankYou_projectType()}</strong><br />
+          {(m as unknown as Record<string, () => string>)[projectTypesWebApp.find((p) => p.id === config.projectType) + '.title']()}
+        </p>
       </div>
     </div>
     <div class="thank-you-actions">

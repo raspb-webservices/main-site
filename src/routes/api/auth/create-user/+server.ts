@@ -5,28 +5,28 @@ import { validateBody, validationErrorResponse } from '$lib/server/validate.serv
 import { createUserSchema } from '$lib/server/schemas/auth.schema';
 
 export const POST: RequestHandler = async ({ request }) => {
-	let body;
-	try {
-		body = validateBody(createUserSchema, await request.json());
-	} catch (error) {
-		return validationErrorResponse(error);
-	}
+  let body;
+  try {
+    body = validateBody(createUserSchema, await request.json());
+  } catch (error) {
+    return validationErrorResponse(error);
+  }
 
-	try {
-		const auth0User = await createUser({
-			email: body.email,
-			password: body.password,
-			given_name: body.givenName,
-			family_name: body.familyName,
-			user_metadata: body.user_metadata,
-			connection: 'Username-Password-Authentication'
-		});
+  try {
+    const auth0User = await createUser({
+      email: body.email,
+      password: body.password,
+      given_name: body.givenName,
+      family_name: body.familyName,
+      user_metadata: body.user_metadata,
+      connection: 'Username-Password-Authentication'
+    });
 
-		return new Response(JSON.stringify(auth0User), {
-			status: 201,
-			headers: { 'Content-Type': 'application/json' }
-		});
-	} catch (error) {
-		return apiErrorResponse(error);
-	}
+    return new Response(JSON.stringify(auth0User), {
+      status: 201,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  } catch (error) {
+    return apiErrorResponse(error);
+  }
 };

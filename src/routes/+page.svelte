@@ -70,10 +70,7 @@
           goto(localizeHref('/wizard'));
         }}>{m.homepage_hero_buttonText()}</button
       >
-      <button
-        class="btn-inverted-outline animate-fade-in-from-side"
-        onclick={openGetAnAppointmentModal}>{m.homepage_hero_buttonText2()}</button
-      >
+      <button class="btn-inverted-outline animate-fade-in-from-side" onclick={openGetAnAppointmentModal}>{m.homepage_hero_buttonText2()}</button>
     </div>
   </div>
 </Stage>
@@ -141,7 +138,10 @@
   <Section customColor={'#fafafa'}>
     <div class="inner-section-wrapper">
       <div class="intro prose pt-10 md:pt-0">
-        <h1>{m.homepage_offering_titleFirst()} <span class="inner-text-special">{m.homepage_offering_titleHighlight()}</span> {m.homepage_offering_titleSecond()}</h1>
+        <h1>
+          {m.homepage_offering_titleFirst()} <span class="inner-text-special">{m.homepage_offering_titleHighlight()}</span>
+          {m.homepage_offering_titleSecond()}
+        </h1>
         <p class="teaser">{m.homepage_offering_subtitle()}</p>
       </div>
     </div>
@@ -223,7 +223,8 @@
     <div class="inner-section-wrapper">
       <div class="intro-wide prose">
         <h1>
-          {m.homepage_features_titleFirst()} <span class="inner-text-special">{m.homepage_features_titleHighlight()}</span> -<br />{m.homepage_features_titleSecond()}
+          {m.homepage_features_titleFirst()} <span class="inner-text-special">{m.homepage_features_titleHighlight()}</span> -<br
+          />{m.homepage_features_titleSecond()}
         </h1>
         <p class="teaser">{@html m.homepage_features_subtitle()}</p>
       </div>

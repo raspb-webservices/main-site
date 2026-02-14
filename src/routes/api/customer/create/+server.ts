@@ -77,7 +77,7 @@ export const POST: RequestHandler = async ({ request }) => {
           salutation
         }
       }
-      `;
+    `;
 
     const variables = {
       address: customerData.address || null,

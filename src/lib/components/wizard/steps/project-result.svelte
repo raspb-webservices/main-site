@@ -73,8 +73,10 @@
         <div class="card-body">
           <h3 class="card-title">{m.wizard_steps_stepSummary_selectedFeatures()}</h3>
           <div class="flex flex-wrap gap-2">
-            {#each (config.features ?? []) as featureId}
-              <div class="badge badge-primary">{(m as unknown as Record<string, () => string>)[availableFeatures.find((f) => f.id === featureId)?.title ?? '']?.()}</div>
+            {#each config.features ?? [] as featureId}
+              <div class="badge badge-primary">
+                {(m as unknown as Record<string, () => string>)[availableFeatures.find((f) => f.id === featureId)?.title ?? '']?.()}
+              </div>
             {/each}
           </div>
         </div>
@@ -86,7 +88,7 @@
         <div class="card-body">
           <h3 class="card-title">{m.wizard_steps_stepSummary_pagesSections()}</h3>
           <div class="flex flex-wrap items-center gap-2">
-            {#each (config.pages ?? []) as page}
+            {#each config.pages ?? [] as page}
               {#if page.name.trim()}
                 <div class="badge badge-outline">{page.name}</div>
               {/if}
@@ -101,10 +103,12 @@
         <div class="card-body">
           <h3 class="card-title">{m.wizard_steps_stepSummary_formFields()}</h3>
           <div class="space-y-1">
-            {#each (config.formFields ?? []) as field}
+            {#each config.formFields ?? [] as field}
               {#if field.name.trim()}
                 <div class="flex items-center gap-2">
-                  <div class="badge badge-outline">{(m as unknown as Record<string, () => string>)[formFieldTypes.find((f) => f.id === field.type)?.title ?? '']?.()}</div>
+                  <div class="badge badge-outline">
+                    {(m as unknown as Record<string, () => string>)[formFieldTypes.find((f) => f.id === field.type)?.title ?? '']?.()}
+                  </div>
                   <span class="text-sm">{field.name}</span>
                   {#if field.required}
                     <div class="badge badge-error badge-xs">{m.wizard_steps_stepSummary_required()}</div>

@@ -26,22 +26,34 @@
 <div class="summary-grid">
   <div class="summary-card">
     <h3>{m.wizard_stepSummary_projectCategory()}</h3>
-    <p class="summary-value">{(m as unknown as Record<string, () => string>)[projectCategories?.find((p) => p.id === config.projectCategory)?.title ?? '']?.()}</p>
+    <p class="summary-value">
+      {(m as unknown as Record<string, () => string>)[projectCategories?.find((p) => p.id === config.projectCategory)?.title ?? '']?.()}
+    </p>
   </div>
 
   <div class="summary-card">
     <h3>{m.wizard_stepSummary_projectType()}</h3>
     {#if config.projectCategory === 'websites-and-apps'}
-      <p class="summary-value">{(m as unknown as Record<string, () => string>)[projectTypesWebApp?.find((p) => p.id === config.projectType)?.title ?? '']?.()}</p>
+      <p class="summary-value">
+        {(m as unknown as Record<string, () => string>)[projectTypesWebApp?.find((p) => p.id === config.projectType)?.title ?? '']?.()}
+      </p>
       {#if config.projectType === 'website'}
-        <p class="summary-subvalue">{(m as unknown as Record<string, () => string>)[projectSubTypesWebsite?.find((p) => p.id === config.subType)?.title ?? '']?.()}</p>
+        <p class="summary-subvalue">
+          {(m as unknown as Record<string, () => string>)[projectSubTypesWebsite?.find((p) => p.id === config.subType)?.title ?? '']?.()}
+        </p>
       {:else}
-        <p class="summary-subvalue">{(m as unknown as Record<string, () => string>)[projectSubTypesApp?.find((p) => p.id === config.subType)?.title ?? '']?.()}</p>
+        <p class="summary-subvalue">
+          {(m as unknown as Record<string, () => string>)[projectSubTypesApp?.find((p) => p.id === config.subType)?.title ?? '']?.()}
+        </p>
       {/if}
     {:else}
-      <p class="summary-value">{(m as unknown as Record<string, () => string>)[projectTypesAiFreestyle?.find((p) => p.id === config.projectType)?.title ?? '']?.()}</p>
+      <p class="summary-value">
+        {(m as unknown as Record<string, () => string>)[projectTypesAiFreestyle?.find((p) => p.id === config.projectType)?.title ?? '']?.()}
+      </p>
       {#if config.subType !== ''}
-        <p class="summary-subvalue">{(m as unknown as Record<string, () => string>)[projectSubTypesAi?.find((p) => p.id === config.subType)?.title ?? '']?.()}</p>
+        <p class="summary-subvalue">
+          {(m as unknown as Record<string, () => string>)[projectSubTypesAi?.find((p) => p.id === config.subType)?.title ?? '']?.()}
+        </p>
       {/if}
     {/if}
   </div>
@@ -82,18 +94,17 @@
     </svg>
     {m.wizard_navigation_projectRequest()}
   </button>
-  <div class="tooltip" data-tip="{m.wizard_navigation_register_tooltip()}">
-      <button
-    type="button"
-    class="btn btn-simple btn-lg"
-    onclick={() => {
-      goto(localizeHref('/registration'));
-    }}
-  >
-    {m.wizard_navigation_register()}
-  </button>
+  <div class="tooltip" data-tip={m.wizard_navigation_register_tooltip()}>
+    <button
+      type="button"
+      class="btn btn-simple btn-lg"
+      onclick={() => {
+        goto(localizeHref('/registration'));
+      }}
+    >
+      {m.wizard_navigation_register()}
+    </button>
   </div>
-
 </div>
 
 <style lang="postcss">

@@ -26,7 +26,7 @@
         try {
           return JSON.parse(tokenString);
         } catch (e) {
-      throw new Error(m.dashboard_setup_error_invalid_json());
+          throw new Error(m.dashboard_setup_error_invalid_json());
         }
       };
 
@@ -171,12 +171,7 @@
             <div class="form-control">
               <label class="label cursor-pointer" for="github-isConfigured">
                 <span class="label-text">{m.dashboard_setup_label_configured()}</span>
-                <input
-                  id="github-isConfigured"
-                  type="checkbox"
-                  bind:checked={setupForm.github.isConfigured}
-                  class="checkbox checkbox-primary"
-                />
+                <input id="github-isConfigured" type="checkbox" bind:checked={setupForm.github.isConfigured} class="checkbox checkbox-primary" />
               </label>
             </div>
           </div>
@@ -237,12 +232,7 @@
             <div class="form-control">
               <label class="label cursor-pointer" for="netlify-isConfigured">
                 <span class="label-text">{m.dashboard_setup_label_configured()}</span>
-                <input
-                  id="netlify-isConfigured"
-                  type="checkbox"
-                  bind:checked={setupForm.netlify.isConfigured}
-                  class="checkbox checkbox-primary"
-                />
+                <input id="netlify-isConfigured" type="checkbox" bind:checked={setupForm.netlify.isConfigured} class="checkbox checkbox-primary" />
               </label>
             </div>
           </div>
@@ -303,12 +293,7 @@
             <div class="form-control">
               <label class="label cursor-pointer" for="hygraph-isConfigured">
                 <span class="label-text">{m.dashboard_setup_label_configured()}</span>
-                <input
-                  id="hygraph-isConfigured"
-                  type="checkbox"
-                  bind:checked={setupForm.hygraph.isConfigured}
-                  class="checkbox checkbox-primary"
-                />
+                <input id="hygraph-isConfigured" type="checkbox" bind:checked={setupForm.hygraph.isConfigured} class="checkbox checkbox-primary" />
               </label>
             </div>
           </div>
@@ -330,13 +315,7 @@
               <label class="label" for="auth0-username">
                 <span class="label-text">{m.dashboard_setup_label_username()}</span>
               </label>
-              <input
-                id="auth0-username"
-                type="text"
-                bind:value={setupForm.auth0.username}
-                placeholder="Auth0 Username"
-                class="input input-bordered input-sm"
-              />
+              <input id="auth0-username" type="text" bind:value={setupForm.auth0.username} placeholder="Auth0 Username" class="input input-bordered input-sm" />
             </div>
 
             <div class="form-control">
@@ -367,12 +346,7 @@
             <div class="form-control">
               <label class="label cursor-pointer" for="auth0-isConfigured">
                 <span class="label-text">{m.dashboard_setup_label_configured()}</span>
-                <input
-                  id="auth0-isConfigured"
-                  type="checkbox"
-                  bind:checked={setupForm.auth0.isConfigured}
-                  class="checkbox checkbox-primary"
-                />
+                <input id="auth0-isConfigured" type="checkbox" bind:checked={setupForm.auth0.isConfigured} class="checkbox checkbox-primary" />
               </label>
             </div>
           </div>

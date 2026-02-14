@@ -5,7 +5,7 @@
   import FOOTER from '$lib/components/footer.svelte';
   import LottieLoader from '$lib/components/lottie-loader.svelte';
   import CookieConsentComponent from '$lib/components/cookie-consent.svelte';
-  import "flag-icons/css/flag-icons.min.css";
+  import 'flag-icons/css/flag-icons.min.css';
   import { m } from '$lib/paraglide/messages';
   import { getLocale } from '$lib/paraglide/runtime';
 

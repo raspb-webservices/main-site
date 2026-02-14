@@ -892,7 +892,14 @@
                 <label class="label" for="budget">
                   <span class="label-text">{m.dashboard_details_label_budget()}</span>
                 </label>
-                <input type="text" bind:value={editForm.budget} id="budget" name="budget" class="input input-bordered input-sm" placeholder={m.dashboard_edit_placeholder_budget()} />
+                <input
+                  type="text"
+                  bind:value={editForm.budget}
+                  id="budget"
+                  name="budget"
+                  class="input input-bordered input-sm"
+                  placeholder={m.dashboard_edit_placeholder_budget()}
+                />
               </div>
 
               <div class="form-control">
@@ -1395,7 +1402,9 @@
                   </div>
                   <div class="flex justify-between">
                     <span class="text-base-content/60">Auth Tokens:</span>
-                    <span>{selectedProject?.setup?.github?.authTokens ? m.dashboard_edit_status_tokens_present() : m.dashboard_edit_status_tokens_missing()}</span>
+                    <span
+                      >{selectedProject?.setup?.github?.authTokens ? m.dashboard_edit_status_tokens_present() : m.dashboard_edit_status_tokens_missing()}</span
+                    >
                   </div>
                 </div>
               {/if}
@@ -1418,17 +1427,17 @@
                   {/if}
                 </div>
                 {#if editingSetupService !== 'netlify'}
-                    <button class="btn btn-xs btn-simple" onclick={() => editSetupService('netlify')}>
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                        />
-                      </svg>
-                      {m.dashboard_edit_button_edit()}
-                    </button>
+                  <button class="btn btn-xs btn-simple" onclick={() => editSetupService('netlify')}>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                      />
+                    </svg>
+                    {m.dashboard_edit_button_edit()}
+                  </button>
                 {/if}
               </div>
 
@@ -1536,7 +1545,9 @@
                   </div>
                   <div class="flex justify-between">
                     <span class="text-base-content/60">Auth Tokens:</span>
-                    <span>{selectedProject?.setup?.netlify?.authTokens ? m.dashboard_edit_status_tokens_present() : m.dashboard_edit_status_tokens_missing()}</span>
+                    <span
+                      >{selectedProject?.setup?.netlify?.authTokens ? m.dashboard_edit_status_tokens_present() : m.dashboard_edit_status_tokens_missing()}</span
+                    >
                   </div>
                 </div>
               {/if}
@@ -1559,17 +1570,17 @@
                   {/if}
                 </div>
                 {#if editingSetupService !== 'hygraph'}
-                    <button class="btn btn-xs btn-simple" onclick={() => editSetupService('hygraph')}>
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                        />
-                      </svg>
-                      {m.dashboard_edit_button_edit()}
-                    </button>
+                  <button class="btn btn-xs btn-simple" onclick={() => editSetupService('hygraph')}>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                      />
+                    </svg>
+                    {m.dashboard_edit_button_edit()}
+                  </button>
                 {/if}
               </div>
 
@@ -1677,7 +1688,9 @@
                   </div>
                   <div class="flex justify-between">
                     <span class="text-base-content/60">Auth Tokens:</span>
-                    <span>{selectedProject?.setup?.hygraph?.authTokens ? m.dashboard_edit_status_tokens_present() : m.dashboard_edit_status_tokens_missing()}</span>
+                    <span
+                      >{selectedProject?.setup?.hygraph?.authTokens ? m.dashboard_edit_status_tokens_present() : m.dashboard_edit_status_tokens_missing()}</span
+                    >
                   </div>
                 </div>
               {/if}
@@ -1700,17 +1713,17 @@
                   {/if}
                 </div>
                 {#if editingSetupService !== 'auth0'}
-                    <button class="btn btn-xs btn-simple" onclick={() => editSetupService('auth0')}>
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                        />
-                      </svg>
-                      {m.dashboard_edit_button_edit()}
-                    </button>
+                  <button class="btn btn-xs btn-simple" onclick={() => editSetupService('auth0')}>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                      />
+                    </svg>
+                    {m.dashboard_edit_button_edit()}
+                  </button>
                 {/if}
               </div>
 
@@ -1818,7 +1831,9 @@
                   </div>
                   <div class="flex justify-between">
                     <span class="text-base-content/60">Auth Tokens:</span>
-                    <span>{selectedProject?.setup?.auth0?.authTokens ? m.dashboard_edit_status_tokens_present() : m.dashboard_edit_status_tokens_missing()}</span>
+                    <span
+                      >{selectedProject?.setup?.auth0?.authTokens ? m.dashboard_edit_status_tokens_present() : m.dashboard_edit_status_tokens_missing()}</span
+                    >
                   </div>
                 </div>
               {/if}

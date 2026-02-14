@@ -51,9 +51,7 @@ export async function initPlausibleOnce(): Promise<void> {
   const domain = PUBLIC_PLAUSIBLE_DOMAIN;
   if (!domain) {
     if (import.meta.env.DEV) {
-      console.warn(
-        '[plausible] PUBLIC_PLAUSIBLE_DOMAIN is not set - skipping initialization.'
-      );
+      console.warn('[plausible] PUBLIC_PLAUSIBLE_DOMAIN is not set - skipping initialization.');
     }
     return;
   }

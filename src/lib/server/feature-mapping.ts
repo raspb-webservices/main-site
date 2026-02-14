@@ -1,5 +1,5 @@
 /**
- * Mapping von englischen Feature-IDs (aus wizard-config.ts) 
+ * Mapping von englischen Feature-IDs (aus wizard-config.ts)
  * zu deutschen Hygraph Enum-Werten
  */
 export const featureMapping: Record<string, string> = {
@@ -62,7 +62,5 @@ export const featureMapping: Record<string, string> = {
  * Konvertiert englische Feature-IDs zu Hygraph Enum-Werten
  */
 export function mapFeaturesToHygraph(features: string[]): string[] {
-  return features
-    .map((feature) => featureMapping[feature])
-    .filter((mapped) => mapped !== undefined);
+  return features.map((feature) => featureMapping[feature]).filter((mapped) => mapped !== undefined);
 }

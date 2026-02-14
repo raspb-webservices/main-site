@@ -7,79 +7,74 @@ import { isAdmin } from '$lib/server/auth0-helper.server';
 import { checkRateLimit } from '$lib/server/rate-limit.server';
 
 /** Public POST-Routes die rate-limited werden */
-const RATE_LIMITED_ROUTES = [
-	'/api/mail/send',
-	'/api/project/create',
-	'/api/customer/create',
-	'/api/user-question/create'
-];
+const RATE_LIMITED_ROUTES = ['/api/mail/send', '/api/project/create', '/api/customer/create', '/api/user-question/create'];
 
 const handleAuth: Handle = async ({ event, resolve }) => {
-	event.locals.user = null;
+  event.locals.user = null;
 
-	// Nur API-Routes pruefen
-	if (!event.url.pathname.startsWith('/api/')) {
-		return resolve(event);
-	}
+  // Nur API-Routes pruefen
+  if (!event.url.pathname.startsWith('/api/')) {
+    return resolve(event);
+  }
 
-	const authLevel = getAuthLevel(event.request.method, event.url.pathname);
+  const authLevel = getAuthLevel(event.request.method, event.url.pathname);
 
-	// Rate-Limiting fuer oeffentliche POST-Endpoints
-	if (authLevel === 'public' && event.request.method === 'POST') {
-		const pathname = event.url.pathname;
-		if (RATE_LIMITED_ROUTES.some((route) => pathname.startsWith(route))) {
-			const ip = event.getClientAddress();
-			const limited = checkRateLimit(ip, pathname);
-			if (limited) return limited;
-		}
-	}
+  // Rate-Limiting fuer oeffentliche POST-Endpoints
+  if (authLevel === 'public' && event.request.method === 'POST') {
+    const pathname = event.url.pathname;
+    if (RATE_LIMITED_ROUTES.some((route) => pathname.startsWith(route))) {
+      const ip = event.getClientAddress();
+      const limited = checkRateLimit(ip, pathname);
+      if (limited) return limited;
+    }
+  }
 
-	// Public Routes brauchen keine Auth
-	if (authLevel === 'public') {
-		return resolve(event);
-	}
+  // Public Routes brauchen keine Auth
+  if (authLevel === 'public') {
+    return resolve(event);
+  }
 
-	// Token aus Authorization-Header lesen
-	const authHeader = event.request.headers.get('authorization');
-	const token = authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : null;
+  // Token aus Authorization-Header lesen
+  const authHeader = event.request.headers.get('authorization');
+  const token = authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : null;
 
-	if (!token) {
-		return new Response(JSON.stringify({ error: 'Authentication required' }), {
-			status: 401,
-			headers: { 'Content-Type': 'application/json' }
-		});
-	}
+  if (!token) {
+    return new Response(JSON.stringify({ error: 'Authentication required' }), {
+      status: 401,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
 
-	try {
-		event.locals.user = await validateIdToken(token);
-	} catch {
-		return new Response(JSON.stringify({ error: 'Invalid or expired token' }), {
-			status: 401,
-			headers: { 'Content-Type': 'application/json' }
-		});
-	}
+  try {
+    event.locals.user = await validateIdToken(token);
+  } catch {
+    return new Response(JSON.stringify({ error: 'Invalid or expired token' }), {
+      status: 401,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
 
-	// Admin-Check fuer Admin-only Routes
-	if (authLevel === 'admin') {
-		const userIsAdmin = await isAdmin(event.locals.user.sub);
-		if (!userIsAdmin) {
-			return new Response(JSON.stringify({ error: 'Admin access required' }), {
-				status: 403,
-				headers: { 'Content-Type': 'application/json' }
-			});
-		}
-	}
+  // Admin-Check fuer Admin-only Routes
+  if (authLevel === 'admin') {
+    const userIsAdmin = await isAdmin(event.locals.user.sub);
+    if (!userIsAdmin) {
+      return new Response(JSON.stringify({ error: 'Admin access required' }), {
+        status: 403,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+  }
 
-	return resolve(event);
+  return resolve(event);
 };
 
 const handleParaglide: Handle = ({ event, resolve }) =>
-	paraglideMiddleware(event.request, ({ request, locale }) => {
-		event.request = request;
+  paraglideMiddleware(event.request, ({ request, locale }) => {
+    event.request = request;
 
-		return resolve(event, {
-			transformPageChunk: ({ html }) => html.replace('%lang%', locale)
-		});
-	});
+    return resolve(event, {
+      transformPageChunk: ({ html }) => html.replace('%lang%', locale)
+    });
+  });
 
 export const handle: Handle = sequence(handleAuth, handleParaglide);

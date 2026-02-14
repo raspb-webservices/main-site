@@ -62,7 +62,10 @@
 
 <div class="contact-form">
   <div class="step-header">
-    <h1>{(m as unknown as Record<string, () => string>)['wizard_contactForm_title']()} <span class="inner-text-special">{(m as unknown as Record<string, () => string>)['wizard_contactForm_titleHighlight']()}</span></h1>
+    <h1>
+      {(m as unknown as Record<string, () => string>)['wizard_contactForm_title']()}
+      <span class="inner-text-special">{(m as unknown as Record<string, () => string>)['wizard_contactForm_titleHighlight']()}</span>
+    </h1>
     <p class="teaser">
       {(m as unknown as Record<string, () => string>)['wizard_contactForm_teaser']()}
     </p>
@@ -106,7 +109,9 @@
       <!-- Vorname -->
       <div class="form-control w-full">
         <label class="label" for="givenName">
-          <span class="label-text font-semibold">{(m as unknown as Record<string, () => string>)['wizard_contactForm_fields_givenName_label']()} <span class="text-error">*</span></span>
+          <span class="label-text font-semibold"
+            >{(m as unknown as Record<string, () => string>)['wizard_contactForm_fields_givenName_label']()} <span class="text-error">*</span></span
+          >
         </label>
         <input
           type="text"
@@ -123,7 +128,9 @@
       <!-- Nachname -->
       <div class="form-control w-full">
         <label class="label" for="familyName">
-          <span class="label-text font-semibold">{(m as unknown as Record<string, () => string>)['wizard_contactForm_fields_familyName_label']()} <span class="text-error">*</span></span>
+          <span class="label-text font-semibold"
+            >{(m as unknown as Record<string, () => string>)['wizard_contactForm_fields_familyName_label']()} <span class="text-error">*</span></span
+          >
         </label>
         <input
           type="text"
@@ -140,7 +147,9 @@
       <!-- E-Mail -->
       <div class="form-control w-full md:col-span-2">
         <label class="label" for="email">
-          <span class="label-text font-semibold">{(m as unknown as Record<string, () => string>)['wizard_contactForm_fields_email_label']()} <span class="text-error">*</span></span>
+          <span class="label-text font-semibold"
+            >{(m as unknown as Record<string, () => string>)['wizard_contactForm_fields_email_label']()} <span class="text-error">*</span></span
+          >
         </label>
         <input
           type="email"
@@ -248,7 +257,9 @@
       <!-- Password -->
       <div class="form-control w-full md:col-span-2">
         <label class="label" for="password">
-          <span class="label-text font-semibold">{(m as unknown as Record<string, () => string>)['wizard_contactForm_fields_password_label']()} <span class="text-error">*</span></span>
+          <span class="label-text font-semibold"
+            >{(m as unknown as Record<string, () => string>)['wizard_contactForm_fields_password_label']()} <span class="text-error">*</span></span
+          >
         </label>
         <input
           type="password"
@@ -270,7 +281,9 @@
       <!-- Password Confirmation -->
       <div class="form-control w-full md:col-span-2">
         <label class="label" for="passwordConfirm">
-          <span class="label-text font-semibold">{(m as unknown as Record<string, () => string>)['wizard_contactForm_fields_passwordConfirm_label']()} <span class="text-error">*</span></span>
+          <span class="label-text font-semibold"
+            >{(m as unknown as Record<string, () => string>)['wizard_contactForm_fields_passwordConfirm_label']()} <span class="text-error">*</span></span
+          >
         </label>
         <input
           type="password"
@@ -284,7 +297,9 @@
         />
         {#if customerData.passwordConfirm && customerData.password !== customerData.passwordConfirm}
           <div class="label">
-            <span class="label-text-alt text-error">{(m as unknown as Record<string, () => string>)['wizard_contactForm_fields_passwordConfirm_validation']()}</span>
+            <span class="label-text-alt text-error"
+              >{(m as unknown as Record<string, () => string>)['wizard_contactForm_fields_passwordConfirm_validation']()}</span
+            >
           </div>
         {/if}
       </div>
@@ -300,7 +315,9 @@
           <div class="font-bold">{(m as unknown as Record<string, () => string>)['wizard_contactForm_privacy_title']()}</div>
           <div class="text-sm">
             {(m as unknown as Record<string, () => string>)['wizard_contactForm_privacy_description']()}
-            <a href="/privacy-notice" class="link link-primary" target="_blank">{(m as unknown as Record<string, () => string>)['wizard_contactForm_privacy_link']()}</a>.
+            <a href="/privacy-notice" class="link link-primary" target="_blank"
+              >{(m as unknown as Record<string, () => string>)['wizard_contactForm_privacy_link']()}</a
+            >.
           </div>
         </div>
       </div>

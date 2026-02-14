@@ -163,7 +163,8 @@
               </div>
               <input type="range" min="0" max="100" bind:value={cmsComplexity} class="custom-slider complexity-slider" />
               <div class="slider-value">
-                {m.wizard_basic_cms_complexity_prefix()} {cmsComplexity < 25
+                {m.wizard_basic_cms_complexity_prefix()}
+                {cmsComplexity < 25
                   ? m.wizard_basic_cms_complexity_level1()
                   : cmsComplexity < 50
                     ? m.wizard_basic_cms_complexity_level2()
@@ -242,8 +243,12 @@
         <div class="form-section">
           <div class="slider-container">
             <div class="slider-labels">
-              <span class="slider-label-left">{m.wizard_basic_engineering_slider_left()}<br /><small>{m.wizard_basic_engineering_slider_left_sub()}</small></span>
-              <span class="slider-label-right">{m.wizard_basic_engineering_slider_right()}<br /><small>{m.wizard_basic_engineering_slider_right_sub()}</small></span>
+              <span class="slider-label-left"
+                >{m.wizard_basic_engineering_slider_left()}<br /><small>{m.wizard_basic_engineering_slider_left_sub()}</small></span
+              >
+              <span class="slider-label-right"
+                >{m.wizard_basic_engineering_slider_right()}<br /><small>{m.wizard_basic_engineering_slider_right_sub()}</small></span
+              >
             </div>
             <input type="range" min="0" max="100" bind:value={engineeringApproach} class="custom-slider engineering-slider" />
             <div class="slider-value">
@@ -275,12 +280,7 @@
         </p>
 
         <div class="form-section">
-          <textarea
-            bind:value={specialRequirements}
-            placeholder={m.wizard_basic_requirements_placeholder()}
-            class="form-textarea"
-            rows="5"
-          ></textarea>
+          <textarea bind:value={specialRequirements} placeholder={m.wizard_basic_requirements_placeholder()} class="form-textarea" rows="5"></textarea>
         </div>
       </div>
     </div>
@@ -296,12 +296,7 @@
         <p class="card-description">{m.wizard_basic_goal_description()}</p>
 
         <div class="form-section">
-          <textarea
-            bind:value={projectGoal}
-            placeholder={m.wizard_basic_goal_placeholder()}
-            class="form-textarea"
-            rows="5"
-          ></textarea>
+          <textarea bind:value={projectGoal} placeholder={m.wizard_basic_goal_placeholder()} class="form-textarea" rows="5"></textarea>
         </div>
       </div>
     </div>
@@ -317,12 +312,7 @@
         <p class="card-description">{m.wizard_basic_audience_description()}</p>
 
         <div class="form-section">
-          <textarea
-            bind:value={targetAudience}
-            placeholder={m.wizard_basic_audience_placeholder()}
-            class="form-textarea"
-            rows="4"
-          ></textarea>
+          <textarea bind:value={targetAudience} placeholder={m.wizard_basic_audience_placeholder()} class="form-textarea" rows="4"></textarea>
         </div>
       </div>
     </div>
@@ -465,7 +455,7 @@
       @apply mb-4 flex items-center justify-start;
 
       .card-icon {
-        @apply text-3xl pr-2;
+        @apply pr-2 text-3xl;
       }
     }
 

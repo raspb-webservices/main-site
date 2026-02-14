@@ -5,15 +5,12 @@ import { idToken } from '$store/sharedStates.svelte';
  * als Authorization-Header mitsendet (wenn vorhanden).
  * Fuer geschuetzte API-Routes verwenden.
  */
-export async function authFetch(
-	url: string,
-	options: RequestInit = {}
-): Promise<Response> {
-	const headers = new Headers(options.headers);
+export async function authFetch(url: string, options: RequestInit = {}): Promise<Response> {
+  const headers = new Headers(options.headers);
 
-	if (idToken.value) {
-		headers.set('Authorization', `Bearer ${idToken.value}`);
-	}
+  if (idToken.value) {
+    headers.set('Authorization', `Bearer ${idToken.value}`);
+  }
 
-	return fetch(url, { ...options, headers });
+  return fetch(url, { ...options, headers });
 }

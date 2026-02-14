@@ -128,7 +128,11 @@
       <div class="drawer drawer-end">
         <input id="mobile-navigation" type="checkbox" class="drawer-toggle" bind:checked={mobileNavOpen} />
         <div class="drawer-content">
-          <label for="mobile-navigation" aria-label={m.header_open_menu()} class="drawer-button text-text-base-content hover:text-primary block h-11 cursor-pointer rounded-full p-1">
+          <label
+            for="mobile-navigation"
+            aria-label={m.header_open_menu()}
+            class="drawer-button text-text-base-content hover:text-primary block h-11 cursor-pointer rounded-full p-1"
+          >
             <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 512 512" aria-hidden="true">
               <path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" />
             </svg>
