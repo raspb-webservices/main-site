@@ -14,6 +14,7 @@
       "./messages/pages/services/{locale}.json",
       "./messages/pages/insights/{locale}.json",
       "./messages/pages/contact/{locale}.json",
+      "./messages/pages/login/{locale}.json",
       "./messages/pages/about-us/{locale}.json",
       "./messages/pages/faq/{locale}.json",
       "./messages/pages/dashboard/{locale}.json",

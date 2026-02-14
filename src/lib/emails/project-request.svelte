@@ -47,7 +47,7 @@
     return map[range] || range;
   }
 
-  const owner = projectData.owner || {};
+  let owner = $derived(projectData.owner || {});
   const salutationMap: Record<string, string> = {
     mr: 'Herr',
     mrs: 'Frau',

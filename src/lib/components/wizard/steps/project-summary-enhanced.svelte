@@ -218,7 +218,7 @@
   {#if (config.subType === 'cms' || config.subType === 'cmsPlus') && config.cmsComplexity !== undefined}
     <section class="summary-section">
       <h2 class="section-title">📝 CMS-Details</h2>
-      <div class="text-card">
+      <div class="slider-card">
         <div class="card-label">Komplexität</div>
         <div class="slider-visual">
           <div class="slider-track">
@@ -248,7 +248,7 @@
         {#each (config.features ?? []).filter((f: string) => f !== 'cookieConsent') as featureId}
           {@const feature = availableFeatures.find((f) => f.id === featureId)}
           {#if feature}
-            <div class="feature-badge {featureCategoryColors[feature.category] || 'badge-info'}">
+            <div class="feature-badge {featureCategoryColors[feature.category ?? ''] || 'badge-info'}">
               {(m as unknown as Record<string, () => string>)[feature.title]?.()}
             </div>
           {/if}
