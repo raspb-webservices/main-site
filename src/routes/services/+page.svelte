@@ -5,23 +5,7 @@
   import Stage from '$lib/components/ui/stage.svelte';
   import Section from '$lib/components/ui/section.svelte';
   import CTABox from '$lib/components/snippets/cta-box.svelte';
-  import ServiceModal from '$lib/components/modals/services/service-modal.svelte';
-  import { serviceModalConfigs } from '$lib/configs/service-modal-config';
   import { localizeHref } from '$lib/paraglide/runtime';
-
-  const handleHashChange = (event: HashChangeEvent) => {
-    const newHash = new URL(event.newURL).hash.slice(1);
-    setTimeout(() => {
-      scrollToSection(newHash);
-    }, 250);
-  };
-
-  function openModal(modalId: string) {
-    const modal = document.getElementById(modalId) as HTMLDialogElement;
-    if (modal) {
-      modal.showModal();
-    }
-  }
 
   function scrollToSection(sectionId: string) {
     const element = document.getElementById(sectionId);
@@ -35,619 +19,183 @@
 
   onMount(() => {
     const { hash } = document.location;
-    const scrollTo = hash && document.getElementById(hash.slice(1));
-    if (scrollTo)
-      scrollTo.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    window.addEventListener('hashchange', handleHashChange);
-    return () => {
-      window.removeEventListener('hashchange', handleHashChange);
-    };
+    if (hash) scrollToSection(hash.slice(1));
   });
 </script>
 
 <svelte:head>
-  <title>{m.servicesPage_meta_title()}</title>
-  <meta name="description" content={m.servicesPage_meta_description()} />
-  <meta property="og:title" content={m.servicesPage_meta_title()} />
-  <meta property="og:description" content={m.servicesPage_meta_description()} />
+  <title>Agent-Native Services | raspb Webservices</title>
+  <meta name="description" content="Hör auf, Tools zu kaufen. Fang an, Agenten einzustellen. Wir transformieren Ihr Business mit Agent-Native Lösungen." />
 </svelte:head>
 
+<!-- Hero Section -->
 <Stage style={'basic-gradient'}>
   <div class="inner-box reduced prose py-36">
-    <h1 class="massive animate-fade-in-up">{m.servicesPage_hero_title()}</h1>
-    <p class="teaser animate-fade-in-up">{m.servicesPage_hero_subtitle()}</p>
-    <button
-      class="btn-basic animate-fade-in-from-side"
-      onclick={() => {
-        goto(localizeHref('/wizard'));
-      }}>{m.servicesPage_hero_buttonText()}</button
-    >
+    <div class="badge badge-outline badge-primary animate-fade-in mb-4">The Future is Agent-Native</div>
+    <h1 class="massive animate-fade-in-up">
+        Hör auf, Tools zu kaufen. <br/>
+        <span class="inner-text-special">Fang an, Agenten einzustellen.</span>
+    </h1>
+    <p class="teaser animate-fade-in-up">
+        Die Ära der "Werkzeuge" ist vorbei. Wir bauen <strong>Agent-Native Businesses</strong>: 
+        Digitale Ökosysteme, in denen KI nicht nur unterstützt, sondern autonom handelt, entscheidet und wächst.
+    </p>
+    <div class="flex gap-4 animate-fade-in-up">
+        <button
+          class="btn-basic"
+          onclick={() => goto(localizeHref('/wizard'))}>
+          Projekt konfigurieren
+        </button>
+        <button
+          class="btn btn-outline btn-lg"
+          onclick={() => scrollToSection('vision')}>
+          Vision entdecken
+        </button>
+    </div>
   </div>
 </Stage>
 
-<Section type={'centerTeaser'}>
-  <div class="massive-spacer"></div>
+<!-- The Manifest Section -->
+<Section id="vision">
+    <div class="massive-spacer"></div>
+    <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+        <div class="prose animate-fadeIn">
+            <h2 class="text-4xl font-bold">Agent-Native: <span class="inner-text-special">KI als Fundament, nicht als Add-on.</span></h2>
+            <p class="text-xl italic">
+                "Not just another Custom GPT. Wir bauen echte agentische Systeme mit Wissen, Integrationen und Autonomie."
+            </p>
+            <div class="space-y-6 mt-8">
+                <div class="flex gap-4">
+                    <div class="text-primary text-2xl font-bold">01</div>
+                    <div>
+                        <h4 class="font-bold">Echte Autonomie</h4>
+                        <p>Unsere Agenten führen Aufgaben von A bis Z aus, treffen Entscheidungen und lernen dazu, statt nur Texte zu generieren.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="text-primary text-2xl font-bold">02</div>
+                    <div>
+                        <h4 class="font-bold">Native Integration</h4>
+                        <p>Keine Silos. Deine Agenten sind tief in deine Prozesse integriert und bilden das zentrale Nervensystem deines Unternehmens.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="text-primary text-2xl font-bold">03</div>
+                    <div>
+                        <h4 class="font-bold">Human-in-the-Loop</h4>
+                        <p>Du setzt die Leitplanken und Ziele. Die KI erledigt die Arbeit. Du kümmerst dich nur noch um die strategischen Ausnahmen.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card bg-base-300 shadow-2xl p-8 border border-primary/20 rotate-1 hover:rotate-0 transition-transform duration-500">
+            <pre class="text-sm font-mono text-primary"><code>{`
+// raspb Agent Blueprint
+export const StratecoAgent = new Agent({
+  role: "Sales Operations",
+  capabilities: ["negotiate", "schedule", "adapt"],
+  foundation: "Agent-Native",
+  autonomy: "High"
+});
 
-  <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-14">
-    <div class="animate-fadeIn prose mr-8">
-      <h2>{m.servicesPage_intro_titleFirst()} <span class="inner-text-special">{m.servicesPage_intro_titleHighlight()}</span></h2>
-      <p>
-        {m.servicesPage_intro_paragraph1()}
-      </p>
-      <p>
-        {m.servicesPage_intro_paragraph2()}
-      </p>
-      <div class="benefits">
-        <div class="item">{m.servicesPage_intro_benefits_benefit1()}</div>
-        <div class="item">{m.servicesPage_intro_benefits_benefit2()}</div>
-        <div class="item">{m.servicesPage_intro_benefits_benefit3()}</div>
-        <div class="item">{m.servicesPage_intro_benefits_benefit4()}</div>
-        <div class="item">{m.servicesPage_intro_benefits_benefit5()}</div>
-        <div class="item">{m.servicesPage_intro_benefits_benefit6()}</div>
-      </div>
+StratecoAgent.on("target_reached", (goal) => {
+  console.log("Goal achieved autonomozusly.");
+});
+            `}</code></pre>
+        </div>
     </div>
-    <div>
-      <div class="image-container">
-        <div class="services-image"></div>
-      </div>
-    </div>
-  </div>
-  <div class="massive-spacer"></div>
+    <div class="massive-spacer"></div>
 </Section>
 
-<!-- Services Overview with Visual Highlight -->
+<!-- Service Säulen -->
 <Section noSpacing={true}>
-  <div class="service-overview-highlight">
-    <div class="highlight-content">
-      <h2 class="mb-8 text-center">
-        {m.servicesPage_categories_titleFirst()} <span class="inner-text-special">{m.servicesPage_categories_titleHighlight()}</span>
-      </h2>
-      <div class="service-categories-grid">
-        <button class="category-card" onclick={() => scrollToSection('webseiten-section')}>
-          <div class="category-icon">🌐</div>
-          <h3>{m.servicesPage_categories_webseiten_title()}</h3>
-          <p class="no-padding">{m.servicesPage_categories_webseiten_description()}</p>
-        </button>
-        <button class="category-card" onclick={() => scrollToSection('cms-section')}>
-          <div class="category-icon">📝</div>
-          <h3>{m.servicesPage_categories_contentManagement_title()}</h3>
-          <p class="no-padding">{m.servicesPage_categories_contentManagement_description()}</p>
-        </button>
-        <button class="category-card" onclick={() => scrollToSection('applications-section')}>
-          <div class="category-icon">📱</div>
-          <h3>{m.servicesPage_categories_applications_title()}</h3>
-          <p class="no-padding">{m.servicesPage_categories_applications_description()}</p>
-        </button>
-        <button class="category-card" onclick={() => scrollToSection('individual-development-section')}>
-          <div class="category-icon">⚙️</div>
-          <h3>{m.servicesPage_categories_freestyle_title()}</h3>
-          <p class="no-padding">{m.servicesPage_categories_freestyle_description()}</p>
-        </button>
-        <button class="category-card" onclick={() => scrollToSection('ki-services-section')}>
-          <div class="category-icon">🤖</div>
-          <h3>{m.servicesPage_categories_aiServices_title()}</h3>
-          <p class="no-padding">{m.servicesPage_categories_aiServices_description()}</p>
-        </button>
-      </div>
+    <div class="from-primary/10 via-base-100 to-accent/10 rounded-3xl bg-linear-to-br py-24 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-5xl font-bold text-center mb-16">Drei Säulen der <span class="inner-text-special">Transformation</span></h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Säule A -->
+                <div class="card bg-base-100 shadow-xl hover:shadow-primary/20 transition-all border border-base-content/5">
+                    <div class="card-body">
+                        <div class="text-4xl mb-4">🌐</div>
+                        <h3 class="card-title text-2xl">Agent-Native Frontends</h3>
+                        <p>Wir bauen Web-Plattformen mit <strong>Svelte 5</strong>, die so schnell und semantisch sauber sind, dass sie sowohl von Kunden als auch von KI-Agenten perfekt bedient werden können.</p>
+                        <div class="card-actions mt-4">
+                            <div class="badge badge-outline">SvelteKit</div>
+                            <div class="badge badge-outline">Tailwind 4</div>
+                            <div class="badge badge-outline">SEO+</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Säule B -->
+                <div class="card bg-primary text-primary-content shadow-xl scale-105 border-none">
+                    <div class="card-body">
+                        <div class="text-4xl mb-4">🤖</div>
+                        <h3 class="card-title text-2xl">Autonomous Operations</h3>
+                        <p>Dein digitales Team, das niemals schläft. Wir entwickeln spezialisierte Agenten für Sales, Support und Ops, die innerhalb deiner Leitplanken autonom handeln.</p>
+                        <div class="card-actions mt-4">
+                            <div class="badge badge-outline border-white text-white">Custom Agents</div>
+                            <div class="badge badge-outline border-white text-white">Automation</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Säule C -->
+                <div class="card bg-base-100 shadow-xl hover:shadow-accent/20 transition-all border border-base-content/5">
+                    <div class="card-body">
+                        <div class="text-4xl mb-4">🧠</div>
+                        <h3 class="card-title text-2xl">AI Strategy & Infra</h3>
+                        <p>Wir machen dein Unternehmen "Agent-Ready". Von der RAG-Infrastruktur bis zur KI-Roadmap. Wir bauen das Gehirn deiner Unternehmung.</p>
+                        <div class="card-actions mt-4">
+                            <div class="badge badge-outline">RAG</div>
+                            <div class="badge badge-outline">Governance</div>
+                            <div class="badge badge-outline">Scaling</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </Section>
 
-<!-- Webseiten Section -->
-<Section noSpacing={true}>
-  <div id="webseiten-section" class="service-section">
-    <div class="service-header prose">
-      <h1>{m.servicesPage_webseitenSection_titleFirst()} <span class="inner-text-special">{m.servicesPage_webseitenSection_titleHighlight()}</span></h1>
-      <p class="teaser">
-        {m.servicesPage_webseitenSection_teaser()}
-      </p>
+<!-- Tech Stack Section -->
+<Section>
+    <div class="massive-spacer"></div>
+    <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-4xl font-bold mb-6">Gebaut für die <span class="inner-text-special">Lichtgeschwindigkeit</span> der KI.</h2>
+        <p class="text-xl">Warum wir auf den <strong>raspb-Standard</strong> setzen? Weil im Agent-Native Business Millisekunden über die Conversion entscheiden.</p>
     </div>
-
-    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
-      <!-- One-Page Websites -->
-      <div class="service-card">
-        <div class="service-card-content">
-          <div class="service-card-header">
-            <h3>{m.servicesPage_webseitenSection_onePage_title()}</h3>
-            <div class="service-icon">{m.servicesPage_webseitenSection_onePage_icon()}</div>
-          </div>
-          <p>{m.servicesPage_webseitenSection_onePage_description()}</p>
-          <div class="service-highlights">
-            <span class="highlight">{m.servicesPage_webseitenSection_onePage_highlights_h1()}</span>
-            <span class="highlight">{m.servicesPage_webseitenSection_onePage_highlights_h2()}</span>
-            <span class="highlight">{m.servicesPage_webseitenSection_onePage_highlights_h3()}</span>
-          </div>
-          <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-onepage')}>
-            <div class="button-inner">{m.servicesPage_webseitenSection_onePage_buttonText()}</div>
-          </button>
+    
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="flex flex-col items-center p-6 bg-base-200 rounded-2xl">
+            <div class="text-3xl font-bold text-primary mb-2">Svelte 5</div>
+            <p class="text-sm opacity-70">Runes Power</p>
         </div>
-      </div>
-
-      <!-- Landing Pages -->
-      <div class="service-card">
-        <div class="service-card-content">
-          <div class="service-card-header">
-            <h3>{m.servicesPage_webseitenSection_landingPages_title()}</h3>
-            <div class="service-icon">{m.servicesPage_webseitenSection_landingPages_icon()}</div>
-          </div>
-          <p>{m.servicesPage_webseitenSection_landingPages_description()}</p>
-          <div class="service-highlights">
-            <span class="highlight">{m.servicesPage_webseitenSection_landingPages_highlights_h1()}</span>
-            <span class="highlight">{m.servicesPage_webseitenSection_landingPages_highlights_h2()}</span>
-            <span class="highlight">{m.servicesPage_webseitenSection_landingPages_highlights_h3()}</span>
-          </div>
-          <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-landing')}>
-            <div class="button-inner">{m.servicesPage_webseitenSection_landingPages_buttonText()}</div>
-          </button>
+        <div class="flex flex-col items-center p-6 bg-base-200 rounded-2xl">
+            <div class="text-3xl font-bold text-primary mb-2">Tailwind 4</div>
+            <p class="text-sm opacity-70">Next-Gen CSS</p>
         </div>
-      </div>
-
-      <!-- Corporate Websites -->
-      <div class="service-card">
-        <div class="service-card-content">
-          <div class="service-card-header">
-            <h3>{m.servicesPage_webseitenSection_corporateWebsites_title()}</h3>
-            <div class="service-icon">{m.servicesPage_webseitenSection_corporateWebsites_icon()}</div>
-          </div>
-          <p>{m.servicesPage_webseitenSection_corporateWebsites_description()}</p>
-          <div class="service-highlights">
-            <span class="highlight">{m.servicesPage_webseitenSection_corporateWebsites_highlights_h1()}</span>
-            <span class="highlight">{m.servicesPage_webseitenSection_corporateWebsites_highlights_h2()}</span>
-            <span class="highlight">{m.servicesPage_webseitenSection_corporateWebsites_highlights_h3()}</span>
-          </div>
-          <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-corporate')}>
-            <div class="button-inner">{m.servicesPage_webseitenSection_corporateWebsites_buttonText()}</div>
-          </button>
+        <div class="flex flex-col items-center p-6 bg-base-200 rounded-2xl">
+            <div class="text-3xl font-bold text-primary mb-2">DaisyUI 5</div>
+            <p class="text-sm opacity-70">Radical UI</p>
         </div>
-      </div>
+        <div class="flex flex-col items-center p-6 bg-base-200 rounded-2xl">
+            <div class="text-3xl font-bold text-primary mb-2">TypeScript</div>
+            <p class="text-sm opacity-70">Total Safety</p>
+        </div>
     </div>
-  </div>
 </Section>
 
-<!-- CMS Section -->
-<Section noSpacing={true}>
-  <div id="cms-section" class="service-section">
-    <div class="service-header prose">
-      <h1>{m.servicesPage_cmsSection_titleFirst()} <span class="inner-text-special">{m.servicesPage_cmsSection_titleHighlight()}</span></h1>
-      <p class="teaser">
-        {m.servicesPage_cmsSection_teaser()}
-      </p>
-    </div>
-
-    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-      <!-- Einfache Inhaltsbearbeitung -->
-      <div class="service-card large">
-        <div class="service-card-content prose">
-          <div class="service-card-header">
-            <h3 class="pt-2">{m.servicesPage_cmsSection_simpleCms_title()}</h3>
-            <div class="service-icon">{m.servicesPage_cmsSection_simpleCms_icon()}</div>
-          </div>
-          <p>{m.servicesPage_cmsSection_simpleCms_description()}</p>
-          <div class="service-highlights">
-            <span class="highlight">{m.servicesPage_cmsSection_simpleCms_highlights_h1()}</span>
-            <span class="highlight">{m.servicesPage_cmsSection_simpleCms_highlights_h2()}</span>
-            <span class="highlight">{m.servicesPage_cmsSection_simpleCms_highlights_h3()}</span>
-          </div>
-          <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-simple-cms')}>
-            <div class="button-inner">{m.servicesPage_cmsSection_simpleCms_buttonText()}</div>
-          </button>
-        </div>
-      </div>
-
-      <!-- Komplexe CMS-Systeme -->
-      <div class="service-card large">
-        <div class="service-card-content prose">
-          <div class="service-card-header">
-            <h3 class="pt-2">{m.servicesPage_cmsSection_complexCms_title()}</h3>
-            <div class="service-icon">{m.servicesPage_cmsSection_complexCms_icon()}</div>
-          </div>
-          <p>{m.servicesPage_cmsSection_complexCms_description()}</p>
-          <div class="service-highlights">
-            <span class="highlight">{m.servicesPage_cmsSection_complexCms_highlights_h1()}</span>
-            <span class="highlight">{m.servicesPage_cmsSection_complexCms_highlights_h2()}</span>
-            <span class="highlight">{m.servicesPage_cmsSection_complexCms_highlights_h3()}</span>
-          </div>
-          <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-complex-cms')}>
-            <div class="button-inner">{m.servicesPage_cmsSection_complexCms_buttonText()}</div>
-          </button>
-        </div>
-      </div>
-
-      <!-- Blog & Content-getriebene Websites -->
-      <div class="service-card large">
-        <div class="service-card-content prose">
-          <div class="service-card-header">
-            <h3 class="pt-2">{m.servicesPage_cmsSection_blogCms_title()}</h3>
-            <div class="service-icon">{m.servicesPage_cmsSection_blogCms_icon()}</div>
-          </div>
-          <p>{m.servicesPage_cmsSection_blogCms_description()}</p>
-          <div class="service-highlights">
-            <span class="highlight">{m.servicesPage_cmsSection_blogCms_highlights_h1()}</span>
-            <span class="highlight">{m.servicesPage_cmsSection_blogCms_highlights_h2()}</span>
-            <span class="highlight">{m.servicesPage_cmsSection_blogCms_highlights_h3()}</span>
-          </div>
-          <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-blog-cms')}>
-            <div class="button-inner">{m.servicesPage_cmsSection_blogCms_buttonText()}</div>
-          </button>
-        </div>
-      </div>
-
-      <!-- Headless CMS -->
-      <div class="service-card large">
-        <div class="service-card-content prose">
-          <div class="service-card-header">
-            <h3 class="pt-2">{m.servicesPage_cmsSection_headlessCms_title()}</h3>
-            <div class="service-icon">{m.servicesPage_cmsSection_headlessCms_icon()}</div>
-          </div>
-          <p>{m.servicesPage_cmsSection_headlessCms_description()}</p>
-          <div class="service-highlights">
-            <span class="highlight">{m.servicesPage_cmsSection_headlessCms_highlights_h1()}</span>
-            <span class="highlight">{m.servicesPage_cmsSection_headlessCms_highlights_h2()}</span>
-            <span class="highlight">{m.servicesPage_cmsSection_headlessCms_highlights_h3()}</span>
-          </div>
-          <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-headless-cms')}>
-            <div class="button-inner">{m.servicesPage_cmsSection_headlessCms_buttonText()}</div>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</Section>
-
-<!-- Applikationen Section -->
-<Section noSpacing={true}>
-  <div id="applications-section" class="service-section">
-    <div class="service-header prose">
-      <h1>
-        {m.servicesPage_applicationsSection_titleFirst()} <span class="inner-text-special">{m.servicesPage_applicationsSection_titleHighlight()}</span>
-      </h1>
-      <p class="teaser">
-        {m.servicesPage_applicationsSection_teaser()}
-      </p>
-    </div>
-
-    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-      <!-- Web Applications -->
-      <div class="service-card large">
-        <div class="service-card-content">
-          <div class="service-card-header">
-            <h3>{m.servicesPage_applicationsSection_webApps_title()}</h3>
-            <div class="service-icon">{m.servicesPage_applicationsSection_webApps_icon()}</div>
-          </div>
-          <p>{m.servicesPage_applicationsSection_webApps_description()}</p>
-          <div class="service-highlights">
-            <span class="highlight">{m.servicesPage_applicationsSection_webApps_highlights_h1()}</span>
-            <span class="highlight">{m.servicesPage_applicationsSection_webApps_highlights_h2()}</span>
-            <span class="highlight">{m.servicesPage_applicationsSection_webApps_highlights_h3()}</span>
-          </div>
-          <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-web-apps')}>
-            <div class="button-inner">{m.servicesPage_applicationsSection_webApps_buttonText()}</div>
-          </button>
-        </div>
-      </div>
-
-      <!-- Progressive Web Apps -->
-      <div class="service-card large">
-        <div class="service-card-content">
-          <div class="service-card-header">
-            <h3>{m.servicesPage_applicationsSection_pwa_title()}</h3>
-            <div class="service-icon">{m.servicesPage_applicationsSection_pwa_icon()}</div>
-          </div>
-          <p>{m.servicesPage_applicationsSection_pwa_description()}</p>
-          <div class="service-highlights">
-            <span class="highlight">{m.servicesPage_applicationsSection_pwa_highlights_h1()}</span>
-            <span class="highlight">{m.servicesPage_applicationsSection_pwa_highlights_h2()}</span>
-            <span class="highlight">{m.servicesPage_applicationsSection_pwa_highlights_h3()}</span>
-          </div>
-          <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-pwa')}>
-            <div class="button-inner">{m.servicesPage_applicationsSection_pwa_buttonText()}</div>
-          </button>
-        </div>
-      </div>
-
-      <!-- Native Mobile Apps -->
-      <div class="service-card large">
-        <div class="service-card-content">
-          <div class="service-card-header">
-            <h3>{m.servicesPage_applicationsSection_nativeApps_title()}</h3>
-            <div class="service-icon">{m.servicesPage_applicationsSection_nativeApps_icon()}</div>
-          </div>
-          <p>{m.servicesPage_applicationsSection_nativeApps_description()}</p>
-          <div class="service-highlights">
-            <span class="highlight">{m.servicesPage_applicationsSection_nativeApps_highlights_h1()}</span>
-            <span class="highlight">{m.servicesPage_applicationsSection_nativeApps_highlights_h2()}</span>
-            <span class="highlight">{m.servicesPage_applicationsSection_nativeApps_highlights_h3()}</span>
-          </div>
-          <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-native-apps')}>
-            <div class="button-inner">{m.servicesPage_applicationsSection_nativeApps_buttonText()}</div>
-          </button>
-        </div>
-      </div>
-
-      <!-- Komplexe Anwendungen -->
-      <div class="service-card large">
-        <div class="service-card-content">
-          <div class="service-card-header">
-            <h3>{m.servicesPage_applicationsSection_complexApps_title()}</h3>
-            <div class="service-icon">{m.servicesPage_applicationsSection_complexApps_icon()}</div>
-          </div>
-          <p>{m.servicesPage_applicationsSection_complexApps_description()}</p>
-          <div class="service-highlights">
-            <span class="highlight">{m.servicesPage_applicationsSection_complexApps_highlights_h1()}</span>
-            <span class="highlight">{m.servicesPage_applicationsSection_complexApps_highlights_h2()}</span>
-            <span class="highlight">{m.servicesPage_applicationsSection_complexApps_highlights_h3()}</span>
-          </div>
-          <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-complex-apps')}>
-            <div class="button-inner">{m.servicesPage_applicationsSection_complexApps_buttonText()}</div>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</Section>
-
-<!-- Individualentwicklung Section -->
-<Section noSpacing={true}>
-  <div id="individual-development-section" class="service-section">
-    <div class="service-header prose">
-      <h1>
-        {m.servicesPage_individualDevelopmentSection_titleFirst()}<span class="inner-text-special"
-          >{m.servicesPage_individualDevelopmentSection_titleHighlight()}</span
-        >
-      </h1>
-      <p class="teaser">
-        {m.servicesPage_individualDevelopmentSection_teaser()}
-      </p>
-    </div>
-
-    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-4">
-      <div class="service-card">
-        <div class="service-card-content">
-          <div class="service-card-header">
-            <h3>{m.servicesPage_individualDevelopmentSection_components_title()}</h3>
-            <div class="service-icon">{m.servicesPage_individualDevelopmentSection_components_icon()}</div>
-          </div>
-          <p>{m.servicesPage_individualDevelopmentSection_components_description()}</p>
-          <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-components')}>
-            <div class="button-inner">{m.servicesPage_individualDevelopmentSection_components_buttonText()}</div>
-          </button>
-        </div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-card-content">
-          <div class="service-card-header">
-            <h3>{m.servicesPage_individualDevelopmentSection_extensions_title()}</h3>
-            <div class="service-icon">{m.servicesPage_individualDevelopmentSection_extensions_icon()}</div>
-          </div>
-          <p>{m.servicesPage_individualDevelopmentSection_extensions_description()}</p>
-          <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-extensions')}>
-            <div class="button-inner">{m.servicesPage_individualDevelopmentSection_extensions_buttonText()}</div>
-          </button>
-        </div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-card-content">
-          <div class="service-card-header">
-            <h3>{m.servicesPage_individualDevelopmentSection_specialApps_title()}</h3>
-            <div class="service-icon">{m.servicesPage_individualDevelopmentSection_specialApps_icon()}</div>
-          </div>
-          <p>{m.servicesPage_individualDevelopmentSection_specialApps_description()}</p>
-          <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-special-apps')}>
-            <div class="button-inner">{m.servicesPage_individualDevelopmentSection_specialApps_buttonText()}</div>
-          </button>
-        </div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-card-content">
-          <div class="service-card-header">
-            <h3>{m.servicesPage_individualDevelopmentSection_design_title()}</h3>
-            <div class="service-icon">{m.servicesPage_individualDevelopmentSection_design_icon()}</div>
-          </div>
-          <p>{m.servicesPage_individualDevelopmentSection_design_description()}</p>
-          <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-design')}>
-            <div class="button-inner">{m.servicesPage_individualDevelopmentSection_design_buttonText()}</div>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</Section>
-
-<!-- KI Services Section -->
-<Section noSpacing={true}>
-  <div id="ki-services-section" class="service-section">
-    <div class="service-header prose">
-      <h1>{m.servicesPage_kiServicesSection_titleFirst()} <span class="inner-text-special">{m.servicesPage_kiServicesSection_titleHighlight()}</span></h1>
-      <p class="teaser">{m.servicesPage_kiServicesSection_teaser()}</p>
-    </div>
-
-    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-      <!-- KI Beratung & Support -->
-      <div class="service-card large">
-        <div class="service-card-content">
-          <div class="service-card-header">
-            <h3>{m.servicesPage_kiServicesSection_consulting_title()}</h3>
-            <div class="service-icon">{m.servicesPage_kiServicesSection_consulting_icon()}</div>
-          </div>
-          <p>{m.servicesPage_kiServicesSection_consulting_description()}</p>
-          <div class="service-highlights">
-            <span class="highlight">{m.servicesPage_kiServicesSection_consulting_highlights_h1()}</span>
-            <span class="highlight">{m.servicesPage_kiServicesSection_consulting_highlights_h2()}</span>
-            <span class="highlight">{m.servicesPage_kiServicesSection_consulting_highlights_h3()}</span>
-          </div>
-          <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-ki-beratung')}>
-            <div class="button-inner">{m.servicesPage_kiServicesSection_consulting_buttonText()}</div>
-          </button>
-        </div>
-      </div>
-
-      <!-- KI-Agenten Entwicklung -->
-      <div class="service-card large">
-        <div class="service-card-content">
-          <div class="service-card-header">
-            <h3>{m.servicesPage_kiServicesSection_agentDevelopment_title()}</h3>
-            <div class="service-icon">{m.servicesPage_kiServicesSection_agentDevelopment_icon()}</div>
-          </div>
-          <p>{m.servicesPage_kiServicesSection_agentDevelopment_description()}</p>
-          <div class="service-highlights">
-            <span class="highlight">{m.servicesPage_kiServicesSection_agentDevelopment_highlights_h1()}</span>
-            <span class="highlight">{m.servicesPage_kiServicesSection_agentDevelopment_highlights_h2()}</span>
-            <span class="highlight">{m.servicesPage_kiServicesSection_agentDevelopment_highlights_h3()}</span>
-          </div>
-          <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-ki-agenten')}>
-            <div class="button-inner">{m.servicesPage_kiServicesSection_agentDevelopment_buttonText()}</div>
-          </button>
-        </div>
-      </div>
-
-      <!-- Workflow-Optimierung -->
-      <div class="service-card large">
-        <div class="service-card-content">
-          <div class="service-card-header">
-            <h3>{m.servicesPage_kiServicesSection_workflowOptimization_title()}</h3>
-            <div class="service-icon">{m.servicesPage_kiServicesSection_workflowOptimization_icon()}</div>
-          </div>
-          <p>{m.servicesPage_kiServicesSection_workflowOptimization_description()}</p>
-          <div class="service-highlights">
-            <span class="highlight">{m.servicesPage_kiServicesSection_workflowOptimization_highlights_h1()}</span>
-            <span class="highlight">{m.servicesPage_kiServicesSection_workflowOptimization_highlights_h2()}</span>
-            <span class="highlight">{m.servicesPage_kiServicesSection_workflowOptimization_highlights_h3()}</span>
-          </div>
-          <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-workflow')}>
-            <div class="button-inner">{m.servicesPage_kiServicesSection_workflowOptimization_buttonText()}</div>
-          </button>
-        </div>
-      </div>
-
-      <!-- AI as Infrastructure -->
-      <div class="service-card large">
-        <div class="service-card-content">
-          <div class="service-card-header">
-            <h3>{m.servicesPage_kiServicesSection_aiAsInfrastructure_title()}</h3>
-            <div class="service-icon">{m.servicesPage_kiServicesSection_aiAsInfrastructure_icon()}</div>
-          </div>
-          <p>{m.servicesPage_kiServicesSection_aiAsInfrastructure_description()}</p>
-          <div class="service-highlights">
-            <span class="highlight">{m.servicesPage_kiServicesSection_aiAsInfrastructure_highlights_h1()}</span>
-            <span class="highlight">{m.servicesPage_kiServicesSection_aiAsInfrastructure_highlights_h2()}</span>
-            <span class="highlight">{m.servicesPage_kiServicesSection_aiAsInfrastructure_highlights_h3()}</span>
-          </div>
-          <button class="btn-outline-basic mt-3 ml-auto" onclick={() => openModal('modal-ai-infrastructure')}>
-            <div class="button-inner">{m.servicesPage_kiServicesSection_aiAsInfrastructure_buttonText()}</div>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</Section>
-
-<!-- Call to Action Section -->
+<!-- CTA -->
 <Section>
   <CTABox variant={'service'}></CTABox>
 </Section>
 
-<!-- DaisyUI Modals for detailed information -->
-{#each serviceModalConfigs as config}
-  <ServiceModal {config} />
-{/each}
-
 <style lang="postcss">
   @reference '../../app.css';
 
-  .service-overview-highlight {
-    @apply from-primary/10 via-secondary/5 to-accent/10 mt-30 rounded-3xl bg-linear-to-br py-16;
-
-    .highlight-content {
-      @apply mx-auto max-w-6xl px-6;
-
-      h2 {
-        @apply mb-12 text-4xl font-bold;
-      }
-    }
-
-    .service-categories-grid {
-      @apply grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-5;
-
-      .category-card {
-        @apply from-base-100 to-base-200 text-base-content flex cursor-pointer flex-col justify-between rounded-2xl border-0 bg-linear-to-tl p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg;
-
-        .category-icon {
-          @apply mb-4 text-4xl;
-        }
-
-        h3 {
-          @apply mb-2 text-lg font-semibold;
-        }
-
-        p {
-          @apply text-base-content mb-4 grow text-sm;
-        }
-      }
-    }
-  }
-
-  .service-section {
-    @apply flex flex-col items-center justify-center pt-36 pb-12;
-
-    .service-header {
-      @apply m-auto mb-12 max-w-5xl text-center;
-    }
-  }
-
-  .service-card {
-    @apply from-base-100 to-base-200 text-base-content flex cursor-default flex-col justify-between rounded-2xl border-0 bg-linear-to-tl p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg;
-
-    &.large {
-      @apply min-h-70;
-    }
-
-    .service-card-content {
-      @apply flex h-full flex-col;
-    }
-
-    .service-card-header {
-      @apply mb-4 flex items-center justify-between;
-
-      h3 {
-        @apply text-xl font-semibold;
-      }
-
-      .service-icon {
-        @apply text-3xl;
-      }
-    }
-
-    p {
-      @apply text-base-content mb-4 grow;
-    }
-
-    .service-highlights {
-      @apply mb-4 flex flex-wrap gap-2;
-
-      .highlight {
-        @apply bg-primary/10 text-primary rounded-full px-3 py-1 text-sm font-medium;
-      }
-    }
-  }
-
-  .benefits {
-    @apply mt-4 flex flex-wrap gap-2;
-    .item {
-      @apply text-base-content bg-base-100 w-fit rounded-lg px-4 py-2 text-sm;
-    }
-  }
-
-  .image-container {
-    @apply relative aspect-5/3 w-full overflow-hidden rounded-2xl shadow-2xl;
-    .services-image {
-      @apply h-full w-full bg-cover bg-center bg-no-repeat;
-      background-image: url('$images/visualisation-1.jpg');
-    }
+  .massive-spacer {
+    @apply h-24 lg:h-36;
   }
 </style>
