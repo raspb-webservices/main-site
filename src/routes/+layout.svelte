@@ -13,14 +13,18 @@
 
   const ogLocaleMap: Record<string, string> = { de: 'de_DE', en: 'en_US' };
 
-  // Reload page when a new service worker version takes over
+  // Reload page when a new service worker version takes over or assets go stale
   $effect(() => {
-    if ('serviceWorker' in navigator) {
-      const hadController = !!navigator.serviceWorker.controller;
-      navigator.serviceWorker.addEventListener('controllerchange', () => {
-        if (hadController) window.location.reload();
-      });
-    }
+    if (!('serviceWorker' in navigator)) return;
+
+    const hadController = !!navigator.serviceWorker.controller;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (hadController) window.location.reload();
+    });
+
+    navigator.serviceWorker.addEventListener('message', (event) => {
+      if (event.data?.type === 'STALE_ASSETS') window.location.reload();
+    });
   });
 </script>
 
