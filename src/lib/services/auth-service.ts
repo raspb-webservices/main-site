@@ -2,6 +2,7 @@ import { createAuth0Client, type Auth0Client } from '@auth0/auth0-spa-js';
 import { user, isAuthenticated, userroles, idToken } from '$store/sharedStates.svelte';
 import { authFetch } from '$lib/helper/auth-fetch';
 import authConfig from '../configs/auth-config';
+import { goto } from '$app/navigation';
 
 let auth0Client: Auth0Client | null = null;
 
@@ -40,6 +41,21 @@ async function storeIdToken(client: Auth0Client) {
   }
 }
 
+async function loadUserProfile() {
+  try {
+    const response = await authFetch('/api/auth/user-profile');
+    if (response.ok) {
+      const profile = await response.json();
+      if (profile.user_metadata) {
+        // Merge user_metadata into the user object (overwriting standard claims if needed)
+        user.value = { ...user.value, ...profile.user_metadata };
+      }
+    }
+  } catch (e) {
+    console.error('Error loading user profile:', e);
+  }
+}
+
 async function getRoles(): Promise<string[]> {
   const response = await authFetch('/api/auth/user-roles');
   if (response.ok) {
@@ -58,8 +74,15 @@ async function loginWithPopup(client: Auth0Client, options?: Record<string, unkn
     const currentUser = await client.getUser();
     if (!currentUser?.sub) return { isFirstLogin: false };
 
+    // User im Store setzen (Basis-Daten)
+    user.value = currentUser;
+    isAuthenticated.value = true;
+
     // Token speichern fuer authentifizierte API-Calls
     await storeIdToken(client);
+
+    // Profil-Metadaten laden (merged in user.value)
+    await loadUserProfile();
 
     const currentUserRole = await getRoles();
     let isFirstLogin = false;
@@ -72,8 +95,6 @@ async function loginWithPopup(client: Auth0Client, options?: Record<string, unkn
     }
 
     userroles.value = currentUserRole;
-    user.value = currentUser;
-    isAuthenticated.value = true;
 
     return { isFirstLogin };
   } catch (e) {
@@ -82,7 +103,8 @@ async function loginWithPopup(client: Auth0Client, options?: Record<string, unkn
   }
 }
 
-function logout(client: Auth0Client) {
+async function logout(client: Auth0Client) {
+  await goto('/');
   isAuthenticated.value = false;
   user.value = { email: '' };
   userroles.value = [];
@@ -102,7 +124,7 @@ async function checkAuthState(client: Auth0Client) {
       await client.getTokenSilently();
     } catch (e) {
       // Wenn das fehlschlägt, sind wir nicht eingeloggt
-      console.error(e);
+      // Fehler wird nicht geloggt, da dies der erwartete Zustand bei nicht eingeloggten Nutzern ist
       isAuthenticated.value = false;
       return;
     }
@@ -115,6 +137,9 @@ async function checkAuthState(client: Auth0Client) {
 
       // Token speichern fuer authentifizierte API-Calls
       await storeIdToken(client);
+
+      // Profil-Metadaten laden
+      await loadUserProfile();
 
       // Rollen laden
       const roles = await getRoles();

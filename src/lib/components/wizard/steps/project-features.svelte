@@ -1,7 +1,7 @@
 <script lang="ts">
   import { m } from '$lib/paraglide/messages';
   import { availableFeatures, featureCategoryColors } from '$lib/configs/wizard-config';
-  let { config, customFeatures = null, calculatePrice, isExtendedConfigurator = false } = $props();
+  let { config, customFeatures = $bindable(null), calculatePrice, isExtendedConfigurator = false } = $props();
 </script>
 
 <div class="step-header">

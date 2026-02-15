@@ -9,7 +9,7 @@ export const GET: RequestHandler = async ({ params, locals }) => {
   try {
     const query = gql`
       query getProjectById($id: ID!) {
-        project(where: { id: $id }, stage: PUBLISHED) {
+        project(where: { id: $id }) {
           id
           name
           description
@@ -43,6 +43,7 @@ export const GET: RequestHandler = async ({ params, locals }) => {
             auth0Id
             familyName
             givenName
+            email
           }
           createdAt
         }
@@ -51,12 +52,14 @@ export const GET: RequestHandler = async ({ params, locals }) => {
 
     const variables = { id };
     const response = (await client.request(query, variables)) as {
-      project: { owner?: { auth0Id?: string } } | null;
+      project: { owner?: { auth0Id?: string; email?: string } } | null;
     };
 
     // Ownership-Check: Owner's auth0Id muss zum eingeloggten User passen
     if (response.project?.owner) {
-      const isOwner = response.project.owner.auth0Id === locals.user?.sub;
+      const isOwner =
+        response.project.owner.auth0Id === locals.user?.sub ||
+        (response.project.owner.email && response.project.owner.email === locals.user?.email);
       const userIsAdmin = await checkAdmin(locals);
       if (!isOwner && !userIsAdmin) {
         return forbiddenResponse();

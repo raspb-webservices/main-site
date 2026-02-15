@@ -99,6 +99,10 @@ export async function assignRoleToUser(userId: string, roleIds: string[]): Promi
   await apiRequest('POST', `users/${userId}/roles`, { roles: roleIds });
 }
 
+export async function getUserProfile(userId: string): Promise<Record<string, unknown>> {
+  return apiRequest('GET', `users/${userId}`, null) as Promise<Record<string, unknown>>;
+}
+
 export async function updateUserMetadata(userId: string, metadata: Record<string, unknown>): Promise<unknown> {
   return apiRequest('PATCH', `users/${userId}`, { user_metadata: metadata });
 }

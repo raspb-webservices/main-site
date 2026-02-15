@@ -19,7 +19,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
   try {
     const query = gql`
       query getProjectsByIds($ids: [ID!]!) {
-        projects(where: { id_in: $ids }, stage: PUBLISHED) {
+        projects(where: { id_in: $ids }) {
           id
           name
           description
@@ -54,6 +54,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
             auth0Id
             familyName
             givenName
+            email
           }
           createdAt
         }
@@ -61,13 +62,15 @@ export const POST: RequestHandler = async ({ request, locals }) => {
     `;
 
     const response = (await client.request(query, { ids })) as {
-      projects: Array<{ owner?: { auth0Id?: string } }>;
+      projects: Array<{ owner?: { auth0Id?: string; email?: string } }>;
     };
 
     // Ownership-Filter: Nur eigene Projekte zurueckgeben (ausser Admin)
     const userIsAdmin = await checkAdmin(locals);
     if (!userIsAdmin && response.projects) {
-      response.projects = response.projects.filter((p) => p.owner?.auth0Id === locals.user?.sub);
+      response.projects = response.projects.filter(
+        (p) => p.owner?.auth0Id === locals.user?.sub || (p.owner?.email && p.owner.email === locals.user?.email)
+      );
     }
 
     return new Response(JSON.stringify(response), {

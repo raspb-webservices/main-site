@@ -1,9 +1,14 @@
 <script lang="ts">
   import { m } from '$lib/paraglide/messages';
   import { goto } from '$app/navigation';
-  import { projectTypesWebApp } from '$configs/wizard-config';
+  import { projectTypesWebApp, projectTypesAiFreestyle } from '$configs/wizard-config';
   import { localizeHref } from '$lib/paraglide/runtime';
   let { config } = $props();
+
+  const projectTypeTitle =
+    projectTypesWebApp.find((p) => p.id === config.projectType)?.title ||
+    projectTypesAiFreestyle.find((p) => p.id === config.projectType)?.title ||
+    '';
 </script>
 
 <div class="thank-you-overlay">
@@ -40,7 +45,7 @@
         <p><strong>{m.wizard_modals_thankYou_estimatedPrice()}</strong> {config.estimatedPrice.toLocaleString()} €</p>
         <p>
           <strong>{m.wizard_modals_thankYou_projectType()}</strong><br />
-          {(m as unknown as Record<string, () => string>)[projectTypesWebApp.find((p) => p.id === config.projectType) + '.title']()}
+          {(m as unknown as Record<string, () => string>)[projectTypeTitle]?.() ?? config.projectType}
         </p>
       </div>
     </div>

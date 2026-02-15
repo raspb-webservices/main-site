@@ -22,10 +22,10 @@
   import auth from '$services/auth-service';
   import { user } from '$store/sharedStates.svelte';
   import ProjectContent from './steps/project-content.svelte';
-  import ProjectDetails from './steps/project-details.svelte';
+  import ProjectBasicDetails from './steps/project-basic-details.svelte';
   import ProjectFeatures from './steps/project-features.svelte';
   import ProjectMaterials from './steps/project-materials.svelte';
-  import ProjectResult from './steps/project-result.svelte';
+  import ProjectSummaryExtended from './steps/project-summary-extended.svelte';
   import ThankYou from './steps/thank-you.svelte';
   import ResetModal from '../modals/general/reset-modal.svelte';
   import ErrorModal from '../modals/general/error-modal.svelte';
@@ -33,8 +33,10 @@
 
   import ProjectCategory from './steps/project-category.svelte';
   import ProjectTypeWebApp from './steps/project-type-web-app.svelte';
-  import ProjectSubTypesWebsite from './steps/project-sub-type-website.svelte';
-  import ProjectSubTypesApp from './steps/project-sub-type-apps.svelte';
+  import ProjectSubTypeWebsite from './steps/project-sub-type-website.svelte';
+  import ProjectSubTypeApp from './steps/project-sub-type-apps.svelte';
+  import ProjectSubTypeAi from './steps/project-sub-type-ai.svelte';
+  import ProjectSubTypeFreestyle from './steps/project-sub-type-freestyle.svelte';
   import ProjectTypeAiFreestyle from './steps/project-type-ai-freestyle.svelte';
 
   // Props for initial values from URL parameters
@@ -51,8 +53,7 @@
   let showResetModal = $state(false);
   let custom_metadata = $state({});
   let currentUser = $derived(user.value) as User;
-  let disableHeader = true;
-
+  
   let config: WizardConfig = $state({
     step: 1,
     name: '',
@@ -70,8 +71,8 @@
     timeline: '',
     features: ['cookieConsent'],
     customFeature: '',
-    primaryColour: '#c1121f',
-    secondaryColour: '#003049',
+    primaryColour: '#003049',
+    secondaryColour: '#c1121f',
     accentColour: '#fdf0d5',
     desiredFont: '',
     customFont: '',
@@ -79,7 +80,10 @@
     formFields: [],
     pages: [],
     relatedFiles: [],
-    uploadedFiles: []
+    uploadedFiles: [],
+    owner: {
+      id: ''
+    }
   });
 
   // Additional wizard-specific properties
@@ -104,7 +108,6 @@
 
   // Dynamic step configuration based on project type
   const stepConfig = $derived(getStepConfig(config.projectType ?? ''));
-
   const maxSteps = $derived(stepConfig.length);
 
   // Functions
@@ -115,11 +118,11 @@
   function selectProjectType(type: string) {
     config.projectType = type;
     config.subType = '';
-    currentStep = 1;
   }
 
-  function selectSubType(subType: string) {
+  function selectProjectSubType(subType: string) {
     config.subType = subType;
+    calculatePrice();
   }
 
   function addPage() {
@@ -139,18 +142,14 @@
   }
 
   function scrollToTop() {
-    // Scroll to the top of the wizard container
-
     setTimeout(() => {
-      const wizardContainer = document.querySelector('.wizard-container');
-
+      const wizardContainer = document.querySelector('.wizard-scroll-container');
       if (wizardContainer) {
-        wizardContainer.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+        wizardContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else {
-        // Fallback: scroll to top of page
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
-    }, 300);
+    }, 150);
   }
 
   function goToStep(step: number) {
@@ -186,6 +185,7 @@
       step: 1,
       name: '',
       description: '',
+      projectCategory: '',
       projectType: '',
       subType: '',
       projectDetails: '',
@@ -218,7 +218,7 @@
   }
 
   function calculatePrice() {
-    // 1. Determine base price from subType (more specific) or projectType
+    // Basic wizard calculation logic
     const allSubTypes = [...projectSubTypesWebsite, ...projectSubTypesApp, ...projectSubTypesAi, ...projectSubTypesFreestyle];
     const allProjectTypes = [...projectTypesWebApp, ...projectTypesAiFreestyle];
 
@@ -234,27 +234,17 @@
       if (projectType?.basePrice) basePrice = projectType.basePrice;
     }
 
-    // 2. Service level factor (±25%)
-    // 0 = Full-Service (+25% cost), 50 = neutral, 100 = Active participation (-25% cost)
     const sl = config.serviceLevel ?? 50;
     const serviceFactor = ((50 - sl) / 50) * 0.25;
 
-    // 3. Engineering approach factor (±25%)
-    // 0 = Quick & Dirty (-25% cost), 50 = neutral, 100 = Over-engineered (+25% cost)
     const ea = config.engineeringApproach ?? 50;
     const engineeringFactor = ((ea - 50) / 50) * 0.25;
 
-    // 4. Apply factors to base price
     const adjustedBasePrice = basePrice * (1 + serviceFactor + engineeringFactor);
 
-    // 5. Calculate feature costs
     const selectedFeatures = availableFeatures.filter((f) => (config.features ?? []).includes(f.id));
     const totalFeatureCost = selectedFeatures.reduce((sum, f) => sum + (f.basePrice || 0), 0);
 
-    // 6. Feature volume discount based on count
-    // Up to 10: 2% per feature (max 20%)
-    // 11-20: +1.5% per feature (max 35% at 20)
-    // 21+: +1% per feature (max 40% total)
     const featureCount = selectedFeatures.length;
     let featureDiscountPercent = 0;
 
@@ -270,18 +260,14 @@
 
     const discountedFeatureCost = totalFeatureCost * (1 - featureDiscountPercent / 100);
 
-    // 7. Final estimated price
     config.estimatedPrice = Math.round(adjustedBasePrice + discountedFeatureCost);
   }
 
   async function handleFileUpload(event: Event) {
     const target = event.target as HTMLInputElement;
     if (target.files && target.files.length > 0) {
-      // Neue Dateien zu den bestehenden hinzufügen
       const newFiles = Array.from(target.files);
       uploadedFiles = [...uploadedFiles, ...newFiles];
-
-      // Input zurücksetzen, damit dieselbe Datei erneut ausgewählt werden kann
       target.value = '';
     }
   }
@@ -290,7 +276,6 @@
     uploadedFiles = uploadedFiles.filter((_, i) => i !== index);
   }
 
-  // Function to prepare assets when entering final step
   async function prepareAssetsForFinalStep() {
     if (uploadedFiles.length === 0 || uploadedAssetIds.length > 0) return;
 
@@ -300,7 +285,7 @@
     try {
       const preparedAssetIds = await uploadMultipleAssetsWithDelay(
         uploadedFiles,
-        3000, // 3 second delay between uploads to avoid rate limiting
+        3000, 
         (message, current, total, assetId) => {
           assetPreparationProgress = m.wizard_steps_stepSummary_preparingAssets_progress({ message: message, current: current, total: total });
         }
@@ -321,7 +306,6 @@
     }
   }
 
-  // Legacy function for manual upload (kept for compatibility)
   async function uploadAllFiles() {
     if (uploadedFiles.length === 0) return [];
 
@@ -352,7 +336,6 @@
   async function generatePDF() {
     isGeneratingPDF = true;
     try {
-      // Send project data to server-side PDF generation
       const response = await fetch('/api/pdf/generate', {
         method: 'POST',
         headers: {
@@ -380,7 +363,6 @@
         throw new Error(m.wizard_steps_stepSummary_pdfGeneration_error());
       }
 
-      // Download the PDF
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -408,7 +390,6 @@
     errorModal?.closeModal();
     showErrorModal = false;
     errorDetails = [];
-    // Redirect back to step 1 while preserving user input
     currentStep = 1;
   }
 
@@ -425,18 +406,15 @@
     showThankYou = true;
   }
 
-  // Neue Funktion zum Senden der Daten an die API
   async function submitToAPI() {
     isSubmitting = true;
     errorDetails = [];
 
     try {
-      // Prepare asset IDs (use pre-uploaded or fallback to upload now)
       let finalAssetIds: string[] = [];
       if (uploadedAssetIds.length > 0) {
         finalAssetIds = uploadedAssetIds;
       } else if (uploadedFiles.length > 0) {
-        // Fallback: If no pre-uploaded assets, upload them now
         finalAssetIds = await uploadAllFiles();
 
         if (finalAssetIds.length === 0 && uploadedFiles.length > 0) {
@@ -445,7 +423,6 @@
         }
       }
 
-      // Create project
       const projectData: Project = {
         name: config.name,
         description: config.description,
@@ -466,6 +443,17 @@
         accentColour: config.accentColour,
         desiredFont: config.desiredFont,
         estimatedPrice: config.estimatedPrice,
+        serviceLevel: config.serviceLevel,
+        engineeringApproach: config.engineeringApproach,
+        specialRequirements: config.specialRequirements,
+        projectGoal: config.projectGoal,
+        timelinePreference: config.timelinePreference,
+        specificDeadline: config.specificDeadline,
+        budgetRange: config.budgetRange,
+        pwaApproach: config.pwaApproach,
+        pwaExistingUrl: config.pwaExistingUrl,
+        cmsComplexity: config.cmsComplexity,
+        cmsContentStructure: config.cmsContentStructure,
         formFields: config.formFields,
         pages: config.pages,
         relatedFiles: finalAssetIds.map((id) => ({ id }))
@@ -484,7 +472,6 @@
       if (result.success && result.data?.id) {
         const projectId = result.data.id;
 
-        // Update Auth0 metadata with projectId
         if (currentUser) {
           if (Array.isArray(currentUser.projectIds)) {
             currentUser.projectIds.push(projectId);
@@ -499,41 +486,26 @@
           await auth.updateMetadata(custom_metadata);
         }
 
-        // Show thank you page immediately while publishing happens in background
         showThankYouPage();
 
-        // Wait 3.5 seconds to ensure everything is properly saved before publishing
         await new Promise((resolve) => setTimeout(resolve, 3500));
 
-        // Publish the project
         try {
           const publishProjectResponse = await fetch(`/api/project/publish/${projectId}`, {
             method: 'POST'
           });
-          const publishProjectResult = await publishProjectResponse.json();
-
-          if (publishProjectResponse.ok && publishProjectResult.success) {
-            // Project published successfully
-          } else {
-            // Project publishing failed
-            // Don't fail the entire process if publishing fails
-          }
         } catch (publishProjectError) {
-          // Don't fail the entire process if publishing fails
+          // ignore
         }
 
-        // Publish all assets that are part of the project
         if (finalAssetIds.length > 0) {
           try {
-            const publishedAssetIds = await publishMultipleAssets(finalAssetIds, (message, current, total) => {
-              // Asset publishing progress callback
-            });
+            const publishedAssetIds = await publishMultipleAssets(finalAssetIds, (message, current, total) => {});
           } catch (assetPublishError) {
-            // Don't fail the entire process if asset publishing fails
+            // ignore
           }
         }
       } else {
-        // Collect detailed error information
         errorDetails.push(`${m.wizard_modals_error_apiError()} : ${result.error || m.wizard_modals_error_unknownError()}`);
         if (result.details) {
           errorDetails.push(...result.details);
@@ -542,37 +514,24 @@
       }
     } catch (error) {
       console.error(m.wizard_modals_error_submissionError(), error);
-
-      // Add network error if no other errors were collected
       if (errorDetails.length === 0) {
         errorDetails.push(m.wizard_modals_error_networkError());
         errorDetails.push(m.wizard_modals_error_checkConnection());
       }
-
-      // Show error modal
       showErrorModal = true;
     } finally {
       isSubmitting = false;
     }
   }
 
-  // Function to validate and set initial parameters
   function initializeFromParams() {
-    let shouldAdvance = false;
-
     if (initialProjectCategory && projectCategories.some((pt) => pt.id === initialProjectCategory)) {
       config.projectCategory = initialProjectCategory;
-      shouldAdvance = true;
-
-      // Check if initialProjectType is valid
       if (
         initialProjectType &&
         (projectTypesWebApp.some((pt) => pt.id === initialProjectType) || projectTypesAiFreestyle.some((pt) => pt.id === initialProjectType))
       ) {
         config.projectType = initialProjectType;
-        shouldAdvance = true;
-
-        // Check if initialSubType is valid for the selected project type
         if (
           initialSubType &&
           (projectSubTypesAi.some((st) => st.id === initialSubType) ||
@@ -580,21 +539,17 @@
             projectSubTypesWebsite.some((st) => st.id === initialSubType))
         ) {
           config.subType = initialSubType;
-          // If both projectType and subType are valid, skip to step 3
           currentStep = 4;
           return;
         } else {
-          // If only projectType is valid, go to step 2
           currentStep = 3;
           return;
         }
       } else {
-        // If only projectCategory is valid, go to step 2
         currentStep = 2;
         return;
       }
     }
-    // If no valid parameters, stay on step 1
     currentStep = 1;
   }
 
@@ -604,42 +559,24 @@
   });
 </script>
 
-<div class="wizard-container">
-  <!-- Header with Reset Button -->
-  {#if !disableHeader}
-    <div class="wizard-header">
-      <h1 id="projekt-konfigurator">{m.wizard_header_titleFirst()} <span class="inner-text-special">{m.wizard_header_titleHighlight()}</span></h1>
-      <button type="button" class="btn btn-outline btn-sm" onclick={openResetModal}>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-          />
-        </svg>
-        {m.wizard_header_resetButton()}
-      </button>
-    </div>
-  {/if}
+<div class="wizard-scroll-container">
+  <div class="wizard-basic-container">
+    <!-- Progress Bar (Basic Style) -->
+    <div class="progress-wrapper">
+      <div class="progress-bar">
+        <progress
+          class="progress progress-primary h-8 w-full"
+          value={currentStep === 1 ? 0.05 : currentStep === maxSteps ? currentStep : currentStep - 0.5}
+          max={maxSteps}
+        ></progress>
+      </div>
 
-  <!-- Progress Bar with Dynamic Steps -->
-  <div class="progress-wrapper">
-    <!-- Desktop Progress Bar (horizontal with connecting line) -->
-    <div class="progress-desktop hidden md:block">
-      <div class="relative flex w-full items-center justify-between">
-        <!-- Background connecting line -->
-        <div class="bg-base-300 absolute top-6 right-0 left-0 mx-8 h-0.5"></div>
-        <!-- Progress connecting line -->
-        <div
-          class="bg-primary absolute top-6 right-0 left-0 mx-8 h-0.5 transition-all duration-300"
-          style="width: {currentStep > 1 ? `calc(${((currentStep - 1) / (stepConfig.length - 1)) * 100}% - ${currentStep - 1.5}rem )` : '0%'}"
-        ></div>
-
+      <div class="wizard-steps grid gap-3" style="grid-template-columns: repeat({maxSteps}, minmax(0, 1fr));">
         {#each stepConfig as step, i}
           <button
             type="button"
-            class="progressbar-relative z-10 min-w-24 cursor-pointer flex-col items-center border-none bg-transparent p-2 transition-all duration-200"
+            class:active={currentStep === i + 1}
+            class:touched={currentStep > i + 1}
             onclick={() => goToStep(i + 1)}
             onkeydown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
@@ -647,132 +584,109 @@
                 goToStep(i + 1);
               }
             }}
-            aria-label="Go to step {i + 1}: {step.title}"
-            aria-current={i + 1 === currentStep ? 'step' : undefined}
+            aria-label="Go to step {i + 1}: {(m as unknown as Record<string, () => string>)[step.title]?.() ?? step.title}"
+            >{(m as unknown as Record<string, () => string>)[step.title]?.() ?? step.title}</button
           >
-            <!-- Step Circle -->
-            <div
-              class="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 text-sm font-bold transition-all duration-200
-                     {i + 1 <= currentStep ? 'bg-primary text-primary-content border-primary' : 'bg-base-100 border-base-300 hover:bg-base-200'}"
-            >
-              {i + 1}
-            </div>
-            <!-- Step Title -->
-            <div class="text-base-content mt-2 max-w-20 text-center text-xs font-medium"></div>
-          </button>
         {/each}
       </div>
     </div>
 
-    <!-- Mobile Progress Bar (vertical wrapped without connecting line) -->
-    <div class="progress-mobile block md:hidden">
-      <div class="flex flex-wrap justify-center gap-4">
-        {#each stepConfig as step, i}
-          <button
-            type="button"
-            class="progressbar-flex min-w cursor-pointer flex-col items-center border-none bg-transparent p-2 transition-all duration-200"
-            onclick={() => goToStep(i + 1)}
-            onkeydown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                goToStep(i + 1);
-              }
-            }}
-            aria-label="Go to step {i + 1}: {step.title}"
-            aria-current={i + 1 === currentStep ? 'step' : undefined}
-          >
-            <!-- Step Circle -->
-            <div
-              class="flex h-8 w-8 items-center justify-center rounded-full border-2 text-sm font-bold transition-all duration-200
-                     {i + 1 <= currentStep ? 'bg-primary text-primary-content border-primary' : 'bg-base-100 border-base-300'}"
-            >
-              {i + 1}
-            </div>
-            <!-- Step Title -->
-            <div class="text-base-content mt-2 text-center text-xs font-medium"></div>
-          </button>
-        {/each}
-      </div>
+    <!-- Step Content -->
+    <div class="step-content-wrapper">
+      {#if currentStep === 1}
+        <ProjectCategory {config} {selectProjectCategory}></ProjectCategory>
+      {:else if currentStep === 2}
+        {#if config.projectCategory === 'websites-and-apps'}
+          <ProjectTypeWebApp {config} {selectProjectType}></ProjectTypeWebApp>
+        {:else}
+          <ProjectTypeAiFreestyle {config} {selectProjectType}></ProjectTypeAiFreestyle>
+        {/if}
+      {:else if currentStep === 3}
+        {#if config.projectType === 'website'}
+          <ProjectSubTypeWebsite {config} {selectProjectSubType}></ProjectSubTypeWebsite>
+        {:else if config.projectType === 'app'}
+          <ProjectSubTypeApp {config} {selectProjectSubType}></ProjectSubTypeApp>
+        {:else if config.projectType === 'aiSolution'}
+          <ProjectSubTypeAi {config} {selectProjectSubType}></ProjectSubTypeAi>
+        {:else}
+          <ProjectSubTypeFreestyle {config} {selectProjectSubType}></ProjectSubTypeFreestyle>
+        {/if}
+      {:else if currentStep === 4}
+        <!-- Basic Details (Extended) -->
+        <ProjectBasicDetails {config}></ProjectBasicDetails>
+      {:else if currentStep === 5 && (config.projectType === 'website' || config.projectType === 'cms' || config.projectType === 'webApplication')}
+        <!-- Features (Web/CMS/App) -->
+        <ProjectFeatures {config} bind:customFeatures {calculatePrice} isExtendedConfigurator={true}></ProjectFeatures>
+      {:else if currentStep === 5 && (config.projectType === 'artificialIntelligence' || config.projectType === 'freestyle')}
+        <!-- Materials (AI/Freestyle) -->
+        <ProjectMaterials {config} {uploadedFiles} {handleFileUpload} {removeFile} {isUploading} {uploadProgress}></ProjectMaterials>
+      {:else if currentStep === 6 && (config.projectType === 'website' || config.projectType === 'cms')}
+        <!-- Content (Web/CMS) -->
+        <ProjectContent {config} {addPage} {removePage} {removeFormField} {addFormField} {formFieldTypes}></ProjectContent>
+      {:else if (currentStep === 7 && (config.projectType === 'website' || config.projectType === 'cms')) || (currentStep === 6 && config.projectType === 'webApplication')}
+        <!-- Materials (Web/CMS/App) -->
+        <ProjectMaterials {config} {uploadedFiles} {handleFileUpload} {removeFile} {isUploading} {uploadProgress}></ProjectMaterials>
+      {:else if currentStep === maxSteps}
+        <!-- Result/Summary -->
+        <ProjectSummaryExtended {config} {isPreparingAssets} {assetPreparationProgress}></ProjectSummaryExtended>
+      {/if}
     </div>
-  </div>
 
-  <!-- Step Content -->
-  <div class="step-content-wrapper">
-    {#if currentStep === 1}
-      <ProjectCategory {config} {selectProjectCategory}></ProjectCategory>
-    {:else if currentStep === 2 && config.projectType !== 'freestyle'}
-      <ProjectTypeWebApp {config} {selectProjectType}></ProjectTypeWebApp>
-    {:else if (currentStep === 3 && config.projectType !== 'freestyle') || (currentStep === 2 && config.projectType === 'freestyle')}
-      <ProjectDetails {config}></ProjectDetails>
-    {:else if currentStep === 4 && (config.projectType === 'website' || config.projectType === 'cms' || config.projectType === 'webApplication')}
-      <ProjectFeatures {config} {customFeatures} {calculatePrice} isExtendedConfigurator={true}></ProjectFeatures>
-    {:else if currentStep === 5 && (config.projectType === 'website' || config.projectType === 'cms')}
-      <ProjectContent {config} {addPage} {removePage} {removeFormField} {addFormField} {formFieldTypes}></ProjectContent>
-    {:else if (currentStep === 6 && (config.projectType === 'website' || config.projectType === 'cms')) || (currentStep === 5 && config.projectType === 'webApplication')}
-      <ProjectMaterials {config} {uploadedFiles} {handleFileUpload} {removeFile} {isUploading} {uploadProgress}></ProjectMaterials>
-    {:else if (currentStep === 3 && config.projectType === 'freestyle') || (currentStep === 4 && config.projectType === 'artificialIntelligence')}
-      <ProjectMaterials {config} {uploadedFiles} {handleFileUpload} {removeFile} {isUploading} {uploadProgress}></ProjectMaterials>
-    {:else if currentStep === maxSteps}
-      <ProjectResult {config} {isPreparingAssets} {assetPreparationProgress}></ProjectResult>
-    {/if}
-  </div>
+    <!-- Navigation -->
+    <div class="wizard-basic-navigation">
+      {#if currentStep > 1}
+        <button type="button" class="btn-basic grow md:grow-0" onclick={prevStep}>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          {m.wizard_navigation_back()}
+        </button>
+      {/if}
 
-  <!-- Navigation -->
-  <div class="wizard-navigation">
-    {#if currentStep > 1}
-      <button type="button" class="btn-basic grow md:grow-0" onclick={prevStep}>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-        {m.wizard_navigation_back()}
-      </button>
-    {:else}
-      <div></div>
-    {/if}
-
-    {#if currentStep < maxSteps}
-      <button
-        type="button"
-        class="btn-basic grow md:grow-0"
-        onclick={nextStep}
-        disabled={(currentStep === 1 && !config.projectType) || (currentStep === 2 && !config.subType && config.projectType !== 'freestyle')}
-      >
-        {m.wizard_navigation_next()}
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-    {:else}
-      <div class="flex flex-wrap gap-4">
-        <button type="button" class="btn-basic grow md:grow-0" onclick={generatePDF} disabled={isGeneratingPDF}>
-          {#if isGeneratingPDF}
-            <span class="loading loading-ring loading-sm"></span>
-            {m.wizard_navigation_downloadPDF()}
-          {:else}
+      {#if currentStep < maxSteps}
+        <button
+          type="button"
+          class="btn-basic m-auto max-w-md grow md:mr-0 md:ml-auto md:grow-0"
+          onclick={nextStep}
+          disabled={(currentStep === 1 && !config.projectCategory) || (currentStep === 2 && !config.projectType) || (currentStep === 3 && !config.subType)}
+        >
+          {m.wizard_navigation_next()}
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      {:else}
+        <div class="flex flex-wrap gap-4">
+          <button type="button" class="btn-basic grow md:grow-0" onclick={generatePDF} disabled={isGeneratingPDF}>
+            {#if isGeneratingPDF}
+              <span class="loading loading-ring loading-sm"></span>
+              {m.wizard_navigation_downloadPDF()}
+            {:else}
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+              {m.wizard_navigation_downloadPDF()}
+            {/if}
+          </button>
+          <button type="button" class="btn-basic grow md:grow-0" onclick={submitToAPI}>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
               />
             </svg>
-            {m.wizard_navigation_downloadPDF()}
-          {/if}
-        </button>
-        <button type="button" class="btn-basic grow md:grow-0" onclick={submitToAPI}>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-            />
-          </svg>
-          {m.wizard_navigation_submitProject()}
-        </button>
-      </div>
-    {/if}
+            {m.wizard_navigation_submitProject()}
+          </button>
+        </div>
+      {/if}
+    </div>
   </div>
 </div>
 
@@ -786,52 +700,52 @@
   <ThankYou {config}></ThankYou>
 {/if}
 <!-- Error Modal -->
-<ErrorModal bind:this={errorModal} {errorDetails}></ErrorModal>
+<ErrorModal bind:this={errorModal} {errorDetails} onClose={closeErrorModal}></ErrorModal>
 <!-- Reset Modal -->
 <ResetModal bind:this={resetModal} {confirmReset}></ResetModal>
 
 <style lang="postcss">
   @reference '../../../app.css';
-  /* Wizard Container - Dark Theme Support */
-  .wizard-container {
+  .wizard-scroll-container {
+    @apply pt-24;
+  }
+
+  /* Wizard Basic Container */
+  .wizard-basic-container {
     @apply bg-base-100 border-base-300 rounded-2xl border shadow-lg;
   }
 
-  /* Header - Dark Theme Support */
-  .wizard-header {
-    @apply border-base-300 flex items-center justify-between border-b px-6 py-4;
-
-    h1 {
-      @apply text-base-content m-0 p-0;
-    }
-  }
-
-  /* Progress Bar Wrapper */
+  /* Progress Bar */
   .progress-wrapper {
-    @apply mx-6 my-12;
-  }
+    @apply m-8;
 
-  /* Progress Bar - Desktop (horizontal with line) */
-  .progress-desktop {
-    .progressbar-relative {
-      @apply flex items-center justify-center;
-    }
-  }
+    .wizard-steps {
+      button {
+        @apply col-span-full cursor-pointer hover:opacity-75 md:col-span-1;
 
-  /* Progress Bar - Mobile (wrapped without line) */
-  .progress-mobile {
-    .progressbar-flex {
-      @apply flex flex-wrap justify-center gap-x-2 pb-2 md:gap-4 md:pb-0;
+        &.active {
+          @apply text-primary font-bold;
+        }
+        &.touched {
+          @apply text-primary/80;
+        }
+        &:first-child {
+          @apply md:text-left;
+        }
+        &:last-child {
+          @apply md:text-right;
+        }
+      }
     }
   }
 
   /* Step Content */
   .step-content-wrapper {
-    @apply mb-8 min-h-96 px-6 py-8; /* Added py-8 for vertical padding */
+    @apply mb-8 min-h-96 px-6;
   }
 
   /* Navigation */
-  .wizard-navigation {
+  .wizard-basic-navigation {
     @apply border-base-300 bg-base-100 flex flex-wrap items-center justify-between gap-4 border-t p-6;
   }
 </style>

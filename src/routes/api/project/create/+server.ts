@@ -6,10 +6,55 @@ import { validateBody, validationErrorResponse, ValidationError } from '$lib/ser
 import { projectCreateSchema } from '$lib/server/schemas/project.schema';
 import { mapFeaturesToHygraph } from '$lib/server/feature-mapping';
 import { nameByRace } from 'fantasy-name-generator';
+import type { z } from 'zod';
 
-export const POST: RequestHandler = async ({ request }) => {
+export const POST: RequestHandler = async ({ request, locals }) => {
   try {
-    const projectData = validateBody(projectCreateSchema, await request.json()) as any;
+    const projectData = validateBody(projectCreateSchema, await request.json()) as z.infer<typeof projectCreateSchema>;
+
+    let customerId;
+
+    if (locals.user) {
+      // 1. Check if Customer exists
+      const customerQuery = gql`
+        query GetCustomer($email: String!) {
+          customer(where: { email: $email }) {
+            id
+          }
+        }
+      `;
+      const customerResult = (await client.request(customerQuery, { email: locals.user.email })) as {
+        customer: { id: string } | null;
+      };
+
+      customerId = customerResult.customer?.id;
+
+      // 2. If not, create Customer
+      if (!customerId) {
+        // Try to split name if available
+        const parts = (locals.user.name || '').split(' ');
+        const firstName = parts[0] || '';
+        const lastName = parts.length > 1 ? parts.slice(1).join(' ') : '';
+
+        const createCustomerMutation = gql`
+          mutation CreateCustomer($email: String!, $givenName: String, $familyName: String, $auth0Id: String) {
+            createCustomer(data: { email: $email, givenName: $givenName, familyName: $familyName, auth0Id: $auth0Id }) {
+              id
+            }
+          }
+        `;
+        const createResult = (await client.request(createCustomerMutation, {
+          email: locals.user.email,
+          givenName: firstName,
+          familyName: lastName,
+          auth0Id: locals.user.sub
+        })) as { createCustomer: { id: string } };
+        customerId = createResult.createCustomer.id;
+      }
+    }
+
+    const ownerInput = customerId ? 'owner: { connect: { id: $customerId } }' : '';
+    const customerIdVar = customerId ? '$customerId: ID' : '';
 
     const mutation = gql`
       mutation CreateProject(
@@ -49,6 +94,7 @@ export const POST: RequestHandler = async ({ request }) => {
         $setup: Json
         $fileIDs: [AssetWhereUniqueInput!]
         $projectStatus: ProjectStatus
+        ${customerIdVar}
       ) {
         createProject(
           data: {
@@ -88,6 +134,7 @@ export const POST: RequestHandler = async ({ request }) => {
             setup: $setup
             relatedFiles: { connect: $fileIDs }
             projectStatus: $projectStatus
+            ${ownerInput}
           }
         ) {
           id
@@ -163,7 +210,8 @@ export const POST: RequestHandler = async ({ request }) => {
       pages: JSON.stringify(projectData.pages || []),
       setup: projectData.setup ? JSON.stringify(projectData.setup) : null,
       fileIDs: projectData.relatedFiles?.length ? projectData.relatedFiles : null,
-      projectStatus: 'created'
+      projectStatus: 'created',
+      customerId: customerId
     };
 
     // GraphQL Request an Hygraph senden

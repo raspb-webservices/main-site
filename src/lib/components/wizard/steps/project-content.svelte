@@ -80,7 +80,7 @@
 </div>
 
 <!-- Form Fields (only if contact form is selected) -->
-{#if config.features.includes('kontaktformular')}
+{#if config.features.includes('contactForm')}
   <div class="content-section">
     <h2>{m.wizard_content_formFields_title()}</h2>
     <p>{m.wizard_content_formFields_description()}</p>

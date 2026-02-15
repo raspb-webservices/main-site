@@ -550,64 +550,61 @@ export const googleFonts: string[] = [
 ];
 
 export const formFieldTypes: FormFieldType[] = [
-  { id: 'text', title: 'wizard.formFieldTypes.text' },
-  { id: 'email', title: 'wizard.formFieldTypes.email' },
-  { id: 'phone', title: 'wizard.formFieldTypes.phone' },
-  { id: 'textarea', title: 'wizard.formFieldTypes.textarea' },
-  { id: 'select', title: 'wizard.formFieldTypes.select' },
-  { id: 'checkbox', title: 'wizard.formFieldTypes.checkbox' },
-  { id: 'radio', title: 'wizard.formFieldTypes.radio' },
-  { id: 'file', title: 'wizard.formFieldTypes.file' },
-  { id: 'date', title: 'wizard.formFieldTypes.date' },
-  { id: 'number', title: 'wizard.formFieldTypes.number' }
+  { id: 'text', title: 'wizard_config_formFieldTypes_text' },
+  { id: 'email', title: 'wizard_config_formFieldTypes_email' },
+  { id: 'phone', title: 'wizard_config_formFieldTypes_phone' },
+  { id: 'textarea', title: 'wizard_config_formFieldTypes_textarea' },
+  { id: 'select', title: 'wizard_config_formFieldTypes_select' },
+  { id: 'checkbox', title: 'wizard_config_formFieldTypes_checkbox' },
+  { id: 'radio', title: 'wizard_config_formFieldTypes_radio' },
+  { id: 'file', title: 'wizard_config_formFieldTypes_file' },
+  { id: 'date', title: 'wizard_config_formFieldTypes_date' },
+  { id: 'number', title: 'wizard_config_formFieldTypes_number' }
 ];
 
 // Dynamic step configuration function EXTENDED!!!
 export function getStepConfig(projectType: string): WizardStep[] {
-  const baseSteps: WizardStep[] = [{ id: 1, title: 'wizard_config_steps_projekttyp', required: true }];
+  // Basic Steps are always the same structure initially: Category -> Type -> SubType -> Details -> Features
+  const commonSteps: WizardStep[] = [
+    { id: 1, title: 'wizard_stepCategory_title', required: true },
+    { id: 2, title: 'wizard_stepType_title', required: true },
+    { id: 3, title: 'wizard_stepSubType_title', required: true },
+    { id: 4, title: 'wizard_stepBasicDetails_title', required: true },
+    { id: 5, title: 'wizard_stepFeatures_title', required: true }
+  ];
+
+  // Extended steps depend on type
+  let extendedSteps: WizardStep[];
 
   if (projectType === 'website' || projectType === 'cms') {
-    return [
-      ...baseSteps,
-      { id: 2, title: 'wizard_config_steps_details', required: true },
-      { id: 3, title: 'wizard_config_steps_beschreibung', required: false },
-      { id: 4, title: 'wizard_config_steps_features', required: false },
-      { id: 5, title: 'wizard_config_steps_inhalte', required: false },
+    extendedSteps = [
+      { id: 6, title: 'wizard_config_steps_inhalte', required: false },
+      { id: 7, title: 'wizard_config_steps_materialien', required: false },
+      { id: 8, title: 'wizard_stepSummary_title', required: false }
+    ];
+  } else if (projectType === 'webApplication' || projectType === 'app') {
+    extendedSteps = [
       { id: 6, title: 'wizard_config_steps_materialien', required: false },
-      { id: 7, title: 'wizard_config_steps_ergebnis', required: false }
+      { id: 7, title: 'wizard_stepSummary_title', required: false }
     ];
-  } else if (projectType === 'webApplication') {
-    return [
-      ...baseSteps,
-      { id: 2, title: 'wizard_config_steps_details', required: true },
-      { id: 3, title: 'wizard_config_steps_beschreibung', required: false },
-      { id: 4, title: 'wizard_config_steps_features', required: false },
-      { id: 5, title: 'wizard_config_steps_materialien', required: false },
-      { id: 6, title: 'wizard_config_steps_ergebnis', required: false }
-    ];
-  } else if (projectType === 'artificialIntelligence') {
-    return [
-      ...baseSteps,
-      { id: 2, title: 'wizard_config_steps_details', required: true },
-      { id: 3, title: 'wizard_config_steps_beschreibung', required: false },
-      { id: 4, title: 'wizard_config_steps_materialien', required: false },
-      { id: 5, title: 'wizard_config_steps_ergebnis', required: false }
+  } else if (projectType === 'artificialIntelligence' || projectType === 'aiSolution') {
+    extendedSteps = [
+      { id: 6, title: 'wizard_config_steps_materialien', required: false },
+      { id: 7, title: 'wizard_stepSummary_title', required: false }
     ];
   } else if (projectType === 'freestyle') {
-    return [
-      ...baseSteps,
-      { id: 2, title: 'wizard_config_steps_beschreibung', required: false },
-      { id: 3, title: 'wizard_config_steps_materialien', required: false },
-      { id: 4, title: 'wizard_config_steps_ergebnis', required: false }
+    // Freestyle might skip features? No, keep structure consistent for "Basic" part
+    extendedSteps = [
+      { id: 6, title: 'wizard_config_steps_materialien', required: false },
+      { id: 7, title: 'wizard_stepSummary_title', required: false }
     ];
   } else {
     // Default fallback
-    return [
-      ...baseSteps,
-      { id: 2, title: 'wizard_config_steps_details', required: true },
-      { id: 3, title: 'wizard_config_steps_beschreibung', required: false },
-      { id: 4, title: 'wizard_config_steps_materialien', required: false },
-      { id: 5, title: 'wizard_config_steps_ergebnis', required: false }
+    extendedSteps = [
+      { id: 6, title: 'wizard_config_steps_materialien', required: false },
+      { id: 7, title: 'wizard_stepSummary_title', required: false }
     ];
   }
+
+  return [...commonSteps, ...extendedSteps];
 }

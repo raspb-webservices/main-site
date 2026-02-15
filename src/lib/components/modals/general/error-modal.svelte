@@ -1,6 +1,6 @@
 <script lang="ts">
   import { m } from '$lib/paraglide/messages';
-  let { errorDetails } = $props();
+  let { errorDetails, onClose } = $props();
   let modal: HTMLDialogElement;
 
   export function openModal() {
@@ -8,6 +8,7 @@
   }
   export function closeModal() {
     modal?.close();
+    onClose?.();
   }
 </script>
 

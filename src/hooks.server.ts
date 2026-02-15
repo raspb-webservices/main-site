@@ -29,26 +29,30 @@ const handleAuth: Handle = async ({ event, resolve }) => {
     }
   }
 
-  // Public Routes brauchen keine Auth
-  if (authLevel === 'public') {
-    return resolve(event);
-  }
-
   // Token aus Authorization-Header lesen
   const authHeader = event.request.headers.get('authorization');
   const token = authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : null;
 
-  if (!token) {
-    return new Response(JSON.stringify({ error: 'Authentication required' }), {
-      status: 401,
-      headers: { 'Content-Type': 'application/json' }
-    });
+  if (token) {
+    try {
+      event.locals.user = await validateIdToken(token);
+    } catch {
+      if (authLevel !== 'public') {
+        return new Response(JSON.stringify({ error: 'Invalid or expired token' }), {
+          status: 401,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+    }
   }
 
-  try {
-    event.locals.user = await validateIdToken(token);
-  } catch {
-    return new Response(JSON.stringify({ error: 'Invalid or expired token' }), {
+  // Public Routes brauchen keine Auth (aber nutzen locals.user wenn vorhanden)
+  if (authLevel === 'public') {
+    return resolve(event);
+  }
+
+  if (!event.locals.user) {
+    return new Response(JSON.stringify({ error: 'Authentication required' }), {
       status: 401,
       headers: { 'Content-Type': 'application/json' }
     });

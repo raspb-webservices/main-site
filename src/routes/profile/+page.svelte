@@ -180,6 +180,7 @@
       </div>
     </div>
   </Section>
+
 {:else if showSection === 'not-authorized'}
   <Section type={'fullCenterTeaser'}>
     <div class="inner-content-wrapper prose">
