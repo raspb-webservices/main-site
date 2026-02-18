@@ -411,21 +411,24 @@
     errorDetails = [];
 
     try {
+      // ─── STEP 1: Upload assets (create in Hygraph, unpublished) ───────────────
       let finalAssetIds: string[] = [];
       if (uploadedAssetIds.length > 0) {
+        // Already uploaded during summary step preview
         finalAssetIds = uploadedAssetIds;
       } else if (uploadedFiles.length > 0) {
         finalAssetIds = await uploadAllFiles();
-
         if (finalAssetIds.length === 0 && uploadedFiles.length > 0) {
           errorDetails.push(m.wizard_modals_error_fileUploadError());
           throw new Error(m.wizard_modals_error_fileUploadFailed());
         }
       }
 
+      // ─── STEP 2: Create project (server creates/finds customer as owner) ──────
       const projectData: Project = {
         name: config.name,
         description: config.description,
+        projectCategory: config.projectCategory,
         projectType: config.projectType,
         subType: config.subType,
         projectDetails: config.projectDetails,
@@ -446,7 +449,6 @@
         serviceLevel: config.serviceLevel,
         engineeringApproach: config.engineeringApproach,
         specialRequirements: config.specialRequirements,
-        projectGoal: config.projectGoal,
         timelinePreference: config.timelinePreference,
         specificDeadline: config.specificDeadline,
         budgetRange: config.budgetRange,
@@ -461,57 +463,63 @@
 
       const response = await fetch('/api/project/create', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(projectData)
       });
 
       const result = await response.json();
 
-      if (result.success && result.data?.id) {
-        const projectId = result.data.id;
-
-        if (currentUser) {
-          if (Array.isArray(currentUser.projectIds)) {
-            currentUser.projectIds.push(projectId);
-          } else {
-            currentUser.projectIds = [projectId];
-          }
-
-          custom_metadata = {
-            projectIds: currentUser.projectIds
-          };
-
-          await auth.updateMetadata(custom_metadata);
-        }
-
-        showThankYouPage();
-
-        await new Promise((resolve) => setTimeout(resolve, 3500));
-
-        try {
-          const publishProjectResponse = await fetch(`/api/project/publish/${projectId}`, {
-            method: 'POST'
-          });
-        } catch (publishProjectError) {
-          // ignore
-        }
-
-        if (finalAssetIds.length > 0) {
-          try {
-            const publishedAssetIds = await publishMultipleAssets(finalAssetIds, (message, current, total) => {});
-          } catch (assetPublishError) {
-            // ignore
-          }
-        }
-      } else {
+      if (!result.success || !result.data?.id) {
         errorDetails.push(`${m.wizard_modals_error_apiError()} : ${result.error || m.wizard_modals_error_unknownError()}`);
-        if (result.details) {
-          errorDetails.push(...result.details);
-        }
+        if (result.details) errorDetails.push(...result.details);
         throw new Error(m.wizard_modals_error_apiRequestFailed());
       }
+
+      const projectId: string = result.data.id;
+      const customerId: string | undefined = result.customerId;
+      const customerCreated: boolean = result.customerCreated ?? false;
+
+      // Update Auth0 metadata with new project ID
+      if (currentUser) {
+        if (Array.isArray(currentUser.projectIds)) {
+          currentUser.projectIds.push(projectId);
+        } else {
+          currentUser.projectIds = [projectId];
+        }
+        custom_metadata = { projectIds: currentUser.projectIds };
+        await auth.updateMetadata(custom_metadata);
+      }
+
+      // Show thank you immediately after successful creation
+      showThankYouPage();
+
+      // ─── STEP 3: Wait for Hygraph to index all created entities ──────────────
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+
+      // ─── STEP 4: Publish everything in parallel ───────────────────────────────
+      const publishTasks: Promise<unknown>[] = [];
+
+      // Publish project
+      publishTasks.push(
+        fetch(`/api/project/publish/${projectId}`, { method: 'POST' }).catch(() => {/* non-critical */})
+      );
+
+      // Publish customer if freshly created
+      if (customerCreated && customerId) {
+        publishTasks.push(
+          fetch(`/api/customer/publish/${customerId}`, { method: 'POST' }).catch(() => {/* non-critical */})
+        );
+      }
+
+      // Publish assets
+      if (finalAssetIds.length > 0) {
+        publishTasks.push(
+          publishMultipleAssets(finalAssetIds, () => {}).catch(() => {/* non-critical */})
+        );
+      }
+
+      await Promise.allSettled(publishTasks);
+
     } catch (error) {
       console.error(m.wizard_modals_error_submissionError(), error);
       if (errorDetails.length === 0) {

@@ -16,7 +16,10 @@
       "Bash(git revert:*)",
       "Bash(python3:*)",
       "Bash(grep:*)",
-      "Bash(npx @inlang/paraglide-js compile:*)"
+      "Bash(npx @inlang/paraglide-js compile:*)",
+      "Bash(yarn run build:*)",
+      "Bash(yarn svelte-check:*)",
+      "Bash(node_modules/.bin/svelte-check:*)"
     ]
   }
 }

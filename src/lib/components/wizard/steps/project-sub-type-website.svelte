@@ -10,7 +10,7 @@
   </h1>
   <p class="teaser">
     {m.wizard_stepSubType_teaser({
-      project: (m as unknown as Record<string, () => string>)['wizard.type.' + config.projectType + '.title']?.() ?? config.projectType
+      project: (m as unknown as Record<string, () => string>)['wizard_type_' + config.projectType + '_title']?.() ?? config.projectType
     })}
   </p>
 </div>

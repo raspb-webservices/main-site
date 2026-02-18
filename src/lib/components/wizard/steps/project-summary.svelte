@@ -35,7 +35,7 @@
     <h3>{m.wizard_stepSummary_projectType()}</h3>
     {#if config.projectCategory === 'websites-and-apps'}
       <p class="summary-value">
-        {(m as unknown as Record<string, () => string>)[projectTypesWebApp?.find((p) => p.id === config.projectType)?.title ?? '']?.()}
+        {(m as unknown as Record<string, () => string>)[projectTypesWebApp?.find((p) => p.id === config.projectType)?.label ?? projectTypesWebApp?.find((p) => p.id === config.projectType)?.title ?? '']?.()}
       </p>
       {#if config.projectType === 'website'}
         <p class="summary-subvalue">

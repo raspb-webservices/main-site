@@ -398,8 +398,7 @@
     }
 
     .form-group-large {
-      @apply md:col-span-1;
-      flex: 1;
+      @apply flex-1 md:col-span-1;
     }
   }
 

@@ -23,6 +23,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
           id
           name
           description
+          projectCategory
           projectType
           subType
           projectDetails
@@ -41,6 +42,16 @@ export const POST: RequestHandler = async ({ request, locals }) => {
           accentColour
           desiredFont
           estimatedPrice
+          serviceLevel
+          engineeringApproach
+          specialRequirements
+          timelinePreference
+          specificDeadline
+          budgetRange
+          pwaApproach
+          pwaExistingUrl
+          cmsComplexity
+          cmsContentStructure
           formFields
           pages
           setup
@@ -57,6 +68,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
             email
           }
           createdAt
+          updatedAt
         }
       }
     `;

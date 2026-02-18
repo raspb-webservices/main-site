@@ -134,16 +134,16 @@
       <Hr />
 
       <!-- Project Goals & Audience -->
-      {#if projectData.projectGoal || projectData.targetAudience}
+      {#if projectData.goals || projectData.targetAudience}
         <Section style="padding: 30px 20px;">
           <Text style="font-size: 22px; color: #c1121f; margin-bottom: 15px; font-weight: bold;">🎯 Ziel & Zielgruppe</Text>
 
-          {#if projectData.projectGoal}
+          {#if projectData.goals}
             <Text style="margin: 5px 0; font-size: 14px;">
               <strong>Projektziel:</strong>
             </Text>
             <Text style="margin: 0 0 15px 0; font-size: 14px; background-color: #f5f5f5; padding: 10px; border-radius: 5px;">
-              {projectData.projectGoal}
+              {projectData.goals}
             </Text>
           {/if}
 

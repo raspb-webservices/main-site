@@ -17,6 +17,7 @@ export interface Project {
   id?: string;
   name: string;
   description?: string;
+  /** Freitext-String, kein Enum – entspricht Wizard-Kategorie-ID (z.B. 'websites-and-apps', 'ki-and-freestyle') */
   projectCategory?: string;
   projectType?: string;
   subType?: string;
@@ -46,7 +47,8 @@ export interface Project {
   serviceLevel?: number; // 0-100: 0 = Full-Service, 100 = Active Participation
   engineeringApproach?: number; // 0-100: 0 = Quick & Dirty, 100 = Over-engineered
   specialRequirements?: string;
-  projectGoal?: string;
+  // KI & Freestyle only
+  estimatedExpertDays?: number; // estimated man-days (optional, only for ki-and-freestyle)
   timelinePreference?: string; // 'urgent', 'fast', 'moderate', 'flexible', 'delayed', 'deadline', 'whenever'
   specificDeadline?: string; // ISO date string
   budgetRange?: string; // 'small', 'medium', 'large', 'xlarge', 'enterprise', 'flexible'
@@ -80,12 +82,16 @@ export interface Project {
   };
   setup?: ProjectSetup;
   createdAt?: string;
+  updatedAt?: string;
+  publishedAt?: string;
 }
 
 export interface WizardConfig extends Project {
   step: number;
   customFont: string;
   uploadedFiles: { name: string; size: number; type: string }[];
+  /** Only used client-side for ki-and-freestyle price range display – not sent to Hygraph */
+  estimatedPriceMax?: number;
 }
 
 export interface ProjectResponse extends Omit<Project, 'pages' | 'formFields' | 'setup'> {
@@ -95,13 +101,10 @@ export interface ProjectResponse extends Omit<Project, 'pages' | 'formFields' | 
   setup?: string;
 }
 
-export enum projectCategory {
-  website,
-  app,
-  aiSolution,
-  freestyle
-}
-
+/**
+ * Hygraph ProjectType enum values.
+ * Diese Werte werden direkt als Strings in Hygraph gespeichert.
+ */
 export enum projectType {
   website,
   app,
@@ -109,26 +112,39 @@ export enum projectType {
   freestyle
 }
 
+/**
+ * Hygraph SubType enum values.
+ * Diese Werte werden direkt als Strings in Hygraph gespeichert.
+ */
 export enum subType {
+  // Website
   onepager,
   onepagerPlus,
   corporateWebsite,
   corporateWebsitePlus,
   cms,
   cmsPlus,
+  // App
   webApp,
   pwaSimple,
   pwaExtended,
   individualApp,
+  // AI Solution
   aiConsulting,
   agenticAi,
   generativeAi,
   bots,
   workflowAutomation,
   aiWorkflows,
-  individualAi
+  individualAi,
+  // Freestyle
+  individualConsulting,
+  individualDevelopment
 }
 
+/**
+ * Hygraph ProjectStatus enum values (geordnet nach Fortschritt).
+ */
 export enum projectStatus {
   created,
   introduced,
@@ -155,39 +171,55 @@ export enum salutationOptions {
   other
 }
 
+/**
+ * Hygraph Features enum values.
+ * IDs stimmen 1:1 mit den Hygraph-Enum-Werten überein.
+ * Deutsch benannt, da Hygraph die deutschen Bezeichnungen als Enum-Werte nutzt.
+ */
 export enum features {
-  contactForm,
-  newsletterRegistration,
+  // Kommunikation
+  kontaktformular,
+  newsletterRegistrierung,
   chatbot,
   voicebot,
-  appointments,
-  imageGallery,
+  terminbuchung,
+  // Content & Medien
+  bildergalerie,
   videoEmbedding,
   portfolioGrid,
-  calendar,
-  fileUpload,
+  kalender,
+  dateiupload,
+  downloadbereich,
+  // Navigation & UI
   megaMenu,
   customTeaser,
   customCarousel,
-  accordeon,
+  akkordeon,
   tabs,
   themeSwitcher,
-  search,
+  // Funktionalität & Tools
+  suchfunktion,
   customFilter,
   multiStepDialog,
-  configurator,
-  assistant,
-  rating,
-  payment,
-  userAccounts,
-  ageVerification,
+  konfigurator,
+  assistent,
+  bewertungsmechanismus,
+  // E-Commerce & Zahlungen
+  zahlungsabwicklung,
+  // Benutzer & Sicherheit
+  benutzerkonten,
+  altersverifikation,
   cookieConsent,
-  accessibility,
+  barrierefreiheitTools,
+  // Integration & Services
   mapsIntegration,
   socialMediaIntegration,
   analyticsIntegration,
+  // Marketing & SEO
   seo,
   marketingTools,
-  localization,
+  // Lokalisierung
+  mehrsprachigkeit,
+  // Special Features
   virtualTour
 }

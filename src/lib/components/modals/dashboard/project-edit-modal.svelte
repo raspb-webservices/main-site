@@ -27,10 +27,20 @@
   let modal: HTMLDialogElement;
 
   let editingSection: string | null = $state(null);
+  let editingTitle = $state(false);
   let editError = $state('');
   let editSuccess = $state('');
   let editSaving = $state(false);
   let editForm = $derived(selectedProject);
+  let headerTitle = $state('');
+  let headerStatus = $state('');
+  
+  $effect(() => {
+    if (selectedProject) {
+      headerTitle = selectedProject.name || '';
+      headerStatus = selectedProject.projectStatus || '';
+    }
+  });
 
   let editingCustomer = $state(false);
   let customerError = $state('');
@@ -69,56 +79,63 @@
     editSuccess = '';
   }
 
+  // Helper function to convert null/undefined to empty string or 0
+  function sanitizeValue(value: unknown): string | number | undefined {
+    if (value === null || value === undefined) return undefined;
+    if (typeof value === 'string') return value;
+    if (typeof value === 'number') return value;
+    return String(value);
+  }
+
+  function sanitizeNumber(value: unknown): number | undefined {
+    if (value === null || value === undefined) return undefined;
+    const num = Number(value);
+    return isNaN(num) ? undefined : num;
+  }
+
   async function saveProjectSection() {
     editSaving = true;
     editError = '';
     editSuccess = '';
 
     try {
+      // Build sanitized project data - convert null/undefined to empty strings or 0
+      const sanitizedData: Record<string, unknown> = { id: selectedProject?.id };
+
       switch (editingSection) {
         case 'grundinformationen':
-          selectedProject = {
-            ...selectedProject,
-            name: editForm.name,
-            description: editForm.description,
-            projectType: editForm.projectType,
-            subType: editForm.subType,
-            projectDetails: editForm.projectDetails,
-            projectStatus: editForm.projectStatus
-          };
+          sanitizedData.name = sanitizeValue(editForm.name) || '';
+          sanitizedData.description = sanitizeValue(editForm.description) || '';
+          sanitizedData.projectType = sanitizeValue(editForm.projectType) || '';
+          sanitizedData.subType = sanitizeValue(editForm.subType) || '';
+          sanitizedData.projectDetails = sanitizeValue(editForm.projectDetails) || '';
+          sanitizedData.projectStatus = sanitizeValue(editForm.projectStatus) || '';
+          selectedProject = { ...selectedProject, ...sanitizedData };
           break;
         case 'spezifikationen':
-          selectedProject = {
-            ...selectedProject,
-            desiredDomain: editForm.desiredDomain,
-            domainStatus: editForm.domainStatus,
-            goals: editForm.goals,
-            targetAudience: editForm.targetAudience,
-            timeline: editForm.timeline
-          };
+          sanitizedData.desiredDomain = sanitizeValue(editForm.desiredDomain) || '';
+          sanitizedData.domainStatus = sanitizeValue(editForm.domainStatus) || '';
+          sanitizedData.goals = sanitizeValue(editForm.goals) || '';
+          sanitizedData.targetAudience = sanitizeValue(editForm.targetAudience) || '';
+          sanitizedData.timeline = sanitizeValue(editForm.timeline) || '';
+          selectedProject = { ...selectedProject, ...sanitizedData };
           break;
         case 'budget':
-          selectedProject = {
-            ...selectedProject,
-            budget: editForm.budget,
-            estimatedPrice: editForm.estimatedPrice
-          };
+          sanitizedData.budget = sanitizeValue(editForm.budget) || '';
+          sanitizedData.estimatedPrice = sanitizeNumber(editForm.estimatedPrice) ?? 0;
+          selectedProject = { ...selectedProject, ...sanitizedData };
           break;
         case 'design':
-          selectedProject = {
-            ...selectedProject,
-            primaryColour: editForm.primaryColour,
-            secondaryColour: editForm.secondaryColour,
-            accentColour: editForm.accentColour,
-            desiredFont: editForm.desiredFont
-          };
+          sanitizedData.primaryColour = sanitizeValue(editForm.primaryColour) || '';
+          sanitizedData.secondaryColour = sanitizeValue(editForm.secondaryColour) || '';
+          sanitizedData.accentColour = sanitizeValue(editForm.accentColour) || '';
+          sanitizedData.desiredFont = sanitizeValue(editForm.desiredFont) || '';
+          selectedProject = { ...selectedProject, ...sanitizedData };
           break;
         case 'features':
-          selectedProject = {
-            ...selectedProject,
-            features: editForm.features,
-            customFeature: editForm.customFeature
-          };
+          sanitizedData.features = editForm.features || [];
+          sanitizedData.customFeature = sanitizeValue(editForm.customFeature) || '';
+          selectedProject = { ...selectedProject, ...sanitizedData };
           break;
       }
 
@@ -303,12 +320,85 @@
 </script>
 
 <dialog bind:this={modal} class="modal edit-project">
-  <div class="modal-box w-11/12 max-w-5xl">
+  <div class="modal-box w-11/12 max-w-7xl">
     <form method="dialog">
       <button class="btn btn-sm btn-circle btn-ghost absolute top-4 right-4" onclick={closeModal}>✕</button>
     </form>
 
-    <h3 class="mb-4 text-lg font-bold">{selectedProject?.name}</h3>
+    <!-- Header: Editable Title & Status -->
+    <div class="mb-4 flex items-center gap-4 rounded-lg bg-base-200 p-4">
+      {#if editingTitle}
+        <div class="flex flex-1 items-center gap-2">
+          <input
+            type="text"
+            bind:value={headerTitle}
+            class="input input-bordered input-sm flex-1"
+            placeholder={m.dashboard_edit_label_name()}
+          />
+          <select
+            bind:value={headerStatus}
+            class="select select-bordered select-sm"
+          >
+            <option value="">{m.dashboard_edit_placeholder_select()}</option>
+            {#each ToArray(projectStatus) as status}
+              <option value={status as string}>{getStatusLabel(status as string)}</option>
+            {/each}
+          </select>
+          <button
+            class="btn btn-sm btn-simple"
+            onclick={async () => {
+              if (!selectedProject) return;
+              editSaving = true;
+              const response = await authFetch(`/api/project/patch/${selectedProject.id}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  id: selectedProject.id,
+                  name: headerTitle,
+                  projectStatus: headerStatus
+                })
+              });
+              if (response.ok) {
+                selectedProject = { ...selectedProject, name: headerTitle, projectStatus: headerStatus };
+                editingTitle = false;
+                editSuccess = m.dashboard_edit_success_saved();
+                setTimeout(() => { editSuccess = ''; }, 2000);
+              } else {
+                editError = m.dashboard_edit_error_save();
+              }
+              editSaving = false;
+            }}
+            disabled={editSaving}
+          >
+            {#if editSaving}
+              <span class="loading loading-spinner loading-xs"></span>
+            {:else}
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            {/if}
+          </button>
+          <button class="btn btn-sm btn-ghost" onclick={() => { editingTitle = false; headerTitle = selectedProject?.name || ''; headerStatus = selectedProject?.projectStatus || ''; }}>
+            ✕
+          </button>
+        </div>
+      {:else}
+        <div class="flex flex-1 items-center gap-3">
+          <h3 class="text-lg font-bold">{selectedProject?.name}</h3>
+          {#if selectedProject?.projectStatus}
+            <div class="badge {getStatusBadgeClass(selectedProject?.projectStatus)}">
+              {getStatusLabel(selectedProject?.projectStatus)}
+            </div>
+          {/if}
+        </div>
+        <button class="btn btn-xs btn-simple" onclick={() => { editingTitle = true; headerTitle = selectedProject?.name || ''; headerStatus = selectedProject?.projectStatus || ''; }}>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+          </svg>
+          Bearbeiten
+        </button>
+      {/if}
+    </div>
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
       <!-- Grundinformationen -->
       <div class="card bg-base-200">
@@ -381,10 +471,10 @@
                 <select bind:value={editForm.projectType} id="projectType" name="projectType" class="select select-bordered select-sm">
                   <option value="">{m.dashboard_edit_placeholder_select()}</option>
                   {#each projectTypesWebApp as type}
-                    <option value={type.id}>{(m as unknown as Record<string, () => string>)[type.title]?.() ?? type.title}</option>
+                    <option value={type.id}>{(m as unknown as Record<string, () => string>)[type.label ?? type.title]?.() ?? type.title}</option>
                   {/each}
                   {#each projectTypesAiFreestyle as type}
-                    <option value={type.id}>{(m as unknown as Record<string, () => string>)[type.title]?.() ?? type.title}</option>
+                    <option value={type.id}>{(m as unknown as Record<string, () => string>)[type.label ?? type.title]?.() ?? type.title}</option>
                   {/each}
                 </select>
               </div>

@@ -213,9 +213,14 @@ export async function uploadAssetWithStatusCheck(file: File, onProgress?: (messa
       return 'error';
     }
 
-    onProgress?.(`${file.name} verarbeitet, veröffentliche Asset...`);
+    onProgress?.(`${file.name} verarbeitet, warte auf Finalisierung...`);
 
-    // Step 3: Publish the asset
+    // Step 3: Wait for Hygraph to fully finalize the asset before publishing
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    onProgress?.(`${file.name} veröffentliche Asset...`);
+
+    // Step 4: Publish the asset
     const publishResult = await publishAsset(assetId);
 
     if (publishResult === 'error') {

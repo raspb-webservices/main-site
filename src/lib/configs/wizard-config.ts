@@ -8,6 +8,7 @@ export interface ProjectCategory {
 export interface ProjectType {
   id: string;
   title: string;
+  label?: string;
   description: string;
   icon?: string;
   parentId?: string;
@@ -52,14 +53,16 @@ export const projectCategories: ProjectCategory[] = [
 export const projectTypesWebApp: ProjectType[] = [
   {
     id: 'website',
-    title: 'wizard_type_website',
+    title: 'wizard_type_website_card',
+    label: 'wizard_type_website',
     description: 'wizard_type_website_description',
     icon: '🖥️',
     basePrice: 399
   },
   {
     id: 'app',
-    title: 'wizard_type_app',
+    title: 'wizard_type_app_card',
+    label: 'wizard_type_app',
     description: 'wizard_type_app_description',
     icon: '🚀',
     basePrice: 3000
@@ -70,6 +73,7 @@ export const projectTypesAiFreestyle: ProjectType[] = [
   {
     id: 'aiSolution',
     title: 'wizard_type_aiSolution',
+    label: 'wizard_type_aiSolution_title',
     description: 'wizard_type_aiSolution_description',
     icon: '🤖',
     basePrice: 5000
@@ -77,6 +81,7 @@ export const projectTypesAiFreestyle: ProjectType[] = [
   {
     id: 'freestyle',
     title: 'wizard_type_freestyle',
+    label: 'wizard_type_freestyle_title',
     description: 'wizard_type_freestyle_description',
     icon: '⚗️',
     basePrice: 3000
@@ -181,6 +186,12 @@ export const projectSubTypesAi: ProjectType[] = [
     basePrice: 5000
   },
   {
+    id: 'aiWorkflows',
+    title: 'wizard_subTypes_aiWorkflows',
+    description: 'wizard_subTypes_aiWorkflows_description',
+    basePrice: 5000
+  },
+  {
     id: 'individualAi',
     title: 'wizard_subTypes_individualAi',
     description: 'wizard_subTypes_individualAi_description',
@@ -193,26 +204,26 @@ export const projectSubTypesFreestyle: ProjectType[] = [
     id: 'individualConsulting',
     title: 'wizard_subTypes_individualConsulting',
     description: 'wizard_subTypes_individualConsulting_description',
-    basePrice: 3000
+    icon: '🧑‍💼',
+    basePrice: 1000
   },
   {
-    id: 'fullDevelopment',
-    title: 'wizard_subTypes_fullDevelopment',
-    description: 'wizard_subTypes_fullDevelopment_description',
-    basePrice: 15000
-  },
-  {
-    id: 'partDevelopment',
-    title: 'wizard_subTypes_partDevelopment',
-    description: 'wizard_subTypes_partDevelopment_description',
-    basePrice: 3000
+    id: 'individualDevelopment',
+    title: 'wizard_subTypes_individualDevelopment',
+    description: 'wizard_subTypes_individualDevelopment_description',
+    icon: '🔧',
+    basePrice: 5000
   }
 ];
 
+/**
+ * Feature IDs directly match Hygraph enum values.
+ * No mapping required between client and API.
+ */
 export const availableFeatures: Feature[] = [
   // Kommunikation
   {
-    id: 'contactForm',
+    id: 'kontaktformular',
     title: 'wizard_features_contactForm_title',
     description: 'wizard_features_contactForm_description',
     category: 'communication',
@@ -220,7 +231,7 @@ export const availableFeatures: Feature[] = [
     isSideProject: false
   },
   {
-    id: 'newsletterRegistration',
+    id: 'newsletterRegistrierung',
     title: 'wizard_features_newsletterRegistration_title',
     description: 'wizard_features_newsletterRegistration_description',
     category: 'communication',
@@ -244,7 +255,7 @@ export const availableFeatures: Feature[] = [
     isSideProject: true
   },
   {
-    id: 'appointments',
+    id: 'terminbuchung',
     title: 'wizard_features_appointments_title',
     description: 'wizard_features_appointments_description',
     category: 'communication',
@@ -254,7 +265,7 @@ export const availableFeatures: Feature[] = [
 
   // Content & Medien
   {
-    id: 'imageGallery',
+    id: 'bildergalerie',
     title: 'wizard_features_imageGallery_title',
     description: 'wizard_features_imageGallery_description',
     category: 'content',
@@ -278,7 +289,7 @@ export const availableFeatures: Feature[] = [
     isSideProject: false
   },
   {
-    id: 'calendar',
+    id: 'kalender',
     title: 'wizard_features_calendar_title',
     description: 'wizard_features_calendar_description',
     category: 'content',
@@ -286,11 +297,19 @@ export const availableFeatures: Feature[] = [
     isSideProject: false
   },
   {
-    id: 'fileUpload',
+    id: 'dateiupload',
     title: 'wizard_features_fileUpload_title',
     description: 'wizard_features_fileUpload_description',
     category: 'content',
     basePrice: 300,
+    isSideProject: false
+  },
+  {
+    id: 'downloadbereich',
+    title: 'wizard_features_downloadbereich_title',
+    description: 'wizard_features_downloadbereich_description',
+    category: 'content',
+    basePrice: 200,
     isSideProject: false
   },
 
@@ -320,7 +339,7 @@ export const availableFeatures: Feature[] = [
     isSideProject: false
   },
   {
-    id: 'accordeon',
+    id: 'akkordeon',
     title: 'wizard_features_accordeon_title',
     description: 'wizard_features_accordeon_description',
     category: 'navigation',
@@ -346,7 +365,7 @@ export const availableFeatures: Feature[] = [
 
   // Funktionalität & Tools
   {
-    id: 'search',
+    id: 'suchfunktion',
     title: 'wizard_features_search_title',
     description: 'wizard_features_search_description',
     category: 'functionality',
@@ -370,7 +389,7 @@ export const availableFeatures: Feature[] = [
     isSideProject: false
   },
   {
-    id: 'configurator',
+    id: 'konfigurator',
     title: 'wizard_features_configurator_title',
     description: 'wizard_features_configurator_description',
     category: 'functionality',
@@ -378,7 +397,7 @@ export const availableFeatures: Feature[] = [
     isSideProject: false
   },
   {
-    id: 'assistant',
+    id: 'assistent',
     title: 'wizard_features_assistant_title',
     description: 'wizard_features_assistant_description',
     category: 'functionality',
@@ -386,7 +405,7 @@ export const availableFeatures: Feature[] = [
     isSideProject: true
   },
   {
-    id: 'rating',
+    id: 'bewertungsmechanismus',
     title: 'wizard_features_rating_title',
     description: 'wizard_features_rating_description',
     category: 'functionality',
@@ -396,7 +415,7 @@ export const availableFeatures: Feature[] = [
 
   // E-Commerce & Zahlungen
   {
-    id: 'payment',
+    id: 'zahlungsabwicklung',
     title: 'wizard_features_payment_title',
     description: 'wizard_features_payment_description',
     category: 'ecommerce',
@@ -406,7 +425,7 @@ export const availableFeatures: Feature[] = [
 
   // Benutzer & Sicherheit
   {
-    id: 'userAccounts',
+    id: 'benutzerkonten',
     title: 'wizard_features_userAccounts_title',
     description: 'wizard_features_userAccounts_description',
     category: 'users',
@@ -414,7 +433,7 @@ export const availableFeatures: Feature[] = [
     isSideProject: true
   },
   {
-    id: 'ageVerification',
+    id: 'altersverifikation',
     title: 'wizard_features_ageVerification_title',
     description: 'wizard_features_ageVerification_description',
     category: 'users',
@@ -430,7 +449,7 @@ export const availableFeatures: Feature[] = [
     isSideProject: false
   },
   {
-    id: 'accessibility',
+    id: 'barrierefreiheitTools',
     title: 'wizard_features_accessibility_title',
     description: 'wizard_features_accessibility_description',
     category: 'users',
@@ -484,7 +503,7 @@ export const availableFeatures: Feature[] = [
 
   // Lokalisierung
   {
-    id: 'localization',
+    id: 'mehrsprachigkeit',
     title: 'wizard_features_localization_title',
     description: 'wizard_features_localization_description',
     category: 'localization',

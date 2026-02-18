@@ -307,8 +307,7 @@
             &.active {
               @apply font-bold;
               &:hover {
-                @apply cursor-default bg-transparent;
-                color: inherit;
+                @apply cursor-default bg-transparent text-inherit;
               }
             }
             &:hover {

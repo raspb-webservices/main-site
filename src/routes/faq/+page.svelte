@@ -273,7 +273,6 @@
     animation: fadeInUp 0.5s ease-out;
   }
   .fade-out {
-    opacity: 0;
-    transition: opacity 0.4s ease;
+    @apply opacity-0 transition-opacity duration-400;
   }
 </style>

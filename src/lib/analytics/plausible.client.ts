@@ -62,9 +62,9 @@ export async function initPlausibleOnce(): Promise<void> {
     domain,
     endpoint: buildEndpoint(PUBLIC_PLAUSIBLE_API_HOST),
 
-    // Plausible Tracker can auto-track SPA navigation (history.pushState/popstate).
-    // This is what we want for SvelteKit.
-    autoCapturePageviews: true,
+    // Disabled: we use SvelteKit's afterNavigate to track pageviews manually,
+    // avoiding the history.pushState conflict warning from SvelteKit's router.
+    autoCapturePageviews: false,
 
     // Useful defaults
     outboundLinks: true,
@@ -78,4 +78,15 @@ export async function initPlausibleOnce(): Promise<void> {
 
   init(config);
   isInitialized = true;
+}
+
+/**
+ * Tracks a pageview manually. Call this from SvelteKit's afterNavigate hook
+ * in +layout.svelte to replace autoCapturePageviews without triggering
+ * history.pushState conflicts.
+ */
+export async function trackPageview(): Promise<void> {
+  if (!isInitialized) return;
+  const { track } = await loadPlausible();
+  track('pageview', {});
 }

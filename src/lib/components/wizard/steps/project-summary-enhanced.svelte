@@ -83,7 +83,7 @@
         <div class="card-label">Projekttyp</div>
         <div class="card-value">
           {#if config.projectCategory === 'websites-and-apps'}
-            {(m as unknown as Record<string, () => string>)[projectTypesWebApp?.find((p) => p.id === config.projectType)?.title ?? '']?.()}
+            {(m as unknown as Record<string, () => string>)[projectTypesWebApp?.find((p) => p.id === config.projectType)?.label ?? projectTypesWebApp?.find((p) => p.id === config.projectType)?.title ?? '']?.()}
           {:else}
             {(m as unknown as Record<string, () => string>)[projectTypesAiFreestyle?.find((p) => p.id === config.projectType)?.title ?? '']?.()}
           {/if}
@@ -114,14 +114,14 @@
   {/if}
 
   <!-- Project Goals & Audience -->
-  {#if config.projectGoal || config.targetAudience}
+  {#if config.goals || config.targetAudience}
     <section class="summary-section">
       <h2 class="section-title">🎯 Ziel & Zielgruppe</h2>
       <div class="summary-grid">
-        {#if config.projectGoal}
+        {#if config.goals}
           <div class="text-card">
             <div class="card-label">Projektziel</div>
-            <p>{config.projectGoal}</p>
+            <p>{config.goals}</p>
           </div>
         {/if}
         {#if config.targetAudience}
@@ -414,11 +414,4 @@
     @apply mt-8 flex flex-wrap justify-center gap-4;
   }
 
-  .mt-2 {
-    margin-top: 0.5rem;
-  }
-
-  .mt-4 {
-    margin-top: 1rem;
-  }
 </style>

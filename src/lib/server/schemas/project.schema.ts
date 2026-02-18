@@ -3,146 +3,198 @@ import { z } from 'zod';
 const MAX_STRING = 2000;
 const MAX_SHORT = 500;
 
-const projectTypeEnum = z.enum(['website', 'app', 'aiSolution', 'freestyle']);
+const projectTypeEnum = z.enum(['website', 'app', 'aiSolution', 'freestyle']).nullish();
 
-const subTypeEnum = z.enum([
-  'onepager',
-  'onepagerPlus',
-  'corporateWebsite',
-  'corporateWebsitePlus',
-  'cms',
-  'cmsPlus',
-  'webApp',
-  'pwaSimple',
-  'pwaExtended',
-  'individualApp',
-  'aiConsulting',
-  'agenticAi',
-  'generativeAi',
-  'bots',
-  'workflowAutomation',
-  'aiWorkflows',
-  'individualAi'
-]);
+const subTypeEnum = z
+  .enum([
+    'onepager',
+    'onepagerPlus',
+    'corporateWebsite',
+    'corporateWebsitePlus',
+    'cms',
+    'cmsPlus',
+    'webApp',
+    'pwaSimple',
+    'pwaExtended',
+    'individualApp',
+    'aiConsulting',
+    'agenticAi',
+    'generativeAi',
+    'bots',
+    'workflowAutomation',
+    'aiWorkflows',
+    'individualAi',
+    'individualConsulting',
+    'individualDevelopment'
+  ])
+  .nullish();
 
 const featuresEnum = z.enum([
-  'contactForm',
-  'newsletterRegistration',
+  'kontaktformular',
+  'newsletterRegistrierung',
   'chatbot',
   'voicebot',
-  'appointments',
-  'imageGallery',
+  'terminbuchung',
+  'bildergalerie',
   'videoEmbedding',
   'portfolioGrid',
-  'calendar',
-  'fileUpload',
+  'kalender',
+  'dateiupload',
+  'downloadbereich',
   'megaMenu',
   'customTeaser',
   'customCarousel',
-  'accordeon',
+  'akkordeon',
   'tabs',
   'themeSwitcher',
-  'search',
+  'suchfunktion',
   'customFilter',
   'multiStepDialog',
-  'configurator',
-  'assistant',
-  'rating',
-  'payment',
-  'userAccounts',
-  'ageVerification',
+  'konfigurator',
+  'assistent',
+  'bewertungsmechanismus',
+  'zahlungsabwicklung',
+  'benutzerkonten',
+  'altersverifikation',
   'cookieConsent',
-  'accessibility',
+  'barrierefreiheitTools',
   'mapsIntegration',
   'socialMediaIntegration',
   'analyticsIntegration',
   'seo',
   'marketingTools',
-  'localization',
+  'mehrsprachigkeit',
   'virtualTour'
 ]);
 
 const formFieldSchema = z.object({
   type: z.string().max(100),
   name: z.string().max(200),
-  required: z.boolean().optional()
+  required: z.boolean().optional().nullable()
 });
 
 const pageSchema = z.object({
   name: z.string().max(200),
-  content: z.string().max(MAX_STRING).optional(),
-  characteristic: z.string().max(MAX_STRING).optional()
+  content: z.string().max(MAX_STRING).nullish(),
+  characteristic: z.string().max(MAX_STRING).nullish()
 });
 
 const relatedFileSchema = z.object({
-  id: z.string().optional()
+  id: z.string().optional().nullable()
 });
+
+/**
+ * Preprocessor: JSON-String → Array (für pages/formFields aus Hygraph).
+ * null/undefined → undefined (kein Update).
+ */
+function preprocessJsonArray<T extends z.ZodTypeAny>(schema: T) {
+  return z.preprocess((val) => {
+    if (val === null || val === undefined) return undefined;
+    if (typeof val === 'string') {
+      try {
+        return JSON.parse(val);
+      } catch {
+        return [];
+      }
+    }
+    return val;
+  }, schema);
+}
+
+/**
+ * Preprocessor: JSON-String → Record (für setup aus Hygraph).
+ * null/undefined → undefined (kein Update).
+ */
+const preprocessJsonRecord = z.preprocess((val) => {
+  if (val === null || val === undefined) return undefined;
+  if (typeof val === 'string') {
+    try {
+      return JSON.parse(val);
+    } catch {
+      return undefined;
+    }
+  }
+  return val;
+}, z.record(z.string(), z.unknown()).optional());
 
 /** Schema fuer POST /api/project/create */
 export const projectCreateSchema = z.object({
-  name: z.string().max(MAX_SHORT).optional(),
-  description: z.string().max(MAX_STRING).optional(),
-  projectCategory: z.string().max(100).optional(),
-  projectType: projectTypeEnum.optional(),
-  subType: subTypeEnum.optional(),
-  projectDetails: z.string().max(MAX_STRING).optional(),
-  desiredDomain: z.string().max(MAX_SHORT).optional(),
-  domainStatus: z.string().max(100).optional(),
-  goals: z.string().max(MAX_STRING).optional(),
-  inspiration: z.string().max(MAX_STRING).optional(),
-  targetAudience: z.string().max(MAX_STRING).optional(),
-  budget: z.string().max(MAX_SHORT).optional(),
-  timeline: z.string().max(MAX_SHORT).optional(),
-  features: z.array(featuresEnum).optional(),
-  customFeature: z.string().max(MAX_STRING).optional(),
-  primaryColour: z.string().max(50).optional(),
-  secondaryColour: z.string().max(50).optional(),
-  accentColour: z.string().max(50).optional(),
-  desiredFont: z.string().max(200).optional(),
-  estimatedPrice: z.number().min(0).optional(),
-  serviceLevel: z.number().min(0).max(100).optional(),
-  engineeringApproach: z.number().min(0).max(100).optional(),
-  specialRequirements: z.string().max(MAX_STRING).optional(),
-  projectGoal: z.string().max(MAX_STRING).optional(),
-  timelinePreference: z.string().max(100).optional(),
-  specificDeadline: z.string().max(100).optional(),
-  budgetRange: z.string().max(100).optional(),
-  pwaApproach: z.string().max(100).optional(),
-  pwaExistingUrl: z.string().max(500).optional(),
-  cmsComplexity: z.number().min(0).max(100).optional(),
-  cmsContentStructure: z.string().max(MAX_STRING).optional(),
-  formFields: z.array(formFieldSchema).optional(),
-  pages: z.array(pageSchema).optional(),
-  setup: z.record(z.string(), z.unknown()).optional(),
-  relatedFiles: z.array(relatedFileSchema).optional()
+  name: z.string().max(MAX_SHORT).nullish(),
+  description: z.string().max(MAX_STRING).nullish(),
+  projectCategory: z.string().max(100).nullish(),
+  projectType: projectTypeEnum,
+  subType: subTypeEnum,
+  projectDetails: z.string().max(MAX_STRING).nullish(),
+  desiredDomain: z.string().max(MAX_SHORT).nullish(),
+  domainStatus: z.string().max(100).nullish(),
+  goals: z.string().max(MAX_STRING).nullish(),
+  inspiration: z.string().max(MAX_STRING).nullish(),
+  targetAudience: z.string().max(MAX_STRING).nullish(),
+  budget: z.string().max(MAX_SHORT).nullish(),
+  timeline: z.string().max(MAX_SHORT).nullish(),
+  features: z.array(featuresEnum).nullish(),
+  customFeature: z.string().max(MAX_STRING).nullish(),
+  primaryColour: z.string().max(50).nullish(),
+  secondaryColour: z.string().max(50).nullish(),
+  accentColour: z.string().max(50).nullish(),
+  desiredFont: z.string().max(200).nullish(),
+  estimatedPrice: z.number().min(0).nullish(),
+  serviceLevel: z.number().min(0).max(100).nullish(),
+  engineeringApproach: z.number().min(0).max(100).nullish(),
+  specialRequirements: z.string().max(MAX_STRING).nullish(),
+  timelinePreference: z.string().max(100).nullish(),
+  specificDeadline: z.string().max(100).nullish(),
+  budgetRange: z.string().max(100).nullish(),
+  pwaApproach: z.string().max(100).nullish(),
+  pwaExistingUrl: z.string().max(500).nullish(),
+  cmsComplexity: z.number().min(0).max(100).nullish(),
+  cmsContentStructure: z.string().max(MAX_STRING).nullish(),
+  estimatedExpertDays: z.number().min(0).max(365).nullish(),
+  formFields: preprocessJsonArray(z.array(formFieldSchema).optional()),
+  pages: preprocessJsonArray(z.array(pageSchema).optional()),
+  setup: preprocessJsonRecord,
+  relatedFiles: z.array(relatedFileSchema).nullish()
 });
 
 /** Schema fuer PATCH /api/project/patch/[id] */
 export const projectPatchSchema = z.object({
   id: z.string().min(1),
-  name: z.string().max(MAX_SHORT).optional(),
-  description: z.string().max(MAX_STRING).optional(),
-  projectType: projectTypeEnum.optional(),
-  subType: subTypeEnum.optional(),
-  projectDetails: z.string().max(MAX_STRING).optional(),
-  desiredDomain: z.string().max(MAX_SHORT).optional(),
-  domainStatus: z.string().max(100).optional(),
-  goals: z.string().max(MAX_STRING).optional(),
-  inspiration: z.string().max(MAX_STRING).optional(),
-  targetAudience: z.string().max(MAX_STRING).optional(),
-  budget: z.string().max(MAX_SHORT).optional(),
-  timeline: z.string().max(MAX_SHORT).optional(),
-  features: z.array(featuresEnum).optional(),
-  customFeature: z.string().max(MAX_STRING).optional(),
-  primaryColour: z.string().max(50).optional(),
-  secondaryColour: z.string().max(50).optional(),
-  accentColour: z.string().max(50).optional(),
-  desiredFont: z.string().max(200).optional(),
-  estimatedPrice: z.number().min(0).optional(),
-  formFields: z.array(formFieldSchema).optional(),
-  pages: z.array(pageSchema).optional(),
-  setup: z.record(z.string(), z.unknown()).optional(),
-  relatedFiles: z.array(relatedFileSchema).optional()
+  name: z.string().max(MAX_SHORT).nullish(),
+  description: z.string().max(MAX_STRING).nullish(),
+  projectCategory: z.string().max(100).nullish(),
+  projectType: projectTypeEnum,
+  subType: subTypeEnum,
+  projectDetails: z.string().max(MAX_STRING).nullish(),
+  desiredDomain: z.string().max(MAX_SHORT).nullish(),
+  domainStatus: z.string().max(100).nullish(),
+  goals: z.string().max(MAX_STRING).nullish(),
+  inspiration: z.string().max(MAX_STRING).nullish(),
+  targetAudience: z.string().max(MAX_STRING).nullish(),
+  budget: z.string().max(MAX_SHORT).nullish(),
+  timeline: z.string().max(MAX_SHORT).nullish(),
+  features: z.array(featuresEnum).nullish(),
+  customFeature: z.string().max(MAX_STRING).nullish(),
+  primaryColour: z.string().max(50).nullish(),
+  secondaryColour: z.string().max(50).nullish(),
+  accentColour: z.string().max(50).nullish(),
+  desiredFont: z.string().max(200).nullish(),
+  estimatedPrice: z.number().min(0).nullish(),
+  projectStatus: z.string().max(100).nullish(),
+  serviceLevel: z.number().min(0).max(100).nullish(),
+  engineeringApproach: z.number().min(0).max(100).nullish(),
+  specialRequirements: z.string().max(MAX_STRING).nullish(),
+  timelinePreference: z.string().max(100).nullish(),
+  specificDeadline: z.string().max(100).nullish(),
+  budgetRange: z.string().max(100).nullish(),
+  pwaApproach: z.string().max(100).nullish(),
+  pwaExistingUrl: z.string().max(500).nullish(),
+  cmsComplexity: z.number().min(0).max(100).nullish(),
+  cmsContentStructure: z.string().max(MAX_STRING).nullish(),
+  estimatedExpertDays: z.number().min(0).max(365).nullish(),
+  formFields: preprocessJsonArray(z.array(formFieldSchema).optional()),
+  pages: preprocessJsonArray(z.array(pageSchema).optional()),
+  setup: preprocessJsonRecord,
+  relatedFiles: z.array(relatedFileSchema).nullish()
 });
 
 /** Schema fuer POST /api/project/link-customer/[id] */

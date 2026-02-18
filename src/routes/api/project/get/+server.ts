@@ -11,6 +11,7 @@ export const GET: RequestHandler = async () => {
           id
           name
           description
+          projectCategory
           projectType
           subType
           projectDetails
@@ -29,6 +30,16 @@ export const GET: RequestHandler = async () => {
           accentColour
           desiredFont
           estimatedPrice
+          serviceLevel
+          engineeringApproach
+          specialRequirements
+          timelinePreference
+          specificDeadline
+          budgetRange
+          pwaApproach
+          pwaExistingUrl
+          cmsComplexity
+          cmsContentStructure
           formFields
           pages
           setup
@@ -51,6 +62,7 @@ export const GET: RequestHandler = async () => {
             country
           }
           createdAt
+          updatedAt
         }
       }
     `;

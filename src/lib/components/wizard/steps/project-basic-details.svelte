@@ -1,25 +1,31 @@
 <script lang="ts">
   import { m } from '$lib/paraglide/messages';
+  import { untrack } from 'svelte';
 
   let { config } = $props();
 
-  // PWA-specific variables
-  let pwaApproach: string = $state('new'); // 'new' or 'extend'
-  let pwaExistingUrl: string = $state('');
+  // PWA-specific variables (initialized from config for persistence)
+  // untrack() tells Svelte we intentionally only capture the initial value
+  let pwaApproach: string = $state(untrack(() => config.pwaApproach ?? 'new'));
+  let pwaExistingUrl: string = $state(untrack(() => config.pwaExistingUrl ?? ''));
 
-  // CMS-specific variables
-  let cmsComplexity: number = $state(50); // 0-100 scale
-  let cmsContentStructure: string = $state('');
+  // CMS-specific variables (initialized from config for persistence)
+  let cmsComplexity: number = $state(untrack(() => config.cmsComplexity ?? 50));
+  let cmsContentStructure: string = $state(untrack(() => config.cmsContentStructure ?? ''));
 
-  // General project variables
-  let serviceLevel: number = $state(50); // 0 = Full-Service, 100 = Active Participation
-  let engineeringApproach: number = $state(50); // 0 = Quick & Dirty, 100 = Over-engineered
-  let specialRequirements: string = $state('');
-  let projectGoal: string = $state('');
-  let targetAudience: string = $state('');
-  let timelinePreference: string = $state('moderate');
-  let specificDeadline: string = $state('');
-  let budgetRange: string = $state('');
+  // Determines which blocks are shown
+  const isFreestyleOrAi = $derived(config.projectCategory === 'ki-and-freestyle');
+
+  // General project variables (all initialized from config for persistence on back/forward)
+  let serviceLevel: number = $state(untrack(() => config.serviceLevel ?? 50));
+  let engineeringApproach: number = $state(untrack(() => config.engineeringApproach ?? 50));
+  let specialRequirements: string = $state(untrack(() => config.specialRequirements ?? ''));
+  let estimatedExpertDays: number = $state(untrack(() => config.estimatedExpertDays ?? 0));
+  let goalsValue: string = $state(untrack(() => config.goals ?? ''));
+  let targetAudience: string = $state(untrack(() => config.targetAudience ?? ''));
+  let timelinePreference: string = $state(untrack(() => config.timelinePreference ?? ''));
+  let specificDeadline: string = $state(untrack(() => config.specificDeadline ?? ''));
+  let budgetRange: string = $state(untrack(() => config.budgetRange ?? ''));
 
   // Reactive updates to config
   $effect(() => {
@@ -33,10 +39,19 @@
       config.cmsContentStructure = cmsContentStructure;
     }
 
-    config.serviceLevel = serviceLevel;
-    config.engineeringApproach = engineeringApproach;
-    config.specialRequirements = specialRequirements;
-    config.projectGoal = projectGoal;
+    if (isFreestyleOrAi) {
+      // KI & Freestyle: only store expert days, skip standard project sliders
+      config.estimatedExpertDays = estimatedExpertDays || undefined;
+      config.serviceLevel = undefined;
+      config.engineeringApproach = undefined;
+      config.specialRequirements = undefined;
+    } else {
+      config.serviceLevel = serviceLevel;
+      config.engineeringApproach = engineeringApproach;
+      config.specialRequirements = specialRequirements;
+    }
+
+    config.goals = goalsValue;
     config.targetAudience = targetAudience;
     config.timelinePreference = timelinePreference;
     config.specificDeadline = specificDeadline;
@@ -84,10 +99,10 @@
       id="description"
       class="textarea textarea-bordered textarea-lg w-full"
       bind:value={config.description}
-      placeholder={config.projectType === 'app' || config.projectType === 'aiSolution'
-        ? m.wizard_form_placeholders_webApplication()
-        : config.projectType === 'freestyle'
-          ? m.wizard_form_placeholders_freestyle()
+      placeholder={isFreestyleOrAi
+        ? m.wizard_form_placeholders_freestyle()
+        : config.projectType === 'app'
+          ? m.wizard_form_placeholders_webApplication()
           : m.wizard_form_placeholders_default()}
       rows="8"
     ></textarea>
@@ -119,16 +134,22 @@
             <div class="radio-group">
               <label class="radio-option">
                 <input type="radio" name="pwaApproach" value="new" bind:group={pwaApproach} class="radio radio-primary" />
-                <div class="radio-content">
-                  <span class="radio-title">{m.wizard_basic_pwa_new_title()}</span>
+                <div class="flex w-full flex-col gap-1">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="radio-title">{m.wizard_basic_pwa_new_title()}</span>
+                    <span class="bg-primary/10 text-primary rounded-full px-2 py-0.5 text-xs font-bold whitespace-nowrap">ab 3.000 €</span>
+                  </div>
                   <span class="radio-description">{m.wizard_basic_pwa_new_description()}</span>
                 </div>
               </label>
 
               <label class="radio-option">
                 <input type="radio" name="pwaApproach" value="extend" bind:group={pwaApproach} class="radio radio-primary" />
-                <div class="radio-content">
-                  <span class="radio-title">{m.wizard_basic_pwa_extend_title()}</span>
+                <div class="flex w-full flex-col gap-1">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="radio-title">{m.wizard_basic_pwa_extend_title()}</span>
+                    <span class="bg-primary/10 text-primary rounded-full px-2 py-0.5 text-xs font-bold whitespace-nowrap">ab 1.999 €</span>
+                  </div>
                   <span class="radio-description">{m.wizard_basic_pwa_extend_description()}</span>
                 </div>
               </label>
@@ -192,7 +213,40 @@
       </div>
     {/if}
 
-    <!-- Service Level -->
+    <!-- Expert Days (only for KI & Freestyle) -->
+    {#if isFreestyleOrAi}
+      <div class="card detail-card">
+        <div class="card-body">
+          <div class="detail-card-header">
+            <div class="card-icon">📅</div>
+            <h3 class="card-title">{m.wizard_basic_expertdays_title()}</h3>
+          </div>
+
+          <p class="card-description">
+            {m.wizard_basic_expertdays_description()}
+          </p>
+
+          <div class="form-section">
+            <label for="expertDays" class="section-label">
+              <span class="label-icon">🗓️</span>
+              {m.wizard_basic_expertdays_label()}
+            </label>
+            <input
+              id="expertDays"
+              type="number"
+              min="0"
+              max="365"
+              bind:value={estimatedExpertDays}
+              placeholder={m.wizard_basic_expertdays_placeholder()}
+              class="form-input"
+            />
+          </div>
+        </div>
+      </div>
+    {/if}
+
+    <!-- Service Level (only for Websites & Apps) -->
+    {#if !isFreestyleOrAi}
     <div class="card detail-card">
       <div class="card-body">
         <div class="detail-card-header">
@@ -284,6 +338,7 @@
         </div>
       </div>
     </div>
+    {/if}
 
     <!-- Project Goal -->
     <div class="card detail-card">
@@ -296,7 +351,7 @@
         <p class="card-description">{m.wizard_basic_goal_description()}</p>
 
         <div class="form-section">
-          <textarea bind:value={projectGoal} placeholder={m.wizard_basic_goal_placeholder()} class="form-textarea" rows="5"></textarea>
+          <textarea bind:value={goalsValue} placeholder={m.wizard_basic_goal_placeholder()} class="form-textarea" rows="5"></textarea>
         </div>
       </div>
     </div>
@@ -330,6 +385,7 @@
         <div class="form-section">
           <label for="timeline" class="section-label">{m.wizard_basic_timeline_label()}</label>
           <select id="timeline" bind:value={timelinePreference} class="form-select">
+            <option value="">Bitte auswählen...</option>
             {#each timelineOptions as option}
               <option value={option.value}>{option.label}</option>
             {/each}
@@ -574,7 +630,7 @@
       }
 
       input[type='radio'] {
-        @apply flex-shrink-0;
+        @apply shrink-0;
       }
 
       .radio-content {
@@ -591,7 +647,4 @@
     }
   }
 
-  .mt-4 {
-    margin-top: 1rem;
-  }
 </style>

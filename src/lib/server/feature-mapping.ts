@@ -1,66 +1,16 @@
 /**
- * Mapping von englischen Feature-IDs (aus wizard-config.ts)
- * zu deutschen Hygraph Enum-Werten
+ * Feature IDs in wizard-config.ts now directly match Hygraph enum values.
+ * These functions are kept as no-ops for backward compatibility but do nothing.
+ *
+ * @deprecated No mapping required — feature IDs already match Hygraph enum values.
  */
-export const featureMapping: Record<string, string> = {
-  // Communication
-  contactForm: 'kontaktformular',
-  newsletterRegistration: 'newsletterRegistrierung',
-  chatbot: 'chatbot',
-  voicebot: 'voicebot', // FEHLT IN HYGRAPH - muss hinzugefügt werden!
-  appointments: 'terminbuchung',
 
-  // Content & Media
-  imageGallery: 'bildergalerie',
-  videoEmbedding: 'videoEmbedding',
-  portfolioGrid: 'portfolioGrid',
-  calendar: 'kalender',
-  fileUpload: 'dateiupload',
-
-  // Navigation & UI
-  megaMenu: 'megaMenu',
-  customTeaser: 'customTeaser',
-  customCarousel: 'customCarousel',
-  accordeon: 'akkordeon',
-  tabs: 'tabs',
-  themeSwitcher: 'themeSwitcher',
-
-  // Functionality & Tools
-  search: 'suchfunktion',
-  customFilter: 'customFilter',
-  multiStepDialog: 'multiStepDialog',
-  configurator: 'konfigurator',
-  assistant: 'assistent',
-  rating: 'bewertungsmechanismus',
-
-  // E-Commerce & Payments
-  payment: 'zahlungsabwicklung',
-
-  // Users & Security
-  userAccounts: 'benutzerkonten',
-  ageVerification: 'altersverifikation',
-  cookieConsent: 'cookieConsent',
-  accessibility: 'barrierefreiheitTools',
-
-  // Integration & Services
-  mapsIntegration: 'mapsIntegration',
-  socialMediaIntegration: 'socialMediaIntegration',
-  analyticsIntegration: 'analyticsIntegration',
-
-  // Marketing & SEO
-  seo: 'seo',
-  marketingTools: 'marketingTools',
-
-  // Localization
-  localization: 'mehrsprachigkeit',
-
-  // Special Features
-  virtualTour: 'virtualTour'
-};
-
-/**
- * Konvertiert englische Feature-IDs zu Hygraph Enum-Werten
- */
+/** @deprecated IDs already match Hygraph enum values — pass-through only */
 export function mapFeaturesToHygraph(features: string[]): string[] {
-  return features.map((feature) => featureMapping[feature]).filter((mapped) => mapped !== undefined);
+  return features;
+}
+
+/** @deprecated IDs already match Hygraph enum values — pass-through only */
+export function mapFeaturesFromHygraph(features: string[]): string[] {
+  return features;
 }

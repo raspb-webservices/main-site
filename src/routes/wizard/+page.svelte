@@ -186,8 +186,7 @@
   }
 
   .benefit-item {
-    @apply bg-base-200 text-base-content flex items-start gap-4 rounded-xl p-6 shadow-sm;
-    transition: all 0.3s ease;
+    @apply bg-base-200 text-base-content flex items-start gap-4 rounded-xl p-6 shadow-sm transition-all duration-300;
 
     &:hover {
       @apply -translate-y-0.5 shadow-md;
@@ -195,7 +194,7 @@
   }
 
   .wizard-card {
-    cursor: pointer;
+    @apply cursor-pointer;
   }
 
   .wizard-icon {
@@ -220,8 +219,7 @@
     @apply bg-base-200 border-base-300 text-base-content rounded-xl border p-6 text-center;
 
     p {
-      @apply text-base-content/80 text-base leading-relaxed;
-      margin: 0;
+      @apply text-base-content/80 m-0 text-base leading-relaxed;
     }
 
     strong {

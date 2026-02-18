@@ -6,6 +6,7 @@
   let { config } = $props();
 
   const projectTypeTitle =
+    projectTypesWebApp.find((p) => p.id === config.projectType)?.label ||
     projectTypesWebApp.find((p) => p.id === config.projectType)?.title ||
     projectTypesAiFreestyle.find((p) => p.id === config.projectType)?.title ||
     '';
@@ -85,9 +86,8 @@
   @reference '../../../../app.css';
   /* Thank You Page Styles - Dark Theme Support */
   .thank-you-overlay {
-    @apply fixed inset-0 z-50 flex items-center justify-center p-4;
+    @apply fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md;
     background: linear-gradient(135deg, rgba(139, 69, 19, 0.1), rgba(34, 197, 94, 0.1));
-    backdrop-filter: blur(12px);
   }
 
   .thank-you-content {

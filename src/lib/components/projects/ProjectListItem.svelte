@@ -14,7 +14,7 @@
   <td>
     <div class="font-medium">{project.name}</div>
   </td>
-  <td>{project.projectType || m.dashboard_details_fallback_unknown()}</td>
+  <td>{getProjectTypeLabel(project.projectType || '') || m.dashboard_details_fallback_unknown()}</td>
   <td>
     {#if project.projectStatus}
       <div class="badge {getStatusBadgeClass(project.projectStatus)} badge-sm">

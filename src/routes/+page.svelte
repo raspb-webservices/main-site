@@ -100,7 +100,7 @@
       </div>
       <div class="lg:items-top order-1 col-span-full items-center md:order-2 md:col-span-5">
         <div class="lottie-container m-auto max-w-117.5">
-          <DotLottieSvelte src=" /lotties/robot-supports.lottie" loop autoplay />
+          <DotLottieSvelte src="/lotties/robot-supports.lottie" loop autoplay />
         </div>
       </div>
       <div class="order-3 col-span-full md:col-span-5">

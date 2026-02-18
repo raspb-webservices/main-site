@@ -166,9 +166,8 @@
   }
 
   .hero-subtext {
-    @apply mb-8 max-w-2xl text-lg leading-relaxed text-white/90 md:text-xl lg:text-2xl;
+    @apply mb-8 max-w-2xl font-light text-lg leading-relaxed text-white/90 md:text-xl lg:text-2xl;
     font-family: var(--font-circular);
-    font-weight: 300;
   }
 
   .hero-cta {

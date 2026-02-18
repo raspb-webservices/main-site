@@ -18,7 +18,7 @@
 
     <div class="mt-10 mb-6 flex flex-col items-center text-center">
       <div class="mb-4">
-        <img class="h-36 w-auto rounded-full" src="$images/test.jpg" alt={m.aboutUs_modals_aboutMe_imageAlt()} loading="lazy" />
+        <img class="h-36 w-auto rounded-full" src="$images/markus-foto.jpg" alt={m.aboutUs_modals_aboutMe_imageAlt()} loading="lazy" />
       </div>
       <h3 class="no-padding">{m.aboutUs_modals_aboutMe_name()}</h3>
       <p class="opacity-70">{m.aboutUs_modals_aboutMe_role()}</p>

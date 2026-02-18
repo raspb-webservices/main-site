@@ -61,6 +61,10 @@
   ];
   const maxSteps = basicSteps.length;
   let currentStep = $state(1);
+
+  // Features step is skipped for ki-and-freestyle category (known after step 1)
+  const featuresDisabled = $derived(config.projectCategory === 'ki-and-freestyle');
+  const FEATURES_STEP = 5;
   let showSuccessMessage = $state(false);
   let resetModal: ResetModal;
   let contactModal: ContactModalEnhanced;
@@ -100,6 +104,23 @@
     if (basePrice === 0 && config.projectType) {
       const projectType = allProjectTypes.find((pt) => pt.id === config.projectType);
       if (projectType?.basePrice) basePrice = projectType.basePrice;
+    }
+
+    // --- KI & Freestyle: price based on expert days × daily rate with volume discount ---
+    if (config.projectCategory === 'ki-and-freestyle') {
+      const expertDays = config.estimatedExpertDays ?? 0;
+      if (expertDays > 0) {
+        const DAILY_RATE = 1000;
+        // Volume discount: 1% per day over 10, capped at 20%
+        // 10 days = 10.000 €, 11 days ≈ 10.900 €, 30 days = 24.000 €, 40 days = 32.000 €
+        const discountPercent = Math.min(Math.max(0, expertDays - 10), 20);
+        const rawPrice = expertDays * DAILY_RATE * (1 - discountPercent / 100);
+        config.estimatedPrice = Math.round(rawPrice / 100) * 100;
+      } else {
+        // No expert days given → use subtype base price as minimum indicator
+        config.estimatedPrice = basePrice;
+      }
+      return;
     }
 
     // 2. Service level factor (±25%)
@@ -154,6 +175,8 @@
   }
 
   function goToStep(step: number) {
+    // Prevent jumping to the Features step when it is disabled
+    if (featuresDisabled && step === FEATURES_STEP) return;
     if (step >= 1 && step <= maxSteps) {
       currentStep = step;
       scrollToTop();
@@ -165,7 +188,9 @@
 
   function nextStep() {
     if (currentStep < maxSteps) {
-      currentStep++;
+      // Skip Features step for aiSolution / freestyle
+      const next = featuresDisabled && currentStep === FEATURES_STEP - 1 ? FEATURES_STEP + 1 : currentStep + 1;
+      currentStep = next;
       scrollToTop();
       if (currentStep === maxSteps) {
         calculatePrice();
@@ -175,7 +200,9 @@
 
   function prevStep() {
     if (currentStep > 1) {
-      currentStep--;
+      // Skip Features step for aiSolution / freestyle (going backwards)
+      const prev = featuresDisabled && currentStep === FEATURES_STEP + 1 ? FEATURES_STEP - 1 : currentStep - 1;
+      currentStep = prev;
       scrollToTop();
     }
   }
@@ -238,10 +265,13 @@
 
       <div class="wizard-steps grid gap-3" style="grid-template-columns: repeat({maxSteps}, minmax(0, 1fr));">
         {#each basicSteps as step, i}
+          {@const isDisabled = featuresDisabled && step.id === FEATURES_STEP}
           <button
             type="button"
             class:active={currentStep === i + 1}
-            class:touched={currentStep > i + 1}
+            class:touched={currentStep > i + 1 && !isDisabled}
+            class:step-disabled={isDisabled}
+            disabled={isDisabled}
             onclick={() => goToStep(i + 1)}
             onkeydown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
@@ -354,6 +384,9 @@
         }
         &.touched {
           @apply text-primary/80;
+        }
+        &.step-disabled {
+          @apply text-base-content/30 cursor-not-allowed opacity-40 hover:opacity-40;
         }
         &:first-child {
           @apply md:text-left;

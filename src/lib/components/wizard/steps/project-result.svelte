@@ -52,7 +52,7 @@
     <div class="card bg-base-200">
       <div class="card-body">
         <h3 class="card-title">{m.wizard_steps_stepSummary_projectType()}</h3>
-        <p class="no-padding">{projectTypesWebApp.find((p) => p.id === config.projectType)?.title}</p>
+        <p class="no-padding">{(m as unknown as Record<string, () => string>)[(projectTypesWebApp.find((p) => p.id === config.projectType) ?? projectTypesAiFreestyle.find((p) => p.id === config.projectType))?.label ?? (projectTypesWebApp.find((p) => p.id === config.projectType) ?? projectTypesAiFreestyle.find((p) => p.id === config.projectType))?.title ?? '']?.() ?? config.projectType}</p>
         <p class="text-base-content/70 no-padding text-sm">
           {projectSubTypesWebsite.find((s) => s.id === config.subType && s.parentId === config.projectType)?.title}
         </p>

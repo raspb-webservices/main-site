@@ -1,6 +1,8 @@
 <script lang="ts">
   import '../app.css';
   import { navigating } from '$app/state';
+  import { afterNavigate } from '$app/navigation';
+  import { trackPageview } from '$lib/analytics/plausible.client';
   import HEADER from '$lib/components/header.svelte';
   import FOOTER from '$lib/components/footer.svelte';
   import LottieLoader from '$lib/components/lottie-loader.svelte';
@@ -17,6 +19,12 @@
 
   onMount(() => {
     auth.checkSession();
+  });
+
+  // Track pageviews manually via Plausible to avoid history.pushState conflicts
+  // with SvelteKit's router (replaces autoCapturePageviews: true in plausible.client.ts)
+  afterNavigate(() => {
+    trackPageview();
   });
 
   // Reload page when a new service worker version takes over or assets go stale
@@ -70,19 +78,14 @@
   <CookieConsentComponent />
 </div>
 
-<style>
+<style lang="postcss">
+  @reference '../app.css';
+
   .skip-nav {
-    position: absolute;
-    left: -9999px;
-    top: 0;
-    z-index: 100;
-    padding: 0.5rem 1rem;
-    background: var(--color-primary, #6366f1);
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-  }
-  .skip-nav:focus {
-    left: 0;
+    @apply absolute top-0 z-100 -left-2500 bg-primary px-4 py-2 font-bold text-white no-underline;
+
+    &:focus {
+      @apply left-0;
+    }
   }
 </style>

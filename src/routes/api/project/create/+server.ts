@@ -4,7 +4,6 @@ import type { RequestHandler } from '@sveltejs/kit';
 import type { ProjectResponse } from '$interfaces/project.interface';
 import { validateBody, validationErrorResponse, ValidationError } from '$lib/server/validate.server';
 import { projectCreateSchema } from '$lib/server/schemas/project.schema';
-import { mapFeaturesToHygraph } from '$lib/server/feature-mapping';
 import { nameByRace } from 'fantasy-name-generator';
 import type { z } from 'zod';
 
@@ -12,7 +11,8 @@ export const POST: RequestHandler = async ({ request, locals }) => {
   try {
     const projectData = validateBody(projectCreateSchema, await request.json()) as z.infer<typeof projectCreateSchema>;
 
-    let customerId;
+    let customerId: string | undefined;
+    let customerCreated = false;
 
     if (locals.user) {
       // 1. Check if Customer exists
@@ -31,7 +31,6 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 
       // 2. If not, create Customer
       if (!customerId) {
-        // Try to split name if available
         const parts = (locals.user.name || '').split(' ');
         const firstName = parts[0] || '';
         const lastName = parts.length > 1 ? parts.slice(1).join(' ') : '';
@@ -50,6 +49,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
           auth0Id: locals.user.sub
         })) as { createCustomer: { id: string } };
         customerId = createResult.createCustomer.id;
+        customerCreated = true;
       }
     }
 
@@ -81,7 +81,6 @@ export const POST: RequestHandler = async ({ request, locals }) => {
         $serviceLevel: Int
         $engineeringApproach: Int
         $specialRequirements: String
-        $projectGoal: String
         $timelinePreference: String
         $specificDeadline: Date
         $budgetRange: String
@@ -89,6 +88,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
         $pwaExistingUrl: String
         $cmsComplexity: Int
         $cmsContentStructure: String
+        $estimatedExpertDays: Int
         $formFields: Json!
         $pages: Json!
         $setup: Json
@@ -121,7 +121,6 @@ export const POST: RequestHandler = async ({ request, locals }) => {
             serviceLevel: $serviceLevel
             engineeringApproach: $engineeringApproach
             specialRequirements: $specialRequirements
-            projectGoal: $projectGoal
             timelinePreference: $timelinePreference
             specificDeadline: $specificDeadline
             budgetRange: $budgetRange
@@ -129,6 +128,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
             pwaExistingUrl: $pwaExistingUrl
             cmsComplexity: $cmsComplexity
             cmsContentStructure: $cmsContentStructure
+            estimatedExpertDays: $estimatedExpertDays
             formFields: $formFields
             pages: $pages
             setup: $setup
@@ -188,7 +188,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
       targetAudience: projectData.targetAudience || null,
       budget: projectData.budget || null,
       timeline: projectData.timeline || null,
-      features: projectData.features?.length ? mapFeaturesToHygraph(projectData.features) : null,
+      features: projectData.features?.length ? projectData.features : null,
       customFeature: projectData.customFeature || null,
       primaryColour: projectData.primaryColour || null,
       secondaryColour: projectData.secondaryColour || null,
@@ -198,7 +198,6 @@ export const POST: RequestHandler = async ({ request, locals }) => {
       serviceLevel: projectData.serviceLevel ?? null,
       engineeringApproach: projectData.engineeringApproach ?? null,
       specialRequirements: projectData.specialRequirements || null,
-      projectGoal: projectData.projectGoal || null,
       timelinePreference: projectData.timelinePreference || null,
       specificDeadline: projectData.specificDeadline || null,
       budgetRange: projectData.budgetRange || null,
@@ -206,6 +205,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
       pwaExistingUrl: projectData.pwaExistingUrl || null,
       cmsComplexity: projectData.cmsComplexity ?? null,
       cmsContentStructure: projectData.cmsContentStructure || null,
+      estimatedExpertDays: projectData.estimatedExpertDays ?? null,
       formFields: JSON.stringify(projectData.formFields || []),
       pages: JSON.stringify(projectData.pages || []),
       setup: projectData.setup ? JSON.stringify(projectData.setup) : null,
@@ -220,7 +220,9 @@ export const POST: RequestHandler = async ({ request, locals }) => {
     return new Response(
       JSON.stringify({
         success: true,
-        data: response.createProject
+        data: response.createProject,
+        customerId,
+        customerCreated
       }),
       {
         status: 201,

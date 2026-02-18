@@ -16,7 +16,7 @@
   <div class="feature-block">
     <h2>{m.homepage_offering_web_title()}</h2>
     <div class="lottie-container">
-      <DotLottieSvelte src=" /lotties/solution-development-web.lottie" loop autoplay />
+      <DotLottieSvelte src="/lotties/solution-development-web.lottie" loop autoplay />
     </div>
     <p>
       {m.homepage_offering_web_description()}
@@ -45,7 +45,7 @@
   <div class="feature-block">
     <h2>{m.homepage_offering_ki_title()}</h2>
     <div class="lottie-container py-4">
-      <DotLottieSvelte src=" /lotties/abstract-robot-with-cloud.lottie" loop autoplay />
+      <DotLottieSvelte src="/lotties/abstract-robot-with-cloud.lottie" loop autoplay />
     </div>
     <p>
       {m.homepage_offering_ki_description()}

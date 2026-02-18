@@ -32,9 +32,7 @@
 
   /* Loading Overlay Styles - Dark Theme Support */
   .loading-overlay {
-    @apply fixed inset-0 z-50 flex items-center justify-center;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(8px);
+    @apply fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm;
   }
 
   .loading-content {
