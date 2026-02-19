@@ -592,14 +592,21 @@
           </div>
 
           <div class="grid grid-cols-2 gap-4">
+          <div class="field-group">
+            <span class="field-label">{m.dashboard_details_label_budget()}</span>
+            {#if editable}
+              <input type="text" class="input input-bordered w-full" value={editData.budget || ''} oninput={(e) => updateField('budget', e.currentTarget.value)} placeholder={m.dashboard_edit_placeholder_budget()} />
+            {:else}
+              <p class="field-value">{formatBudget(project.budget || '')}</p>
+            {/if}
+          </div>
+
+          {#if !editable && project.estimatedPrice}
             <div class="field-group">
-              <span class="field-label">{m.dashboard_details_label_budget()}</span>
-              {#if editable}
-                <input type="text" class="input input-bordered w-full" value={editData.budget || ''} oninput={(e) => updateField('budget', e.currentTarget.value)} placeholder={m.dashboard_edit_placeholder_budget()} />
-              {:else}
-                <p class="field-value">{formatBudget(project.budget || '')}</p>
-              {/if}
+              <span class="field-label">{m.dashboard_details_label_estimated_price()}</span>
+              <p class="field-value text-lg font-semibold">{project.estimatedPrice}€</p>
             </div>
+          {/if}
 
             <div class="field-group">
               <span class="field-label">{m.dashboard_details_label_timeline()}</span>

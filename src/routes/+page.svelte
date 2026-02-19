@@ -8,6 +8,7 @@
   import TimeAsFactorModal from '$lib/components/modals/home/time-as-factor.svelte';
   import CostAsFactorModal from '$lib/components/modals/home/cost-as-factor.svelte';
   import QualityAsFactorModal from '$lib/components/modals/home/quality-as-factor.svelte';
+  import { browser } from '$app/environment';
   import { DotLottieSvelte } from '@lottiefiles/dotlottie-svelte';
   import robotSupports from '$lotties/robot-supports.lottie';
   import businessLaunch from '$lotties/business-launch.lottie';
@@ -102,12 +103,12 @@
       </div>
       <div class="lg:items-top order-1 col-span-full items-center md:order-2 md:col-span-5">
         <div class="lottie-container m-auto max-w-117.5">
-          <DotLottieSvelte src={robotSupports} loop autoplay />
+          {#if browser}<DotLottieSvelte src={robotSupports} loop autoplay />{/if}
         </div>
       </div>
       <div class="order-3 col-span-full md:col-span-5">
         <div class="lottie-container">
-          <DotLottieSvelte src={businessLaunch} loop autoplay />
+          {#if browser}<DotLottieSvelte src={businessLaunch} loop autoplay />{/if}
         </div>
       </div>
       <div class="animate-fade-in-from-side prose order-4 col-span-full md:col-span-7">

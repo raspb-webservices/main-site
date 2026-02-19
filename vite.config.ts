@@ -240,6 +240,9 @@ export default defineConfig({
     transformer: 'postcss'
   },
   assetsInclude: ['**/*.lottie'],
+  optimizeDeps: {
+    exclude: ['@lottiefiles/dotlottie-web', '@lottiefiles/dotlottie-svelte']
+  },
   build: {
     chunkSizeWarningLimit: 2048,
     cssMinify: 'esbuild'

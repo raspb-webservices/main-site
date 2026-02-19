@@ -89,7 +89,7 @@
         <button
           class="social-media-icon linkedin"
           onclick={() => {
-            gotoExternal('https://www.linkedin.com');
+            gotoExternal('https://www.linkedin.com/company/raspb/');
           }}
           aria-label="LinkedIn"
         ></button>
@@ -103,14 +103,14 @@
         <button
           class="social-media-icon xing"
           onclick={() => {
-            gotoExternal('https://www.xing.com');
+            gotoExternal('https://www.xing.com/pages/raspb-webservices-ug-haftungsbeschraenkt');
           }}
           aria-label="Xing"
         ></button>
         <button
           class="social-media-icon facebook"
           onclick={() => {
-            gotoExternal('https://www.facebook.com');
+            gotoExternal('https://www.facebook.com/profile.php?id=61588380333358');
           }}
           aria-label="Facebook"
         ></button>

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { browser } from '$app/environment';
   import { DotLottieSvelte } from '@lottiefiles/dotlottie-svelte';
   import solutionDevelopmentWeb from '$lotties/solution-development-web.lottie';
   import abstractRobotWithCloud from '$lotties/abstract-robot-with-cloud.lottie';
@@ -18,7 +19,7 @@
   <div class="feature-block">
     <h2>{m.homepage_offering_web_title()}</h2>
     <div class="lottie-container">
-      <DotLottieSvelte src={solutionDevelopmentWeb} loop autoplay />
+      {#if browser}<DotLottieSvelte src={solutionDevelopmentWeb} loop autoplay />{/if}
     </div>
     <p>
       {m.homepage_offering_web_description()}
@@ -47,7 +48,7 @@
   <div class="feature-block">
     <h2>{m.homepage_offering_ki_title()}</h2>
     <div class="lottie-container py-4">
-      <DotLottieSvelte src={abstractRobotWithCloud} loop autoplay />
+      {#if browser}<DotLottieSvelte src={abstractRobotWithCloud} loop autoplay />{/if}
     </div>
     <p>
       {m.homepage_offering_ki_description()}

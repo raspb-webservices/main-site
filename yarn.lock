@@ -710,21 +710,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lottiefiles/dotlottie-svelte@npm:0.8.15":
-  version: 0.8.15
-  resolution: "@lottiefiles/dotlottie-svelte@npm:0.8.15"
+"@lottiefiles/dotlottie-svelte@npm:0.9.1":
+  version: 0.9.1
+  resolution: "@lottiefiles/dotlottie-svelte@npm:0.9.1"
   dependencies:
-    "@lottiefiles/dotlottie-web": "npm:0.63.0"
+    "@lottiefiles/dotlottie-web": "npm:0.64.1"
   peerDependencies:
     svelte: ^4.0.0 || ^5.0.0
-  checksum: 10c0/2d5e6c70885d3ca2f2e23811f4e88ad4d03b3b82118837292db93b0a4b4a74dd3252077011d58d1bfc9a244c64d3ef9d1ba773776a2dc8041cc3912eb9972a79
+  checksum: 10c0/8d8768b099350d628941e294a14606dfe429c2adfd19ef5aab1bcb692c30f7a5495d86593a07dee4f2f522198c29e69023d25ef3fbe4000eeed5e0fd2569a836
   languageName: node
   linkType: hard
 
-"@lottiefiles/dotlottie-web@npm:0.63.0":
-  version: 0.63.0
-  resolution: "@lottiefiles/dotlottie-web@npm:0.63.0"
-  checksum: 10c0/54f024bcfc723f4cbd7cdcf610dc62301435781c03adb1046aadb92adafb28042590854b8ba911dd5b584801382694a20c29d3ac8a0f41559fa7605179402d77
+"@lottiefiles/dotlottie-web@npm:0.64.1":
+  version: 0.64.1
+  resolution: "@lottiefiles/dotlottie-web@npm:0.64.1"
+  checksum: 10c0/cd94a0fdc9f74eac035a238c5525030a1a2ed74e852d65526d539e7de3ad8437175c961ff479e0284c9cde1f25a7d42aaf1242915b0d94f93f563217cd3655f0
   languageName: node
   linkType: hard
 
@@ -3798,7 +3798,7 @@ __metadata:
     "@eslint/js": "npm:^10.0.1"
     "@hygraph/management-sdk": "npm:^1.5.2"
     "@inlang/paraglide-js": "npm:^2.12.0"
-    "@lottiefiles/dotlottie-svelte": "npm:0.8.15"
+    "@lottiefiles/dotlottie-svelte": "npm:0.9.1"
     "@photo-sphere-viewer/core": "npm:^5.14.1"
     "@photo-sphere-viewer/virtual-tour-plugin": "npm:^5.14.1"
     "@plausible-analytics/tracker": "npm:^0.4.4"

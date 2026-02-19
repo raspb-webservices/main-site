@@ -12,6 +12,9 @@
   import { getLocale } from '$lib/paraglide/runtime';
   import auth from '$services/auth-service';
   import { onMount } from 'svelte';
+  import { setWasmUrl } from '@lottiefiles/dotlottie-svelte';
+
+  setWasmUrl('/dotlottie-player.wasm');
 
   let { children } = $props();
 

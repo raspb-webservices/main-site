@@ -7,8 +7,12 @@
     projectSubTypesWebsite,
     projectSubTypesApp,
     projectSubTypesAi,
-    availableFeatures
+    projectSubTypesFreestyle,
+    availableFeatures,
+    googleFonts,
+    formFieldTypes
   } from '$lib/configs/wizard-config';
+  import { uploadAssetWithStatusCheck } from '$lib/helper/uploadAsset';
   import {
     formatDate,
     formatBudget,
@@ -59,6 +63,91 @@
   let serviceError = $state('');
   let serviceSuccess = $state('');
 
+  // File upload state
+  let uploading = $state(false);
+  let uploadProgress = $state('');
+  let uploadedFiles: File[] = $state([]);
+
+  function handleFileUpload(event: Event) {
+    const target = event.target as HTMLInputElement;
+    if (target.files && target.files.length > 0) {
+      const newFiles = Array.from(target.files);
+      uploadedFiles = [...uploadedFiles, ...newFiles];
+      target.value = '';
+    }
+  }
+
+  function removeUploadedFile(index: number) {
+    uploadedFiles = uploadedFiles.filter((_, i) => i !== index);
+  }
+
+  async function uploadFilesAndSave() {
+    if (!selectedProject?.id || uploadedFiles.length === 0) return;
+    
+    uploading = true;
+    uploadProgress = `Lade ${uploadedFiles.length} Datei(en) hoch...`;
+    editError = '';
+
+    try {
+      const uploadedAssetIds: string[] = [];
+
+      for (let i = 0; i < uploadedFiles.length; i++) {
+        const file = uploadedFiles[i];
+        uploadProgress = `Verarbeite ${file.name} (${i + 1}/${uploadedFiles.length})...`;
+
+        const assetId = await uploadAssetWithStatusCheck(file, (msg) => {
+          uploadProgress = msg;
+        });
+
+        if (assetId !== 'error') {
+          uploadedAssetIds.push(assetId);
+        } else {
+          console.error(`Failed to upload: ${file.name}`);
+        }
+      }
+
+      if (uploadedAssetIds.length === 0) {
+        uploadProgress = 'Fehler beim Hochladen der Dateien';
+        editError = 'Fehler beim Hochladen';
+        setTimeout(() => { uploadProgress = ''; }, 3000);
+        return;
+      }
+
+      uploadProgress = `${uploadedAssetIds.length} Datei(en) hochgeladen, verknüpfe mit Projekt...`;
+
+      const existingFileIds = (selectedProject.relatedFiles || []).map((f: { id: string }) => ({ id: f.id })).filter((f: { id: string }) => f.id);
+      const newFileIds = uploadedAssetIds.map((id) => ({ id }));
+      const allFileIds = [...existingFileIds, ...newFileIds];
+
+      const response = await authFetch(`/api/project/patch/${selectedProject.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: selectedProject.id,
+          relatedFiles: allFileIds
+        })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        selectedProject = { ...selectedProject, relatedFiles: data.data.relatedFiles };
+        
+        uploadProgress = 'Dateien erfolgreich hochgeladen!';
+        uploadedFiles = [];
+        setTimeout(() => { uploadProgress = ''; }, 5000);
+      } else {
+        uploadProgress = 'Fehler beim Verknüpfen der Dateien';
+        editError = 'Fehler beim Speichern';
+      }
+    } catch (error) {
+      console.error('File upload error:', error);
+      uploadProgress = 'Fehler beim Hochladen';
+      editError = 'Fehler beim Hochladen';
+    } finally {
+      uploading = false;
+    }
+  }
+
   export function openModal() {
     modal?.showModal();
   }
@@ -106,6 +195,7 @@
         case 'grundinformationen':
           sanitizedData.name = sanitizeValue(editForm.name) || '';
           sanitizedData.description = sanitizeValue(editForm.description) || '';
+          sanitizedData.projectCategory = sanitizeValue(editForm.projectCategory) || '';
           sanitizedData.projectType = sanitizeValue(editForm.projectType) || '';
           sanitizedData.subType = sanitizeValue(editForm.subType) || '';
           sanitizedData.projectDetails = sanitizeValue(editForm.projectDetails) || '';
@@ -116,13 +206,28 @@
           sanitizedData.desiredDomain = sanitizeValue(editForm.desiredDomain) || '';
           sanitizedData.domainStatus = sanitizeValue(editForm.domainStatus) || '';
           sanitizedData.goals = sanitizeValue(editForm.goals) || '';
+          sanitizedData.inspiration = sanitizeValue(editForm.inspiration) || '';
           sanitizedData.targetAudience = sanitizeValue(editForm.targetAudience) || '';
           sanitizedData.timeline = sanitizeValue(editForm.timeline) || '';
+          sanitizedData.timelinePreference = sanitizeValue(editForm.timelinePreference) || '';
+          sanitizedData.specificDeadline = sanitizeValue(editForm.specificDeadline) || '';
+          sanitizedData.budgetRange = sanitizeValue(editForm.budgetRange) || '';
+          sanitizedData.specialRequirements = sanitizeValue(editForm.specialRequirements) || '';
+          sanitizedData.serviceLevel = sanitizeNumber(editForm.serviceLevel);
+          sanitizedData.engineeringApproach = sanitizeNumber(editForm.engineeringApproach);
+          // PWA fields
+          sanitizedData.pwaApproach = sanitizeValue(editForm.pwaApproach) || '';
+          sanitizedData.pwaExistingUrl = sanitizeValue(editForm.pwaExistingUrl) || '';
+          // CMS fields
+          sanitizedData.cmsComplexity = sanitizeNumber(editForm.cmsComplexity);
+          sanitizedData.cmsContentStructure = sanitizeValue(editForm.cmsContentStructure) || '';
+          // KI & Freestyle fields
+          sanitizedData.estimatedExpertDays = sanitizeNumber(editForm.estimatedExpertDays);
           selectedProject = { ...selectedProject, ...sanitizedData };
           break;
         case 'budget':
           sanitizedData.budget = sanitizeValue(editForm.budget) || '';
-          sanitizedData.estimatedPrice = sanitizeNumber(editForm.estimatedPrice) ?? 0;
+          sanitizedData.estimatedPrice = sanitizeNumber(editForm.estimatedPrice);
           selectedProject = { ...selectedProject, ...sanitizedData };
           break;
         case 'design':
@@ -893,6 +998,209 @@
                 />
               </div>
 
+              <div class="form-control">
+                <label class="label" for="inspiration">
+                  <span class="label-text">{m.dashboard_drawer_label_inspiration()}</span>
+                </label>
+                <textarea
+                  bind:value={editForm.inspiration}
+                  id="inspiration"
+                  name="inspiration"
+                  class="textarea textarea-bordered textarea-sm h-20"
+                  placeholder="Inspirationsquellen, Links, Designs..."
+                ></textarea>
+              </div>
+
+              <div class="grid grid-cols-2 gap-2">
+                <div class="form-control">
+                  <label class="label" for="timelinePreference">
+                    <span class="label-text">{m.dashboard_drawer_label_timelinePreference()}</span>
+                  </label>
+                  <select bind:value={editForm.timelinePreference} id="timelinePreference" name="timelinePreference" class="select select-bordered select-sm">
+                    <option value="">{m.dashboard_edit_placeholder_select()}</option>
+                    <option value="urgent">Dringend</option>
+                    <option value="fast">Schnell</option>
+                    <option value="moderate">Moderat</option>
+                    <option value="flexible">Flexibel</option>
+                    <option value="delayed">Verzögert</option>
+                    <option value="whenever">Irgendwann</option>
+                  </select>
+                </div>
+
+                <div class="form-control">
+                  <label class="label" for="budgetRange">
+                    <span class="label-text">{m.dashboard_drawer_label_budgetRange()}</span>
+                  </label>
+                  <select bind:value={editForm.budgetRange} id="budgetRange" name="budgetRange" class="select select-bordered select-sm">
+                    <option value="">{m.dashboard_edit_placeholder_select()}</option>
+                    <option value="small">Klein (bis 1.000€)</option>
+                    <option value="medium">Mittel (1.000–5.000€)</option>
+                    <option value="large">Groß (5.000–15.000€)</option>
+                    <option value="xlarge">Sehr groß (15.000–50.000€)</option>
+                    <option value="enterprise">Enterprise (50.000€+)</option>
+                    <option value="flexible">Flexibel</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-control">
+                <label class="label" for="specificDeadline">
+                  <span class="label-text">Deadline</span>
+                </label>
+                <input
+                  type="date"
+                  bind:value={editForm.specificDeadline}
+                  id="specificDeadline"
+                  name="specificDeadline"
+                  class="input input-bordered input-sm"
+                />
+              </div>
+
+              <div class="form-control">
+                <label class="label" for="specialRequirements">
+                  <span class="label-text">{m.dashboard_drawer_label_specialRequirements()}</span>
+                </label>
+                <textarea
+                  bind:value={editForm.specialRequirements}
+                  id="specialRequirements"
+                  name="specialRequirements"
+                  class="textarea textarea-bordered textarea-sm h-20"
+                  placeholder="Besondere Anforderungen..."
+                ></textarea>
+              </div>
+
+              <!-- Service Level Slider -->
+              <div class="form-control">
+                <label class="label" for="serviceLevel">
+                  <span class="label-text">{m.dashboard_drawer_label_serviceLevel()}</span>
+                </label>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs whitespace-nowrap">{m.dashboard_drawer_serviceLevel_full()}</span>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    bind:value={editForm.serviceLevel}
+                    id="serviceLevel"
+                    name="serviceLevel"
+                    class="range range-primary range-sm flex-1"
+                  />
+                  <span class="text-xs whitespace-nowrap">{m.dashboard_drawer_serviceLevel_active()}</span>
+                </div>
+                <span class="text-xs text-base-content/50">{editForm.serviceLevel ?? 50}/100</span>
+              </div>
+
+              <!-- Engineering Approach Slider -->
+              <div class="form-control">
+                <label class="label" for="engineeringApproach">
+                  <span class="label-text">{m.dashboard_drawer_label_engineeringApproach()}</span>
+                </label>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs whitespace-nowrap">{m.dashboard_drawer_engineering_quick()}</span>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    bind:value={editForm.engineeringApproach}
+                    id="engineeringApproach"
+                    name="engineeringApproach"
+                    class="range range-secondary range-sm flex-1"
+                  />
+                  <span class="text-xs whitespace-nowrap">{m.dashboard_drawer_engineering_over()}</span>
+                </div>
+                <span class="text-xs text-base-content/50">{editForm.engineeringApproach ?? 50}/100</span>
+              </div>
+
+              <!-- PWA Fields -->
+              {#if editForm.subType === 'pwaSimple' || editForm.subType === 'pwaExtended'}
+                <div class="border-t border-base-300 pt-4 mt-4">
+                  <h5 class="text-sm font-semibold mb-3">PWA-Einstellungen</h5>
+                  <div class="form-control">
+                    <label class="label" for="pwaApproach">
+                      <span class="label-text">PWA-Ansatz</span>
+                    </label>
+                    <select bind:value={editForm.pwaApproach} id="pwaApproach" name="pwaApproach" class="select select-bordered select-sm">
+                      <option value="new">Neue PWA erstellen</option>
+                      <option value="extend">Bestehende Website erweitern</option>
+                    </select>
+                  </div>
+                  {#if editForm.pwaApproach === 'extend'}
+                    <div class="form-control">
+                      <label class="label" for="pwaExistingUrl">
+                        <span class="label-text">Bestehende URL</span>
+                      </label>
+                      <input
+                        type="url"
+                        bind:value={editForm.pwaExistingUrl}
+                        id="pwaExistingUrl"
+                        name="pwaExistingUrl"
+                        class="input input-bordered input-sm"
+                        placeholder="https://..."
+                      />
+                    </div>
+                  {/if}
+                </div>
+              {/if}
+
+              <!-- CMS Fields -->
+              {#if editForm.subType === 'cms' || editForm.subType === 'cmsPlus'}
+                <div class="border-t border-base-300 pt-4 mt-4">
+                  <h5 class="text-sm font-semibold mb-3">CMS-Einstellungen</h5>
+                  <div class="form-control">
+                    <label class="label" for="cmsComplexity">
+                      <span class="label-text">CMS-Komplexität</span>
+                    </label>
+                    <div class="flex items-center gap-2">
+                      <span class="text-xs">Einfach</span>
+                      <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        bind:value={editForm.cmsComplexity}
+                        id="cmsComplexity"
+                        name="cmsComplexity"
+                        class="range range-info range-sm flex-1"
+                      />
+                      <span class="text-xs">Komplex</span>
+                    </div>
+                    <span class="text-xs text-base-content/50">{editForm.cmsComplexity ?? 50}/100</span>
+                  </div>
+                  <div class="form-control">
+                    <label class="label" for="cmsContentStructure">
+                      <span class="label-text">Content-Struktur</span>
+                    </label>
+                    <textarea
+                      bind:value={editForm.cmsContentStructure}
+                      id="cmsContentStructure"
+                      name="cmsContentStructure"
+                      class="textarea textarea-bordered textarea-sm h-20"
+                      placeholder="Beschreiben Sie die gewünschte Content-Struktur..."
+                    ></textarea>
+                  </div>
+                </div>
+              {/if}
+
+              <!-- KI & Freestyle Fields -->
+              {#if editForm.projectType === 'aiSolution' || editForm.projectType === 'freestyle'}
+                <div class="border-t border-base-300 pt-4 mt-4">
+                  <h5 class="text-sm font-semibold mb-3">KI & Freestyle Einstellungen</h5>
+                  <div class="form-control">
+                    <label class="label" for="estimatedExpertDays">
+                      <span class="label-text">Geschätzte Expertentage</span>
+                    </label>
+                    <input
+                      type="number"
+                      min="0"
+                      bind:value={editForm.estimatedExpertDays}
+                      id="estimatedExpertDays"
+                      name="estimatedExpertDays"
+                      class="input input-bordered input-sm"
+                      placeholder="Anzahl Tage"
+                    />
+                  </div>
+                </div>
+              {/if}
+
               <div class="flex justify-end gap-2">
                 <button class="btn btn-sm btn-ghost" onclick={cancelEdit}>{m.dashboard_edit_button_cancel()}</button>
                 <button class="btn btn-sm btn-simple" onclick={saveProjectSection} disabled={editSaving}>
@@ -921,6 +1229,10 @@
                 <span class="text-sm">{selectedProject?.goals || m.dashboard_details_fallback_not_specified()}</span>
               </div>
               <div class="flex flex-col gap-1">
+                <span class="text-base-content/60">{m.dashboard_drawer_label_inspiration()}</span>
+                <span class="text-sm">{selectedProject?.inspiration || m.dashboard_details_fallback_not_specified()}</span>
+              </div>
+              <div class="flex flex-col gap-1">
                 <span class="text-base-content/60">{m.dashboard_details_label_audience()}</span>
                 <span class="text-sm">{selectedProject?.targetAudience || m.dashboard_details_fallback_not_specified()}</span>
               </div>
@@ -928,6 +1240,80 @@
                 <span class="text-base-content/60">{m.dashboard_details_label_timeline()}</span>
                 <span class="font-medium">{selectedProject?.timeline || m.dashboard_details_fallback_not_specified()}</span>
               </div>
+              {#if selectedProject?.timelinePreference}
+                <div class="flex justify-between">
+                  <span class="text-base-content/60">{m.dashboard_drawer_label_timelinePreference()}</span>
+                  <span class="font-medium">{selectedProject?.timelinePreference}</span>
+                </div>
+              {/if}
+              {#if selectedProject?.specificDeadline}
+                <div class="flex justify-between">
+                  <span class="text-base-content/60">Deadline</span>
+                  <span class="font-medium">{new Date(selectedProject?.specificDeadline).toLocaleDateString('de-DE')}</span>
+                </div>
+              {/if}
+              {#if selectedProject?.budgetRange}
+                <div class="flex justify-between">
+                  <span class="text-base-content/60">{m.dashboard_drawer_label_budgetRange()}</span>
+                  <span class="font-medium">{selectedProject?.budgetRange}</span>
+                </div>
+              {/if}
+              {#if selectedProject?.specialRequirements}
+                <div class="flex flex-col gap-1">
+                  <span class="text-base-content/60">{m.dashboard_drawer_label_specialRequirements()}</span>
+                  <span class="text-sm">{selectedProject?.specialRequirements}</span>
+                </div>
+              {/if}
+              {#if selectedProject?.serviceLevel !== undefined}
+                <div class="flex justify-between">
+                  <span class="text-base-content/60">{m.dashboard_drawer_label_serviceLevel()}</span>
+                  <span class="font-medium">{selectedProject?.serviceLevel}/100</span>
+                </div>
+              {/if}
+              {#if selectedProject?.engineeringApproach !== undefined}
+                <div class="flex justify-between">
+                  <span class="text-base-content/60">{m.dashboard_drawer_label_engineeringApproach()}</span>
+                  <span class="font-medium">{selectedProject?.engineeringApproach}/100</span>
+                </div>
+              {/if}
+              {#if selectedProject?.pwaApproach}
+                <div class="border-t border-base-300 pt-3 mt-3">
+                  <h5 class="text-sm font-semibold mb-2">PWA-Einstellungen</h5>
+                  <div class="flex justify-between">
+                    <span class="text-base-content/60">PWA-Ansatz</span>
+                    <span class="font-medium">{selectedProject?.pwaApproach === 'new' ? 'Neue PWA erstellen' : 'Bestehende erweitern'}</span>
+                  </div>
+                  {#if selectedProject?.pwaExistingUrl}
+                    <div class="flex justify-between mt-1">
+                      <span class="text-base-content/60">URL</span>
+                      <a href={selectedProject?.pwaExistingUrl} target="_blank" class="text-primary text-sm hover:underline">{selectedProject?.pwaExistingUrl}</a>
+                    </div>
+                  {/if}
+                </div>
+              {/if}
+              {#if selectedProject?.cmsComplexity !== undefined}
+                <div class="border-t border-base-300 pt-3 mt-3">
+                  <h5 class="text-sm font-semibold mb-2">CMS-Einstellungen</h5>
+                  <div class="flex justify-between">
+                    <span class="text-base-content/60">Komplexität</span>
+                    <span class="font-medium">{selectedProject?.cmsComplexity}/100</span>
+                  </div>
+                  {#if selectedProject?.cmsContentStructure}
+                    <div class="flex flex-col gap-1 mt-1">
+                      <span class="text-base-content/60">Content-Struktur</span>
+                      <span class="text-sm">{selectedProject?.cmsContentStructure}</span>
+                    </div>
+                  {/if}
+                </div>
+              {/if}
+              {#if selectedProject?.estimatedExpertDays}
+                <div class="border-t border-base-300 pt-3 mt-3">
+                  <div class="flex justify-between">
+                    <span class="text-base-content/60">Geschätzte Expertentage</span>
+                    <span class="font-medium">{selectedProject?.estimatedExpertDays} Tage</span>
+                  </div>
+                </div>
+              {/if}
             </div>
           {/if}
         </div>
@@ -1334,11 +1720,74 @@
       </div>
 
       <!-- Dateien -->
-      {#if selectedProject?.relatedFiles && selectedProject?.relatedFiles.length > 0}
-        <div class="card bg-base-200">
-          <div class="card-body">
-            <h4 class="card-title text-base">{m.dashboard_details_section_files()}</h4>
+      <div class="card bg-base-200 lg:col-span-2">
+        <div class="card-body">
+          <h4 class="card-title text-base">{m.dashboard_details_section_files()}</h4>
+          
+          <!-- Upload section -->
+          <div class="mb-4">
+            <div class="upload-area">
+              <input
+                type="file"
+                id="admin-file-upload"
+                multiple
+                class="hidden"
+                onchange={handleFileUpload}
+                accept="*/*"
+              />
+              <label for="admin-file-upload" class="upload-label">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                </svg>
+                <span class="text-sm font-medium">Dateien auswählen</span>
+                <span class="text-xs text-base-content/50">oder hier ablegen</span>
+              </label>
+            </div>
+
+            {#if uploadedFiles.length > 0}
+              <div class="space-y-2 mt-3">
+                <span class="text-xs font-medium uppercase text-base-content/60">Ausgewählte Dateien ({uploadedFiles.length})</span>
+                {#each uploadedFiles as file, i}
+                  <div class="bg-base-100 flex items-center justify-between rounded-lg p-3">
+                    <div class="flex items-center gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-base-content/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                      <span class="text-sm">{file.name}</span>
+                      <span class="text-xs text-base-content/50">({Math.round(file.size / 1024)} KB)</span>
+                    </div>
+                    <button class="btn btn-ghost btn-sm btn-square text-error" onclick={() => removeUploadedFile(i)} aria-label={m.dashboard_drawer_remove()}>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                      </svg>
+                    </button>
+                  </div>
+                {/each}
+                
+                <button class="btn btn-primary btn-sm w-full mt-2" onclick={uploadFilesAndSave} disabled={uploading}>
+                  {#if uploading}
+                    <span class="loading loading-spinner loading-sm"></span>
+                    {m.dashboard_drawer_uploading()}
+                  {:else}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                    </svg>
+                    Dateien hochladen
+                  {/if}
+                </button>
+              </div>
+            {/if}
+
+            {#if uploadProgress}
+              <div class="mt-3 rounded-lg p-3 {editError ? 'bg-error/10' : 'bg-success/10'}">
+                <p class="text-sm {editError ? 'text-error' : 'text-success'}">{uploadProgress}</p>
+              </div>
+            {/if}
+          </div>
+
+          {#if selectedProject?.relatedFiles && selectedProject?.relatedFiles.length > 0}
             <div class="space-y-2">
+              <span class="text-xs font-medium uppercase text-base-content/60">Bereits hochgeladene Dateien</span>
               {#each selectedProject?.relatedFiles as file}
                 <div class="bg-base-100 flex items-center justify-between rounded p-2">
                   <span class="truncate text-sm">{file.fileName || m.dashboard_details_fallback_unnamed_file()}</span>
@@ -1348,9 +1797,11 @@
                 </div>
               {/each}
             </div>
-          </div>
+          {:else if uploadedFiles.length === 0}
+            <p class="text-base-content/50 text-sm">{m.dashboard_drawer_no_files()}</p>
+          {/if}
         </div>
-      {/if}
+      </div>
 
       <!-- Service Setup -->
       <div class="card bg-base-200 lg:col-span-2">
