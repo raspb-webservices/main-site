@@ -19,7 +19,8 @@
       "Bash(npx @inlang/paraglide-js compile:*)",
       "Bash(yarn run build:*)",
       "Bash(yarn svelte-check:*)",
-      "Bash(node_modules/.bin/svelte-check:*)"
+      "Bash(node_modules/.bin/svelte-check:*)",
+      "Bash(sort find c:/Users/mac/projects/raspb/main-site/build -name \"*.png\")"
     ]
   }
 }

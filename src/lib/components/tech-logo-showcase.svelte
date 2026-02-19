@@ -1,36 +1,60 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import svelteLogo from '$icons/tech-logos/svelte-logo.svg';
+  import typescriptLogo from '$icons/tech-logos/typescript-logo.svg';
+  import tailwindLogo from '$icons/tech-logos/tailwind-css-logo.svg';
+  import daisyUiLogo from '$icons/tech-logos/daisyUi.svg';
+  import graphqlLogo from '$icons/tech-logos/GraphQL-logo.svg';
+  import nodejsLogo from '$icons/tech-logos/node-js-logo.svg';
+  import netlifyLogo from '$icons/tech-logos/netlify-logo.svg';
+  import vitejsLogo from '$icons/tech-logos/vitejs-logo.svg';
+  import hygraphLogo from '$icons/tech-logos/hygraph-logo.svg';
+  import openaiLogo from '$icons/tech-logos/openai.svg';
+  import anthropicLogo from '$icons/tech-logos/anthropic.svg';
+  import geminiLogo from '$icons/tech-logos/gemini-color.svg';
+  import claudeLogo from '$icons/tech-logos/claude-color.svg';
+  import ollamaLogo from '$icons/tech-logos/ollama.svg';
+  import postCssLogo from '$icons/tech-logos/PostCSS_Logo.svg';
+  import npmLogo from '$icons/tech-logos/npm-logo.svg';
+  import githubLogo from '$icons/tech-logos/GitHub-logo.svg';
+  import mapboxLogo from '$icons/tech-logos/mapbox-logo.svg';
+  import markdownLogo from '$icons/tech-logos/markdown-logo.svg';
+  import jamstackLogo from '$icons/tech-logos/Jamstack-logo.svg';
+  import clineLogo from '$icons/tech-logos/cline.svg';
+  import openrouterLogo from '$icons/tech-logos/openrouter.svg';
+  import postCssAr21Logo from '$icons/tech-logos/postcss-ar21.svg';
+  import puppeteerLogo from '$icons/tech-logos/pptrdev-icon.svg';
+  import swiperLogo from '$icons/tech-logos/swiper-logo.svg';
 
   // Export speed property to make it configurable (higher number = faster)
   export let speed = 0.5;
 
-  // List of technology logos with correct paths
   const techLogos = [
-    { name: 'Svelte', src: '/icons/tech-logos/svelte-logo.svg' },
-    { name: 'TypeScript', src: '/icons/tech-logos/typescript-logo.svg' },
-    { name: 'Tailwind CSS', src: '/icons/tech-logos/tailwind-css-logo.svg' },
-    { name: 'DaisyUI', src: '/icons/tech-logos/daisyUi.svg' },
-    { name: 'GraphQL', src: '/icons/tech-logos/GraphQL-logo.svg' },
-    { name: 'Node.js', src: '/icons/tech-logos/node-js-logo.svg' },
-    { name: 'Netlify', src: '/icons/tech-logos/netlify-logo.svg' },
-    { name: 'Vite', src: '/icons/tech-logos/vitejs-logo.svg' },
-    { name: 'Hygraph', src: '/icons/tech-logos/hygraph-logo.svg' },
-    { name: 'OpenAI', src: '/icons/tech-logos/openai.svg' },
-    { name: 'Anthropic', src: '/icons/tech-logos/anthropic.svg' },
-    { name: 'Gemini', src: '/icons/tech-logos/gemini-color.svg' },
-    { name: 'Claude', src: '/icons/tech-logos/claude-color.svg' },
-    { name: 'Ollama', src: '/icons/tech-logos/ollama.svg' },
-    { name: 'PostCSS', src: '/icons/tech-logos/PostCSS_Logo.svg' },
-    { name: 'npm', src: '/icons/tech-logos/npm-logo.svg' },
-    { name: 'GitHub', src: '/icons/tech-logos/GitHub-logo.svg' },
-    { name: 'Mapbox', src: '/icons/tech-logos/mapbox-logo.svg' },
-    { name: 'Markdown', src: '/icons/tech-logos/markdown-logo.svg' },
-    { name: 'Jamstack', src: '/icons/tech-logos/Jamstack-logo.svg' },
-    { name: 'Cline', src: '/icons/tech-logos/cline.svg' },
-    { name: 'OpenRouter', src: '/icons/tech-logos/openrouter.svg' },
-    { name: 'PostCSS AR21', src: '/icons/tech-logos/postcss-ar21.svg' },
-    { name: 'Puppeteer', src: '/icons/tech-logos/pptrdev-icon.svg' },
-    { name: 'Swiper', src: '/icons/tech-logos/swiper-logo.svg' }
+    { name: 'Svelte', src: svelteLogo },
+    { name: 'TypeScript', src: typescriptLogo },
+    { name: 'Tailwind CSS', src: tailwindLogo },
+    { name: 'DaisyUI', src: daisyUiLogo },
+    { name: 'GraphQL', src: graphqlLogo },
+    { name: 'Node.js', src: nodejsLogo },
+    { name: 'Netlify', src: netlifyLogo },
+    { name: 'Vite', src: vitejsLogo },
+    { name: 'Hygraph', src: hygraphLogo },
+    { name: 'OpenAI', src: openaiLogo },
+    { name: 'Anthropic', src: anthropicLogo },
+    { name: 'Gemini', src: geminiLogo },
+    { name: 'Claude', src: claudeLogo },
+    { name: 'Ollama', src: ollamaLogo },
+    { name: 'PostCSS', src: postCssLogo },
+    { name: 'npm', src: npmLogo },
+    { name: 'GitHub', src: githubLogo },
+    { name: 'Mapbox', src: mapboxLogo },
+    { name: 'Markdown', src: markdownLogo },
+    { name: 'Jamstack', src: jamstackLogo },
+    { name: 'Cline', src: clineLogo },
+    { name: 'OpenRouter', src: openrouterLogo },
+    { name: 'PostCSS AR21', src: postCssAr21Logo },
+    { name: 'Puppeteer', src: puppeteerLogo },
+    { name: 'Swiper', src: swiperLogo }
   ];
 
   let container: HTMLElement;

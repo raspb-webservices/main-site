@@ -9,6 +9,8 @@
   import CostAsFactorModal from '$lib/components/modals/home/cost-as-factor.svelte';
   import QualityAsFactorModal from '$lib/components/modals/home/quality-as-factor.svelte';
   import { DotLottieSvelte } from '@lottiefiles/dotlottie-svelte';
+  import robotSupports from '$lotties/robot-supports.lottie';
+  import businessLaunch from '$lotties/business-launch.lottie';
   import { m } from '$lib/paraglide/messages';
   import { getLocale, localizeHref } from '$lib/paraglide/runtime';
   import MainOffering from '$lib/components/ui/main-offering.svelte';
@@ -100,12 +102,12 @@
       </div>
       <div class="lg:items-top order-1 col-span-full items-center md:order-2 md:col-span-5">
         <div class="lottie-container m-auto max-w-117.5">
-          <DotLottieSvelte src="/lotties/robot-supports.lottie" loop autoplay />
+          <DotLottieSvelte src={robotSupports} loop autoplay />
         </div>
       </div>
       <div class="order-3 col-span-full md:col-span-5">
         <div class="lottie-container">
-          <DotLottieSvelte src="/lotties/business-launch.lottie" loop autoplay />
+          <DotLottieSvelte src={businessLaunch} loop autoplay />
         </div>
       </div>
       <div class="animate-fade-in-from-side prose order-4 col-span-full md:col-span-7">
@@ -205,13 +207,13 @@
               <button class="text-link-button inverted-underline" onclick={openQualityAsFactorModal}>{m.homepage_balance_qualitaet_buttonText()}</button>
             </p>
             <div class="tech-stack">
-              <img src="/icons/tech-logos/node-js-logo.svg" alt="Node.js" class="tech-logo" loading="lazy" />
-              <img src="/icons/tech-logos/svelte-logo.svg" alt="Svelte" class="tech-logo smaller" loading="lazy" />
-              <img src="/icons/tech-logos/typescript-logo.svg" alt="TypeScript" class="tech-logo smaller" loading="lazy" />
-              <img src="/icons/tech-logos/GitHub-logo.svg" alt="GitHub" class="tech-logo" loading="lazy" />
-              <img src="/icons/tech-logos/netlify-logo.svg" alt="Netlify" class="tech-logo long" loading="lazy" />
-              <img src="/icons/tech-logos/tailwind-css-logo-full.svg" alt="TailwindCSS" class="tech-logo long" loading="lazy" />
-              <img src="/icons/tech-logos/GraphQL-logo.svg" alt="GraphQL" class="tech-logo long" loading="lazy" />
+              <img src="$icons/tech-logos/node-js-logo.svg" alt="Node.js" class="tech-logo" loading="lazy" />
+              <img src="$icons/tech-logos/svelte-logo.svg" alt="Svelte" class="tech-logo smaller" loading="lazy" />
+              <img src="$icons/tech-logos/typescript-logo.svg" alt="TypeScript" class="tech-logo smaller" loading="lazy" />
+              <img src="$icons/tech-logos/GitHub-logo.svg" alt="GitHub" class="tech-logo" loading="lazy" />
+              <img src="$icons/tech-logos/netlify-logo.svg" alt="Netlify" class="tech-logo long" loading="lazy" />
+              <img src="$icons/tech-logos/tailwind-css-logo-full.svg" alt="TailwindCSS" class="tech-logo long" loading="lazy" />
+              <img src="$icons/tech-logos/GraphQL-logo.svg" alt="GraphQL" class="tech-logo long" loading="lazy" />
             </div>
           </div>
         </div>

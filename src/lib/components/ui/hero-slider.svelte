@@ -15,31 +15,31 @@
 
   const slides: Slide[] = [
     {
-      image: '/images/slider/slide1.jpg',
+      image: '$images/slider/slide1.jpg',
       title: m.carousel_slide1_title(),
       text: m.carousel_slide1_text(),
       cta: m.carousel_slide1_cta()
     },
     {
-      image: '/images/slider/slide2.jpg',
+      image: '$images/slider/slide2.jpg',
       title: m.carousel_slide2_title(),
       text: m.carousel_slide2_text(),
       cta: m.carousel_slide2_cta()
     },
     {
-      image: '/images/slider/slide3.jpg',
+      image: '$images/slider/slide3.jpg',
       title: m.carousel_slide3_title(),
       text: m.carousel_slide3_text(),
       cta: m.carousel_slide3_cta()
     },
     {
-      image: '/images/slider/slide4.jpg',
+      image: '$images/slider/slide4.jpg',
       title: m.carousel_slide4_title(),
       text: m.carousel_slide4_text(),
       cta: m.carousel_slide4_cta()
     },
     {
-      image: '/images/slider/slide5.jpg',
+      image: '$images/slider/slide5.jpg',
       title: m.carousel_slide5_title(),
       text: m.carousel_slide5_text(),
       cta: m.carousel_slide5_cta()

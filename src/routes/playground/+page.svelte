@@ -40,7 +40,7 @@
   <Hero
     headline={m.playground_hero_default_with_image()}
     subheadline={m.playground_hero_subheadline()}
-    image={'/images/slider/slide1.jpg'}
+    image={'$images/slider/slide1.jpg'}
     position={'top'}
     imageAlt={m.playground_hero_image_alt()}
     variant={'default '}
@@ -66,7 +66,7 @@
   <Hero
     headline={m.playground_hero_centered_with_image()}
     subheadline={m.playground_hero_subheadline()}
-    image={'/images/slider/slide2.jpg'}
+    image={'$images/slider/slide2.jpg'}
     imageAlt={m.playground_hero_image_alt()}
     variant={'centered'}
     showButton={true}
@@ -90,7 +90,7 @@
   <Hero
     headline={m.playground_hero_split_with_image()}
     subheadline={m.playground_hero_subheadline()}
-    image={'/images/slider/slide3.jpg'}
+    image={'$images/slider/slide3.jpg'}
     imageAlt={m.playground_hero_image_alt()}
     variant={'split'}
     showButton={true}
@@ -114,7 +114,7 @@
   <Hero
     headline={m.playground_hero_fullwidth()}
     subheadline={m.playground_hero_subheadline()}
-    image={'/images/slider/slide1.jpg'}
+    image={'$images/slider/slide1.jpg'}
     position={'bottom'}
     imageAlt={m.playground_hero_image_alt()}
     variant={'default '}

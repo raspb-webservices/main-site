@@ -632,19 +632,6 @@
       input[type='radio'] {
         @apply shrink-0;
       }
-
-      .radio-content {
-        @apply flex flex-col gap-1;
-
-        .radio-title {
-          @apply text-base-content text-base font-semibold;
-        }
-
-        .radio-description {
-          @apply text-base-content/70 text-sm;
-        }
-      }
     }
   }
-
 </style>

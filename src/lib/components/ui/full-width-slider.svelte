@@ -45,7 +45,7 @@
   <swiper-container bind:this={mySwiper} init="false" class="hero-swiper">
     <!-- Slide 1 -->
     <swiper-slide>
-      <div class="hero-slide" style="--bg-image: url('/images/slider/slide1.jpg')">
+      <div class="hero-slide" style="--bg-image: url('$images/slider/slide1.jpg')">
         <div class="hero-overlay"></div>
         <div class="hero-content">
           <div class="hero-text">
@@ -59,7 +59,7 @@
 
     <!-- Slide 2 -->
     <swiper-slide>
-      <div class="hero-slide" style="--bg-image: url('/images/slider/slide2.jpg')">
+      <div class="hero-slide" style="--bg-image: url('$images/slider/slide2.jpg')">
         <div class="hero-overlay"></div>
         <div class="hero-content">
           <div class="hero-text">
@@ -73,7 +73,7 @@
 
     <!-- Slide 3 -->
     <swiper-slide>
-      <div class="hero-slide" style="--bg-image: url('/images/slider/slide3.jpg')">
+      <div class="hero-slide" style="--bg-image: url('$images/slider/slide3.jpg')">
         <div class="hero-overlay"></div>
         <div class="hero-content">
           <div class="hero-text">
@@ -87,7 +87,7 @@
 
     <!-- Slide 4 -->
     <swiper-slide>
-      <div class="hero-slide" style="--bg-image: url('/images/slider/slide4.jpg')">
+      <div class="hero-slide" style="--bg-image: url('$images/slider/slide4.jpg')">
         <div class="hero-overlay"></div>
         <div class="hero-content">
           <div class="hero-text">
@@ -101,7 +101,7 @@
 
     <!-- Slide 5 -->
     <swiper-slide>
-      <div class="hero-slide" style="--bg-image: url('/images/slider/slide5.jpg')">
+      <div class="hero-slide" style="--bg-image: url('$images/slider/slide5.jpg')">
         <div class="hero-overlay"></div>
         <div class="hero-content">
           <div class="hero-text">

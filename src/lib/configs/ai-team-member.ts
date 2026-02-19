@@ -1,9 +1,15 @@
+import alexImg from '$images/alex.png';
+import mayaImg from '$images/maya.png';
+import samImg from '$images/sam.png';
+import rioImg from '$images/rio.png';
+import melindaImg from '$images/melinda.png';
+
 export const teamMembers = [
   {
     id: 'alex',
     name: 'Alex',
     role: 'Lead Developer & Architect',
-    avatar: '/images/alex.png',
+    avatar: alexImg,
     skills: [
       'Cloud Architecture & Infrastructure',
       'Scalability & Performance Optimization',
@@ -16,7 +22,7 @@ export const teamMembers = [
     id: 'maya',
     name: 'Maya',
     role: 'UX/UI Design Specialist',
-    avatar: '/images/maya.png',
+    avatar: mayaImg,
     skills: [
       'Usability Testing & User Research',
       'Prototyping & Wireframing',
@@ -29,7 +35,7 @@ export const teamMembers = [
     id: 'sam',
     name: 'Sam',
     role: 'Content Strategy & SEO Expert',
-    avatar: '/images/sam.png',
+    avatar: samImg,
     skills: [
       'Keyword Research & Analysis',
       'On-Page SEO & Technical SEO',
@@ -42,14 +48,14 @@ export const teamMembers = [
     id: 'rio',
     name: 'Rio',
     role: 'Quality Assurance & Testing Lead',
-    avatar: '/images/rio.png',
+    avatar: rioImg,
     skills: ['Test Automation Strategy', 'Performance & Load Testing', 'Defect Management & Analysis', 'Integration', 'Test Environment & Data Management']
   },
   {
     id: 'melinda',
     name: 'Melinda',
     role: 'Customer Service & Accounting',
-    avatar: '/images/melinda.png',
+    avatar: melindaImg,
     skills: [
       'Accounting Software',
       'Billing & Collections Management',

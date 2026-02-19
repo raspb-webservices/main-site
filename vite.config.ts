@@ -239,6 +239,7 @@ export default defineConfig({
   css: {
     transformer: 'postcss'
   },
+  assetsInclude: ['**/*.lottie'],
   build: {
     chunkSizeWarningLimit: 2048,
     cssMinify: 'esbuild'

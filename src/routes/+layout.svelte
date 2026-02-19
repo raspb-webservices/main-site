@@ -57,7 +57,7 @@
   <meta name="apple-mobile-web-app-title" content="raspb" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="raspb" />
-  <meta property="og:image" content="https://raspb.de/icons/apple-touch-icon.png" />
+  <meta property="og:image" content="https://raspb.de/screenshots/screenshot-desktop.png" />
   <meta property="og:locale" content={ogLocaleMap[getLocale()] ?? 'de_DE'} />
   <meta name="twitter:card" content="summary" />
 </svelte:head>
