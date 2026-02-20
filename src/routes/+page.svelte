@@ -9,7 +9,7 @@
   import CostAsFactorModal from '$lib/components/modals/home/cost-as-factor.svelte';
   import QualityAsFactorModal from '$lib/components/modals/home/quality-as-factor.svelte';
   import { browser } from '$app/environment';
-  import { DotLottieSvelte } from '@lottiefiles/dotlottie-svelte';
+  import LottiePlayer from '$lib/components/lottie-player.svelte';
   import robotSupports from '$lotties/robot-supports.lottie';
   import businessLaunch from '$lotties/business-launch.lottie';
   import { m } from '$lib/paraglide/messages';
@@ -57,6 +57,7 @@
   <meta name="description" content={m.homepage_meta_description()} />
   <meta property="og:title" content={m.homepage_meta_title()} />
   <meta property="og:description" content={m.homepage_meta_description()} />
+  <link rel="preload" href={robotSupports} as="fetch" crossorigin="anonymous" />
 </svelte:head>
 
 <Stage style={'svg-gradient'}>
@@ -103,12 +104,12 @@
       </div>
       <div class="lg:items-top order-1 col-span-full items-center md:order-2 md:col-span-5">
         <div class="lottie-container m-auto max-w-117.5">
-          {#if browser}<DotLottieSvelte src={robotSupports} loop autoplay />{/if}
+          {#if browser}<LottiePlayer src={robotSupports} loop autoplay />{/if}
         </div>
       </div>
       <div class="order-3 col-span-full md:col-span-5">
         <div class="lottie-container">
-          {#if browser}<DotLottieSvelte src={businessLaunch} loop autoplay />{/if}
+          {#if browser}<LottiePlayer src={businessLaunch} loop autoplay />{/if}
         </div>
       </div>
       <div class="animate-fade-in-from-side prose order-4 col-span-full md:col-span-7">

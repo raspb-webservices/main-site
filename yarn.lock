@@ -3799,6 +3799,7 @@ __metadata:
     "@hygraph/management-sdk": "npm:^1.5.2"
     "@inlang/paraglide-js": "npm:^2.12.0"
     "@lottiefiles/dotlottie-svelte": "npm:0.9.1"
+    "@lottiefiles/dotlottie-web": "npm:0.64.1"
     "@photo-sphere-viewer/core": "npm:^5.14.1"
     "@photo-sphere-viewer/virtual-tour-plugin": "npm:^5.14.1"
     "@plausible-analytics/tracker": "npm:^0.4.4"

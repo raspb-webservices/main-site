@@ -53,6 +53,7 @@
     "@auth0/auth0-spa-js": "^2.16.0",
     "@hygraph/management-sdk": "^1.5.2",
     "@lottiefiles/dotlottie-svelte": "0.9.1",
+    "@lottiefiles/dotlottie-web": "0.64.1",
     "@photo-sphere-viewer/core": "^5.14.1",
     "@photo-sphere-viewer/virtual-tour-plugin": "^5.14.1",
     "@plausible-analytics/tracker": "^0.4.4",
