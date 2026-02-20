@@ -3,18 +3,18 @@
      Vorschlag für: src/lib/components/projects/ReferenceCard.svelte 
      Angepasst für die öffentliche Portfolio-Ansicht (raspb Standard)
   */
-  let { project } = ();
+  let { project } = $props();
   
-  const techStack = project.tech || ['SvelteKit', 'TailwindCSS', 'Node.js'];
+  const techStack = $derived(project.tech || ['SvelteKit', 'TailwindCSS', 'Node.js']);
 </script>
 
 <div class="card bg-base-100 shadow-xl overflow-hidden group hover:-translate-y-2 transition-all duration-300 border border-base-200">
   <!-- Image Showcase -->
   <figure class="relative h-48 overflow-hidden bg-base-200">
     <img 
-      src={project.image || '/assets/placeholders/project-fallback.jpg'} 
+      src={project.image}
       alt={project.name} 
-      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+      class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
     />
     {#if project.isLighthouse}
       <div class="absolute top-4 right-4 badge badge-primary shadow-lg gap-2 p-3 font-bold">
@@ -28,7 +28,7 @@
       <h3 class="card-title text-xl font-bold">{project.name}</h3>
     </div>
     
-    <p class="text-base-content/70 text-sm line-clamp-3 mb-4 min-h-[4.5rem]">
+    <p class="text-base-content/70 text-sm line-clamp-3 mb-4 min-h-18">
       {project.description}
     </p>
 
