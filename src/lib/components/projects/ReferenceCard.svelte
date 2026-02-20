@@ -1,14 +1,19 @@
 <script lang="ts">
+  /* 
+     Vorschlag für: src/lib/components/projects/ReferenceCard.svelte 
+     Angepasst für die öffentliche Portfolio-Ansicht (raspb Standard)
+  */
   let { project } = $props();
-
+  
   const techStack = $derived(project.tech || ['SvelteKit', 'TailwindCSS', 'Node.js']);
 </script>
 
 <div class="card bg-base-100 shadow-xl overflow-hidden group hover:-translate-y-2 transition-all duration-300 border border-base-200">
+  <!-- Image Showcase -->
   <figure class="relative h-48 overflow-hidden bg-base-200">
-    <img
+    <img 
       src={project.image}
-      alt={project.name}
+      alt={project.name} 
       class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
     />
     {#if project.isLighthouse}
@@ -22,17 +27,19 @@
     <div class="flex justify-between items-start mb-2">
       <h3 class="card-title text-xl font-bold">{project.name}</h3>
     </div>
-
-    <p class="text-base-content/70 text-sm line-clamp-3 mb-4 min-h-[4.5rem]">
+    
+    <p class="text-base-content/70 text-sm line-clamp-3 mb-4 min-h-18">
       {project.description}
     </p>
 
+    <!-- Tech Stack Tags -->
     <div class="flex flex-wrap gap-2 mt-auto">
       {#each techStack as tech}
         <span class="badge badge-outline badge-sm opacity-60 font-medium">{tech}</span>
       {/each}
     </div>
 
+    <!-- Actions -->
     <div class="card-actions justify-end mt-6 pt-4 border-t border-base-200">
       <a href={project.url} target="_blank" class="btn btn-primary btn-sm btn-ghost gap-2">
         Details ansehen
