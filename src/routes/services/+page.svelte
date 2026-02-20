@@ -1,13 +1,11 @@
 <script lang="ts">
-  import Section from '/components/ui/section.svelte';
-  import Stage from '/components/ui/stage.svelte';
-  import { m } from '/paraglide/messages';
-  import { goto } from '/navigation';
-  import { localizeHref } from '/paraglide/runtime';
-
-  /* Visual Assets from Repo */
-  const lighthouseImg = '/src/lib/assets/images/perfect-score.jpg';
-  const lighthouseMobileImg = '/src/lib/assets/images/perfect-score-mobile.jpg';
+  import Section from '$lib/components/ui/section.svelte';
+  import Stage from '$lib/components/ui/stage.svelte';
+  import { m } from '$lib/paraglide/messages';
+  import { goto } from '$app/navigation';
+  import { localizeHref } from '$lib/paraglide/runtime';
+  import lighthouseImg from '$lib/assets/images/perfect-score.jpg';
+  import lighthouseMobileImg from '$lib/assets/images/perfect-score-mobile.jpg';
 </script>
 
 <svelte:head>

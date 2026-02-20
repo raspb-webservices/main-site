@@ -1,0 +1,34 @@
+[      24ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5173/de/einblicke:0
+[   22164ms] [ERROR] [vite] SyntaxError: The requested module '/src/lib/paraglide/messages.js?t=1771629315633' does not provide an export named 'm' @ http://localhost:5173/@vite/client:808
+[   22164ms] [ERROR] [vite] Failed to reload /src/lib/components/modals/home/time-as-factor.svelte. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5173/@vite/client:808
+[   22164ms] [ERROR] [vite] SyntaxError: The requested module '/src/lib/paraglide/messages.js?t=1771629315633' does not provide an export named 'm' @ http://localhost:5173/@vite/client:808
+[   22165ms] [ERROR] [vite] Failed to reload /src/lib/components/modals/general/philosophy.svelte. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5173/@vite/client:808
+[   22165ms] [ERROR] [vite] SyntaxError: The requested module '/src/lib/paraglide/messages.js?t=1771629315633' does not provide an export named 'm' @ http://localhost:5173/@vite/client:808
+[   22165ms] [ERROR] [vite] Failed to reload /src/lib/components/modals/home/cost-as-factor.svelte. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5173/@vite/client:808
+[   22165ms] [ERROR] [vite] SyntaxError: The requested module '/src/lib/paraglide/messages.js?t=1771629315633' does not provide an export named 'm' @ http://localhost:5173/@vite/client:808
+[   22165ms] [ERROR] [vite] Failed to reload /src/lib/components/modals/general/get-an-appointment-modal.svelte. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5173/@vite/client:808
+[   22165ms] [ERROR] [vite] SyntaxError: The requested module '/src/lib/paraglide/messages.js?t=1771629315633' does not provide an export named 'm' @ http://localhost:5173/@vite/client:808
+[   22165ms] [ERROR] [vite] Failed to reload /src/lib/components/modals/home/quality-as-factor.svelte. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5173/@vite/client:808
+[   22165ms] [ERROR] [vite] SyntaxError: The requested module '/src/lib/paraglide/runtime.js?t=1771629315634' does not provide an export named 'localizeHref' @ http://localhost:5173/@vite/client:808
+[   22165ms] [ERROR] [vite] Failed to reload /src/routes/+page.svelte. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5173/@vite/client:808
+[   22165ms] [ERROR] [vite] SyntaxError: The requested module '/src/lib/paraglide/messages.js?t=1771629315633' does not provide an export named 'm' @ http://localhost:5173/@vite/client:808
+[   22165ms] [ERROR] [vite] Failed to reload /src/lib/components/ui/main-offering.svelte. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5173/@vite/client:808
+[   22165ms] [ERROR] [vite] SyntaxError: The requested module '/src/lib/paraglide/runtime.js?t=1771629315634' does not provide an export named 'localizeHref' @ http://localhost:5173/@vite/client:808
+[   22165ms] [ERROR] [vite] Failed to reload /src/routes/+error.svelte. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5173/@vite/client:808
+[   22165ms] [ERROR] [vite] SyntaxError: The requested module '/src/lib/paraglide/runtime.js?t=1771629315634' does not provide an export named 'getLocale' @ http://localhost:5173/@vite/client:808
+[   22165ms] [ERROR] [vite] Failed to reload /src/lib/components/header.svelte. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5173/@vite/client:808
+[   22165ms] [ERROR] [vite] SyntaxError: The requested module '/src/lib/paraglide/runtime.js?t=1771629315634' does not provide an export named 'localizeHref' @ http://localhost:5173/@vite/client:808
+[   22165ms] [ERROR] [vite] Failed to reload /src/lib/components/snippets/cta-box.svelte. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5173/@vite/client:808
+[   22166ms] [ERROR] [vite] SyntaxError: The requested module '/src/lib/paraglide/runtime.js?t=1771629315634' does not provide an export named 'getLocale' @ http://localhost:5173/@vite/client:808
+[   22166ms] [ERROR] [vite] Failed to reload /src/lib/components/footer.svelte. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5173/@vite/client:808
+[   22166ms] [ERROR] [vite] SyntaxError: The requested module '/src/lib/paraglide/runtime.js?t=1771629315634' does not provide an export named 'getLocale' @ http://localhost:5173/@vite/client:808
+[   22166ms] [ERROR] [vite] Failed to reload /src/routes/+layout.svelte. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5173/@vite/client:808
+[   22171ms] TypeError: Cannot read properties of undefined (reading 'default')
+    at http://localhost:5173/src/routes/+layout.svelte?t=1771629288369:192:32
+    at http://localhost:5173/@vite/client:72:58
+    at http://localhost:5173/@vite/client:218:52
+    at http://localhost:5173/@vite/client:196:55
+    at Array.forEach (<anonymous>)
+    at HMRClient.queueUpdate (http://localhost:5173/@vite/client:196:33)
+    at async Promise.all (index 0)
+    at async handleMessage (http://localhost:5173/@vite/client:838:4)

@@ -20,7 +20,9 @@
       "Bash(yarn run build:*)",
       "Bash(yarn svelte-check:*)",
       "Bash(node_modules/.bin/svelte-check:*)",
-      "Bash(sort find c:/Users/mac/projects/raspb/main-site/build -name \"*.png\")"
+      "Bash(sort find c:/Users/mac/projects/raspb/main-site/build -name \"*.png\")",
+      "Bash(curl:*)",
+      "mcp__plugin_playwright_playwright__browser_navigate"
     ]
   }
 }

@@ -2,11 +2,52 @@
   import Section from '$lib/components/ui/section.svelte';
   import TechLogoShowcase from '$lib/components/tech-logo-showcase.svelte';
   import Stage from '$lib/components/ui/stage.svelte';
+  import ReferenceCard from '$lib/components/projects/ReferenceCard.svelte';
   import { onMount } from 'svelte';
   import { m } from '$lib/paraglide/messages';
   import { getLocale, localizeHref, setLocale } from '$lib/paraglide/runtime';
+  import imgPlaceholder from '$lib/assets/images/visualisation-1.jpg';
 
   let activeContent = $state('tech');
+
+  const projects = [
+    {
+      name: 'Wunschwurm',
+      description: 'Komplexe Plattform für soziale Initiativen in Mainz. Digitalisierung von Wunschzetteln, Nutzerverwaltung für verschiedene Rollen und Tracking des Erfüllungsprozesses.',
+      image: imgPlaceholder,
+      isLighthouse: true,
+      url: 'https://wunschwurm.de',
+      tech: ['SvelteKit', 'Hygraph', 'Auth0', 'Mapbox']
+    },
+    {
+      name: 'SC Hahnheim',
+      description: 'Frischer digitaler Auftritt für den lokalen Sportverein. Selbstständige Inhaltspflege durch jede Abteilung und pflegbarer Vereinskalender.',
+      image: imgPlaceholder,
+      url: 'https://sc-hahnheim.de/',
+      tech: ['SvelteKit', 'Hygraph', 'TailwindCSS']
+    },
+    {
+      name: 'Pro Civibus Stiftung',
+      description: 'Corporate Excellence für eine Mainzer Stiftung. Interaktive Historie, LinkedIn-Integration und automatisierte Kontakt-Flows.',
+      image: imgPlaceholder,
+      url: 'https://pro-civibus-stiftung.de/',
+      tech: ['SvelteKit', 'LinkedIn-API', 'TailwindCSS']
+    },
+    {
+      name: 'Schumacher & Gienow',
+      description: 'Moderner Kanzlei-Relaunch in Frankfurt. Wordpress-Ablöse mit vollständigem Content-Scraping und optimierten Prozess-Flows.',
+      image: imgPlaceholder,
+      url: 'https://schumacher-gienow.de/',
+      tech: ['SvelteKit', 'Scraping', 'TailwindCSS']
+    },
+    {
+      name: 'MGV Hahnheim',
+      description: 'Agilität in Bestform: Eine moderne, sichere Inhaltsseite, in wenigen Stunden live gesetzt – ohne Qualitätsverlust.',
+      image: imgPlaceholder,
+      url: 'https://mgv-1880-86-hahnheim.de/',
+      tech: ['SvelteKit', 'DaisyUI', 'Node.js']
+    }
+  ];
 
   const handleHashChange = (event: HashChangeEvent) => {
     const newHash = new URL(event.newURL).hash.slice(1);
@@ -99,7 +140,7 @@
     <Section noSpacing={true}>
       <div class="inner-box fade-in prose pt-36 pb-16">
         <h2>
-          {m.insights_techInsights_titleFirst()} <span class="inner-text-special">{m.insights_techInsights_titleHightlight()}</span>
+          {m.insights_techInsights_titleFirst()} <span class="inner-text-special">{m.insights_techInsights_titleHighlight()}</span>
           {m.insights_techInsights_titleSecond()}
         </h2>
         <p class="teaser">
@@ -201,6 +242,12 @@
       <div class="inner-box animate-fade-in-up prose pt-36 pb-24">
         <h2>{m.insights_showcase_title()}</h2>
         <p>{m.insights_showcase_description()}</p>
+
+        <div class="not-prose grid grid-cols-1 gap-8 mt-12 md:grid-cols-2 lg:grid-cols-3">
+          {#each projects as project}
+            <ReferenceCard {project} />
+          {/each}
+        </div>
       </div>
     </Section>
   {/if}
