@@ -52,6 +52,8 @@
   <link rel="preload" href="$fonts/circular/CircularStd-Book.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
   <link rel="preload" href="$fonts/circular/CircularStd-Light.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
   <link rel="preload" href="$fonts/circular/CircularStd-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="$lotties/robot-supports.lottie" as="fetch" crossorigin="anonymous" />
+  <link rel="preload" href="$lotties/business-launch.lottie" as="fetch" crossorigin="anonymous" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="anonymous" />
   <link rel="icon" type="image/png" href="$icons/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="$icons/favicon.svg" />

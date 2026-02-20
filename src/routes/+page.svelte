@@ -57,7 +57,6 @@
   <meta name="description" content={m.homepage_meta_description()} />
   <meta property="og:title" content={m.homepage_meta_title()} />
   <meta property="og:description" content={m.homepage_meta_description()} />
-  <link rel="preload" href={robotSupports} as="fetch" crossorigin="anonymous" />
 </svelte:head>
 
 <Stage style={'svg-gradient'}>
