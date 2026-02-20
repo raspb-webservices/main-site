@@ -106,6 +106,12 @@
       if (projectType?.basePrice) basePrice = projectType.basePrice;
     }
 
+    // For pwaSimple: base price depends on chosen approach
+    if (config.subType === 'pwaSimple') {
+      if (config.pwaApproach === 'new') basePrice = 3000;
+      else if (config.pwaApproach === 'extend') basePrice = 1999;
+    }
+
     // --- KI & Freestyle: price based on expert days × daily rate with volume discount ---
     if (config.projectCategory === 'ki-and-freestyle') {
       const expertDays = config.estimatedExpertDays ?? 0;

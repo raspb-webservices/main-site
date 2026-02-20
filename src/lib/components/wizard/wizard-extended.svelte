@@ -234,6 +234,12 @@
       if (projectType?.basePrice) basePrice = projectType.basePrice;
     }
 
+    // For pwaSimple: base price depends on chosen approach
+    if (config.subType === 'pwaSimple') {
+      if (config.pwaApproach === 'new') basePrice = 3000;
+      else if (config.pwaApproach === 'extend') basePrice = 1999;
+    }
+
     const sl = config.serviceLevel ?? 50;
     const serviceFactor = ((50 - sl) / 50) * 0.25;
 

@@ -42,6 +42,11 @@
       const projectType = allProjectTypes.find((pt) => pt.id === config.projectType);
       if (projectType?.basePrice) price = projectType.basePrice;
     }
+    // For pwaSimple: base price depends on chosen approach
+    if (config.subType === 'pwaSimple') {
+      if (config.pwaApproach === 'new') price = 3000;
+      else if (config.pwaApproach === 'extend') price = 1999;
+    }
     return price;
   });
 
