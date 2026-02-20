@@ -1,12 +1,52 @@
 <script lang="ts">
-  import Section from '$lib/components/ui/section.svelte';
-  import TechLogoShowcase from '$lib/components/tech-logo-showcase.svelte';
-  import Stage from '$lib/components/ui/stage.svelte';
+  import Section from '/components/ui/section.svelte';
+  import TechLogoShowcase from '/components/tech-logo-showcase.svelte';
+  import Stage from '/components/ui/stage.svelte';
+  import ReferenceCard from '/components/projects/ReferenceCard.svelte';
   import { onMount } from 'svelte';
-  import { m } from '$lib/paraglide/messages';
-  import { getLocale, localizeHref, setLocale } from '$lib/paraglide/runtime';
+  import { m } from '/paraglide/messages';
+  import { getLocale, localizeHref, setLocale } from '/paraglide/runtime';
 
-  let activeContent = $state('tech');
+  let activeContent = ('tech');
+
+  const projects = [
+    {
+      name: 'Wunschwurm',
+      description: 'Komplexe Plattform für soziale Initiativen in Mainz. Digitalisierung von Wunschzetteln, Nutzerverwaltung für verschiedene Rollen und Tracking des Erfüllungsprozesses.',
+      image: '/assets/projects/wunschwurm-hero.jpg',
+      isLighthouse: true,
+      url: 'https://wunschwurm.de',
+      tech: ['SvelteKit', 'Hygraph', 'Auth0', 'Mapbox']
+    },
+    {
+      name: 'SC Hahnheim',
+      description: 'Frischer digitaler Auftritt für den lokalen Sportverein. Selbstständige Inhaltspflege durch jede Abteilung und pflegbarer Vereinskalender.',
+      image: '/assets/projects/sc-hahnheim.jpg',
+      url: 'https://sc-hahnheim.de/',
+      tech: ['SvelteKit', 'Hygraph', 'TailwindCSS']
+    },
+    {
+      name: 'Pro Civibus Stiftung',
+      description: 'Corporate Excellence für eine Mainzer Stiftung. Interaktive Historie, LinkedIn-Integration und automatisierte Kontakt-Flows.',
+      image: '/assets/projects/pro-civibus.jpg',
+      url: 'https://pro-civibus-stiftung.de/',
+      tech: ['SvelteKit', 'LinkedIn-API', 'TailwindCSS']
+    },
+    {
+      name: 'Schumacher & Gienow',
+      description: 'Moderner Kanzlei-Relaunch in Frankfurt. Wordpress-Ablöse mit vollständigem Content-Scraping und optimierten Prozess-Flows.',
+      image: '/assets/projects/schumacher-gienow.jpg',
+      url: 'https://schumacher-gienow.de/',
+      tech: ['SvelteKit', 'Scraping', 'TailwindCSS']
+    },
+    {
+      name: 'MGV Hahnheim',
+      description: 'Agilität in Bestform: Eine moderne, sichere Inhaltsseite, in wenigen Stunden live gesetzt – ohne Qualitätsverlust.',
+      image: '/assets/projects/mgv-hahnheim.jpg',
+      url: 'https://mgv-1880-86-hahnheim.de/',
+      tech: ['SvelteKit', 'DaisyUI', 'Node.js']
+    }
+  ];
 
   const handleHashChange = (event: HashChangeEvent) => {
     const newHash = new URL(event.newURL).hash.slice(1);
@@ -99,7 +139,7 @@
     <Section noSpacing={true}>
       <div class="inner-box fade-in prose pt-36 pb-16">
         <h2>
-          {m.insights_techInsights_titleFirst()} <span class="inner-text-special">{m.insights_techInsights_titleHightlight()}</span>
+          {m.insights_techInsights_titleFirst()} <span class="inner-text-special">{m.insights_techInsights_titleHighlight()}</span>
           {m.insights_techInsights_titleSecond()}
         </h2>
         <p class="teaser">
@@ -201,13 +241,19 @@
       <div class="inner-box animate-fade-in-up prose pt-36 pb-24">
         <h2>{m.insights_showcase_title()}</h2>
         <p>{m.insights_showcase_description()}</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+          {#each projects as project}
+            <ReferenceCard {project} />
+          {/each}
+        </div>
       </div>
     </Section>
   {/if}
 </div>
 
 <style lang="postcss">
-  @reference '../../app.css';
+  @reference "../../app.css";
 
   .tab-tile-collection {
     @apply flex flex-wrap items-center justify-center gap-12 lg:flex-nowrap;
