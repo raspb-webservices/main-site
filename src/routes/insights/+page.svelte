@@ -13,7 +13,7 @@
     {
       name: 'Wunschwurm',
       description: 'Komplexe Plattform für soziale Initiativen in Mainz. Digitalisierung von Wunschzetteln, Nutzerverwaltung für verschiedene Rollen und Tracking des Erfüllungsprozesses.',
-      image: '/assets/projects/wunschwurm-hero.jpg',
+      image: '/projects/wunschwurm-hero.jpg',
       isLighthouse: true,
       url: 'https://wunschwurm.de',
       tech: ['SvelteKit', 'Hygraph', 'Auth0', 'Mapbox']
@@ -21,28 +21,28 @@
     {
       name: 'SC Hahnheim',
       description: 'Frischer digitaler Auftritt für den lokalen Sportverein. Selbstständige Inhaltspflege durch jede Abteilung und pflegbarer Vereinskalender.',
-      image: '/assets/projects/sc-hahnheim.jpg',
+      image: '/sc-hahnheim-angebot.jpg',
       url: 'https://sc-hahnheim.de/',
       tech: ['SvelteKit', 'Hygraph', 'TailwindCSS']
     },
     {
       name: 'Pro Civibus Stiftung',
       description: 'Corporate Excellence für eine Mainzer Stiftung. Interaktive Historie, LinkedIn-Integration und automatisierte Kontakt-Flows.',
-      image: '/assets/projects/pro-civibus.jpg',
+      image: '/pro-civibus-feed.jpg',
       url: 'https://pro-civibus-stiftung.de/',
       tech: ['SvelteKit', 'LinkedIn-API', 'TailwindCSS']
     },
     {
       name: 'Schumacher & Gienow',
       description: 'Moderner Kanzlei-Relaunch in Frankfurt. Wordpress-Ablöse mit vollständigem Content-Scraping und optimierten Prozess-Flows.',
-      image: '/assets/projects/schumacher-gienow.jpg',
+      image: '/schumacher-gienow-hero.jpg',
       url: 'https://schumacher-gienow.de/',
       tech: ['SvelteKit', 'Scraping', 'TailwindCSS']
     },
     {
       name: 'MGV Hahnheim',
       description: 'Agilität in Bestform: Eine moderne, sichere Inhaltsseite, in wenigen Stunden live gesetzt – ohne Qualitätsverlust.',
-      image: '/assets/projects/mgv-hahnheim.jpg',
+      image: '/mgv-hahnheim-willkommen.jpg',
       url: 'https://mgv-1880-86-hahnheim.de/',
       tech: ['SvelteKit', 'DaisyUI', 'Node.js']
     }
