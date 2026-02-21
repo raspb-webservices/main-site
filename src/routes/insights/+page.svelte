@@ -6,11 +6,12 @@
   import { onMount } from 'svelte';
   import { m } from '$lib/paraglide/messages';
   import { getLocale, localizeHref, setLocale } from '$lib/paraglide/runtime';
-  import imgWunschwurm from '$lib/assets/images/wunschwurm.png';
-  import imgScHahnheim from '$lib/assets/images/sc-hahnheim-angebot.png';
-  import imgProCivibus from '$lib/assets/images/pro-civibus-stiftung.png';
-  import imgSchumacherGienow from '$lib/assets/images/schumacher-gienow.png';
-  import imgMgv from '$lib/assets/images/mgv.png';
+  import imgWunschwurm from '$images/wunschwurm.png';
+  import imgScHahnheim from '$images/sc-hahnheim-angebot.png';
+  import imgProCivibus from '$images/pro-civibus-stiftung.png';
+  import imgSchumacherGienow from '$images/schumacher-gienow.png';
+  import imgMgv from '$images/mgv.png';
+  import imgStrateco from '$images/strateco.png';
 
   let activeContent = ('tech');
 
@@ -32,7 +33,7 @@
     },
     {
       name: 'Pro Civibus Stiftung',
-      description: 'Corporate Excellence für eine Mainzer Stiftung. Interaktive Historie, LinkedIn-Integration und automatisierte Kontakt-Flows.',
+      description: 'Corporate Excellence für eine Frankfurter Stiftung. Interaktive Historie, LinkedIn-Integration und automatisierte Kontakt-Flows.',
       image: imgProCivibus,
       url: 'https://pro-civibus-stiftung.de/',
       tech: ['SvelteKit', 'LinkedIn-API', 'TailwindCSS']
@@ -50,45 +51,13 @@
       image: imgMgv,
       url: 'https://mgv-1880-86-hahnheim.de/',
       tech: ['SvelteKit', 'DaisyUI', 'Node.js']
-    }
-  ];
-
-  const projects = [
-    {
-      name: 'Wunschwurm',
-      description: 'Komplexe Plattform für soziale Initiativen in Mainz. Digitalisierung von Wunschzetteln, Nutzerverwaltung für verschiedene Rollen und Tracking des Erfüllungsprozesses.',
-      image: imgPlaceholder,
-      isLighthouse: true,
-      url: 'https://wunschwurm.de',
-      tech: ['SvelteKit', 'Hygraph', 'Auth0', 'Mapbox']
     },
     {
-      name: 'SC Hahnheim',
-      description: 'Frischer digitaler Auftritt für den lokalen Sportverein. Selbstständige Inhaltspflege durch jede Abteilung und pflegbarer Vereinskalender.',
-      image: imgPlaceholder,
-      url: 'https://sc-hahnheim.de/',
-      tech: ['SvelteKit', 'Hygraph', 'TailwindCSS']
-    },
-    {
-      name: 'Pro Civibus Stiftung',
-      description: 'Corporate Excellence für eine Mainzer Stiftung. Interaktive Historie, LinkedIn-Integration und automatisierte Kontakt-Flows.',
-      image: imgPlaceholder,
-      url: 'https://pro-civibus-stiftung.de/',
-      tech: ['SvelteKit', 'LinkedIn-API', 'TailwindCSS']
-    },
-    {
-      name: 'Schumacher & Gienow',
-      description: 'Moderner Kanzlei-Relaunch in Frankfurt. Wordpress-Ablöse mit vollständigem Content-Scraping und optimierten Prozess-Flows.',
-      image: imgPlaceholder,
-      url: 'https://schumacher-gienow.de/',
-      tech: ['SvelteKit', 'Scraping', 'TailwindCSS']
-    },
-    {
-      name: 'MGV Hahnheim',
-      description: 'Agilität in Bestform: Eine moderne, sichere Inhaltsseite, in wenigen Stunden live gesetzt – ohne Qualitätsverlust.',
-      image: imgPlaceholder,
-      url: 'https://mgv-1880-86-hahnheim.de/',
-      tech: ['SvelteKit', 'DaisyUI', 'Node.js']
+      name: 'STRATECO',
+      description: '>10 Jahre altes Content-Monster bekommt Ablöse durch ein Top-modernes, flexibel-gestaltbares System',
+      image: imgStrateco,
+      url: 'https://strateco.netlify.app/',
+      tech: ['SvelteKit', 'Scraping', 'Node.js']
     }
   ];
 
@@ -284,8 +253,8 @@
     <Section noSpacing={true}>
       <div class="inner-box animate-fade-in-up prose pt-36 pb-24">
         <h2>{m.insights_showcase_title()}</h2>
-        <p>{m.insights_showcase_description()}</p>
-        
+        <p>{@html m.insights_showcase_description()}</p>
+        <p>{m.insights_showcase_description2()}</p>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
           {#each projects as project}
             <ReferenceCard {project} />
