@@ -58,7 +58,7 @@
 
   <Section noSpacing={true}>
     <div class="md:inner-box pb-24">
-      <div class="animate-fade-in-up bg-base-200 text-base-content mx-auto flex max-w-2xl justify-center rounded-3xl p-8 text-center">
+      <div class="animate-fade-in-up bg-base-200 text-base-content mx-auto flex flex-col max-w-2xl justify-center rounded-3xl p-8 text-center">
         {#if errorMessage}
           <div class="alert alert-error mb-6 shadow-lg">
             <div>
@@ -69,7 +69,7 @@
 
         <p class="mb-8 text-lg">{m.registration_intro_teaser()}</p>
 
-        <button class="btn-basic w-full max-w-md" onclick={handleSignup} disabled={isLoading}>
+        <button class="btn-basic w-full max-w-md m-auto" onclick={handleSignup} disabled={isLoading}>
           {#if isLoading}
             <span class="loading loading-spinner loading-sm mr-2"></span>
             {m.registration_form_button_loading()}

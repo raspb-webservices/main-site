@@ -2,11 +2,64 @@
   import Section from '$lib/components/ui/section.svelte';
   import TechLogoShowcase from '$lib/components/tech-logo-showcase.svelte';
   import Stage from '$lib/components/ui/stage.svelte';
+  import ReferenceCard from '$lib/components/projects/ReferenceCard.svelte';
   import { onMount } from 'svelte';
   import { m } from '$lib/paraglide/messages';
   import { getLocale, localizeHref, setLocale } from '$lib/paraglide/runtime';
+  import imgWunschwurm from '$images/wunschwurm.png';
+  import imgScHahnheim from '$images/sc-hahnheim-angebot.png';
+  import imgProCivibus from '$images/pro-civibus-stiftung.png';
+  import imgSchumacherGienow from '$images/schumacher-gienow.png';
+  import imgMgv from '$images/mgv.png';
+  import imgStrateco from '$images/strateco.png';
 
-  let activeContent = $state('tech');
+  let activeContent = ('tech');
+
+  const projects = [
+    {
+      name: 'Wunschwurm',
+      description: 'Komplexe Plattform für soziale Initiativen in Mainz. Digitalisierung von Wunschzetteln, Nutzerverwaltung für verschiedene Rollen und Tracking des Erfüllungsprozesses.',
+      image: imgWunschwurm,
+      isLighthouse: true,
+      url: 'https://wunschwurm.de',
+      tech: ['SvelteKit', 'Hygraph', 'Auth0', 'Mapbox']
+    },
+    {
+      name: 'SC Hahnheim',
+      description: 'Frischer digitaler Auftritt für den lokalen Sportverein. Selbstständige Inhaltspflege durch jede Abteilung und pflegbarer Vereinskalender.',
+      image: imgScHahnheim,
+      url: 'https://sc-hahnheim.de/',
+      tech: ['SvelteKit', 'Hygraph', 'TailwindCSS']
+    },
+    {
+      name: 'Pro Civibus Stiftung',
+      description: 'Corporate Excellence für eine Frankfurter Stiftung. Interaktive Historie, LinkedIn-Integration und automatisierte Kontakt-Flows.',
+      image: imgProCivibus,
+      url: 'https://pro-civibus-stiftung.de/',
+      tech: ['SvelteKit', 'LinkedIn-API', 'TailwindCSS']
+    },
+    {
+      name: 'Schumacher & Gienow',
+      description: 'Moderner Kanzlei-Relaunch in Frankfurt. Wordpress-Ablöse mit vollständigem Content-Scraping und optimierten Prozess-Flows.',
+      image: imgSchumacherGienow,
+      url: 'https://schumacher-gienow.de/',
+      tech: ['SvelteKit', 'Scraping', 'TailwindCSS']
+    },
+    {
+      name: 'MGV Hahnheim',
+      description: 'Agilität in Bestform: Eine moderne, sichere Inhaltsseite, in wenigen Stunden live gesetzt – ohne Qualitätsverlust.',
+      image: imgMgv,
+      url: 'https://mgv-1880-86-hahnheim.de/',
+      tech: ['SvelteKit', 'DaisyUI', 'Node.js']
+    },
+    {
+      name: 'STRATECO',
+      description: '>10 Jahre altes Content-Monster bekommt Ablöse durch ein Top-modernes, flexibel-gestaltbares System',
+      image: imgStrateco,
+      url: 'https://strateco.netlify.app/',
+      tech: ['SvelteKit', 'Scraping', 'Node.js']
+    }
+  ];
 
   const handleHashChange = (event: HashChangeEvent) => {
     const newHash = new URL(event.newURL).hash.slice(1);
@@ -99,7 +152,7 @@
     <Section noSpacing={true}>
       <div class="inner-box fade-in prose pt-36 pb-16">
         <h2>
-          {m.insights_techInsights_titleFirst()} <span class="inner-text-special">{m.insights_techInsights_titleHightlight()}</span>
+          {m.insights_techInsights_titleFirst()} <span class="inner-text-special">{m.insights_techInsights_titleHighlight()}</span>
           {m.insights_techInsights_titleSecond()}
         </h2>
         <p class="teaser">
@@ -200,14 +253,20 @@
     <Section noSpacing={true}>
       <div class="inner-box animate-fade-in-up prose pt-36 pb-24">
         <h2>{m.insights_showcase_title()}</h2>
-        <p>{m.insights_showcase_description()}</p>
+        <p>{@html m.insights_showcase_description()}</p>
+        <p>{m.insights_showcase_description2()}</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+          {#each projects as project}
+            <ReferenceCard {project} />
+          {/each}
+        </div>
       </div>
     </Section>
   {/if}
 </div>
 
 <style lang="postcss">
-  @reference '../../app.css';
+  @reference "../../app.css";
 
   .tab-tile-collection {
     @apply flex flex-wrap items-center justify-center gap-12 lg:flex-nowrap;

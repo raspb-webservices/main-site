@@ -219,7 +219,7 @@
     </form>
 
     <h3 class="mb-2 text-2xl font-bold">{m.wizard_modals_contact_title()}</h3>
-    <p class="text-base-content/70 mb-6">{m.wizard_modals_contact_description()}</p>
+    <p class="text-base-content/70 mb-6">{@html m.wizard_modals_contact_description()}</p>
 
     {#if success}
       <div class="alert alert-success mb-4">

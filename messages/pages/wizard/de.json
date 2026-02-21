@@ -300,7 +300,7 @@
   "wizard_loading_title": "Projekt wird übermittelt...",
   "wizard_modals_contact_cancel": "Abbrechen",
   "wizard_modals_contact_confirm": "Abschicken",
-  "wizard_modals_contact_description": "Wie geht es jetzt weiter? Du kannst dein konfiguriertes Projekt huns hier kontaktierenfragenme und die weitere Schritte besprechen oder direkte loslegen, wenn bereits alles klar ist und du vollends überzeugt bist. Dazu kannst du hier (---) einen eigenen Account erstellen und dein Projekt im ausführlichen Konfigurator / Wizard erfassen und an uns übermitteln.",
+  "wizard_modals_contact_description": "Wie geht es jetzt weiter? Du kannst mit deinem gerade konfiguriertem Projekt uns hier eine unverbindliche Anfrage stellen. Wir melden uns innerhalb von 1-2 Tagen bei dir und beantworten alle verbleibenden Fragen. Darüber hinaus kannst du dich gerne schon mal <a href=\"/registration\">hier</a> registrieren.<br><br>Wenn die E-Mail-Adressen übereinstimmen, können wir dein Projekt matchen und direkt in dein Dashboard übertragen (das geht aber nur, wenn du hier die Anfrage abschickst UND dich registrierst).",
   "wizard_modals_contact_title": "Kontaktiere uns und lass uns loslegen",
   "wizard_modals_error_apiError": "API Fehler",
   "wizard_modals_error_apiRequestFailed": "API-Anfrage fehlgeschlagen",

@@ -1,5 +1,6 @@
 @import './font-collection.css';
 @import 'tailwindcss';
+@source not "../node_modules/@lottiefiles";
 
 :root {
   --white: #fefefe;
