@@ -14,7 +14,7 @@ export const customerCreateSchema = z.object({
   city: z.string().max(MAX_STRING).optional(),
   country: z.string().max(MAX_STRING).optional(),
   phone: z.string().max(50).optional(),
-  auth0Id: z.string().max(MAX_STRING).optional(),
+  // auth0Id is NOT accepted from clients — set server-side from locals.user.sub
   projectIds: z.array(z.string()).optional()
 });
 

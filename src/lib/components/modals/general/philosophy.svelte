@@ -88,7 +88,7 @@
           <div class="flex flex-col items-center">
             <button
               type="button"
-              class="mx-2 h-12 w-12 rounded-full bg-gradient-to-br md:mx-3 md:h-16 md:w-16 {item.gradient} flex transform cursor-pointer items-center justify-center text-2xl font-bold text-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl"
+              class="mx-2 h-12 w-12 rounded-full bg-linear-to-br md:mx-3 md:h-16 md:w-16 {item.gradient} flex transform cursor-pointer items-center justify-center text-2xl font-bold text-white shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl"
               onclick={() => scrollToSection(item.letter)}
               title={m.philosophyModal_jump_to_title({ item: item.title })}
             >
@@ -111,8 +111,8 @@
           <div class="card-body p-8 pb-10">
             <div class="flex flex-col items-end lg:flex-row lg:items-center">
               <!-- Icon and Letter -->
-              <div class="flex flex-shrink-0 flex-col items-center lg:mr-7">
-                <div class="h-20 w-20 rounded-full bg-gradient-to-br {item.gradient} flex items-center justify-center text-3xl font-bold text-white shadow-lg">
+              <div class="flex shrink-0 flex-col items-center lg:mr-7">
+                <div class="h-20 w-20 rounded-full bg-linear-to-br {item.gradient} flex items-center justify-center text-3xl font-bold text-white shadow-lg">
                   {item.letter}
                 </div>
               </div>
@@ -143,7 +143,7 @@
 
     <!-- Footer -->
     <div class="border-base-300 mt-8 border-t pt-6 text-center">
-      <div class="from-primary/10 to-secondary/10 rounded-2xl bg-gradient-to-r p-6 sm:mx-4 lg:mx-20">
+      <div class="from-primary/10 to-secondary/10 rounded-2xl bg-linear-to-r p-6 sm:mx-4 lg:mx-20">
         <h3 class="mb-3 text-xl font-bold">{m.philosophyModal_footer_missionTitle()}</h3>
         <p class="text-base-content/80 mx-auto max-w-4xl leading-relaxed">
           {m.philosophyModal_footer_missionDescription()}

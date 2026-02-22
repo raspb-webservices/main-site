@@ -53,7 +53,7 @@ export const POST: RequestHandler = async ({ request }) => {
     }
 
     const sendOptions: SendMailOptions = {
-      from: mailData.from,
+      from: { email: 'request@raspb.de', name: 'raspb Webservices' },
       to: mailData.to,
       subject: mailData.subject,
       text: mailData.text,

@@ -11,7 +11,7 @@ async function getClient() {
     auth0Client = await createAuth0Client({
       domain: authConfig.domain,
       clientId: authConfig.clientId,
-      cacheLocation: 'localstorage',
+      cacheLocation: 'memory',
       useRefreshTokens: true,
       authorizationParams: {
         audience: authConfig.audience,

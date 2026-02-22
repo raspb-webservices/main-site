@@ -12,7 +12,7 @@ const mailSenderSchema = z.object({
 
 /** Schema fuer POST /api/mail/send */
 export const mailSendSchema = z.object({
-  from: mailSenderSchema,
+  // from is NOT accepted from clients — hardcoded server-side to prevent email spoofing
   to: z.array(mailRecipientSchema).min(1).max(50),
   subject: z.string().min(1).max(500),
   text: z.string().max(10000).optional(),

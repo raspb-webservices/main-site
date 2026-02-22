@@ -10,18 +10,16 @@ const PUBLIC_PREFIXES = [
   '/api/user-question/',
   '/api/mail/',
   '/api/project/create',
-  '/api/project/publish/',
   '/api/project/link-customer/',
-  '/api/customer/create',
-  '/api/customer/publish/',
-  '/api/asset/'
+  '/api/customer/create'
+  // /api/project/publish/, /api/customer/publish/, /api/asset/ require authentication
 ];
 
 /**
  * Routes die nur fuer Admins zugaenglich sind.
  * Format: "METHOD:exact-path" - matcht nur exakt (nicht Sub-Pfade).
  */
-const ADMIN_ROUTES = ['GET:/api/customer/get', 'GET:/api/project/get'];
+const ADMIN_ROUTES = ['GET:/api/customer/get', 'GET:/api/project/get', 'POST:/api/auth/create-user'];
 
 export function getAuthLevel(method: string, pathname: string): AuthLevel {
   // Public routes - Prefix-Match

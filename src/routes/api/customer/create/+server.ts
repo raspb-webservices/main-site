@@ -22,7 +22,7 @@ interface Customer {
   salutation?: string;
 }
 
-export const POST: RequestHandler = async ({ request }) => {
+export const POST: RequestHandler = async ({ request, locals }) => {
   try {
     const customerData = validateBody(customerCreateSchema, await request.json());
     const mutation = gql`
@@ -81,7 +81,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
     const variables = {
       address: customerData.address || null,
-      auth0Id: customerData.auth0Id || null,
+      auth0Id: locals.user?.sub ?? null,
       city: customerData.city || null,
       company: customerData.company || null,
       country: customerData.country || null,

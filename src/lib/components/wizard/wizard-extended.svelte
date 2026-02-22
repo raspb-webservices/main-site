@@ -7,7 +7,6 @@
     projectTypesWebApp,
     projectCategories,
     availableFeatures,
-    getStepConfig,
     featureCategoryColors,
     projectTypesAiFreestyle,
     projectSubTypesAi,
@@ -106,9 +105,32 @@
   let isPreparingAssets = $state(false);
   let assetPreparationProgress = $state('');
 
-  // Dynamic step configuration based on project type
-  const stepConfig = $derived(getStepConfig(config.projectType ?? ''));
-  const maxSteps = $derived(stepConfig.length);
+  // Fixed 8-step list – all project types use the same stepper shape
+  const extendedSteps = [
+    { id: 1, title: 'wizard_stepCategory_title', required: true },
+    { id: 2, title: 'wizard_stepType_title', required: true },
+    { id: 3, title: 'wizard_stepSubType_title', required: true },
+    { id: 4, title: 'wizard_stepBasicDetails_title', required: true },
+    { id: 5, title: 'wizard_stepFeatures_title', required: true },
+    { id: 6, title: 'wizard_config_steps_inhalte', required: false },
+    { id: 7, title: 'wizard_config_steps_materialien', required: false },
+    { id: 8, title: 'wizard_stepSummary_title', required: false }
+  ];
+  const MAX_STEPS = extendedSteps.length; // always 8
+
+  // Features only apply to websites-and-apps category
+  const featuresDisabled = $derived(config.projectCategory === 'ki-and-freestyle');
+  // Content (pages/forms) only applies to website and cms project types
+  const contentDisabled = $derived(!!config.projectType && config.projectType !== 'website' && config.projectType !== 'cms');
+
+  const FEATURES_STEP = 5;
+  const CONTENT_STEP = 6;
+
+  function isStepDisabled(step: number): boolean {
+    if (featuresDisabled && step === FEATURES_STEP) return true;
+    if (contentDisabled && step === CONTENT_STEP) return true;
+    return false;
+  }
 
   // Functions
   function selectProjectCategory(category: string) {
@@ -153,19 +175,24 @@
   }
 
   function goToStep(step: number) {
-    if (step >= 1 && step <= maxSteps) {
+    if (isStepDisabled(step)) return;
+    if (step >= 1 && step <= MAX_STEPS) {
       currentStep = step;
       scrollToTop();
+      if (currentStep === MAX_STEPS) {
+        calculatePrice();
+        prepareAssetsForFinalStep();
+      }
     }
   }
 
   function nextStep() {
-    if (currentStep < maxSteps) {
-      currentStep++;
+    if (currentStep < MAX_STEPS) {
+      let next = currentStep + 1;
+      while (next <= MAX_STEPS && isStepDisabled(next)) next++;
+      currentStep = next;
       scrollToTop();
-
-      // If entering the final step, prepare assets
-      if (currentStep === maxSteps) {
+      if (currentStep === MAX_STEPS) {
         calculatePrice();
         prepareAssetsForFinalStep();
       }
@@ -174,7 +201,9 @@
 
   function prevStep() {
     if (currentStep > 1) {
-      currentStep--;
+      let prev = currentStep - 1;
+      while (prev >= 1 && isStepDisabled(prev)) prev--;
+      currentStep = prev;
       scrollToTop();
     }
   }
@@ -580,17 +609,20 @@
       <div class="progress-bar">
         <progress
           class="progress progress-primary h-8 w-full"
-          value={currentStep === 1 ? 0.05 : currentStep === maxSteps ? currentStep : currentStep - 0.5}
-          max={maxSteps}
+          value={currentStep === 1 ? 0.05 : currentStep === MAX_STEPS ? currentStep : currentStep - 0.5}
+          max={MAX_STEPS}
         ></progress>
       </div>
 
-      <div class="wizard-steps grid gap-3" style="grid-template-columns: repeat({maxSteps}, minmax(0, 1fr));">
-        {#each stepConfig as step, i}
+      <div class="wizard-steps grid gap-3" style="grid-template-columns: repeat({MAX_STEPS}, minmax(0, 1fr));">
+        {#each extendedSteps as step, i}
+          {@const isDisabled = isStepDisabled(step.id)}
           <button
             type="button"
             class:active={currentStep === i + 1}
-            class:touched={currentStep > i + 1}
+            class:touched={currentStep > i + 1 && !isDisabled}
+            class:step-disabled={isDisabled}
+            disabled={isDisabled}
             onclick={() => goToStep(i + 1)}
             onkeydown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
@@ -626,22 +658,19 @@
           <ProjectSubTypeFreestyle {config} {selectProjectSubType}></ProjectSubTypeFreestyle>
         {/if}
       {:else if currentStep === 4}
-        <!-- Basic Details (Extended) -->
+        <!-- Basic Details -->
         <ProjectBasicDetails {config}></ProjectBasicDetails>
-      {:else if currentStep === 5 && (config.projectType === 'website' || config.projectType === 'cms' || config.projectType === 'webApplication')}
-        <!-- Features (Web/CMS/App) -->
+      {:else if currentStep === 5}
+        <!-- Features – only reachable for websites-and-apps category -->
         <ProjectFeatures {config} bind:customFeatures {calculatePrice} isExtendedConfigurator={true}></ProjectFeatures>
-      {:else if currentStep === 5 && (config.projectType === 'artificialIntelligence' || config.projectType === 'freestyle')}
-        <!-- Materials (AI/Freestyle) -->
-        <ProjectMaterials {config} {uploadedFiles} {handleFileUpload} {removeFile} {isUploading} {uploadProgress}></ProjectMaterials>
-      {:else if currentStep === 6 && (config.projectType === 'website' || config.projectType === 'cms')}
-        <!-- Content (Web/CMS) -->
+      {:else if currentStep === 6}
+        <!-- Content (pages/forms) – only reachable for website/cms -->
         <ProjectContent {config} {addPage} {removePage} {removeFormField} {addFormField} {formFieldTypes}></ProjectContent>
-      {:else if (currentStep === 7 && (config.projectType === 'website' || config.projectType === 'cms')) || (currentStep === 6 && config.projectType === 'webApplication')}
-        <!-- Materials (Web/CMS/App) -->
+      {:else if currentStep === 7}
+        <!-- Materials -->
         <ProjectMaterials {config} {uploadedFiles} {handleFileUpload} {removeFile} {isUploading} {uploadProgress}></ProjectMaterials>
-      {:else if currentStep === maxSteps}
-        <!-- Result/Summary -->
+      {:else if currentStep === 8}
+        <!-- Summary -->
         <ProjectSummaryExtended {config} {isPreparingAssets} {assetPreparationProgress}></ProjectSummaryExtended>
       {/if}
     </div>
@@ -657,7 +686,7 @@
         </button>
       {/if}
 
-      {#if currentStep < maxSteps}
+      {#if currentStep < MAX_STEPS}
         <button
           type="button"
           class="btn-basic m-auto max-w-md grow md:mr-0 md:ml-auto md:grow-0"
@@ -742,6 +771,9 @@
         }
         &.touched {
           @apply text-primary/80;
+        }
+        &.step-disabled {
+          @apply text-base-content/30 cursor-not-allowed opacity-40 hover:opacity-40;
         }
         &:first-child {
           @apply md:text-left;

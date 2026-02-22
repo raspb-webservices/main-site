@@ -79,7 +79,8 @@
     </h2>
     <p>{@html m.aboutUs_introSection_teaser1()}</p>
     <p>{@html m.aboutUs_introSection_teaser2()}</p>
-    <p class="no-padding">{@html m.aboutUs_introSection_teaser3()}</p>
+    <p>{@html m.aboutUs_introSection_teaser3()}</p>
+    <p class="no-padding">{@html m.aboutUs_introSection_teaser4()}</p>
   </div>
 </Section>
 

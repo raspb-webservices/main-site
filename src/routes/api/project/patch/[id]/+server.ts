@@ -7,17 +7,10 @@ import { validateBody, validationErrorResponse, ValidationError } from '$lib/ser
 import { projectPatchSchema } from '$lib/server/schemas/project.schema';
 
 export const PATCH: RequestHandler = async ({ request, locals }) => {
-  console.group('🟡 PATCH /api/project/patch/[id]');
   try {
     const rawBody = await request.json();
-    console.log('📥 Raw request body:', JSON.stringify(rawBody, null, 2));
-
     const projectData = validateBody(projectPatchSchema, rawBody);
-    console.log('✅ Zod validation passed');
-    console.log('📋 Validated projectData:', JSON.stringify(projectData, null, 2));
-
     const projectId = projectData.id;
-    console.log('🔑 Project ID:', projectId);
 
     // Ownership-Check: Projekt-Owner pruefen
     const ownerQuery = gql`
@@ -34,10 +27,7 @@ export const PATCH: RequestHandler = async ({ request, locals }) => {
     };
     const isOwner = ownerResult.project?.owner?.auth0Id === locals.user?.sub;
     const userIsAdmin = await checkAdmin(locals);
-    console.log('👤 isOwner:', isOwner, '| isAdmin:', userIsAdmin, '| user.sub:', locals.user?.sub);
     if (!isOwner && !userIsAdmin) {
-      console.warn('🚫 Forbidden: not owner and not admin');
-      console.groupEnd();
       return forbiddenResponse();
     }
 
@@ -308,13 +298,7 @@ export const PATCH: RequestHandler = async ({ request, locals }) => {
       }
     `;
 
-    // GraphQL Request an Hygraph senden
-    console.log('🚀 Sending mutation to Hygraph...');
-    console.log('📝 Update fields:', updateFields);
-    console.log('📦 Variables (keys):', Object.keys(variables));
-
     const response = (await client.request(mutation, variables)) as { updateProject: ProjectResponse };
-    console.log('✅ Hygraph mutation success, updated ID:', response.updateProject?.id);
 
     // Auto-publish: 3s warten, dann direkt server-seitig publizieren
     // (verhindert Client-seitige Race-Condition wenn Drawer geschlossen wird)
@@ -329,12 +313,9 @@ export const PATCH: RequestHandler = async ({ request, locals }) => {
         }
       `;
       await client.request(publishMutation, { id: projectId });
-      console.log('📢 Project auto-published successfully');
     } catch (publishError) {
-      console.warn('⚠️ Auto-publish failed (non-critical):', publishError);
+      console.warn('Auto-publish failed:', publishError);
     }
-
-    console.groupEnd();
 
     return new Response(
       JSON.stringify({
@@ -350,22 +331,10 @@ export const PATCH: RequestHandler = async ({ request, locals }) => {
     );
   } catch (error) {
     if (error instanceof ValidationError) {
-      console.error('❌ Validation error:', error.details);
-      console.groupEnd();
       return validationErrorResponse(error);
     }
 
-    console.error('❌ Error updating project:');
-    console.error('  Message:', error instanceof Error ? error.message : String(error));
-    // Hygraph GraphQL errors have a `response` property with error details
     const gqlError = error as Record<string, unknown>;
-    if (gqlError?.response) {
-      console.error('  Hygraph response:', JSON.stringify(gqlError.response, null, 2));
-    }
-    if (gqlError?.request) {
-      console.error('  Request:', JSON.stringify(gqlError.request, null, 2));
-    }
-    console.groupEnd();
 
     let errorMessage = 'Unknown error occurred';
     let statusCode = 500;
