@@ -13,9 +13,11 @@
 
 <dialog bind:this={modal} class="modal">
   <div class="modal-box small-modal">
-    <form method="dialog">
-      <button class="btn btn-sm btn-circle btn-ghost absolute top-4 right-4" onclick={closeModal}>✕</button>
-    </form>
+    <div class="sticky top-0 z-50 flex justify-end -mb-10 pt-2 pr-2">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost" onclick={closeModal}>✕</button>
+      </form>
+    </div>
 
     <div class="mb-6 flex items-center gap-3">
       <div class="text-5xl leading-tight">🏆</div>

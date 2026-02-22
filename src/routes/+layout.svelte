@@ -30,19 +30,8 @@
     trackPageview();
   });
 
-  // Reload page when a new service worker version takes over or assets go stale
-  $effect(() => {
-    if (!('serviceWorker' in navigator)) return;
-
-    const hadController = !!navigator.serviceWorker.controller;
-    navigator.serviceWorker.addEventListener('controllerchange', () => {
-      if (hadController) window.location.reload();
-    });
-
-    navigator.serviceWorker.addEventListener('message', (event) => {
-      if (event.data?.type === 'STALE_ASSETS') window.location.reload();
-    });
-  });
+  // SW update listeners are registered early in app.html to avoid missing events
+  // during initial hydration. No duplicate listener needed here.
 </script>
 
 <svelte:head>

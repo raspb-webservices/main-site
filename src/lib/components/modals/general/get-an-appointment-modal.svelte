@@ -15,9 +15,11 @@
 
 <dialog bind:this={modal} class="modal" onclose={() => (isOpen = false)}>
   <div class="modal-box">
-    <form method="dialog">
-      <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2" onclick={closeModal}>✕</button>
-    </form>
+    <div class="sticky top-0 z-50 flex justify-end -mb-10 pt-2 pr-2">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost" onclick={closeModal}>✕</button>
+      </form>
+    </div>
 
     <div class="iframe-container">
       {#if isOpen}

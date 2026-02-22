@@ -19,14 +19,24 @@ self.addEventListener('install', (event: ExtendableEvent) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)));
 });
 
-// Activate: claim clients first, then clean up old caches.
-// This ensures the controllerchange → reload fires before old assets are gone.
+// Activate: claim clients, notify them to reload (belt & suspenders alongside
+// controllerchange), then delete old caches. Notifying BEFORE deleting ensures
+// that the app.html SW listener receives SW_UPDATED even if old caches are gone.
 self.addEventListener('activate', (event: ExtendableEvent) => {
   event.waitUntil(
-    self.clients
-      .claim()
-      .then(() => caches.keys())
-      .then((keys) => Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))))
+    (async () => {
+      // Take control of all open tabs immediately
+      await self.clients.claim();
+      // Explicitly notify all window clients to reload (belt & suspenders
+      // alongside the controllerchange event caught in app.html)
+      const allClients = await self.clients.matchAll({ type: 'window' });
+      for (const client of allClients) {
+        client.postMessage({ type: 'SW_UPDATED' });
+      }
+      // Now delete old version caches — clients are already reloading
+      const keys = await caches.keys();
+      await Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)));
+    })()
   );
 });
 
@@ -48,19 +58,27 @@ self.addEventListener('fetch', (event: FetchEvent) => {
     return;
   }
 
-  // Stale build assets from a previous deployment: check all caches before 404
+  // Stale build assets from a previous deployment: check all caches before giving up.
+  // If the asset is truly gone (new deployment replaced old hashes), notify clients
+  // to reload and return a 503 — a 404 for a JS chunk would crash SvelteKit hard,
+  // whereas a 503 is less destructive while the reload is in flight.
   if (url.pathname.startsWith('/_app/immutable/')) {
     event.respondWith(
       (async () => {
-        // Try to find the asset in any cache (including old ones not yet cleaned up)
+        // Search across ALL caches (new + any remaining old ones)
         const cached = await caches.match(event.request);
         if (cached) return cached;
-        // Asset is truly gone — notify client to reload with fresh assets
+        // Asset is truly gone from all caches — trigger immediate client reload
         const clients = await self.clients.matchAll({ type: 'window' });
         for (const client of clients) {
           client.postMessage({ type: 'STALE_ASSETS' });
         }
-        return fetch(event.request);
+        // Return 503 instead of letting a 404 propagate — the reload is already
+        // in flight via the STALE_ASSETS message handled in app.html
+        return new Response('Service Unavailable – reloading with updated assets', {
+          status: 503,
+          headers: { 'Content-Type': 'text/plain' }
+        });
       })()
     );
     return;

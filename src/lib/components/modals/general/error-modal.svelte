@@ -14,9 +14,11 @@
 
 <dialog bind:this={modal} class="modal">
   <div class="modal-box max-w-2xl">
-    <form method="dialog">
-      <button class="btn btn-sm btn-circle btn-ghost absolute top-4 right-4" onclick={closeModal}>✕</button>
-    </form>
+    <div class="sticky top-0 z-50 flex justify-end -mb-10 pt-2 pr-2">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost" onclick={closeModal}>✕</button>
+      </form>
+    </div>
 
     <h3 class="text-error mb-4 text-lg font-bold">{m.wizard_modals_error_title()}</h3>
 

@@ -214,9 +214,11 @@
 
 <dialog bind:this={modal} class="modal">
   <div class="modal-box max-w-2xl">
-    <form method="dialog">
-      <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2" onclick={closeModal} disabled={isLoading}>✕</button>
-    </form>
+    <div class="sticky top-0 z-50 flex justify-end -mb-10 pt-2 pr-2">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost" onclick={closeModal} disabled={isLoading}>✕</button>
+      </form>
+    </div>
 
     <h3 class="mb-2 text-2xl font-bold">{m.wizard_modals_contact_title()}</h3>
     <p class="text-base-content/70 mb-6">{@html m.wizard_modals_contact_description()}</p>

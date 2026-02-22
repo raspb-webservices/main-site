@@ -56,8 +56,10 @@
 
 <dialog id="modal-profile-edit" bind:this={modal} class="modal">
   <div class="modal-box">
+    <div class="sticky top-0 z-50 flex justify-end -mb-10 pt-2 pr-2">
+      <button type="button" class="btn btn-sm btn-circle btn-ghost" onclick={closeModal}>✕</button>
+    </div>
     <form onsubmit={handleSubmit}>
-      <button type="button" class="btn btn-sm btn-circle btn-ghost absolute top-4 right-4" onclick={closeModal}>✕</button>
       <h3 class="mb-4 text-lg font-bold">{m.profile_editTitle()}</h3>
 
       <div class="form-edit-container space-y-4">
