@@ -31,3 +31,8 @@
     Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
     Cross-Origin-Opener-Policy = "same-origin-allow-popups"
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://picsum.photos https://media.graphassets.com https://s.gravatar.com https://cdn.auth0.com; connect-src 'self' https://cdn.jsdelivr.net https://auth.raspb.de https://dev-lztna60en7yhpzaq.us.auth0.com https://eu-west-2.cdn.hygraph.com https://media.graphassets.com https://uploads.graphassets.com https://insights.raspb.eu https://*.nsvcs.net; frame-src https://nextcloud.raspb.eu; worker-src 'self' blob:; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
