@@ -128,7 +128,7 @@
           class="btn-basic-header animate-fade-in-from-side mt-4 mb-2"
           onclick={() => {
             aboutMeModal.openModal();
-          }}>{m.mehrErfahren()}</button
+          }}>{m.mehr_ueber_mich()}</button
         >
       </div>
     </div>
