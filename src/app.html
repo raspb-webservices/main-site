@@ -13,7 +13,7 @@
           if (_swHadController) window.location.reload();
         });
         navigator.serviceWorker.addEventListener('message', function (e) {
-          if (e.data && (e.data.type === 'SW_UPDATED' || e.data.type === 'STALE_ASSETS')) {
+          if (_swHadController && e.data && (e.data.type === 'SW_UPDATED' || e.data.type === 'STALE_ASSETS')) {
             window.location.reload();
           }
         });
