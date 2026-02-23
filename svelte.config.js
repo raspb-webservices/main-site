@@ -26,10 +26,6 @@ const config = {
     serviceWorker: {
       register: true
     },
-    paths: {
-      base: '',
-      relative: false
-    },
     prerender: {
       entries: ['*'],
       crawl: true
