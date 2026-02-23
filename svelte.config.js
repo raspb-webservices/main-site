@@ -11,6 +11,9 @@ const config = {
   ],
   kit: {
     adapter: adapter(),
+    paths: {
+      relative: false
+    },
     alias: {
       $store: './src/store',
       $helper: './src/lib/helper',

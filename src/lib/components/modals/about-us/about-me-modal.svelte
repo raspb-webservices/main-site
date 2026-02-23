@@ -28,7 +28,7 @@
 
     <div class="prose py-4">
       <h2>{m.aboutUs_modals_aboutMe_title()}</h2>
-      <p>{@html m.aboutUs_modals_aboutMe_paragraph1()}</p>
+      {@html m.aboutUs_modals_aboutMe_paragraph1()}
     </div>
     <div class="modal-action">
       <form method="dialog">
