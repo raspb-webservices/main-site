@@ -24,7 +24,7 @@ const handleAuth: Handle = async ({ event, resolve }) => {
     const pathname = event.url.pathname;
     if (RATE_LIMITED_ROUTES.some((route) => pathname.startsWith(route))) {
       const ip = event.getClientAddress();
-      const limited = checkRateLimit(ip, pathname);
+      const limited = await checkRateLimit(ip, pathname);
       if (limited) return limited;
     }
   }

@@ -57,6 +57,8 @@
     "@photo-sphere-viewer/core": "^5.14.1",
     "@photo-sphere-viewer/virtual-tour-plugin": "^5.14.1",
     "@plausible-analytics/tracker": "^0.4.4",
+    "@upstash/ratelimit": "^2.0.8",
+    "@upstash/redis": "^1.36.2",
     "better-svelte-email": "patch:better-svelte-email@npm%3A1.4.0#~/.yarn/patches/better-svelte-email-npm-1.4.0-40cf0004a9.patch",
     "dotenv": "^17.3.1",
     "fantasy-name-generator": "^2.0.0",

@@ -1,67 +1,29 @@
-/**
- * Simple in-memory rate limiter for serverless environments.
- *
- * Limitations on Netlify/Lambda:
- * - State lives only within a single warm function instance
- * - Parallel instances each have their own counter
- * - For production-grade limiting, replace with Upstash Redis (@upstash/ratelimit)
- *
- * Still useful: catches rapid-fire abuse on warm instances (bot spam, script loops).
- */
+import { Ratelimit } from '@upstash/ratelimit';
+import { Redis } from '@upstash/redis';
+import { env } from '$env/dynamic/private';
 
-interface RateLimitEntry {
-  count: number;
-  resetAt: number;
-}
+const redis = new Redis({
+  url: env.UPSTASH_REDIS_REST_URL,
+  token: env.UPSTASH_REDIS_REST_TOKEN
+});
 
-const store = new Map<string, RateLimitEntry>();
-
-const CLEANUP_INTERVAL = 60_000;
-let lastCleanup = Date.now();
-
-function cleanup() {
-  const now = Date.now();
-  if (now - lastCleanup < CLEANUP_INTERVAL) return;
-  lastCleanup = now;
-  for (const [key, entry] of store) {
-    if (now > entry.resetAt) {
-      store.delete(key);
-    }
-  }
-}
-
-export interface RateLimitConfig {
-  /** Max requests per window */
-  maxRequests: number;
-  /** Window size in milliseconds */
-  windowMs: number;
-}
-
-const DEFAULT_CONFIG: RateLimitConfig = {
-  maxRequests: 10,
-  windowMs: 60_000
-};
+// 10 Requests per 60 seconds per IP — shared across all Lambda instances
+const ratelimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(10, '60 s'),
+  analytics: true
+});
 
 /**
  * Check if a request should be rate-limited.
  * Returns null if allowed, or a Response (429) if blocked.
  */
-export function checkRateLimit(ip: string, route: string, config: RateLimitConfig = DEFAULT_CONFIG): Response | null {
-  cleanup();
+export async function checkRateLimit(ip: string, pathname: string): Promise<Response | null> {
+  const identifier = `${ip}:${pathname}`;
+  const { success, reset } = await ratelimit.limit(identifier);
 
-  const key = `${ip}:${route}`;
-  const now = Date.now();
-  const entry = store.get(key);
-
-  if (!entry || now > entry.resetAt) {
-    store.set(key, { count: 1, resetAt: now + config.windowMs });
-    return null;
-  }
-
-  entry.count++;
-
-  if (entry.count > config.maxRequests) {
-    const retryAfter = Math.ceil((entry.resetAt - now) / 1000);
+  if (!success) {
+    const retryAfter = Math.ceil((reset - Date.now()) / 1000);
     return new Response(JSON.stringify({ error: 'Too many requests' }), {
       status: 429,
       headers: {
