@@ -3,59 +3,120 @@
   import TechLogoShowcase from '$lib/components/tech-logo-showcase.svelte';
   import Stage from '$lib/components/ui/stage.svelte';
   import ReferenceCard from '$lib/components/projects/ReferenceCard.svelte';
+  import ReferenceDetailModal from '$lib/components/modals/projects/reference-detail-modal.svelte';
   import { onMount } from 'svelte';
   import { m } from '$lib/paraglide/messages';
   import { getLocale, localizeHref, setLocale } from '$lib/paraglide/runtime';
-  import imgWunschwurm from '$images/wunschwurm.png';
-  import imgScHahnheim from '$images/sc-hahnheim-angebot.png';
-  import imgProCivibus from '$images/pro-civibus-stiftung.png';
-  import imgSchumacherGienow from '$images/schumacher-gienow.png';
-  import imgMgv from '$images/mgv.png';
-  import imgStrateco from '$images/strateco.png';
 
-  let activeContent = ('tech');
+  import imgWunschwurm from '$images/wunschwurm.png';
+  import imgWunschwurmMap from '$images/wunschwurm-map.png';
+  import imgWunschwurmWunsch from '$images/wunschwurm-wunsch.png';
+
+  import imgScHahnheim from '$images/sc-hahnheim-angebot.png';
+  import imgScHahnheimMain from '$images/sc-hahnheim.png';
+  import imgScHahnheimKalender from '$images/sc-hahnheim-kalender.png';
+
+  import imgProCivibus from '$images/pro-civibus-stiftung.png';
+  import imgProCivibusHistorie from '$images/pro-civibus-stiftung-historie.png';
+  import imgProCivibusProjekte from '$images/pro-civibus-stiftung-projekte.png';
+  import imgProCivitusMobil from '$images/pro-civibus-stiftung-mobil.png';
+
+  import imgSchumacherGienow from '$images/schumacher-gienow.png';
+
+  import imgMgv from '$images/mgv.png';
+  import imgMgv2 from '$images/mgv-2.png';
+  import imgMgvKontakt from '$images/mgv-kontakt.png';
+
+  import imgStrateco from '$images/strateco.png';
+  import imgStrateco1 from '$images/strateco-1.png';
+  import imgStrateco3 from '$images/strateco-3.png';
+
+  let activeContent = $state('tech');
+
+  let referenceModal: ReferenceDetailModal;
+  let selectedProject: any = $state(null);
+
+  function openProjectModal(project: any) {
+    selectedProject = project;
+    referenceModal.openModal();
+  }
 
   const projects = [
     {
+      key: 'wunschwurm',
       name: 'Wunschwurm',
       description: 'Komplexe Plattform für soziale Initiativen in Mainz. Digitalisierung von Wunschzetteln, Nutzerverwaltung für verschiedene Rollen und Tracking des Erfüllungsprozesses.',
       image: imgWunschwurm,
+      images: [imgWunschwurm, imgWunschwurmWunsch, imgWunschwurmMap],
       isLighthouse: true,
+      isProBono: true,
+      isWip: false,
+      highlightsCount: 6,
       url: 'https://wunschwurm.de',
       tech: ['SvelteKit', 'Hygraph', 'Auth0', 'Mapbox']
     },
     {
+      key: 'schahnheim',
       name: 'SC Hahnheim',
       description: 'Frischer digitaler Auftritt für den lokalen Sportverein. Selbstständige Inhaltspflege durch jede Abteilung und pflegbarer Vereinskalender.',
       image: imgScHahnheim,
+      images: [imgScHahnheimMain, imgScHahnheim, imgScHahnheimKalender],
+      isLighthouse: false,
+      isProBono: true,
+      isWip: false,
+      highlightsCount: 5,
       url: 'https://sc-hahnheim.de/',
       tech: ['SvelteKit', 'Hygraph', 'TailwindCSS']
     },
     {
+      key: 'procivibus',
       name: 'Pro Civibus Stiftung',
       description: 'Corporate Excellence für eine Frankfurter Stiftung. Interaktive Historie, LinkedIn-Integration und automatisierte Kontakt-Flows.',
       image: imgProCivibus,
+      images: [imgProCivibus, imgProCivibusHistorie, imgProCivibusProjekte, imgProCivitusMobil],
+      isLighthouse: false,
+      isProBono: false,
+      isWip: false,
+      highlightsCount: 6,
       url: 'https://pro-civibus-stiftung.de/',
       tech: ['SvelteKit', 'LinkedIn-API', 'TailwindCSS']
     },
     {
+      key: 'schumachergienow',
       name: 'Schumacher & Gienow',
       description: 'Moderner Kanzlei-Relaunch in Frankfurt. Wordpress-Ablöse mit vollständigem Content-Scraping und optimierten Prozess-Flows.',
       image: imgSchumacherGienow,
+      images: [imgSchumacherGienow],
+      isLighthouse: false,
+      isProBono: false,
+      isWip: false,
+      highlightsCount: 5,
       url: 'https://schumacher-gienow.de/',
       tech: ['SvelteKit', 'Scraping', 'TailwindCSS']
     },
     {
+      key: 'mgvhahnheim',
       name: 'MGV Hahnheim',
       description: 'Agilität in Bestform: Eine moderne, sichere Inhaltsseite, in wenigen Stunden live gesetzt – ohne Qualitätsverlust.',
       image: imgMgv,
+      images: [imgMgv, imgMgv2, imgMgvKontakt],
+      isLighthouse: false,
+      isProBono: true,
+      isWip: false,
+      highlightsCount: 4,
       url: 'https://mgv-1880-86-hahnheim.de/',
       tech: ['SvelteKit', 'DaisyUI', 'Node.js']
     },
     {
+      key: 'strateco',
       name: 'STRATECO',
       description: '>10 Jahre altes Content-Monster bekommt Ablöse durch ein Top-modernes, flexibel-gestaltbares System',
       image: imgStrateco,
+      images: [imgStrateco, imgStrateco1, imgStrateco3],
+      isLighthouse: false,
+      isProBono: false,
+      isWip: true,
+      highlightsCount: 5,
       url: 'https://strateco.netlify.app/',
       tech: ['SvelteKit', 'Scraping', 'Node.js']
     }
@@ -257,13 +318,16 @@
         <p>{m.insights_showcase_description2()}</p>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
           {#each projects as project}
-            <ReferenceCard {project} />
+            <ReferenceCard {project} onDetails={openProjectModal} />
           {/each}
         </div>
       </div>
     </Section>
   {/if}
 </div>
+
+<!-- Reference Detail Modal (shared, single instance) -->
+<ReferenceDetailModal bind:this={referenceModal} {selectedProject} />
 
 <style lang="postcss">
   @reference "../../app.css";
