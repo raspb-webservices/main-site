@@ -13,7 +13,7 @@
 </div>
 
 <div class="project-types">
-  {#each projectTypesWebApp as type}
+  {#each projectTypesWebApp as type (type.id)}
     <div
       class="card service-card cursor-pointer transition-all duration-300"
       class:card-selected={config.projectType === type.id}

@@ -1,42 +1,143 @@
+/* Plus Jakarta Sans */
 @font-face {
-  font-family: 'Circular';
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src:
+    url('$fonts/plusJarkataSans/PlusJakartaSans-ExtraLight.woff2') format('woff2'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-ExtraLight.woff') format('woff'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-ExtraLight.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: italic;
+  font-weight: 200;
+  font-display: swap;
+  src:
+    url('$fonts/plusJarkataSans/PlusJakartaSans-ExtraLightItalic.woff2') format('woff2'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-ExtraLightItalic.woff') format('woff'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-ExtraLightItalic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
   font-style: normal;
   font-weight: 300;
   font-display: swap;
   src:
-    url('$fonts/circular/CircularStd-Light.woff2') format('woff2'),
-    url('$fonts/circular/CircularStd-Light.woff') format('woff'),
-    url('$fonts/circular/CircularStd-Light.ttf') format('truetype');
+    url('$fonts/plusJarkataSans/PlusJakartaSans-Light.woff2') format('woff2'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-Light.woff') format('woff'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-Light.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'Circular';
+  font-family: 'Plus Jakarta Sans';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src:
+    url('$fonts/plusJarkataSans/PlusJakartaSans-LightItalic.woff2') format('woff2'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-LightItalic.woff') format('woff'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-LightItalic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
   src:
-    url('$fonts/circular/CircularStd-Book.woff2') format('woff2'),
-    url('$fonts/circular/CircularStd-Book.woff') format('woff'),
-    url('$fonts/circular/CircularStd-Book.ttf') format('truetype');
+    url('$fonts/plusJarkataSans/PlusJakartaSans-Regular.woff2') format('woff2'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-Regular.woff') format('woff'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-Regular.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'Circular';
+  font-family: 'Plus Jakarta Sans';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    url('$fonts/plusJarkataSans/PlusJakartaSans-Italic.woff2') format('woff2'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-Italic.woff') format('woff'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-Italic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
   font-style: normal;
   font-weight: 500;
   font-display: swap;
   src:
-    url('$fonts/circular/CircularStd-Medium.woff2') format('woff2'),
-    url('$fonts/circular/CircularStd-Medium.woff') format('woff'),
-    url('$fonts/circular/CircularStd-Medium.ttf') format('truetype');
+    url('$fonts/plusJarkataSans/PlusJakartaSans-Medium.woff2') format('woff2'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-Medium.woff') format('woff'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-Medium.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'Circular';
+  font-family: 'Plus Jakarta Sans';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src:
+    url('$fonts/plusJarkataSans/PlusJakartaSans-MediumItalic.woff2') format('woff2'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-MediumItalic.woff') format('woff'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-MediumItalic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src:
+    url('$fonts/plusJarkataSans/PlusJakartaSans-SemiBold.woff2') format('woff2'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-SemiBold.woff') format('woff'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-SemiBold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src:
+    url('$fonts/plusJarkataSans/PlusJakartaSans-SemiBoldItalic.woff2') format('woff2'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-SemiBoldItalic.woff') format('woff'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-SemiBoldItalic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
   font-style: normal;
   font-weight: 700;
   font-display: swap;
   src:
-    url('$fonts/circular/CircularStd-Bold.woff2') format('woff2'),
-    url('$fonts/circular/CircularStd-Bold.woff') format('woff'),
-    url('$fonts/circular/CircularStd-Bold.ttf') format('truetype');
+    url('$fonts/plusJarkataSans/PlusJakartaSans-Bold.woff2') format('woff2'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-Bold.woff') format('woff'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-Bold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src:
+    url('$fonts/plusJarkataSans/PlusJakartaSans-BoldItalic.woff2') format('woff2'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-BoldItalic.woff') format('woff'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-BoldItalic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src:
+    url('$fonts/plusJarkataSans/PlusJakartaSans-ExtraBold.woff2') format('woff2'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-ExtraBold.woff') format('woff'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-ExtraBold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+  src:
+    url('$fonts/plusJarkataSans/PlusJakartaSans-ExtraBoldItalic.woff2') format('woff2'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-ExtraBoldItalic.woff') format('woff'),
+    url('$fonts/plusJarkataSans/PlusJakartaSans-ExtraBoldItalic.ttf') format('truetype');
 }
 
 /* vietnamese */

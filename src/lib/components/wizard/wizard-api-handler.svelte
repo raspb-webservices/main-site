@@ -15,12 +15,15 @@
   let { config, customerData, uploadedFiles = [], customFeatures = '', uploadedAssetIds = [] }: Props = $props();
 
   // State management
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let isSubmitting = $state(false);
   let errorDetails: string[] = $state([]);
   let createdCustomerId = $state<string>('');
 
   // Asset preparation
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let isPreparingAssets = $state(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let assetPreparationProgress = $state('');
 
   // Function to prepare assets when entering final step
@@ -34,8 +37,8 @@
       const preparedAssetIds = await uploadMultipleAssetsWithDelay(
         uploadedFiles,
         3000, // 3 second delay between uploads to avoid rate limiting
-        (message, current, total, assetId) => {
-          assetPreparationProgress = `[${current}/${total}] ${message}`;
+        (_message, _current, _total, _assetId) => {
+          assetPreparationProgress = `[${_current}/${_total}] ${_message}`;
         }
       );
 
@@ -78,7 +81,7 @@
             await new Promise((resolve) => setTimeout(resolve, delayMs));
           }
         }
-      } catch (publishError) {
+      } catch (_publishError) {
         // If this is not the last attempt, wait before retrying
         if (attempt < maxRetries) {
           await new Promise((resolve) => setTimeout(resolve, delayMs));
@@ -130,7 +133,7 @@
           // Customer publishing failed, but customer was created
           // Don't fail the entire process if customer publishing fails
         }
-      } catch (publishCustomerError) {
+      } catch (_publishCustomerError) {
         // Don't fail the entire process if customer publishing fails
       }
 
@@ -204,7 +207,7 @@
             // Customer linking failed, but project was created
             // Don't fail the entire process if linking fails
           }
-        } catch (linkError) {
+        } catch (_linkError) {
           // Don't fail the entire process if linking fails
         }
 
@@ -213,7 +216,7 @@
 
         // Step 7: Now publish all assets AFTER project is published
         if (finalAssetIds.length > 0) {
-          const publishedAssetIds = await publishMultipleAssets(finalAssetIds, (message, current, total) => {
+          const publishedAssetIds = await publishMultipleAssets(finalAssetIds, (_message, _current, _total) => {
             // Update loading steps to show asset publishing progress
           });
 
@@ -252,7 +255,7 @@
     if (uploadedFiles.length === 0) return [];
 
     try {
-      const uploadedAssetIds = await uploadMultipleAssetsWithDelay(uploadedFiles, 2000, (message, current, total) => {
+      const uploadedAssetIds = await uploadMultipleAssetsWithDelay(uploadedFiles, 2000, (_message, _current, _total) => {
         // Progress callback
       });
 

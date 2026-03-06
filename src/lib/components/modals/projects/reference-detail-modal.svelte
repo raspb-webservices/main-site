@@ -61,7 +61,7 @@
       <!-- Screenshots grid (clickable → lightbox) -->
       {#if selectedProject.images && selectedProject.images.length > 0}
         <div class="mb-8 grid grid-cols-2 gap-3 md:grid-cols-3">
-          {#each selectedProject.images as img, i}
+          {#each selectedProject.images as img, i (i)}
             <button
               type="button"
               class="screenshot-thumb"
@@ -90,7 +90,7 @@
         <div class="mb-8">
           <h4 class="mb-4 font-semibold">{m.insights_showcase_modal_section_highlights()}</h4>
           <ul class="space-y-3">
-            {#each Array.from({ length: selectedProject.highlightsCount }, (_, i) => i + 1) as i}
+            {#each Array.from({ length: selectedProject.highlightsCount }, (_, i) => i + 1) as i (i)}
               <li class="flex gap-3">
                 <span class="text-primary mt-0.5 shrink-0 font-bold">✓</span>
                 <span class="text-sm leading-relaxed">
@@ -107,7 +107,7 @@
         <div class="mb-10">
           <h4 class="mb-4 font-semibold">{m.insights_showcase_modal_section_tech()}</h4>
           <div class="flex flex-wrap gap-2">
-            {#each selectedProject.tech as tech}
+            {#each selectedProject.tech as tech (tech)}
               <span class="badge badge-outline badge-sm font-medium">{tech}</span>
             {/each}
           </div>

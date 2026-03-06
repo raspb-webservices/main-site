@@ -15,16 +15,16 @@
       </p>
 
       {#if config.paragraphKeys}
-        {#each config.paragraphKeys as key}
+        {#each config.paragraphKeys as key (key)}
           <p>{(m as unknown as Record<string, () => string>)[key]()}</p>
         {/each}
       {/if}
 
-      {#each config.sections as section}
+      {#each config.sections as section (section.titleKey)}
         <div>
           <h4 class="mb-2 font-semibold">{(m as unknown as Record<string, () => string>)[section.titleKey]()}</h4>
           <ul class="list-inside list-disc space-y-1">
-            {#each section.itemKeys as itemKey}
+            {#each section.itemKeys as itemKey (itemKey)}
               <li>{(m as unknown as Record<string, () => string>)[itemKey]()}</li>
             {/each}
           </ul>
@@ -32,7 +32,7 @@
       {/each}
 
       <div class="bg-base-200 rounded-lg p-4">
-        {#each config.infoBox as entry}
+        {#each config.infoBox as entry (entry.labelKey)}
           <p class="text-sm">
             <strong>{(m as unknown as Record<string, () => string>)[entry.labelKey]()}</strong>
             {(m as unknown as Record<string, () => string>)[entry.valueKey]()}

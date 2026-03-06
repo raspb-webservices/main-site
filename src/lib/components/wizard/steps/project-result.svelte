@@ -1,12 +1,9 @@
 <script lang="ts">
   import { m } from '$lib/paraglide/messages';
   import {
-    projectCategories,
     projectTypesWebApp,
     projectTypesAiFreestyle,
     projectSubTypesWebsite,
-    projectSubTypesApp,
-    projectSubTypesAi,
     availableFeatures,
     formFieldTypes
   } from '$lib/configs/wizard-config';
@@ -73,7 +70,7 @@
         <div class="card-body">
           <h3 class="card-title">{m.wizard_steps_stepSummary_selectedFeatures()}</h3>
           <div class="flex flex-wrap gap-2">
-            {#each config.features ?? [] as featureId}
+            {#each config.features ?? [] as featureId (featureId)}
               <div class="badge badge-primary">
                 {(m as unknown as Record<string, () => string>)[availableFeatures.find((f) => f.id === featureId)?.title ?? '']?.()}
               </div>
@@ -88,7 +85,7 @@
         <div class="card-body">
           <h3 class="card-title">{m.wizard_steps_stepSummary_pagesSections()}</h3>
           <div class="flex flex-wrap items-center gap-2">
-            {#each config.pages ?? [] as page}
+            {#each config.pages ?? [] as page (page.name)}
               {#if page.name.trim()}
                 <div class="badge badge-outline">{page.name}</div>
               {/if}
@@ -103,7 +100,7 @@
         <div class="card-body">
           <h3 class="card-title">{m.wizard_steps_stepSummary_formFields()}</h3>
           <div class="space-y-1">
-            {#each config.formFields ?? [] as field}
+            {#each config.formFields ?? [] as field (field.name)}
               {#if field.name.trim()}
                 <div class="flex items-center gap-2">
                   <div class="badge badge-outline">

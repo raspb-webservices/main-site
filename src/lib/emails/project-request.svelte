@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button, Html, Head, Body, Container, Section, Text, Hr, Row, Column } from 'better-svelte-email';
+  import { Html, Head, Body, Container, Section, Text, Hr } from 'better-svelte-email';
 
   let { projectData, projectId } = $props();
 

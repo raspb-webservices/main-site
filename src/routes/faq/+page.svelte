@@ -55,7 +55,7 @@
   <meta property="og:description" content={m.faq_meta_description()} />
 </svelte:head>
 
-<Stage style={'basic-gradient'}>
+<Stage style="basic-gradient">
   <div class="inner-box reduced prose py-36">
     <h1 class="massive animate-fade-in-up">{m.faq_title()}</h1>
     <p class="teaser animate-fade-in-up">{m.faq_teaser()}</p>

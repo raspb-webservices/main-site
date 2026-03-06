@@ -1,5 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
+  import { resolve } from '$app/paths';
   import Section from '$lib/components/ui/section.svelte';
   import { m } from '$lib/paraglide/messages';
 </script>
@@ -9,7 +10,7 @@
   <meta name="robots" content="noindex" />
 </svelte:head>
 
-<Section type={'fullCenterTeaser'}>
+<Section type="fullCenterTeaser">
   <div class="inner-content-wrapper prose">
     <h1 class="text-center"><span class="inner-text-special">{m.thankYouHighlight()}</span> {m.thankYouMessageSecond()}</h1>
     <p class="teaser text-center">{m.thankYouTeaser()}</p>
@@ -19,7 +20,7 @@
       <button
         class="btn-basic"
         onclick={() => {
-          goto('/');
+          goto(resolve('/'));
         }}>{m.backToHomepage()}</button
       >
     </div>

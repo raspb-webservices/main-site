@@ -1,12 +1,16 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { localizeHref } from '$lib/paraglide/runtime';
+  import { resolve } from '$app/paths';
   import { m } from '$lib/paraglide/messages';
 </script>
 
 <button
   class="new-project-card group"
-  onclick={() => goto(localizeHref('/wizard/extended'))}
+  onclick={() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    goto(resolve(localizeHref('/wizard/extended') as any));
+  }}
 >
   <div class="icon-wrapper">
     <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">

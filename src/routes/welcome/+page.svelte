@@ -2,7 +2,8 @@
   import { m } from '$lib/paraglide/messages';
   import { goto } from '$app/navigation';
   import { localizeHref } from '$lib/paraglide/runtime';
-  import { isAuthenticated, user } from '$store/sharedStates.svelte';
+  import { resolve } from '$app/paths';
+  import { user } from '$store/sharedStates.svelte';
   import auth from '$services/auth-service';
   import Section from '$lib/components/ui/section.svelte';
 
@@ -22,7 +23,8 @@
 
       user.value = { ...user.value, givenName: firstName.trim(), familyName: lastName.trim() };
 
-      goto(localizeHref('/dashboard'));
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      goto(resolve(localizeHref('/dashboard') as any));
     } catch (error) {
       console.error('Error updating metadata:', error);
       errorMessage = error instanceof Error ? error.message : 'Ein Fehler ist aufgetreten.';
@@ -32,7 +34,8 @@
   }
 
   function handleSkip() {
-    goto(localizeHref('/dashboard'));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    goto(resolve(localizeHref('/dashboard') as any));
   }
 </script>
 
@@ -42,7 +45,7 @@
 </svelte:head>
 
 <div class="content-area">
-  <Section type={'fullCenterTeaser'}>
+  <Section type="fullCenterTeaser">
     <div class="welcome-card prose">
       <h1 class="mb-4 text-4xl font-bold">
         {m.welcome_title()}<span class="inner-text-special">{m.welcome_titleHighlight()}</span>

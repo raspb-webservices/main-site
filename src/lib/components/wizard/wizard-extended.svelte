@@ -2,12 +2,11 @@
   import { onMount } from 'svelte';
   import type { WizardConfig, Project } from '$interfaces/project.interface';
   import type { User } from '$interfaces/user.interface';
-  import { uploadAsset, publishAsset, createAsset, uploadMultipleAssetsWithDelay, publishMultipleAssets } from '$helper/uploadAsset';
+  import { uploadMultipleAssetsWithDelay, publishMultipleAssets } from '$helper/uploadAsset';
   import {
     projectTypesWebApp,
     projectCategories,
     availableFeatures,
-    featureCategoryColors,
     projectTypesAiFreestyle,
     projectSubTypesAi,
     projectSubTypesApp,
@@ -15,9 +14,7 @@
     projectSubTypesFreestyle,
     formFieldTypes
   } from '$lib/configs/wizard-config';
-  import { goto } from '$app/navigation';
   import { m } from '$lib/paraglide/messages';
-  import { getLocale, localizeHref, setLocale } from '$lib/paraglide/runtime';
   import auth from '$services/auth-service';
   import { user } from '$store/sharedStates.svelte';
   import ProjectContent from './steps/project-content.svelte';
@@ -49,7 +46,6 @@
 
   // State
   let currentStep = $state(1);
-  let showResetModal = $state(false);
   let custom_metadata = $state({});
   let currentUser = $derived(user.value) as User;
   
@@ -94,7 +90,6 @@
 
   // Loading and error states
   let isSubmitting = $state(false);
-  let showErrorModal = $state(false);
   let errorDetails = $state<string[]>([]);
   let showThankYou = $state(false);
   let errorModal: ErrorModal;
@@ -281,7 +276,7 @@
     const totalFeatureCost = selectedFeatures.reduce((sum, f) => sum + (f.basePrice || 0), 0);
 
     const featureCount = selectedFeatures.length;
-    let featureDiscountPercent = 0;
+    let featureDiscountPercent;
 
     if (featureCount <= 10) {
       featureDiscountPercent = featureCount * 2;
@@ -321,7 +316,7 @@
       const preparedAssetIds = await uploadMultipleAssetsWithDelay(
         uploadedFiles,
         3000, 
-        (message, current, total, assetId) => {
+        (message, current, total) => {
           assetPreparationProgress = m.wizard_steps_stepSummary_preparingAssets_progress({ message: message, current: current, total: total });
         }
       );
@@ -348,7 +343,7 @@
     uploadProgress = m.wizard_steps_stepMaterials_files_upload();
 
     try {
-      const uploadedAssetIds = await uploadMultipleAssetsWithDelay(uploadedFiles, 2000, (message, current, total) => {
+      const uploadedAssetIds = await uploadMultipleAssetsWithDelay(uploadedFiles, 2000, () => {
         uploadProgress = m.wizard_steps_step6_files_uploading_progress();
       });
 
@@ -423,18 +418,12 @@
 
   function closeErrorModal() {
     errorModal?.closeModal();
-    showErrorModal = false;
     errorDetails = [];
     currentStep = 1;
   }
 
-  function openResetModal() {
-    resetModal?.openModal();
-  }
-
   function closeResetModal() {
     resetModal?.closeModal();
-    showResetModal = false;
   }
 
   function showThankYouPage() {
@@ -561,7 +550,6 @@
         errorDetails.push(m.wizard_modals_error_networkError());
         errorDetails.push(m.wizard_modals_error_checkConnection());
       }
-      showErrorModal = true;
     } finally {
       isSubmitting = false;
     }
@@ -615,7 +603,7 @@
       </div>
 
       <div class="wizard-steps grid gap-3" style="grid-template-columns: repeat({MAX_STEPS}, minmax(0, 1fr));">
-        {#each extendedSteps as step, i}
+        {#each extendedSteps as step, i (step.id)}
           {@const isDisabled = isStepDisabled(step.id)}
           <button
             type="button"
@@ -662,7 +650,7 @@
         <ProjectBasicDetails {config}></ProjectBasicDetails>
       {:else if currentStep === 5}
         <!-- Features – only reachable for websites-and-apps category -->
-        <ProjectFeatures {config} bind:customFeatures {calculatePrice} isExtendedConfigurator={true}></ProjectFeatures>
+        <ProjectFeatures {config} bind:customFeatures {calculatePrice}></ProjectFeatures>
       {:else if currentStep === 6}
         <!-- Content (pages/forms) – only reachable for website/cms -->
         <ProjectContent {config} {addPage} {removePage} {removeFormField} {addFormField} {formFieldTypes}></ProjectContent>
@@ -671,7 +659,7 @@
         <ProjectMaterials {config} {uploadedFiles} {handleFileUpload} {removeFile} {isUploading} {uploadProgress}></ProjectMaterials>
       {:else if currentStep === 8}
         <!-- Summary -->
-        <ProjectSummaryExtended {config} {isPreparingAssets} {assetPreparationProgress}></ProjectSummaryExtended>
+        <ProjectSummaryExtended {config}></ProjectSummaryExtended>
       {/if}
     </div>
 

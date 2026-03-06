@@ -7,10 +7,6 @@
     projectSubTypesWebsite,
     projectSubTypesApp,
     projectSubTypesAi,
-    projectSubTypesFreestyle,
-    availableFeatures,
-    googleFonts,
-    formFieldTypes
   } from '$lib/configs/wizard-config';
   import { uploadAssetWithStatusCheck } from '$lib/helper/uploadAsset';
   import {
@@ -374,7 +370,7 @@
         try {
           return JSON.parse(tokenString);
         } catch (e) {
-          throw new Error(m.dashboard_setup_error_invalid_json());
+          throw new Error(m.dashboard_setup_error_invalid_json(), { cause: e });
         }
       };
 
@@ -447,7 +443,7 @@
             class="select select-bordered select-sm"
           >
             <option value="">{m.dashboard_edit_placeholder_select()}</option>
-            {#each ToArray(projectStatus) as status}
+            {#each ToArray(projectStatus) as status (status)}
               <option value={status as string}>{getStatusLabel(status as string)}</option>
             {/each}
           </select>
@@ -565,7 +561,7 @@
                 </label>
                 <select bind:value={editForm.projectCategory} id="projectCategory" name="projectCategory" class="select select-bordered select-sm">
                   <option value="">{m.dashboard_edit_placeholder_select()}</option>
-                  {#each projectCategories as category}
+                  {#each projectCategories as category (category.id)}
                     <option value={category.id}>{(m as unknown as Record<string, () => string>)[category.title]()}</option>
                   {/each}
                 </select>
@@ -577,10 +573,10 @@
                 </label>
                 <select bind:value={editForm.projectType} id="projectType" name="projectType" class="select select-bordered select-sm">
                   <option value="">{m.dashboard_edit_placeholder_select()}</option>
-                  {#each projectTypesWebApp as type}
+                  {#each projectTypesWebApp as type (type.id)}
                     <option value={type.id}>{(m as unknown as Record<string, () => string>)[type.label ?? type.title]?.() ?? type.title}</option>
                   {/each}
-                  {#each projectTypesAiFreestyle as type}
+                  {#each projectTypesAiFreestyle as type (type.id)}
                     <option value={type.id}>{(m as unknown as Record<string, () => string>)[type.label ?? type.title]?.() ?? type.title}</option>
                   {/each}
                 </select>
@@ -592,13 +588,13 @@
                 </label>
                 <select bind:value={editForm.subType} id="subType" name="subType" class="select select-bordered select-sm">
                   <option value="">{m.dashboard_edit_placeholder_select()}</option>
-                  {#each projectSubTypesWebsite as subtype}
+                  {#each projectSubTypesWebsite as subtype (subtype.id)}
                     <option value={subtype.id}>{(m as unknown as Record<string, () => string>)[subtype.title]?.() ?? subtype.title}</option>
                   {/each}
-                  {#each projectSubTypesApp as subtype}
+                  {#each projectSubTypesApp as subtype (subtype.id)}
                     <option value={subtype.id}>{(m as unknown as Record<string, () => string>)[subtype.title]?.() ?? subtype.title}</option>
                   {/each}
-                  {#each projectSubTypesAi as subtype}
+                  {#each projectSubTypesAi as subtype (subtype.id)}
                     <option value={subtype.id}>{(m as unknown as Record<string, () => string>)[subtype.title]?.() ?? subtype.title}</option>
                   {/each}
                 </select>
@@ -610,7 +606,7 @@
                 </label>
                 <select bind:value={editForm.projectStatus} id="projectStatus" name="projectStatus" class="select select-bordered select-sm">
                   <option value="">{m.dashboard_edit_placeholder_select()}</option>
-                  {#each ToArray(projectStatus) as status}
+                  {#each ToArray(projectStatus) as status (status)}
                     <option value={status as string}>{getStatusLabel(status as string)}</option>
                   {/each}
                 </select>
@@ -739,7 +735,7 @@
                 </label>
                 <select bind:value={customerForm.salutation} id="salutation" name="salutation" class="select select-bordered select-sm">
                   <option value="">{m.dashboard_edit_placeholder_select()}</option>
-                  {#each ToArray(salutationOptions) as salutation}
+                  {#each ToArray(salutationOptions) as salutation (salutation)}
                     <option value={salutation}>{salutation}</option>
                   {/each}
                 </select>
@@ -954,7 +950,7 @@
                 </label>
                 <select bind:value={editForm.domainStatus} id="domainStatus" name="domainStatus" class="select select-bordered select-sm">
                   <option value="">{m.dashboard_edit_placeholder_select()}</option>
-                  {#each ToArray(domainStatus) as status}
+                  {#each ToArray(domainStatus) as status (status)}
                     <option value={status}>{status}</option>
                   {/each}
                 </select>
@@ -1288,6 +1284,7 @@
                   {#if selectedProject?.pwaExistingUrl}
                     <div class="flex justify-between mt-1">
                       <span class="text-base-content/60">URL</span>
+                      <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
                       <a href={selectedProject?.pwaExistingUrl} target="_blank" class="text-primary text-sm hover:underline">{selectedProject?.pwaExistingUrl}</a>
                     </div>
                   {/if}
@@ -1473,7 +1470,7 @@
                   <span class="label-text">{m.dashboard_edit_label_features_select()}</span>
                 </label>
                 <div class="grid max-h-60 grid-cols-2 gap-2 overflow-y-auto">
-                  {#each ToArray(features) as feature}
+                  {#each ToArray(features) as feature (feature)}
                     <label class="label cursor-pointer justify-start">
                       <input
                         id="feature-{feature}"
@@ -1519,7 +1516,7 @@
             <!-- Anzeigemodus -->
             {#if selectedProject?.features && selectedProject?.features.length > 0}
               <div class="flex flex-wrap gap-2">
-                {#each selectedProject?.features as feature}
+                {#each selectedProject?.features as feature (feature)}
                   <div class="badge badge-success badge-sm">{getFeatureLabel(feature as string)}</div>
                 {/each}
               </div>
@@ -1749,7 +1746,7 @@
             {#if uploadedFiles.length > 0}
               <div class="space-y-2 mt-3">
                 <span class="text-xs font-medium uppercase text-base-content/60">Ausgewählte Dateien ({uploadedFiles.length})</span>
-                {#each uploadedFiles as file, i}
+                {#each uploadedFiles as file, i (i)}
                   <div class="bg-base-100 flex items-center justify-between rounded-lg p-3">
                     <div class="flex items-center gap-2">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-base-content/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1790,7 +1787,7 @@
           {#if selectedProject?.relatedFiles && selectedProject?.relatedFiles.length > 0}
             <div class="space-y-2">
               <span class="text-xs font-medium uppercase text-base-content/60">Bereits hochgeladene Dateien</span>
-              {#each selectedProject?.relatedFiles as file}
+              {#each selectedProject?.relatedFiles as file (file.fileName)}
                 <div class="bg-base-100 flex items-center justify-between rounded p-2">
                   <span class="truncate text-sm">{file.fileName || m.dashboard_details_fallback_unnamed_file()}</span>
                   {#if file.url}

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { isAuthenticated, userroles } from '$store/sharedStates.svelte';
+  import { isAuthenticated } from '$store/sharedStates.svelte';
   import Section from '$lib/components/ui/section.svelte';
   import Wizard from '$lib/components/wizard/wizard-extended.svelte';
   import { goto } from '$app/navigation';
@@ -9,16 +9,15 @@
   import { m } from '$lib/paraglide/messages';
   import { openAuth0Popup } from '$helper/loginOpener';
   import { localizeHref } from '$lib/paraglide/runtime';
+  import { resolve } from '$app/paths';
 
   let isAuth = $derived(isAuthenticated.value);
-  let currentUserRoles = $derived(userroles.value);
-  let hasCustomerAccess = $derived(isAuth && currentUserRoles.includes('customer'));
-  let hasAdminAccess = $derived(isAuth && currentUserRoles.includes('admin'));
-
   let showSection = $state('');
   let loading = $state(false);
+  let url: string;
 
   onMount(async () => {
+    url = localizeHref('/registration');
     loading = true;
     checkAccess();
   });
@@ -58,10 +57,10 @@
 
 {#if loading}
   <div class="global-loading">
-    <Loader size={'large'}></Loader>
+    <Loader size='large'></Loader>
   </div>
 {:else if showSection === 'not-authorized'}
-  <Section type={'fullCenterTeaser'}>
+  <Section type='fullCenterTeaser'>
     <div class="inner-content-wrapper prose">
       <h1>{m.extendedProjectWizard_notAuthorized_title()}</h1>
       <p class="teaser">{m.extendedProjectWizard_notAuthorized_teaser()}</p>
@@ -76,7 +75,8 @@
         <button
           class="btn-basic"
           onclick={() => {
-            goto(localizeHref('/registration'));
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            goto(resolve(url as any));
           }}>{m.extendedProjectWizard_notAuthorized_registrationButton()}</button
         >
       </div>

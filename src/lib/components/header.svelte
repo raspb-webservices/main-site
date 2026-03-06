@@ -1,20 +1,19 @@
 <script lang="ts">
-  import { user, isAuthenticated, userroles } from '$store/sharedStates.svelte';
+  import { user, isAuthenticated } from '$store/sharedStates.svelte';
   import auth from '$services/auth-service';
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
   import type { User } from '$interfaces/user.interface';
   import { openAuth0Popup } from '$helper/loginOpener';
   import { m } from '$lib/paraglide/messages';
-  import { getLocale, localizeHref, setLocale } from '$lib/paraglide/runtime';
+  import { localizeHref } from '$lib/paraglide/runtime';
+  import { resolve } from '$app/paths';
 
   let mobileNavOpen = $state(false);
   let logginIn = $state(false);
   let logginOut = $state(false);
   let isAuth = $derived(isAuthenticated.value);
   let currentUser = $derived(user.value) as User;
-  let currentUserRoles = $derived(userroles.value);
-
   async function login() {
     logginIn = true;
     const popup = openAuth0Popup(450, 650);
@@ -44,14 +43,16 @@
         <button
           class="text-link-button white-link"
           onclick={() => {
-            goto(localizeHref('/dashboard'));
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            goto(resolve(localizeHref('/dashboard') as any));
           }}>{m.header_dashboard()}</button
         >
         <div class="w-8 text-center text-white opacity-70">|</div>
         <button
           class="text-link-button white-link"
           onclick={() => {
-            goto(localizeHref('/profile'));
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            goto(resolve(localizeHref('/profile') as any));
           }}>{m.header_profile()}</button
         >
         <div class="w-8 text-center text-white opacity-70">|</div>
@@ -69,7 +70,7 @@
       aria-label="raspb Logo"
       class="logo"
       onclick={() => {
-        goto('/');
+        goto(resolve('/'));
       }}
     ></button>
 
@@ -78,28 +79,32 @@
         class="nav-item"
         class:active={page.url.pathname == localizeHref('/services')}
         onclick={() => {
-          goto(localizeHref('/services'));
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          goto(resolve(localizeHref('/services') as any));
         }}>{m.menu_services()}</button
       >
       <button
         class="nav-item"
         class:active={page.url.pathname == localizeHref('/insights')}
         onclick={() => {
-          goto(localizeHref('/insights'));
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          goto(resolve(localizeHref('/insights') as any));
         }}>{m.menu_insights()}</button
       >
       <button
         class="nav-item"
         class:active={page.url.pathname == localizeHref('/about-us')}
         onclick={() => {
-          goto(localizeHref('/about-us'));
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          goto(resolve(localizeHref('/about-us') as any));
         }}>{m.menu_aboutUs()}</button
       >
       <button
         class="nav-item"
         class:active={page.url.pathname == localizeHref('/faq')}
         onclick={() => {
-          goto(localizeHref('/faq'));
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          goto(resolve(localizeHref('/faq') as any));
         }}>{m.menu_faq()}</button
       >
     </nav>
@@ -119,7 +124,8 @@
       <button
         class="btn-basic-header"
         onclick={() => {
-          goto(localizeHref('/wizard'));
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          goto(resolve(localizeHref('/wizard') as any));
         }}><span class="halfXl:block hidden">{m.menu_configureProject()}</span><span class="halfXl:hidden">{m.menu_start()}</span></button
       >
     </div>
@@ -161,35 +167,40 @@
                   class="btn-basic mx-0 mt-1.5 mb-4 w-full"
                   onclick={() => {
                     mobileNavOpen = false;
-                    goto(localizeHref('/wizard'));
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    goto(resolve(localizeHref('/wizard') as any));
                   }}>{m.menu_configureProject()}</button
                 >
                 <button
                   class="nav-item"
                   class:active={page.url.pathname == localizeHref('services')}
                   onclick={() => {
-                    goto(localizeHref('services'));
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    goto(resolve(localizeHref('services') as any));
                   }}>{m.menu_services()}</button
                 >
                 <button
                   class="nav-item"
                   class:active={page.url.pathname == localizeHref('insights')}
                   onclick={() => {
-                    goto(localizeHref('insights'));
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    goto(resolve(localizeHref('insights') as any));
                   }}>{m.menu_insights()}</button
                 >
                 <button
                   class="nav-item"
                   class:active={page.url.pathname == localizeHref('about-us')}
                   onclick={() => {
-                    goto(localizeHref('about-us'));
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    goto(resolve(localizeHref('about-us') as any));
                   }}>{m.menu_aboutUs()}</button
                 >
                 <button
                   class="nav-item"
                   class:active={page.url.pathname == localizeHref('faq')}
                   onclick={() => {
-                    goto(localizeHref('faq'));
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    goto(resolve(localizeHref('faq') as any));
                   }}>{m.menu_faq()}</button
                 >
                 {#if !isAuth}

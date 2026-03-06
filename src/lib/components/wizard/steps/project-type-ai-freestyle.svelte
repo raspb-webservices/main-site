@@ -13,7 +13,7 @@
 </div>
 
 <div class="project-types">
-  {#each projectTypesAiFreestyle as type}
+  {#each projectTypesAiFreestyle as type (type.id)}
     <div
       class="card service-card cursor-pointer transition-all duration-300"
       class:card-selected={config.projectType === type.id}

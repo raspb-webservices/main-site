@@ -1,5 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
+  import { resolve } from '$app/paths';
   import Section from '$lib/components/ui/section.svelte';
   import { m } from '$lib/paraglide/messages';
 </script>
@@ -204,7 +205,7 @@
     <button
       class="btn-basic"
       onclick={() => {
-        goto('/');
+        goto(resolve('/'));
       }}
     >
       {m.privacyNotice_backToHomepage()}

@@ -3761,6 +3761,7 @@ __metadata:
     "@tailwindcss/typography": "npm:^0.5.19"
     "@tailwindcss/vite": "npm:^4.2.1"
     "@types/eslint": "npm:^9.6.1"
+    "@types/mapbox__point-geometry": "npm:^1.0.87"
     "@types/markdown-it": "npm:^14.1.2"
     "@types/node": "npm:^25.3.0"
     "@types/three": "npm:^0.183.1"

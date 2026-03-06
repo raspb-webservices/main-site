@@ -8,7 +8,7 @@ export const isAuthenticated = new AuthState();
 
 // Store fuer User-Daten
 class UserState {
-  value = $state<User | {}>({});
+  value = $state<User | object>({});
 }
 export const user = new UserState();
 

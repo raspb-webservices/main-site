@@ -8,6 +8,7 @@
   import auth from '$services/auth-service';
   import { openAuth0Popup } from '$helper/loginOpener';
   import { localizeHref } from '$lib/paraglide/runtime';
+  import { resolve } from '$app/paths';
 
   async function login() {
     const popup = openAuth0Popup(450, 650);
@@ -29,7 +30,7 @@
   const { data }: { data: PageData } = $props();
   let selectedWizard = $state<'basic' | 'advanced' | null>(null);
 
-  function scrollToWizard(offset = 0) {
+  function scrollToWizard() {
     setTimeout(() => {
       const target = document.getElementById('wizard');
       if (target) {
@@ -148,7 +149,8 @@
           <button
             class="btn-basic animate-fade-in-from-side"
             onclick={() => {
-              goto(localizeHref('/registration'));
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              goto(resolve(localizeHref('/registration') as any));
             }}>{m.getStarted_registrationPrompt_registrationButton()}</button
           >
           <button

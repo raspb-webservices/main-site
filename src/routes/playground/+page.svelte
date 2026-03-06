@@ -1,6 +1,7 @@
 <script lang="ts">
   import TEASER from '$lib/components/ui/teaser.svelte';
   import { goto } from '$app/navigation';
+  import { resolve } from '$app/paths';
   import FullWidthSlider from '$lib/components/ui/full-width-slider.svelte';
   import HeroSlider from '$lib/components/ui/hero-slider.svelte';
   import CarouselSlider from '$lib/components/ui/carousel-slider.svelte';
@@ -40,10 +41,10 @@
   <Hero
     headline={m.playground_hero_default_with_image()}
     subheadline={m.playground_hero_subheadline()}
-    image={'$images/slider/slide1.jpg'}
-    position={'top'}
+    image="$images/slider/slide1.jpg"
+    position="top"
     imageAlt={m.playground_hero_image_alt()}
-    variant={'default '}
+    variant="default"
     showButton={true}
     buttonText={m.playground_hero_cta_text()}
     buttonAction={{}}
@@ -54,8 +55,8 @@
   <Hero
     headline={m.playground_hero_default_without_image()}
     subheadline={m.playground_hero_subheadline()}
-    variant={'default'}
-    position={'bottom'}
+    variant="default"
+    position="bottom"
     showButton={true}
     buttonText={m.playground_hero_cta_text()}
     buttonAction={{}}
@@ -66,9 +67,9 @@
   <Hero
     headline={m.playground_hero_centered_with_image()}
     subheadline={m.playground_hero_subheadline()}
-    image={'$images/slider/slide2.jpg'}
+    image="$images/slider/slide2.jpg"
     imageAlt={m.playground_hero_image_alt()}
-    variant={'centered'}
+    variant="centered"
     showButton={true}
     buttonText={m.playground_hero_cta_text()}
     buttonAction={{}}
@@ -79,7 +80,7 @@
   <Hero
     headline={m.playground_hero_centered_without_image()}
     subheadline={m.playground_hero_subheadline()}
-    variant={'centered'}
+    variant="centered"
     showButton={true}
     buttonText={m.playground_hero_cta_text()}
     buttonAction={{}}
@@ -90,9 +91,9 @@
   <Hero
     headline={m.playground_hero_split_with_image()}
     subheadline={m.playground_hero_subheadline()}
-    image={'$images/slider/slide3.jpg'}
+    image="$images/slider/slide3.jpg"
     imageAlt={m.playground_hero_image_alt()}
-    variant={'split'}
+    variant="split"
     showButton={true}
     buttonText={m.playground_hero_cta_text()}
     buttonAction={{}}
@@ -103,7 +104,7 @@
   <Hero
     headline={m.playground_hero_split_without_image()}
     subheadline={m.playground_hero_subheadline()}
-    variant={'split'}
+    variant="split"
     showButton={true}
     buttonText={m.playground_hero_cta_text()}
     buttonAction={{}}
@@ -114,23 +115,23 @@
   <Hero
     headline={m.playground_hero_fullwidth()}
     subheadline={m.playground_hero_subheadline()}
-    image={'$images/slider/slide1.jpg'}
-    position={'bottom'}
+    image="$images/slider/slide1.jpg"
+    position="bottom"
     imageAlt={m.playground_hero_image_alt()}
-    variant={'default '}
+    variant="default"
     showButton={true}
     buttonText={m.playground_hero_cta_text()}
     buttonAction={{}}
   ></Hero>
 </Section>
 
-<TEASER customImageURL={'https://picsum.photos/id/46/1920/1080'} headline={m.teaser_default_headline()} subheadline={m.teaser_default_subheadline()}></TEASER>
+<TEASER customImageURL="https://picsum.photos/id/46/1920/1080" headline={m.teaser_default_headline()} subheadline={m.teaser_default_subheadline()}></TEASER>
 
 <Section>
   <button
     class="btn-basic"
     onclick={() => {
-      goto('/');
+      goto(resolve('/'));
     }}>{m.playground_back_to_home()}</button
   >
   <div class="spacer"></div>

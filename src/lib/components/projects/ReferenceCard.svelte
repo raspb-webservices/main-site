@@ -1,9 +1,19 @@
 <script lang="ts">
   import { m } from '$lib/paraglide/messages';
 
-  let { project, onDetails }: { project: any; onDetails: (p: any) => void } = $props();
+  interface Project {
+    key?: string;
+    name: string;
+    description: string;
+    image: string;
+    isLighthouse: boolean;
+    isWip: boolean;
+    tech?: string[];
+  }
 
-  const techStack = $derived(project.tech || ['SvelteKit', 'TailwindCSS', 'Node.js']);
+  let { project, onDetails }: { project: Project; onDetails: (p: Project) => void } = $props();
+
+  const techStack = $derived(project.tech ?? ['SvelteKit', 'TailwindCSS', 'Node.js']);
 </script>
 
 <div
@@ -39,7 +49,7 @@
 
     <!-- Tech Stack Tags -->
     <div class="flex flex-wrap gap-2 mt-auto">
-      {#each techStack as tech}
+      {#each techStack as tech (tech)}
         <span class="badge badge-outline badge-sm opacity-60 font-medium">{tech}</span>
       {/each}
     </div>

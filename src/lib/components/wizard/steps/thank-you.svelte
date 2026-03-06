@@ -3,6 +3,7 @@
   import { goto } from '$app/navigation';
   import { projectTypesWebApp, projectTypesAiFreestyle } from '$configs/wizard-config';
   import { localizeHref } from '$lib/paraglide/runtime';
+  import { resolve } from '$app/paths';
   let { config } = $props();
 
   const projectTypeTitle =
@@ -53,7 +54,8 @@
     <div class="thank-you-actions">
       <button
         onclick={() => {
-          goto(localizeHref('/dashboard'));
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          goto(resolve(localizeHref('/dashboard') as any));
         }}
         class="btn btn-simple btn-lg"
       >
@@ -67,7 +69,7 @@
         </svg>
         {m.wizard_modals_thankYou_dashboard()}
       </button>
-      <a href="/contact" class="btn btn-link btn-lg">
+      <a href={resolve("/contact")} class="btn btn-link btn-lg">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path
             stroke-linecap="round"

@@ -84,7 +84,7 @@
     <div class="mb-8 text-center">
       <!-- RASPB Letters Display -->
       <div class="mb-8 flex items-center justify-center gap-2">
-        {#each philosophyItems as item}
+        {#each philosophyItems as item (item.letter)}
           <div class="flex flex-col items-center">
             <button
               type="button"
@@ -102,7 +102,7 @@
 
     <!-- Philosophy Items -->
     <div class="space-y-10">
-      {#each philosophyItems as item, index}
+      {#each philosophyItems as item, index (item.letter)}
         <div
           id="philosophy-{item.letter.toLowerCase()}"
           class="card {item.bgColor} border-base-300 animate-fade-in-up border shadow-lg transition-all duration-300 hover:shadow-xl sm:m-4 lg:mx-20 lg:my-16"

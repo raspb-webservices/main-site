@@ -1,7 +1,7 @@
 <script lang="ts">
   import { m } from '$lib/paraglide/messages';
   import { availableFeatures, featureCategoryColors } from '$lib/configs/wizard-config';
-  let { config, customFeatures = $bindable(null), calculatePrice, isExtendedConfigurator = false } = $props();
+  let { config, customFeatures = $bindable(null), calculatePrice } = $props();
 </script>
 
 <div class="step-header">
@@ -13,7 +13,7 @@
 </div>
 
 <div class="features-grid">
-  {#each availableFeatures as feature}
+  {#each availableFeatures as feature (feature.id)}
     <label class="card service-card cursor-pointer transition-all duration-300" class:card-selected={(config.features ?? []).includes(feature.id)}>
       <div class="card-body">
         <div class="card-actions items-center justify-start">

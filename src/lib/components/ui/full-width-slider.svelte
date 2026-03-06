@@ -5,6 +5,7 @@
 
   register();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let mySwiper: any;
   const params = {
     slidesPerView: 1,
@@ -162,12 +163,12 @@
 
   .hero-headline {
     @apply mb-6 text-4xl leading-tight font-bold text-white md:text-5xl lg:text-7xl;
-    font-family: var(--font-circular);
+    font-family: var(--font-jakarta);
   }
 
   .hero-subtext {
     @apply mb-8 max-w-2xl font-light text-lg leading-relaxed text-white/90 md:text-xl lg:text-2xl;
-    font-family: var(--font-circular);
+    font-family: var(--font-jakarta);
   }
 
   .hero-cta {

@@ -1,7 +1,7 @@
 <script lang="ts">
   import Section from '$lib/components/ui/section.svelte';
   import { m } from '$lib/paraglide/messages';
-  import { getLocale, localizeHref, setLocale } from '$lib/paraglide/runtime';
+  import { getLocale } from '$lib/paraglide/runtime';
 
   // Sample-Konfiguration für PDF-Test - SaaS Immobilienverwaltung
   const sampleConfig = {
@@ -258,7 +258,7 @@
           <div>
             <h3 class="mb-2 text-lg font-bold">{m.experimental_features()}</h3>
             <div class="flex flex-wrap gap-1">
-              {#each sampleConfig.features as feature}
+              {#each sampleConfig.features as feature (feature)}
                 <span class="badge badge-primary badge-sm">{feature}</span>
               {/each}
             </div>
@@ -268,7 +268,7 @@
         <div class="mt-4">
           <h3 class="mb-2 text-lg font-bold">{m.experimental_pages()} ({sampleConfig.pages.length})</h3>
           <div class="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
-            {#each sampleConfig.pages as page}
+            {#each sampleConfig.pages as page (page.name)}
               <div class="bg-base-100 rounded p-3">
                 <div class="text-sm font-semibold">{page.name}</div>
                 <div class="text-base-content/70 mt-1 text-xs">{page.content.substring(0, 50)}...</div>
@@ -289,7 +289,7 @@
         <div class="mt-4">
           <h3 class="mb-2 text-lg font-bold">{m.experimental_files()} ({sampleUploadedFiles.length})</h3>
           <div class="grid grid-cols-1 gap-2 md:grid-cols-2">
-            {#each sampleUploadedFiles as file}
+            {#each sampleUploadedFiles as file (file.name)}
               <div class="bg-base-100 rounded p-2 text-sm">
                 <div class="font-medium">{file.name}</div>
                 <div class="text-base-content/70 text-xs">{Math.round(file.size / 1024)} KB</div>

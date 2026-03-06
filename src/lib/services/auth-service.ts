@@ -3,6 +3,7 @@ import { user, isAuthenticated, userroles, idToken } from '$store/sharedStates.s
 import { authFetch } from '$lib/helper/auth-fetch';
 import authConfig from '../configs/auth-config';
 import { goto } from '$app/navigation';
+import { resolve } from '$app/paths';
 
 let auth0Client: Auth0Client | null = null;
 
@@ -104,7 +105,7 @@ async function loginWithPopup(client: Auth0Client, options?: Record<string, unkn
 }
 
 async function logout(client: Auth0Client) {
-  await goto('/');
+  await goto(resolve('/'));
   isAuthenticated.value = false;
   user.value = { email: '' };
   userroles.value = [];
@@ -123,6 +124,7 @@ async function checkAuthState(client: Auth0Client) {
     try {
       await client.getTokenSilently();
     } catch (e) {
+      console.log("ERROR: ", e);
       // Wenn das fehlschlägt, sind wir nicht eingeloggt
       // Fehler wird nicht geloggt, da dies der erwartete Zustand bei nicht eingeloggten Nutzern ist
       isAuthenticated.value = false;

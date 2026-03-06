@@ -5,6 +5,7 @@
   import abstractRobotWithCloud from '$lotties/abstract-robot-with-cloud.lottie';
   import { goto } from '$app/navigation';
   import { localizeHref } from '$lib/paraglide/runtime';
+  import { resolve } from '$app/paths';
   import { m } from '$lib/paraglide/messages';
   import GetAnAppointmentModal from '$lib/components/modals/general/get-an-appointment-modal.svelte';
 
@@ -34,7 +35,8 @@
       <button
         class="btn btn-sm btn-simple animate-fade-in-from-side"
         onclick={() => {
-          goto(localizeHref('/wizard'));
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          goto(resolve(localizeHref('/wizard') as any));
         }}
       >
         {m.homepage_offering_configure_button()}
@@ -63,7 +65,8 @@
       <button
         class="btn btn-sm btn-simple animate-fade-in-from-side"
         onclick={() => {
-          goto(localizeHref('/wizard'));
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          goto(resolve(localizeHref('/wizard') as any));
         }}
       >
         {m.homepage_offering_configure_button()}
@@ -79,7 +82,8 @@
   <button
     class="btn-basic animate-fade-in-from-side"
     onclick={() => {
-      goto(localizeHref('/services'));
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      goto(resolve(localizeHref('/services') as any));
     }}
   >
     {m.homepage_offering_services_detail_button()}
@@ -95,7 +99,7 @@
   }
 
   .feature-block {
-    @apply flex flex-col items-start rounded-xl bg-white p-8 shadow-md;
+    @apply flex flex-col items-start justify-between rounded-xl bg-white p-8 shadow-md;
     h2 {
       @apply text-center;
     }
@@ -122,7 +126,7 @@
       }
     }
     .cta-row {
-      @apply flex gap-3;
+      @apply flex gap-3 mt-auto;
     }
   }
 

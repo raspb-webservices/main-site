@@ -31,7 +31,7 @@
         </svg>
         <div>
           <ul class="space-y-1">
-            {#each errorDetails as error}
+            {#each errorDetails as error (error)}
               <li class="text-sm">{error}</li>
             {/each}
           </ul>

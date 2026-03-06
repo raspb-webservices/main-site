@@ -14,6 +14,7 @@ export const GET: RequestHandler = async () => {
         }
       }
     `;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { __type } = (await client.request(query)) as any;
     return new Response(JSON.stringify(__type.enumValues));
   } catch (error) {

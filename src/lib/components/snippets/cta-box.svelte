@@ -2,6 +2,7 @@
   import { m } from '$lib/paraglide/messages';
   import { goto } from '$app/navigation';
   import { localizeHref } from '$lib/paraglide/runtime';
+  import { resolve } from '$app/paths';
 
   let { variant = 'default' } = $props();
 </script>
@@ -48,12 +49,16 @@
       <button
         class="btn-basic cta-primary"
         onclick={() => {
-          goto(localizeHref('/wizard'));
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          goto(resolve(localizeHref('/wizard') as any));
         }}
       >
         {m.ctaBox_buttonText()}
       </button>
-      <button class="btn btn-outline btn-lg px-8 py-4" onclick={() => goto(localizeHref('/faq'))}> {m.ctaBox_faqButtonText()} </button>
+      <button class="btn btn-outline btn-lg px-8 py-4" onclick={() => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        goto(resolve(localizeHref('/faq') as any));
+      }}> {m.ctaBox_faqButtonText()} </button>
     </div>
 
     <p class="cta-note">

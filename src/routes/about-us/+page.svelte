@@ -64,7 +64,7 @@
   <meta property="og:description" content={m.aboutUs_meta_description()} />
 </svelte:head>
 
-<Stage style={'fancy-gradient'}>
+<Stage style="fancy-gradient">
   <div class="inner-box reduced prose py-36">
     <h1 class="massive animate-fade-in-up">{m.aboutUs_header_title()}</h1>
     <p class="teaser animate-fade-in-up">{@html m.aboutUs_header_subtitle()}</p>
@@ -111,7 +111,7 @@
           </div>
         </div>
         <div class="mb-6 flex flex-wrap gap-2">
-          {#each myskills as myskill}
+          {#each myskills as myskill (myskill)}
             <span class="badge badge-primary badge-lg transition-colors duration-200"
               >{(m as unknown as Record<string, () => string>)[`aboutUs_markusSection_skills_${myskill}`]()}</span
             >
@@ -147,7 +147,7 @@
 <Section noSpacing={true}>
   <div class="inner-box animate-fade-in-up pt-4 pb-24">
     <div class="grid grid-cols-12 gap-6">
-      {#each teamMembers as member, index}
+      {#each teamMembers as member, index (member.id)}
         <div
           class="card from-base-100 to-base-200 animate-fade-in-up text-base-content col-span-12 flex h-full cursor-default flex-col bg-linear-to-tl shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg md:col-span-6 lg:col-span-4 {index ===
           3

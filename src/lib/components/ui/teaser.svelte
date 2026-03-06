@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { goto } from '$app/navigation';
 
   export let customImageURL;
   import { m } from '$lib/paraglide/messages';

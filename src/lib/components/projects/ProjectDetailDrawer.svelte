@@ -2,7 +2,6 @@
   import type { Project } from '$interfaces/project.interface';
   import {
     availableFeatures,
-    featureCategoryColors,
     formFieldTypes,
     googleFonts,
     projectTypesWebApp,
@@ -23,7 +22,6 @@
     getStatusProgress,
     getFeatureLabel,
     isProjectEditable,
-    isProjectSubmitted,
     ToArray
   } from '$lib/helper/projectUtils';
   import { projectStatus } from '$interfaces/project.interface';
@@ -48,7 +46,6 @@
   let uploadedFiles: File[] = $state([]);
 
   let editable = $derived(project ? isProjectEditable(project.projectStatus) : false);
-  let submitted = $derived(project ? isProjectSubmitted(project.projectStatus) : false);
   let progress = $derived(project ? getStatusProgress(project.projectStatus) : 0);
   let icon = $derived(project ? getProjectTypeIcon(project.projectType) : '📁');
 
@@ -515,7 +512,7 @@
               {#if editable}
                 <select class="select select-bordered w-full" value={editData.projectType || ''} onchange={(e) => updateField('projectType', e.currentTarget.value)}>
                   <option value="">{m.dashboard_edit_placeholder_select()}</option>
-                  {#each allProjectTypes as pt}
+                  {#each allProjectTypes as pt (pt.id)}
                     <option value={pt.id}>{resolveTitle(pt.label ?? pt.title)}</option>
                   {/each}
                 </select>
@@ -529,7 +526,7 @@
               {#if editable}
                 <select class="select select-bordered w-full" value={editData.subType || ''} onchange={(e) => updateField('subType', e.currentTarget.value)}>
                   <option value="">{m.dashboard_edit_placeholder_select()}</option>
-                  {#each allSubTypes as st}
+                  {#each allSubTypes as st (st.id)}
                     <option value={st.id}>{resolveTitle(st.title)}</option>
                   {/each}
                 </select>
@@ -695,7 +692,7 @@
             <span class="field-label">{m.dashboard_drawer_label_pages()}</span>
             {#if editable}
               <div class="space-y-2">
-                {#each editData.pages || [] as page, i}
+                {#each editData.pages || [] as page, i (i)}
                   <div class="bg-base-200 rounded-lg p-3 space-y-2">
                     <div class="flex items-center gap-2">
                       <input type="text" class="input input-bordered input-sm flex-1" value={page.name} placeholder={m.dashboard_drawer_page_name()} oninput={(e) => updatePage(i, 'name', e.currentTarget.value)} />
@@ -711,7 +708,7 @@
             {:else}
               {#if (parseJsonField(project.pages)).length > 0}
                 <div class="space-y-2">
-                  {#each parseJsonField<{name: string, content?: string}>(project.pages) as page}
+                  {#each parseJsonField<{name: string, content?: string}>(project.pages) as page (page.name)}
                     <div class="bg-base-200 rounded-lg p-3">
                       <span class="text-sm font-medium">{page.name}</span>
                       {#if page.content}
@@ -731,10 +728,10 @@
             <span class="field-label">{m.dashboard_drawer_label_formFields()}</span>
             {#if editable}
               <div class="space-y-2">
-                {#each editData.formFields || [] as field, i}
+                {#each editData.formFields || [] as field, i (i)}
                   <div class="bg-base-200 flex items-center gap-2 rounded-lg p-3">
                     <select class="select select-bordered select-sm" value={field.type} onchange={(e) => updateFormField(i, 'type', e.currentTarget.value)}>
-                      {#each formFieldTypes as ft}
+                      {#each formFieldTypes as ft (ft.id)}
                         <option value={ft.id}>{resolveTitle(ft.title)}</option>
                       {/each}
                     </select>
@@ -753,7 +750,7 @@
             {:else}
               {#if (parseJsonField(project.formFields)).length > 0}
                 <div class="flex flex-wrap gap-2">
-                  {#each parseJsonField<{name: string, type: string, required?: boolean}>(project.formFields) as field}
+                  {#each parseJsonField<{name: string, type: string, required?: boolean}>(project.formFields) as field (field.name)}
                     <span class="badge badge-outline badge-sm">{field.name} ({field.type}){field.required ? ' *' : ''}</span>
                   {/each}
                 </div>
@@ -866,7 +863,7 @@
             {#if editable}
               <select class="select select-bordered w-full" value={editData.desiredFont || ''} onchange={(e) => updateField('desiredFont', e.currentTarget.value)}>
                 <option value="">{m.dashboard_edit_placeholder_font()}</option>
-                {#each googleFonts as font}
+                {#each googleFonts as font (font)}
                   <option value={font}>{font}</option>
                 {/each}
               </select>
@@ -882,9 +879,8 @@
           {#if editable}
             <p class="text-base-content/60 mb-4 text-sm">{m.dashboard_edit_label_features_select()}</p>
             <div class="features-grid">
-              {#each availableFeatures as feature}
+              {#each availableFeatures as feature (feature.id)}
                 {@const isSelected = (editData.features || []).includes(feature.id)}
-                {@const categoryColor = featureCategoryColors[feature.category || ''] || 'badge-neutral'}
                 <button
                   class="feature-toggle"
                   class:selected={isSelected}
@@ -902,7 +898,7 @@
           {:else}
             {#if project.features && project.features.length > 0}
               <div class="features-grid">
-                {#each project.features as feature}
+                {#each project.features as feature (feature)}
                   <div class="feature-display">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-success shrink-0" viewBox="0 0 20 20" fill="currentColor">
                       <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -955,7 +951,7 @@
               {#if uploadedFiles.length > 0}
                 <div class="space-y-2 mt-3">
                   <span class="text-xs font-medium uppercase text-base-content/60">Ausgewählte Dateien ({uploadedFiles.length})</span>
-                  {#each uploadedFiles as file, i}
+                  {#each uploadedFiles as file, i (i)}
                     <div class="bg-base-200 flex items-center justify-between rounded-lg p-3">
                       <div class="flex items-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-base-content/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1000,7 +996,7 @@
           {#if project.relatedFiles && project.relatedFiles.length > 0}
             <div class="space-y-3">
               <span class="text-xs font-medium uppercase tracking-wider text-base-content/60">Bereits hochgeladene Dateien</span>
-              {#each project.relatedFiles as file}
+              {#each project.relatedFiles as file (file.fileName)}
                 <div class="bg-base-200 flex items-center justify-between rounded-lg p-4">
                   <div class="flex items-center gap-3">
                     <svg xmlns="http://www.w3.org/2000/svg" class="text-base-content/40 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

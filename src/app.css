@@ -129,7 +129,7 @@
   --color-iconic-blue: #121d33;
 }
 @theme {
-  --font-circular: 'Circular', sans-serif;
+  --font-jakarta: 'Plus Jakarta Sans', sans-serif;
   --spacing-fhd: 120rem;
   --spacing-wqhd: 160rem;
   --breakpoint-xs: 26rem;
@@ -184,7 +184,8 @@
 
 html,
 body {
-  @apply relative m-0 h-full w-full p-0;
+  
+  @apply relative h-full w-full m-0 p-0 font-jakarta;
   min-height: 100dvh;
   scroll-behavior: smooth;
   -moz-text-size-adjust: 100%;
@@ -197,7 +198,7 @@ body {
 
 /* TYPOGRAPHY */
 p {
-  @apply font-circular text-lg leading-normal font-light;
+  @apply font-jakarta text-[17px] leading-relaxed font-light;
   &.add-padding {
     @apply pb-5;
   }
@@ -224,7 +225,7 @@ h3,
 h4,
 h5,
 h6 {
-  @apply font-circular leading-[1.1] font-bold text-balance;
+  @apply font-jakarta leading-tight font-bold text-balance;
 
   > a {
     @apply no-underline;

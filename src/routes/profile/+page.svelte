@@ -9,6 +9,7 @@
   import auth from '$services/auth-service';
   import { openAuth0Popup } from '$helper/loginOpener';
   import { localizeHref } from '$lib/paraglide/runtime';
+  import { resolve } from '$app/paths';
 
   let isAuth = $derived(isAuthenticated.value);
   let currentUser = $derived(user.value) as User;
@@ -16,10 +17,8 @@
   let editModal: ProfileEditModal;
 
   let showSection = $state('');
-  let loading = $state(false);
 
   onMount(async () => {
-    loading = true;
     checkAccess();
   });
 
@@ -30,11 +29,9 @@
   function checkAccess() {
     if (!isAuth) {
       showSection = 'not-authorized';
-      loading = false;
       return;
     } else {
       showSection = 'profile';
-      loading = false;
       return;
     }
   }
@@ -162,13 +159,15 @@
                 <button
                   class="btn btn-simple mr-3"
                   onclick={() => {
-                    goto(localizeHref('/dashboard'));
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    goto(resolve(localizeHref('/dashboard') as any));
                   }}>{m.profile_toProjects()}</button
                 >
                 <button
                   class="btn btn-simple"
                   onclick={() => {
-                    goto(localizeHref('/wizard/extended'));
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    goto(resolve(localizeHref('/wizard/extended') as any));
                   }}
                 >
                   {m.profile_startNewProject()}</button
@@ -182,7 +181,7 @@
   </Section>
 
 {:else if showSection === 'not-authorized'}
-  <Section type={'fullCenterTeaser'}>
+  <Section type="fullCenterTeaser">
     <div class="inner-content-wrapper prose">
       <h1>{m.profile_notAuthorized_title()}</h1>
       <p class="teaser">{m.profile_notAuthorized_teaser()}</p>
@@ -199,7 +198,8 @@
         <button
           class="btn-basic"
           onclick={() => {
-            goto(localizeHref('/registration'));
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            goto(resolve(localizeHref('/registration') as any));
           }}
         >
           {m.profile_notAuthorized_registrationButton()}</button

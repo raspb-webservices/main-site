@@ -4,6 +4,7 @@
   import { goto } from '$app/navigation';
   import auth from '$services/auth-service';
   import { localizeHref } from '$lib/paraglide/runtime';
+  import { resolve } from '$app/paths';
   import { openAuth0Popup } from '$helper/loginOpener';
 
   async function login() {
@@ -23,7 +24,7 @@
   <meta name="description" content={m.login_meta_description()} />
 </svelte:head>
 
-<Section type={'fullCenterTeaser'}>
+<Section type="fullCenterTeaser">
   <div class="inner-content-wrapper prose">
     <h1>{m.login_title()}</h1>
     <p class="teaser">{m.login_teaser()}</p>
@@ -38,7 +39,8 @@
       <button
         class="btn-basic"
         onclick={() => {
-          goto(localizeHref('/registration'));
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          goto(resolve(localizeHref('/registration') as any));
         }}>{m.login_registerButton()}</button
       >
     </div>

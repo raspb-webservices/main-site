@@ -114,7 +114,7 @@
             <h4 class="card-title text-base">{m.dashboard_details_section_features()}</h4>
             {#if selectedProject.features && selectedProject.features.length > 0}
               <div class="flex flex-wrap gap-2">
-                {#each selectedProject.features as feature}
+                {#each selectedProject.features as feature (feature)}
                   <div class="badge badge-success badge-sm">{feature}</div>
                 {/each}
               </div>
@@ -182,7 +182,7 @@
             <div class="card-body">
               <h4 class="card-title text-base">{m.dashboard_details_section_files()}</h4>
               <div class="space-y-2">
-                {#each selectedProject.relatedFiles as file}
+                {#each selectedProject.relatedFiles as file (file.fileName)}
                   <div class="bg-base-100 flex items-center justify-between rounded p-2">
                     <span class="truncate text-sm">{file.fileName || m.dashboard_details_fallback_unnamed_file()}</span>
                     {#if file.url}

@@ -151,7 +151,7 @@
     // 11-20: +1.5% per feature (max 35% at 20)
     // 21+: +1% per feature (max 40% total)
     const featureCount = selectedFeatures.length;
-    let featureDiscountPercent = 0;
+    let featureDiscountPercent: number;
 
     if (featureCount <= 10) {
       featureDiscountPercent = featureCount * 2;
@@ -270,7 +270,7 @@
       </div>
 
       <div class="wizard-steps grid gap-3" style="grid-template-columns: repeat({maxSteps}, minmax(0, 1fr));">
-        {#each basicSteps as step, i}
+        {#each basicSteps as step, i (step.id)}
           {@const isDisabled = featuresDisabled && step.id === FEATURES_STEP}
           <button
             type="button"
@@ -317,7 +317,7 @@
       {:else if currentStep === 5}
         <ProjectFeatures {config} {calculatePrice}></ProjectFeatures>
       {:else if currentStep === 6}
-        <ProjectSummaryEnhanced {config} {openContactModal} {openResetModal}></ProjectSummaryEnhanced>
+        <ProjectSummaryEnhanced {config} {openContactModal}></ProjectSummaryEnhanced>
       {/if}
     </div>
 

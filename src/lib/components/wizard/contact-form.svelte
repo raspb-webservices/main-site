@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { User } from '$interfaces/user.interface';
   import { m } from '$lib/paraglide/messages';
+  import { resolve } from '$app/paths';
 
   interface Props {
     customerData: Partial<User>;
@@ -8,6 +9,7 @@
     isValid?: boolean;
   }
 
+  // eslint-disable-next-line no-useless-assignment
   let { customerData = $bindable(), onUpdate, isValid = $bindable() }: Props = $props();
 
   // Reaktive Validierung
@@ -315,7 +317,7 @@
           <div class="font-bold">{(m as unknown as Record<string, () => string>)['wizard_contactForm_privacy_title']()}</div>
           <div class="text-sm">
             {(m as unknown as Record<string, () => string>)['wizard_contactForm_privacy_description']()}
-            <a href="/privacy-notice" class="link link-primary" target="_blank"
+            <a href={resolve("/privacy")} class="link link-primary" target="_blank"
               >{(m as unknown as Record<string, () => string>)['wizard_contactForm_privacy_link']()}</a
             >.
           </div>

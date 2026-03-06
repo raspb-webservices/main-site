@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { page } from '$app/state';
   import { goto } from '$app/navigation';
   import { m } from '$lib/paraglide/messages';
   import { getLocale, localizeHref, setLocale } from '$lib/paraglide/runtime';
+  import { resolve } from '$app/paths';
   import { onMount } from 'svelte';
 
   const currentYear = new Date().getFullYear();
@@ -122,8 +122,11 @@
       <div class="service-column">
         <h3 class="pb-4">{m.footer_nav_services_title()}</h3>
         <div class="footer-nav-items">
-          {#each footerNav[0].subItems as item}
-            <button class="footer-nav-item" onclick={() => goto(localizeHref(item.path))}>
+          {#each footerNav[0].subItems as item (item.name)}
+            <button class="footer-nav-item" onclick={() => {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              goto(resolve(localizeHref(item.path) as any));
+            }}>
               {(m as unknown as Record<string, () => string>)[item.name]()}
             </button>
           {/each}
@@ -132,8 +135,11 @@
       <div class="insights-column">
         <h3 class="pb-4">{m.footer_nav_insights_title()}</h3>
         <div class="footer-nav-items">
-          {#each footerNav[1].subItems as item}
-            <button class="footer-nav-item" onclick={() => goto(localizeHref(item.path))}>
+          {#each footerNav[1].subItems as item (item.name)}
+            <button class="footer-nav-item" onclick={() => {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              goto(resolve(localizeHref(item.path) as any));
+            }}>
               {(m as unknown as Record<string, () => string>)[item.name]()}
             </button>
           {/each}
@@ -142,8 +148,11 @@
       <div class="about-us-column">
         <h3 class="pb-4">{m.footer_nav_aboutUs_title()}</h3>
         <div class="footer-nav-items">
-          {#each footerNav[2].subItems as item}
-            <button class="footer-nav-item" onclick={() => goto(localizeHref(item.path))}>
+          {#each footerNav[2].subItems as item (item.name)}
+            <button class="footer-nav-item" onclick={() => {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              goto(resolve(localizeHref(item.path) as any));
+            }}>
               {(m as unknown as Record<string, () => string>)[item.name]()}
             </button>
           {/each}
@@ -152,8 +161,11 @@
       <div class="legal-column">
         <h3 class="pb-4">{m.footer_nav_legal_title()}</h3>
         <div class="footer-nav-items">
-          {#each footerNav[3].subItems as item}
-            <button class="footer-nav-item" onclick={() => goto(localizeHref(item.path))}>
+          {#each footerNav[3].subItems as item (item.name)}
+            <button class="footer-nav-item" onclick={() => {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              goto(resolve(localizeHref(item.path) as any));
+            }}>
               {(m as unknown as Record<string, () => string>)[item.name]()}
             </button>
           {/each}

@@ -47,7 +47,7 @@
         {#if selectedMember?.skills && selectedMember?.skills.length > 0}
           <h4>{m.aboutUs_modals_member_coreCompetencies()}</h4>
           <div class="mt-3 flex flex-wrap gap-2">
-            {#each selectedMember?.skills as skill}
+            {#each selectedMember?.skills as skill (skill)}
               <span class="badge badge-primary badge-lg">{skill}</span>
             {/each}
           </div>

@@ -8,7 +8,7 @@
   <h1>{m.ui_showcase_title1()}</h1>
 </Section>
 
-<Stage style={'svg-gradient'}>
+<Stage style="svg-gradient">
   <div class="inner-box reduced">
     <h1>{m.ui_showcase_title2()}</h1>
     <p>
@@ -23,7 +23,7 @@
   </div>
 </Section>
 
-<Stage style={'basic-gradient'}>
+<Stage style="basic-gradient">
   <div class="inner-box reduced">
     <h1>{m.ui_showcase_title3()}</h1>
     <p>
@@ -38,7 +38,7 @@
   </div>
 </Section>
 
-<Stage style={'fancy-gradient'}>
+<Stage style="fancy-gradient">
   <div class="inner-box">
     <h1>{m.ui_showcase_title3()}</h1>
     <p>

@@ -16,6 +16,7 @@
   import { getLocale, localizeHref } from '$lib/paraglide/runtime';
   import MainOffering from '$lib/components/ui/main-offering.svelte';
   import GetAnAppointmentModal from '$lib/components/modals/general/get-an-appointment-modal.svelte';
+  import { resolve } from '$app/paths';
 
   let philosophyModal: PhilosophyModal;
   let timeAsFactorModal: TimeAsFactorModal;
@@ -59,7 +60,7 @@
   <meta property="og:description" content={m.homepage_meta_description()} />
 </svelte:head>
 
-<Stage style={'svg-gradient'}>
+<Stage style="svg-gradient">
   <div class="inner-box reduced prose py-36">
     <h1 class="massive animate-fade-in-up">{m.homepage_hero_title()}</h1>
     <p class="teaser animate-fade-in-up">
@@ -70,7 +71,8 @@
       <button
         class="btn-basic animate-fade-in-from-side"
         onclick={() => {
-          goto(localizeHref('/wizard'));
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          goto(resolve(localizeHref('/wizard') as any));
         }}>{m.homepage_hero_buttonText()}</button
       >
       <button class="btn-inverted-outline animate-fade-in-from-side" onclick={openGetAnAppointmentModal}>{m.homepage_hero_buttonText2()}</button>
@@ -138,7 +140,7 @@
     </div>
   </Section>
 
-  <Section customColor={'#fafafa'}>
+  <Section customColor="#fafafa">
     <div class="inner-section-wrapper">
       <div class="intro prose pt-10 md:pt-0">
         <h1>
@@ -222,7 +224,7 @@
     </div>
   </Section>
 
-  <Section customColor={'#fafafa'}>
+  <Section customColor="#fafafa">
     <div class="inner-section-wrapper">
       <div class="intro-wide prose">
         <h1>

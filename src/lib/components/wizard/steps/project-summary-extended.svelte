@@ -13,7 +13,7 @@
   } from '$lib/configs/wizard-config';
   import PriceBreakdown from '../price-breakdown.svelte';
 
-  let { config, isPreparingAssets, assetPreparationProgress } = $props();
+  let { config } = $props();
 
   // Helper functions
   function getServiceLevelText(level: number) {
@@ -244,7 +244,7 @@
     <section class="summary-section">
       <h2 class="section-title">🎨 Features ({(config.features ?? []).length - 1} ausgewählt)</h2>
       <div class="features-grid">
-        {#each (config.features ?? []).filter((f: string) => f !== 'cookieConsent') as featureId}
+        {#each (config.features ?? []).filter((f: string) => f !== 'cookieConsent') as featureId (featureId)}
           {@const feature = availableFeatures.find((f) => f.id === featureId)}
           {#if feature}
             <div class="feature-badge {featureCategoryColors[feature.category ?? ''] || 'badge-info'}">
@@ -265,7 +265,7 @@
           <div class="text-card">
             <div class="card-label">{m.wizard_steps_stepSummary_pagesSections()}</div>
             <div class="flex flex-wrap items-center gap-2 mt-2">
-                {#each config.pages ?? [] as page}
+                {#each config.pages ?? [] as page (page.name)}
                   {#if page.name.trim()}
                     <div class="badge badge-outline">{page.name}</div>
                   {/if}
@@ -278,7 +278,7 @@
           <div class="text-card">
             <div class="card-label">{m.wizard_steps_stepSummary_formFields()}</div>
             <div class="space-y-1 mt-2">
-                {#each config.formFields ?? [] as field}
+                {#each config.formFields ?? [] as field (field.name)}
                   {#if field.name.trim()}
                     <div class="flex items-center gap-2">
                       <div class="badge badge-outline">

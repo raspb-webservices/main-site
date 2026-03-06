@@ -386,7 +386,7 @@
           <label for="timeline" class="section-label">{m.wizard_basic_timeline_label()}</label>
           <select id="timeline" bind:value={timelinePreference} class="form-select">
             <option value="">Bitte auswählen...</option>
-            {#each timelineOptions as option}
+            {#each timelineOptions as option (option.value)}
               <option value={option.value}>{option.label}</option>
             {/each}
           </select>
@@ -420,7 +420,7 @@
           <label for="budget" class="section-label">{m.wizard_basic_budget_label()}</label>
           <select id="budget" bind:value={budgetRange} class="form-select">
             <option value="">{m.wizard_basic_budget_placeholder()}</option>
-            {#each budgetOptions as option}
+            {#each budgetOptions as option (option.value)}
               <option value={option.value}>{option.label}</option>
             {/each}
           </select>

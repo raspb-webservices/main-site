@@ -12,9 +12,10 @@
   } from '$lib/configs/wizard-config';
   import { goto } from '$app/navigation';
   import { localizeHref } from '$lib/paraglide/runtime';
+  import { resolve } from '$app/paths';
   import PriceBreakdown from '../price-breakdown.svelte';
 
-  let { config, openContactModal, openResetModal } = $props();
+  let { config, openContactModal } = $props();
 
   // Helper functions
   function getServiceLevelText(level: number) {
@@ -245,7 +246,7 @@
     <section class="summary-section">
       <h2 class="section-title">🎨 Features ({(config.features ?? []).length - 1} ausgewählt)</h2>
       <div class="features-grid">
-        {#each (config.features ?? []).filter((f: string) => f !== 'cookieConsent') as featureId}
+        {#each (config.features ?? []).filter((f: string) => f !== 'cookieConsent') as featureId (featureId)}
           {@const feature = availableFeatures.find((f) => f.id === featureId)}
           {#if feature}
             <div class="feature-badge {featureCategoryColors[feature.category ?? ''] || 'badge-info'}">
@@ -291,7 +292,8 @@
       type="button"
       class="btn btn-simple btn-lg"
       onclick={() => {
-        goto(localizeHref('/registration'));
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        goto(resolve(localizeHref('/registration') as any));
       }}
     >
       {m.wizard_navigation_register()}

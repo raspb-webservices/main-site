@@ -65,7 +65,7 @@
 
   const featureCount = $derived(selectedFeatures.length);
   const featureDiscountPercent = $derived.by(() => {
-    let discount = 0;
+    let discount: number;
     if (featureCount <= 10) {
       discount = featureCount * 2;
     } else if (featureCount <= 20) {

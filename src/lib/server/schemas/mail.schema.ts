@@ -5,6 +5,7 @@ const mailRecipientSchema = z.object({
   name: z.string().max(200).optional()
 });
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const mailSenderSchema = z.object({
   email: z.string().email().max(254),
   name: z.string().max(200)

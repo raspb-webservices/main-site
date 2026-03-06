@@ -6,6 +6,7 @@
   import { openAuth0Popup } from '$helper/loginOpener';
   import { goto } from '$app/navigation';
   import { localizeHref } from '$lib/paraglide/runtime';
+  import { resolve } from '$app/paths';
 
   let isLoading = $state(false);
   let errorMessage = $state('');
@@ -14,7 +15,8 @@
   // Nach Login zum Dashboard weiterleiten (nur bei erneutem Besuch wenn schon eingeloggt)
   $effect(() => {
     if (isAuth && !isLoading) {
-      goto(localizeHref('/dashboard'));
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      goto(resolve(localizeHref('/dashboard') as any));
     }
   });
 
@@ -30,7 +32,8 @@
       const { isFirstLogin } = await auth.loginWithPopup(auth0Client, { authorizationParams: { screen_hint: 'signup' } }, popup);
 
       // Erstanmeldung → Welcome-Page, sonst Dashboard
-      goto(localizeHref(isFirstLogin ? '/welcome' : '/dashboard'));
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      goto(resolve(localizeHref(isFirstLogin ? '/welcome' : '/dashboard') as any));
     } catch (error: unknown) {
       console.error('Registration error:', error);
       errorMessage = error instanceof Error ? error.message : 'Ein Fehler ist aufgetreten.';

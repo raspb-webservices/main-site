@@ -1,6 +1,5 @@
 <script lang="ts">
   import { m } from '$lib/paraglide/messages';
-  let { projectData } = $props();
   let modal: HTMLDialogElement;
 
   export function openModal() {

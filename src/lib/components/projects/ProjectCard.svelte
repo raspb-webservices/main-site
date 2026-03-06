@@ -1,5 +1,4 @@
 <script lang="ts">
-  import type { Project } from '$interfaces/project.interface';
   import {
     formatDate,
     formatBudget,
@@ -70,7 +69,7 @@
     <!-- Features -->
     {#if visibleFeatures.length > 0}
       <div class="features-row">
-        {#each visibleFeatures as feature}
+        {#each visibleFeatures as feature (feature)}
           <span class="feature-chip">{getFeatureLabel(feature)}</span>
         {/each}
         {#if remainingFeatures > 0}

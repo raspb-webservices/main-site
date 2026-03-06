@@ -33,7 +33,8 @@ export const PATCH: RequestHandler = async ({ request, locals }) => {
 
     // Dynamisch nur die vorhandenen Felder für die Mutation vorbereiten
     const updateFields: string[] = [];
-    const variables: Record<string, any> = { id: projectId };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const variables: Record<string, any> = { id: projectId };
 
     // Alle möglichen Felder prüfen und nur die vorhandenen hinzufügen
     // null == undefined → true; damit werden sowohl undefined als auch null übersprungen

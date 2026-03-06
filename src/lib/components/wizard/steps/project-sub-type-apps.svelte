@@ -13,7 +13,7 @@
   </p>
 </div>
 <div class="subtypes-grid">
-  {#each projectSubTypesApp as subtype}
+  {#each projectSubTypesApp as subtype (subtype.id)}
     <div
       class="card service-card cursor-pointer transition-all duration-300"
       class:card-selected={config.subType === subtype.id}

@@ -6,7 +6,6 @@
   import ReferenceDetailModal from '$lib/components/modals/projects/reference-detail-modal.svelte';
   import { onMount } from 'svelte';
   import { m } from '$lib/paraglide/messages';
-  import { getLocale, localizeHref, setLocale } from '$lib/paraglide/runtime';
 
   import imgWunschwurm from '$images/wunschwurm.png';
   import imgWunschwurmMap from '$images/wunschwurm-map.png';
@@ -34,8 +33,10 @@
   let activeContent = $state('tech');
 
   let referenceModal: ReferenceDetailModal;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let selectedProject: any = $state(null);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function openProjectModal(project: any) {
     selectedProject = project;
     referenceModal.openModal();
@@ -163,7 +164,7 @@
   <meta property="og:description" content={m.insights_meta_description()} />
 </svelte:head>
 
-<Stage style={'fancy-gradient'}>
+<Stage style="fancy-gradient">
   <div class="inner-box reduced prose py-36">
     <h1 class="massive animate-fade-in-up">{m.insights_header_title()}</h1>
     <p class="teaser animate-fade-in-up">{m.insights_header_subtitle()}</p>
@@ -317,7 +318,7 @@
         <p>{@html m.insights_showcase_description()}</p>
         <p>{m.insights_showcase_description2()}</p>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-          {#each projects as project}
+          {#each projects as project (project.key)}
             <ReferenceCard {project} onDetails={openProjectModal} />
           {/each}
         </div>

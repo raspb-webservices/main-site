@@ -4,6 +4,7 @@
 
   register();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let mySwiper: any;
   const params = {
     slidesPerView: 1,
@@ -35,11 +36,11 @@
 
 <div class="carousel-container">
   <swiper-container bind:this={mySwiper} init="false" class="box-swiper">
-    <swiper-slide><div class="swiper-image" style="--image-url:url({'$images/slider/slide1.jpg'})"></div></swiper-slide>
-    <swiper-slide><div class="swiper-image" style="--image-url:url({'$images/slider/slide2.jpg'})"></div></swiper-slide>
-    <swiper-slide><div class="swiper-image" style="--image-url:url({'$images/slider/slide3.jpg'})"></div></swiper-slide>
-    <swiper-slide><div class="swiper-image" style="--image-url:url({'$images/slider/slide4.jpg'})"></div></swiper-slide>
-    <swiper-slide><div class="swiper-image" style="--image-url:url({'$images/slider/slide5.jpg'})"></div></swiper-slide>
+    <swiper-slide><div class="swiper-image" style="--image-url:url('$images/slider/slide1.jpg')"></div></swiper-slide>
+    <swiper-slide><div class="swiper-image" style="--image-url:url('$images/slider/slide2.jpg')"></div></swiper-slide>
+    <swiper-slide><div class="swiper-image" style="--image-url:url('$images/slider/slide3.jpg')"></div></swiper-slide>
+    <swiper-slide><div class="swiper-image" style="--image-url:url('$images/slider/slide4.jpg')"></div></swiper-slide>
+    <swiper-slide><div class="swiper-image" style="--image-url:url('$images/slider/slide5.jpg')"></div></swiper-slide>
   </swiper-container>
 
   <div class="swiper-controls">

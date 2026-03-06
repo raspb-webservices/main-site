@@ -86,7 +86,7 @@
 
     // After initialize, use the underlying Swiper instance for events
     setTimeout(() => {
-      // @ts-ignore web component holds swiper instance on .swiper
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const swiper = (mySwiper as any).swiper;
       if (!swiper) return;
       swiper.slideToLoop(1, 0);
@@ -100,7 +100,7 @@
 
 <div class="hero-slider-container">
   <swiper-container bind:this={mySwiper} init="false" class="hero-swiper">
-    {#each slides as s}
+    {#each slides as s (s.image)}
       <swiper-slide>
         <div class="hero-slide" style={`--bg-image: url('${s.image}')`}></div>
       </swiper-slide>
@@ -151,12 +151,12 @@
 
   .hero-headline {
     @apply mb-3 text-xl leading-tight font-bold text-neutral-900 md:mb-4 md:text-2xl lg:text-3xl xl:text-4xl;
-    font-family: var(--font-circular);
+    font-family: var(--font-jakarta);
   }
 
   .hero-subtext {
     @apply mb-5 max-w-2xl text-sm leading-relaxed text-neutral-700 md:mb-6 md:text-base lg:text-lg;
-    font-family: var(--font-circular);
+    font-family: var(--font-jakarta);
     font-weight: 300;
   }
 

@@ -57,7 +57,7 @@
         <span class="label-text font-semibold">{m.wizard_design_googleFonts()}</span>
       </label>
       <select id="googleFonts" class="select select-bordered w-full" bind:value={config.desiredFont}>
-        {#each googleFonts as font}
+        {#each googleFonts as font (font)}
           <option value={font}>{font}</option>
         {/each}
         <option value="Other Google Fonts">{m.wizard_design_otherGoogleFonts()}</option>
@@ -117,7 +117,7 @@
     <div class="mt-6">
       <h3>{m.wizard_steps_stepMaterials_files_uploaded()}</h3>
       <div class="space-y-2">
-        {#each uploadedFiles as file, i}
+        {#each uploadedFiles as file, i (i)}
           <div class="alert">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
               <path

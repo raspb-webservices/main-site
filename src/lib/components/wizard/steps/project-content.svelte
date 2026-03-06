@@ -15,7 +15,7 @@
   <p>{m.wizard_steps_step5_content_pages_description()}</p>
 
   <div class="space-y-6">
-    {#each config.pages as page, i}
+    {#each config.pages as _page, i (i)}
       <div class="card border-base-300 border bg-white">
         <div class="card-body">
           <div class="mb-4 flex items-center justify-between">
@@ -86,7 +86,7 @@
     <p>{m.wizard_content_formFields_description()}</p>
 
     <div class="space-y-4">
-      {#each config.formFields as field, i}
+      {#each config.formFields as _field, i (i)}
         <div class="card border-base-300 border bg-white">
           <div class="card-body">
             <div class="mb-4 flex items-center justify-between">
@@ -106,7 +106,7 @@
                 </label>
                 <select id="fieldType{i}" class="select select-bordered w-full" bind:value={config.formFields[i].type}>
                   <option value="">{m.wizard_content_formFields_fieldTypePlaceholder()}</option>
-                  {#each formFieldTypes as fieldType}
+                  {#each formFieldTypes as fieldType (fieldType.id)}
                     <option value={fieldType.id}>{(m as unknown as Record<string, () => string>)[fieldType.title]()}</option>
                   {/each}
                 </select>

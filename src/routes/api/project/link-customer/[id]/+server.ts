@@ -38,7 +38,8 @@ export const POST: RequestHandler = async ({ params, request }) => {
     `;
 
     const variables = { projectId: projectId, customerId: customerId };
-    const result = (await client.request(linkCustomerMutation, variables)) as any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const result = (await client.request(linkCustomerMutation, variables)) as any;
 
     if (result.updateProject) {
       return json({

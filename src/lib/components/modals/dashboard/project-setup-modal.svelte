@@ -26,7 +26,7 @@
         try {
           return JSON.parse(tokenString);
         } catch (e) {
-          throw new Error(m.dashboard_setup_error_invalid_json());
+          throw new Error(m.dashboard_setup_error_invalid_json(), { cause: e });
         }
       };
 

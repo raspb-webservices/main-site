@@ -12,7 +12,8 @@
   } from '$lib/configs/wizard-config';
   import { goto } from '$app/navigation';
   import { localizeHref } from '$lib/paraglide/runtime';
-  let { config, openContactModal, openResetModal } = $props();
+  import { resolve } from '$app/paths';
+  let { config, openContactModal } = $props();
 </script>
 
 <div class="step-header">
@@ -62,7 +63,7 @@
     <div class="summary-card">
       <h3>{m.wizard_steps_stepSummary_selectedFeatures()}</h3>
       <div class="flex flex-wrap gap-2">
-        {#each (config.features ?? []).filter((f: string) => f !== 'cookieConsent') as featureId}
+        {#each (config.features ?? []).filter((f: string) => f !== 'cookieConsent') as featureId (featureId)}
           <div class="badge {featureCategoryColors[availableFeatures.find((f) => f.id === featureId)?.category ?? ''] || 'badge-info'}">
             {(m as unknown as Record<string, () => string>)[availableFeatures?.find((f) => f.id === featureId)?.title ?? '']?.()}
           </div>
@@ -99,7 +100,8 @@
       type="button"
       class="btn btn-simple btn-lg"
       onclick={() => {
-        goto(localizeHref('/registration'));
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        goto(resolve(localizeHref('/registration') as any));
       }}
     >
       {m.wizard_navigation_register()}

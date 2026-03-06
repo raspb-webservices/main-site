@@ -5,7 +5,9 @@
 
   register();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let mySwiper: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let textSwiper: any;
 
   type Slide = {
@@ -47,14 +49,6 @@
       cta: m.carousel_slide5_cta()
     }
   ];
-
-  const active = 1;
-  const spaceBetween = 10;
-
-  const onProgress = (e: CustomEvent) => {
-    const [swiper, progress]: [any, any] = e.detail;
-  };
-  const onSlideChange = (e: CustomEvent) => {};
 
   const params = {
     slidesPerView: 1.3,
@@ -110,7 +104,7 @@
 
 <div class="carousel-slider-container">
   <swiper-container bind:this={mySwiper} init="false" class="carousel-swiper">
-    {#each slides as s}
+    {#each slides as s (s.title)}
       <swiper-slide>
         <div class="carousel-slide" style={`--bg-image: url('${s.image}')`}></div>
       </swiper-slide>
@@ -125,7 +119,7 @@
     </button>
 
     <swiper-container bind:this={textSwiper} init="false" class="carousel-card-content">
-      {#each slides as s}
+      {#each slides as s (s.title)}
         <swiper-slide>
           <div class="carousel-card-content">
             <h2 class="carousel-headline line-clamp-1">{s.title}</h2>

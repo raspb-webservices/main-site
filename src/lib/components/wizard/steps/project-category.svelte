@@ -13,7 +13,7 @@
 </div>
 
 <div class="project-categories">
-  {#each projectCategories as category}
+  {#each projectCategories as category (category.id)}
     <div
       class="card service-card cursor-pointer transition-all duration-300"
       class:card-selected={config.projectCategory === category.id}

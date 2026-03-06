@@ -1,9 +1,9 @@
 <script lang="ts">
   import Section from '$lib/components/ui/section.svelte';
   import Stage from '$lib/components/ui/stage.svelte';
-  import { m } from '$lib/paraglide/messages';
   import { goto } from '$app/navigation';
   import { localizeHref } from '$lib/paraglide/runtime';
+  import { resolve } from '$app/paths';
   import lighthouseImg from '$lib/assets/images/perfect-score.jpg';
   import lighthouseMobileImg from '$lib/assets/images/perfect-score-mobile.jpg';
   import CTABox from '$lib/components/snippets/cta-box.svelte';
@@ -17,7 +17,7 @@
   />
 </svelte:head>
 
-<Stage style={'fancy-gradient'}>
+<Stage style="fancy-gradient">
   <div class="inner-box prose py-36 text-center lg:text-left">
     <h1 class="animate-fade-in-up">
       Digitale Präsenz, die <span class="opacity-65">verkauft</span>.<br />
@@ -29,7 +29,10 @@
     </p>
 
     <div class="animate-fade-in-up mt-8 flex flex-wrap justify-center gap-4 lg:justify-start">
-      <button class="btn-basic animate-fade-in-from-side" onclick={() => goto(localizeHref('/wizard'))}> Projekt starten </button>
+      <button class="btn-basic animate-fade-in-from-side" onclick={() => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        goto(resolve(localizeHref('/wizard') as any));
+      }}> Projekt starten </button>
       <a href="#web-apps" class="btn-inverted-outline animate-fade-in-from-side">Unsere Services</a>
     </div>
   </div>
@@ -150,7 +153,10 @@
       <p class="text-xl opacity-80 mb-10">
         Egal ob Sie eine neue digitale Heimat für Ihr Unternehmen suchen oder Ihre Prozesse mit KI revolutionieren wollen – wir sind Ihr Sparringspartner.
       </p>
-      <button class="btn btn-primary btn-lg px-12 rounded-full" onclick={() => goto(localizeHref('/wizard'))}>
+      <button class="btn btn-primary btn-lg px-12 rounded-full" onclick={() => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        goto(resolve(localizeHref('/wizard') as any));
+      }}>
         Jetzt unverbindlich anfragen
       </button>
     </div>

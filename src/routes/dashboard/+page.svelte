@@ -14,6 +14,7 @@
   import LottieLoader from '$lib/components/lottie-loader.svelte';
   import { openAuth0Popup } from '$helper/loginOpener';
   import { localizeHref } from '$lib/paraglide/runtime';
+  import { resolve } from '$app/paths';
   import { ToArray, getStatusLabel, getProjectTypeLabel } from '$lib/helper/projectUtils';
   import { projectStatus } from '$interfaces/project.interface';
   import { projectTypesWebApp, projectTypesAiFreestyle } from '$lib/configs/wizard-config';
@@ -187,7 +188,7 @@
     <LottieLoader />
   </div>
 {:else if showSection === 'not-authorized'}
-  <Section type={'fullCenterTeaser'}>
+  <Section type="fullCenterTeaser">
     <div class="inner-content-wrapper prose">
       <h1>{m.dashboard_notAuthorized_title()}</h1>
       <p class="teaser">{m.dashboard_notAuthorized_teaser()}</p>
@@ -196,20 +197,26 @@
         <button class="btn-basic" onclick={() => login()}>
           {m.dashboard_notAuthorized_loginButton()}
         </button>
-        <button class="btn-basic" onclick={() => goto(localizeHref('/registration'))}>
+        <button class="btn-basic" onclick={() => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          goto(resolve(localizeHref('/registration') as any));
+        }}>
           {m.dashboard_notAuthorized_registrationButton()}
         </button>
       </div>
     </div>
   </Section>
 {:else if showSection === 'no-projects'}
-  <Section type={'fullCenterTeaser'}>
+  <Section type="fullCenterTeaser">
     <div class="inner-content-wrapper prose">
       <h1>{m.dashboard_noProjects_title()}</h1>
       <p class="teaser">{m.dashboard_noProjects_teaser()}</p>
       <div class="spacer"></div>
       <div class="flex">
-        <button class="btn-basic" onclick={() => goto(localizeHref('/wizard/extended'))}>
+        <button class="btn-basic" onclick={() => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          goto(resolve(localizeHref('/wizard/extended') as any));
+        }}>
           {m.dashboard_noProjects_startButton()}
         </button>
       </div>
@@ -371,7 +378,7 @@
               <div class="filter-field">
                 <select class="filter-select" bind:value={filterType}>
                   <option value="">{m.dashboard_admin_filter_type_all()}</option>
-                  {#each allProjectTypes as type}
+                  {#each allProjectTypes as type (type.id)}
                     <option value={type.id}>{getProjectTypeLabel(type.id)}</option>
                   {/each}
                 </select>
@@ -381,7 +388,7 @@
               <div class="filter-field">
                 <select class="filter-select" bind:value={filterStatus}>
                   <option value="">{m.dashboard_admin_filter_status_all()}</option>
-                  {#each statusArray as s}
+                  {#each statusArray as s (s)}
                     <option value={s}>{getStatusLabel(s)}</option>
                   {/each}
                 </select>
@@ -393,7 +400,7 @@
 
       <!-- Project Grid -->
       <div class="project-grid">
-        {#each filteredProjects as project, i}
+        {#each filteredProjects as project, i (project.id)}
           <div class="animate-fade-in-up flex" style="animation-delay: {i * 80}ms">
             <ProjectCard {project} {openProjectModal} />
           </div>
