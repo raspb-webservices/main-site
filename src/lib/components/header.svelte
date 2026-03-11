@@ -173,34 +173,34 @@
                 >
                 <button
                   class="nav-item"
-                  class:active={page.url.pathname == localizeHref('services')}
+                  class:active={page.url.pathname == localizeHref('/services')}
                   onclick={() => {
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    goto(resolve(localizeHref('services') as any));
+                    goto(resolve(localizeHref('/services') as any));
                   }}>{m.menu_services()}</button
                 >
                 <button
                   class="nav-item"
-                  class:active={page.url.pathname == localizeHref('insights')}
+                  class:active={page.url.pathname == localizeHref('/insights')}
                   onclick={() => {
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    goto(resolve(localizeHref('insights') as any));
+                    goto(resolve(localizeHref('/insights') as any));
                   }}>{m.menu_insights()}</button
                 >
                 <button
                   class="nav-item"
-                  class:active={page.url.pathname == localizeHref('about-us')}
+                  class:active={page.url.pathname == localizeHref('/about-us')}
                   onclick={() => {
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    goto(resolve(localizeHref('about-us') as any));
+                    goto(resolve(localizeHref('/about-us') as any));
                   }}>{m.menu_aboutUs()}</button
                 >
                 <button
                   class="nav-item"
-                  class:active={page.url.pathname == localizeHref('faq')}
+                  class:active={page.url.pathname == localizeHref('/faq')}
                   onclick={() => {
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    goto(resolve(localizeHref('faq') as any));
+                    goto(resolve(localizeHref('/faq') as any));
                   }}>{m.menu_faq()}</button
                 >
                 {#if !isAuth}
