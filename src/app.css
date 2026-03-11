@@ -214,6 +214,10 @@ p {
       @apply mx-auto max-w-3xl;
     }
   }
+  &.small-teaser {
+    @apply text-xl opacity-80;
+  }
+
   &.brand {
     @apply from-purple via-pink to-violet inline-block bg-linear-135 bg-clip-text text-transparent;
   }
@@ -476,6 +480,11 @@ textarea:not([rows]) {
 }
 .badge-primary {
   @apply from-pink to-violet border-0 bg-linear-to-r text-nowrap text-white;
+}
+
+/* DaisyUI Component Overwrites */
+.badge {
+  @apply px-4 min-h-8;
 }
 
 /* Custom Styles / Overwrites */

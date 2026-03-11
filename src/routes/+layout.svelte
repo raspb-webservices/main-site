@@ -1,48 +1,15 @@
 <script lang="ts">
   import '../app.css';
-  import { navigating } from '$app/state';
-  import { afterNavigate } from '$app/navigation';
-  import { trackPageview } from '$lib/analytics/plausible.client';
-  import HEADER from '$lib/components/header.svelte';
-  import FOOTER from '$lib/components/footer.svelte';
-  import LottieLoader from '$lib/components/lottie-loader.svelte';
-  import CookieConsentComponent from '$lib/components/cookie-consent.svelte';
   import 'flag-icons/css/flag-icons.min.css';
-  import { m } from '$lib/paraglide/messages';
-  import { getLocale } from '$lib/paraglide/runtime';
-  import auth from '$services/auth-service';
-  import { onMount } from 'svelte';
   import { setWasmUrl } from '@lottiefiles/dotlottie-svelte';
 
   setWasmUrl('/dotlottie-player.wasm');
 
   let { children } = $props();
-
-  const ogLocaleMap: Record<string, string> = { de: 'de_DE', en: 'en_US' };
-
-  onMount(() => {
-    auth.checkSession();
-  });
-
-  // Track pageviews manually via Plausible to avoid history.pushState conflicts
-  // with SvelteKit's router (replaces autoCapturePageviews: true in plausible.client.ts)
-  afterNavigate(() => {
-    trackPageview();
-  });
-
-  // SW update listeners are registered early in app.html to avoid missing events
-  // during initial hydration. No duplicate listener needed here.
 </script>
 
 <svelte:head>
   <link rel="manifest" href="/manifest.webmanifest" />
-  <link rel="preload" href="$images/home-gradient.svg" as="image" type="image/svg+xml" fetchpriority="high" />
-  <link rel="preload" href="$fonts/circular/CircularStd-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="preload" href="$fonts/circular/CircularStd-Book.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="preload" href="$fonts/circular/CircularStd-Light.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="preload" href="$fonts/circular/CircularStd-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="preload" href="$lotties/robot-supports.lottie" as="fetch" crossorigin="anonymous" />
-  <link rel="preload" href="$lotties/business-launch.lottie" as="fetch" crossorigin="anonymous" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="anonymous" />
   <link rel="icon" type="image/png" href="$icons/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="$icons/favicon.svg" />
@@ -52,34 +19,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="raspb" />
   <meta property="og:image" content="https://raspb.de/screenshots/screenshot-desktop.png" />
-  <meta property="og:locale" content={ogLocaleMap[getLocale()] ?? 'de_DE'} />
   <meta name="twitter:card" content="summary" />
 </svelte:head>
 
-<div class="wrapper">
-  {#if navigating.to}
-    <div class="global-loading">
-      <LottieLoader />
-    </div>
-  {:else}
-    <a href="#main-content" class="skip-nav">{m.layout_skip_to_content()}</a>
-    <HEADER />
-    <main id="main-content">
-      {@render children?.()}
-    </main>
-    <FOOTER />
-  {/if}
-  <CookieConsentComponent />
-</div>
-
-<style lang="postcss">
-  @reference '../app.css';
-
-  .skip-nav {
-    @apply absolute top-0 z-100 -left-2500 bg-primary px-4 py-2 font-bold text-white no-underline;
-
-    &:focus {
-      @apply left-0;
-    }
-  }
-</style>
+{@render children?.()}

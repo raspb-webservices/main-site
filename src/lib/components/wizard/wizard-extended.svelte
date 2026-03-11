@@ -333,6 +333,8 @@
       assetPreparationProgress = m.wizard_steps_stepSummary_preparingAssets_error();
     } finally {
       isPreparingAssets = false;
+      console.log("isPreparingAssets: ", isPreparingAssets);
+      console.log("assetPreparationProgress: ", assetPreparationProgress);
     }
   }
 

@@ -232,6 +232,20 @@ export default defineConfig({
             ['de', '/de/projektkonfigurator/:id'],
             ['en', '/en/project-wizard/:id']
           ]
+        },
+        {
+          pattern: '/solutions',
+          localized: [
+            ['de', '/de/loesungen'],
+            ['en', '/en/solutions']
+          ]
+        },
+        {
+          pattern: '/solutions/:id',
+          localized: [
+            ['de', '/de/loesungen/:id'],
+            ['en', '/en/solutions/:id']
+          ]
         }
       ]
     })
