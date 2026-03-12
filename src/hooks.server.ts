@@ -1,5 +1,6 @@
 import type { Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
+import { building } from '$app/environment';
 import { paraglideMiddleware } from '$lib/paraglide/server';
 import { localizeUrl, extractLocaleFromRequest } from '$lib/paraglide/runtime';
 import { validateIdToken } from '$lib/server/auth.server';
@@ -87,7 +88,7 @@ const handleLocaleRedirect: Handle = ({ event, resolve }) => {
   const locale = extractLocaleFromRequest(event.request);
   const localized = localizeUrl(event.url, { locale });
 
-  if (localized.pathname !== event.url.pathname) {
+  if (!building && localized.pathname !== event.url.pathname) {
     return new Response(null, {
       status: 307,
       headers: { Location: localized.pathname + event.url.search + event.url.hash }
