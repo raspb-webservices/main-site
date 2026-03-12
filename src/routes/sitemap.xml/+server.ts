@@ -7,6 +7,9 @@ const SITE_URL = 'https://raspb.de';
 const staticPages = [
   { path: '/', priority: '1.0', changefreq: 'weekly' },
   { path: '/services', priority: '0.9', changefreq: 'monthly' },
+  { path: '/solutions', priority: '0.9', changefreq: 'monthly' },
+  { path: '/solutions/expert', priority: '0.8', changefreq: 'monthly' },
+  { path: '/solutions/website', priority: '0.8', changefreq: 'monthly' },
   { path: '/about-us', priority: '0.8', changefreq: 'monthly' },
   { path: '/contact', priority: '0.8', changefreq: 'monthly' },
   { path: '/wizard', priority: '0.8', changefreq: 'monthly' },
@@ -23,6 +26,9 @@ const locales = ['de', 'en'] as const;
 const localizedPaths: Record<string, Record<string, string>> = {
   '/': { de: '/', en: '/' },
   '/services': { de: '/de/leistungsportfolio', en: '/en/services' },
+  '/solutions': { de: '/de/loesungen', en: '/en/solutions' },
+  '/solutions/expert': { de: '/de/loesungen/expert', en: '/en/solutions/expert' },
+  '/solutions/website': { de: '/de/loesungen/website', en: '/en/solutions/website' },
   '/about-us': { de: '/de/ueber-uns', en: '/en/about-us' },
   '/contact': { de: '/de/kontakt', en: '/en/contact' },
   '/wizard': { de: '/de/projektkonfigurator', en: '/en/project-wizard' },

@@ -2,10 +2,32 @@
   import '../app.css';
   import 'flag-icons/css/flag-icons.min.css';
   import { setWasmUrl } from '@lottiefiles/dotlottie-svelte';
+  import { onMount } from 'svelte';
+  import { beforeNavigate, goto } from '$app/navigation';
+  import { localizeUrl, getLocale } from '$lib/paraglide/runtime';
 
   setWasmUrl('/dotlottie-player.wasm');
 
   let { children } = $props();
+
+  // Catch initial page loads served from browser cache (bypass server redirect)
+  onMount(() => {
+    const url = new URL(window.location.href);
+    const localized = localizeUrl(url, { locale: getLocale() });
+    if (localized.pathname !== url.pathname) {
+      goto(localized.href, { replaceState: true });
+    }
+  });
+
+  // Catch client-side navigations to unlocalized URLs
+  beforeNavigate(({ to, cancel }) => {
+    if (!to?.url) return;
+    const localized = localizeUrl(to.url, { locale: getLocale() });
+    if (localized.pathname !== to.url.pathname) {
+      cancel();
+      goto(localized.href, { replaceState: true });
+    }
+  });
 </script>
 
 <svelte:head>

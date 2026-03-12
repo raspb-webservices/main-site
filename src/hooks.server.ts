@@ -1,6 +1,7 @@
 import type { Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 import { paraglideMiddleware } from '$lib/paraglide/server';
+import { localizeUrl, extractLocaleFromRequest } from '$lib/paraglide/runtime';
 import { validateIdToken } from '$lib/server/auth.server';
 import { getAuthLevel } from '$lib/server/route-auth.server';
 import { isAdmin } from '$lib/server/auth0-helper.server';
@@ -72,6 +73,30 @@ const handleAuth: Handle = async ({ event, resolve }) => {
   return resolve(event);
 };
 
+const handleLocaleRedirect: Handle = ({ event, resolve }) => {
+  // Skip JS fetch/prefetch requests – only redirect document (page) requests
+  if (event.request.headers.get('Sec-Fetch-Dest') === 'empty') {
+    return resolve(event);
+  }
+  // Skip API routes and static assets
+  const { pathname } = event.url;
+  if (pathname.startsWith('/api/') || /\.\w+$/.test(pathname)) {
+    return resolve(event);
+  }
+
+  const locale = extractLocaleFromRequest(event.request);
+  const localized = localizeUrl(event.url, { locale });
+
+  if (localized.pathname !== event.url.pathname) {
+    return new Response(null, {
+      status: 307,
+      headers: { Location: localized.pathname + event.url.search + event.url.hash }
+    });
+  }
+
+  return resolve(event);
+};
+
 const handleParaglide: Handle = ({ event, resolve }) =>
   paraglideMiddleware(event.request, ({ request, locale }) => {
     event.request = request;
@@ -81,4 +106,4 @@ const handleParaglide: Handle = ({ event, resolve }) =>
     });
   });
 
-export const handle: Handle = sequence(handleAuth, handleParaglide);
+export const handle: Handle = sequence(handleAuth, handleLocaleRedirect, handleParaglide);

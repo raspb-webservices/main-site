@@ -202,12 +202,12 @@
         </div>
       {/each}
       <!-- DSGVO Siegel -->
-      <div class="flex items-center justify-center p-6 cursor-pointer opacity-80 hover:opacity-100" onclick={() => { gotoExternal('https://de.wikipedia.org/wiki/Datenschutz-Grundverordnung')}} aria-label="Datenschutz-Grundverordnung">
+      <button class="flex items-center justify-center p-6 cursor-pointer opacity-80 hover:opacity-100" onclick={() => { gotoExternal('https://de.wikipedia.org/wiki/Datenschutz-Grundverordnung')}} aria-label="Datenschutz-Grundverordnung">
         <img src={dsgvoSeal} alt="DSGVO konform" class="max-h-40 w-auto object-contain" />
-      </div>
-      <div class="flex items-center justify-center p-6 cursor-pointer opacity-80 hover:opacity-100" onclick={() => { gotoExternal('https://developer.chrome.com/docs/lighthouse/performance/performance-scoring?hl=de')}} aria-label="Lighthouse-Leistungsbewertung">
+      </button>
+      <button class="flex items-center justify-center p-6 cursor-pointer opacity-80 hover:opacity-100" onclick={() => { gotoExternal('https://developer.chrome.com/docs/lighthouse/performance/performance-scoring?hl=de')}} aria-label="Lighthouse-Leistungsbewertung">
         <img src={lightHouseBatch} alt="DSGVO konform" class="max-h-40 w-auto object-contain" />
-      </div>
+      </button>
     </div>
   </div>
 </section>
