@@ -25,6 +25,48 @@ interface Customer {
 export const POST: RequestHandler = async ({ request, locals }) => {
   try {
     const customerData = validateBody(customerCreateSchema, await request.json());
+    const email = customerData.email;
+
+    // Check if customer with this email already exists
+    const checkQuery = gql`
+      query CheckCustomer($email: String!) {
+        customer(where: { email: $email }) {
+          address
+          auth0Id
+          city
+          company
+          country
+          createdAt
+          email
+          familyName
+          givenName
+          id
+          phone
+          postCode
+          projects {
+            id
+            name
+          }
+          salutation
+        }
+      }
+    `;
+    const checkResult = (await client.request(checkQuery, { email })) as { customer: Customer | null };
+
+    if (checkResult.customer) {
+      return new Response(
+        JSON.stringify({
+          success: true,
+          data: checkResult.customer
+        }),
+        {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        }
+      );
+    }
+
+    // Customer does not exist — create new one
     const mutation = gql`
       mutation CreateCustomer(
         $address: String
@@ -85,7 +127,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
       city: customerData.city || null,
       company: customerData.company || null,
       country: customerData.country || null,
-      email: customerData.email || 'n/a',
+      email,
       familyName: customerData.familyName || null,
       givenName: customerData.givenName || null,
       phone: customerData.phone || null,
@@ -123,6 +165,15 @@ export const POST: RequestHandler = async ({ request, locals }) => {
       if (error.message.includes('authorization') || error.message.includes('Unauthorized')) {
         statusCode = 401;
         errorMessage = 'Authorization failed';
+      } else {
+        // Extract actual GraphQL error message if present
+        try {
+          const parsed = JSON.parse(error.message);
+          const gqlMessage = parsed?.response?.errors?.[0]?.message;
+          if (gqlMessage) errorMessage = gqlMessage;
+        } catch {
+          // message was not JSON — keep generic fallback
+        }
       }
     }
 

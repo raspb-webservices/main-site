@@ -20,17 +20,24 @@ const ratelimit = new Ratelimit({
  */
 export async function checkRateLimit(ip: string, pathname: string): Promise<Response | null> {
   const identifier = `${ip}:${pathname}`;
-  const { success, reset } = await ratelimit.limit(identifier);
 
-  if (!success) {
-    const retryAfter = Math.ceil((reset - Date.now()) / 1000);
-    return new Response(JSON.stringify({ error: 'Too many requests' }), {
-      status: 429,
-      headers: {
-        'Content-Type': 'application/json',
-        'Retry-After': String(retryAfter)
-      }
-    });
+  try {
+    const { success, reset } = await ratelimit.limit(identifier);
+
+    if (!success) {
+      const retryAfter = Math.ceil((reset - Date.now()) / 1000);
+      return new Response(JSON.stringify({ error: 'Too many requests' }), {
+        status: 429,
+        headers: {
+          'Content-Type': 'application/json',
+          'Retry-After': String(retryAfter)
+        }
+      });
+    }
+  } catch (err) {
+    // Redis unavailable (e.g. missing env vars locally, or transient outage)
+    // Fail open: allow the request rather than blocking all traffic
+    console.warn('Rate limit check failed, allowing request:', err instanceof Error ? err.message : err);
   }
 
   return null;
