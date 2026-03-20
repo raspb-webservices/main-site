@@ -546,7 +546,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mapbox/point-geometry@npm:*, @mapbox/point-geometry@npm:^1.1.0, @mapbox/point-geometry@npm:~1.1.0":
+"@mapbox/point-geometry@npm:^1.1.0, @mapbox/point-geometry@npm:~1.1.0":
   version: 1.1.0
   resolution: "@mapbox/point-geometry@npm:1.1.0"
   checksum: 10c0/fe43d00a92592a28835090722df771be50182ff5fc40705cbd571534e2397beef884a97f701869b4a99a61289700cf709f588883f4b085c034bbe722cf17155d
@@ -1189,15 +1189,6 @@ __metadata:
   version: 5.0.0
   resolution: "@types/linkify-it@npm:5.0.0"
   checksum: 10c0/7bbbf45b9dde17bf3f184fee585aef0e7342f6954f0377a24e4ff42ab5a85d5b806aaa5c8d16e2faf2a6b87b2d94467a196b7d2b85c9c7de2f0eaac5487aaab8
-  languageName: node
-  linkType: hard
-
-"@types/mapbox__point-geometry@npm:^1.0.87":
-  version: 1.0.87
-  resolution: "@types/mapbox__point-geometry@npm:1.0.87"
-  dependencies:
-    "@mapbox/point-geometry": "npm:*"
-  checksum: 10c0/18ecc7064bbd2356985dc0808f0fd68bb5f17824e9d88e1d98d33f2df1b73085fa5aea11a6b7d65826c94d260f9c5a24915a5b82cc9a19afe3a063663faf2087
   languageName: node
   linkType: hard
 
@@ -3476,7 +3467,6 @@ __metadata:
     "@tailwindcss/oxide-wasm32-wasi": "npm:4.2.2"
     "@tailwindcss/vite": "npm:^4.2.2"
     "@types/eslint": "npm:^9.6.1"
-    "@types/mapbox__point-geometry": "npm:^1.0.87"
     "@types/markdown-it": "npm:^14.1.2"
     "@types/node": "npm:^25.5.0"
     "@types/qrcode": "npm:^1.5.6"

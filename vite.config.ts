@@ -250,7 +250,7 @@ export default defineConfig({
       ]
     })
   ],
-  assetsInclude: ['**/*.lottie'],
+  assetsInclude: ['**/*.lottie', '**/*.wasm'],
   optimizeDeps: {
     exclude: ['@lottiefiles/dotlottie-web', '@lottiefiles/dotlottie-svelte']
   },

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { DotLottie } from '@lottiefiles/dotlottie-web';
+  import wasmUrl from '@lottiefiles/dotlottie-web/dotlottie-player.wasm?url';
   import { onMount } from 'svelte';
 
   interface Props {
@@ -16,6 +17,7 @@
 
   onMount(() => {
     console.log('[LottiePlayer] onMount', { src, loop, autoplay });
+    DotLottie.setWasmUrl(wasmUrl);
 
     if (!src) {
       console.warn('[LottiePlayer] src is empty or undefined – animation will not load');
