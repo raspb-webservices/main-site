@@ -27,6 +27,6 @@
   @reference '../../app.css';
 
   .solutions-layout {
-    @apply min-h-screen;
+    @apply min-h-dvh;
   }
 </style>

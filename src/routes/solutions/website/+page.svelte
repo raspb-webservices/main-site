@@ -157,7 +157,7 @@
 
 <!-- ─── HERO (above the fold, raspb gradient) ────────────────── -->
 <Stage style="basic-gradient">
-  <div class="flex min-h-screen w-full flex-col">
+  <div class="flex min-h-dvh w-full flex-col">
     <!-- Nav: logo only, no links to other LPs -->
     <nav class="flex w-full items-center px-6 py-6 md:px-12">
       <!-- eslint-disable-next-line @typescript-eslint/no-explicit-any -->

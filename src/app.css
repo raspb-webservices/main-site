@@ -490,10 +490,10 @@ textarea:not([rows]) {
 /* Custom Styles / Overwrites */
 .modal-box {
   &.small-modal {
-    @apply max-h-[92vh] max-w-2xl;
+    @apply max-h-[92dvh] max-w-2xl;
   }
   &.large-modal {
-    @apply max-h-[96vh] max-w-6xl;
+    @apply max-h-[96dvh] max-w-6xl;
   }
 }
 div.alert {

@@ -40,7 +40,7 @@
   .iframe-container {
     @apply flex w-full items-center justify-center md:items-start;
     iframe {
-      @apply h-full min-h-screen w-full md:min-h-157 md:w-125 md:rounded-2xl;
+      @apply h-full min-h-dvh w-full md:min-h-157 md:w-125 md:rounded-2xl;
     }
   }
 </style>

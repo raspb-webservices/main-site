@@ -56,7 +56,7 @@
   @reference '../../../app.css';
 
   .hero-container {
-    @apply relative flex min-h-[50vh] w-full overflow-hidden;
+    @apply relative flex min-h-[50dvh] w-full overflow-hidden;
 
     &.centered {
       @apply flex items-center justify-center text-center;

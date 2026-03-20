@@ -137,7 +137,7 @@
   @reference '../../../app.css';
 
   .hero-slider-container {
-    @apply relative h-screen w-full overflow-hidden;
+    @apply relative h-dvh w-full overflow-hidden;
   }
 
   .hero-swiper {

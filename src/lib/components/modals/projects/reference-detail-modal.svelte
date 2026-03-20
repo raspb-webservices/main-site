@@ -197,6 +197,6 @@
   }
 
   .lightbox-box {
-    @apply max-h-[90vh] w-11/12 max-w-5xl overflow-hidden bg-transparent p-0 shadow-none;
+    @apply max-h-[90dvh] w-11/12 max-w-5xl overflow-hidden bg-transparent p-0 shadow-none;
   }
 </style>

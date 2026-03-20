@@ -29,7 +29,7 @@
     background-color: var(--backgroundColor);
 
     &.stretch {
-      @apply min-h-screen;
+      @apply min-h-dvh;
     }
 
     &.noSpacing {
