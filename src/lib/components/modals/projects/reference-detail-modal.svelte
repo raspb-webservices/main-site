@@ -24,7 +24,7 @@
 
 <!-- Main project detail modal -->
 <dialog bind:this={modal} class="modal">
-  <div class="modal-box w-11/12 max-w-4xl px-8 py-8">
+  <div class="modal-box w-11/12 max-w-4xl max-h-[92dvh] overflow-y-auto px-8 py-8">
     <!-- Close button -->
     <div class="absolute top-4 right-4">
       <form method="dialog">

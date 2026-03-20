@@ -35,7 +35,7 @@
 <style lang="postcss">
   @reference '../../../../app.css';
   .modal-box {
-    @apply w-full max-w-120 rounded-none p-0 md:rounded-4xl md:p-6;
+    @apply max-h-dvh w-full max-w-120 overflow-hidden rounded-none p-0 md:rounded-4xl md:p-6;
   }
   .iframe-container {
     @apply flex w-full items-center justify-center md:items-start;

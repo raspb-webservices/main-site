@@ -55,7 +55,7 @@
 </script>
 
 <dialog id="modal-profile-edit" bind:this={modal} class="modal">
-  <div class="modal-box">
+  <div class="modal-box small-modal overflow-y-auto">
     <div class="sticky top-0 z-50 flex justify-end -mb-10 pt-2 pr-2">
       <button type="button" class="btn btn-sm btn-circle btn-ghost" onclick={closeModal}>✕</button>
     </div>

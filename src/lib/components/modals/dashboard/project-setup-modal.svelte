@@ -100,7 +100,7 @@
 </script>
 
 <dialog bind:this={modal} class="modal">
-  <div class="modal-box w-11/12 max-w-4xl">
+  <div class="modal-box w-11/12 max-w-4xl max-h-[96dvh] overflow-y-auto">
     <div class="sticky top-0 z-50 flex justify-end -mb-10 pt-2 pr-2">
       <form method="dialog">
         <button class="btn btn-sm btn-circle btn-ghost" onclick={closeModal}>✕</button>

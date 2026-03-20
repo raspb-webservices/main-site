@@ -51,6 +51,6 @@
 <style lang="postcss">
   @reference '../../../../app.css';
   .modal-box {
-    @apply max-w-2xl;
+    @apply max-h-[92dvh] max-w-2xl overflow-y-auto;
   }
 </style>
