@@ -250,9 +250,6 @@ export default defineConfig({
       ]
     })
   ],
-  css: {
-    transformer: 'postcss'
-  },
   assetsInclude: ['**/*.lottie'],
   optimizeDeps: {
     exclude: ['@lottiefiles/dotlottie-web', '@lottiefiles/dotlottie-svelte']
