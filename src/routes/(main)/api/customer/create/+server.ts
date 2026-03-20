@@ -53,6 +53,8 @@ export const POST: RequestHandler = async ({ request, locals }) => {
     `;
     const checkResult = (await client.request(checkQuery, { email })) as { customer: Customer | null };
 
+    console.log("checkResult ::: ", checkResult);
+
     if (checkResult.customer) {
       return new Response(
         JSON.stringify({
