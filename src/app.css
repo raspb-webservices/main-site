@@ -45,11 +45,7 @@
   --iconic-blue: #121d33;
 }
 
-@plugin 'daisyui' {
-  themes:
-    light --default,
-    dark --prefersdark;
-}
+@plugin 'daisyui';
 @plugin 'daisyui/theme' {
   name: 'light';
   default: true;
