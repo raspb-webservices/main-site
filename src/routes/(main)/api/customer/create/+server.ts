@@ -27,10 +27,10 @@ export const POST: RequestHandler = async ({ request, locals }) => {
     const customerData = validateBody(customerCreateSchema, await request.json());
     const email = customerData.email;
 
-    // Check if customer with this email already exists
+    // Check if customer with this email already exists (DRAFT stage covers both published and unpublished)
     const checkQuery = gql`
       query CheckCustomer($email: String!) {
-        customer(where: { email: $email }) {
+        customer(where: { email: $email }, stage: DRAFT) {
           address
           auth0Id
           city
