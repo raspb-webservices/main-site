@@ -42,6 +42,6 @@
   "faq_questions_q8_title": "Gehört mir der Code am Ende wirklich komplett?",
   "faq_questions_q9_content": "KI ist bei raspb ein Werkzeug, kein Selbstzweck. Sie wird eingesetzt, um Entwurf, Code, Tests und Dokumentation deutlich zu beschleunigen – immer innerhalb einer kontrollierten Umgebung und mit einem erfahrenen Entwickler \"Human in the Loop\". Kritische Bereiche wie Security, Architektur, Datenmodellierung und Performance werden bewusst nicht blind der KI überlassen. Das Ergebnis: deutlich schnellere Umsetzung, aber mit Qualitäts- und Sicherheitsniveau, das zu produktiven Business-Systemen passt.",
   "faq_questions_q9_title": "Wie setzt raspb KI ein – und ist das wirklich sicher und qualitativ hochwertig?",
-  "faq_teaser": "Hier findest du Antworten auf die häufigsten Fragen zu unseren Services, dem Projektablauf und technischen Details. Falls du weitere Fragen hast, kontaktiere uns gerne direkt.",
+  "faq_teaser": "Hier findest du Antworten auf die häufigsten Fragen zu unseren Services, dem Projektablauf und die technischen Details. Falls du weitere Fragen hast, stelle sie uns gerne über das Formular am Ende dieser Seite.",
   "faq_title": "Häufig gestellte Fragen"
 }
