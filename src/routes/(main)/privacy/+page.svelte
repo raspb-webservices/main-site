@@ -56,6 +56,9 @@
     <p>
       {m.privacyNotice_section2_netlify_text3()}
     </p>
+    <p>
+      {m.privacyNotice_section2_netlify_text4()}
+    </p>
 
     <h2>{m.privacyNotice_section3_title()}</h2>
     <h3>{m.privacyNotice_section3_dataProtection_title()}</h3>
@@ -162,6 +165,9 @@
       {m.privacyNotice_section5_auth0_text3()}
     </p>
     <p>
+      {m.privacyNotice_section5_auth0_text5()}
+    </p>
+    <p>
       {m.privacyNotice_section5_auth0_text4()}
       <a href="https://auth0.com/privacy" target="_blank" rel="noopener noreferrer">https://auth0.com/privacy</a>.
     </p>
@@ -175,6 +181,9 @@
     </p>
     <p>
       {m.privacyNotice_section5_hygraph_text3()}
+    </p>
+    <p>
+      {m.privacyNotice_section5_hygraph_text5()}
     </p>
     <p>
       {m.privacyNotice_section5_hygraph_text4()}
