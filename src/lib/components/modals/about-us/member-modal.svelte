@@ -1,5 +1,20 @@
 <script lang="ts">
   import { m } from '$lib/paraglide/messages';
+  import VideoPlayer from '$components/VideoPlayer.svelte';
+  import AlexVideo from '$videos/alex.mp4';
+  import MayaVideo from '$videos/maya.mp4';
+  import SamVideo from '$videos/sam.mp4';
+  import RioVideo from '$videos/rio.mp4';
+  import MelindaVideo from '$videos/melinda.mp4';
+
+  const memberVideo: Record<string, string> = {
+    alex: AlexVideo,
+    maya: MayaVideo,
+    sam: SamVideo,
+    rio: RioVideo,
+    melinda: MelindaVideo
+  };
+
   let { selectedMember } = $props();
   let modal: HTMLDialogElement;
 
@@ -12,8 +27,8 @@
 </script>
 
 <dialog bind:this={modal} class="modal">
-  <div class="modal-box w-11/12 max-w-2xl max-h-[92dvh] overflow-y-auto">
-    <div class="sticky top-0 z-50 flex justify-end -mb-10 pt-2 pr-2">
+  <div class="modal-box max-h-[92dvh] w-11/12 max-w-2xl overflow-y-auto">
+    <div class="sticky top-0 z-50 -mb-10 flex justify-end pt-2 pr-2">
       <form method="dialog">
         <button class="btn btn-sm btn-circle btn-ghost" onclick={closeModal}>✕</button>
       </form>
@@ -21,7 +36,11 @@
 
     <div class="mt-10 mb-6 flex flex-col items-center text-center">
       <div class="mb-4">
-        <img class="h-36 w-auto" src={selectedMember?.avatar} alt={selectedMember?.name} loading="lazy" />
+        {#if selectedMember && memberVideo[selectedMember.id]}
+          <VideoPlayer imageSrc={selectedMember.avatar} videoSrc={memberVideo[selectedMember.id]} />
+        {:else}
+          <img class="h-36 w-auto rounded-full" src={selectedMember?.avatar} alt={selectedMember?.name} loading="lazy" />
+        {/if}
       </div>
       <h3 class="no-padding">{selectedMember?.name}</h3>
       <p class="opacity-70">{selectedMember?.role}</p>

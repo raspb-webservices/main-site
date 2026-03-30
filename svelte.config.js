@@ -18,6 +18,8 @@ const config = {
       $store: './src/store',
       $helper: './src/lib/helper',
       $images: './src/lib/assets/images',
+      $audios: './src/lib/assets/audios',
+      $videos: './src/lib/assets/videos',
       $icons: './src/lib/assets/icons',
       $fonts: './src/lib/assets/fonts',
       $lotties: './src/lib/assets/lotties',

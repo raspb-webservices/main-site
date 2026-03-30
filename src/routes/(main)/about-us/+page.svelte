@@ -8,6 +8,20 @@
   import MemberModal from '$lib/components/modals/about-us/member-modal.svelte';
   import type { Member } from '$interfaces/user.interface';
   import { m } from '$lib/paraglide/messages';
+  import AudioPlayer from '$components/AudioPlayer.svelte';
+  import VorstellungAlex from '$audios/alex-vorstellung.mp3';
+  import VorstellungMaya from '$audios/maya-vorstellung.mp3';
+  import VorstellungSam from '$audios/sam-vorstellung.mp3';
+  import VorstellungRio from '$audios/rio-vorstellung.mp3';
+  import VorstellungMelinda from '$audios/melinda-vorstellung.mp3';
+
+  const memberAudio: Record<string, string> = {
+    alex: VorstellungAlex,
+    maya: VorstellungMaya,
+    sam: VorstellungSam,
+    rio: VorstellungRio,
+    melinda: VorstellungMelinda
+  };
 
   let currentTheme = $state('light');
   let selectedMember: Member | null = $state(null);
@@ -155,9 +169,12 @@
             : ''} "
           style="animation-delay: {index * 0.1}s"
         >
-          <figure class="px-6 pt-6">
-            <div>
+          <figure class="overflow-visible px-6 pt-6">
+            <div class="relative">
               <img class="h-24 w-auto" src={member.avatar} alt={member.name} loading="lazy" />
+              <div class="absolute -right-3 -bottom-3">
+                <AudioPlayer src={memberAudio[member.id]} class="w-9 h-9" />
+              </div>
             </div>
           </figure>
           <div class="card-body flex flex-col items-center justify-between p-4 text-center">
