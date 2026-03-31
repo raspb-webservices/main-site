@@ -1,9 +1,9 @@
 <script lang="ts">
-  let { children, fullWidth = false, fullHeight = false, noSpacing = false, customColor = 'white', type = 'default' } = $props();
+  let { children, fullWidth = false, fullHeight = false, noSpacing = false, customColor = '', type = 'default' } = $props();
 </script>
 
 {#if type === 'default'}
-  <section class="base-section" class:full={fullWidth} class:stretch={fullHeight} class:noSpacing style="--backgroundColor:{customColor}">
+  <section class="base-section" class:full={fullWidth} class:stretch={fullHeight} class:noSpacing class:has-custom-bg={!!customColor} style={customColor ? `--backgroundColor:${customColor}` : undefined}>
     <div class="inner-container">
       {@render children?.()}
     </div>
@@ -34,6 +34,10 @@
 
     &.noSpacing {
       @apply py-0;
+    }
+
+    :global([data-theme='dark']) &.has-custom-bg {
+      background-color: var(--color-base-300);
     }
 
     &:not(.full) {

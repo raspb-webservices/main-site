@@ -336,13 +336,13 @@
   .tab-tile-collection {
     @apply flex flex-wrap items-center justify-center gap-12 lg:flex-nowrap;
     .tab-tile {
-      @apply flex aspect-square w-60 flex-col items-center justify-center rounded-3xl bg-white p-6 text-center text-black drop-shadow-2xl;
+      @apply flex aspect-square w-60 flex-col items-center justify-center rounded-3xl bg-base-100 p-6 text-center text-base-content drop-shadow-2xl;
       &:hover {
-        @apply cursor-pointer bg-neutral-100 drop-shadow-lg;
+        @apply cursor-pointer bg-base-200 drop-shadow-lg;
       }
       &.active,
       &.active:hover {
-        @apply cursor-default bg-neutral-50 drop-shadow-lg;
+        @apply cursor-default bg-base-200 drop-shadow-lg;
       }
 
       &.tech {

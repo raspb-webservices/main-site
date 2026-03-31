@@ -99,7 +99,7 @@
           }
           input,
           textarea {
-            @apply border-mediumGrey text-darkGrey focus:border-secondary focus:ring-secondary mt-1 block w-full border bg-white p-3 text-sm;
+            @apply border-mediumGrey focus:border-secondary focus:ring-secondary mt-1 block w-full border bg-base-100 p-3 text-sm text-base-content;
           }
           input.is-checkbox {
             @apply focus:ring-secondary mt-0 h-6 w-6 p-0 focus:ring-1;

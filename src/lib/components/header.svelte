@@ -20,7 +20,8 @@
   let darkActive = $state(false);
 
   onMount(() => {
-    darkActive = document.documentElement.getAttribute('data-theme') === 'dark';
+    const saved = localStorage.getItem('raspb-theme');
+    darkActive = (saved ?? document.documentElement.getAttribute('data-theme')) === 'dark';
   });
 
   $effect(() => {
@@ -32,6 +33,8 @@
   function toggleTheme() {
     const next = darkActive ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
+    document.documentElement.style.colorScheme = next;
+    localStorage.setItem('raspb-theme', next);
     darkActive = !darkActive;
   }
 

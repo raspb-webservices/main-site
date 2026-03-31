@@ -99,7 +99,7 @@
   }
 
   .feature-block {
-    @apply flex flex-col items-start justify-between rounded-xl bg-white p-8 shadow-md;
+    @apply flex flex-col items-start justify-between rounded-xl bg-base-100 p-8 shadow-md;
     h2 {
       @apply text-center;
     }

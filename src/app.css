@@ -370,11 +370,10 @@ textarea:not([rows]) {
 /* LAYOUT */
 .wrapper {
   .global-loading {
-    @apply flex h-dvh w-full items-center justify-center;
+    @apply flex h-dvh w-full items-center justify-center bg-base-100;
     position: fixed;
     top: 0;
     left: 0;
-    background: white;
     z-index: 9999;
   }
   main {

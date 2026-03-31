@@ -386,6 +386,10 @@
       .feature-card {
         @apply to-base-50 text-base-content flex cursor-default flex-col rounded-2xl border-0 bg-linear-to-tl from-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg;
 
+        :global([data-theme='dark']) & {
+          @apply from-base-200 to-base-100;
+        }
+
         .feature-card-header {
           @apply mb-4 flex min-w-full flex-wrap items-center gap-4;
 

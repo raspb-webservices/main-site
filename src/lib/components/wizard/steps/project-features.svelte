@@ -66,16 +66,16 @@
     @apply mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3;
 
     .service-card {
-      @apply border-base-300/80 border bg-white transition-all duration-300;
+      @apply border-base-300/80 border bg-base-100 transition-all duration-300;
 
       &:hover {
-        @apply bg-primary/1 border-base-300 shadow-md;
+        @apply bg-primary/10 border-base-300 shadow-md;
       }
 
       &.card-selected {
         @apply ring-primary ring-offset-base-100 ring-2 ring-offset-2;
         &:hover {
-          @apply bg-primary/1 cursor-default;
+          @apply bg-primary/10 cursor-default;
         }
       }
 
@@ -96,10 +96,10 @@
   .textarea,
   .input,
   .select {
-    @apply border-base-300 text-base-content w-full bg-white;
+    @apply border-base-300 text-base-content w-full bg-base-100;
 
     &:focus {
-      @apply border-primary bg-primary/1;
+      @apply border-primary bg-primary/10;
     }
 
     &::placeholder {

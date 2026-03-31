@@ -484,7 +484,7 @@
     }
 
     .textarea {
-      @apply border-base-300 text-base-content w-full bg-white;
+      @apply border-base-300 text-base-content w-full bg-base-100;
 
       &:focus {
         @apply border-primary bg-primary/5;
@@ -501,10 +501,10 @@
   }
 
   .detail-card {
-    @apply border-base-300/80 border bg-white transition-all duration-300;
+    @apply border-base-300/80 border bg-base-100 transition-all duration-300;
 
     &:hover {
-      @apply bg-primary/1 border-base-300 shadow-md;
+      @apply bg-primary/10 border-base-300 shadow-md;
     }
 
     .detail-card-header {
@@ -544,7 +544,7 @@
   }
 
   .form-input {
-    @apply border-base-300 text-base-content focus:border-primary focus:bg-primary/5 w-full rounded-lg border bg-white px-4 py-3 transition-all;
+    @apply border-base-300 text-base-content focus:border-primary focus:bg-primary/5 w-full rounded-lg border bg-base-100 px-4 py-3 transition-all;
 
     &::placeholder {
       @apply text-base-content/50;
@@ -552,7 +552,7 @@
   }
 
   .form-textarea {
-    @apply border-base-300 text-base-content focus:border-primary focus:bg-primary/5 w-full rounded-lg border bg-white px-4 py-3 transition-all;
+    @apply border-base-300 text-base-content focus:border-primary focus:bg-primary/5 w-full rounded-lg border bg-base-100 px-4 py-3 transition-all;
 
     &::placeholder {
       @apply text-base-content/50;
@@ -560,7 +560,7 @@
   }
 
   .form-select {
-    @apply border-base-300 text-base-content focus:border-primary focus:bg-primary/5 w-full cursor-pointer rounded-lg border bg-white px-4 py-3 transition-all;
+    @apply border-base-300 text-base-content focus:border-primary focus:bg-primary/5 w-full cursor-pointer rounded-lg border bg-base-100 px-4 py-3 transition-all;
   }
 
   .slider-container {
@@ -619,7 +619,7 @@
     @apply flex flex-row gap-3;
 
     .radio-option {
-      @apply border-base-300 flex flex-1 cursor-pointer items-center gap-3 rounded-lg border bg-white p-4 transition-all duration-200;
+      @apply border-base-300 flex flex-1 cursor-pointer items-center gap-3 rounded-lg border bg-base-100 p-4 transition-all duration-200;
 
       &:hover {
         @apply border-primary/50 bg-primary/5;

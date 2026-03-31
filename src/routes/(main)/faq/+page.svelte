@@ -267,7 +267,7 @@
   }
   .collapse input[type='radio']:checked ~ .collapse-title,
   .collapse input[type='radio']:checked ~ .collapse-content {
-    @apply bg-white;
+    @apply bg-base-200;
   }
   .success-container {
     animation: fadeInUp 0.5s ease-out;

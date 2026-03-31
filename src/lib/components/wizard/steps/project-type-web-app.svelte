@@ -58,16 +58,16 @@
   .project-types {
     @apply flex flex-row flex-wrap items-center justify-center gap-10 md:flex-nowrap;
     .service-card {
-      @apply border-base-300/80 max-w-md border bg-white transition-all duration-300;
+      @apply border-base-300/80 max-w-md border bg-base-100 transition-all duration-300;
 
       &:hover {
-        @apply bg-primary/1 border-base-300 shadow-md;
+        @apply bg-primary/10 border-base-300 shadow-md;
       }
 
       &.card-selected {
         @apply ring-primary ring-offset-base-100 ring-2 ring-offset-2;
         &:hover {
-          @apply bg-primary/1 cursor-default;
+          @apply bg-primary/10 cursor-default;
         }
       }
 

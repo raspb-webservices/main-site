@@ -121,7 +121,7 @@
     <div class="flex whitespace-nowrap" bind:this={container}>
       {#each techLogos as logo, i (i)}
         <div class="mx-8 inline-flex items-center justify-center">
-          <div class="rounded-xl bg-white p-4 shadow-lg transition-shadow duration-300 hover:cursor-pointer">
+          <div class="rounded-xl bg-base-100 p-4 shadow-lg transition-shadow duration-300 hover:cursor-pointer">
             <img src={logo.src} alt={logo.name} class="block h-24 w-auto grayscale filter transition-all duration-300 hover:grayscale-0" loading="lazy" />
           </div>
         </div>
