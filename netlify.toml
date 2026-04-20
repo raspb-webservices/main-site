@@ -6,6 +6,16 @@
   directory = "functions"
   node_bundler = "esbuild"
 
+[[redirects]]
+  from = "/impressum"
+  to = "/imprint"
+  status = 301
+
+[[redirects]]
+  from = "/datenschutz"
+  to = "/privacy"
+  status = 301
+
 [[headers]]
   for = "/service-worker.js"
   [headers.values]
