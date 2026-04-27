@@ -1,185 +1,154 @@
 <script lang="ts">
-  import { page } from '$app/stores';
-  import Section from '$lib/components/ui/section.svelte';
-  import { getPostBySlug, getRecentPosts } from '$lib/data/blog/posts';
-  import { m } from '$lib/paraglide/messages';
-  import { localizeHref } from '$lib/paraglide/runtime';
+  import { goto } from '$app/navigation';
+  import { resolve } from '$app/paths';
+  import NewsletterSignup from '$lib/components/newsletter-signup.svelte';
 
-  let slug = $derived($page.params.slug);
-  let post = $derived(getPostBySlug(slug || ''));
-  let relatedPosts = $derived(getRecentPosts(3).filter(p => p.slug !== slug));
+  let { data } = $props();
+
+  function formatDate(dateStr: string) {
+    return new Intl.DateTimeFormat('de-DE', { day: '2-digit', month: 'long', year: 'numeric' }).format(
+      new Date(dateStr)
+    );
+  }
+
+  const canonicalUrl = $derived(`https://raspb.de/blog/${data.meta.slug}`);
 </script>
 
 <svelte:head>
-  {#if post}
-    <title>{post.title} - raspb Blog</title>
-    <meta name="description" content={post.excerpt} />
-    <meta property="og:title" content={post.title} />
-    <meta property="og:description" content={post.excerpt} />
-    <meta property="og:type" content="article" />
-    <meta property="article:published_time" content={post.date} />
-    <meta property="article:author" content={post.author.name} />
-    {#each post.tags as tag}
-      <meta property="article:tag" content={tag} />
-    {/each}
+  <title>{data.meta.title} | raspb Blog</title>
+  <meta name="description" content={data.meta.excerpt} />
+  <link rel="canonical" href={canonicalUrl} />
+  <meta property="og:title" content={data.meta.title} />
+  <meta property="og:description" content={data.meta.excerpt} />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content={canonicalUrl} />
+  {#if data.meta.coverImage}
+    <meta property="og:image" content="https://raspb.de{data.meta.coverImage}" />
   {/if}
+  <meta property="article:published_time" content={data.meta.date} />
 </svelte:head>
 
-{#if post}
-  <!-- Hero Section -->
-  <section class="hero bg-gradient-to-br from-primary/10 to-secondary/10 py-20">
-    <div class="container mx-auto px-6">
-      <div class="max-w-4xl mx-auto">
-        <!-- Breadcrumb -->
-        <div class="text-sm text-base-content/60 mb-6">
-          <a href={localizeHref('/blog')} class="hover:text-primary">Blog</a>
-          <span class="mx-2">›</span>
-          <span>{post.category}</span>
-        </div>
-        
-        <!-- Category & Date -->
-        <div class="flex items-center gap-4 mb-6">
-          <span class="badge badge-primary">{post.category}</span>
-          <time datetime={post.date} class="text-sm text-base-content/60">
-            {new Date(post.date).toLocaleDateString('de-DE', { year: 'numeric', month: 'long', day: 'numeric' })}
-          </time>
-          <span class="text-sm text-base-content/60">{post.readTime} Min. Lesezeit</span>
-        </div>
-        
-        <!-- Title -->
-        <h1 class="text-4xl md:text-5xl font-bold mb-6">{post.title}</h1>
-        
-        <!-- Author -->
-        <div class="flex items-center gap-4">
-          <div class="avatar">
-            <div class="w-12 h-12 rounded-full">
-              <img src={post.author.avatar} alt={post.author.name} />
-            </div>
-          </div>
-          <div>
-            <p class="font-semibold">{post.author.name}</p>
-            <p class="text-sm text-base-content/60">Autor bei raspb</p>
-          </div>
-        </div>
-      </div>
+<article class="blog-post">
+  <header class="post-header">
+    <div class="inner">
+      <button class="back-link" onclick={() => goto(resolve('/blog'))}>
+        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+        Alle Artikel
+      </button>
+      <span class="badge">{data.meta.category}</span>
+      <h1>{data.meta.title}</h1>
+      <p class="excerpt">{data.meta.excerpt}</p>
+      <time datetime={data.meta.date}>{formatDate(data.meta.date)}</time>
     </div>
-  </section>
+  </header>
 
-  <!-- Featured Image -->
-  <div class="container mx-auto px-6 -mt-10">
-    <div class="max-w-4xl mx-auto">
-      <img 
-        src={post.image} 
-        alt={post.title}
-        class="w-full h-auto rounded-xl shadow-xl"
+  {#if data.meta.coverImage}
+    <div class="cover-image">
+      <img
+        src={data.meta.coverImage}
+        alt={data.meta.title}
+        width="1200"
+        height="630"
+        loading="eager"
+        fetchpriority="high"
+        onerror={(e) => {
+          (e.currentTarget as HTMLImageElement).src =
+            'https://picsum.photos/seed/' + data.meta.slug + '/1200/630';
+        }}
       />
+    </div>
+  {/if}
+
+  <div class="post-content">
+    <div class="inner prose">
+      <svelte:component this={data.content} />
     </div>
   </div>
 
-  <!-- Article Content -->
-  <Section>
-    <div class="container mx-auto px-6">
-      <div class="max-w-4xl mx-auto">
-        <article class="prose prose-lg max-w-none">
-          {@html post.content.replace(/\n/g, '<br>')}
-        </article>
-        
-        <!-- Tags -->
-        <div class="flex flex-wrap gap-2 mt-8 pt-8 border-t">
-          {#each post.tags as tag}
-            <span class="badge badge-outline">{tag}</span>
-          {/each}
-        </div>
-        
-        <!-- Share Buttons -->
-        <div class="flex gap-4 mt-8">
-          <span class="text-sm font-semibold">Teilen:</span>
-          <a 
-            href="https://twitter.com/intent/tweet?text={encodeURIComponent(post.title)}&url={encodeURIComponent('https://raspb.de/blog/' + post.slug)}" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="btn btn-sm btn-outline"
-          >
-            🐦 Twitter
-          </a>
-          <a 
-            href="https://www.linkedin.com/shareArticle?mini=true&url={encodeURIComponent('https://raspb.de/blog/' + post.slug)}&title={encodeURIComponent(post.title)}" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="btn btn-sm btn-outline"
-          >
-            💼 LinkedIn
-          </a>
-          <a 
-            href="https://www.facebook.com/sharer/sharer.php?u={encodeURIComponent('https://raspb.de/blog/' + post.slug)}" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="btn btn-sm btn-outline"
-          >
-            📘 Facebook
-          </a>
-        </div>
-      </div>
+  <div class="newsletter-section">
+    <div class="inner">
+      <NewsletterSignup />
     </div>
-  </Section>
+  </div>
+</article>
 
-  <!-- Related Posts -->
-  {#if relatedPosts.length > 0}
-    <Section>
-      <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold mb-8">Weitere Artikel</h2>
-        <div class="grid md:grid-cols-3 gap-8">
-          {#each relatedPosts as relatedPost}
-            <article class="card bg-base-200 shadow-md hover:shadow-xl transition-all">
-              <figure>
-                <img src={relatedPost.image} alt={relatedPost.title} class="w-full h-48 object-cover" />
-              </figure>
-              <div class="card-body">
-                <span class="badge badge-primary badge-sm w-fit">{relatedPost.category}</span>
-                <h3 class="card-title text-lg">
-                  <a href="/blog/{relatedPost.slug}" class="hover:text-primary">{relatedPost.title}</a>
-                </h3>
-                <p class="text-sm text-base-content/70">{relatedPost.excerpt.slice(0, 100)}...</p>
-              </div>
-            </article>
-          {/each}
-        </div>
-      </div>
-    </Section>
-  {/if}
+<style lang="postcss">
+  @reference '../../../../app.css';
 
-  <!-- CTA Section -->
-  <Section>
-    <div class="container mx-auto px-6">
-      <div class="card bg-gradient-to-r from-primary to-secondary text-primary-content shadow-xl">
-        <div class="card-body text-center">
-          <h2 class="card-title text-3xl justify-center mb-4">Newsletter abonnieren</h2>
-          <p class="text-lg mb-6">Erhalten Sie wöchentlich die besten KI-Tipps und Trends direkt in Ihr Postfach.</p>
-          <div class="card-actions justify-center">
-            <div class="form-control">
-              <div class="input-group flex gap-2">
-                <input 
-                  type="email" 
-                  placeholder="ihre@email.de" 
-                  class="input input-bordered"
-                />
-                <button class="btn">Abonnieren</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </Section>
-{:else}
-  <!-- 404 State -->
-  <section class="hero min-h-[60vh]">
-    <div class="hero-content text-center">
-      <div>
-        <h1 class="text-5xl font-bold">Artikel nicht gefunden</h1>
-        <p class="py-6">Der gesuchte Artikel existiert leider nicht.</p>
-        <a href={localizeHref('/blog')} class="btn btn-primary">← Zurück zum Blog</a>
-      </div>
-    </div>
-  </section>
-{/if}
+  .blog-post {
+    @apply pb-20;
+  }
+
+  .post-header {
+    @apply bg-base-200 py-14;
+    .inner {
+      @apply mx-auto flex max-w-3xl flex-col gap-4 px-4;
+    }
+    .back-link {
+      @apply text-primary flex cursor-pointer items-center gap-1.5 text-sm font-medium transition-opacity hover:opacity-70;
+      svg {
+        @apply h-4 w-4;
+      }
+    }
+    .badge {
+      @apply bg-primary/10 text-primary w-fit rounded-full px-3 py-0.5 text-xs font-semibold;
+    }
+    h1 {
+      @apply text-base-content text-4xl font-bold leading-tight md:text-5xl;
+    }
+    .excerpt {
+      @apply text-base-content/70 text-xl leading-relaxed;
+    }
+    time {
+      @apply text-base-content/50 text-sm;
+    }
+  }
+
+  .cover-image {
+    @apply mx-auto max-w-5xl px-4 pt-10;
+    img {
+      @apply h-auto w-full rounded-2xl object-cover shadow-lg;
+      max-height: 480px;
+    }
+  }
+
+  .post-content {
+    @apply pt-10;
+    .inner {
+      @apply mx-auto max-w-3xl px-4;
+    }
+  }
+
+  .prose {
+    :global(h1) { @apply text-base-content mt-10 mb-4 text-3xl font-bold; }
+    :global(h2) { @apply text-base-content mt-8 mb-3 text-2xl font-bold; }
+    :global(h3) { @apply text-base-content mt-6 mb-2 text-xl font-semibold; }
+    :global(p) { @apply text-base-content/80 mb-4 leading-relaxed; }
+    :global(ul), :global(ol) { @apply text-base-content/80 mb-4 pl-6; }
+    :global(ul) { @apply list-disc; }
+    :global(ol) { @apply list-decimal; }
+    :global(li) { @apply mb-1.5; }
+    :global(strong) { @apply text-base-content font-semibold; }
+    :global(a) { @apply text-primary underline; }
+    :global(blockquote) {
+      @apply border-primary/40 text-base-content/70 my-6 border-l-4 pl-4 italic;
+    }
+    :global(code) {
+      @apply bg-base-200 rounded px-1.5 py-0.5 font-mono text-sm;
+    }
+    :global(pre) {
+      @apply bg-base-200 mb-4 overflow-x-auto rounded-xl p-4;
+      :global(code) { @apply bg-transparent p-0; }
+    }
+    :global(hr) { @apply border-base-300 my-8; }
+  }
+
+  .newsletter-section {
+    @apply pt-16;
+    .inner {
+      @apply mx-auto max-w-3xl px-4;
+    }
+  }
+</style>

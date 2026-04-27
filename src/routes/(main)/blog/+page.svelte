@@ -1,182 +1,228 @@
 <script lang="ts">
-  import Section from '$lib/components/ui/section.svelte';
-  import BlogCard from '$lib/components/blog/BlogCard.svelte';
-  import { posts, getFeaturedPosts, getRecentPosts } from '$lib/data/blog/posts';
-  import { m } from '$lib/paraglide/messages';
-  import { localizeHref } from '$lib/paraglide/runtime';
+  import { resolve } from '$app/paths';
+  import Fuse from 'fuse.js';
+  import type { PostMeta } from '$lib/blog';
 
-  let selectedCategory = $state('all');
+  let { data } = $props();
+
+  const categories = $derived(['Alle', ...new Set((data.posts as PostMeta[]).map((p) => p.category))]);
+
+  let selectedCategory = $state('Alle');
   let searchQuery = $state('');
 
-  const categories = ['all', 'KI-Agenten', 'Business OS', 'Tutorial', 'Case Study', 'Branchen', 'Technologie'];
+  const fuse = $derived(
+    new Fuse(data.posts as PostMeta[], {
+      keys: ['title', 'excerpt', 'category'],
+      threshold: 0.35
+    })
+  );
 
-  let filteredPosts = $derived(() => {
-    let result = posts;
-    
-    if (selectedCategory !== 'all') {
-      result = result.filter(p => p.category === selectedCategory);
+  const filteredPosts = $derived.by(() => {
+    let result: PostMeta[] = data.posts;
+
+    if (searchQuery.trim().length > 1) {
+      result = fuse.search(searchQuery).map((r) => r.item);
     }
-    
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
-      result = result.filter(p => 
-        p.title.toLowerCase().includes(query) ||
-        p.excerpt.toLowerCase().includes(query) ||
-        p.tags.some(t => t.toLowerCase().includes(query))
-      );
+
+    if (selectedCategory !== 'Alle') {
+      result = result.filter((p) => p.category === selectedCategory);
     }
-    
+
     return result;
   });
 
-  let featuredPosts = $derived(getFeaturedPosts());
-  let recentPosts = $derived(getRecentPosts(3));
+  function formatDate(dateStr: string) {
+    return new Intl.DateTimeFormat('de-DE', { day: '2-digit', month: 'long', year: 'numeric' }).format(
+      new Date(dateStr)
+    );
+  }
 </script>
 
 <svelte:head>
-  <title>Blog - raspb | KI-Agenten, Business OS & Webentwicklung</title>
-  <meta name="description" content="Tipps, Trends und Wissen rund um KI-Agenten, Business OS, Webentwicklung und Digitalisierung für KMUs. Praxisnahe Artikel von den Experten." />
-  <meta property="og:title" content="Blog - raspb" />
-  <meta property="og:description" content="KI-Agenten, Business OS und Webentwicklung - aktuelle Einblicke und Praxiswissen." />
-  <meta property="og:type" content="blog" />
+  <title>Blog | raspb — IT-Wissen für den Mittelstand</title>
+  <meta name="description" content="Praxisnahes IT-Wissen für KMUs: KI, Webentwicklung, Prozessautomatisierung und IT-Sicherheit — erklärt ohne Fachjargon." />
+  <meta property="og:title" content="Blog | raspb — IT-Wissen für den Mittelstand" />
+  <meta property="og:description" content="Praxisnahes IT-Wissen für KMUs: KI, Webentwicklung, Prozessautomatisierung und IT-Sicherheit — erklärt ohne Fachjargon." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://raspb.de/blog" />
 </svelte:head>
 
-<!-- Hero Section -->
-<section class="hero bg-gradient-to-br from-primary/10 to-secondary/10 py-20">
-  <div class="container mx-auto px-6 text-center">
-    <h1 class="text-5xl font-bold mb-6">
-      {m.blog_hero_title() || 'raspb Blog'}
-    </h1>
-    <p class="text-xl text-base-content/70 max-w-2xl mx-auto mb-8">
-      {m.blog_hero_subtitle() || 'Tipps, Trends und Wissen rund um KI-Agenten, Business OS und Webentwicklung für KMUs.'}
-    </p>
-    
-    <!-- Newsletter Signup -->
-    <div class="card bg-base-100 shadow-xl max-w-md mx-auto">
-      <div class="card-body">
-        <h2 class="card-title justify-center text-lg">📬 Newsletter abonnieren</h2>
-        <p class="text-sm text-base-content/70">Wöchentliche KI-Insights direkt in Ihr Postfach.</p>
-        <div class="form-control">
-          <div class="input-group flex gap-2">
-            <input 
-              type="email" 
-              placeholder="ihre@email.de" 
-              class="input input-bordered flex-1"
-            />
-            <button class="btn btn-primary">Abonnieren</button>
-          </div>
-        </div>
-      </div>
-    </div>
+<section class="blog-hero">
+  <div class="inner">
+    <h1>Blog</h1>
+    <p>Praxisnahes IT-Wissen für den Mittelstand — ohne Fachjargon.</p>
   </div>
 </section>
 
-<!-- Featured Posts -->
-{#if featuredPosts.length > 0}
-  <Section>
-    <div class="container mx-auto px-6">
-      <h2 class="text-3xl font-bold mb-8">⭐ Featured Articles</h2>
-      <div class="grid md:grid-cols-2 gap-8">
-        {#each featuredPosts as post}
-          <BlogCard {post} featured={true} />
-        {/each}
-      </div>
-    </div>
-  </Section>
-{/if}
-
-<!-- Filter & Search -->
-<Section>
-  <div class="container mx-auto px-6">
-    <div class="flex flex-col md:flex-row gap-4 mb-8">
-      <!-- Search -->
-      <div class="form-control flex-1">
-        <input 
-          type="text" 
-          placeholder="🔍 Artikel suchen..." 
-          class="input input-bordered w-full"
-          bind:value={searchQuery}
-        />
-      </div>
-      
-      <!-- Category Filter -->
-      <div class="flex flex-wrap gap-2">
-        {#each categories as category}
-          <button 
-            class="btn btn-sm {selectedCategory === category ? 'btn-primary' : 'btn-outline'}"
-            onclick={() => selectedCategory = category}
-          >
-            {category === 'all' ? 'Alle' : category}
-          </button>
-        {/each}
-      </div>
+<section class="blog-controls">
+  <div class="inner">
+    <div class="search-box">
+      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </svg>
+      <input
+        type="search"
+        placeholder="Artikel suchen…"
+        bind:value={searchQuery}
+        aria-label="Artikel suchen"
+      />
     </div>
 
-    <!-- Posts Grid -->
-    {#if filteredPosts.length > 0}
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {#each filteredPosts as post (post.slug)}
-          <BlogCard {post} />
-        {/each}
-      </div>
-    {:else}
-      <div class="text-center py-12">
-        <p class="text-xl text-base-content/50">Keine Artikel gefunden.</p>
-        <button 
-          class="btn btn-primary mt-4"
-          onclick={() => { selectedCategory = 'all'; searchQuery = ''; }}
+    <div class="category-filter" role="group" aria-label="Kategorie filtern">
+      {#each categories as cat}
+        <button
+          class="cat-btn"
+          class:active={selectedCategory === cat}
+          onclick={() => (selectedCategory = cat)}
         >
-          Filter zurücksetzen
-        </button>
-      </div>
-    {/if}
-  </div>
-</Section>
-
-<!-- Categories Overview -->
-<Section>
-  <div class="container mx-auto px-6">
-    <h2 class="text-3xl font-bold mb-8">Kategorien</h2>
-    <div class="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
-      {#each categories.slice(1) as category}
-        <button 
-          class="card bg-base-200 hover:bg-base-300 transition-colors cursor-pointer"
-          onclick={() => selectedCategory = category}
-        >
-          <div class="card-body items-center text-center p-4">
-            <span class="text-2xl">
-              {#if category === 'KI-Agenten'}🤖
-              {:else if category === 'Business OS'}⚡
-              {:else if category === 'Tutorial'}📚
-              {:else if category === 'Case Study'}📊
-              {:else if category === 'Branchen'}🏢
-              {:else if category === 'Technologie'}💻
-              {/if}
-            </span>
-            <h3 class="card-title text-sm">{category}</h3>
-            <p class="text-xs text-base-content/60">
-              {posts.filter(p => p.category === category).length} Artikel
-            </p>
-          </div>
+          {cat}
         </button>
       {/each}
     </div>
   </div>
-</Section>
+</section>
 
-<!-- CTA Section -->
-<Section>
-  <div class="container mx-auto px-6">
-    <div class="card bg-gradient-to-r from-primary to-secondary text-primary-content shadow-xl">
-      <div class="card-body text-center">
-        <h2 class="card-title text-3xl justify-center mb-4">Bereit für Ihr KI-Projekt?</h2>
-        <p class="text-lg mb-6">Lassen Sie sich von unseren Experten beraten und starten Sie noch heute mit der Automatisierung.</p>
-        <div class="card-actions justify-center">
-          <a href={localizeHref('/contact')} class="btn btn-lg">
-            Kostenlose Beratung anfordern
-          </a>
-        </div>
+<section class="blog-grid">
+  <div class="inner">
+    {#if filteredPosts.length === 0}
+      <p class="no-results">Keine Artikel gefunden. Bitte passen Sie Ihre Suche an.</p>
+    {:else}
+      <div class="grid">
+        {#each filteredPosts as post (post.slug)}
+          <article class="card">
+            <a class="card-image-link" href={resolve(`/blog/${post.slug}`)} aria-label={post.title}>
+              <img
+                src={post.coverImage}
+                alt={post.title}
+                loading="lazy"
+                width="640"
+                height="360"
+                onerror={(e) => {
+                  (e.currentTarget as HTMLImageElement).src =
+                    'https://picsum.photos/seed/' + post.slug + '/640/360';
+                }}
+              />
+            </a>
+            <div class="card-body">
+              <span class="badge">{post.category}</span>
+              <h2>
+                <a class="title-link" href={resolve(`/blog/${post.slug}`)}>
+                  {post.title}
+                </a>
+              </h2>
+              <p class="excerpt">{post.excerpt}</p>
+              <div class="card-footer">
+                <time datetime={post.date}>{formatDate(post.date)}</time>
+                <a class="btn-read" href={resolve(`/blog/${post.slug}`)}>Weiterlesen</a>
+              </div>
+            </div>
+          </article>
+        {/each}
       </div>
-    </div>
+    {/if}
   </div>
-</Section>
+</section>
+
+<style lang="postcss">
+  @reference '../../../app.css';
+
+  .blog-hero {
+    @apply bg-base-200 py-20 text-center;
+    .inner {
+      @apply mx-auto max-w-3xl px-4;
+      h1 {
+        @apply text-base-content mb-4 text-5xl font-bold;
+      }
+      p {
+        @apply text-base-content/70 text-xl;
+      }
+    }
+  }
+
+  .blog-controls {
+    @apply border-base-200 border-b py-6;
+    .inner {
+      @apply mx-auto flex max-w-7xl flex-col gap-4 px-4 sm:flex-row sm:items-center sm:justify-between;
+    }
+  }
+
+  .search-box {
+    @apply border-base-300 bg-base-100 focus-within:border-primary flex items-center gap-2 rounded-xl border px-4 py-2 transition-colors;
+    svg {
+      @apply text-base-content/40 h-5 w-5 shrink-0;
+    }
+    input {
+      @apply bg-transparent text-base outline-none placeholder:text-base-content/40 w-full;
+    }
+  }
+
+  .category-filter {
+    @apply flex flex-wrap gap-2;
+    .cat-btn {
+      @apply border-base-300 text-base-content/70 cursor-pointer rounded-full border px-4 py-1.5 text-sm font-medium transition-all duration-200;
+      &:hover {
+        @apply border-primary text-primary;
+      }
+      &.active {
+        @apply bg-primary border-primary text-primary-content;
+      }
+    }
+  }
+
+  .blog-grid {
+    @apply py-12;
+    .inner {
+      @apply mx-auto max-w-7xl px-4;
+    }
+    .no-results {
+      @apply text-base-content/60 py-12 text-center text-lg;
+    }
+  }
+
+  .grid {
+    @apply grid gap-8 sm:grid-cols-2 lg:grid-cols-3;
+  }
+
+  .card {
+    @apply bg-base-100 border-base-200 flex flex-col overflow-hidden rounded-2xl border shadow-sm transition-shadow duration-300 hover:shadow-lg;
+
+    .card-image-link {
+      @apply block cursor-pointer overflow-hidden p-0;
+      img {
+        @apply h-48 w-full object-cover transition-transform duration-500;
+      }
+      &:hover img {
+        @apply scale-105;
+      }
+    }
+
+    .card-body {
+      @apply flex flex-1 flex-col gap-3 p-5;
+    }
+
+    .badge {
+      @apply bg-primary/10 text-primary w-fit rounded-full px-3 py-0.5 text-xs font-semibold;
+    }
+
+    h2 {
+      @apply text-base-content text-xl font-bold leading-snug;
+      .title-link {
+        @apply cursor-pointer text-left transition-colors duration-200 hover:text-primary;
+      }
+    }
+
+    .excerpt {
+      @apply text-base-content/70 flex-1 text-sm leading-relaxed;
+    }
+
+    .card-footer {
+      @apply flex items-center justify-between pt-2;
+      time {
+        @apply text-base-content/50 text-xs;
+      }
+      .btn-read {
+        @apply text-primary cursor-pointer text-sm font-semibold transition-colors hover:underline;
+      }
+    }
+  }
+</style>
