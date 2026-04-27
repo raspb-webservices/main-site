@@ -1,5 +1,5 @@
 {
-  "packageManager": "yarn@4.13.0",
+  "packageManager": "yarn@4.14.1",
   "name": "main-site",
   "version": "0.0.1",
   "type": "module",
