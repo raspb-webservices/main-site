@@ -4,7 +4,7 @@
 
 [build.environment]
   NODE_VERSION = "20"
-  YARN_FLAGS = "--immutable"
+  YARN_FLAGS = ""
 
 [functions]
   directory = "functions"
