@@ -108,6 +108,20 @@ export default defineConfig({
           ]
         },
         {
+          pattern: '/blog',
+          localized: [
+            ['de', '/de/blog'],
+            ['en', '/en/blog']
+          ]
+        },
+        {
+          pattern: '/blog/:slug',
+          localized: [
+            ['de', '/de/blog/:slug'],
+            ['en', '/en/blog/:slug']
+          ]
+        },
+        {
           pattern: '/login',
           localized: [
             ['de', '/de/anmelden'],

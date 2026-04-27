@@ -125,6 +125,14 @@
       >
       <button
         class="nav-item"
+        class:active={page.url.pathname == localizeHref('/blog')}
+        onclick={() => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          goto(resolve(localizeHref('/blog') as any));
+        }}>{m.menu_blog()}</button
+      >
+      <button
+        class="nav-item"
         class:active={page.url.pathname == localizeHref('/about-us')}
         onclick={() => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -223,6 +231,15 @@
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             goto(resolve(localizeHref('/insights') as any));
           }}>{m.menu_insights()}</button
+        >
+        <button
+          class="nav-item"
+          class:active={page.url.pathname == localizeHref('/blog')}
+          onclick={() => {
+            closeMobileNav();
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            goto(resolve(localizeHref('/blog') as any));
+          }}>{m.menu_blog()}</button
         >
         <button
           class="nav-item"
