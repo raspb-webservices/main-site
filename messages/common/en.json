@@ -91,5 +91,6 @@
   "offline_title": "Offline | raspb Webservices",
   "teaser_default_headline": "No headline",
   "teaser_default_subheadline": "No sub-headline",
-  "title": "This is the title"
+  "title": "This is the title",
+  "menu_blog": "Blog"
 }
