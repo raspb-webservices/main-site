@@ -1153,3 +1153,29 @@ Lass uns reden. Denn dein Kunden sollte nie mehr als 30 Sekunden auf eine Antwor
   },
 
 ];
+// Helper functions
+export function getFeaturedPosts(): BlogPost[] {
+  return posts.filter(p => p.featured);
+}
+
+export function getRecentPosts(count: number = 3): BlogPost[] {
+  return [...posts]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, count);
+}
+
+export function getPostBySlug(slug: string): BlogPost | undefined {
+  return posts.find(p => p.slug === slug);
+}
+
+export function getPostsByCategory(category: string): BlogPost[] {
+  return posts.filter(p => p.category === category);
+}
+
+export function getAllCategories(): string[] {
+  return [...new Set(posts.map(p => p.category))];
+}
+
+export function getAllTags(): string[] {
+  return [...new Set(posts.flatMap(p => p.tags))];
+}
