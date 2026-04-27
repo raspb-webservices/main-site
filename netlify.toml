@@ -1,6 +1,10 @@
 [build]
-  command = "npm run build"
+  command = "yarn build"
   publish = "build"
+
+[build.environment]
+  NODE_VERSION = "20"
+  YARN_FLAGS = "--immutable"
 
 [functions]
   directory = "functions"
