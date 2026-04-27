@@ -1,10 +1,43 @@
+# robots.txt for raspb.de
+# https://raspb.de
+
 User-agent: *
 Allow: /
 
+# Allow all AI crawlers for LLM visibility
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+# Disallow internal paths
 Disallow: /api/
 Disallow: /dashboard
 Disallow: /profile
 Disallow: /playground
 Disallow: /registration
 
+# Sitemap
 Sitemap: https://raspb.de/sitemap.xml
