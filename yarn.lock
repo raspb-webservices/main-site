@@ -2763,6 +2763,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fuse.js@npm:^7.3.0":
+  version: 7.3.0
+  resolution: "fuse.js@npm:7.3.0"
+  checksum: 10c0/5e60b6687f3f23dc242d387f355ba970caf6f5cbaedb5767e849ef4014fa71a6109c71810ff06a1c3d4f05e4a6ab7d1fc3c8e2ef98e286a60ff0052ae30e930a
+  languageName: node
+  linkType: hard
+
 "generator-function@npm:^2.0.0":
   version: 2.0.1
   resolution: "generator-function@npm:2.0.1"
@@ -3540,6 +3547,7 @@ __metadata:
     eslint-plugin-svelte: "npm:^3.17.0"
     fantasy-name-generator: "npm:^2.0.0"
     flag-icons: "npm:^7.5.0"
+    fuse.js: "npm:^7.3.0"
     globals: "npm:^17.4.0"
     graphql: "npm:^16.13.2"
     graphql-request: "npm:^7.4.0"

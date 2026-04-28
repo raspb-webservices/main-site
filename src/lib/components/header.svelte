@@ -117,6 +117,13 @@
       >
       <button
         class="nav-item"
+        class:active={page.url.pathname.startsWith('/blog')}
+        onclick={() => {
+          goto(resolve('/blog'));
+        }}>{m.menu_blog()}</button
+      >
+      <button
+        class="nav-item"
         class:active={page.url.pathname == localizeHref('/insights')}
         onclick={() => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -214,6 +221,14 @@
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             goto(resolve(localizeHref('/services') as any));
           }}>{m.menu_services()}</button
+        >
+        <button
+          class="nav-item"
+          class:active={page.url.pathname.startsWith('/blog')}
+          onclick={() => {
+            closeMobileNav();
+            goto(resolve('/blog'));
+          }}>{m.menu_blog()}</button
         >
         <button
           class="nav-item"
