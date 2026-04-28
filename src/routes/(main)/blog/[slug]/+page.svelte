@@ -1,137 +1,154 @@
 <script lang="ts">
-  import type { PageData } from './$types';
+  import { goto } from '$app/navigation';
+  import { resolve } from '$app/paths';
   import NewsletterSignup from '$lib/components/newsletter-signup.svelte';
 
-  let { data }: { data: PageData } = $props();
-  const { post } = data;
+  let { data } = $props();
 
-  function formatDate(dateStr: string): string {
-    return new Date(dateStr).toLocaleDateString('de-DE', {
-      day: '2-digit',
-      month: 'long',
-      year: 'numeric'
-    });
+  function formatDate(dateStr: string) {
+    return new Intl.DateTimeFormat('de-DE', { day: '2-digit', month: 'long', year: 'numeric' }).format(
+      new Date(dateStr)
+    );
   }
+
+  const canonicalUrl = $derived(`https://raspb.de/blog/${data.meta.slug}`);
 </script>
 
 <svelte:head>
-  <title>{post.title} | raspb Webservices</title>
-  <meta name="description" content={post.excerpt} />
-  <meta property="og:title" content={post.title} />
-  <meta property="og:description" content={post.excerpt} />
+  <title>{data.meta.title} | raspb Blog</title>
+  <meta name="description" content={data.meta.excerpt} />
+  <link rel="canonical" href={canonicalUrl} />
+  <meta property="og:title" content={data.meta.title} />
+  <meta property="og:description" content={data.meta.excerpt} />
   <meta property="og:type" content="article" />
-  {#if post.coverImage}
-    <meta property="og:image" content={post.coverImage} />
+  <meta property="og:url" content={canonicalUrl} />
+  {#if data.meta.coverImage}
+    <meta property="og:image" content="https://raspb.de{data.meta.coverImage}" />
   {/if}
-  <link rel="canonical" href="https://raspb.de/blog/{post.slug}" />
+  <meta property="article:published_time" content={data.meta.date} />
 </svelte:head>
 
-<article class="blog-article">
-  <header class="article-hero">
-    <div class="hero-inner">
-      <div class="article-meta">
-        <span class="category-badge">{post.category}</span>
-        <time class="article-date" datetime={post.date}>{formatDate(post.date)}</time>
-      </div>
-      <h1 class="article-title">{post.title}</h1>
-      <p class="article-excerpt">{post.excerpt}</p>
+<article class="blog-post">
+  <header class="post-header">
+    <div class="inner">
+      <button class="back-link" onclick={() => goto(resolve('/blog'))}>
+        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+        Alle Artikel
+      </button>
+      <span class="badge">{data.meta.category}</span>
+      <h1>{data.meta.title}</h1>
+      <p class="excerpt">{data.meta.excerpt}</p>
+      <time datetime={data.meta.date}>{formatDate(data.meta.date)}</time>
     </div>
   </header>
 
-  <div class="article-body">
-    <div class="prose-wrapper">
-      <a href="/blog" class="back-link">← Zurück zum Blog</a>
-      <div class="prose">{@html post.content}</div>
+  {#if data.meta.coverImage}
+    <div class="cover-image">
+      <img
+        src={data.meta.coverImage}
+        alt={data.meta.title}
+        width="1200"
+        height="630"
+        loading="eager"
+        fetchpriority="high"
+        onerror={(e) => {
+          (e.currentTarget as HTMLImageElement).src =
+            'https://picsum.photos/seed/' + data.meta.slug + '/1200/630';
+        }}
+      />
+    </div>
+  {/if}
+
+  <div class="post-content">
+    <div class="inner prose">
+      <svelte:component this={data.content} />
+    </div>
+  </div>
+
+  <div class="newsletter-section">
+    <div class="inner">
+      <NewsletterSignup />
     </div>
   </div>
 </article>
 
-<section class="newsletter-section">
-  <NewsletterSignup />
-</section>
-
 <style lang="postcss">
   @reference '../../../../app.css';
 
-
-  .blog-article {
-    @apply min-h-screen;
+  .blog-post {
+    @apply pb-20;
   }
 
-  .article-hero {
-    background-image: radial-gradient(
-      100% 308.42% at 102.05% 0%,
-      rgb(13, 116, 224) 0%,
-      rgb(160, 61, 206) 36.98%,
-      rgb(18, 29, 51) 100%
-    );
-    @apply flex min-h-72 items-center justify-center text-white;
-
-    .hero-inner {
-      @apply mx-auto max-w-3xl px-6 py-16 text-center;
-
-      .article-meta {
-        @apply mb-4 flex items-center justify-center gap-3;
+  .post-header {
+    @apply bg-base-200 py-14;
+    .inner {
+      @apply mx-auto flex max-w-3xl flex-col gap-4 px-4;
+    }
+    .back-link {
+      @apply text-primary flex cursor-pointer items-center gap-1.5 text-sm font-medium transition-opacity hover:opacity-70;
+      svg {
+        @apply h-4 w-4;
       }
-
-      .category-badge {
-        @apply rounded-full bg-white/20 px-3 py-1 text-xs font-semibold backdrop-blur-sm;
-      }
-
-      .article-date {
-        @apply text-sm opacity-75;
-      }
-
-      .article-title {
-        @apply mb-4 text-3xl font-bold leading-tight md:text-4xl;
-      }
-
-      .article-excerpt {
-        @apply text-lg opacity-85;
-      }
+    }
+    .badge {
+      @apply bg-primary/10 text-primary w-fit rounded-full px-3 py-0.5 text-xs font-semibold;
+    }
+    h1 {
+      @apply text-base-content text-4xl font-bold leading-tight md:text-5xl;
+    }
+    .excerpt {
+      @apply text-base-content/70 text-xl leading-relaxed;
+    }
+    time {
+      @apply text-base-content/50 text-sm;
     }
   }
 
-  .article-body {
-    @apply bg-base-100 py-16;
+  .cover-image {
+    @apply mx-auto max-w-5xl px-4 pt-10;
+    img {
+      @apply h-auto w-full rounded-2xl object-cover shadow-lg;
+      max-height: 480px;
+    }
+  }
 
-    .prose-wrapper {
-      @apply mx-auto max-w-3xl px-6;
-
-      .back-link {
-        @apply text-primary mb-8 inline-block text-sm font-semibold hover:underline;
-      }
+  .post-content {
+    @apply pt-10;
+    .inner {
+      @apply mx-auto max-w-3xl px-4;
     }
   }
 
   .prose {
-    @apply text-base-content max-w-none text-base leading-relaxed;
-
-    :global(h1, h2, h3, h4) {
-      @apply font-bold leading-snug mt-8 mb-4;
-    }
-    :global(h1) { @apply text-3xl; }
-    :global(h2) { @apply text-2xl; }
-    :global(h3) { @apply text-xl; }
-    :global(p) { @apply mb-4; }
-    :global(ul, ol) { @apply mb-4 pl-6; }
+    :global(h1) { @apply text-base-content mt-10 mb-4 text-3xl font-bold; }
+    :global(h2) { @apply text-base-content mt-8 mb-3 text-2xl font-bold; }
+    :global(h3) { @apply text-base-content mt-6 mb-2 text-xl font-semibold; }
+    :global(p) { @apply text-base-content/80 mb-4 leading-relaxed; }
+    :global(ul), :global(ol) { @apply text-base-content/80 mb-4 pl-6; }
     :global(ul) { @apply list-disc; }
     :global(ol) { @apply list-decimal; }
-    :global(li) { @apply mb-1; }
-    :global(strong) { @apply font-bold; }
-    :global(em) { @apply italic; }
-    :global(a) { @apply text-primary underline hover:no-underline; }
+    :global(li) { @apply mb-1.5; }
+    :global(strong) { @apply text-base-content font-semibold; }
+    :global(a) { @apply text-primary underline; }
+    :global(blockquote) {
+      @apply border-primary/40 text-base-content/70 my-6 border-l-4 pl-4 italic;
+    }
+    :global(code) {
+      @apply bg-base-200 rounded px-1.5 py-0.5 font-mono text-sm;
+    }
+    :global(pre) {
+      @apply bg-base-200 mb-4 overflow-x-auto rounded-xl p-4;
+      :global(code) { @apply bg-transparent p-0; }
+    }
     :global(hr) { @apply border-base-300 my-8; }
-    :global(blockquote) { @apply border-l-4 border-primary pl-4 italic opacity-80 my-4; }
-    :global(code) { @apply bg-base-200 px-1.5 py-0.5 rounded text-sm font-mono; }
-    :global(pre) { @apply bg-base-200 p-4 rounded-xl overflow-x-auto mb-4; }
-    :global(pre code) { @apply bg-transparent p-0; }
   }
 
   .newsletter-section {
-    @apply bg-gray-50 py-16;
-    > :global(*) {
-      @apply mx-auto max-w-4xl px-6;
+    @apply pt-16;
+    .inner {
+      @apply mx-auto max-w-3xl px-4;
     }
   }
 </style>

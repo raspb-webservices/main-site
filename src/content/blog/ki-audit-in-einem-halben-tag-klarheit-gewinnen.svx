@@ -1,0 +1,109 @@
+---
+title: "KI-Audit: In einem halben Tag herausfinden, wo KI in Ihrem Unternehmen wirklich hilft"
+slug: "ki-audit-in-einem-halben-tag-klarheit-gewinnen"
+category: "KI & Automatisierung"
+date: "2026-04-27"
+excerpt: "Viele Unternehmen wissen, dass KI helfen könnte — aber nicht wo und wie. Ein KI-Audit löst genau dieses Problem: strukturiert, konkret, mit klarem Ergebnis."
+coverImage: "/images/blog/ki-audit-workshop.jpg"
+published: true
+---
+
+# KI-Audit: In einem halben Tag herausfinden, wo KI in Ihrem Unternehmen wirklich hilft
+
+"Wir sollten eigentlich auch KI einsetzen." — Diesen Satz haben in den letzten zwei Jahren fast alle Unternehmer irgendwann gedacht oder gesagt. Aber was dann? Welches Tool? Für welchen Prozess? Wer setzt es um? Was kostet das?
+
+Genau hier hängen die meisten Unternehmen fest: zwischen dem Wissen, dass etwas passieren sollte — und dem konkreten ersten Schritt.
+
+Ein KI-Audit löst dieses Problem.
+
+---
+
+## Was ein KI-Audit ist — und was nicht
+
+Ein KI-Audit ist kein Vortrag über Künstliche Intelligenz. Kein theoretisches Framework. Keine Präsentation über ChatGPT.
+
+Es ist eine strukturierte Analyse Ihrer eigenen Prozesse — mit dem Ziel, konkret zu sagen: **Wo kann KI bei Ihnen Zeit und Geld sparen, und was würde das kosten?**
+
+Der Fokus liegt auf dem, was wirklich zählt: Ihr Betrieb, Ihre Mitarbeiter, Ihre Abläufe. Nicht auf Technologie um der Technologie willen.
+
+---
+
+## Wie ein KI-Audit abläuft
+
+### Schritt 1: Vorbereitungsgespräch (30 Minuten)
+
+Vor dem eigentlichen Workshop findet ein kurzes Gespräch statt. Ziel: verstehen, womit Ihr Unternehmen täglich beschäftigt ist, welche Prozesse als aufwendig oder fehleranfällig gelten — und wo Sie selbst den größten Schmerz spüren.
+
+Das Gespräch dauert 30 Minuten. Es geht nicht um Technologie, sondern um Ihren Alltag.
+
+### Schritt 2: Workshop-Tag (4 Stunden)
+
+Der Workshop kann vor Ort oder remote stattfinden. In vier Stunden werden die relevanten Prozesse gemeinsam durchleuchtet:
+
+- Wie läuft es heute ab?
+- Wo entstehen Reibungsverluste, Wartezeiten, Fehler?
+- Was kostet das in Arbeitsstunden pro Monat?
+- Wo könnten automatisierte Lösungen ansetzen?
+
+Das Ergebnis ist keine To-Do-Liste für später — es ist eine priorisierte Analyse mit konkreten Empfehlungen.
+
+### Schritt 3: Report und Briefing
+
+Innerhalb von fünf Werktagen erhalten Sie einen schriftlichen Report. Darin: die Befunde, die Top-3-Empfehlungen mit Umsetzbarkeitseinschätzung und eine grobe ROI-Kalkulation — wie viel Zeit und Geld lässt sich durch welche Maßnahme einsparen?
+
+Ein abschließendes Briefing-Gespräch (30 Minuten) bespricht die Ergebnisse und klärt offene Fragen.
+
+---
+
+## Was am Ende vorliegt
+
+Nach dem Audit wissen Sie:
+
+- **Welche Prozesse** das höchste Automatisierungspotenzial haben
+- **Was es kosten würde**, diese umzusetzen
+- **In welcher Reihenfolge** Maßnahmen sinnvoll sind (Quick Wins zuerst)
+- **Welche Technologien** für Ihren Fall passend wären
+
+Und — wichtig — was sich nicht lohnt. Denn nicht jeder Prozess muss automatisiert werden. Ehrlichkeit gehört zum Angebot.
+
+---
+
+## Was ein KI-Audit kostet
+
+| Paket | Preis | Umfang |
+|-------|-------|--------|
+| **Kompakt** | 990 € | 1–2 Kernprozesse, 1 Workshop-Tag, Report |
+| **Standard** | 1.990 € | Alle relevanten Prozesse (bis 8), 2 Workshop-Tage, Aktionsplan mit ROI-Kalkulation |
+
+### BAFA-Förderung: Bis zu 80% erstattet
+
+Was viele nicht wissen: Beratungsleistungen zur Digitalisierung und zum KI-Einsatz können über das BAFA-Programm "Unternehmensberatung für KMU" gefördert werden — mit bis zu 2.800 € netto.
+
+Das bedeutet in der Praxis: Das Standard-Audit (1.990 €) kann nach Förderung einen **effektiven Eigenanteil von unter 400 €** haben.
+
+Wir unterstützen bei der Vorbereitung des Förderantrags.
+
+---
+
+## Für wen der KI-Audit geeignet ist
+
+Der Audit passt gut zu Unternehmen, die:
+
+- Wissen wollen, wo KI konkret helfen kann — ohne selbst die Technologie zu kennen
+- Erste Projekte planen und eine solide Entscheidungsgrundlage brauchen
+- Vermuten, dass ihre Prozesse Potenzial haben — und das bestätigen oder widerlegen möchten
+- Bereits KI-Tools im Einsatz haben und wissen möchten, ob sie das Richtige nutzen
+
+Nicht geeignet ist der Audit für Unternehmen, die noch keinen operativen Betrieb haben (Startups ohne Prozesse) oder für Konzerne mit eigenen KI-Teams.
+
+---
+
+## Was unterscheidet uns von klassischen Unternehmensberatern?
+
+Wir reden nicht über KI — wir nutzen sie täglich. raspb betreibt intern ein Team aus 14 KI-Agenten, die Aufgaben von der Entwicklung bis zum Marketing übernehmen. Wir kennen die realen Grenzen, die echten Kostentreiber und die Lösungen, die tatsächlich funktionieren.
+
+Das macht den Unterschied zwischen Theorie und Praxis.
+
+---
+
+*Interesse an einem KI-Audit? [Jetzt Gespräch vereinbaren](/kontakt) — das Erstgespräch ist kostenlos und unverbindlich.*

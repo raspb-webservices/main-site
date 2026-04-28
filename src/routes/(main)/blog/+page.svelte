@@ -1,30 +1,26 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import type { PageData } from './$types';
-  import NewsletterSignup from '$lib/components/newsletter-signup.svelte';
-  import type { Post } from '$lib/blog.server';
+  import { resolve } from '$app/paths';
+  import Fuse from 'fuse.js';
+  import type { PostMeta } from '$lib/blog';
 
-  let { data }: { data: PageData } = $props();
+  let { data } = $props();
 
-  const allPosts: Post[] = data.posts;
-  const categories = ['Alle', ...new Set(allPosts.map((p) => p.category))];
+  const categories = $derived(['Alle', ...new Set((data.posts as PostMeta[]).map((p) => p.category))]);
 
-  let searchQuery = $state('');
   let selectedCategory = $state('Alle');
-  let fuse: import('fuse.js').default<Post> | null = $state(null);
+  let searchQuery = $state('');
 
-  onMount(async () => {
-    const Fuse = (await import('fuse.js')).default;
-    fuse = new Fuse(allPosts, {
+  const fuse = $derived(
+    new Fuse(data.posts as PostMeta[], {
       keys: ['title', 'excerpt', 'category'],
       threshold: 0.35
-    });
-  });
+    })
+  );
 
   const filteredPosts = $derived.by(() => {
-    let result = allPosts;
+    let result: PostMeta[] = data.posts;
 
-    if (searchQuery.trim() && fuse) {
+    if (searchQuery.trim().length > 1) {
       result = fuse.search(searchQuery).map((r) => r.item);
     }
 
@@ -35,45 +31,43 @@
     return result;
   });
 
-  function formatDate(dateStr: string): string {
-    return new Date(dateStr).toLocaleDateString('de-DE', {
-      day: '2-digit',
-      month: 'long',
-      year: 'numeric'
-    });
+  function formatDate(dateStr: string) {
+    return new Intl.DateTimeFormat('de-DE', { day: '2-digit', month: 'long', year: 'numeric' }).format(
+      new Date(dateStr)
+    );
   }
 </script>
 
 <svelte:head>
-  <title>Blog | raspb Webservices</title>
-  <meta
-    name="description"
-    content="Praxiswissen für den Mittelstand: KI, Digitalisierung und Webentwicklung ohne Buzzwords."
-  />
-  <meta property="og:title" content="Blog | raspb Webservices" />
-  <meta
-    property="og:description"
-    content="Praxiswissen für den Mittelstand: KI, Digitalisierung und Webentwicklung ohne Buzzwords."
-  />
+  <title>Blog | raspb — IT-Wissen für den Mittelstand</title>
+  <meta name="description" content="Praxisnahes IT-Wissen für KMUs: KI, Webentwicklung, Prozessautomatisierung und IT-Sicherheit — erklärt ohne Fachjargon." />
+  <meta property="og:title" content="Blog | raspb — IT-Wissen für den Mittelstand" />
+  <meta property="og:description" content="Praxisnahes IT-Wissen für KMUs: KI, Webentwicklung, Prozessautomatisierung und IT-Sicherheit — erklärt ohne Fachjargon." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://raspb.de/blog" />
 </svelte:head>
 
 <section class="blog-hero">
-  <div class="hero-content">
+  <div class="inner">
     <h1>Blog</h1>
-    <p>Praxiswissen für den Mittelstand — ohne Hype, ohne Buzzwords.</p>
+    <p>Praxisnahes IT-Wissen für den Mittelstand — ohne Fachjargon.</p>
   </div>
 </section>
 
 <section class="blog-controls">
-  <div class="controls-inner">
-    <input
-      type="search"
-      class="search-input"
-      placeholder="Artikel suchen..."
-      bind:value={searchQuery}
-      aria-label="Artikel suchen"
-    />
+  <div class="inner">
+    <div class="search-box">
+      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </svg>
+      <input
+        type="search"
+        placeholder="Artikel suchen…"
+        bind:value={searchQuery}
+        aria-label="Artikel suchen"
+      />
+    </div>
+
     <div class="category-filter" role="group" aria-label="Kategorie filtern">
       {#each categories as cat}
         <button
@@ -88,132 +82,147 @@
   </div>
 </section>
 
-<section class="blog-grid-section">
-  <div class="blog-grid">
+<section class="blog-grid">
+  <div class="inner">
     {#if filteredPosts.length === 0}
-      <p class="no-results">Keine Artikel gefunden.</p>
+      <p class="no-results">Keine Artikel gefunden. Bitte passen Sie Ihre Suche an.</p>
     {:else}
-      {#each filteredPosts as post (post.slug)}
-        <article class="post-card">
-          <a href="/blog/{post.slug}" class="card-link" aria-label={post.title}>
-            <div class="card-cover" aria-hidden="true">
-              <span class="category-badge">{post.category}</span>
-            </div>
+      <div class="grid">
+        {#each filteredPosts as post (post.slug)}
+          <article class="card">
+            <a class="card-image-link" href={resolve(`/blog/${post.slug}`)} aria-label={post.title}>
+              <img
+                src={post.coverImage}
+                alt={post.title}
+                loading="lazy"
+                width="640"
+                height="360"
+                onerror={(e) => {
+                  (e.currentTarget as HTMLImageElement).src =
+                    'https://picsum.photos/seed/' + post.slug + '/640/360';
+                }}
+              />
+            </a>
             <div class="card-body">
-              <time class="card-date" datetime={post.date}>{formatDate(post.date)}</time>
-              <h2 class="card-title">{post.title}</h2>
-              <p class="card-excerpt">{post.excerpt}</p>
-              <span class="card-cta">Weiterlesen →</span>
+              <span class="badge">{post.category}</span>
+              <h2>
+                <a class="title-link" href={resolve(`/blog/${post.slug}`)}>
+                  {post.title}
+                </a>
+              </h2>
+              <p class="excerpt">{post.excerpt}</p>
+              <div class="card-footer">
+                <time datetime={post.date}>{formatDate(post.date)}</time>
+                <a class="btn-read" href={resolve(`/blog/${post.slug}`)}>Weiterlesen</a>
+              </div>
             </div>
-          </a>
-        </article>
-      {/each}
+          </article>
+        {/each}
+      </div>
     {/if}
   </div>
-</section>
-
-<section class="newsletter-section">
-  <NewsletterSignup />
 </section>
 
 <style lang="postcss">
   @reference '../../../app.css';
 
   .blog-hero {
-    background-image: radial-gradient(
-      100% 308.42% at 102.05% 0%,
-      rgb(13, 116, 224) 0%,
-      rgb(160, 61, 206) 36.98%,
-      rgb(18, 29, 51) 100%
-    );
-    @apply flex min-h-64 items-center justify-center text-white;
-
-    .hero-content {
-      @apply max-w-3xl px-6 py-16 text-center;
-
+    @apply bg-base-200 py-20 text-center;
+    .inner {
+      @apply mx-auto max-w-3xl px-4;
       h1 {
-        @apply mb-4 text-5xl font-bold;
+        @apply text-base-content mb-4 text-5xl font-bold;
       }
-
       p {
-        @apply text-xl opacity-85;
+        @apply text-base-content/70 text-xl;
       }
     }
   }
 
   .blog-controls {
-    @apply border-b border-gray-100 bg-white py-6 shadow-sm;
-
-    .controls-inner {
-      @apply mx-auto flex max-w-6xl flex-col gap-4 px-6 sm:flex-row sm:items-center;
+    @apply border-base-200 border-b py-6;
+    .inner {
+      @apply mx-auto flex max-w-7xl flex-col gap-4 px-4 sm:flex-row sm:items-center sm:justify-between;
     }
+  }
 
-    .search-input {
-      @apply w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm outline-none transition-all focus:border-blue-500 focus:ring-2 focus:ring-blue-100 sm:max-w-xs;
+  .search-box {
+    @apply border-base-300 bg-base-100 focus-within:border-primary flex items-center gap-2 rounded-xl border px-4 py-2 transition-colors;
+    svg {
+      @apply text-base-content/40 h-5 w-5 shrink-0;
     }
-
-    .category-filter {
-      @apply flex flex-wrap gap-2;
+    input {
+      @apply bg-transparent text-base outline-none placeholder:text-base-content/40 w-full;
     }
+  }
 
+  .category-filter {
+    @apply flex flex-wrap gap-2;
     .cat-btn {
-      @apply cursor-pointer rounded-full border border-gray-200 px-4 py-1.5 text-sm font-medium text-gray-600 transition-all hover:border-blue-400 hover:text-blue-600;
-
+      @apply border-base-300 text-base-content/70 cursor-pointer rounded-full border px-4 py-1.5 text-sm font-medium transition-all duration-200;
+      &:hover {
+        @apply border-primary text-primary;
+      }
       &.active {
-        @apply border-blue-500 bg-blue-500 text-white;
+        @apply bg-primary border-primary text-primary-content;
       }
     }
   }
 
-  .blog-grid-section {
-    @apply bg-gray-50 py-16;
-
-    .blog-grid {
-      @apply mx-auto grid max-w-6xl grid-cols-1 gap-8 px-6 sm:grid-cols-2 lg:grid-cols-3;
+  .blog-grid {
+    @apply py-12;
+    .inner {
+      @apply mx-auto max-w-7xl px-4;
     }
-
     .no-results {
-      @apply col-span-3 py-12 text-center text-gray-500;
+      @apply text-base-content/60 py-12 text-center text-lg;
     }
   }
 
-  .post-card {
-    @apply overflow-hidden rounded-2xl bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-md;
+  .grid {
+    @apply grid gap-8 sm:grid-cols-2 lg:grid-cols-3;
+  }
 
-    .card-link {
-      @apply block no-underline;
-    }
+  .card {
+    @apply bg-base-100 border-base-200 flex flex-col overflow-hidden rounded-2xl border shadow-sm transition-shadow duration-300 hover:shadow-lg;
 
-    .card-cover {
-      @apply relative flex h-44 items-end bg-gradient-to-br from-blue-600 to-purple-700 p-4;
-    }
-
-    .category-badge {
-      @apply rounded-full bg-white/20 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm;
+    .card-image-link {
+      @apply block cursor-pointer overflow-hidden p-0;
+      img {
+        @apply h-48 w-full object-cover transition-transform duration-500;
+      }
+      &:hover img {
+        @apply scale-105;
+      }
     }
 
     .card-body {
-      @apply p-6;
+      @apply flex flex-1 flex-col gap-3 p-5;
     }
 
-    .card-date {
-      @apply text-xs text-gray-400;
+    .badge {
+      @apply bg-primary/10 text-primary w-fit rounded-full px-3 py-0.5 text-xs font-semibold;
     }
 
-    .card-title {
-      @apply mt-1 text-lg font-bold leading-snug text-gray-900;
+    h2 {
+      @apply text-base-content text-xl font-bold leading-snug;
+      .title-link {
+        @apply cursor-pointer text-left transition-colors duration-200 hover:text-primary;
+      }
     }
 
-    .card-excerpt {
-      @apply mt-2 text-sm leading-relaxed text-gray-500;
+    .excerpt {
+      @apply text-base-content/70 flex-1 text-sm leading-relaxed;
     }
 
-    .card-cta {
-      @apply mt-4 inline-block text-sm font-semibold text-blue-600;
+    .card-footer {
+      @apply flex items-center justify-between pt-2;
+      time {
+        @apply text-base-content/50 text-xs;
+      }
+      .btn-read {
+        @apply text-primary cursor-pointer text-sm font-semibold transition-colors hover:underline;
+      }
     }
-  }
-
-  .newsletter-section {
-    @apply bg-white py-16;
   }
 </style>

@@ -6,6 +6,7 @@
   import FOOTER from '$lib/components/footer.svelte';
   import LottieLoader from '$lib/components/lottie-loader.svelte';
   import CookieConsentComponent from '$lib/components/cookie-consent.svelte';
+  import SchemaOrg from '$lib/components/seo/SchemaOrg.svelte';
   import { m } from '$lib/paraglide/messages';
   import auth from '$services/auth-service';
   import { getLocale } from '$lib/paraglide/runtime';
@@ -36,6 +37,7 @@
 </svelte:head>
 
 <div class="wrapper">
+  <SchemaOrg />
   {#if navigating.to}
     <div class="global-loading">
       <LottieLoader />

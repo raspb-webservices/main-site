@@ -1,83 +1,75 @@
 <script lang="ts">
-  import { PUBLIC_BREVO_FORM_ID } from '$env/static/public';
   import { onMount } from 'svelte';
+  import { trackEvent } from '$lib/analytics/plausible.client';
 
-  let formId = PUBLIC_BREVO_FORM_ID ?? '';
-  let mounted = $state(false);
+  // import.meta.env is used instead of $env/static/public so the component
+  // builds gracefully even when PUBLIC_BREVO_FORM_ID is not yet set.
+  const formId: string = (import.meta.env.PUBLIC_BREVO_FORM_ID as string) ?? '';
 
   onMount(() => {
-    mounted = true;
     if (!formId) return;
 
     const script = document.createElement('script');
     script.src = 'https://sibforms.com/forms/end-form/build/main.js';
     script.async = true;
     document.head.appendChild(script);
+
+    const handler = (e: Event) => {
+      const target = e.target as HTMLElement;
+      if (target?.closest?.(`[data-brevo-form-id="${formId}"]`)) {
+        trackEvent('Newsletter Signup', { source: 'blog' });
+      }
+    };
+    document.addEventListener('submit', handler, true);
+    return () => document.removeEventListener('submit', handler, true);
   });
 </script>
 
-<div class="newsletter-wrapper">
-  <div class="newsletter-inner">
-    <div class="newsletter-copy">
-      <h2 class="newsletter-title">Praxiswissen direkt ins Postfach</h2>
-      <p class="newsletter-sub">
-        Kein Spam. Nur nützliche Impulse zu KI, Digitalisierung und modernen Webprojekten — für den
-        Mittelstand.
-      </p>
-    </div>
-    {#if mounted && formId}
-      <div class="sib-form" id="sib-form-container">
-        <div
-          id="sib-container"
-          class="sib-container--large sib-container--vertical"
-          style="text-align:center; max-width:640px; margin:0 auto;"
-        >
-          <iframe
-            title="Brevo Newsletter Signup"
-            src="https://sibforms.com/serve/MUIFAAl{formId}"
-            frameborder="0"
-            scrolling="auto"
-            allowfullscreen
-            style="display:block; max-width:100%; width:640px; height:350px;"
-          ></iframe>
-        </div>
-      </div>
-    {:else if mounted}
-      <div class="form-placeholder">
-        <p class="placeholder-text">Newsletter-Formular wird konfiguriert.</p>
-      </div>
-    {/if}
+<div class="newsletter-box">
+  <div class="content">
+    <h3>IT-Wissen direkt ins Postfach</h3>
+    <p>Praktische Tipps zu KI, Digitalisierung und IT-Sicherheit — monatlich, ohne Spam.</p>
   </div>
+
+  {#if !formId}
+    <div class="placeholder">
+      <p class="hint">Newsletter-Anmeldung — kommt bald.</p>
+    </div>
+  {:else}
+    <div
+      id="sib-form-{formId}"
+      data-brevo-form-id={formId}
+      class="sib-form"
+    >
+      <div id="sib-container--{formId}"></div>
+      <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css" />
+    </div>
+  {/if}
 </div>
 
 <style lang="postcss">
   @reference '../../app.css';
 
-  .newsletter-wrapper {
-    @apply bg-base-200/50 rounded-2xl p-8 md:p-12;
+  .newsletter-box {
+    @apply bg-primary/5 border-primary/20 flex flex-col gap-6 rounded-2xl border p-8 sm:flex-row sm:items-center sm:justify-between;
   }
 
-  .newsletter-inner {
-    @apply mx-auto flex max-w-4xl flex-col items-center gap-8 text-center;
+  .content {
+    h3 {
+      @apply text-base-content mb-1 text-xl font-bold;
+    }
+    p {
+      @apply text-base-content/70 text-sm leading-relaxed;
+    }
   }
 
-  .newsletter-copy {
-    @apply flex flex-col gap-3;
+  .placeholder {
+    .hint {
+      @apply text-base-content/50 text-sm italic;
+    }
   }
 
-  .newsletter-title {
-    @apply text-base-content text-2xl font-bold md:text-3xl;
-  }
-
-  .newsletter-sub {
-    @apply text-base-content/70 text-base leading-relaxed;
-  }
-
-  .form-placeholder {
-    @apply border-base-300 rounded-xl border-2 border-dashed p-8;
-  }
-
-  .placeholder-text {
-    @apply text-base-content/50 text-sm;
+  .sib-form {
+    @apply min-w-72;
   }
 </style>

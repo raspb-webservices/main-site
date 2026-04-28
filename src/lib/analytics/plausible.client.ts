@@ -90,3 +90,9 @@ export async function trackPageview(): Promise<void> {
   const { track } = await loadPlausible();
   track('pageview', {});
 }
+
+export async function trackEvent(name: string, props?: Record<string, string | number | boolean>): Promise<void> {
+  if (!isInitialized) return;
+  const { track } = await loadPlausible();
+  track(name, props ?? {});
+}

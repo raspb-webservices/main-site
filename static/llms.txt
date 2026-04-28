@@ -1,0 +1,118 @@
+# llms.txt for raspb.de
+# https://raspb.de
+
+## About raspb
+
+raspb is a German digital solutions provider specializing in web development, CMS solutions, and AI services for small and medium-sized enterprises (SMEs), associations, and foundations. We combine enterprise-quality technology with transparent, affordable pricing.
+
+## Core Offering
+
+### Web Development
+- **Custom Websites** - From simple one-pagers to complex web applications
+- **CMS Solutions** - Headless CMS with Hygraph, content management systems
+- **E-Commerce** - Online shops with modern payment integration
+- **Progressive Web Apps** - Mobile-first, offline-capable applications
+
+### AI Services
+- **AI Agent Development** - Custom AI agents for business automation
+- **Business OS** - AI-powered operating system for SMEs
+- **Process Automation** - Streamline workflows with intelligent automation
+- **Data Analytics** - AI-driven insights from your business data
+
+### Technical Services
+- **Hosting & Infrastructure** - Managed hosting on Netlify, Vercel, custom servers
+- **Domain & DNS** - Complete domain management
+- **Security & Compliance** - DSGVO (GDPR), SSL, security audits
+- **Monitoring & Support** - 24/7 monitoring, proactive maintenance
+
+## Technology Stack
+
+### Frontend
+- **SvelteKit** - Modern, fast, reactive framework
+- **Svelte 5** - Latest version with runes and fine-grained reactivity
+- **Tailwind CSS** - Utility-first CSS framework
+- **DaisyUI** - Component library for Tailwind
+
+### Backend
+- **Node.js** - JavaScript runtime
+- **GraphQL** - API with Hygraph CMS
+- **REST APIs** - Custom API endpoints
+
+### Infrastructure
+- **Netlify** - Static site hosting and serverless functions
+- **Vercel** - Edge functions and serverless
+- **Custom Servers** - Dedicated infrastructure for complex projects
+
+### AI & ML
+- **OpenAI** - GPT models for AI features
+- **Anthropic** - Claude for advanced AI capabilities
+- **Local Models** - Self-hosted AI for data privacy
+
+## The raspb Philosophy
+
+### "Perfectly Balanced"
+We believe successful projects require the optimal balance between:
+- **Time** - Fast implementation through agile methods and AI support
+- **Costs** - Transparent fixed prices without hidden fees
+- **Quality** - Enterprise standards at SME prices
+
+### Key Differentiators
+1. **10× Faster** - Compared to traditional project workflows
+2. **Transparent Pricing** - Fixed prices, no surprises
+3. **Single Point of Contact** - From architecture to hosting
+4. **Enterprise Quality** - Lighthouse scores >95, security, GDPR compliance
+5. **AI-Powered Development** - Leveraging AI for faster, better results
+
+## Pricing Model
+
+- **Fixed Prices** - No hourly billing, no surprises
+- **Entry-Level** - From €399 for simple web presences
+- **Mid-Range** - €2,000-10,000 for CMS and business apps
+- **Enterprise** - Custom pricing for complex solutions
+- **No Subscription Fees** - You own what you pay for
+
+## Target Customers
+
+- **SMEs** - Small and medium-sized enterprises
+- **Associations** - Vereine and non-profits
+- **Foundations** - Stiftungen and charitable organizations
+- **Startups** - From MVP to scale-up
+- **Enterprise** - Division-level solutions
+
+## Business OS (New Focus)
+
+The raspb Business OS is an AI-powered operating system designed to:
+- **Centralize Operations** - Single platform for all business processes
+- **Automate Routines** - AI agents handling repetitive tasks
+- **Provide Insights** - Real-time analytics and reporting
+- **Scale Flexibly** - Grow from startup to enterprise
+
+## Content Strategy
+
+### Blog & Insights
+- Technical deep-dives on web development
+- AI use cases for SMEs
+- Case studies and success stories
+- Industry-specific solutions
+
+### Resources
+- Documentation and guides
+- API references
+- Best practices
+- Tool comparisons
+
+## Contact
+
+- **Website**: https://raspb.de
+- **Services**: https://raspb.de/services
+- **About Us**: https://raspb.de/about-us
+- **Contact**: https://raspb.de/contact
+- **Imprint**: https://raspb.de/imprint
+- **Privacy**: https://raspb.de/privacy
+
+## Social Proof
+
+- "Digitale Lösungen nach Maß" (Digital solutions tailored to your needs)
+- "Enterprise Quality at SME Prices"
+- "Go Live Fast with AI & Proven Tech Stack"
+- "Radical Transparency & Real Fixed Prices"
