@@ -123,10 +123,13 @@
         <h3 class="pb-4">{m.footer_nav_services_title()}</h3>
         <div class="footer-nav-items">
           {#each footerNav[0].subItems as item (item.name)}
-            <button class="footer-nav-item" onclick={() => {
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              goto(resolve(localizeHref(item.path) as any));
-            }}>
+            <button
+              class="footer-nav-item"
+              onclick={() => {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                goto(resolve(localizeHref(item.path) as any));
+              }}
+            >
               {(m as unknown as Record<string, () => string>)[item.name]()}
             </button>
           {/each}
@@ -136,10 +139,13 @@
         <h3 class="pb-4">{m.footer_nav_insights_title()}</h3>
         <div class="footer-nav-items">
           {#each footerNav[1].subItems as item (item.name)}
-            <button class="footer-nav-item" onclick={() => {
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              goto(resolve(localizeHref(item.path) as any));
-            }}>
+            <button
+              class="footer-nav-item"
+              onclick={() => {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                goto(resolve(localizeHref(item.path) as any));
+              }}
+            >
               {(m as unknown as Record<string, () => string>)[item.name]()}
             </button>
           {/each}
@@ -149,23 +155,35 @@
         <h3 class="pb-4">{m.footer_nav_aboutUs_title()}</h3>
         <div class="footer-nav-items">
           {#each footerNav[2].subItems as item (item.name)}
-            <button class="footer-nav-item" onclick={() => {
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              goto(resolve(localizeHref(item.path) as any));
-            }}>
+            <button
+              class="footer-nav-item"
+              onclick={() => {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                goto(resolve(localizeHref(item.path) as any));
+              }}
+            >
               {(m as unknown as Record<string, () => string>)[item.name]()}
             </button>
           {/each}
+          <button
+            class="footer-nav-item"
+            onclick={() => {
+              goto(resolve('/blog'));
+            }}>Blog</button
+          >
         </div>
       </div>
       <div class="legal-column">
         <h3 class="pb-4">{m.footer_nav_legal_title()}</h3>
         <div class="footer-nav-items">
           {#each footerNav[3].subItems as item (item.name)}
-            <button class="footer-nav-item" onclick={() => {
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              goto(resolve(localizeHref(item.path) as any));
-            }}>
+            <button
+              class="footer-nav-item"
+              onclick={() => {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                goto(resolve(localizeHref(item.path) as any));
+              }}
+            >
               {(m as unknown as Record<string, () => string>)[item.name]()}
             </button>
           {/each}

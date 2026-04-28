@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types';
-import type { PostMeta } from '$lib/blog';
+import { type PostMeta, resolveCoverImage } from '$lib/blog';
 
 export const prerender = true;
 
@@ -10,7 +10,7 @@ export const load: PageServerLoad = async () => {
   for (const path in modules) {
     const mod = modules[path] as { metadata: PostMeta };
     if (mod.metadata?.published !== false) {
-      posts.push(mod.metadata);
+      posts.push({ ...mod.metadata, coverImage: resolveCoverImage(mod.metadata.coverImage) });
     }
   }
 

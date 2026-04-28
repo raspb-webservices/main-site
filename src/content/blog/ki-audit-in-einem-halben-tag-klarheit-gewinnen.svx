@@ -4,7 +4,7 @@ slug: "ki-audit-in-einem-halben-tag-klarheit-gewinnen"
 category: "KI & Automatisierung"
 date: "2026-04-27"
 excerpt: "Viele Unternehmen wissen, dass KI helfen könnte — aber nicht wo und wie. Ein KI-Audit löst genau dieses Problem: strukturiert, konkret, mit klarem Ergebnis."
-coverImage: "/images/blog/ki-audit-workshop.jpg"
+coverImage: "/images/blog/dsgvo-ki-unternehmen.jpg"
 published: true
 ---
 
@@ -106,4 +106,4 @@ Das macht den Unterschied zwischen Theorie und Praxis.
 
 ---
 
-*Interesse an einem KI-Audit? [Jetzt Gespräch vereinbaren](/kontakt) — das Erstgespräch ist kostenlos und unverbindlich.*
+*Interesse an einem KI-Audit? [Jetzt Gespräch vereinbaren](/?openAppointment=true) — das Erstgespräch ist kostenlos und unverbindlich.*

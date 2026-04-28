@@ -117,26 +117,11 @@
       >
       <button
         class="nav-item"
-        class:active={page.url.pathname.startsWith('/blog')}
-        onclick={() => {
-          goto(resolve('/blog'));
-        }}>{m.menu_blog()}</button
-      >
-      <button
-        class="nav-item"
         class:active={page.url.pathname == localizeHref('/insights')}
         onclick={() => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           goto(resolve(localizeHref('/insights') as any));
         }}>{m.menu_insights()}</button
-      >
-      <button
-        class="nav-item"
-        class:active={page.url.pathname == localizeHref('/blog')}
-        onclick={() => {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          goto(resolve(localizeHref('/blog') as any));
-        }}>{m.menu_blog()}</button
       >
       <button
         class="nav-item"
@@ -153,13 +138,6 @@
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           goto(resolve(localizeHref('/faq') as any));
         }}>{m.menu_faq()}</button
-      >
-      <button
-        class="nav-item"
-        class:active={page.url.pathname.startsWith('/blog')}
-        onclick={() => {
-          goto(resolve('/blog'));
-        }}>Blog</button
       >
     </nav>
 
@@ -239,29 +217,12 @@
         >
         <button
           class="nav-item"
-          class:active={page.url.pathname.startsWith('/blog')}
-          onclick={() => {
-            closeMobileNav();
-            goto(resolve('/blog'));
-          }}>{m.menu_blog()}</button
-        >
-        <button
-          class="nav-item"
           class:active={page.url.pathname == localizeHref('/insights')}
           onclick={() => {
             closeMobileNav();
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             goto(resolve(localizeHref('/insights') as any));
           }}>{m.menu_insights()}</button
-        >
-        <button
-          class="nav-item"
-          class:active={page.url.pathname == localizeHref('/blog')}
-          onclick={() => {
-            closeMobileNav();
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            goto(resolve(localizeHref('/blog') as any));
-          }}>{m.menu_blog()}</button
         >
         <button
           class="nav-item"

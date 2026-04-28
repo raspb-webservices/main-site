@@ -4,7 +4,7 @@ slug: "festpreis-statt-stundensatz-warum-kmus-umdenken"
 category: "Web & App"
 date: "2026-04-27"
 excerpt: "IT-Projekte nach Stunden abzurechnen ist der Normalfall — aber selten im Interesse des Kunden. Was Festpreise wirklich bedeuten und warum sie für KMUs die bessere Wahl sind."
-coverImage: "/images/blog/festpreis-it-projekte.jpg"
+coverImage: "/images/blog/sveltekit-webentwicklung.jpg"
 published: true
 ---
 
@@ -87,4 +87,4 @@ Wer diese Fragen stellt, schützt sein Investition — und erkennt schnell, mit 
 
 ---
 
-*raspb arbeitet ausschließlich mit Festpreisen und vollständiger Code-Ownership. Kein Time & Material, kein Vendor Lock-in. [Mehr zu unseren Leistungen](/leistungen) oder direkt [Kontakt aufnehmen](/kontakt).*
+*raspb arbeitet ausschließlich mit Festpreisen und vollständiger Code-Ownership. Kein Time & Material, kein Vendor Lock-in. [Jetzt Erstgespräch vereinbaren](/?openAppointment=true) — kostenlos und unverbindlich.*

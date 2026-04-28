@@ -1,6 +1,7 @@
 import { error } from '@sveltejs/kit';
+import type { Component } from 'svelte';
 import type { PageLoad } from './$types';
-import type { PostMeta } from '$lib/blog';
+import { type PostMeta, resolveCoverImage } from '$lib/blog';
 
 export const prerender = true;
 
@@ -13,10 +14,10 @@ export async function load({ params }: Parameters<PageLoad>[0]) {
     throw error(404, `Artikel "${slug}" nicht gefunden.`);
   }
 
-  const mod = (await importer()) as { default: unknown; metadata: PostMeta };
+  const mod = (await importer()) as { default: Component; metadata: PostMeta };
 
   return {
     content: mod.default,
-    meta: mod.metadata
+    meta: { ...mod.metadata, coverImage: resolveCoverImage(mod.metadata.coverImage) }
   };
 }

@@ -4,7 +4,7 @@ slug: "ki-im-mittelstand-was-wirklich-funktioniert"
 category: "KI & Automatisierung"
 date: "2026-04-27"
 excerpt: "KI ist kein Wundermittel — aber für viele KMUs ein echter Hebel. Wir zeigen, wo KI im Alltag konkret hilft und wo man besser die Finger davon lässt."
-coverImage: "/images/blog/ki-mittelstand.jpg"
+coverImage: "/images/blog/kundenservice-ki.jpg"
 published: true
 ---
 
@@ -68,4 +68,4 @@ Eine strukturierte Analyse — wie ein KI-Audit — hilft, diesen Prozess zu fin
 
 **Fazit:** KI ist kein Selbstläufer, aber auch kein Hexenwerk. Für Mittelständler, die konkret hinschauen, gibt es heute echte Hebel — an den richtigen Stellen eingesetzt, zahlen sie sich schnell aus.
 
-*Sie möchten wissen, wo KI in Ihrem Unternehmen konkret helfen kann? [Sprechen Sie mit uns](/kontakt) — in einem halben Tag finden wir gemeinsam die richtigen Ansatzpunkte.*
+*Sie möchten wissen, wo KI in Ihrem Unternehmen konkret helfen kann? [Jetzt Erstgespräch vereinbaren](/?openAppointment=true) — in einem halben Tag finden wir gemeinsam die richtigen Ansatzpunkte.*

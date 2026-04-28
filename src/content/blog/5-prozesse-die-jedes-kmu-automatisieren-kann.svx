@@ -4,7 +4,7 @@ slug: "5-prozesse-die-jedes-kmu-automatisieren-kann"
 category: "KI & Automatisierung"
 date: "2026-04-27"
 excerpt: "Automatisierung klingt nach Großkonzern. Ist sie aber nicht. Diese fünf Prozesse lassen sich in fast jedem mittelständischen Betrieb mit überschaubarem Aufwand automatisieren."
-coverImage: "/images/blog/prozessautomatisierung-kmu.jpg"
+coverImage: "/images/blog/ki-agenten-leitfaden.jpg"
 published: true
 ---
 
@@ -76,4 +76,4 @@ Wer diese Fragen beantwortet hat, weiß wo er anfangen soll.
 
 ---
 
-*Möchten Sie wissen, welcher Ihrer Prozesse das höchste Einsparpotenzial hat? Unser [KI-Audit](/leistungen/ki-audit) zeigt Ihnen in einem strukturierten Workshop genau das — mit konkreten Zahlen, ohne Theorie.*
+*Möchten Sie wissen, welcher Ihrer Prozesse das höchste Einsparpotenzial hat? Unser [KI-Audit](/?openAppointment=true) zeigt Ihnen in einem strukturierten Workshop genau das — mit konkreten Zahlen, ohne Theorie.*

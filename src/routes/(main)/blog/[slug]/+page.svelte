@@ -4,6 +4,7 @@
   import NewsletterSignup from '$lib/components/newsletter-signup.svelte';
 
   let { data } = $props();
+  const Content = $derived(data.content);
 
   function formatDate(dateStr: string) {
     return new Intl.DateTimeFormat('de-DE', { day: '2-digit', month: 'long', year: 'numeric' }).format(
@@ -63,7 +64,7 @@
 
   <div class="post-content">
     <div class="inner prose">
-      <svelte:component this={data.content} />
+      <Content />
     </div>
   </div>
 

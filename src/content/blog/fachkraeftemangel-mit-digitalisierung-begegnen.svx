@@ -4,7 +4,7 @@ slug: "fachkraeftemangel-mit-digitalisierung-begegnen"
 category: "KI & Automatisierung"
 date: "2026-04-27"
 excerpt: "Zu wenig Personal, zu viele Aufgaben — der Fachkräftemangel trifft den Mittelstand hart. Digitalisierung und KI sind kein Ersatz für Menschen, aber ein echter Multiplikator für das vorhandene Team."
-coverImage: "/images/blog/fachkraeftemangel-digitalisierung.jpg"
+coverImage: "/images/blog/business-os-grundlagen.jpg"
 published: true
 ---
 
@@ -77,4 +77,4 @@ Dafür braucht es keinen monatelangen Beratungsprozess. In einem strukturierten 
 
 ---
 
-*Wie viel Kapazität steckt noch in Ihrem Team? Wir helfen Ihnen, das herauszufinden. [Jetzt Erstgespräch vereinbaren](/kontakt) — kostenlos und unverbindlich.*
+*Wie viel Kapazität steckt noch in Ihrem Team? Wir helfen Ihnen, das herauszufinden. [Jetzt Erstgespräch vereinbaren](/?openAppointment=true) — kostenlos und unverbindlich.*

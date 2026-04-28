@@ -1,9 +1,9 @@
 [build]
-  command = "corepack enable && yarn install && yarn build"
+  command = "npm run build"
   publish = "build"
 
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "24"
 
 [functions]
   directory = "functions"
