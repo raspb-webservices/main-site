@@ -1,28 +1,47 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { trackEvent } from '$lib/analytics/plausible.client';
 
-  // import.meta.env is used instead of $env/static/public so the component
-  // builds gracefully even when PUBLIC_BREVO_FORM_ID is not yet set.
-  const formId: string = (import.meta.env.PUBLIC_BREVO_FORM_ID as string) ?? '';
+  type State = 'idle' | 'loading' | 'success' | 'error';
+  type ErrorType = 'already_subscribed' | 'invalid_email' | 'service_unavailable' | 'unknown';
 
-  onMount(() => {
-    if (!formId) return;
+  let email = $state('');
+  let formState = $state<State>('idle');
+  let errorType = $state<ErrorType>('unknown');
 
-    const script = document.createElement('script');
-    script.src = 'https://sibforms.com/forms/end-form/build/main.js';
-    script.async = true;
-    document.head.appendChild(script);
+  const errorMessages: Record<ErrorType, string> = {
+    already_subscribed: 'Diese E-Mail-Adresse ist bereits angemeldet.',
+    invalid_email: 'Bitte gib eine gültige E-Mail-Adresse ein.',
+    service_unavailable: 'Der Newsletter-Service ist momentan nicht verfügbar. Bitte versuche es später.',
+    unknown: 'Ein unbekannter Fehler ist aufgetreten. Bitte versuche es später.'
+  };
 
-    const handler = (e: Event) => {
-      const target = e.target as HTMLElement;
-      if (target?.closest?.(`[data-brevo-form-id="${formId}"]`)) {
+  async function handleSubmit(e: SubmitEvent) {
+    e.preventDefault();
+    if (formState === 'loading') return;
+
+    formState = 'loading';
+
+    try {
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+
+      if (res.ok) {
+        formState = 'success';
         trackEvent('Newsletter Signup', { source: 'blog' });
+        return;
       }
-    };
-    document.addEventListener('submit', handler, true);
-    return () => document.removeEventListener('submit', handler, true);
-  });
+
+      const data = await res.json().catch(() => ({}));
+      errorType = (data?.error as ErrorType) ?? 'unknown';
+      formState = 'error';
+    } catch {
+      errorType = 'unknown';
+      formState = 'error';
+    }
+  }
 </script>
 
 <div class="newsletter-box">
@@ -31,20 +50,35 @@
     <p>Praktische Tipps zu KI, Digitalisierung und IT-Sicherheit — monatlich, ohne Spam.</p>
   </div>
 
-  {#if !formId}
-    <div class="placeholder">
-      <p class="hint">Newsletter-Anmeldung — kommt bald.</p>
-    </div>
-  {:else}
-    <div
-      id="sib-form-{formId}"
-      data-brevo-form-id={formId}
-      class="sib-form"
-    >
-      <div id="sib-container--{formId}"></div>
-      <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css" />
-    </div>
-  {/if}
+  <div class="form-area">
+    {#if formState === 'success'}
+      <p class="success-msg">Bitte bestätige deine Email-Adresse.</p>
+    {:else}
+      <form onsubmit={handleSubmit} class="signup-form">
+        <input
+          type="email"
+          name="email"
+          bind:value={email}
+          placeholder="deine@email.de"
+          required
+          disabled={formState === 'loading'}
+          class="email-input"
+          autocomplete="email"
+        />
+        <button type="submit" disabled={formState === 'loading'} class="submit-btn">
+          {formState === 'loading' ? 'Wird angemeldet…' : 'Anmelden'}
+        </button>
+      </form>
+
+      {#if formState === 'error'}
+        <p class="error-msg">{errorMessages[errorType]}</p>
+      {/if}
+
+      <p class="dsgvo-hint">
+        Mit Anmelden stimmst du unserer <a href="/datenschutz">Datenschutzerklärung</a> zu.
+      </p>
+    {/if}
+  </div>
 </div>
 
 <style lang="postcss">
@@ -63,13 +97,34 @@
     }
   }
 
-  .placeholder {
-    .hint {
-      @apply text-base-content/50 text-sm italic;
-    }
+  .form-area {
+    @apply flex min-w-72 flex-col gap-2;
   }
 
-  .sib-form {
-    @apply min-w-72;
+  .signup-form {
+    @apply flex gap-2;
+  }
+
+  .email-input {
+    @apply border-base-300 bg-base-100 text-base-content focus:border-primary min-w-0 flex-1 rounded-lg border px-3 py-2 text-sm outline-none transition-colors focus:ring-0 disabled:opacity-50;
+  }
+
+  .submit-btn {
+    @apply bg-primary text-primary-content hover:bg-primary/90 rounded-lg px-4 py-2 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .success-msg {
+    @apply text-success text-sm font-medium;
+  }
+
+  .error-msg {
+    @apply text-error text-xs;
+  }
+
+  .dsgvo-hint {
+    @apply text-base-content/50 text-xs;
+    a {
+      @apply underline;
+    }
   }
 </style>
