@@ -260,6 +260,20 @@ export default defineConfig({
             ['de', '/de/loesungen/:id'],
             ['en', '/en/solutions/:id']
           ]
+        },
+        {
+          pattern: '/excellence',
+          localized: [
+            ['de', '/de/excellence'],
+            ['en', '/en/excellence']
+          ]
+        },
+        {
+          pattern: '/excellence/:id',
+          localized: [
+            ['de', '/de/excellence/:id'],
+            ['en', '/en/excellence/:id']
+          ]
         }
       ]
     })
